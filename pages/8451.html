@@ -1,0 +1,574 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Bayesian reasoning in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      Bayesian reasoning
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='measure_and_probability_theory'>Measure and probability theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/measure+theory'>measure theory</a></strong></p>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/probability+theory'>probability theory</a></strong></p>
+
+<h2 id='measure_theory'>Measure theory</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/measurable+space'>measurable space</a>, <a class='existingWikiWord' href='/nlab/show/measurable+locale'>measurable locale</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/measure+space'>measure</a>, <a class='existingWikiWord' href='/nlab/show/measure+space'>measure space</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/von+Neumann+algebra'>von Neumann algebra</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/geometric+measure+theory'>geometric measure theory</a></p>
+</li>
+</ul>
+
+<h2 id='probability_theory'>Probability theory</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/probability+space'>probability space</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/probability+distribution'>probability distribution</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/state'>state</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/state+on+an+operator+algebra'>in AQFT and operator algebra</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Gelfand-Naimark-Segal+construction'>GNS construction</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Fell%27s+theorem'>Fell&#39;s theorem</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/entropy'>entropy</a>, <a class='existingWikiWord' href='/nlab/show/relative+entropy'>relative entropy</a></p>
+</li>
+</ul>
+
+<h2 id='information_geometry'>Information geometry</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/information+geometry'>information geometry</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/information+metric'>information metric</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Wasserstein+metric'>Wasserstein metric</a></p>
+</li>
+</ul>
+
+<h2 id='thermodynamics'>Thermodynamics</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/thermodynamics'>thermodynamics</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/second+law+of+thermodynamics'>second law of thermodynamics</a>, <a class='existingWikiWord' href='/nlab/show/generalized+second+law+of+thermodynamics'>generalized second law</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/ergodic+theory'>ergodic theory</a></p>
+</li>
+</ul>
+
+<h2 id='theorems'>Theorems</h2>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Riesz+representation+theorem'>Riesz representation theorem</a></li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/measure+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='bayesian_reasoning'>Bayesian reasoning</h1>
+<div class='maruku_toc'><ul><li><a href='#idea'>Idea</a></li><li><a href='#dutch_book_justification'>Dutch Book justification</a></li><li><a href='#coxs_axioms'>Cox’s axioms</a></li><li><a href='#conditionalizing'>Conditionalizing</a></li><li><a href='#objective_bayesianism'>Objective Bayesianism</a></li><li><a href='#exchangeability'>Exchangeability</a></li><li><a href='#related_entries'>Related entries</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='idea'>Idea</h2>
+
+<p>Bayesian <a class='existingWikiWord' href='/nlab/show/reasoning'>reasoning</a> is an application of <a class='existingWikiWord' href='/nlab/show/probability+theory'>probability theory</a> to <a class='existingWikiWord' href='/nlab/show/inductive+reasoning'>inductive reasoning</a> (and <a class='existingWikiWord' href='/nlab/show/abductive+reasoning'>abductive reasoning</a>). It relies on an interpretation of probabilities as expressions of an agent’s uncertainty about the world, rather than as concerning some notion of objective chance in the world. The perspective here is that, when done correctly, inductive reasoning is simply a generalisation of <a class='existingWikiWord' href='/nlab/show/deductive+reasoning'>deductive reasoning</a>, where knowledge of the truth or falsity of a proposition corresponds to adopting the extreme probabilities <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math>.</p>
+
+<p>Several advantages to this interpretation have been proposed. For one thing, it is possible to have (rational) degrees of belief about a wide range of propositions, including matters which are settled, yet unknown. For example, it is possible to speak of the probability of the value of a constant of nature falling within a given interval on the basis of various pieces of evidence, or of the outcome of a coin that has already been tossed. This interpretation of probability beyond limiting frequences leads, so advocates such as <a class='existingWikiWord' href='/nlab/show/Edwin+Jaynes'>Edwin Jaynes</a> claim, to a more integrated treatment of probability theory and statistics.</p>
+
+<h2 id='dutch_book_justification'>Dutch Book justification</h2>
+
+<p>It can be shown by so-called “Dutch Book” arguments, that a rational agent must set their degrees of belief in the outcomes of events in such a way that they satisfy the axioms of probability theory. The idea here is that to believe a proposition to degree <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>p</mi></mrow><annotation encoding='application/x-tex'>p</annotation></semantics></math> is equivalent to being prepared to accept a wager at the corresponding odds. For instance, if I believe there is a 0.75 chance of rain today, then I should be prepared to accept a wager so that I receive <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> units of currency if it does not rain, and pay out <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo stretchy='false'>/</mo><mn>3</mn></mrow><annotation encoding='application/x-tex'>S/3</annotation></semantics></math> units if it does rain. Note that <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> may be chosen to be negative by the bettor.</p>
+
+<p>It can be shown then that such betting odds must satisfy the probability axioms, otherwise it will be possible for someone to place multiple bets which will cause the bookmaker to suffer a certain loss whatever the outcome. For example, in the case above, my degree of belief that it will <em>not</em> rain today should be 0.25. Were I to offer, say, 0.5, someone could stake <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>3</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(-3)</annotation></semantics></math> units on the first bet and <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>2</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(-2)</annotation></semantics></math> units on the second bet, and will gain <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math> unit whether or not it rains. Of course, real bookmakers have odds which sum to more than 1, but they suffer no guaranteed loss since clients are only allowed positive stakes.</p>
+
+<h2 id='coxs_axioms'>Cox’s axioms</h2>
+
+<p>Some consider the reliance on the idea of the undesirability of certain financial loss to be unbefitting for a justification of what is supposed to be an extension of ordinary deductive logic (<a href='#Jaynes'>Jaynes 2003</a>). Axiomatisations in terms of the properties one should expect of degrees of plausibility have been given, and it can be shown from such axioms that these degrees satisfy the axioms of probability. Richard Cox is responsible for one such axiomatisation (for the moment see <a href='http://en.wikipedia.org/wiki/Cox&#39;s_theorem'>Wikipedia: Cox’s theorem</a>).</p>
+
+<h2 id='conditionalizing'>Conditionalizing</h2>
+
+<p>Using <a class='existingWikiWord' href='/nlab/show/Bayes%27+Rule'>Bayes&#39; Rule</a>, degrees of belief can be updated on receipt of new evidence.</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>h</mi><mo stretchy='false'>|</mo><mi>e</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>P</mi><mo stretchy='false'>(</mo><mi>e</mi><mo stretchy='false'>|</mo><mi>h</mi><mo stretchy='false'>)</mo><mo>⋅</mo><mfrac><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>h</mi><mo stretchy='false'>)</mo></mrow><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>e</mi><mo stretchy='false'>)</mo></mrow></mfrac><mo>,</mo></mrow><annotation encoding='application/x-tex'>
+P(h|e) = P(e|h) \cdot \frac{P(h)}{P(e)},
+
+</annotation></semantics></math></div>
+<p>where <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi></mrow><annotation encoding='application/x-tex'>h</annotation></semantics></math> is a hypothesis and <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>e</mi></mrow><annotation encoding='application/x-tex'>e</annotation></semantics></math> is evidence.</p>
+
+<p>The idea here is that when <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>e</mi></mrow><annotation encoding='application/x-tex'>e</annotation></semantics></math> is observed, your degree of belief in <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi></mrow><annotation encoding='application/x-tex'>h</annotation></semantics></math> should be changed from <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>h</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>P(h)</annotation></semantics></math> to <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>h</mi><mo stretchy='false'>|</mo><mi>e</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>P(h|e)</annotation></semantics></math>. This is known as <strong>conditionalizing</strong>. If <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>h</mi><mo stretchy='false'>|</mo><mi>e</mi><mo stretchy='false'>)</mo><mo>&gt;</mo><mi>P</mi><mo stretchy='false'>(</mo><mi>h</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>P(h|e) \gt P(h)</annotation></semantics></math>, we say that <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>e</mi></mrow><annotation encoding='application/x-tex'>e</annotation></semantics></math> has provided <strong>confirmation</strong> for <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi></mrow><annotation encoding='application/x-tex'>h</annotation></semantics></math>.</p>
+
+<p>Typically, situations will involve a range of possible hypotheses, <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>h</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>h</mi> <mn>2</mn></msub><mo>,</mo><mi>…</mi></mrow><annotation encoding='application/x-tex'>h_1, h_2, \ldots</annotation></semantics></math>, and applying Bayes’ Rule will allow us to compare how these fare as new observations are made. For example, comparing the fate of two hypotheses,</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mfrac><mrow><mi>P</mi><mo stretchy='false'>(</mo><msub><mi>h</mi> <mn>1</mn></msub><mo stretchy='false'>|</mo><mi>e</mi><mo stretchy='false'>)</mo></mrow><mrow><mi>P</mi><mo stretchy='false'>(</mo><msub><mi>h</mi> <mn>2</mn></msub><mo stretchy='false'>|</mo><mi>e</mi><mo stretchy='false'>)</mo></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>e</mi><mo stretchy='false'>|</mo><msub><mi>h</mi> <mn>1</mn></msub><mo stretchy='false'>)</mo></mrow><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>e</mi><mo stretchy='false'>|</mo><msub><mi>h</mi> <mn>2</mn></msub><mo stretchy='false'>)</mo></mrow></mfrac><mo>⋅</mo><mfrac><mrow><mi>P</mi><mo stretchy='false'>(</mo><msub><mi>h</mi> <mn>1</mn></msub><mo stretchy='false'>)</mo></mrow><mrow><mi>P</mi><mo stretchy='false'>(</mo><msub><mi>h</mi> <mn>2</mn></msub><mo stretchy='false'>)</mo></mrow></mfrac><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\frac{P(h_1|e)}{P(h_2|e)} = \frac{P(e|h_1)}{P(e|h_2)}\cdot \frac{P(h_1)}{P(h_2)}.
+
+</annotation></semantics></math></div>
+<p>How to assign prior probabilities to hypotheses when you don’t think you have an exhaustive set of rivals is not obvious. When astronomers in the nineteenth century tried to account for the anomalies in the position of Mercury’s perihelion, they tried out all manner of explanations: maybe there was a planet inside Mercury’s orbit, maybe there was a cloud of dust surrounding the sun, maybe the power in the inverse square law ought to be (2 - <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding='application/x-tex'>\epsilon</annotation></semantics></math>),… Assigning priors and changing these as evidence comes in is one thing, but it would have been wise to have reserved some of the prior for ‘none of the above’.</p>
+
+<p>Interestingly, one of the first people to give a qualitative sketch of how such an approach would work was <a class='existingWikiWord' href='/nlab/show/George+Polya'>George Polya</a> in ‘Mathematics and Plausible Reasoning’ (<a href='#Polya'>Polya</a>), where examples from mathematics are widely used. The idea of a Bayesian account of plausible reasoning in mathematics surprises many, it being assumed that mathematicians rely solely on <a class='existingWikiWord' href='/nlab/show/deductive+reasoning'>deduction</a>. (See also Chap. 4 of <a href='#Corfield'>Corfield03</a>.)</p>
+
+<h2 id='objective_bayesianism'>Objective Bayesianism</h2>
+
+<p>For some Bayesians, degrees of belief must satisfy further restrictions. One extreme form of this view holds that given a particular state of knowledge, there is a single best set of degrees of belief that should be adopted for any proposition.</p>
+
+<p>Some such restrictions are generally accepted. If, for example, all I know of an event is that it has <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> possible outcomes, the objective Bayesian will apply the principle of indifference to set their degrees of belief to <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn><mo stretchy='false'>/</mo><mi>n</mi></mrow><annotation encoding='application/x-tex'>1/n</annotation></semantics></math> for each outcome. On the other hand, if there is background knowledge concerning differences between the outcomes, indifference need not hold. This principle of indifference can be generalized to other kinds of invariance, such as the Jeffreys prior (<a href='http://en.wikipedia.org/wiki/Jeffreys_prior'>wiki</a>).</p>
+
+<p>Other objective Bayesian principles include maximum entropy (see <a href='#Jaynes'>Jaynes 2003</a>). For instance, Jaynes argues that if all that is known of a die is that the mean value of throws is equal to, say, 4, then a prior distribution over <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>6</mn><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{1, 2, 3, 4, 5, 6\}</annotation></semantics></math> should be chosen which maximizes <a class='existingWikiWord' href='/nlab/show/entropy'>entropy</a>, subject to the constraint that the mean is 4. Many familiar distributions are maximum entropy distributions, subject to moment constraints. For instance, the Normal distribution, <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>N</mi><mo stretchy='false'>(</mo><mi>μ</mi><mo>,</mo><msup><mi>σ</mi> <mn>2</mn></msup><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>N(\mu, \sigma^2)</annotation></semantics></math>, is the distribution over the reals which maximises entropy subject to having mean <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>μ</mi></mrow><annotation encoding='application/x-tex'>\mu</annotation></semantics></math> and variance <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>σ</mi> <mn>2</mn></msup></mrow><annotation encoding='application/x-tex'>\sigma^2</annotation></semantics></math>.</p>
+
+<h2 id='exchangeability'>Exchangeability</h2>
+
+<p>Frequentist statistics makes much use of independent and identically distributed (iid) random variables, for example in sampling situations. If, say, we were to toss a coin repeatedly and record the outcomes, the frequentist would typically understand this as sampling from a Bernoulli distribution for some fixed value <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>p</mi></mrow><annotation encoding='application/x-tex'>p</annotation></semantics></math> of the coin showing heads. From the sample one could then calculate an estimate and confidence interval for the true value of <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>p</mi></mrow><annotation encoding='application/x-tex'>p</annotation></semantics></math>.</p>
+
+<p>Many Bayesians, in particular <a class='existingWikiWord' href='/nlab/show/Bruno+de+Finetti'>Bruno de Finetti</a>, argue that this makes no sense since probability is not in the world, but rather it represents the strengths of our beliefs in different outcomes. Their formulation in such repeated sampling cases is to say that if our degrees of belief are such that, for all <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>, the probability we assign to any sequence of <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> tosses is invariant under any permutation of <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> elements, then we can represent our degrees of belief for all sequences as arising from a mixture of Bernoulli distributions for some prior distribution over the value of <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>p</mi></mrow><annotation encoding='application/x-tex'>p</annotation></semantics></math>.</p>
+
+<p>More formally, given a sequence of random variables <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><msub><mi>X</mi> <mi>i</mi></msub><msubsup><mo stretchy='false'>}</mo> <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow> <mn>∞</mn></msubsup></mrow><annotation encoding='application/x-tex'>\{X_i\}^\infty_{i = 1}</annotation></semantics></math> each taking the values <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>, de Finetti’s Representation Theorem says that the sequence is exchangeable if and only if there is a random variable <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Θ</mi><mo>:</mo><mi>Ω</mi><mo>→</mo><mo stretchy='false'>[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>\Theta: \Omega \to [0, 1]</annotation></semantics></math>, with distribution <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>μ</mi> <mi>Θ</mi></msub></mrow><annotation encoding='application/x-tex'>\mu_{\Theta}</annotation></semantics></math>, such that</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>P</mi><mo stretchy='false'>{</mo><msub><mi>X</mi> <mn>1</mn></msub><mo>=</mo><msub><mi>x</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>X</mi> <mi>n</mi></msub><mo>=</mo><msub><mi>x</mi> <mi>n</mi></msub><mo stretchy='false'>}</mo><mo>=</mo><msub><mo>∫</mo> <mrow><mo stretchy='false'>[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>]</mo></mrow></msub><msup><mi>θ</mi> <mi>s</mi></msup><mo stretchy='false'>(</mo><mn>1</mn><mo>−</mo><mi>θ</mi><msup><mo stretchy='false'>)</mo> <mrow><mi>n</mi><mo>−</mo><mi>s</mi></mrow></msup><mi>d</mi><msub><mi>μ</mi> <mi>Θ</mi></msub><mo stretchy='false'>(</mo><mi>θ</mi><mo stretchy='false'>)</mo><mo>,</mo></mrow><annotation encoding='application/x-tex'>
+P\{X_1=x_1,\ldots,X_n=x_n\}=\int_{[0,1]} \theta^s (1 - \theta)^{n - s} d \mu_{\Theta}(\theta),
+
+</annotation></semantics></math></div>
+<p>in which <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>s</mi><mo>=</mo><msubsup><mo lspace='thinmathspace' rspace='thinmathspace'>∑</mo> <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow> <mi>n</mi></msubsup><msub><mi>x</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>s = \sum^n_{i=1} x_i</annotation></semantics></math>.</p>
+
+<p>Often, for ease of calculation, Beta distributions are chosen as priors on <math class='maruku-mathml' display='inline' id='mathml_e65727ea7d9cf846e6f5d7748f4acd27ccb4b028_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>p</mi></mrow><annotation encoding='application/x-tex'>p</annotation></semantics></math>, which can be taken as representing one’s confidence as though one had already seen a certain number of heads and tails. Bayesians are sometimes criticized for the subjectivity inherent in the choice of a prior, but in many cases, such as this one, prior distributions will eventually be ‘washed out’ by the weight of the evidence. The de Finetti theorem has a generalization for multivariate distributions (<a href='#BBF'>BBF</a>).</p>
+
+<p>Of course, exchangeability may not represent the strength of one’s prior beliefs accurately. For example, in the case of coin tossing, I may have a suspicion of there being something in the tossing mechanism which would make the result of one toss depend on its predecessor. Then it would be quite reasonable for me, say, to have accorded a higher prior probability to the sequence of one hundred heads followed by one hundred tails than to some of its permutations. There are, however, generalizations of de Finetti’s representation theorem to Markov chain situations (<a href='#DF80}'>Diaconis and Freedman</a>).</p>
+
+<h2 id='related_entries'>Related entries</h2>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Bayesian+interpretation+of+quantum+mechanics'>Bayesian interpretation of quantum mechanics</a></li>
+</ul>
+
+<h2 id='references'>References</h2>
+
+<ul>
+<li id='Corfield'>
+<p><a class='existingWikiWord' href='/nlab/show/David+Corfield'>David Corfield</a>, <em>Towards a Philosophy of Real Mathematics</em>, Cambridge University Press, 2003.</p>
+</li>
+
+<li id='Jaynes'>
+<p><a class='existingWikiWord' href='/nlab/show/Edwin+Jaynes'>Edwin Jaynes</a>, <em>Probability Theory: The Logic of Science</em>, Cambridge University Press, 2003.</p>
+</li>
+
+<li id='Polya'>
+<p><a class='existingWikiWord' href='/nlab/show/George+Polya'>George Polya</a>, <em>Mathematics and Plausible Reasoning: Vol. II: Patterns of Plausible Inference</em>, Princeton University Press, 1954.</p>
+</li>
+
+<li id='DF80'>
+<p><a class='existingWikiWord' href='/nlab/show/Persi+Diaconis'>Persi Diaconis</a> and David Freedman, “De Finetti’s theorem for Markov chains.” Annals of Probability, 8(1), 115-130, 1980.</p>
+</li>
+
+<li id='BBF'>
+<p>A. Bach, H. Blank, H. Francke, <em>Bose-Einstein statistics derived from the statistics of classical particles</em>, Lettere Al Nuovo Cimento Series 2, Volume 43, Issue 4, pp 195-198.</p>
+</li>
+</ul>
+
+<p>Placing Bayesian inference in a category theoretic setting occurs in</p>
+
+<ul>
+<li>
+<p><span class='newWikiWord'>Kirk Sturtz<a href='/nlab/new/Kirk+Sturtz'>?</a></span> <em>Bayesian Inference using the Symmetric Monoidal Closed Category Structure</em>, (<a href='https://arxiv.org/abs/1601.02593'>arXiv:1601.02593</a>)</p>
+</li>
+
+<li>
+<p><span class='newWikiWord'>Jared Culbertson<a href='/nlab/new/Jared+Culbertson'>?</a></span>, <span class='newWikiWord'>Kirk Sturtz<a href='/nlab/new/Kirk+Sturtz'>?</a></span> <em>Bayesian machine learning via category theory</em>, (<a href='https://arxiv.org/abs/1312.1445'>arXiv:1312.1445</a>)</p>
+</li>
+</ul>
+
+<p>Discussion of applications in <span class='newWikiWord'>astronomy<a href='/nlab/new/astronomy'>?</a></span> and <a class='existingWikiWord' href='/nlab/show/cosmology'>cosmology</a> includes</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/J%C3%B6rg+Rachen'>Jörg Rachen</a> <em>Bayesian Classification of Astronomical Objects – and what is behind it</em> (<a href='http://arxiv.org/abs/1302.2429'>arXiv:1302.2429</a>)</li>
+</ul>
+
+<p>
+ 
+ 
+ 
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on May  3, 2017 04:45:27 
+  by <a class="existingWikiWord" href="/nlab/show/David+Corfield">David Corfield</a>
+  (51.9.254.136)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Bayesian+reasoning" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/Bayesian+reasoning/11" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(11 revisions)</span> | <a href="/nlab/show/diff/Bayesian+reasoning" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/Bayesian+reasoning" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/Bayesian+reasoning" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/Bayesian+reasoning" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/Bayesian+reasoning" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

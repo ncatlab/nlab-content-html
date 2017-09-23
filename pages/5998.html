@@ -1,0 +1,689 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      lambda-calculus in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      lambda-calculus
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='type_theory'>Type theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/natural+deduction'>natural deduction</a></strong> <a class='existingWikiWord' href='/nlab/show/metalanguage'>metalanguage</a>, <a class='existingWikiWord' href='/nlab/show/practical+foundation+of+mathematics'>practical foundations</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/judgment'>judgement</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sequent'>hypothetical judgement</a>, <a class='existingWikiWord' href='/nlab/show/sequent'>sequent</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/antecedent'>antecedents</a> <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊢</mo></mrow><annotation encoding='application/x-tex'>\vdash</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/consequent'>consequent</a>, <a class='existingWikiWord' href='/nlab/show/succedent'>succedents</a></li>
+</ul>
+</li>
+</ul>
+
+<ol>
+<li><a class='existingWikiWord' href='/nlab/show/type+formation'>type formation rule</a></li>
+
+<li><a class='existingWikiWord' href='/nlab/show/natural+deduction'>term introduction rule</a></li>
+
+<li><a class='existingWikiWord' href='/nlab/show/natural+deduction'>term elimination rule</a></li>
+
+<li><a class='existingWikiWord' href='/nlab/show/natural+deduction'>computation rule</a></li>
+</ol>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a></strong> (<a class='existingWikiWord' href='/nlab/show/dependent+type+theory'>dependent</a>, <a class='existingWikiWord' href='/nlab/show/intensional+type+theory'>intensional</a>, <a class='existingWikiWord' href='/nlab/show/observational+type+theory'>observational type theory</a>, <a class='existingWikiWord' href='/nlab/show/homotopy+type+theory'>homotopy type theory</a>)</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/calculus+of+constructions'>calculus of constructions</a></li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/syntax'>syntax</a></strong> <a class='existingWikiWord' href='/nlab/show/metalanguage'>object language</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/theory'>theory</a>, <a class='existingWikiWord' href='/nlab/show/axiom'>axiom</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/proposition'>proposition</a>/<a class='existingWikiWord' href='/nlab/show/type'>type</a> (<a class='existingWikiWord' href='/nlab/show/propositions+as+types'>propositions as types</a>)</p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/definition'>definition</a>/<a class='existingWikiWord' href='/nlab/show/proof'>proof</a>/<a class='existingWikiWord' href='/nlab/show/program'>program</a> (<a class='existingWikiWord' href='/nlab/show/proofs+as+programs'>proofs as programs</a>)</p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/theorem'>theorem</a></p>
+</li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/computational+trinitarianism'>computational trinitarianism</a></strong> = <strong><a class='existingWikiWord' href='/nlab/show/propositions+as+types'>propositions as types</a></strong> +<strong><a class='existingWikiWord' href='/nlab/show/proofs+as+programs'>programs as proofs</a></strong> +<strong><a class='existingWikiWord' href='/nlab/show/relation+between+type+theory+and+category+theory'>relation type theory/category theory</a></strong></p>
+<table><thead><tr><th><a class='existingWikiWord' href='/nlab/show/logic'>logic</a></th><th><a class='existingWikiWord' href='/nlab/show/category+theory'>category theory</a></th><th><a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a></th></tr></thead><tbody><tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/true+proposition'>true</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/terminal+object'>terminal object</a>/<a class='existingWikiWord' href='/nlab/show/truncated+object'>(-2)-truncated object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/contractible+type'>h-level 0</a>-<a class='existingWikiWord' href='/nlab/show/type'>type</a>/<a class='existingWikiWord' href='/nlab/show/unit+type'>unit type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/falsehood'>false</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/initial+object'>initial object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/empty+type'>empty type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/proposition'>proposition</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/truncated+object'>(-1)-truncated object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/mere+proposition'>h-proposition</a>, <a class='existingWikiWord' href='/nlab/show/mere+proposition'>mere proposition</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/proof'>proof</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/generalized+element'>generalized element</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/program'>program</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/cut+rule'>cut rule</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/composition'>composition</a> of <a class='existingWikiWord' href='/nlab/show/classifying+morphism'>classifying morphisms</a> / <a class='existingWikiWord' href='/nlab/show/pullback'>pullback</a> of <a class='existingWikiWord' href='/nlab/show/display+map'>display maps</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/substitution'>substitution</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/cut+rule'>cut elimination</a> for <a class='existingWikiWord' href='/nlab/show/implication'>implication</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/unit+of+an+adjunction'>counit</a> for hom-tensor adjunction</td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/beta-reduction'>beta reduction</a></td></tr>
+<tr><td style='text-align: left;'>introduction rule for <a class='existingWikiWord' href='/nlab/show/implication'>implication</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/unit'>unit</a> for hom-tensor adjunction</td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/eta-conversion'>eta conversion</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/logical+conjunction'>logical conjunction</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/cartesian+product'>product</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/product+type'>product type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/disjunction'>disjunction</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/coproduct'>coproduct</a> (<a class='existingWikiWord' href='/nlab/show/truncated+object'>(-1)-truncation</a> of)</td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/sum+type'>sum type</a> (<a class='existingWikiWord' href='/nlab/show/bracket+type'>bracket type</a> of)</td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/implication'>implication</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/internal+hom'>internal hom</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/function+type'>function type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/negation'>negation</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/internal+hom'>internal hom</a> into <a class='existingWikiWord' href='/nlab/show/initial+object'>initial object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/function+type'>function type</a> into <a class='existingWikiWord' href='/nlab/show/empty+type'>empty type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/universal+quantifier'>universal quantification</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/dependent+product'>dependent product</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/dependent+product+type'>dependent product type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/existential+quantifier'>existential quantification</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/dependent+sum'>dependent sum</a> (<a class='existingWikiWord' href='/nlab/show/truncated+object'>(-1)-truncation</a> of)</td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/dependent+sum+type'>dependent sum type</a> (<a class='existingWikiWord' href='/nlab/show/bracket+type'>bracket type</a> of)</td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/equivalence'>equivalence</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/path+space+object'>path space object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/identity+type'>identity type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/equivalence+class'>equivalence class</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/quotient+object'>quotient</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/quotient+type'>quotient type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/induction'>induction</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/colimit'>colimit</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/inductive+type'>inductive type</a>, <a class='existingWikiWord' href='/nlab/show/W-type'>W-type</a>, <a class='existingWikiWord' href='/nlab/show/M-type'>M-type</a></td></tr>
+<tr><td style='text-align: left;'>higher <a class='existingWikiWord' href='/nlab/show/induction'>induction</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/%28%E2%88%9E%2C1%29-limit'>higher colimit</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/higher+inductive+type'>higher inductive type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/preset'>completely presented set</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/discrete+object'>discrete object</a>/<a class='existingWikiWord' href='/nlab/show/truncated+object'>0-truncated object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/h-set'>h-level 2</a>-<a class='existingWikiWord' href='/nlab/show/type'>type</a>/<a class='existingWikiWord' href='/nlab/show/preset'>preset</a>/<a class='existingWikiWord' href='/nlab/show/h-set'>h-set</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/set'>set</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/groupoid+object+in+an+%28infinity%2C1%29-category'>internal 0-groupoid</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/Bishop+set'>Bishop set</a>/<a class='existingWikiWord' href='/nlab/show/equivalence+relation'>setoid</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/universe'>universe</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/%28sub%29object+classifier+in+an+%28infinity%2C1%29-topos'>object classifier</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/type+of+types'>type of types</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/modality'>modality</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/closure+operator'>closure operator</a>, (<a class='existingWikiWord' href='/nlab/show/idempotent+monad'>idemponent</a>) <a class='existingWikiWord' href='/nlab/show/monad'>monad</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/modal+type+theory'>modal type theory</a>, <a class='existingWikiWord' href='/nlab/show/monad+%28in+computer+science%29'>monad (in computer science)</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/linear+logic'>linear logic</a></td><td style='text-align: left;'>(<a class='existingWikiWord' href='/nlab/show/symmetric+monoidal+category'>symmetric</a>, <a class='existingWikiWord' href='/nlab/show/closed+monoidal+category'>closed</a>) <a class='existingWikiWord' href='/nlab/show/monoidal+category'>monoidal category</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/linear+type+theory'>linear type theory</a>/<a class='existingWikiWord' href='/nlab/show/quantum+computation'>quantum computation</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/proof+net'>proof net</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/string+diagram'>string diagram</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/quantum+circuit'>quantum circuit</a></td></tr>
+<tr><td style='text-align: left;'>(absence of) <a class='existingWikiWord' href='/nlab/show/contraction+rule'>contraction rule</a></td><td style='text-align: left;'>(absence of) <a class='existingWikiWord' href='/nlab/show/diagonal+morphism'>diagonal</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/no-cloning+theorem'>no-cloning theorem</a></td></tr>
+<tr><td style='text-align: left;'></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/synthetic+mathematics'>synthetic mathematics</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/domain+specific+embedded+programming+language'>domain specific embedded programming language</a></td></tr>
+</tbody></table>
+<p><strong><a class='existingWikiWord' href='/nlab/show/homotopy+level'>homotopy levels</a></strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-type+theory'>2-type theory</a>, <a class='existingWikiWord' href='/michaelshulman/show/2-categorical+logic' title='michaelshulman'>2-categorical logic</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+type+theory'>homotopy type theory</a>, <a class='existingWikiWord' href='/nlab/show/homotopy+type+theory+-+contents'>homotopy type theory - contents</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+type'>homotopy type</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/univalence+axiom'>univalence</a>, <a class='existingWikiWord' href='/nlab/show/function+extensionality'>function extensionality</a>, <a class='existingWikiWord' href='/nlab/show/internal+logic+of+an+%28infinity%2C1%29-topos'>internal logic of an (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cohesive+homotopy+type+theory'>cohesive homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/directed+homotopy+type+theory'>directed homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/HoTT+methods+for+homotopy+theorists'>HoTT methods for homotopy theorists</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/semantics'>semantics</a></strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/internal+logic'>internal logic</a>, <a class='existingWikiWord' href='/nlab/show/categorical+semantics'>categorical semantics</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/display+map'>display map</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Mitchell-B%C3%A9nabou+language'>internal logic of a topos</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Mitchell-B%C3%A9nabou+language'>Mitchell-Benabou language</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Kripke-Joyal+semantics'>Kripke-Joyal semantics</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/internal+logic+of+an+%28infinity%2C1%29-topos'>internal logic of an (∞,1)-topos</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/type-theoretic+model+category'>type-theoretic model category</a></li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/type+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='the_calculus'>The λ-calculus</h1>
+<div class='maruku_toc'><ul><li><a href='#idea'>Idea</a></li><li><a href='#concepts'>Concepts</a><ul><li><a href='#abstraction_and_application'>Abstraction and application</a></li><li><a href='#evaluation_and_reduction'>Evaluation and Reduction</a></li></ul></li><li><a href='#variants'>Variants</a><ul><li><a href='#pure_lambda_calculus'>Pure lambda calculus</a></li><li><a href='#simply_typed_lambda_calculus'>Simply typed lambda calculus</a></li><li><a href='#functional_programming'>Functional programming</a></li></ul></li><li><a href='#related_entries'>Related entries</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='idea'>Idea</h2>
+
+<p>The <strong>lambda calculus</strong> is:</p>
+
+<ul>
+<li>
+<p>a simple <a class='existingWikiWord' href='/nlab/show/programming+language'>programming language</a>;</p>
+</li>
+
+<li>
+<p>a <em>model of computation</em> (akin to <span class='newWikiWord'>Turing machine<a href='/nlab/new/Turing+machine'>?</a></span>s and <a class='existingWikiWord' href='/nlab/show/recursive+function'>recursive function</a>s), through which we can study the computability and complexity of <a class='existingWikiWord' href='/nlab/show/function'>functions</a> and predicates; and</p>
+</li>
+
+<li>
+<p>an <a class='existingWikiWord' href='/nlab/show/internal+logic'>internal language</a> for <a class='existingWikiWord' href='/nlab/show/cartesian+closed+category'>cartesian closed categories</a> (for more on this see at <em><a class='existingWikiWord' href='/nlab/show/relation+between+type+theory+and+category+theory'>relation between type theory and category theory</a></em>).</p>
+</li>
+</ul>
+
+<p>It comes in both <em>typed</em> and <em>untyped</em> versions.</p>
+
+<h2 id='concepts'>Concepts</h2>
+
+<h3 id='abstraction_and_application'>Abstraction and application</h3>
+
+<p>The basic constructs of lambda calculus are <em><a class='existingWikiWord' href='/nlab/show/lambda-abstraction'>lambda abstractions</a></em> and <em>applications</em>. If <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi></mrow><annotation encoding='application/x-tex'>t</annotation></semantics></math> is an expression of some sort involving a free variable <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi></mrow><annotation encoding='application/x-tex'>x</annotation></semantics></math> (possibly vacuously), then the lambda abstraction</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi><mi>x</mi><mo>.</mo><mi>t</mi></mrow><annotation encoding='application/x-tex'> \lambda x. t </annotation></semantics></math></div>
+<p>is intended to represent the function which takes one input and returns the result of substituting that input for <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi></mrow><annotation encoding='application/x-tex'>x</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi></mrow><annotation encoding='application/x-tex'>t</annotation></semantics></math>. Thus, for instance, <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mo stretchy='false'>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\lambda x. (x+1))</annotation></semantics></math> is the function which adds one to its argument. Lambda expressions are often convenient, even outside lambda calculus proper, for referring to a function without giving it a name.</p>
+
+<p>Application is how we “undo” abstraction, by applying a function to an argument. The application of the function <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> to the argument <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi></mrow><annotation encoding='application/x-tex'>t</annotation></semantics></math> is generally denoted simply by <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mi>t</mi></mrow><annotation encoding='application/x-tex'>f t</annotation></semantics></math>. Applications can be parenthesized, so for instance <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo stretchy='false'>(</mo><mi>t</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>f(t)</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>f</mi><mo stretchy='false'>)</mo><mi>t</mi></mrow><annotation encoding='application/x-tex'>(f)t</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>f</mi><mi>t</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(f t)</annotation></semantics></math> all denote the same thing as <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mi>t</mi></mrow><annotation encoding='application/x-tex'>f t</annotation></semantics></math>.</p>
+
+<p>Application is generally considered to associate to the left. Thus <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mi>v</mi><mi>w</mi></mrow><annotation encoding='application/x-tex'>u v w</annotation></semantics></math> denotes the application of <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi></mrow><annotation encoding='application/x-tex'>u</annotation></semantics></math> to <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi></mrow><annotation encoding='application/x-tex'>v</annotation></semantics></math>, followed by application of the result (assumed to again be a function) to <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi></mrow><annotation encoding='application/x-tex'>w</annotation></semantics></math>. This allows the representation of functions of multiple variables in terms of functions of one variable via “currying” (named for Haskell Curry, although it was invented by Moses Schönfinkel): after being applied to the first argument, we return a function which, applied to the next argument, returns a function which, when applied to the next argument, … , returns a value. For instance, the “addition” function of two variables can be denoted <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mo stretchy='false'>(</mo><mi>λ</mi><mi>y</mi><mo>.</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\lambda x. (\lambda y. x+y))</annotation></semantics></math>: when applied to an argument <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi></mrow><annotation encoding='application/x-tex'>x</annotation></semantics></math>, it returns a function which, when applied to an argument <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>y</mi></mrow><annotation encoding='application/x-tex'>y</annotation></semantics></math>, returns <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><annotation encoding='application/x-tex'>x+y</annotation></semantics></math>. This is so common that it is generally abbreviated <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mi>y</mi><mo>.</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\lambda x y. x+y)</annotation></semantics></math>.</p>
+
+<h3 id='evaluation_and_reduction'>Evaluation and Reduction</h3>
+
+<p><em>Evaluation</em> or <em>reduction</em> is the process of “computing” the “value” of a lambda term. The most basic operation is called <em><a class='existingWikiWord' href='/nlab/show/beta-reduction'>beta reduction</a></em> and consists in taking a lambda abstraction at its word about what it is supposed to do when applied to an input. For instance, the application <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy='false'>)</mo><mn>3</mn></mrow><annotation encoding='application/x-tex'>(\lambda x. x+1) 3</annotation></semantics></math> reduces to <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>3</mn><mo>+</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>3+1</annotation></semantics></math> (and thereby, presuming appropriate rules for <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo lspace='verythinmathspace' rspace='0em'>+</mo></mrow><annotation encoding='application/x-tex'>+</annotation></semantics></math>, to <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>4</mn></mrow><annotation encoding='application/x-tex'>4</annotation></semantics></math>). In general, the beta reduction of a term <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>t</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\lambda x.t)(u)</annotation></semantics></math> is defined as the <a class='existingWikiWord' href='/nlab/show/substitution#avoiding variable capture'>capture-avoiding substitution</a> of <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi></mrow><annotation encoding='application/x-tex'>u</annotation></semantics></math> for <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi></mrow><annotation encoding='application/x-tex'>x</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi></mrow><annotation encoding='application/x-tex'>t</annotation></semantics></math>,</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>t</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo><msub><mo>→</mo> <mi>β</mi></msub><mi>t</mi><mo stretchy='false'>[</mo><mi>u</mi><mo stretchy='false'>/</mo><mi>x</mi><mo stretchy='false'>]</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>(\lambda x.t)(u) \to_\beta t[u/x].</annotation></semantics></math></div>
+<p>Terms which can be connected by a <a class='existingWikiWord' href='/nlab/show/zigzag'>zigzag</a> of beta reductions (in either direction) are said to be <em>beta-equivalent</em>.</p>
+
+<p>Another basic operation often assumed in the lambda calculus is <em><a class='existingWikiWord' href='/nlab/show/eta-conversion'>eta reduction</a>/expansion</em>, which consists of identifying a function, <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> with the lambda abstraction <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>f</mi><mi>x</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\lambda x. f x)</annotation></semantics></math> which does nothing other than apply <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> to its argument. (It is called “reduction” or “expansion” depending on which “direction” it goes in, from <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>f</mi><mi>x</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\lambda x. f x)</annotation></semantics></math> to <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> or vice versa.)</p>
+
+<p>A more basic operation than either of these, which is often not even mentioned at all, is <em>alpha equivalence</em>; this consists of the renaming of bound variables, e.g. <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>f</mi><mi>x</mi><mo stretchy='false'>)</mo><mo>→</mo><mo stretchy='false'>(</mo><mi>λ</mi><mi>y</mi><mo>.</mo><mi>f</mi><mi>y</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\lambda x. f x) \to (\lambda y. f y)</annotation></semantics></math>.</p>
+
+<p>More complicated systems that build on the lambda calculus, such as various <a class='existingWikiWord' href='/nlab/show/type+theory'>type theories</a>, will often have other rules of evaluation as well.</p>
+
+<p>In good situations, lambda calculus reduction is <em><a class='existingWikiWord' href='/nlab/show/confluent+category'>confluent</a></em> (the <a class='existingWikiWord' href='/nlab/show/Church-Rosser+theorem'>Church-Rosser theorem</a>), so that every term has at most one <em><span class='newWikiWord'>normal form<a href='/nlab/new/normal+form'>?</a></span></em>, and two terms are equivalent precisely when they have the same normal form. A term is said to be <em>normalizing</em> if its reduction is also terminating—more precisely, <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi></mrow><annotation encoding='application/x-tex'>t</annotation></semantics></math> is said to be <em>weakly-normalizing</em> if there exists a finite sequence of reductions</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi><mo>→</mo><msub><mi>t</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>t</mi> <mn>2</mn></msub><mo>→</mo><mi>…</mi><mo>→</mo><msub><mi>t</mi> <mi>n</mi></msub><mo>↛</mo></mrow><annotation encoding='application/x-tex'> t \to t_1 \to t_2 \to \dots \to t_n \nrightarrow </annotation></semantics></math></div>
+<p>terminating in a normal form <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>t</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>t_n</annotation></semantics></math>, and <em>strongly-normalizing</em> if <em>all</em> sequences of reductions lead to a (by confluence, necessarily unique) normal form. In general, there exist terms which do not normalize by any reduction sequence, although simply-typed lambda calculus and many other typed variants of lambda calculus are strongly-normalizing.</p>
+
+<h2 id='variants'>Variants</h2>
+
+<h3 id='pure_lambda_calculus'>Pure lambda calculus</h3>
+
+<p>In the untyped (or “pure”) lambda calculus, every term can be applied to any other term. As an example of the sort of freedom this allows, we can form the term <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>=</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>x</mi><mi>x</mi></mrow><annotation encoding='application/x-tex'>u = \lambda x. x x</annotation></semantics></math> which applies its argument to itself, and then define</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ω</mi><mo>=</mo><mi>u</mi><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'> \omega = u(u) </annotation></semantics></math></div>
+<p>as the self-application of <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi></mrow><annotation encoding='application/x-tex'>u</annotation></semantics></math>. Performing beta-reduction on <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ω</mi></mrow><annotation encoding='application/x-tex'>\omega</annotation></semantics></math> yields</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ω</mi><msub><mo>→</mo> <mi>β</mi></msub><mi>x</mi><mi>x</mi><mo stretchy='false'>[</mo><mi>u</mi><mo stretchy='false'>/</mo><mi>x</mi><mo stretchy='false'>]</mo><mo>=</mo><mi>u</mi><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>ω</mi><msub><mo>→</mo> <mi>β</mi></msub><mi>ω</mi><msub><mo>→</mo> <mi>β</mi></msub><mi>…</mi></mrow><annotation encoding='application/x-tex'> \omega \to_\beta x x[u/x] = u(u) = \omega \to_\beta \omega \to_\beta \dots</annotation></semantics></math></div>
+<p>thus giving the classic example of a non-terminating program.</p>
+
+<p>In pure untyped lambda calculus, we can define <a class='existingWikiWord' href='/nlab/show/natural+number'>natural numbers</a> using the <span class='newWikiWord'>Church numerals<a href='/nlab/new/Church+numerals'>?</a></span>: the number <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> is represented by the operation of <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>-fold iteration. Thus for instance we have <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>2</mn><mo>=</mo><mi>λ</mi><mi>f</mi><mo>.</mo><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>f</mi><mi>x</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>2 = \lambda f. (\lambda x.f (f x))</annotation></semantics></math>, the function which takes a function <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> as input and returns a function that applies <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> twice. Similarly <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn><mo>=</mo><mi>λ</mi><mi>f</mi><mo>.</mo><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>f</mi><mi>x</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>1 = \lambda f. (\lambda x.f x)</annotation></semantics></math> is the identity on functions, while <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>0</mn><mo>=</mo><mi>λ</mi><mi>f</mi><mo>.</mo><mo stretchy='false'>(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>x</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>0 = \lambda f. (\lambda x . x)</annotation></semantics></math> takes any function <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> to the identity function (the 0th iterate of <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math>). We can then construct (very inefficiently) all of arithmetic, and prove that the arithmetic functions expressible by lambda terms are exactly the same as those computable by Turing machines or (total) recursive functions.</p>
+
+<p>The most natural sort of <em>model</em> of pure lambda calculus is a <a class='existingWikiWord' href='/nlab/show/reflexive+object'>reflexive object</a> in a cartesian closed category, that is, an object <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_56' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> together with a pair of maps</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_57' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><mi>U</mi></mtd> <mtd><mover><munder><mo>⇄</mo><mi>ℓ</mi></munder><mi>a</mi></mover></mtd> <mtd><msup><mi>U</mi> <mi>U</mi></msup></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>
+\array{U &amp; \overset{a}{\underset{\ell}{\rightleftarrows}} &amp; U^U} 
+
+</annotation></semantics></math></div>
+<p>representing <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_58' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>a</mi></mrow><annotation encoding='application/x-tex'>a</annotation></semantics></math>pplication and <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_59' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℓ</mi></mrow><annotation encoding='application/x-tex'>\ell</annotation></semantics></math>ambda, such that <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_60' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>a</mi><mo>∘</mo><mi>ℓ</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>a \circ \ell = 1</annotation></semantics></math> (to validate the <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_61' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>β</mi></mrow><annotation encoding='application/x-tex'>\beta</annotation></semantics></math> equation). Such data thereby witnesses the <a class='existingWikiWord' href='/nlab/show/exponential+object'>exponential object</a> <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_62' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>U</mi> <mi>U</mi></msup></mrow><annotation encoding='application/x-tex'>U^U</annotation></semantics></math> as a <a class='existingWikiWord' href='/nlab/show/retract'>retract</a> of <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_63' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>. Of course there are no nontrivial such models in sets, but they do exist in other categories, such as <a class='existingWikiWord' href='/nlab/show/domain'>domain</a>s. It is worth remarking that a necessary condition on such <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_64' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> is that every term <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_65' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo lspace='verythinmathspace'>:</mo><msup><mi>U</mi> <mi>U</mi></msup></mrow><annotation encoding='application/x-tex'>f \colon U^U</annotation></semantics></math> have a fixed-point; see <a class='existingWikiWord' href='/nlab/show/fixed-point+combinator'>fixed-point combinator</a>.</p>
+
+<p>From the point of view of <a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a> and in particular the “types à la Church” perspective, such a reflexive object <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_66' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> can also be seen as the intrinsic type of <em>every</em> lambda term, and so the untyped lambda calculus is sometimes referred to (a bit cheekily) as really being “uni-typed”. On the other hand, from the “types à la Curry” perspective, it is also possible to begin with the pure lambda calculus as a foundation, and then try to ascribe individual terms more precise types. For example, the normalizing terms of pure lambda calculus can be characterized precisely as those which are typable in an <span class='newWikiWord'>intersection type<a href='/nlab/new/intersection+type'>?</a></span> system.</p>
+
+<h3 id='simply_typed_lambda_calculus'>Simply typed lambda calculus</h3>
+
+<p>In simply typed lambda calculus, each variable and term has a <a class='existingWikiWord' href='/nlab/show/type+theory'>type</a>, and we can only form the application <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_67' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mi>t</mi></mrow><annotation encoding='application/x-tex'>f t</annotation></semantics></math> if <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_68' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi></mrow><annotation encoding='application/x-tex'>t</annotation></semantics></math> is of some type <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_69' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> while <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_70' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> is of a function type <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_71' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>→</mo><mi>B</mi><mo>=</mo><msup><mi>B</mi> <mi>A</mi></msup></mrow><annotation encoding='application/x-tex'>A \to B = B^A</annotation></semantics></math> whose domain is <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_72' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math>; the type of <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_73' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mi>t</mi></mrow><annotation encoding='application/x-tex'>f t</annotation></semantics></math> is then <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_74' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math>. Similarly, if <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_75' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi></mrow><annotation encoding='application/x-tex'>x</annotation></semantics></math> is a variable of type <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_76' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_77' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi></mrow><annotation encoding='application/x-tex'>t</annotation></semantics></math> is a term of type <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_78' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math> involving <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_79' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi></mrow><annotation encoding='application/x-tex'>x</annotation></semantics></math>, then <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_80' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi><mi>x</mi><mo>.</mo><mi>t</mi></mrow><annotation encoding='application/x-tex'>\lambda x. t</annotation></semantics></math> has type <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_81' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>A\to B</annotation></semantics></math>.</p>
+
+<p>Without some further type and term constructors, there is not much that can be done, but if we add a <a class='existingWikiWord' href='/nlab/show/natural+numbers+object'>natural numbers object</a> (that is, a type <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_82' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>N</mi></mrow><annotation encoding='application/x-tex'>N</annotation></semantics></math> with constants <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_83' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math> of type <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_84' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>N</mi></mrow><annotation encoding='application/x-tex'>N</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_85' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>s</mi></mrow><annotation encoding='application/x-tex'>s</annotation></semantics></math> of type <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_86' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>N</mi><mo>→</mo><mi>N</mi></mrow><annotation encoding='application/x-tex'>N\to N</annotation></semantics></math>, along with a “definition-by-recursion” operator), then we can express many recursive functions. (We cannot by this means express <em>all</em> computable functions, although we can go beyond <span class='newWikiWord'>primitive recursive function<a href='/nlab/new/primitive+recursive+function'>?</a></span>s; for instance we can define the <a class='existingWikiWord' href='/nlab/show/partial+recursive+function'>Ackermann function</a>. One way to increase the expressiveness to all <a class='existingWikiWord' href='/nlab/show/partial+recursive+function'>partial recursive function</a>s is to add a <span class='newWikiWord'>fixpoint<a href='/nlab/new/fixpoint'>?</a></span> <span class='newWikiWord'>combinator<a href='/nlab/new/combinator'>?</a></span>, or an unbounded search operator).</p>
+
+<p>Simply typed lambda calculus is the natural <a class='existingWikiWord' href='/nlab/show/internal+logic'>internal language</a> of <a class='existingWikiWord' href='/nlab/show/cartesian+closed+category'>cartesian closed categories</a>. This means that</p>
+
+<ul>
+<li>
+<p>Every cartesian closed category gives rise to a simply typed lambda calculus whose basic types are its objects, and whose basic terms are its morphisms, while</p>
+</li>
+
+<li>
+<p>Every simply typed lambda calculus “generates” a cartesian closed category whose objects are its types and whose morphisms are its equivalence classes of terms.</p>
+</li>
+</ul>
+
+<p>These two operations are adjoint in an appropriate sense.</p>
+
+<h3 id='functional_programming'>Functional programming</h3>
+
+<p>Most <a class='existingWikiWord' href='/nlab/show/functional+programming'>functional</a> <a class='existingWikiWord' href='/nlab/show/programming+language'>programming languages</a>, such as Lisp, ML, and Haskell, are at least loosely based on lambda calculus.</p>
+
+<h2 id='related_entries'>Related entries</h2>
+
+<ul>
+<li>
+<p><span class='newWikiWord'>combinator<a href='/nlab/new/combinator'>?</a></span>, <a class='existingWikiWord' href='/nlab/show/combinatory+logic'>combinatory logic</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/fixed-point+combinator'>fixed-point combinator</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/relation+between+type+theory+and+category+theory'>relation between type theory and category theory</a></p>
+</li>
+</ul>
+
+<h2 id='references'>References</h2>
+
+<p>The idea that untyped lambda calculus can be modeled internally to a cartesian closed category as a <a class='existingWikiWord' href='/nlab/show/reflexive+object'>reflexive object</a> (an object <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_87' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> such that the exponential <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_88' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>U</mi> <mi>U</mi></msup></mrow><annotation encoding='application/x-tex'>U^U</annotation></semantics></math> is a <a class='existingWikiWord' href='/nlab/show/retract'>retract</a> of <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_89' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>) was formulated explicitly by <a class='existingWikiWord' href='/nlab/show/Dana+Scott'>Dana Scott</a> in</p>
+
+<ul>
+<li>Dana Scott. Relating theories of the <math class='maruku-mathml' display='inline' id='mathml_f3a48f83d20e96c18b37d4dc8ccbf2f5dfa08297_90' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi></mrow><annotation encoding='application/x-tex'>\lambda</annotation></semantics></math>-calculus. In <em>To H.B. Curry: Essays on Combinatory Logic, Lambda-Calculus and Formalism</em> (eds. Hindley and Seldin), Academic Press, 403–450, 1980.</li>
+</ul>
+
+<p>This followed his earlier work constructing an explicit such model in the category of domains:</p>
+
+<ul>
+<li>
+<p>Dana Scott. Outline of a Mathematical Theory of Computation. <em>Proc. 4th Princeton Conf. on Information Sciences and Systems</em>, 169–176, 1970. <a href='http://ropas.snu.ac.kr/~kwang/520/readings/sco70.pdf'>pdf</a></p>
+</li>
+
+<li>
+<p>Dana Scott. Data types as lattices. <em>SIAM Journal of Computing</em>, 5(3):522–587, September 1976.</p>
+</li>
+</ul>
+
+<p>Another, more recent take on pure lambda calculus as a certain kind of <a class='existingWikiWord' href='/nlab/show/algebraic+theory'>algebraic theory</a> (called a “<a class='existingWikiWord' href='/nlab/show/lambda+theory'>lambda theory</a>”) can be found in</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Martin+Hyland'>Martin Hyland</a>. Classical lambda calculus in modern dress. To appear in <em>Mathematical Structures in Computer Science</em>, 2013. <a href='http://arxiv.org/abs/1211.5762'>arxiv</a></li>
+</ul>
+
+<p>
+ 
+ 
+ 
+ 
+ 
+</p>
+
+<p>
+ 
+ 
+</p>
+
+<p>
+ 
+ 
+</p>
+
+<p>
+ 
+ 
+</p>
+
+<p>
+ 
+ 
+</p>
+
+<p>
+ 
+ 
+</p>
+
+<p>
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on March  6, 2015 11:02:45 
+  by <a class="existingWikiWord" href="/nlab/show/Noam+Zeilberger">Noam Zeilberger</a>
+  (195.83.213.132)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/lambda-calculus" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/lambda-calculus/14" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(14 revisions)</span> | <a href="/nlab/show/diff/lambda-calculus" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/lambda-calculus" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/lambda-calculus" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/lambda-calculus" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/lambda-calculus" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

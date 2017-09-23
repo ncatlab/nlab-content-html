@@ -1,0 +1,596 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Moore closure in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      Moore closure
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='modalities_closure_and_reflection'>Modalities, Closure and Reflection</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/modal+type+theory'>modal type theory</a></strong>, <a class='existingWikiWord' href='/nlab/show/modal+logic'>modal logic</a></p>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/closure+operator'>closure operator</a></strong>, <a class='existingWikiWord' href='/nlab/show/universal+closure+operator'>universal closure operator</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/idempotent+monad'>idempotent monad</a>, <a class='existingWikiWord' href='/nlab/show/comonad'>comonad</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/modal+type'>modal type</a>, <a class='existingWikiWord' href='/nlab/show/local+object'>local object</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/reflective+subcategory'>reflective subcategory</a>, <a class='existingWikiWord' href='/nlab/show/coreflective+subcategory'>coreflective subcategory</a></p>
+</li>
+</ul>
+
+<h3 id='examples'>Examples</h3>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Moore+closure'>Moore closure</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/modal+type+theory'>geometric modality</a>/<a class='existingWikiWord' href='/nlab/show/Lawvere-Tierney+topology'>Lawvere-Tierney topology</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/the+logic+S4%28m%29'>S4 modal logic</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/n-truncated+object+of+an+%28infinity%2C1%29-category'>n-truncation</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/shape+modality'>Pi modality</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/flat+modality'>flat modality</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/sharp+modality'>sharp modality</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<h1 id='moore_closures'>Moore closures</h1>
+<div class='maruku_toc'><ul><li><a href='#idea'>Idea</a></li><li><a href='#definitions'>Definitions</a><ul><li><a href='#InTermsOfClosureCondition'>In terms of closure condition</a></li><li><a href='#InTermsOfClosureOperators'>In terms of closure operators</a></li><li><a href='#InTermsOfMonads'>In terms of monads</a></li></ul></li><li><a href='#examples_2'>Examples</a></li><li><a href='#generalisations'>Generalisations</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='idea'>Idea</h2>
+
+<p>The concept of <em>Moore closure</em> is a very general idea of what it can mean for a <a class='existingWikiWord' href='/nlab/show/set'>set</a> to be <em>closed</em> under some condition. It includes, as special cases, the operation of <a class='existingWikiWord' href='/nlab/show/closed+subspace'>closure</a> in a <a class='existingWikiWord' href='/nlab/show/topological+space'>topological space</a>, many examples of generation of structures from <a class='existingWikiWord' href='/nlab/show/base'>bases</a> and even <a class='existingWikiWord' href='/nlab/show/base'>subbases</a>, and generating <a class='existingWikiWord' href='/nlab/show/subobject'>subalgebras</a> from subsets of an algebra.</p>
+
+<p>Secretly, it is the same thing as the collection of subsets preserved by some <a class='existingWikiWord' href='/nlab/show/monad'>monad</a> on a <a class='existingWikiWord' href='/nlab/show/power+set'>power set</a> (the subset of “<a class='existingWikiWord' href='/nlab/show/modal+type'>modal types</a>”). In fact it is a special case of the notion of <a class='existingWikiWord' href='/nlab/show/closure+operator'>closure operator</a> or <a class='existingWikiWord' href='/nlab/show/modality'>modality</a> in <a class='existingWikiWord' href='/nlab/show/logic'>logic</a>/<a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a>, namely the special case where the ambient <a class='existingWikiWord' href='/nlab/show/category'>category</a>/<a class='existingWikiWord' href='/nlab/show/hyperdoctrine'>hyperdoctrine</a> is the <a class='existingWikiWord' href='/nlab/show/topos'>topos</a> <a class='existingWikiWord' href='/nlab/show/Set'>Set</a>.</p>
+
+<h2 id='definitions'>Definitions</h2>
+
+<p>We give two equivalent definitions. The first one</p>
+
+<ul>
+<li><a href='#InTermsOfClosureCondition'>In terms of closure condition</a></li>
+</ul>
+
+<p>gives the explicit condition for a <a class='existingWikiWord' href='/nlab/show/subset'>subset</a> of a <a class='existingWikiWord' href='/nlab/show/power+set'>power set</a> to qualify as a Moore closure, the second</p>
+
+<ul>
+<li><a href='#InTermsOfClosureOperators'>In terms of closure operators</a></li>
+</ul>
+
+<p>characterizes Moore closures as the collections of <a class='existingWikiWord' href='/nlab/show/modal+type'>modal types</a> of suitable <a class='existingWikiWord' href='/nlab/show/closure+operator'>closure operators</a>. More abstractly, this characterizes Moore closures</p>
+
+<ul>
+<li><a href='#InTermsOfMonads'>In terms of monads</a></li>
+</ul>
+
+<p>on the <a class='existingWikiWord' href='/nlab/show/poset+of+subobjects'>subobject lattice</a> of the given set.</p>
+
+<h3 id='InTermsOfClosureCondition'>In terms of closure condition</h3>
+
+<div class='num_defn'>
+<h6 id='definition'>Definition</h6>
+
+<p>Let <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> be a <a class='existingWikiWord' href='/nlab/show/set'>set</a>, and let <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒞</mi><mo>⊂</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{C} \subset P X</annotation></semantics></math> be a collection of <a class='existingWikiWord' href='/nlab/show/subset'>subsets</a> of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math>. Then <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding='application/x-tex'>\mathcal{C}</annotation></semantics></math> is a <strong>Moore collection</strong> if every <a class='existingWikiWord' href='/nlab/show/intersection'>intersection</a> of members of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding='application/x-tex'>\mathcal{C}</annotation></semantics></math> belongs to <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding='application/x-tex'>\mathcal{C}</annotation></semantics></math>.</p>
+
+<p>That is, given a family <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><msub><mi>A</mi> <mi>i</mi></msub><msub><mo stretchy='false'>)</mo> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>(A_i)_i</annotation></semantics></math> of sets in <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math>,</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>∀</mo><mi>i</mi><mo>,</mo><mspace width='thickmathspace'></mspace><msub><mi>A</mi> <mi>i</mi></msub><mo>∈</mo><mi>𝒞</mi><mspace width='thickmathspace'></mspace><mo>⇒</mo><mspace width='thickmathspace'></mspace><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋂</mo> <mi>i</mi></munder><msub><mi>A</mi> <mi>i</mi></msub><mo>∈</mo><mi>𝒞</mi><mo>.</mo></mrow><annotation encoding='application/x-tex'> \forall i,\; A_i \in \mathcal{C} \;\Rightarrow\; \bigcap_i A_i \in \mathcal{C} .</annotation></semantics></math></div></div>
+
+<div class='num_defn'>
+<h6 id='definition_2'>Definition</h6>
+
+<p>Given any collection <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> whatsoever of subsets of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math>, the Moore collection <strong>generated</strong> by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> is the collection of all intersections of members of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math>.</p>
+</div>
+
+<div class='num_remark'>
+<h6 id='remark'>Remark</h6>
+
+<p>This is indeed a Moore collection, and it equals <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> if and only if <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> is a Moore collection.</p>
+</div>
+
+<h3 id='InTermsOfClosureOperators'>In terms of closure operators</h3>
+
+<div class='num_defn' id='ClosureOperator'>
+<h6 id='definition_3'>Definition</h6>
+
+<p>Again let <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> be a set, and now let <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi></mrow><annotation encoding='application/x-tex'>Cl</annotation></semantics></math> be an operation on subsets of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math>. Then <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi></mrow><annotation encoding='application/x-tex'>Cl</annotation></semantics></math> is a <strong>closure operation</strong> if <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi></mrow><annotation encoding='application/x-tex'>Cl</annotation></semantics></math> is monotone, isotone, and idempotent. That is,</p>
+
+<ol>
+<li><math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>⊆</mo><mi>B</mi><mspace width='thickmathspace'></mspace><mo>⇒</mo><mspace width='thickmathspace'></mspace><mi>Cl</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo><mo>⊆</mo><mi>Cl</mi><mo stretchy='false'>(</mo><mi>B</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'> A \subseteq B \;\Rightarrow\; Cl(A) \subseteq Cl(B) </annotation></semantics></math>,</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>⊆</mo><mi>Cl</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'> A \subseteq Cl(A) </annotation></semantics></math>, and</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi><mo stretchy='false'>(</mo><mi>Cl</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>⊆</mo><mi>Cl</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'> Cl(Cl(A)) \subseteq Cl(A) </annotation></semantics></math> (the reverse inclusion follows from the previous two properties).</li>
+</ol>
+</div>
+
+<div class='num_prop'>
+<h6 id='proposition'>Proposition</h6>
+
+<p>If <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi></mrow><annotation encoding='application/x-tex'>Cl</annotation></semantics></math> is a closure operation, then let <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding='application/x-tex'>\mathcal{C}</annotation></semantics></math> be the collection of sets that equal their own closures (the “<a class='existingWikiWord' href='/nlab/show/modal+type'>modal types</a>” or “<a class='existingWikiWord' href='/nlab/show/local+object'>local objects</a>”). Then <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding='application/x-tex'>\mathcal{C}</annotation></semantics></math> is a Moore collection.</p>
+
+<p>Conversely, if <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding='application/x-tex'>\mathcal{C}</annotation></semantics></math> is a Moore collection, then let <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Cl(A)</annotation></semantics></math> be the intersection of all closed sets that contain <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math>. Then <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi></mrow><annotation encoding='application/x-tex'>Cl</annotation></semantics></math> is a closure operator.</p>
+
+<p>Furthermore, the two maps above, from closure operators to Moore collections and vice versa, are inverses.</p>
+</div>
+
+<h3 id='InTermsOfMonads'>In terms of monads</h3>
+
+<p>Moore closures on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> are precisely <a class='existingWikiWord' href='/nlab/show/monad'>monads</a> on the <a class='existingWikiWord' href='/nlab/show/poset+of+subobjects'>subobject lattice</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒫</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}X</annotation></semantics></math>. The property (1) of a closure operator, def. <a class='maruku-ref' href='#ClosureOperator'>3</a> ,corresponds the action of the monad on morphisms, while (2,3) are the <a class='existingWikiWord' href='/nlab/show/unit+of+an+adjunction'>unit</a> and multiplication of the monad. (The rest of the requirements of a monad are trivial in a <a class='existingWikiWord' href='/nlab/show/partial+order'>poset</a>, since they state the equality of various morphisms with common source and target.)</p>
+
+<h2 id='examples_2'>Examples</h2>
+
+<p>What are examples? Better to ask what <em>isn&#39;t</em> an example! (Answer: preclosure in a <a class='existingWikiWord' href='/nlab/show/pretopological+space'>pretopological space</a>, even though some authors call this ‘closure’.)</p>
+
+<p>Of course, the <a class='existingWikiWord' href='/nlab/show/closed+subspace'>closed subsets</a> in a <a class='existingWikiWord' href='/nlab/show/topological+space'>topological space</a> form a Moore collection; then the closure of a set <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> is its closure in the usual sense. In fact, a topological space can be <em>defined</em> as a set equipped with a Moore closure with either of these additional properties (which are equivalent):</p>
+
+<ul>
+<li><math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi><mo stretchy='false'>(</mo><mi>∅</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>∅</mi></mrow><annotation encoding='application/x-tex'>Cl(\empty) = \empty</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cl</mi><mo stretchy='false'>(</mo><mi>A</mi><mo>∪</mo><mi>B</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>Cl</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo><mo>∪</mo><mi>Cl</mi><mo stretchy='false'>(</mo><mi>B</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Cl(A \cup B) = Cl(A) \cup Cl(B)</annotation></semantics></math>.</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>∅</mi></mrow><annotation encoding='application/x-tex'>\empty</annotation></semantics></math> is closed, and so is <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>∪</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>A \cup B</annotation></semantics></math> if <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math> are closed.</li>
+</ul>
+
+<p>(However, these properties may fail in <a class='existingWikiWord' href='/nlab/show/constructive+mathematics'>constructive mathematics</a>; in fact, a topology cannot be constructively recovered from its closure operation.)</p>
+
+<p>Here are some algebraic examples:</p>
+
+<ul>
+<li>
+<p>The <a class='existingWikiWord' href='/nlab/show/subgroup'>subgroup</a>s of a <a class='existingWikiWord' href='/nlab/show/group'>group</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> form a Moore collection; the closure of a subset <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> is the subgroup generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>The subrings of a <a class='existingWikiWord' href='/nlab/show/ring'>ring</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> form a Moore collection; the closure of a subset <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> is the subring generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>The subspaces of a <a class='existingWikiWord' href='/nlab/show/vector+space'>vector space</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math> form a Moore collection; the closure of a subset <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math> is the subspace spanned by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>OK, you get the idea. This applies to any <a class='existingWikiWord' href='/nlab/show/algebraic+theory'>algebraic theory</a>. For a <a class='existingWikiWord' href='/nlab/show/Lawvere+theory'>finitary algebraic theory</a>, the lattice of closed elements is an <a class='existingWikiWord' href='/nlab/show/algebraic+lattice'>algebraic lattice</a>.</p>
+</li>
+</ul>
+
+<p>But also:</p>
+
+<ul>
+<li>
+<p>The <a class='existingWikiWord' href='/nlab/show/normal+subgroup'>normal subgroup</a>s of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> form a Moore collection; the closure of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math> is the normal subgroup generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_56' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>The <a class='existingWikiWord' href='/nlab/show/ideal'>ideal</a>s of a ring <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_57' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> form a Moore collection; the closure of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_58' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math> is the ideal generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_59' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>The (topologically) closed subspaces of a <a class='existingWikiWord' href='/nlab/show/Hilbert+space'>Hilbert space</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_60' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>H</mi></mrow><annotation encoding='application/x-tex'>H</annotation></semantics></math> form a Moore collection; the closure of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_61' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math> is the closed subspace generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_62' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>And many further examples.</p>
+</li>
+</ul>
+
+<p>Here are some examples on <a class='existingWikiWord' href='/nlab/show/power+set'>power set</a>s:</p>
+
+<ul>
+<li>
+<p>The topologies on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_63' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> form a Moore collection on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_64' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒫</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}X</annotation></semantics></math>; the closure of a subset <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_65' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_66' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒫</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}X</annotation></semantics></math> is the topology generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_67' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> as a <a class='existingWikiWord' href='/nlab/show/base'>subbase</a>.</p>
+</li>
+
+<li>
+<p>The <a class='existingWikiWord' href='/nlab/show/filter'>filter</a>s on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_68' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> form a Moore collection on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_69' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒫</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}X</annotation></semantics></math>; the closure of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_70' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> is the filter generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_71' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> as a <a class='existingWikiWord' href='/nlab/show/base'>subbase</a>. (The <em>proper</em> filters on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_72' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> do <em>not</em> form a Moore collection; not every <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_73' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> generates a proper filter.)</p>
+</li>
+
+<li>
+<p>The <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_74' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>σ</mi></mrow><annotation encoding='application/x-tex'>\sigma</annotation></semantics></math>-<a class='existingWikiWord' href='/nlab/show/sigma-algebra'>algebras</a> on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_75' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> form a Moore collection on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_76' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒫</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}X</annotation></semantics></math>; the closure of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_77' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> is the <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_78' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>σ</mi></mrow><annotation encoding='application/x-tex'>\sigma</annotation></semantics></math>-algebra generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_79' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math>. (This is the ‘abstract nonsense’ way to generate a <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_80' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>σ</mi></mrow><annotation encoding='application/x-tex'>\sigma</annotation></semantics></math>-algebra; else you have to do transfinite induction on countable <a class='existingWikiWord' href='/nlab/show/ordinal+number'>ordinals</a>.)</p>
+</li>
+
+<li>
+<p>And so on.</p>
+</li>
+</ul>
+
+<p>Topping off these, the Moore collections on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_81' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> form a Moore collection on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_82' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒫</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}X</annotation></semantics></math>; the closure of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_83' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> is the Moore collection generated by <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_84' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{B}</annotation></semantics></math> as described in the definitions.</p>
+
+<p>See also at <em><a class='existingWikiWord' href='/nlab/show/matroid'>matroid</a></em>.</p>
+
+<h2 id='generalisations'>Generalisations</h2>
+
+<p>The definition of Moore collection really makes sense in any <a class='existingWikiWord' href='/nlab/show/suplattice'>inflattice</a>; even better, the definition of closure operator makes sense in any <a class='existingWikiWord' href='/nlab/show/partial+order'>poset</a>. This context is the generic meaning of <a class='existingWikiWord' href='/nlab/show/closure+operator'>closure operator</a>; here are some examples:</p>
+
+<ul>
+<li>
+<p>Instead of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_85' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>𝒫</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}X</annotation></semantics></math>, work in the <a class='existingWikiWord' href='/nlab/show/opposite+category'>opposite poset</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_86' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>𝒫</mi> <mi>op</mi></msup><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}^{op}X</annotation></semantics></math>. Then the open sets in a <a class='existingWikiWord' href='/nlab/show/topological+space'>topological space</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_87' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> form a Moore collection whose closure operator is the usual interior operation. Now we can define a topological space as a set equipped with a Moore closure operator on <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_88' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>𝒫</mi> <mi>op</mi></msup><mi>X</mi></mrow><annotation encoding='application/x-tex'>\mathcal{P}^{op}X</annotation></semantics></math> that preserves <a class='existingWikiWord' href='/nlab/show/join'>join</a>s (which here are <a class='existingWikiWord' href='/nlab/show/intersection'>intersection</a>s); this definition is even valid constructively.</p>
+</li>
+
+<li>
+<p>Let <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_89' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>⊣</mo><mi>g</mi></mrow><annotation encoding='application/x-tex'>f \dashv g</annotation></semantics></math> be a <a class='existingWikiWord' href='/nlab/show/Galois+connection'>Galois connection</a> between <a class='existingWikiWord' href='/nlab/show/partial+order'>posets</a> <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_90' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_91' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi></mrow><annotation encoding='application/x-tex'>B</annotation></semantics></math>. Call an element of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_92' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> <em>normal</em> if <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_93' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mo stretchy='false'>(</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>a</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>≤</mo><mi>a</mi></mrow><annotation encoding='application/x-tex'>g(f(a)) \leq a</annotation></semantics></math> (the reverse is always true). Then <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_94' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mo>∘</mo><mi>f</mi></mrow><annotation encoding='application/x-tex'>g \circ f</annotation></semantics></math> is a closure operator. This generalises the case of the normal subgroups of <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_95' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> when <math class='maruku-mathml' display='inline' id='mathml_0606c3b638b0b8a407cf883ab7a98f539fb9a963_96' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> is the <a class='existingWikiWord' href='/nlab/show/Galois+group'>Galois group</a> of an extension of <a class='existingWikiWord' href='/nlab/show/field'>field</a>s.</p>
+</li>
+</ul>
+
+<p>Since Galois connections are simply <a class='existingWikiWord' href='/nlab/show/adjunction'>adjunction</a>s between posets, the concept of Moore closure cries out for <a class='existingWikiWord' href='/nlab/show/vertical+categorification'>categorification</a>. And in fact, the answer is well known in category theory: it is a <a class='existingWikiWord' href='/nlab/show/monad'>monad</a>.</p>
+
+<h2 id='references'>References</h2>
+
+<p>Section 4.1–4.12 in</p>
+
+<ul>
+<li>Erich Schechter, <em><a class='existingWikiWord' href='/nlab/show/Handbook+of+Analysis+and+its+Foundations'>Handbook of Analysis and its Foundations</a></em></li>
+</ul>
+
+<p>See also</p>
+
+<ul>
+<li>Wikipedia, <em><a href='http://en.wikipedia.org/wiki/Closure_operator'>Closure operator</a></em></li>
+</ul>
+
+<p>
+ 
+ 
+ 
+ 
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on March  7, 2015 17:12:33 
+  by <a class="existingWikiWord" href="/nlab/show/Todd+Trimble">Todd Trimble</a>
+  (67.81.95.215)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Moore+closure" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/Moore+closure/14" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(14 revisions)</span> | <a href="/nlab/show/diff/Moore+closure" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/Moore+closure" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/Moore+closure" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/Moore+closure" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/Moore+closure" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

@@ -1,0 +1,728 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      monadicity theorem in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      monadicity theorem
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='category_theory'>Category theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/category+theory'>category theory</a></strong></p>
+
+<h2 id='concepts'>Concepts</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category'>category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/functor'>functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a></p>
+</li>
+</ul>
+
+<h2 id='universal_constructions'>Universal constructions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/universal+construction'>universal construction</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/representable+functor'>representable functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+functor'>adjoint functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/limit'>limit</a>/<a class='existingWikiWord' href='/nlab/show/colimit'>colimit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/weighted+limit'>weighted limit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/end'>end</a>/<a class='existingWikiWord' href='/nlab/show/end'>coend</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Kan+extension'>Kan extension</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id='theorems'>Theorems</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma'>Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Isbell+duality'>Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Grothendieck+construction'>Grothendieck construction</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+functor+theorem'>adjoint functor theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/monadicity+theorem'>monadicity theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+lifting+theorem'>adjoint lifting theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Tannaka+duality'>Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Gabriel-Ulmer+duality'>Gabriel-Ulmer duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/small+object+argument'>small object argument</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Freyd-Mitchell+embedding+theorem'>Freyd-Mitchell embedding theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/relation+between+type+theory+and+category+theory'>relation between type theory and category theory</a></p>
+</li>
+</ul>
+
+<h2 id='extensions'>Extensions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sheaf+and+topos+theory'>sheaf and topos theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/enriched+category+theory'>enriched category theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/higher+category+theory'>higher category theory</a></p>
+</li>
+</ul>
+
+<h2 id='applications'>Applications</h2>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/applications+of+%28higher%29+category+theory'>applications of (higher) category theory</a></li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/category+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='contents'>Contents</h1>
+<div class='maruku_toc'><ul><li><a href='#statement'>Statement</a></li><li><a href='#variations'>Variations</a><ul><li><a href='#the_crude_monadicity_theorem'>The crude monadicity theorem</a></li><li><a href='#duskins_monadicity_theorem'>Duskin’s monadicity theorem</a></li><li><a href='#monadicity_over_set'>Monadicity over Set</a></li><li><a href='#strict_monadicity'>Strict monadicity</a></li></ul></li><li><a href='#examples_and_applications'>Examples and Applications</a><ul><li><a href='#groups_over_sets'>Groups over sets</a></li><li><a href='#categories_over_computads'>Categories over computads</a></li><li><a href='#monadic_descent'>Monadic descent</a></li></ul></li><li><a href='#InInfinityCategories'>In <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\infty,1)</annotation></semantics></math>-categories</a></li><li><a href='#related_concepts'>Related concepts</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='statement'>Statement</h2>
+
+<div class='num_defn' id='CreationOfCoequalizersOfuSplitPairs'>
+<h6 id='definition'>Definition</h6>
+
+<p>Given a <a class='existingWikiWord' href='/nlab/show/functor'>functor</a> <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>U : D \rightarrow C</annotation></semantics></math>, then a <a class='existingWikiWord' href='/nlab/show/parallel+morphisms'>parallel pair</a> <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>,</mo><mi>g</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>f,g : a \rightarrow b</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> is called <strong><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>-split</strong> if the pair <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mi>f</mi><mo>,</mo><mi>U</mi><mi>g</mi></mrow><annotation encoding='application/x-tex'>U f, U g</annotation></semantics></math> has a <a class='existingWikiWord' href='/nlab/show/split+coequalizer'>split coequalizer</a> in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math>. Specifically, this means that there is a diagram in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math>:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mi>a</mi><mspace width='thickmathspace'></mspace><munderover><mo>⇉</mo><mrow><mi>U</mi><mi>f</mi></mrow><mrow><mi>U</mi><mi>g</mi></mrow></munderover><mspace width='thickmathspace'></mspace><mi>U</mi><mi>b</mi><mspace width='thickmathspace'></mspace><mover><mo>→</mo><mi>h</mi></mover><mspace width='thickmathspace'></mspace><mi>c</mi></mrow><annotation encoding='application/x-tex'>U a \;\underoverset{U f}{U g}{\rightrightarrows}\; U b \;\overset{h}{\rightarrow}\; c</annotation></semantics></math></div>
+<p>where <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi></mrow><annotation encoding='application/x-tex'>h</annotation></semantics></math> has a <a class='existingWikiWord' href='/nlab/show/section'>section</a> <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>s</mi></mrow><annotation encoding='application/x-tex'>s</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mi>f</mi></mrow><annotation encoding='application/x-tex'>U f</annotation></semantics></math> has a section <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi></mrow><annotation encoding='application/x-tex'>t</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mi>g</mi><mo>⋅</mo><mi>t</mi><mo>=</mo><mi>s</mi><mo>⋅</mo><mi>h</mi></mrow><annotation encoding='application/x-tex'>U g \cdot t = s \cdot h</annotation></semantics></math>. This implies that the arrow <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi></mrow><annotation encoding='application/x-tex'>h</annotation></semantics></math> is necessarily a coequalizer of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mi>f</mi></mrow><annotation encoding='application/x-tex'>U f</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mi>g</mi></mrow><annotation encoding='application/x-tex'>U g</annotation></semantics></math>.</p>
+
+<p>The functor <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> is said to <em>create coequalizers of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>-split pairs</em> if for any such <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>-split pair, there exists a coequalizer <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>e</mi></mrow><annotation encoding='application/x-tex'>e</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>,</mo><mi>g</mi></mrow><annotation encoding='application/x-tex'>f,g</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> which is preserved by <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>, and moreover any <a class='existingWikiWord' href='/nlab/show/fork'>fork</a> in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> whose image in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> is a split coequalizer must itself be a coequalizer (not necessarily split).</p>
+</div>
+
+<div class='num_theorem'>
+<h6 id='theorem'>Theorem</h6>
+
+<p><strong>(Beck’s monadicity theorem</strong>, <strong>tripleability theorem)</strong></p>
+
+<p>A <a class='existingWikiWord' href='/nlab/show/functor'>functor</a> <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>U : D \rightarrow C</annotation></semantics></math> is <a class='existingWikiWord' href='/nlab/show/monadic+functor'>monadic</a> (tripleable) if and only if</p>
+
+<ol>
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> has a <a class='existingWikiWord' href='/nlab/show/left+adjoint'>left adjoint</a>, and</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/created+limit'>creates</a> <a class='existingWikiWord' href='/nlab/show/coequalizer'>coequalizers</a> of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>-split pairs, def. <a class='maruku-ref' href='#CreationOfCoequalizersOfuSplitPairs'>1</a>.</li>
+</ol>
+</div>
+
+<p>The proof is reproduced for instance in (<a href='#Borceux'>Borceux, vol 2, theorem 4.4.4</a>, <a href='#MacLane'>MacLane, p. 147-150</a>).</p>
+
+<p>An equivalent, and sometimes easier, way to state these conditions is to say that</p>
+
+<div class='num_theorem'>
+<h6 id='theorem_2'>Theorem</h6>
+
+<p>A functor <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>U : D \to C</annotation></semantics></math> is monadic precisely if</p>
+
+<ol>
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> has a <a class='existingWikiWord' href='/nlab/show/left+adjoint'>left adjoint</a>,</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> reflects <a class='existingWikiWord' href='/nlab/show/isomorphism'>isomorphisms</a> (i.e. it is <a class='existingWikiWord' href='/nlab/show/conservative+functor'>conservative</a>), and</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> has, and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/preserved+limit'>preserves</a>, coequalizers of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>-split pairs.</li>
+</ol>
+</div>
+
+<p>This is equivalent because a conservative functor <a class='existingWikiWord' href='/nlab/show/reflected+limit'>reflects</a> any limits or colimits which exist in its domain and which it <a class='existingWikiWord' href='/nlab/show/preserved+limit'>preserves</a>, while monadic functors are always conservative.</p>
+
+<h2 id='variations'>Variations</h2>
+
+<h3 id='the_crude_monadicity_theorem'>The crude monadicity theorem</h3>
+
+<p>The <strong>crude monadicity theorem</strong> gives a <em>sufficient</em>, but not necessary, condition for a functor to be monadic. It states that a functor <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>U : D \rightarrow C</annotation></semantics></math> is <a class='existingWikiWord' href='/nlab/show/monadic+functor'>monadic</a> if</p>
+
+<ol>
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> has a left adjoint</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> reflects isomorphisms</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> has and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> preserves coequalizers of <a class='existingWikiWord' href='/nlab/show/reflexive+coequalizer'>reflexive pairs</a>.</li>
+</ol>
+
+<p>(Recall that a parallel pair <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>,</mo><mi>g</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>f,g : a \rightarrow b</annotation></semantics></math> is <strong>reflexive</strong> if <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi></mrow><annotation encoding='application/x-tex'>g</annotation></semantics></math> have a common <a class='existingWikiWord' href='/nlab/show/section'>section</a>.) This sufficient, but not necessary, condition is sometimes easier to verify in practice. In contrast to the crude monadicity theorem, the necessary and sufficient condition above is sometimes called the <strong>precise monadicity theorem</strong>.</p>
+
+<h3 id='duskins_monadicity_theorem'>Duskin’s monadicity theorem</h3>
+
+<p>Duskin’s monadicity theorem gives a different sufficient, but not necessary, condition which refers only to quotients of <a class='existingWikiWord' href='/nlab/show/congruence'>congruences</a>. It says that a functor <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo lspace='verythinmathspace'>:</mo><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>U \colon D \to C</annotation></semantics></math> is monadic if</p>
+
+<ol>
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> has a left adjoint</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> are <a class='existingWikiWord' href='/nlab/show/finitely+complete+category'>finitely complete</a></li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/created+limit'>creates</a> coequalizers for <a class='existingWikiWord' href='/nlab/show/congruence'>congruences</a> in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> whose images in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> have split coequalizers.</li>
+</ol>
+
+<p>We can weaken the hypothesis a bit further to obtain the theorem:</p>
+
+<ul>
+<li>A right adjoint between finitely complete categories is monadic if it creates <a class='existingWikiWord' href='/nlab/show/quotient+object'>quotients</a> for <a class='existingWikiWord' href='/nlab/show/congruence'>congruences</a>.</li>
+</ul>
+
+<p>As usual, we can also modify it by replacing reflection of limits by reflection of isomorphisms.</p>
+
+<ul>
+<li>A conservative right adjoint <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo lspace='verythinmathspace'>:</mo><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>U\colon D \to C</annotation></semantics></math> between finitely complete categories is monadic if any congruence in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> which has a quotient in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> already has a quotient in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math>, and that quotient that is preserved by <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_56' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>.</li>
+</ul>
+
+<p>If we view the objects of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_57' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> as underlying <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_58' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math>-objects with structure, this says that any congruence in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_59' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> induces a <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_60' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math>-structure on its quotient in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_61' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math>. As with the crude monadicity theorem, this condition is sometimes easier to verify since quotients of congruences are often better-behaved than arbitrary coequalizers. This is the case in many “algebraic” situations.</p>
+
+<p>Duskin actually gave a slightly more precise version only assuming the categories <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_62' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_63' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> to have particular finite limits, rather than all of them.</p>
+
+<h3 id='monadicity_over_set'>Monadicity over Set</h3>
+
+<p>In the case when the base category <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_64' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> is <a class='existingWikiWord' href='/nlab/show/Set'>Set</a>, one can further refine the requisite conditions. Linton proved that a functor <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_65' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo lspace='verythinmathspace'>:</mo><mi>D</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding='application/x-tex'>U\colon D\to Set</annotation></semantics></math> is monadic if and only if</p>
+
+<ol>
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_66' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> has a left adjoint,</li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_67' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> admits <a class='existingWikiWord' href='/nlab/show/kernel+pair'>kernel pairs</a> and <a class='existingWikiWord' href='/nlab/show/coequalizer'>coequalizers</a>,</li>
+
+<li>A <a class='existingWikiWord' href='/nlab/show/parallel+morphisms'>parallel pair</a> <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_68' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>R</mi><mo>⇉</mo><mi>S</mi></mrow><annotation encoding='application/x-tex'>R \rightrightarrows S</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_69' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> is a kernel pair if and only if its image under <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_70' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> is so, and</li>
+
+<li>A morphism <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_71' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>A\to B</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_72' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> is a <a class='existingWikiWord' href='/nlab/show/regular+epimorphism'>regular epimorphism</a> if and only if its image under <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_73' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> is so.</li>
+</ol>
+
+<p>There are other versions of this theorem, including generalizations to monadicity over <a class='existingWikiWord' href='/nlab/show/presheaf'>presheaf categories</a>, which can be viewed as analogues of <a class='existingWikiWord' href='/nlab/show/Giraud%27s+theorem'>Giraud&#39;s theorem</a>.</p>
+
+<h3 id='strict_monadicity'>Strict monadicity</h3>
+
+<p>The version of the monadicity theorem given in <a class='existingWikiWord' href='/nlab/show/Categories+Work'>Categories Work</a> uses an <a class='existingWikiWord' href='/nlab/show/principle+of+equivalence'>evil</a> notion of “creation of limits” and concludes that the comparison functor is an <em>isomorphism</em> of categories, rather than merely an equivalence. But the versions mentioned above can be found in the exercises.</p>
+
+<p>Note however that if <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_74' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>U: D \to C</annotation></semantics></math> is an <a class='existingWikiWord' href='/nlab/show/amnestic+functor'>amnestic</a> <a class='existingWikiWord' href='/nlab/show/isofibration'>isofibration</a>, then <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_75' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> is monadic iff it is strictly monadic. For an application of this observation, see for example the discussion of algebraically free monads at <a class='existingWikiWord' href='/nlab/show/free+monad'>free monad</a>.</p>
+
+<h2 id='examples_and_applications'>Examples and Applications</h2>
+
+<h3 id='groups_over_sets'>Groups over sets</h3>
+
+<p>We will use Duskin’s variant to prove that the <a class='existingWikiWord' href='/nlab/show/forgetful+functor'>forgetful functor</a> <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_76' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo lspace='verythinmathspace'>:</mo></mrow><annotation encoding='application/x-tex'>U\colon</annotation></semantics></math><a class='existingWikiWord' href='/nlab/show/Grp'>Grp</a><math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_77' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>→</mo></mrow><annotation encoding='application/x-tex'>\to</annotation></semantics></math><a class='existingWikiWord' href='/nlab/show/Set'>Set</a> is monadic. Of course, this is also easy to show by explicit computation, but it serves as a useful example of how to use a monadicity theorem. We first need it to have a left adjoint: this is easy to show by a direct construction of <a class='existingWikiWord' href='/nlab/show/free+group'>free groups</a>, but we could also invoke the <a class='existingWikiWord' href='/nlab/show/adjoint+functor+theorem'>adjoint functor theorem</a>. It is also easy to show that it is conservative (a bijective group homomorphism is a group isomorphism), so it remains to consider congruences.</p>
+
+<p>Since limits in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_78' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Grp</mi></mrow><annotation encoding='application/x-tex'>Grp</annotation></semantics></math> are created in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_79' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Set</mi></mrow><annotation encoding='application/x-tex'>Set</annotation></semantics></math>, a <a class='existingWikiWord' href='/nlab/show/congruence'>congruence</a> in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_80' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Grp</mi></mrow><annotation encoding='application/x-tex'>Grp</annotation></semantics></math> on a group <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_81' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> is an <a class='existingWikiWord' href='/nlab/show/equivalence+relation'>equivalence relation</a> on <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_82' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> which is also a <a class='existingWikiWord' href='/nlab/show/subgroup'>subgroup</a> of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_83' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi><mo>×</mo><mi>G</mi></mrow><annotation encoding='application/x-tex'>G\times G</annotation></semantics></math>. This latter condition means that if <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_84' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>g</mi> <mn>1</mn></msub><mo>∼</mo><msub><mi>g</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>g_1\sim g_2</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_85' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>h</mi> <mn>1</mn></msub><mo>∼</mo><msub><mi>h</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>h_1\sim h_2</annotation></semantics></math>, then also <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_86' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msubsup><mi>g</mi> <mn>1</mn> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msubsup><mo>∼</mo><msubsup><mi>g</mi> <mn>2</mn> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msubsup></mrow><annotation encoding='application/x-tex'>g_1^{-1}\sim g_2^{-1}</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_87' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>g</mi> <mn>1</mn></msub><msub><mi>h</mi> <mn>1</mn></msub><mo>∼</mo><msub><mi>g</mi> <mn>2</mn></msub><msub><mi>h</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>g_1 h_1 \sim g_2 h_2</annotation></semantics></math>. Since <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_88' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mo>∼</mo><mi>g</mi></mrow><annotation encoding='application/x-tex'>g\sim g</annotation></semantics></math> for all <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_89' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi></mrow><annotation encoding='application/x-tex'>g</annotation></semantics></math>, it follows that <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_90' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mo>∼</mo><mi>h</mi></mrow><annotation encoding='application/x-tex'>g\sim h</annotation></semantics></math> if and only if <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_91' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn><mo>∼</mo><mi>h</mi><msup><mi>g</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding='application/x-tex'>1\sim h g^{-1}</annotation></semantics></math>, so <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_92' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>∼</mo></mrow><annotation encoding='application/x-tex'>\sim</annotation></semantics></math> is determined by the subset <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_93' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>H</mi><mo>⊆</mo><mi>G</mi></mrow><annotation encoding='application/x-tex'>H\subseteq G</annotation></semantics></math> of those <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_94' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo>∈</mo><mi>G</mi></mrow><annotation encoding='application/x-tex'>h\in G</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_95' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn><mo>∼</mo><mi>h</mi></mrow><annotation encoding='application/x-tex'>1\sim h</annotation></semantics></math>. This <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_96' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>H</mi></mrow><annotation encoding='application/x-tex'>H</annotation></semantics></math> is clearly a subgroup of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_97' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math>, and moreover a <a class='existingWikiWord' href='/nlab/show/normal+subgroup'>normal subgroup</a>, since if <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_98' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo>∈</mo><mi>H</mi></mrow><annotation encoding='application/x-tex'>h\in H</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_99' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mo>∈</mo><mi>G</mi></mrow><annotation encoding='application/x-tex'>g\in G</annotation></semantics></math> we have <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_100' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn><mo>=</mo><msup><mi>g</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msup><mi>g</mi><mo>∼</mo><msup><mi>g</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msup><mi>h</mi><mi>g</mi></mrow><annotation encoding='application/x-tex'>1 = g^{-1} g \sim g^{-1} h g</annotation></semantics></math>, so <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_101' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>g</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msup><mi>h</mi><mi>g</mi><mo>∈</mo><mi>H</mi></mrow><annotation encoding='application/x-tex'>g^{-1} h g\in H</annotation></semantics></math>. Conversely, it is easy to construct a congruence from any normal subgroup, so the two notions are equivalent. It remains only to observe that the quotient of a group by a normal subgroup is, in fact, a quotient of its associated congruence in <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_102' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Grp</mi></mrow><annotation encoding='application/x-tex'>Grp</annotation></semantics></math>, which is preserved by <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_103' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>. Thus, by Duskin’s monadicity theorem, <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_104' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> is monadic.</p>
+
+<h3 id='categories_over_computads'>Categories over computads</h3>
+
+<p>The monadicity theorem becomes more important when the base category <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_105' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> is more complicated and harder to work with explicitly, and when the objects of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_106' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math> are not obviously defined as “objects of <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_107' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> with extra structure.” For instance, the category of <a class='existingWikiWord' href='/nlab/show/strict+2-category'>strict 2-categories</a> is monadic over the category of 2-<a class='existingWikiWord' href='/nlab/show/globular+set'>globular sets</a>, essentially by definition, but it is much less trivial to show that it is <em>also</em> monadic over the category of <a class='existingWikiWord' href='/nlab/show/computad'>2-computads</a>. This latter fact can, however, be proven using the monadicity theorem.</p>
+
+<h3 id='monadic_descent'>Monadic descent</h3>
+
+<p>The monadicity theorem also plays a central role in <a class='existingWikiWord' href='/nlab/show/monadic+descent'>monadic descent</a>.</p>
+
+<h2 id='InInfinityCategories'>In <math class='maruku-mathml' display='inline' id='mathml_0d600a02dc494922f72f1d5eb88b1c79adf78370_108' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\infty,1)</annotation></semantics></math>-categories</h2>
+
+<p>There is a version of the monadicity theorem for <a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-monad'>(∞,1)-monad</a>s in <a href='http://arxiv.org/PS_cache/math/pdf/0702/0702299v5.pdf#page=107'>section 3.4</a> of</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Jacob+Lurie'>Jacob Lurie</a>, <em>Noncommutative algebra</em> (<a href='http://arxiv.org/abs/math/0702299'>arXiv</a>)</li>
+</ul>
+
+<p>There is also a 2-categorical approach using quasicategories in</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Emily+Riehl'>Emily Riehl</a>, <a class='existingWikiWord' href='/nlab/show/Dominic+Verity'>Dominic Verity</a> <em>The 2-category theory of quasi-categories</em> (<a href='http://arxiv.org/abs/1306.5144'>arXiv</a>), <em>Homotopy coherent adjunctions and the formal theory of monads</em> (<a href='http://arxiv.org/abs/1310.8279'>arXiv</a>)</li>
+</ul>
+
+<h2 id='related_concepts'>Related concepts</h2>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/monadic+functor'>monadic functor</a>, <a class='existingWikiWord' href='/nlab/show/comonadic+functor'>comonadic functor</a></li>
+
+<li><a class='existingWikiWord' href='/nlab/show/functor+of+descent+type'>functor of descent type</a></li>
+</ul>
+
+<h2 id='references'>References</h2>
+
+<p>Canonical textbook references include</p>
+
+<ul>
+<li id='Borceux'>
+<p><a class='existingWikiWord' href='/nlab/show/Francis+Borceux'>Francis Borceux</a>, Section 4 in volume 2 of <em><a class='existingWikiWord' href='/nlab/show/Handbook+of+Categorical+Algebra'>Handbook of Categorical Algebra</a></em>, in 3 vols.</p>
+</li>
+
+<li id='MacLane'>
+<p><a class='existingWikiWord' href='/nlab/show/Saunders+Mac+Lane'>Saunders MacLane</a>, Section VI.7 of <em><a class='existingWikiWord' href='/nlab/show/Categories+Work'>Categories for the Working Mathematician</a></em>.</p>
+</li>
+
+<li>
+<p>Chapter 3 of <a class='existingWikiWord' href='/nlab/show/Michael+Barr'>Michael Barr</a>, <a class='existingWikiWord' href='/nlab/show/Charles+Wells'>Charles Wells</a>, <em>Triples, toposes, and theories</em> , Grundlehren der math. Wissenschaften 278, Springer-Verlag 1983, <a href='ftp://ftp.math.mcgill.ca/pub/barr/ttt'>ftp</a>, <a href='http://www.cwru.edu/artsci/math/wells/pub/ttt.html'>web</a>, <a href='http://www.case.edu/artsci/math/wells/pub/pdf/ttt.pdf'>pdf</a></p>
+</li>
+</ul>
+
+<p>Other references include:</p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/descent'>descent</a>, <a class='existingWikiWord' href='/nlab/show/FGA+explained'>FGA explained</a>, <a class='existingWikiWord' href='/nlab/show/SGA1'>SGA 1</a>, <a class='existingWikiWord' href='/nlab/show/Benabou-Roubaud+theorem'> Bénabou-Roubaud&#39;s theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Jean+Benabou'>Jean Bénabou</a>, <a class='existingWikiWord' href='/nlab/show/Jacques+Roubaud'>Jacques Roubaud</a>, <em>Monades et descente</em> , C. R. Acad. Sc. Paris, t. 270 (12 Janvier 1970), Serie A, 96–98</p>
+</li>
+
+<li>
+<p>Duško Pavlović, Categorical interpolation: descent and the Beck-Chevalley condition without direct images, Category theory Como 1990, pp. 306–325, Lecture Notes in Mathematics 1488, Springer 1991</p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Pierre+Deligne'>Pierre Deligne</a>, <em><a class='existingWikiWord' href='/nlab/show/Cat%C3%A9gories+Tannakiennes'>Catégories Tannakiennes</a></em> , Grothendieck Festschrift, vol. II, Birkhäuser Progress in Math. 87 (1990) pp. 111-195.</p>
+</li>
+
+<li>
+<p>wikipedia: <a href='http://en.wikipedia.org/wiki/Beck%27s_monadicity_theorem'>monadicity theorem</a></p>
+</li>
+
+<li>
+<p>John Bourke, <em>Two dimensional monadicity</em>, <a href='http://arxiv.org/abs/1212.5123'>arxiv/1212.5123</a></p>
+</li>
+</ul>
+
+<p>There is a version for <a class='existingWikiWord' href='/nlab/show/Morita+context'>Morita context</a>s instead of monads:</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Tomasz+Brzezinski'>Tomasz Brzeziński</a>, Adrian Vazquez Marquez, Joost Vercruysse, <em>The Eilenberg-Moore category and a Beck-type theorem for a Morita context</em>, Appl. Categ. Structures <strong>19</strong> (2011), no. 5, 821–858 <a href='http://www.ams.org/mathscinet-getitem?mr=2836546'>MR2836546</a> <a href='http://dx.doi.org/10.1007/s10485-009-9217-0'>doi</a></li>
+</ul>
+
+<p>Discussion for <a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-monad'>(infinity,1)-monads</a> is in</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Jacob+Lurie'>Jacob Lurie</a>, section 6.2. of <em><a class='existingWikiWord' href='/nlab/show/Higher+Algebra'>Higher Algebra</a></em></li>
+</ul>
+
+<p>and realized in the context of <a class='existingWikiWord' href='/nlab/show/quasi-category'>quasi-categories</a> in</p>
+
+<ul id='RiehlVerity13'>
+<li><a class='existingWikiWord' href='/nlab/show/Emily+Riehl'>Emily Riehl</a>, <a class='existingWikiWord' href='/nlab/show/Dominic+Verity'>Dominic Verity</a>, section 7.2 of <em>Homotopy coherent adjunctions and the formal theory of monads</em> (<a href='http://arxiv.org/abs/1310.8279'>arXiv:1310.8279</a>)</li>
+</ul>
+
+<p>
+ 
+ 
+ 
+ 
+</p>
+
+<p>
+</p>
+
+<p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on June 26, 2017 12:28:04 
+  by <a class="existingWikiWord" href="/nlab/show/Mike+Shulman">Mike Shulman</a>
+  (76.167.222.204)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/monadicity+theorem" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/monadicity+theorem/26" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(26 revisions)</span> | <a href="/nlab/show/diff/monadicity+theorem" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/monadicity+theorem" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/monadicity+theorem" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/monadicity+theorem" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/monadicity+theorem" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

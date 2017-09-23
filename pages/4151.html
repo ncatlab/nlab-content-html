@@ -1,0 +1,931 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      basic localizer in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      basic localizer
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='category_theory'>Category theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/category+theory'>category theory</a></strong></p>
+
+<h2 id='concepts'>Concepts</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category'>category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/functor'>functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a></p>
+</li>
+</ul>
+
+<h2 id='universal_constructions'>Universal constructions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/universal+construction'>universal construction</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/representable+functor'>representable functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+functor'>adjoint functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/limit'>limit</a>/<a class='existingWikiWord' href='/nlab/show/colimit'>colimit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/weighted+limit'>weighted limit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/end'>end</a>/<a class='existingWikiWord' href='/nlab/show/end'>coend</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Kan+extension'>Kan extension</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id='theorems'>Theorems</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma'>Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Isbell+duality'>Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Grothendieck+construction'>Grothendieck construction</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+functor+theorem'>adjoint functor theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/monadicity+theorem'>monadicity theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+lifting+theorem'>adjoint lifting theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Tannaka+duality'>Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Gabriel-Ulmer+duality'>Gabriel-Ulmer duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/small+object+argument'>small object argument</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Freyd-Mitchell+embedding+theorem'>Freyd-Mitchell embedding theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/relation+between+type+theory+and+category+theory'>relation between type theory and category theory</a></p>
+</li>
+</ul>
+
+<h2 id='extensions'>Extensions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sheaf+and+topos+theory'>sheaf and topos theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/enriched+category+theory'>enriched category theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/higher+category+theory'>higher category theory</a></p>
+</li>
+</ul>
+
+<h2 id='applications'>Applications</h2>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/applications+of+%28higher%29+category+theory'>applications of (higher) category theory</a></li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/category+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+
+<h4 id='homotopy_theory'>Homotopy theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/homotopy+theory'>homotopy theory</a>, <a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-category+theory'>(∞,1)-category theory</a>, <a class='existingWikiWord' href='/nlab/show/homotopy+type+theory'>homotopy type theory</a></strong></p>
+
+<p>flavors: <a class='existingWikiWord' href='/nlab/show/stable+homotopy+theory'>stable</a>, <a class='existingWikiWord' href='/nlab/show/equivariant+homotopy+theory'>equivariant</a>, <a class='existingWikiWord' href='/nlab/show/rational+homotopy+theory'>rational</a>, <a class='existingWikiWord' href='/nlab/show/p-adic+homotopy+theory'>p-adic</a>, <a class='existingWikiWord' href='/nlab/show/proper+homotopy+theory'>proper</a>, <a class='existingWikiWord' href='/nlab/show/geometric+homotopy+type+theory'>geometric</a>, <a class='existingWikiWord' href='/nlab/show/cohesive+%28infinity%2C1%29-topos'>cohesive</a>, <a class='existingWikiWord' href='/nlab/show/directed+homotopy+theory'>directed</a>…</p>
+
+<p>models: <a class='existingWikiWord' href='/nlab/show/topological+homotopy+theory'>topological</a>, <a class='existingWikiWord' href='/nlab/show/simplicial+homotopy+theory'>simplicial</a>, <a class='existingWikiWord' href='/nlab/show/localic+homotopy+theory'>localic</a>, …</p>
+
+<p>see also <strong><a class='existingWikiWord' href='/nlab/show/algebraic+topology'>algebraic topology</a></strong></p>
+
+<p><strong>Introductions</strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Introduction+to+Topology+--+2'>Introduction to Basic Homotopy Theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Introduction+to+Homotopy+Theory'>Introduction to Abstract Homotopy Theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/geometry+of+physics+--+homotopy+types'>geometry of physics -- homotopy types</a></p>
+</li>
+</ul>
+
+<p><strong>Definitions</strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy'>homotopy</a>, <a class='existingWikiWord' href='/nlab/show/higher+homotopy'>higher homotopy</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+type'>homotopy type</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Pi-algebra'>Pi-algebra</a>, <a class='existingWikiWord' href='/nlab/show/spherical+object'>spherical object and Pi(A)-algebra</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+coherent+category+theory'>homotopy coherent category theory</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopical+category'>homotopical category</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/model+category'>model category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category+of+fibrant+objects'>category of fibrant objects</a>, <a class='existingWikiWord' href='/nlab/show/cofibration+category'>cofibration category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Waldhausen+category'>Waldhausen category</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+category'>homotopy category</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Ho%28Top%29'>Ho(Top)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-category'>(∞,1)-category</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/homotopy+category+of+an+%28infinity%2C1%29-category'>homotopy category of an (∞,1)-category</a></li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Paths and cylinders</strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy'>left homotopy</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cylinder+object'>cylinder object</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/mapping+cone'>mapping cone</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy'>right homotopy</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/path+space+object'>path object</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/mapping+cocone'>mapping cocone</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/generalized+universal+bundle'>universal bundle</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/interval+object'>interval object</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+localization'>homotopy localization</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/infinitesimal+interval+object'>infinitesimal interval object</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Homotopy groups</strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+group'>homotopy group</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fundamental+group'>fundamental group</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/fundamental+group+of+a+topos'>fundamental group of a topos</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Brown-Grossman+homotopy+group'>Brown-Grossman homotopy group</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/categorical+homotopy+groups+in+an+%28infinity%2C1%29-topos'>categorical homotopy groups in an (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/geometric+homotopy+groups+in+an+%28infinity%2C1%29-topos'>geometric homotopy groups in an (∞,1)-topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fundamental+infinity-groupoid'>fundamental ∞-groupoid</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fundamental+groupoid'>fundamental groupoid</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/path+groupoid'>path groupoid</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fundamental+infinity-groupoid+in+a+locally+infinity-connected+%28infinity%2C1%29-topos'>fundamental ∞-groupoid in a locally ∞-connected (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fundamental+infinity-groupoid+of+a+locally+infinity-connected+%28infinity%2C1%29-topos'>fundamental ∞-groupoid of a locally ∞-connected (∞,1)-topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fundamental+%28infinity%2C1%29-category'>fundamental (∞,1)-category</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/fundamental+category'>fundamental category</a></li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Basic facts</strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/fundamental+group+of+the+circle+is+the+integers'>fundamental group of the circle is the integers</a></li>
+</ul>
+
+<p><strong>Theorems</strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fundamental+theorem+of+covering+spaces'>fundamental theorem of covering spaces</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Freudenthal+suspension+theorem'>Freudenthal suspension theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Blakers-Massey+theorem'>Blakers-Massey theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/higher+homotopy+van+Kampen+theorem'>higher homotopy van Kampen theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/nerve+theorem'>nerve theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Whitehead+theorem'>Whitehead&#39;s theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Hurewicz+theorem'>Hurewicz theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Galois+theory'>Galois theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+hypothesis'>homotopy hypothesis</a>-theorem</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<h1 id='basic_localizers'>Basic localizers</h1>
+<div class='maruku_toc'><ul><li><a href='#idea'>Idea</a></li><li><a href='#definition'>Definition</a></li><li><a href='#examples'>Examples</a></li><li><a href='#properties'>Properties</a><ul><li><a href='#asphericity_and_local_equivalences'>Asphericity and local equivalences</a></li><li><a href='#selfduality'>Self-duality</a></li><li><a href='#cisinskis_theorem'>Cisinski’s theorem</a></li></ul></li><li><a href='#related_concepts'>Related concepts</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='idea'>Idea</h2>
+
+<p>By a <em>basic localizer</em> one means a <a class='existingWikiWord' href='/nlab/show/localizer'>localizer</a> on the category <a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a> of <a class='existingWikiWord' href='/nlab/show/category'>categories</a>, hence a choice of a <a class='existingWikiWord' href='/nlab/show/proper+class'>class</a> of <a class='existingWikiWord' href='/nlab/show/functor'>functors</a> to be called the <em><a class='existingWikiWord' href='/nlab/show/weak+equivalence'>weak equivalences</a></em>, subject to some conditions.</p>
+
+<p>These conditions ensure in particular that a basic localizer always contains the weak equivalences of the <a class='existingWikiWord' href='/nlab/show/Thomason+model+structure'>Thomason model structure</a> on <a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a> (see <a href='#Maltsiniotis11'>Maltsiniotis 11, 1.2.1</a>), the <a class='existingWikiWord' href='/nlab/show/localization'>localization</a> at which is equivalent to the standard <a class='existingWikiWord' href='/nlab/show/homotopy+category'>homotopy category</a>. On the other hand, the standard <a class='existingWikiWord' href='/nlab/show/equivalence+of+categories'>equivalences of categories</a>, which are the weak equivalences in the <a class='existingWikiWord' href='/nlab/show/canonical+model+structure'>canonical model structure</a> on <a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a>, do not form a basic localizer.</p>
+
+<p>Hence basic localizers are a tool for <a class='existingWikiWord' href='/nlab/show/homotopy+theory'>homotopy theory</a> modeled on <a class='existingWikiWord' href='/nlab/show/category+theory'>category theory</a>. In fact, their introduction by <a class='existingWikiWord' href='/nlab/show/Alexander+Grothendieck'>Grothendieck</a> was motivated from the study of <a class='existingWikiWord' href='/nlab/show/test+category'>test categories</a> (see remark <a class='maruku-ref' href='#CitationOnTestCategories'>2</a> below).</p>
+
+<h2 id='definition'>Definition</h2>
+
+<p>The definition is due to <a class='existingWikiWord' href='/nlab/show/Alexander+Grothendieck'>Grothendieck</a>:</p>
+
+<div class='num_defn' id='BasicLocalizer'>
+<h6 id='definition_2'>Definition</h6>
+
+<p>A <strong>basic localizer</strong> is a <a class='existingWikiWord' href='/nlab/show/proper+class'>class</a> <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math> of <a class='existingWikiWord' href='/nlab/show/morphism'>morphisms</a> in <a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a> such that</p>
+
+<ol>
+<li>
+<p><math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math> contains all <a class='existingWikiWord' href='/nlab/show/identity'>identities</a>, satisfies the <a class='existingWikiWord' href='/nlab/show/two-out-of-three'>2-out-of-3 property</a> and is closed under <a class='existingWikiWord' href='/nlab/show/retract'>retracts</a> (in the literature this is sometimes called being <em>weakly saturated</em>),</p>
+</li>
+
+<li>
+<p>If <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> has a <a class='existingWikiWord' href='/nlab/show/terminal+object'>terminal object</a>, then the functor <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>→</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>A\to 1</annotation></semantics></math> is in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>, and</p>
+</li>
+
+<li>
+<p>Given a commutative triangle in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Cat</mi></mrow><annotation encoding='application/x-tex'>Cat</annotation></semantics></math>:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><mi>A</mi></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mi>u</mi></mover></mtd> <mtd></mtd> <mtd><mi>B</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo></mo><mi>v</mi></msub><mo>↘</mo></mtd> <mtd></mtd> <mtd><msub><mo>↙</mo> <mi>w</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>C</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>\array{ A &amp; &amp; \overset{u}{\to} &amp; &amp; B\\ &amp; _v \searrow &amp; &amp; \swarrow_w \\ &amp; &amp; C } </annotation></semantics></math></div>
+<p>if each induced functor <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo stretchy='false'>/</mo><mi>c</mi><mo>→</mo><mi>w</mi><mo stretchy='false'>/</mo><mi>c</mi></mrow><annotation encoding='application/x-tex'>v/c \to w/c</annotation></semantics></math> between <a class='existingWikiWord' href='/nlab/show/comma+category'>comma categories</a> is in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>, then <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi></mrow><annotation encoding='application/x-tex'>u</annotation></semantics></math> is also in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>.</p>
+</li>
+</ol>
+</div>
+
+<div class='num_remark'>
+<h6 id='remark'>Remark</h6>
+
+<p>The term in French is <strong>localisateur fondamental</strong>, which is sometimes translated as <strong>fundamental localizer</strong>.</p>
+</div>
+
+<div class='num_remark' id='CitationOnTestCategories'>
+<h6 id='remark_2'>Remark</h6>
+
+<p>In <a class='existingWikiWord' href='/nlab/show/Pursuing+Stacks'>Pursuing Stacks</a> <a class='existingWikiWord' href='/nlab/show/Alexander+Grothendieck'>Grothendieck</a> wrote about def. <a class='maruku-ref' href='#BasicLocalizer'>1</a> the following:</p>
+
+<blockquote>
+<p>These conditions are enough, I quickly checked this night, in order to validify all results developed so far on <a class='existingWikiWord' href='/nlab/show/test+category'>test categories</a>, <span class='newWikiWord'>weak test categories<a href='/nlab/new/weak+test+categories'>?</a></span>, <a class='existingWikiWord' href='/nlab/show/test+category'>strict test categories</a>, weak test functors and test functors (with values in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>Cat</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(Cat)</annotation></semantics></math>) (of notably the review in par. 44, page 79–88), provided in the case of test functors we restrict to the case of loc. cit. when each of the categories <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>i</mi><mo stretchy='false'>(</mo><mi>a</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>i(a)</annotation></semantics></math> has a final object. All this I believe is justification enough for the definition above.</p>
+</blockquote>
+</div>
+
+<h2 id='examples'>Examples</h2>
+
+<ul>
+<li>
+<p>The class of <em>all</em> functors between small categories is, of course, the maximal basic localizer.</p>
+</li>
+
+<li>
+<p>The class of functors inducing an <a class='existingWikiWord' href='/nlab/show/isomorphism'>isomorphism</a> on <a class='existingWikiWord' href='/nlab/show/connected+space'>connected components</a> is a basic localizer.</p>
+</li>
+
+<li>
+<p>The class of functors whose <a class='existingWikiWord' href='/nlab/show/nerve'>nerve</a> is a <a class='existingWikiWord' href='/nlab/show/weak+homotopy+equivalence'>weak homotopy equivalence</a> is a basic localizer. (These are the <a class='existingWikiWord' href='/nlab/show/weak+equivalence'>weak equivalences</a> in the <a class='existingWikiWord' href='/nlab/show/Thomason+model+structure'>Thomason model structure</a>.)</p>
+</li>
+
+<li>
+<p>For any <a class='existingWikiWord' href='/nlab/show/derivator'>derivator</a> <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math>, the class of <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>D</mi></mrow><annotation encoding='application/x-tex'>D</annotation></semantics></math>-equivalences is a basic localizer. This includes all the previous examples.</p>
+</li>
+
+<li>
+<p>The class of <a class='existingWikiWord' href='/nlab/show/equivalence+of+categories'>equivalences of categories</a> is <em>not</em> a basic localizer (it fails the second condition). (These are the weak equivalences of the <a class='existingWikiWord' href='/nlab/show/canonical+model+structure'>canonical model structure</a>.)</p>
+</li>
+</ul>
+
+<h2 id='properties'>Properties</h2>
+
+<h3 id='asphericity_and_local_equivalences'>Asphericity and local equivalences</h3>
+
+<p>If <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math> is a basic localizer, we define the following related classes. We sometimes refer to functors in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math> as <em>weak equivalences</em>.</p>
+
+<ul>
+<li>A category <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> is <strong>(<math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>-)aspherical</strong> if <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>→</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>A\to 1</annotation></semantics></math> is in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>. Thus the second axiom says exactly that any category with a terminal object is aspherical.</li>
+
+<li>A functor <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo lspace='verythinmathspace'>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>u\colon A\to B</annotation></semantics></math> is <strong>(<math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>-)aspherical</strong> if for all <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>b</mi><mo>∈</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>b\in B</annotation></semantics></math>, the comma category <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo stretchy='false'>/</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>u/b</annotation></semantics></math> is aspherical.</li>
+
+<li>When the hypotheses of the third axiom are satisfied, we say that <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi></mrow><annotation encoding='application/x-tex'>u</annotation></semantics></math> is a <strong>local weak equivalence over <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math></strong>. Thus the third axiom says exactly that every local weak equivalence is a weak equivalence.</li>
+</ul>
+
+<div class='num_example'>
+<h6 id='example'>Example</h6>
+
+<p>If <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi><mo>=</mo><msub><mi>π</mi> <mn>0</mn></msub></mrow><annotation encoding='application/x-tex'>W = \pi_0</annotation></semantics></math>-equivalences, then a category is aspherical iff it is connected, and a functor is aspherical iff it is <a class='existingWikiWord' href='/nlab/show/final+functor'>initial</a>.</p>
+</div>
+
+<div class='num_example'>
+<h6 id='example_2'>Example</h6>
+
+<p>If <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi><mo>=</mo></mrow><annotation encoding='application/x-tex'>W = </annotation></semantics></math> nerve equivalences, then a category is aspherical iff its nerve is contractible, and a functor is aspherical iff it is <a class='existingWikiWord' href='/nlab/show/final+%28infinity%2C1%29-functor'>homotopy initial</a>.</p>
+</div>
+
+<p>We observe the following.</p>
+
+<ul>
+<li>
+<p>A category <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> is aspherical iff the functor <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>→</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>A\to 1</annotation></semantics></math> is aspherical, since the only comma category involved in the latter assertion is <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> itself.</p>
+</li>
+
+<li>
+<p>An aspherical functor is a weak equivalence. For if <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo lspace='verythinmathspace'>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>u\colon A\to B</annotation></semantics></math> is aspherical, then consider the triangle</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><mi>A</mi></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mi>u</mi></mover></mtd> <mtd></mtd> <mtd><mi>B</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo></mo><mi>u</mi></msub><mo>↘</mo></mtd> <mtd></mtd> <mtd><mo>↙</mo></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>B</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>\array{ A &amp; &amp; \overset{u}{\to} &amp; &amp; B\\ &amp; _u \searrow &amp; &amp; \swarrow \\ &amp; &amp; B } </annotation></semantics></math></div>
+<p>The third axiom tells us to consider, for a given <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>b</mi><mo>∈</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>b\in B</annotation></semantics></math>, the functor <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo stretchy='false'>/</mo><mi>b</mi><mo>→</mo><mi>B</mi><mo stretchy='false'>/</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>u/b \to B/b</annotation></semantics></math>. But <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo stretchy='false'>/</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>u/b</annotation></semantics></math> is aspherical by assumption, while <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi><mo stretchy='false'>/</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>B/b</annotation></semantics></math> is aspherical by the second axiom since it has a terminal object. Thus, by 2-out-of-3, the functor <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo stretchy='false'>/</mo><mi>b</mi><mo>→</mo><mi>B</mi><mo stretchy='false'>/</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>u/b \to B/b</annotation></semantics></math> is in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>, and thus by the third axiom <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi></mrow><annotation encoding='application/x-tex'>u</annotation></semantics></math> is in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>If <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi></mrow><annotation encoding='application/x-tex'>u</annotation></semantics></math> has a right adjoint, then it is aspherical. For in this case, each category <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo stretchy='false'>/</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>u/b</annotation></semantics></math> has a terminal object, and thus is aspherical.</p>
+</li>
+
+<li>
+<p>If <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>I</mi></mrow><annotation encoding='application/x-tex'>I</annotation></semantics></math> denotes the <a class='existingWikiWord' href='/nlab/show/interval+category'>interval category</a>, then for any category <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> the projection <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>×</mo><mi>I</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding='application/x-tex'>A\times I\to A</annotation></semantics></math> has a right adjoint, hence is aspherical and thus a weak equivalence. By 2-out-of-3, the two injections <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>⇉</mo><mi>A</mi><mo>×</mo><mi>I</mi></mrow><annotation encoding='application/x-tex'>A \rightrightarrows A\times I</annotation></semantics></math> are also weak equivalences, so <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>×</mo><mi>I</mi></mrow><annotation encoding='application/x-tex'>A\times I</annotation></semantics></math> is a <a class='existingWikiWord' href='/nlab/show/cylinder+object'>cylinder object</a> for <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>. It follows that if we have a natural transformation <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>→</mo><mi>g</mi></mrow><annotation encoding='application/x-tex'>f\to g</annotation></semantics></math>, then <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> is in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math> if and only if <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi></mrow><annotation encoding='application/x-tex'>g</annotation></semantics></math> is. Moreover, if <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> is a “homotopy equivalence” in the sense that it has an “inverse” <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_56' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi></mrow><annotation encoding='application/x-tex'>g</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_57' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mi>g</mi></mrow><annotation encoding='application/x-tex'>f g</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_58' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mi>f</mi></mrow><annotation encoding='application/x-tex'>g f</annotation></semantics></math> are connected to identities by arbitrary natural zigzags, then <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_59' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> is a weak equivalence.</p>
+</li>
+
+<li>
+<p>In particular, any left or right adjoint is a weak equivalence.</p>
+</li>
+</ul>
+
+<h3 id='selfduality'>Self-duality</h3>
+
+<p>It is a non-obvious fact that the notion of basic localizer is self-dual.</p>
+
+<div class='num_theorem'>
+<h6 id='theorem'>Theorem</h6>
+
+<p>A functor <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_60' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>u : A \to B</annotation></semantics></math> is in a basic localizer <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_61' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math> if and only if <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_62' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>u</mi> <mi>op</mi></msup><mo>:</mo><msup><mi>A</mi> <mi>op</mi></msup><mo>→</mo><msup><mi>B</mi> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>u^{op} : A^{op} \to B^{op}</annotation></semantics></math> is in <math class='maruku-mathml' display='inline' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_63' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>.</p>
+</div>
+
+<div class='proof'>
+<h6 id='proof'>Proof</h6>
+
+<p>See Proposition 1.2.6 in (<a href='#Cisinski04'>Cisinski 04</a>).</p>
+</div>
+
+<h3 id='cisinskis_theorem'>Cisinski’s theorem</h3>
+
+<p>Since the definition consists merely of closure conditions, the intersection of any family of basic localizers is again a basic localizer. It follows that there is a unique <em>smallest</em> basic localizer. The following was conjectured by <a class='existingWikiWord' href='/nlab/show/Alexander+Grothendieck'>Grothendieck</a> and proven by <a class='existingWikiWord' href='/nlab/show/Denis-Charles+Cisinski'>Denis-Charles Cisinski</a>.</p>
+
+<div class='num_theorem'>
+<h6 id='theorem_cisinski'>Theorem (Cisinski)</h6>
+
+<p>The class of functors whose <a class='existingWikiWord' href='/nlab/show/nerve'>nerve</a> is a <a class='existingWikiWord' href='/nlab/show/weak+homotopy+equivalence'>weak homotopy equivalence</a> is the smallest basic localizer.</p>
+</div>
+
+<div class='proof'>
+<h6 id='proof_2'>Proof</h6>
+
+<p>See Théorème 2.2.11 in (<a href='#Cisinski04'>Cisinski 04</a>).</p>
+</div>
+
+<p>Note that this is a larger class than the class of “<a class='existingWikiWord' href='/nlab/show/homotopy+equivalence'>homotopy equivalences</a>” considered above. For instance, the category generated by the graph</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_595538c926ce92a0d0faaef3a40ecc4950f71f23_64' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>•</mo><mo>←</mo><mo>•</mo><mo>→</mo><mo>•</mo><mo>←</mo><mo>•</mo><mo>→</mo><mo>•</mo><mo>←</mo><mo>•</mo><mo>→</mo><mi>⋯</mi></mrow><annotation encoding='application/x-tex'>\bullet \leftarrow \bullet \rightarrow \bullet \leftarrow \bullet \rightarrow \bullet \leftarrow \bullet \rightarrow \cdots</annotation></semantics></math></div>
+<p>has a contractible nerve, but its identity functor is not connected to a constant one by any natural zigzag.</p>
+
+<h2 id='related_concepts'>Related concepts</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/canonical+model+structure'>canonical model structure</a>, <a class='existingWikiWord' href='/nlab/show/Thomason+model+structure'>Thomason model structure</a> on <a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Cisinski+model+structure'>Cisinski model structure</a></p>
+</li>
+</ul>
+
+<h2 id='references'>References</h2>
+
+<ul id='Cisinski06'>
+<li><a class='existingWikiWord' href='/nlab/show/Denis-Charles+Cisinski'>Denis-Charles Cisinski</a>, <em><a class='existingWikiWord' href='/joyalscatlab/published/Les+pr%C3%A9faisceaux+comme+type+d%27homotopie' title='joyalscatlab'>Les préfaisceaux comme type d&#39;homotopie</a></em>, Astérisque, Volume 308, Soc. Math. France (2006), 392 pages (<a href='http://www.math.univ-toulouse.fr/~dcisinsk/ast.pdf'>pdf</a>)</li>
+</ul>
+
+<ul id='Cisinski04'>
+<li><a class='existingWikiWord' href='/nlab/show/Denis-Charles+Cisinski'>Denis-Charles Cisinski</a>, <em>Le localisateur fondamental minimal</em></li>
+</ul>
+
+<p>See also at <em><a class='existingWikiWord' href='/nlab/show/Cisinski+model+structure'>Cisinski model structure</a></em>.</p>
+
+<ul id='Maltsiniotis11'>
+<li><a class='existingWikiWord' href='/nlab/show/Georges+Maltsiniotis'>Georges Maltsiniotis</a>, <em>Homotopical exact squares and derivators</em> (<a href='http://arxiv.org/abs/1101.4144'>arXiv:1101.4144</a>)</li>
+</ul>
+
+<p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on July 18, 2013 12:26:07 
+  by <a class="existingWikiWord" href="/nlab/show/Urs+Schreiber">Urs Schreiber</a>
+  (82.169.65.155)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/basic+localizer" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/basic+localizer/4" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(4 revisions)</span> | <a href="/nlab/show/diff/basic+localizer" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/basic+localizer" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/basic+localizer" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/basic+localizer" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/basic+localizer" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

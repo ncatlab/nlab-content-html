@@ -1,0 +1,547 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      propagating flow in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      propagating flow
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <p>
+</p>
+
+<div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='mapping_space'>Mapping space</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/internal+hom'>mapping space</a></strong></p>
+
+<h3 id='general_abstract'>General abstract</h3>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/hom-set'>hom-set</a>, <a class='existingWikiWord' href='/nlab/show/hom-object'>hom-object</a>, <a class='existingWikiWord' href='/nlab/show/internal+hom'>internal hom</a>, <a class='existingWikiWord' href='/nlab/show/exponential+object'>exponential object</a>, <a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-categorical+hom-space'>derived hom-space</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/loop+space+object'>loop space object</a>, <a class='existingWikiWord' href='/nlab/show/free+loop+space+object'>free loop space object</a>, <a class='existingWikiWord' href='/nlab/show/derived+loop+space'>derived loop space</a></p>
+</li>
+</ul>
+
+<h3 id='topology'>Topology</h3>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/topology+of+mapping+spaces'>topology of mapping spaces</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/compact-open+topology'>compact-open topology</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/evaluation+fibration+of+mapping+spaces'>evaluation fibration of mapping spaces</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/loop+space'>loop space</a>, <a class='existingWikiWord' href='/nlab/show/free+loop+space'>free loop space</a></p>
+</li>
+</ul>
+
+<h3 id='differential_topology'>Differential topology</h3>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/differential+topology+of+mapping+spaces'>differential topology of mapping spaces</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/C-infinity+topology'>C-k topology</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/manifold+structure+of+mapping+spaces'>manifold structure of mapping spaces</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/tangent+spaces+of+mapping+spaces'>tangent spaces of mapping spaces</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/smooth+loop+space'>smooth loop space</a></p>
+</li>
+</ul>
+
+<h3 id='stable_homotopy_theory'>Stable homotopy theory</h3>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/function+spectrum'>mapping spectrum</a></li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/mapping+space+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='contents'>Contents</h1>
+<div class='maruku_toc'><ul><li><a href='#idea'>Idea</a></li><li><a href='#definition'>Definition</a></li><li><a href='#construction'>Construction</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='idea'>Idea</h2>
+
+<p><a class='existingWikiWord' href='/nlab/show/manifold+structure+of+mapping+spaces'>Smooth mapping spaces</a> are very nice examples of <a class='existingWikiWord' href='/nlab/show/infinite-dimensional+manifold'>infinite dimensional smooth manifolds</a>. One reason for their nice behaviour is that it is often possible to use the structure of the <a class='existingWikiWord' href='/nlab/show/target+space'>target space</a> (a finite <a class='existingWikiWord' href='/nlab/show/dimension'>dimension</a>al <a class='existingWikiWord' href='/nlab/show/manifold'>manifold</a>) to study the mapping space. This provides a route from finite dimensional <a class='existingWikiWord' href='/nlab/show/differential+topology'>differential topology</a> to that of infinite dimensions. It is usually the case that one needs stronger structure on the target space to do this than would be needed just for the finite dimensional result, but as the target space is a finite dimensional manifold that stronger structure is usually there anyway.</p>
+
+<p>An example of this is the concept of a <a class='existingWikiWord' href='/nlab/show/tubular+neighbourhood'>tubular neighbourhood</a> of an <a class='existingWikiWord' href='/nlab/show/embedding'>embedding</a>. As shown at <a class='existingWikiWord' href='/nlab/show/A+Not-So-Nice+Submanifold'>A Not-So-Nice Submanifold</a>, not all embeddings of infinite dimensional manifolds - even of mapping spaces - admit tubular neighbourhoods. However, if the embedding is of a coincidental nature then it is possible to use structure on the target manifold to find tubular neighbourhoods in infinite dimensions.</p>
+
+<p>By “coincidental nature”, we mean that the submanifold is defined by taking those smooth maps with some condition imposed that says that certain “coincidences” happen. That is, that the values of the map at certain points coincide, or are constrained to lie in some submanifold of the target space.</p>
+
+<p>Let us consider, for an example, the simplest case: the inclusion of based loops in <a class='existingWikiWord' href='/nlab/show/smooth+loop+space'>smooth loops</a>. So let <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>M</mi></mrow><annotation encoding='application/x-tex'>M</annotation></semantics></math> be a smooth finite dimensional manifold, <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>L</mi><mi>M</mi></mrow><annotation encoding='application/x-tex'>L M</annotation></semantics></math> its smooth <a class='existingWikiWord' href='/nlab/show/free+loop+space'>free loop space</a> and <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ω</mi><mi>M</mi></mrow><annotation encoding='application/x-tex'>\Omega M</annotation></semantics></math> its smooth <a class='existingWikiWord' href='/nlab/show/loop+space'>based loop space</a>. Let <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>x</mi> <mn>0</mn></msub></mrow><annotation encoding='application/x-tex'>x_0</annotation></semantics></math> be the basepoint of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>M</mi></mrow><annotation encoding='application/x-tex'>M</annotation></semantics></math>, and <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math> the basepoint of the <a class='existingWikiWord' href='/nlab/show/circle'>circle</a>, <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow><annotation encoding='application/x-tex'>S^1</annotation></semantics></math>. To get a tubular neighbourhood of this, we need to start by finding a suitable neighbourhood. To do this, we choose a <a class='existingWikiWord' href='/nlab/show/coordinate+system'>chart</a> <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϕ</mi><mo lspace='verythinmathspace'>:</mo><msup><mi>ℝ</mi> <mi>n</mi></msup><mo>→</mo><mi>U</mi><mo>⊆</mo><mi>M</mi></mrow><annotation encoding='application/x-tex'>\phi \colon \mathbb{R}^n \to U \subseteq M</annotation></semantics></math> at <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>x</mi> <mn>0</mn></msub></mrow><annotation encoding='application/x-tex'>x_0</annotation></semantics></math> (so that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϕ</mi><mo stretchy='false'>(</mo><mn>0</mn><mo stretchy='false'>)</mo><mo>=</mo><msub><mi>x</mi> <mn>0</mn></msub></mrow><annotation encoding='application/x-tex'>\phi(0) = x_0</annotation></semantics></math>). We define the neighbourhood of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ω</mi><mi>M</mi></mrow><annotation encoding='application/x-tex'>\Omega M</annotation></semantics></math> to be those loops <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo>∈</mo><mi>L</mi><mi>M</mi></mrow><annotation encoding='application/x-tex'>\alpha \in L M</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo><mo>∈</mo><mi>U</mi></mrow><annotation encoding='application/x-tex'>\alpha(1) \in U</annotation></semantics></math>. To make this a <em>tubular</em> neighbourhood, we need to find a way to project these loops on to <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ω</mi><mi>M</mi></mrow><annotation encoding='application/x-tex'>\Omega M</annotation></semantics></math>. That is, given a loop <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo lspace='verythinmathspace'>:</mo><msup><mi>S</mi> <mn>1</mn></msup><mo>→</mo><mi>M</mi></mrow><annotation encoding='application/x-tex'>\alpha \colon S^1 \to M</annotation></semantics></math> with <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo><mo>∈</mo><mi>U</mi></mrow><annotation encoding='application/x-tex'>\alpha(1) \in U</annotation></semantics></math> we need to produce a loop <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>π</mi><mo stretchy='false'>(</mo><mi>α</mi><mo stretchy='false'>)</mo><mo lspace='verythinmathspace'>:</mo><msup><mi>S</mi> <mn>1</mn></msup><mo>→</mo><mi>M</mi></mrow><annotation encoding='application/x-tex'>\pi(\alpha) \colon S^1 \to M</annotation></semantics></math> with <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>π</mi><mo stretchy='false'>(</mo><mi>α</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo><mo>=</mo><msub><mi>x</mi> <mn>0</mn></msub></mrow><annotation encoding='application/x-tex'>\pi(\alpha)(1) = x_0</annotation></semantics></math>. It is obvious how to move the basepoint: simply scale it to <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>x</mi> <mn>0</mn></msub></mrow><annotation encoding='application/x-tex'>x_0</annotation></semantics></math> using the scalar multiplication coming from the chart. However, that just moves <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\alpha(1)</annotation></semantics></math>. We need to move the whole of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi></mrow><annotation encoding='application/x-tex'>\alpha</annotation></semantics></math> with it - or at least, drag that part of it near <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>. We cannot assume that all of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi></mrow><annotation encoding='application/x-tex'>\alpha</annotation></semantics></math> lies in <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>. The solution is to define a diffeomorphism <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ψ</mi></mrow><annotation encoding='application/x-tex'>\Psi</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>M</mi></mrow><annotation encoding='application/x-tex'>M</annotation></semantics></math> with the property that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ψ</mi><mo stretchy='false'>(</mo><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>=</mo><msub><mi>x</mi> <mn>0</mn></msub></mrow><annotation encoding='application/x-tex'>\Psi(\alpha(1)) = x_0</annotation></semantics></math>. Then we can define <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>π</mi><mo stretchy='false'>(</mo><mi>α</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>Ψ</mi><mo>∘</mo><mi>α</mi></mrow><annotation encoding='application/x-tex'>\pi(\alpha) = \Psi \circ \alpha</annotation></semantics></math>. As we vary <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi></mrow><annotation encoding='application/x-tex'>\alpha</annotation></semantics></math>, so we also vary <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\alpha(1)</annotation></semantics></math>, and thus must vary the diffeomorphism <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ψ</mi></mrow><annotation encoding='application/x-tex'>\Psi</annotation></semantics></math>. The trick is to choose <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ψ</mi></mrow><annotation encoding='application/x-tex'>\Psi</annotation></semantics></math> so that it varies smoothly with <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\alpha(1)</annotation></semantics></math>.</p>
+
+<p>In the above example, this is straightforward because everything happens in the chart, and thus effectively on <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>ℝ</mi> <mi>n</mi></msup></mrow><annotation encoding='application/x-tex'>\mathbb{R}^n</annotation></semantics></math>. There are more complicated examples. One such is the basic construction in <a class='existingWikiWord' href='/nlab/show/string+topology'>string topology</a>. Within <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>L</mi><mi>M</mi><mo>×</mo><mi>L</mi><mi>M</mi></mrow><annotation encoding='application/x-tex'>L M \times L M</annotation></semantics></math> we consider those pairs of loops <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\alpha,\beta)</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo><mo>=</mo><mi>β</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\alpha(1) = \beta(1)</annotation></semantics></math>. Then for <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\alpha,\beta)</annotation></semantics></math> with <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\alpha(1)</annotation></semantics></math> <em>near</em> to <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>β</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\beta(1)</annotation></semantics></math> we want to project the pair <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\alpha,\beta)</annotation></semantics></math> to a pair where these values coincide. Now although the points <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\alpha(1)</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>β</mi><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\beta(1)</annotation></semantics></math> are near (in some vague not-yet-defined sense), they may, as a pair, roam all over the manifold. Thus local solutions are not applicable here. Nonetheless, the question still comes down to the ability to choose diffeomorphisms consistently according to some conditions.</p>
+
+<h2 id='definition'>Definition</h2>
+
+<p>One way to choose these diffeomorphisms is to use the notion of a <strong>propagating flow</strong>. The term was coined by <a class='existingWikiWord' href='/nlab/show/Veronique+Godin'>Veronique Godin</a> in (<a href='#Godin'>Godin, 07</a>) and is based on an idea due to <a class='existingWikiWord' href='/nlab/show/Andrew+Stacey'>Andrew Stacey</a> in (<a href='#Stacey'>Stacey, 05</a>), though there are probably antecedents. The basic idea is contained in the following definition.</p>
+
+<div class='num_definition' id='propflow'>
+<h6 id='definition_2'>Definition</h6>
+
+<p>Let <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>π</mi><mo lspace='verythinmathspace'>:</mo><mi>E</mi><mo>→</mo><mi>M</mi></mrow><annotation encoding='application/x-tex'>\pi \colon E \to M</annotation></semantics></math> be a <a class='existingWikiWord' href='/nlab/show/vector+bundle'>vector bundle</a> over a <a class='existingWikiWord' href='/nlab/show/smooth+manifold'>smooth manifold</a>. Everything here is assumed to be finite dimensional. We consider the space <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>Diff</mi> <mi>fc</mi></msub><mo stretchy='false'>(</mo><mi>E</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Diff_{fc}(E)</annotation></semantics></math> of <a class='existingWikiWord' href='/nlab/show/diffeomorphism'>diffeomorphisms</a> of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math> which preserve the <a class='existingWikiWord' href='/nlab/show/fiber'>fibres</a> of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math> and have <a class='existingWikiWord' href='/nlab/show/compact+support'>compact support</a>. A <strong>propagating flow</strong> is a <a class='existingWikiWord' href='/nlab/show/smooth+map'>smooth map</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϕ</mi><mo lspace='verythinmathspace'>:</mo><mi>E</mi><mo>→</mo><msub><mi>Diff</mi> <mi>fc</mi></msub><mo stretchy='false'>(</mo><mi>E</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>
+  \phi \colon E \to Diff_{fc}(E)
+
+</annotation></semantics></math></div>
+<p>with the property that</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϕ</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>:</mo><mi>v</mi><mo>↦</mo><mi>π</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>
+  \phi(v) : v \mapsto \pi(v)
+
+</annotation></semantics></math></div>
+<p>where we identify <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>π</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\pi(v)</annotation></semantics></math> with the zero vector in the corresponding fibre of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math>.</p>
+</div>
+
+<h2 id='construction'>Construction</h2>
+
+<p>The original definition of a propagating flow in <a href='#Stacey'>Stacey, 05</a> and <a href='#Godin'>Godin, 07</a> used the exponentiation map from vector fields to diffeomorphisms to get the actual diffeomorphism. The idea of that was that it is much easier to build a vector field with the required properties than a diffeomorphism because vector fields are more easily manipulated. But the diffeomorphisms used here are simple enough that they can be constructed directly. This makes it easier to generalise to situations where the exponentiation map cannot be assumed to exist.</p>
+
+<p>Let us consider the linear situation first. We start with a vector space, <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math>, and a vector <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow><annotation encoding='application/x-tex'>v \in V</annotation></semantics></math>. We want to define a diffeomorphism <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>v</mi></msub><mo lspace='verythinmathspace'>:</mo><mi>V</mi><mo>→</mo><mi>V</mi></mrow><annotation encoding='application/x-tex'>\phi_v \colon V \to V</annotation></semantics></math> with the property that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>\phi_v(v) = 0</annotation></semantics></math>. This is simple enough:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_56' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mn>1</mn></msub><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>w</mi><mo>−</mo><mi>v</mi><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\phi_1(w) = w - v.
+
+</annotation></semantics></math></div>
+<p>The problem with this is that we do not want just any diffeomorphism. We want one that is the identity “near infinity”. Let us start by fixing the diffeomorphism in the <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_57' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi></mrow><annotation encoding='application/x-tex'>v</annotation></semantics></math>-direction.</p>
+
+<p>Choose a smooth function <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_58' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>σ</mi><mo lspace='verythinmathspace'>:</mo><mi>ℝ</mi><mo>→</mo><mo stretchy='false'>[</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>\sigma \colon \mathbb{R} \to [-1,0]</annotation></semantics></math> with the following properties:</p>
+
+<ol>
+<li><math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_59' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>σ</mi><mo stretchy='false'>(</mo><mi>t</mi><mo stretchy='false'>)</mo><mo>=</mo><mrow><mo>{</mo><mrow><mtable columnalign='left left' displaystyle='false'><mtr><mtd><mn>0</mn></mtd> <mtd><mi>t</mi><mo>≤</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>2</mn></mtd></mtr> <mtr><mtd><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mtd> <mtd><mn>0</mn><mo>≤</mo><mi>t</mi><mo>≤</mo><mn>1</mn></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>2</mn><mo>≤</mo><mi>t</mi></mtd></mtr></mtable></mrow></mrow></mrow><annotation encoding='application/x-tex'>\sigma(t) = \begin{cases} 0 &amp; t \le -2 \\ - 1 &amp; 0 \le t \le 1 \\ 0 &amp; 2 \le t \end{cases}</annotation></semantics></math></li>
+
+<li><math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_60' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>σ</mi><mo>′</mo><mo stretchy='false'>(</mo><mi>t</mi><mo stretchy='false'>)</mo><mo>&gt;</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>\sigma&#39;(t) \gt -1</annotation></semantics></math> (note that this is possible as we have given ourselves an interval of length <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_61' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>2</mn></mrow><annotation encoding='application/x-tex'>2</annotation></semantics></math> to get from <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_62' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math> at <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_63' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi><mo>=</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>2</mn></mrow><annotation encoding='application/x-tex'>t = -2</annotation></semantics></math> to <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_64' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>-1</annotation></semantics></math> at <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_65' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>t = 0</annotation></semantics></math>.</li>
+</ol>
+
+<p>We are actually interested in the function <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_66' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi><mo>↦</mo><mi>t</mi><mo>+</mo><mi>h</mi><mi>σ</mi><mo stretchy='false'>(</mo><mi>t</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>t \mapsto t + h \sigma(t)</annotation></semantics></math> for <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_67' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>|</mo><mi>h</mi><mo stretchy='false'>|</mo><mo>≤</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>|h| \le 1</annotation></semantics></math>. The first property of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_68' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>σ</mi></mrow><annotation encoding='application/x-tex'>\sigma</annotation></semantics></math> tells us that this agrees with the identity outside <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_69' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>[</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>2</mn><mo>,</mo><mn>2</mn><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>[-2,2]</annotation></semantics></math> and that it is <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_70' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi><mo>↦</mo><mi>t</mi><mo>−</mo><mi>h</mi></mrow><annotation encoding='application/x-tex'>t \mapsto t - h</annotation></semantics></math> on <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_71' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>[0,1]</annotation></semantics></math>. The second property tells us that its derivative is strictly bigger than <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_72' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn><mo>−</mo><mi>h</mi></mrow><annotation encoding='application/x-tex'>1 - h</annotation></semantics></math> and so, for <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_73' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>h \le 1</annotation></semantics></math>, is a diffeomorphism.</p>
+
+<p>On <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_74' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math>, we choose a “dual functional” to <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_75' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi></mrow><annotation encoding='application/x-tex'>v</annotation></semantics></math>. That is, we choose some continuous linear functional <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_76' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo lspace='verythinmathspace'>:</mo><mi>V</mi><mo>→</mo><mi>ℝ</mi></mrow><annotation encoding='application/x-tex'>f \colon V \to \mathbb{R}</annotation></semantics></math> with <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_77' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>f(v) = 1</annotation></semantics></math> (we need to assume that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_78' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>v \ne 0</annotation></semantics></math> for this part, we shall correct for that later). Then we define a diffeomorphism on <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_79' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math> by:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_80' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mn>2</mn></msub><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>w</mi><mo>+</mo><mi>σ</mi><mo stretchy='false'>(</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mi>v</mi><mo>=</mo><mo stretchy='false'>(</mo><mi>w</mi><mo>−</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>+</mo><mo stretchy='false'>(</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>+</mo><mi>σ</mi><mo stretchy='false'>(</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mi>v</mi><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\phi_2(w) = w + \sigma(f(w))v =  (w - f(w)v) + (f(w) + \sigma(f(w)))v.
+
+</annotation></semantics></math></div>
+<p>The second expression shows that what we have done is used <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_81' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> to identify <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_82' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math> with <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_83' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ker</mi><mi>f</mi><mo>⊕</mo><mi>ℝ</mi></mrow><annotation encoding='application/x-tex'>\ker f \oplus \mathbb{R}</annotation></semantics></math> and then applied <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_84' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi><mo>↦</mo><mi>t</mi><mo>+</mo><mi>σ</mi><mo stretchy='false'>(</mo><mi>t</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>t \mapsto t + \sigma(t)</annotation></semantics></math> on the <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_85' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding='application/x-tex'>\mathbb{R}</annotation></semantics></math>-factor.</p>
+
+<p>This fixes our diffeomorphism in the <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_86' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi></mrow><annotation encoding='application/x-tex'>v</annotation></semantics></math>-direction. To fix it in the other direction, we choose a smooth function <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_87' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mover><mi>τ</mi><mo>^</mo></mover><mo lspace='verythinmathspace'>:</mo><mi>ker</mi><mi>f</mi><mo>→</mo><mo stretchy='false'>[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>\widehat{\tau} \colon \ker f \to [0,1]</annotation></semantics></math> which is <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_88' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math> “near infinity” and <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_89' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math> at <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_90' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math>. Then we mix this in to the above as follows:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_91' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mn>3</mn></msub><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>w</mi><mo>+</mo><mover><mi>τ</mi><mo>^</mo></mover><mo stretchy='false'>(</mo><mi>w</mi><mo>−</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mi>v</mi><mo stretchy='false'>)</mo><mi>σ</mi><mo stretchy='false'>(</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mi>v</mi><mo>=</mo><mo stretchy='false'>(</mo><mi>w</mi><mo>−</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>+</mo><mo stretchy='false'>(</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>+</mo><mover><mi>τ</mi><mo>^</mo></mover><mo stretchy='false'>(</mo><mi>w</mi><mo>−</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mi>v</mi><mo stretchy='false'>)</mo><mi>σ</mi><mo stretchy='false'>(</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mi>v</mi><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\phi_3(w) = w + \widehat{\tau}(w - f(w)v) \sigma(f(w))v = (w - f(w)v) + (f(w) + \widehat{\tau}(w - f(w)v) \sigma(f(w)) v.
+
+</annotation></semantics></math></div>
+<p>As before, the second expression makes it clear that this is a diffeomorphism. When <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_92' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mover><mi>τ</mi><mo>^</mo></mover><mo stretchy='false'>(</mo><mi>w</mi><mo>−</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>\widehat{\tau}(w - f(w)v) = 0</annotation></semantics></math> then it is the identity.</p>
+
+<p>This will do, but there are a few too many choices in the above. To simplify these, we assume that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_93' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math> admits a smooth inner product, <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_94' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi></mrow><annotation encoding='application/x-tex'>g</annotation></semantics></math>. Let us write <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_95' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>q</mi></mrow><annotation encoding='application/x-tex'>q</annotation></semantics></math> for the square of the associated norm. Then we can choose <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_96' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> to be evaluation of the inner product at <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_97' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi></mrow><annotation encoding='application/x-tex'>v</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_98' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>τ</mi></mrow><annotation encoding='application/x-tex'>\tau</annotation></semantics></math> to be composition of the inner product with a suitable bump function on <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_99' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding='application/x-tex'>\mathbb{R}</annotation></semantics></math>. We shall write <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_100' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>τ</mi></mrow><annotation encoding='application/x-tex'>\tau</annotation></semantics></math> for that bump function. To make the final formula cleaner, we assume that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_101' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>τ</mi><mo stretchy='false'>(</mo><mi>t</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>\tau(t) = 1</annotation></semantics></math> for <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_102' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>|</mo><mi>t</mi><mo stretchy='false'>|</mo><mo>≤</mo><mn>2</mn></mrow><annotation encoding='application/x-tex'>|t| \le 2</annotation></semantics></math>. This leads us to:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_103' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable columnalign='right left right left right left right left right left' columnspacing='0em' displaystyle='true'><mtr><mtd><msub><mi>ϕ</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo></mtd> <mtd><mo>=</mo><mi>w</mi><mo>+</mo><mi>τ</mi><mrow><mo>(</mo><mfrac><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo></mrow><mrow><mn>1</mn><mo>+</mo><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></mfrac><mo>)</mo></mrow><mi>σ</mi><mrow><mo>(</mo><mfrac><mrow><mi>g</mi><mo stretchy='false'>(</mo><mi>w</mi><mo>,</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></mfrac><mo>)</mo></mrow><mi>v</mi></mtd> <mtd><mo>=</mo><mi>w</mi><mo>−</mo><mfrac><mrow><mi>g</mi><mo stretchy='false'>(</mo><mi>w</mi><mo>,</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></mfrac><mi>v</mi><mo>+</mo><mrow><mo>(</mo><mfrac><mrow><mi>g</mi><mo stretchy='false'>(</mo><mi>w</mi><mo>,</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></mfrac><mo>+</mo><mi>τ</mi><mrow><mo>(</mo><mfrac><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo></mrow><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></mfrac><mo>)</mo></mrow><mi>σ</mi><mrow><mo>(</mo><mfrac><mrow><mi>g</mi><mo stretchy='false'>(</mo><mi>w</mi><mo>,</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></mfrac><mo>)</mo></mrow><mo>)</mo></mrow><mi>v</mi><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>
+\begin{aligned}
+\phi_v(w) &amp;= w + \tau\left(\frac{q(w)}{1 + q(v)}\right) \sigma\left(\frac{g(w,v)}{q(v)}\right) v
+&amp;= w - \frac{g(w,v)}{q(v)}v + \left(\frac{g(w,v)}{q(v)} + \tau\left(\frac{q(w)}{q(v)}\right) \sigma\left(\frac{g(w,v)}{q(v)}\right) \right)v.
+\end{aligned}
+
+</annotation></semantics></math></div>
+<p>As written, this makes sense only for <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_104' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>v \ne 0</annotation></semantics></math>. But it extends to the identity at <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_105' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>v = 0</annotation></semantics></math>. To see that this extension is smooth, we need merely point out that as <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_106' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>→</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>v \to 0</annotation></semantics></math>, so <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_107' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>→</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>q(v) \to 0</annotation></semantics></math> and thus <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_108' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>σ</mi><mrow><mo>(</mo><mfrac><mrow><mi>g</mi><mo stretchy='false'>(</mo><mi>w</mi><mo>,</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></mfrac><mo>)</mo></mrow><mo>→</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>\sigma\left(\frac{g(w,v)}{q(v)}\right) \to 0</annotation></semantics></math>. The second expression again shows that, for <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_109' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>v \ne 0</annotation></semantics></math>, this is a diffeomorphism.</p>
+
+<p>This, then, is our required linear diffeomorphism. For <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_110' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi></mrow><annotation encoding='application/x-tex'>w</annotation></semantics></math> with <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_111' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>≥</mo><mn>2</mn><mo stretchy='false'>(</mo><mn>1</mn><mo>+</mo><mi>q</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>q(w) \ge 2(1 + q(v))</annotation></semantics></math> it is the identity, and thus will extend “at infinity”, whilst <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_112' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>\phi_v(v) = 0</annotation></semantics></math>.</p>
+
+<p>The next step is to extend this to a bundle over a manifold. So let <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_113' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>π</mi><mo lspace='verythinmathspace'>:</mo><mi>E</mi><mo>→</mo><mi>M</mi></mrow><annotation encoding='application/x-tex'>\pi \colon E \to M</annotation></semantics></math> be a smooth vector bundle over a smooth manifold. We wish to extend the above formula so that it is valid for <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_114' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math>. That is, <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_115' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi></mrow><annotation encoding='application/x-tex'>v</annotation></semantics></math> is an arbitrary point in <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_116' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math> and we wish to define <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_117' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>v</mi></msub><mo lspace='verythinmathspace'>:</mo><mi>E</mi><mo>→</mo><mi>E</mi></mrow><annotation encoding='application/x-tex'>\phi_v \colon E \to E</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_118' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo>=</mo><msub><mn>0</mn> <mrow><mi>π</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></msub></mrow><annotation encoding='application/x-tex'>\phi_v(v) = 0_{\pi(v)}</annotation></semantics></math>. So also we must take <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_119' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi></mrow><annotation encoding='application/x-tex'>w</annotation></semantics></math> to be an arbitrary point in <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_120' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math>. And thereby lies the problem: in the formula <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_121' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi></mrow><annotation encoding='application/x-tex'>v</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_122' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi></mrow><annotation encoding='application/x-tex'>w</annotation></semantics></math> interact but they may be in different fibres. The solution is to extend one of them to a vector field. Since <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_123' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi></mrow><annotation encoding='application/x-tex'>v</annotation></semantics></math> is static in the formula for <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_124' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>v</mi></msub></mrow><annotation encoding='application/x-tex'>\phi_v</annotation></semantics></math>, that is the obvious choice.</p>
+
+<p>We should also note that the explicit formula requires the existence of a smooth <a class='existingWikiWord' href='/nlab/show/orthogonal+structure'>orthogonal structure</a> on <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_125' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math>.</p>
+
+<p>Thus we want to define a smooth function <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_126' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo lspace='verythinmathspace'>:</mo><mi>E</mi><mo>→</mo><mi>Γ</mi><mo stretchy='false'>(</mo><mi>E</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>X \colon E \to \Gamma(E)</annotation></semantics></math> with the property that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_127' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>π</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>=</mo><mi>v</mi></mrow><annotation encoding='application/x-tex'>X_v(\pi(v)) = v</annotation></semantics></math>. This is easy if <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_128' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math> is trivial, and the condition is convex, so a standard <a class='existingWikiWord' href='/nlab/show/partition+of+unity'>partition of unity</a> argument will suffice. Specifically, let <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_129' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><msub><mi>ρ</mi> <mi>λ</mi></msub><mo>:</mo><mi>λ</mi><mo>∈</mo><mi>Λ</mi><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{\rho_\lambda : \lambda \in \Lambda\}</annotation></semantics></math> be a partition of unity on <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_130' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>M</mi></mrow><annotation encoding='application/x-tex'>M</annotation></semantics></math> with the property that for each <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_131' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi><mo>∈</mo><mi>λ</mi></mrow><annotation encoding='application/x-tex'>\lambda \in \lambda</annotation></semantics></math> there is an open set <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_132' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>U</mi> <mi>λ</mi></msub></mrow><annotation encoding='application/x-tex'>U_\lambda</annotation></semantics></math> containing the support of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_133' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ρ</mi> <mi>λ</mi></msub></mrow><annotation encoding='application/x-tex'>\rho_\lambda</annotation></semantics></math> over which <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_134' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math> is trivial. Let <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_135' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>E</mi> <mi>λ</mi></msub></mrow><annotation encoding='application/x-tex'>E_\lambda</annotation></semantics></math> denote the restriction of <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_136' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>E</mi></mrow><annotation encoding='application/x-tex'>E</annotation></semantics></math> to <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_137' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>U</mi> <mi>λ</mi></msub></mrow><annotation encoding='application/x-tex'>U_\lambda</annotation></semantics></math> and let <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_138' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ψ</mi> <mi>λ</mi></msub><mo lspace='verythinmathspace'>:</mo><msub><mi>E</mi> <mi>λ</mi></msub><mo>→</mo><msub><mi>U</mi> <mi>λ</mi></msub><mo>×</mo><mi>V</mi></mrow><annotation encoding='application/x-tex'>\psi_\lambda \colon E_\lambda \to U_\lambda \times V</annotation></semantics></math> be a trivialisation. Let <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_139' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>p</mi> <mi>λ</mi></msub><mo lspace='verythinmathspace'>:</mo><msub><mi>E</mi> <mi>λ</mi></msub><mo>→</mo><mi>V</mi></mrow><annotation encoding='application/x-tex'>p_\lambda \colon E_\lambda \to V</annotation></semantics></math> be the composition of this trivialisation with the projection on to the <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_140' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math>-factor. We define <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_141' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>X</mi> <mi>λ</mi></msub><mo lspace='verythinmathspace'>:</mo><msub><mi>E</mi> <mi>λ</mi></msub><mo>→</mo><mi>Γ</mi><mo stretchy='false'>(</mo><msub><mi>E</mi> <mi>λ</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>X_\lambda \colon E_\lambda \to \Gamma(E_\lambda)</annotation></semantics></math> by</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_142' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>X</mi> <mrow><mi>λ</mi><mo>,</mo><mi>v</mi></mrow></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo>=</mo><msubsup><mi>ψ</mi> <mi>λ</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msubsup><mo stretchy='false'>(</mo><mi>p</mi><mo>,</mo><msub><mi>p</mi> <mi>λ</mi></msub><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+X_{\lambda,v}(p) = \psi_\lambda^{-1}(p,p_\lambda(v)).
+
+</annotation></semantics></math></div>
+<p>Now we define <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_143' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo lspace='verythinmathspace'>:</mo><mi>E</mi><mo>→</mo><mi>Γ</mi><mo stretchy='false'>(</mo><mi>E</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>X \colon E \to \Gamma(E)</annotation></semantics></math> by</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_144' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo>=</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>∑</mo> <mi>λ</mi></munder><msub><mi>ρ</mi> <mi>λ</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><msub><mi>X</mi> <mrow><mi>λ</mi><mo>,</mo><mi>v</mi></mrow></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+X_v(p) = \sum_\lambda \rho_\lambda(p) X_{\lambda,v}(p).
+
+</annotation></semantics></math></div>
+<p>Notice that <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_145' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>X_v(p) = 0</annotation></semantics></math> if <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_146' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>p</mi></mrow><annotation encoding='application/x-tex'>p</annotation></semantics></math> is “sufficiently far” from <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_147' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>π</mi><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\pi(v)</annotation></semantics></math>.</p>
+
+<p>Thus our diffeomorphism <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_148' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>v</mi></msub></mrow><annotation encoding='application/x-tex'>\phi_v</annotation></semantics></math> at <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_149' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi></mrow><annotation encoding='application/x-tex'>w</annotation></semantics></math>, with <math class='maruku-mathml' display='inline' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_150' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>p</mi><mo>=</mo><mi>π</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>p = \pi(w)</annotation></semantics></math>, is:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6e4c8572c84190383e261a5b650dc7bd4d793849_151' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>=</mo><mrow><mo>{</mo><mrow><mtable columnalign='left left' displaystyle='false'><mtr><mtd><mi>w</mi><mo>+</mo><mi>τ</mi><mrow><mo>(</mo><mfrac><mrow><mi>q</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo></mrow><mrow><mn>1</mn><mo>+</mo><mi>q</mi><mo stretchy='false'>(</mo><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow></mfrac><mo>)</mo></mrow><mi>σ</mi><mrow><mo>(</mo><mfrac><mrow><mi>g</mi><mo stretchy='false'>(</mo><mi>w</mi><mo>,</mo><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><mrow><mi>q</mi><mo stretchy='false'>(</mo><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow></mfrac><mo>)</mo></mrow><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo></mtd> <mtd><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo>≠</mo><mn>0</mn></mtd></mtr> <mtr><mtd><mi>w</mi></mtd> <mtd><msub><mi>X</mi> <mi>v</mi></msub><mo stretchy='false'>(</mo><mi>p</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>0</mn></mtd></mtr></mtable></mrow></mrow><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\phi_v(w) = \begin{cases} w + \tau\left(\frac{q(w)}{1 + q(X_v(p))}\right) \sigma \left(\frac{g(w,X_v(p))}{q(X_v(p))}\right) X_v(p) &amp; X_v(p) \ne 0 \\
+w &amp; X_v(p) = 0 \end{cases}.
+
+</annotation></semantics></math></div>
+<h2 id='references'>References</h2>
+
+<p>The idea goes back to</p>
+
+<ul id='Stacey'>
+<li><a class='existingWikiWord' href='/nlab/show/Andrew+Stacey'>Andrew Stacey</a>, <em>The differential topology of smooth loops</em> (<a href='http://arxiv.org/abs/math/0510097'>arXiv:math/0510097</a>)</li>
+</ul>
+
+<p>The term <em>propagating flow</em> was coined in</p>
+
+<ul id='Godin'>
+<li><a class='existingWikiWord' href='/nlab/show/Veronique+Godin'>Veronique Godin</a>, <em>Higher string topology operations</em> (2007)(<a href='http://arxiv.org/abs/0711.4859'>arXiv:0711.4859</a>)</li>
+</ul>
+
+<p>and used for the construction of <a class='existingWikiWord' href='/nlab/show/fiber+integration'>umkehr maps</a> to construct <a class='existingWikiWord' href='/nlab/show/string+topology'>string topology</a> operations.</p>
+</div>
+
+<div class="revisedby">
+  Revised on September 19, 2011 15:03:51 
+  by <a class="existingWikiWord" href="/nlab/show/Andrew+Stacey">Andrew Stacey</a>
+  (129.241.15.200)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/propagating+flow" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/propagating+flow/4" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(4 revisions)</span> | <a href="/nlab/show/diff/propagating+flow" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/propagating+flow" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/propagating+flow" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/propagating+flow" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/propagating+flow" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

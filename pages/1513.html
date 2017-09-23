@@ -1,0 +1,913 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      separated presheaf in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      separated presheaf
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='topos_theory'>Topos Theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/sheaf+and+topos+theory'>topos theory</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Topos'>Toposes</a></li>
+</ul>
+
+<h2 id='background'>Background</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category+theory'>category theory</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category'>category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/functor'>functor</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id='toposes'>Toposes</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/%280%2C1%29-topos'>(0,1)-topos</a>, <a class='existingWikiWord' href='/nlab/show/Heyting+algebra'>Heyting algebra</a>, <a class='existingWikiWord' href='/nlab/show/locale'>locale</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/pretopos'>pretopos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/topos'>topos</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Grothendieck+topos'>Grothendieck topos</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category+of+presheaves'>category of presheaves</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/presheaf'>presheaf</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/representable+functor'>representable presheaf</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category+of+sheaves'>category of sheaves</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/site'>site</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sieve'>sieve</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/coverage'>coverage</a>, <a class='existingWikiWord' href='/nlab/show/Grothendieck+pretopology'>pretopology</a>, <a class='existingWikiWord' href='/nlab/show/Grothendieck+topology'>topology</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sheaf'>sheaf</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sheafification'>sheafification</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/quasitopos'>quasitopos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/base+topos'>base topos</a>, <a class='existingWikiWord' href='/nlab/show/indexed+topos'>indexed topos</a></p>
+</li>
+</ul>
+
+<h2 id='internal_logic'>Internal Logic</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/categorical+semantics'>categorical semantics</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/internal+logic'>internal logic</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/subobject+classifier'>subobject classifier</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/natural+numbers+object'>natural numbers object</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id='topos_morphisms'>Topos morphisms</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/logical+functor'>logical morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/geometric+morphism'>geometric morphism</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/direct+image'>direct image</a>/<a class='existingWikiWord' href='/nlab/show/inverse+image'>inverse image</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/global+section'>global sections</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/geometric+embedding'>geometric embedding</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/surjective+geometric+morphism'>surjective geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/essential+geometric+morphism'>essential geometric morphism</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/locally+connected+geometric+morphism'>locally connected geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/connected+topos'>connected geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/totally+connected+geometric+morphism'>totally connected geometric morphism</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/etale+geometric+morphism'>étale geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/open+geometric+morphism'>open geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/proper+geometric+morphism'>proper geometric morphism</a>, <a class='existingWikiWord' href='/nlab/show/proper+geometric+morphism'>compact topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/separated+geometric+morphism'>separated geometric morphism</a>, <a class='existingWikiWord' href='/nlab/show/separated+geometric+morphism'>Hausdorff topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/local+geometric+morphism'>local geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/bounded+geometric+morphism'>bounded geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/base+change'>base change</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/localic+geometric+morphism'>localic geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/hyperconnected+geometric+morphism'>hyperconnected geometric morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/atomic+geometric+morphism'>atomic geometric morphism</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id='extra_stuff_structure_properties'>Extra stuff, structure, properties</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/topological+locale'>topological locale</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/localic+topos'>localic topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/big+and+little+toposes'>petit topos/gros topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/locally+connected+topos'>locally connected topos</a>, <a class='existingWikiWord' href='/nlab/show/connected+topos'>connected topos</a>, <a class='existingWikiWord' href='/nlab/show/totally+connected+geometric+morphism'>totally connected topos</a>, <a class='existingWikiWord' href='/nlab/show/strongly+connected+topos'>strongly connected topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/local+geometric+morphism'>local topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cohesive+topos'>cohesive topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/classifying+topos'>classifying topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/smooth+topos'>smooth topos</a></p>
+</li>
+</ul>
+
+<h2 id='cohomology_and_homotopy'>Cohomology and homotopy</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cohomology'>cohomology</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+groups+in+an+%28infinity%2C1%29-topos'>homotopy</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/abelian+sheaf+cohomology'>abelian sheaf cohomology</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/model+structure+on+simplicial+presheaves'>model structure on simplicial presheaves</a></p>
+</li>
+</ul>
+
+<h2 id='in_higher_category_theory'>In higher category theory</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/higher+topos+theory'>higher topos theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/%280%2C1%29-topos'>(0,1)-topos</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/posite'>(0,1)-site</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-topos'>2-topos</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-site'>2-site</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-sheaf'>2-sheaf</a>, <a class='existingWikiWord' href='/nlab/show/stack'>stack</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-topos'>(∞,1)-topos</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-site'>(∞,1)-site</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-sheaf'>(∞,1)-sheaf</a>, <a class='existingWikiWord' href='/nlab/show/infinity-stack'>∞-stack</a>, <a class='existingWikiWord' href='/nlab/show/derived+stack'>derived stack</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id='theorems'>Theorems</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Diaconescu%27s+theorem'>Diaconescu&#39;s theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Barr%27s+theorem'>Barr&#39;s theorem</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/topos+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='contents'>Contents</h1>
+<div class='maruku_toc'><ul><li><a href='#separated_presheaf'>Separated presheaf</a><ul><li><a href='#idea'>Idea</a></li><li><a href='#definition'>Definition</a></li><li><a href='#example'>Example</a></li><li><a href='#properties'>Properties</a></li></ul></li><li><a href='#biseparated_presheaf'>Biseparated presheaf</a><ul><li><a href='#idea_2'>Idea</a></li><li><a href='#definition_4'>Definition</a></li><li><a href='#properties_2'>Properties</a></li></ul></li><li><a href='#related_concepts'>Related concepts</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='separated_presheaf'>Separated presheaf</h2>
+
+<h3 id='idea'>Idea</h3>
+
+<p>The condition that a <a class='existingWikiWord' href='/nlab/show/presheaf'>presheaf</a> be a <a class='existingWikiWord' href='/nlab/show/sheaf'>sheaf</a> may be seen as a condition of unique existence. A presheaf is separated if it satisfies the uniqueness part.</p>
+
+<h3 id='definition'>Definition</h3>
+
+<p>Let <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> be a <a class='existingWikiWord' href='/nlab/show/site'>site</a>.</p>
+
+<p>Recall that a <a class='existingWikiWord' href='/nlab/show/sheaf'>sheaf</a> on <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> is a presheaf <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>∈</mo><msub><mi>PSh</mi> <mi>S</mi></msub></mrow><annotation encoding='application/x-tex'>A \in PSh_S</annotation></semantics></math> such that for all <a class='existingWikiWord' href='/nlab/show/local+isomorphism'>local isomorphism</a>s <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>Y \to X</annotation></semantics></math> the induced morphism <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>PSh</mi> <mi>S</mi></msub><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>A</mi><mo stretchy='false'>)</mo><mo>→</mo><msub><mi>PSh</mi> <mi>S</mi></msub><mo stretchy='false'>(</mo><mi>Y</mi><mo>,</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>PSh_S(X,A) \to PSh_S(Y,A)</annotation></semantics></math> (under the <a class='existingWikiWord' href='/nlab/show/hom-functor'>hom-functor</a> <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>PSh</mi> <mi>S</mi></msub><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>PSh_S(-,A)</annotation></semantics></math>) is an <a class='existingWikiWord' href='/nlab/show/isomorphism'>isomorphism</a>. (For an arbitrary class of morphisms <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math>, the corresponding condition is called being a <a class='existingWikiWord' href='/nlab/show/local+object'>local object</a>.)<br/>It is sufficient to check this on the <a class='existingWikiWord' href='/nlab/show/dense+monomorphism'>dense monomorphism</a>s instead of all local isomorphisms. This is equivalent to checking <a class='existingWikiWord' href='/nlab/show/cover'>cover</a>ing <a class='existingWikiWord' href='/nlab/show/sieve'>sieve</a>s.</p>
+
+<div class='num_defn'>
+<h6 id='definition_2'>Definition</h6>
+
+<p>A <a class='existingWikiWord' href='/nlab/show/presheaf'>presheaf</a> <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>∈</mo><mi>PSh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>A \in PSh(S)</annotation></semantics></math> is called <strong>separated</strong> (or a <strong>monopresheaf</strong>) if for all <a class='existingWikiWord' href='/nlab/show/local+isomorphism'>local isomorphism</a>s <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>Y \to X</annotation></semantics></math> the induced morphism <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Hom</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>A</mi><mo stretchy='false'>)</mo><mo>→</mo><mi>Hom</mi><mo stretchy='false'>(</mo><mi>Y</mi><mo>,</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Hom(X,A) \to Hom(Y,A)</annotation></semantics></math> is a <a class='existingWikiWord' href='/nlab/show/monomorphism'>monomorphism</a>.</p>
+
+<p>More generally, for a class <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math> of arrows in a category <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math>, an object <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>A\in C</annotation></semantics></math> is <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math>-<strong>separated</strong> if for all morphisms <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>Y\to X</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math>, the induced morphism <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Hom</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>A</mi><mo stretchy='false'>)</mo><mo>→</mo><mi>Hom</mi><mo stretchy='false'>(</mo><mi>Y</mi><mo>,</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Hom(X,A)\to Hom(Y,A)</annotation></semantics></math> is a monomorphism.</p>
+</div>
+
+<div class='num_remark'>
+<h6 id='remark'>Remark</h6>
+
+<p>As for sheaves, it is sufficient to check the separation condition on the <a class='existingWikiWord' href='/nlab/show/dense+monomorphism'>dense monomorphism</a>s, hence on the <a class='existingWikiWord' href='/nlab/show/sieve'>sieve</a>s.</p>
+
+<p>For <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><msub><mi>p</mi> <mi>i</mi></msub><mo>:</mo><msub><mi>U</mi> <mi>i</mi></msub><mo>→</mo><mi>U</mi><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{p_i : U_i \to U\}</annotation></semantics></math> a <a class='existingWikiWord' href='/nlab/show/covering'>covering</a> family of an object <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding='application/x-tex'>U \in S</annotation></semantics></math>, the condition is that if <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>∈</mo><mi>A</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>a,b \in A(U)</annotation></semantics></math> are such that for all <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>i</mi></mrow><annotation encoding='application/x-tex'>i</annotation></semantics></math> we have <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo stretchy='false'>(</mo><msub><mi>p</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>a</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>A</mi><mo stretchy='false'>(</mo><msub><mi>p</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>b</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>A(p_i)(a) = A(p_i)(b)</annotation></semantics></math> then already <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>a</mi><mo>=</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>a = b</annotation></semantics></math>.</p>
+</div>
+
+<div class='num_remark'>
+<h6 id='remark_2'>Remark</h6>
+
+<p>The definition generalizes to any system of <a class='existingWikiWord' href='/nlab/show/local+isomorphism'>local isomorphisms</a> on any <a class='existingWikiWord' href='/nlab/show/topos'>topos</a>, such as that obtained from any <a class='existingWikiWord' href='/nlab/show/Lawvere-Tierney+topology'>Lawvere-Tierney topology</a>, or equivalently any <a class='existingWikiWord' href='/nlab/show/subtopos'>subtopos</a>.</p>
+</div>
+
+<h3 id='example'>Example</h3>
+
+<div class='num_example' id='ConstantPresheafOnSiteWithAllInhabitedCoverings'>
+<h6 id='example_2'>Example</h6>
+
+<p>Let <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>S</mi><mo>,</mo><mi>J</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(S,J)</annotation></semantics></math> be a <a class='existingWikiWord' href='/nlab/show/site'>site</a> for which every <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>J</mi></mrow><annotation encoding='application/x-tex'>J</annotation></semantics></math>-<a class='existingWikiWord' href='/nlab/show/cover'>covering family</a> is <a class='existingWikiWord' href='/nlab/show/inhabited+object'>inhabited</a>. Then for any <a class='existingWikiWord' href='/nlab/show/set'>set</a> <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math>, the <a class='existingWikiWord' href='/nlab/show/constant+presheaf'>constant presheaf</a> <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo>∋</mo><mi>a</mi><mo>↦</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>S\ni a \mapsto X</annotation></semantics></math> is separated.</p>
+</div>
+
+<p>See also at <em><a class='existingWikiWord' href='/nlab/show/locally+connected+site'>locally connected site</a></em>.</p>
+
+<h3 id='properties'>Properties</h3>
+
+<div class='num_prop'>
+<h6 id='proposition'>Proposition</h6>
+
+<p>The full <a class='existingWikiWord' href='/nlab/show/subcategory'>subcategory</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>i</mi><mo>:</mo><mi>Sep</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mo>↪</mo><mi>PSh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>
+  i : Sep(S) \hookrightarrow PSh(S)
+
+</annotation></semantics></math></div>
+<p>of separated presheaves in a presheaf category is</p>
+
+<ul>
+<li>
+<p>a <a class='existingWikiWord' href='/nlab/show/reflective+subcategory'>reflective subcategory</a>;</p>
+</li>
+
+<li>
+<p>a <a class='existingWikiWord' href='/nlab/show/quasitopos'>quasitopos</a>.</p>
+</li>
+</ul>
+</div>
+
+<p>Being a reflective subcategory means that there is a <a class='existingWikiWord' href='/nlab/show/left+adjoint'>left adjoint</a> functor to the inclusion</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><msub><mi>L</mi> <mi>sep</mi></msub><mo>⊣</mo><mi>i</mi><mo stretchy='false'>)</mo><mo>:</mo><mi>Sep</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mover><mo>↪</mo><mover><mo>←</mo><mrow><msub><mi>L</mi> <mi>sep</mi></msub></mrow></mover></mover><msub><mi>PSh</mi> <mi>S</mi></msub><mspace width='thinmathspace'></mspace><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+  (L_{sep} \dashv i) : Sep(S) \stackrel{\overset{L_{sep}}{\leftarrow}}{\hookrightarrow} 
+  PSh_S
+  \,.
+
+</annotation></semantics></math></div>
+<div class='num_defn'>
+<h6 id='definition_3'>Definition</h6>
+
+<p>For <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>∈</mo><msub><mi>PSh</mi> <mi>S</mi></msub></mrow><annotation encoding='application/x-tex'>A \in PSh_S</annotation></semantics></math> the <strong>separafication</strong> <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>L</mi> <mi>sep</mi></msub><mi>A</mi></mrow><annotation encoding='application/x-tex'>L_{sep}A</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> is the presheaf that assigns equivalence classes</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>L</mi> <mi>sep</mi></msub><mi>A</mi><mo>:</mo><mi>U</mi><mo>↦</mo><mi>A</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo><mo stretchy='false'>/</mo><msub><mo>∼</mo> <mi>U</mi></msub><mspace width='thinmathspace'></mspace><mo>,</mo></mrow><annotation encoding='application/x-tex'>
+  L_{sep}A : U \mapsto A(U)/\sim_U
+  \,,
+
+</annotation></semantics></math></div>
+<p>where <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mo>∼</mo> <mi>U</mi></msub></mrow><annotation encoding='application/x-tex'>\sim_U</annotation></semantics></math> is the <a class='existingWikiWord' href='/nlab/show/equivalence+relation'>equivalence relation</a> that relates two elements <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>a</mi><mo>∼</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>a \sim b</annotation></semantics></math> iff there exists a <a class='existingWikiWord' href='/nlab/show/covering'>covering</a> <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><msub><mi>p</mi> <mi>i</mi></msub><mo>:</mo><msub><mi>U</mi> <mi>i</mi></msub><mo>→</mo><mi>U</mi><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{p_i : U_i \to U\}</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo stretchy='false'>(</mo><msub><mi>p</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>a</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>A</mi><mo stretchy='false'>(</mo><msub><mi>p</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>b</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>A(p_i)(a) = A(p_i)(b)</annotation></semantics></math> for all <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>i</mi></mrow><annotation encoding='application/x-tex'>i</annotation></semantics></math>.</p>
+
+<p>This construction extends in the evident way to a functor</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>L</mi> <mi>sep</mi></msub><mo>:</mo><mi>PSh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mo>→</mo><mi>Sep</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mspace width='thinmathspace'></mspace><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+  L_{sep} : PSh(S) \to Sep(S)
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<div class='num_prop'>
+<h6 id='proposition_2'>Proposition</h6>
+
+<p>This functor <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>L</mi> <mi>sep</mi></msub></mrow><annotation encoding='application/x-tex'>L_{sep}</annotation></semantics></math> is indeed a <a class='existingWikiWord' href='/nlab/show/left+adjoint'>left adjoint</a> to the inclusion <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>i</mi><mo>:</mo><mi>Sep</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mo>↪</mo><mi>PSh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>i : Sep(S) \hookrightarrow PSh(S)</annotation></semantics></math>.</p>
+</div>
+
+<div class='proof'>
+<h6 id='proof'>Proof</h6>
+
+<p>Let <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>∈</mo><mi>PSh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>A \in PSh(S)</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi><mo>∈</mo><mi>Sep</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mo>↪</mo><mi>PSh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>B \in Sep(S) \hookrightarrow PSh(S)</annotation></semantics></math>. We need to show that morphisms <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>f : A \to B</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>PSh</mi> <mi>C</mi></msub></mrow><annotation encoding='application/x-tex'>PSh_C</annotation></semantics></math> are in natural bijection with morphisms <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>L</mi> <mi>sep</mi></msub><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding='application/x-tex'>L_{sep} A \to B</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Sep</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Sep(S)</annotation></semantics></math>.</p>
+
+<p>For <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> such a morphism and <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>f</mi> <mi>U</mi></msub><mo>:</mo><mi>A</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo><mo>→</mo><mi>B</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>f_U : A(U) \to B(U)</annotation></semantics></math> its component over any object <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding='application/x-tex'>U \in S</annotation></semantics></math>, consider any covering <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><msub><mi>U</mi> <mi>i</mi></msub><mo>→</mo><mi>U</mi><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{U_i \to U\}</annotation></semantics></math>, let <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo stretchy='false'>(</mo><msub><mi>U</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo>→</mo><mi>U</mi></mrow><annotation encoding='application/x-tex'>S(U_i) \to U</annotation></semantics></math> be the corresponding <a class='existingWikiWord' href='/nlab/show/sieve'>sieve</a> and consider the <a class='existingWikiWord' href='/nlab/show/commutative+diagram'>commuting diagram</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><mo stretchy='false'>{</mo><mo stretchy='false'>(</mo><msub><mi>a</mi> <mi>i</mi></msub><mo>∈</mo><mi>A</mi><mo stretchy='false'>(</mo><msub><mi>U</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>|</mo><mi>⋯</mi><mo stretchy='false'>}</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mo stretchy='false'>{</mo><mo stretchy='false'>(</mo><msub><mi>b</mi> <mi>i</mi></msub><mo>∈</mo><mi>F</mi><mo stretchy='false'>(</mo><msub><mi>U</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>|</mo><mi>⋯</mi><mo stretchy='false'>}</mo></mtd></mtr> <mtr><mtd><mo stretchy='false'>↑</mo></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↑</mo></mtd></mtr> <mtr><mtd><mi>A</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>f</mi> <mi>U</mi></msub></mrow></mover></mtd> <mtd><mi>B</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>
+  \array{
+    \{(a_i \in A(U_i)) | \cdots \}
+    &amp;\to&amp; 
+   \{(b_i \in F(U_i)) | \cdots \}
+    \\ 
+    \uparrow &amp;&amp; \uparrow
+    \\
+    A(U) &amp;\stackrel{f_U}{\to}&amp; B(U)
+  }
+
+</annotation></semantics></math></div>
+<p>obtained from the naturality of <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>PSh</mi> <mi>S</mi></msub><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>(</mo><msub><mi>U</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo>→</mo><mi>U</mi><mo>,</mo><mi>A</mi><mover><mo>→</mo><mi>f</mi></mover><mi>B</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>PSh_S(S(U_i) \to U, A \stackrel{f}{\to} B)</annotation></semantics></math>.</p>
+
+<p>If for <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>a</mi><mo>,</mo><mi>a</mi><mo>′</mo><mo>∈</mo><mi>A</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>a,a&#39; \in A(U)</annotation></semantics></math> two elements that are not equal their restrictions to the cover become equal in that <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_56' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>∀</mo><mi>i</mi><mo>:</mo><mi>a</mi><msub><mo stretchy='false'>|</mo> <mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow></msub><mo>=</mo><mi>a</mi><mo>′</mo><msub><mo stretchy='false'>|</mo> <mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow></msub></mrow><annotation encoding='application/x-tex'>\forall i :  a|_{U_i} = a&#39;|_{U_i}</annotation></semantics></math>, then also <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_57' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo stretchy='false'>(</mo><mi>a</mi><msub><mo stretchy='false'>|</mo> <mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow></msub><mo stretchy='false'>)</mo><mo>=</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>a</mi><mo>′</mo><msub><mo stretchy='false'>|</mo> <mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>f(a|_{U_i}) = f(a&#39;|_{U_i})</annotation></semantics></math> and since the right vertical morphism is monic there is a <em>unique</em> <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_58' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>b</mi><mo>∈</mo><mi>B</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>b \in B(U)</annotation></semantics></math> mapping to the latter. The commutativity of the diagram then demands that <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_59' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo stretchy='false'>(</mo><mi>a</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>f</mi><mo stretchy='false'>(</mo><mi>a</mi><mo>′</mo><mo stretchy='false'>)</mo><mo>=</mo><mi>b</mi></mrow><annotation encoding='application/x-tex'>f(a) = f(a&#39;) = b</annotation></semantics></math>.</p>
+
+<p>Since this argument applies to all covers of <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_60' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math>, we have that <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_61' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>f</mi> <mi>U</mi></msub></mrow><annotation encoding='application/x-tex'>f_U</annotation></semantics></math> factors uniquely through the projection map <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_62' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo><mo>→</mo><mi>A</mi><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo><mo stretchy='false'>/</mo><msub><mo>∼</mo> <mi>U</mi></msub><mo>=</mo><mo>:</mo><msub><mi>L</mi> <mi>sep</mi></msub><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>A(U) \to A(U)/\sim_U =: L_{sep}(U)</annotation></semantics></math> onto the quotient. Since this is true for every object <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_63' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> we have that <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_64' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi></mrow><annotation encoding='application/x-tex'>f</annotation></semantics></math> factors uniquely through <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_65' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>→</mo><msub><mi>L</mi> <mi>sep</mi></msub><mi>A</mi></mrow><annotation encoding='application/x-tex'>A \to L_{sep}A</annotation></semantics></math>.</p>
+</div>
+
+<h2 id='biseparated_presheaf'>Biseparated presheaf</h2>
+
+<h3 id='idea_2'>Idea</h3>
+
+<p>Often one is interested in separated presheaves with respect to one <a class='existingWikiWord' href='/nlab/show/coverage'>coverage</a> that are sheaves with respect to another coverage. These are called <em>biseparated presheaves</em> .</p>
+
+<p>This typically arises if a <a class='existingWikiWord' href='/nlab/show/reflective+subcategory'>reflective subcategory</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_66' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi><mover><mo>↪</mo><mover><mo>←</mo><mrow></mrow></mover></mover><mi>Sh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>
+  C \stackrel{\stackrel{}{\leftarrow}}{\hookrightarrow}
+  Sh(S)
+
+</annotation></semantics></math></div>
+<p>of a <a class='existingWikiWord' href='/nlab/show/Grothendieck+topos'>sheaf topos</a> is given. This is the <a class='existingWikiWord' href='/nlab/show/localization'>localization</a> at a set <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_67' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math> of morphisms in <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_68' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Sh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Sh(S)</annotation></semantics></math>, with <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_69' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> the full subcategory of all <a class='existingWikiWord' href='/nlab/show/local+object'>local object</a>s <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_70' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>c</mi></mrow><annotation encoding='application/x-tex'>c</annotation></semantics></math>: objects such that <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_71' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>Sh</mi> <mo stretchy='false'>(</mo></msub><mi>S</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>w</mi><mo>,</mo><mi>c</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Sh_(S)(w,c)</annotation></semantics></math> is an isomorphism for all <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_72' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>∈</mo><mi>W</mi></mrow><annotation encoding='application/x-tex'>w \in W</annotation></semantics></math>. A <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_73' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi></mrow><annotation encoding='application/x-tex'>W</annotation></semantics></math>-separated object is then called a <em>biseparated presheaf</em> on <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_74' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> and their collection <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_75' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>BiSep</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>BiSep(S)</annotation></semantics></math> factors the reflective inclusion as</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_76' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi><mover><mo>↪</mo><mo>←</mo></mover><mi>BiSep</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mover><mo>↪</mo><mo>←</mo></mover><mi>Sh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mspace width='thinmathspace'></mspace><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+  C 
+    \stackrel{\leftarrow}{\hookrightarrow}
+  BiSep(S) 
+    \stackrel{\leftarrow}{\hookrightarrow}
+  Sh(S)
+  \,.
+
+</annotation></semantics></math></div>
+<h3 id='definition_4'>Definition</h3>
+
+<div class='num_defn'>
+<h6 id='definition_5'>Definition</h6>
+
+<p>A <strong>bisite</strong> is a <a class='existingWikiWord' href='/nlab/show/small+category'>small category</a> <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_77' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> equipped with two <a class='existingWikiWord' href='/nlab/show/coverage'>coverage</a>s: <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_78' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>J</mi></mrow><annotation encoding='application/x-tex'>J</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_79' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>K</mi></mrow><annotation encoding='application/x-tex'>K</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_80' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>J</mi><mo>⊂</mo><mi>K</mi></mrow><annotation encoding='application/x-tex'>J \subset K</annotation></semantics></math>.</p>
+
+<p>A presheaf <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_81' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi><mo>∈</mo><msub><mi>PSh</mi> <mi>S</mi></msub></mrow><annotation encoding='application/x-tex'>A \in PSh_S</annotation></semantics></math> is called <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_82' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>J</mi><mo>,</mo><mi>K</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(J,K)</annotation></semantics></math>-<strong>biseparated</strong> if it is</p>
+
+<ul>
+<li>
+<p>a <a class='existingWikiWord' href='/nlab/show/sheaf'>sheaf</a> with respect to <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_83' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>J</mi></mrow><annotation encoding='application/x-tex'>J</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>a separated presheaf with respect to <math class='maruku-mathml' display='inline' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_84' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>K</mi></mrow><annotation encoding='application/x-tex'>K</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<p>Write</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_85' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>BiSep</mi> <mrow><mo stretchy='false'>(</mo><mi>J</mi><mo>,</mo><mi>K</mi><mo stretchy='false'>)</mo></mrow></msub><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mo>↪</mo><msub><mi>Sh</mi> <mi>J</mi></msub><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mo>↪</mo><mi>PSh</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>
+  BiSep_{(J,K)}(S) \hookrightarrow Sh_J(S) \hookrightarrow PSh(S)
+
+</annotation></semantics></math></div>
+<p>for the full <a class='existingWikiWord' href='/nlab/show/subcategory'>subcategory</a> on biseparated presheaves.</p>
+</div>
+
+<h3 id='properties_2'>Properties</h3>
+
+<div class='num_prop'>
+<h6 id='proposition_3'>Proposition</h6>
+
+<p>Biseparated presheaves form a <a class='existingWikiWord' href='/nlab/show/reflective+subcategory'>reflective subcategory</a> of all sheaves</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_b68248fcf87ca661b298a8f4098fcbe557bdbc51_86' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>BiSep</mi> <mrow><mo stretchy='false'>(</mo><mi>J</mi><mo>,</mo><mi>K</mi><mo stretchy='false'>)</mo></mrow></msub><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mover><mo>↪</mo><mover><mo>←</mo><mrow><msubsup><mi>L</mi> <mi>sep</mi> <mi>K</mi></msubsup></mrow></mover></mover><msub><mi>Sh</mi> <mi>J</mi></msub><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>)</mo><mspace width='thinmathspace'></mspace><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+  BiSep_{(J,K)}(S)
+  \stackrel{\stackrel{L^K_{sep}}{\leftarrow}}{\hookrightarrow}
+  Sh_J(S)
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<p>See <a class='existingWikiWord' href='/nlab/show/quasitopos'>quasitopos</a> for the proof.</p>
+
+<h2 id='related_concepts'>Related concepts</h2>
+
+<ul>
+<li>
+<p><strong>separated presheaf</strong></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/separated+%282%2C1%29-presheaf'>separated (2,1)-presheaf</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/separated+%28infinity%2C1%29-presheaf'>separated (∞,1)-presheaf</a></p>
+</li>
+</ul>
+
+<h2 id='references'>References</h2>
+
+<p>The general theory of biseparated presheaves and Grothendieck quasitoposes is in section C.2.2 of</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Peter+Johnstone'>Peter Johnstone</a>, <a class='existingWikiWord' href='/nlab/show/Elephant'>Sketches of an Elephant</a> .</li>
+</ul>
+
+<p>A concrete description of separafication appears on page 43 of</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Angelo+Vistoli'>Angelo Vistoli</a>, <em>Notes on Grothendieck topologies, fibered categories and descent theory</em> (<a href='http://homepage.sns.it/vistoli/descent.pdf#Page=43'>pdf</a>)</li>
+</ul>
+
+<p><div class='property'> category: <a class='category_link' href='/nlab/list/sheaf+theory'>sheaf theory</a></div></p>
+
+<p>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on December 26, 2014 15:43:14 
+  by <a class="existingWikiWord" href="/nlab/show/Todd+Trimble">Todd Trimble</a>
+  (127.0.0.1)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/separated+presheaf" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/separated+presheaf/16" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(16 revisions)</span> | <a href="/nlab/show/diff/separated+presheaf" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/separated+presheaf" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/separated+presheaf" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/separated+presheaf" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/separated+presheaf" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

@@ -1,0 +1,716 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Yoneda embedding in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      Yoneda embedding
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='category_theory'>Category theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/category+theory'>category theory</a></strong></p>
+
+<h2 id='concepts'>Concepts</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category'>category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/functor'>functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a></p>
+</li>
+</ul>
+
+<h2 id='universal_constructions'>Universal constructions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/universal+construction'>universal construction</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/representable+functor'>representable functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+functor'>adjoint functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/limit'>limit</a>/<a class='existingWikiWord' href='/nlab/show/colimit'>colimit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/weighted+limit'>weighted limit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/end'>end</a>/<a class='existingWikiWord' href='/nlab/show/end'>coend</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Kan+extension'>Kan extension</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id='theorems'>Theorems</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma'>Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Isbell+duality'>Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Grothendieck+construction'>Grothendieck construction</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+functor+theorem'>adjoint functor theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/monadicity+theorem'>monadicity theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+lifting+theorem'>adjoint lifting theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Tannaka+duality'>Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Gabriel-Ulmer+duality'>Gabriel-Ulmer duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/small+object+argument'>small object argument</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Freyd-Mitchell+embedding+theorem'>Freyd-Mitchell embedding theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/relation+between+type+theory+and+category+theory'>relation between type theory and category theory</a></p>
+</li>
+</ul>
+
+<h2 id='extensions'>Extensions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sheaf+and+topos+theory'>sheaf and topos theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/enriched+category+theory'>enriched category theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/higher+category+theory'>higher category theory</a></p>
+</li>
+</ul>
+
+<h2 id='applications'>Applications</h2>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/applications+of+%28higher%29+category+theory'>applications of (higher) category theory</a></li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/category+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+
+<h4 id='yoneda_lemma'>Yoneda lemma</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma'>Yoneda lemma</a></strong></p>
+
+<h2 id='ingredients'>Ingredients</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category'>category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/functor'>functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/presheaf'>presheaf</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category+of+presheaves'>category of presheaves</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/representable+functor'>representable presheaf</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+embedding'>Yoneda embedding</a></p>
+</li>
+</ul>
+
+<h2 id='incarnations'>Incarnations</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma'>Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/enriched+Yoneda+lemma'>enriched Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/co-Yoneda+lemma'>co-Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+reduction'>Yoneda reduction</a></p>
+</li>
+</ul>
+
+<h2 id='properties'>Properties</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/free+cocompletion'>free cocompletion</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+extension'>Yoneda extension</a></p>
+</li>
+</ul>
+
+<h2 id='universal_aspects'>Universal aspects</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/representable+functor'>representable functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/universal+construction'>universal construction</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/universal+element'>universal element</a></p>
+</li>
+</ul>
+
+<h2 id='classification'>Classification</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/classifying+space'>classifying space</a>, <a class='existingWikiWord' href='/nlab/show/moduli+stack'>classifying stack</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/moduli+space'>moduli space</a>, <a class='existingWikiWord' href='/nlab/show/moduli+stack'>moduli stack</a>, <a class='existingWikiWord' href='/nlab/show/derived+moduli+space'>derived moduli space</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/classifying+topos'>classifying topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/subobject+classifier'>subobject classifier</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/universal+principal+bundle'>universal principal bundle</a>, <a class='existingWikiWord' href='/nlab/show/universal+principal+infinity-bundle'>universal principal ∞-bundle</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/classifying+morphism'>classifying morphism</a></p>
+</li>
+</ul>
+
+<h2 id='induced_theorems'>Induced theorems</h2>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Tannaka+duality'>Tannaka duality</a></li>
+</ul>
+
+<p>…</p>
+
+<h2 id='in_higher_category_theory'>In higher category theory</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma+for+bicategories'>2-Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma+for+%28infinity%2C1%29-categories'>(∞,1)-Yoneda lemma</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/Yoneda+lemma+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='contents'>Contents</h1>
+<div class='maruku_toc'><ul><li><a href='#idea'>Idea</a></li><li><a href='#definition'>Definition</a></li><li><a href='#remarks'>Remarks</a></li><li><a href='#properties_2'>Properties</a></li><li><a href='#related_concepts'>Related concepts</a></li></ul></div>
+<h2 id='idea'>Idea</h2>
+
+<p>For <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> a <a class='existingWikiWord' href='/nlab/show/locally+small+category'>locally small category</a>, every <a class='existingWikiWord' href='/nlab/show/object'>object</a> <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> induces a <a class='existingWikiWord' href='/nlab/show/presheaf'>presheaf</a> on <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math>: the <a class='existingWikiWord' href='/nlab/show/representable+functor'>representable presheaf</a> <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>h</mi> <mi>X</mi></msub></mrow><annotation encoding='application/x-tex'>h_X</annotation></semantics></math> represented by <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math>. This assignment extends to a <a class='existingWikiWord' href='/nlab/show/functor'>functor</a> <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi><mo>→</mo><mo stretchy='false'>[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Set</mi><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>C \to [C^{op}, Set]</annotation></semantics></math> from <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> to its <a class='existingWikiWord' href='/nlab/show/category+of+presheaves'>category of presheaves</a>. The <a class='existingWikiWord' href='/nlab/show/Yoneda+lemma'>Yoneda lemma</a> implies that this functor is <a class='existingWikiWord' href='/nlab/show/full+and+faithful+functor'>full and faithful</a> and hence realizes <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> as a <a class='existingWikiWord' href='/nlab/show/full+subcategory'>full subcategory</a> inside its category of presheaves.</p>
+
+<p>Recall from the discussion at <a class='existingWikiWord' href='/nlab/show/representable+functor'>representable presheaf</a> that the presheaf represented by an object <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> is the functor <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>h</mi> <mi>X</mi></msub><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Set</mi></mrow><annotation encoding='application/x-tex'>h_X :C^{op} \to Set</annotation></semantics></math> whose assignment is illustrated by</p>
+
+<p><img src='http://ncatlab.org/ericforgy/files/hxalpha3.jpg' width='400'/></p>
+
+<p>which sends each object <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> to <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy='false'>(</mo><mi>U</mi><mo>,</mo><mi>X</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Hom_C(U,X)</annotation></semantics></math> and each morphism <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi><mo>:</mo><mi>U</mi><mo>′</mo><mo>→</mo><mi>U</mi></mrow><annotation encoding='application/x-tex'>\alpha:U&#39;\to U</annotation></semantics></math> to the function</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>h</mi> <mi>X</mi></msub><mi>α</mi><mo>:</mo><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy='false'>(</mo><mi>U</mi><mo>,</mo><mi>X</mi><mo stretchy='false'>)</mo><mo>→</mo><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy='false'>(</mo><mi>U</mi><mo>′</mo><mo>,</mo><mi>X</mi><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>h_X\alpha: Hom_C(U,X)\to Hom_C(U&#39;,X).</annotation></semantics></math></div>
+<p>Moreover, for <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>f : X \to Y</annotation></semantics></math> an <a class='existingWikiWord' href='/nlab/show/morphism'>morphism</a> in <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math>, this induces a <a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a> <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>h</mi> <mi>f</mi></msub><mo>:</mo><msub><mi>h</mi> <mi>X</mi></msub><mo>→</mo><msub><mi>h</mi> <mi>Y</mi></msub></mrow><annotation encoding='application/x-tex'>h_f : h_X \to h_Y</annotation></semantics></math>, whose component on <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> is illustrated by</p>
+
+<p><img src='http://ncatlab.org/ericforgy/files/hf.jpg' width='400'/></p>
+
+<p>For this to be a natural transformation, we need to have the commuting diagram</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>h</mi> <mi>X</mi></msub><mi>U</mi></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>h</mi> <mi>f</mi></msub><mi>U</mi></mrow></mover></mtd> <mtd><msub><mi>h</mi> <mi>Y</mi></msub><mi>U</mi></mtd></mtr> <mtr><mtd><mpadded lspace='-100%width' width='0'><mrow><msub><mi>h</mi> <mi>X</mi></msub><mi>α</mi><mspace width='1em'></mspace></mrow></mpadded><mo stretchy='false'>↓</mo></mtd> <mtd><mrow></mrow></mtd> <mtd><mpadded width='0'><mo stretchy='false'>↓</mo></mpadded><mrow><mspace width='1em'></mspace><msub><mi>h</mi> <mi>Y</mi></msub><mi>α</mi></mrow></mtd></mtr> <mtr><mtd><msub><mi>h</mi> <mi>X</mi></msub><mi>U</mi><mo>′</mo></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>h</mi> <mi>f</mi></msub><mi>U</mi><mo>′</mo></mrow></mover></mtd> <mtd><msub><mi>h</mi> <mi>Y</mi></msub><mi>U</mi><mo>′</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>\array{
+h_X U &amp; \stackrel{h_f U}{\rightarrow} &amp; h_Y U \\
+\mathllap{h_X\alpha\quad}{\downarrow} &amp; {} &amp; \mathrlap{\downarrow}{\quad h_Y\alpha} \\
+h_X U&#39; &amp; \stackrel{h_f U&#39;}{\rightarrow} &amp; h_Y U&#39;
+}
+</annotation></semantics></math></div>
+<p>but this simply means that it doesn’t matter if we first “comb” the strands back to <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>U&#39;</annotation></semantics></math> and then comb the strands forward to <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math>, or comb the strands forward to <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> first and then comb the strands back to <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>U&#39;</annotation></semantics></math></p>
+
+<p><img src='http://ncatlab.org/ericforgy/files/nattrans.jpg' width='600'/></p>
+
+<p>which follows from associativity of composition of morphisms in <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math>.</p>
+
+<h2 id='definition'>Definition</h2>
+
+<p>The <strong>Yoneda embedding</strong> for <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> a <a class='existingWikiWord' href='/nlab/show/locally+small+category'>locally small category</a> is the <a class='existingWikiWord' href='/nlab/show/functor'>functor</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo>:</mo><mi>C</mi><mo>→</mo><mo stretchy='false'>[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Set</mi><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>
+  Y : C \to [C^{op}, Set]
+
+</annotation></semantics></math></div>
+<p>from <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> to the <a class='existingWikiWord' href='/nlab/show/category+of+presheaves'>category of presheaves</a> over <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> which is the image of the <a class='existingWikiWord' href='/nlab/show/hom-functor'>hom-functor</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Hom</mi><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>×</mo><mi>C</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding='application/x-tex'>
+  Hom : C^{op} \times C \to Set
+
+</annotation></semantics></math></div>
+<p>under the Hom <a class='existingWikiWord' href='/nlab/show/adjunction'>adjunction</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Hom</mi><mo stretchy='false'>(</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>×</mo><mi>C</mi><mo>,</mo><mi>Set</mi><mo stretchy='false'>)</mo><mo>≃</mo><mi>Hom</mi><mo stretchy='false'>(</mo><mi>C</mi><mo>,</mo><mo stretchy='false'>[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Set</mi><mo stretchy='false'>]</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>
+  Hom(C^{op} \times C , Set) \simeq
+  Hom(C, [C^{op}, Set])
+
+</annotation></semantics></math></div>
+<p>in the <a class='existingWikiWord' href='/nlab/show/closed+monoidal+category'>closed</a> <a class='existingWikiWord' href='/nlab/show/monoidal+category'>symmetric monoidal category</a> <a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a>.</p>
+
+<p>Hence <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> sends any <a class='existingWikiWord' href='/nlab/show/object'>object</a> <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>c</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding='application/x-tex'>c \in C</annotation></semantics></math> to the <a class='existingWikiWord' href='/nlab/show/representable+functor'>representable presheaf</a> which assigns to any other object <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>d</mi></mrow><annotation encoding='application/x-tex'>d</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>C</mi></mrow><annotation encoding='application/x-tex'>C</annotation></semantics></math> the <a class='existingWikiWord' href='/nlab/show/hom-set'>hom-set</a> of <a class='existingWikiWord' href='/nlab/show/morphism'>morphism</a>s from <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>d</mi></mrow><annotation encoding='application/x-tex'>d</annotation></semantics></math> into <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>c</mi></mrow><annotation encoding='application/x-tex'>c</annotation></semantics></math>:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo stretchy='false'>(</mo><mi>c</mi><mo stretchy='false'>)</mo><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mover><mo>→</mo><mrow><mi>C</mi><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>c</mi><mo stretchy='false'>)</mo></mrow></mover><mi>Set</mi><mspace width='thinmathspace'></mspace><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+  Y(c) : C^{op} \stackrel{C(-,c)}{\to} Set
+  \,.
+
+</annotation></semantics></math></div>
+<h2 id='remarks'>Remarks</h2>
+
+<p>We can also curry the Hom functor in the other variable, thus obtaining a contravariant functor</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mo stretchy='false'>[</mo><mi>C</mi><mo>,</mo><mi>Set</mi><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>
+C^{op} \to [C, Set]
+
+</annotation></semantics></math></div>
+<p>which is explicitly given by <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>c</mi><mo>↦</mo><mi>C</mi><mo stretchy='false'>(</mo><mi>c</mi><mo>,</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>c \mapsto C(c,-)</annotation></semantics></math>. This is sometimes jokingly called the <strong>Yoda embedding</strong> (“the Yoda embedding, contravariant it is”).</p>
+
+<p>However, since <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>C</mi> <mi>op</mi></msup><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>c</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>C</mi><mo stretchy='false'>(</mo><mi>c</mi><mo>,</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>C^{op}(-,c)=C(c,-)</annotation></semantics></math>, it is easy to see that the Yoda embedding is just the Yoneda embedding <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo>:</mo><msup><mi>C</mi> <mo lspace='0em' rspace='thinmathspace'>op</mo></msup><mo>→</mo><mo stretchy='false'>[</mo><mo stretchy='false'>(</mo><msup><mi>C</mi> <mi>op</mi></msup><msup><mo stretchy='false'>)</mo> <mi>op</mi></msup><mo>,</mo><mi>Set</mi><mo stretchy='false'>]</mo><mo>=</mo><mo stretchy='false'>[</mo><mi>C</mi><mo>,</mo><mi>Set</mi><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>Y: C^{\op} \to [(C^{op})^{op}, Set]=[C, Set]</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>C</mi> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>C^{op}</annotation></semantics></math>, and hence does not require special treatment.</p>
+
+<h2 id='properties_2'>Properties</h2>
+
+<p>It follows from the <a class='existingWikiWord' href='/nlab/show/Yoneda+lemma'>Yoneda lemma</a> that the functor <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> is <a class='existingWikiWord' href='/nlab/show/full+and+faithful+functor'>full and faithful</a>. It is also <a class='existingWikiWord' href='/nlab/show/limit'>limit</a> preserving (= <a class='existingWikiWord' href='/nlab/show/continuous+functor'>continuous functor</a>), but does in general not preserve <a class='existingWikiWord' href='/nlab/show/colimit'>colimit</a>s.</p>
+
+<p>The Yoneda embedding of a <a class='existingWikiWord' href='/nlab/show/small+category'>small category</a> <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> into the category of <a class='existingWikiWord' href='/nlab/show/presheaf'>presheaves</a> on <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> gives a <a class='existingWikiWord' href='/nlab/show/free+cocompletion'>free cocompletion</a> of <math class='maruku-mathml' display='inline' id='mathml_393fee38b5234ada1f797126daf4a1916581eef1_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math>.</p>
+
+<p>If the Yoneda embedding of a category has a <a class='existingWikiWord' href='/nlab/show/left+adjoint'>left adjoint</a>, then that category is called a <em><a class='existingWikiWord' href='/nlab/show/total+category'>total category</a></em> .</p>
+
+<h2 id='related_concepts'>Related concepts</h2>
+
+<ul>
+<li>
+<p>A <a class='existingWikiWord' href='/nlab/show/category'>category</a> is a <em><a class='existingWikiWord' href='/nlab/show/total+category'>total category</a></em> if its Yoneda embedding has a <a class='existingWikiWord' href='/nlab/show/left+adjoint'>left adjoint</a>.</p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma+for+%28infinity%2C1%29-categories'>(infinity,1)-Yoneda embedding</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/singleton'>singleton</a> injection, the Yoneda embedding for 0-category theory. 
+</p>
+</li>
+</ul>
+</div>
+
+<div class="revisedby">
+  Revised on June 19, 2017 11:35:06 
+  by <a class="existingWikiWord" href="/nlab/show/Mike+Shulman">Mike Shulman</a>
+  (76.167.222.204)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Yoneda+embedding" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/Yoneda+embedding/26" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(26 revisions)</span> | <a href="/nlab/show/diff/Yoneda+embedding" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/Yoneda+embedding" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/Yoneda+embedding" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/Yoneda+embedding" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/Yoneda+embedding" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

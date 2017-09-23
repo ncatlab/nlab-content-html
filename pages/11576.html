@@ -1,0 +1,840 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      points-to-pieces transform in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      points-to-pieces transform
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='cohesive_toposes'>Cohesive <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>∞</mn></mrow><annotation encoding='application/x-tex'>\infty</annotation></semantics></math>-Toposes</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/cohesive+topos'>cohesive topos</a></strong></p>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/cohesive+%28infinity%2C1%29-topos'>cohesive (∞,1)-topos</a></strong></p>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/cohesive+homotopy+type+theory'>cohesive homotopy type theory</a></strong></p>
+
+<h2 id='backround'>Backround</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/%28infinity%2C1%29-topos+theory'>(∞,1)-topos theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/higher+geometry'>higher geometry</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/motivation+for+cohesive+toposes'>motivation for cohesive toposes</a></p>
+</li>
+</ul>
+
+<h2 id='definition'>Definition</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/locally+connected+topos'>locally connected topos</a> / <a class='existingWikiWord' href='/nlab/show/locally+n-connected+%28n%2B1%2C1%29-topos'>locally ∞-connected (∞,1)-topos</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/connected+topos'>connected topos</a> / <a class='existingWikiWord' href='/nlab/show/locally+n-connected+%28n%2B1%2C1%29-topos'>∞-connected (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/strongly+connected+topos'>strongly connected topos</a> / <a class='existingWikiWord' href='/nlab/show/strongly+infinity-connected+%28infinity%2C1%29-topos'>strongly ∞-connected (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/totally+connected+geometric+morphism'>totally connected topos</a> / <a class='existingWikiWord' href='/nlab/show/totally+infinity-connected+%28infinity%2C1%29-topos'>totally ∞-connected (∞,1)-topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/local+geometric+morphism'>local topos</a> / <a class='existingWikiWord' href='/nlab/show/%28%E2%88%9E%2C1%29-local+geometric+morphism'>local (∞,1)-topos</a>.</p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cohesive+topos'>cohesive topos</a> / <a class='existingWikiWord' href='/nlab/show/cohesive+%28infinity%2C1%29-topos'>cohesive (∞,1)-topos</a></p>
+</li>
+</ul>
+
+<h2 id='presentation_over_a_site'>Presentation over a site</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/locally+connected+site'>locally connected site</a> / <a class='existingWikiWord' href='/nlab/show/locally+infinity-connected+%28infinity%2C1%29-site'>locally ∞-connected site</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/connected+site'>connected site</a> / <a class='existingWikiWord' href='/nlab/show/infinity-connected+%28infinity%2C1%29-site'>∞-connected site</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/strongly+connected+site'>strongly connected site</a> / <a class='existingWikiWord' href='/nlab/show/strongly+infinity-connected+site'>strongly ∞-connected site</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/totally+connected+geometric+morphism'>totally connected site</a> / <a class='existingWikiWord' href='/nlab/show/totally+infinity-connected+site'>totally ∞-connected site</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/local+site'>local site</a> / <a class='existingWikiWord' href='/nlab/show/infinity-local+site'>∞-local site</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cohesive+site'>cohesive site</a>, <a class='existingWikiWord' href='/nlab/show/infinity-cohesive+site'>∞-cohesive site</a></p>
+</li>
+</ul>
+
+<h2 id='structures_in_a_cohesive_topos'>Structures in a cohesive <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\infty,1)</annotation></semantics></math>-topos</h2>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/cohesive+%28infinity%2C1%29-topos+--+structures'>structures in a cohesive (∞,1)-topos</a></strong></p>
+
+<ul>
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#ConcreteObjects'>concrete objects</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#InfinGroups'>cohesive ∞-groups</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#Cohomology'>cohomology and principal ∞-bundles</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#Concordance'>concordance</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#Homotopy'>geometric homotopy and Galois theory</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#vanKampenTheorem'>van Kampen theorem</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#Paths'>paths and geometric Postnikov towers</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#Coverings'>universal coverings and geometric Whitehead towers</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#FlatDifferentialCohomology'>flat ∞-connections and local systems</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#deRhamCohomology'>de Rham cohomology</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#LieAlgebras'>∞-Lie algebras</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#CurvatureCharacteristics'>Maurer-Cartan forms and curvature characteristic forms</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#DifferentialCohomology'>differential cohomology</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#ChernWeilTheory'>Chern-Weil homomorphism and ∞-connections</a></p>
+</li>
+
+<li>
+<p>. <a href='http://ncatlab.org/nlab/show/cohesive+(infinity%2C1)-topos#ChernSimonsTheory'>higher holonomy and Chern-Simons functional</a></p>
+</li>
+</ul>
+
+<h2 id='structures_with_infinitesimal_cohesion'>Structures with infinitesimal cohesion</h2>
+
+<p><strong><span class='newWikiWord'>infinitesimal cohesion<a href='/nlab/new/cohesive+%28%E2%88%9E%2C1%29-topos+--+infinitesimal+cohesion'>?</a></span></strong></p>
+
+<ul>
+<li>
+<p>. <a href='http://nlab.mathforge.org/nlab/show/cohesive+%28infinity%2C1%29-topos+--+infinitesimal+cohesion#InfinitesimalPaths'>de Rham space</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/formal+cohesive+infinity-groupoid'>formal cohesive ∞-groupoid</a></p>
+</li>
+
+<li>
+<p>. <a href='http://nlab.mathforge.org/nlab/show/cohesive+%28infinity%2C1%29-topos+--+infinitesimal+cohesion#StrucInfinitesimalLocalSystem'>de Rham theorem</a></p>
+</li>
+</ul>
+
+<h2 id='models'>Models</h2>
+
+<ul>
+<li>
+<p><strong><a class='existingWikiWord' href='/nlab/show/geometrically+discrete+infinity-groupoid'>discrete ∞-groupoid</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/discrete+object'>discrete space</a>, <a class='existingWikiWord' href='/nlab/show/discrete+group'>discrete group</a>, <a class='existingWikiWord' href='/nlab/show/discrete+category'>discrete groupoid</a></li>
+</ul>
+</li>
+
+<li>
+<p><strong><a class='existingWikiWord' href='/nlab/show/Euclidean-topological+infinity-groupoid'>Euclidean-topological ∞-groupoid</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/topological+space'>topological space</a>, <a class='existingWikiWord' href='/nlab/show/topological+groupoid'>topological groupoid</a>, <a class='existingWikiWord' href='/nlab/show/topological+group'>topological group</a></li>
+</ul>
+</li>
+
+<li>
+<p><strong><a class='existingWikiWord' href='/nlab/show/smooth+infinity-groupoid'>smooth ∞-groupoid</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/smooth+set'>smooth space</a>, <a class='existingWikiWord' href='/nlab/show/diffeological+space'>diffeological space</a>, <a class='existingWikiWord' href='/nlab/show/smooth+manifold'>smooth manifold</a>, <a class='existingWikiWord' href='/nlab/show/Lie+group'>Lie group</a>, <a class='existingWikiWord' href='/nlab/show/Lie+groupoid'>Lie groupoid</a>, <a class='existingWikiWord' href='/nlab/show/differentiable+stack'>differentiable stack</a>, <a class='existingWikiWord' href='/nlab/show/Lie+2-group'>Lie 2-group</a>, <a class='existingWikiWord' href='/nlab/show/Lie+2-groupoid'>Lie 2-groupoid</a>, <a class='existingWikiWord' href='/nlab/show/smooth+infinity-groupoid'>smooth ∞-groupoid</a></li>
+</ul>
+</li>
+
+<li>
+<p><strong><a class='existingWikiWord' href='/nlab/show/formal+smooth+infinity-groupoid'>synthetic differential ∞-groupoid</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Lie+algebra'>Lie algebra</a>, <a class='existingWikiWord' href='/nlab/show/Lie+algebroid'>Lie algebroid</a>, <a class='existingWikiWord' href='/nlab/show/L-infinity-algebra'>∞-Lie algebra</a>, <a class='existingWikiWord' href='/nlab/show/Lie+infinity-algebroid'>∞-Lie algebroid</a></li>
+</ul>
+</li>
+
+<li>
+<p><strong><a class='existingWikiWord' href='/nlab/show/super+infinity-groupoid'>super ∞-groupoid</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/super+algebra'>superalgebra</a>, <a class='existingWikiWord' href='/nlab/show/super+Lie+algebra'>super Lie algebra</a>, <a class='existingWikiWord' href='/nlab/show/super+L-infinity+algebra'>super L-∞ algebra</a></li>
+</ul>
+</li>
+
+<li>
+<p><strong><a class='existingWikiWord' href='/nlab/show/smooth+super+infinity-groupoid'>smooth super ∞-groupoid</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/superpoint'>superpoint</a>, <a class='existingWikiWord' href='/nlab/show/supergeometry'>supergeometry</a>, <a class='existingWikiWord' href='/nlab/show/supermanifold'>supermanifold</a>, <a class='existingWikiWord' href='/nlab/show/supergroup'>super Lie group</a>, <a class='existingWikiWord' href='/nlab/show/super+infinity-groupoid'>super ∞-groupoid</a>, <a class='existingWikiWord' href='/nlab/show/synthetic+differential+super+infinity-groupoid'>synthetic differential super ∞-groupoid</a></li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/cohesive+infinity-toposes+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+
+<h4 id='discrete_and_concrete_objects'>Discrete and concrete objects</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/discrete+object'>discrete objects</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/discrete+object'>discrete space</a>, <a class='existingWikiWord' href='/nlab/show/geometrically+discrete+infinity-groupoid'>discrete ∞-groupoid</a></li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/codiscrete+object'>codiscrete objects</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/codiscrete+space'>codiscrete space</a></li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/concrete+object'>concrete objects</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/concrete+sheaf'>concrete sheaf</a>, <a class='existingWikiWord' href='/nlab/show/concrete+%28infinity%2C1%29-sheaf'>concrete (∞,1)-sheaf</a></li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/co-concrete+object'>co-concrete object</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/ionad'>ionad</a></li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/reduced+object'>reduced object</a></strong></p>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/coreduced+object'>coreduced object</a></strong></p>
+
+<p><strong>typical contexts</strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/local+geometric+morphism'>local topos</a>, <a class='existingWikiWord' href='/nlab/show/connected+topos'>connected topos</a>, <a class='existingWikiWord' href='/nlab/show/cohesive+topos'>cohesive topos</a>,</p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/%28%E2%88%9E%2C1%29-local+geometric+morphism'>local (∞,1)-topos</a>, <a class='existingWikiWord' href='/nlab/show/locally+n-connected+%28n%2B1%2C1%29-topos'>∞-connected (∞,1)-topos</a>, <a class='existingWikiWord' href='/nlab/show/cohesive+%28infinity%2C1%29-topos'>cohesive (∞,1)-topos</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/discrete+and+concrete+objects+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='contents'>Contents</h1>
+<div class='maruku_toc'><ul><li><a href='#idea'>Idea</a></li><li><a href='#definition_and_basic_properties'>Definition and basic properties</a></li><li><a href='#RelationToAufhebung'>Relation to Aufhebung of the initial opposition</a></li><li><a href='#examples'>Examples</a><ul><li><a href='#BundleEquivalenceAndConcordance'>Bundle equivalence and concordance</a></li><li><a href='#in_tangent_cohesion_the_differential_cohomology_diagram'>In tangent cohesion: the differential cohomology diagram</a></li><li><a href='#comparison_map_between_algebraic_and_topological_ktheory'>Comparison map between algebraic and topological K-theory</a></li><li><a href='#in_infinitesimal_cohesion'>In infinitesimal cohesion</a></li></ul></li><li><a href='#related_concepts'>Related concepts</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='idea'>Idea</h2>
+
+<p>In a <a class='existingWikiWord' href='/nlab/show/cohesive+%28infinity%2C1%29-topos'>cohesive (∞,1)-topos</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mi>H</mi></mstyle></mrow><annotation encoding='application/x-tex'>\mathbf{H}</annotation></semantics></math>, the canonical <a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>♭</mo><mo>→</mo><mi>Π</mi></mrow><annotation encoding='application/x-tex'>
+  \flat \to \Pi
+
+</annotation></semantics></math></div>
+<p>from the <a class='existingWikiWord' href='/nlab/show/flat+modality'>flat modality</a> to the <a class='existingWikiWord' href='/nlab/show/shape+modality'>shape modality</a> may be thought of as sending “points to the pieces in which they sit”.</p>
+
+<h2 id='definition_and_basic_properties'>Definition and basic properties</h2>
+
+<p>Notice the existence of the following canonical <a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformations</a> induced from the structure of a cohesive topos (a special case of the construction at <em><a class='existingWikiWord' href='/nlab/show/adjoint+modality'>unity of opposites</a></em>).</p>
+
+<div class='num_defn' id='TransformationFromPointsToPieces'>
+<h6 id='definition_2'>Definition</h6>
+
+<p>Given a <a class='existingWikiWord' href='/nlab/show/cohesive+topos'>cohesive topos</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ℰ</mi></mrow><annotation encoding='application/x-tex'>\mathcal{E}</annotation></semantics></math> with (<math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ʃ</mi><mo>⊣</mo><mo>♭</mo></mrow><annotation encoding='application/x-tex'>&amp;#643; \dashv \flat</annotation></semantics></math>) its (<a class='existingWikiWord' href='/nlab/show/shape+modality'>shape modality</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/flat+modality'>flat modality</a>)-<a class='existingWikiWord' href='/nlab/show/adjunction'>adjunction</a> of def. \ref{AdjointTriple}, then the <a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a></p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>♭</mo><mi>X</mi><mo>⟶</mo><mi>X</mi><mo>⟶</mo><mi>ʃ</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>
+  \flat X \longrightarrow X \longrightarrow &amp;#643; X 
+
+</annotation></semantics></math></div>
+<p>(given by the <a class='existingWikiWord' href='/nlab/show/composition'>composition</a> of the <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>♭</mo></mrow><annotation encoding='application/x-tex'>\flat</annotation></semantics></math>-<a class='existingWikiWord' href='/nlab/show/unit+of+a+monad'>counit</a> followed by the <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ʃ</mi></mrow><annotation encoding='application/x-tex'>&amp;#643;</annotation></semantics></math>-<a class='existingWikiWord' href='/nlab/show/unit+of+a+monad'>unit</a>) may be called the transformation <strong>from points to their pieces</strong> or the <strong>points-to-pieces-transformation</strong>, for short.</p>
+</div>
+
+<div class='num_remark'>
+<h6 id='remark'>Remark</h6>
+
+<p>The <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><msup><mi>f</mi> <mo>*</mo></msup><mo>⊣</mo><msub><mi>f</mi> <mo>*</mo></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(f^\ast \dashv f_\ast)</annotation></semantics></math>-<a class='existingWikiWord' href='/nlab/show/adjunct'>adjunct</a> of the transformation from pieces to points, def. <a class='maruku-ref' href='#TransformationFromPointsToPieces'>1</a>,</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>♭</mo><mi>X</mi><mo>⟶</mo><mi>X</mi><mo>⟶</mo><mi>ʃ</mi><mi>X</mi></mrow><annotation encoding='application/x-tex'>
+  \flat X \longrightarrow X \longrightarrow &amp;#643; X
+
+</annotation></semantics></math></div>
+<p>is (by the rule of forming right <a class='existingWikiWord' href='/nlab/show/adjunct'>adjuncts</a> by first applying the <a class='existingWikiWord' href='/nlab/show/right+adjoint'>right adjoint</a> functor and then precomposing with the <a class='existingWikiWord' href='/nlab/show/unit+of+an+adjunction'>unit</a> and by the fact that the <a class='existingWikiWord' href='/nlab/show/adjunct'>adjunct</a> of a <a class='existingWikiWord' href='/nlab/show/unit+of+an+adjunction'>unit</a> is the <a class='existingWikiWord' href='/nlab/show/identity'>identity</a>) the map</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><msub><mi>f</mi> <mo>*</mo></msub><mi>X</mi><mo>⟶</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>X</mi><mo stretchy='false'>)</mo><mo>≔</mo><mrow><mo>(</mo><msub><mi>f</mi> <mo>*</mo></msub><mi>X</mi><mo>⟶</mo><msub><mi>f</mi> <mo>*</mo></msub><msup><mi>f</mi> <mo>*</mo></msup><msub><mi>f</mi> <mo>!</mo></msub><mi>X</mi><mover><mo>⟶</mo><mo>≃</mo></mover><msub><mi>f</mi> <mo>!</mo></msub><mi>X</mi><mo>)</mo></mrow><mspace width='thinmathspace'></mspace><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+  (f_\ast X \longrightarrow f_! X)
+  \coloneqq
+  \left(
+  f_\ast X \longrightarrow f_\ast f^\ast f_! X \stackrel{\simeq}{\longrightarrow} f_!X
+  \right)
+  \,.
+
+</annotation></semantics></math></div>
+<p>Observe that going backwards by applying <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding='application/x-tex'>f^\ast</annotation></semantics></math> to this and postcomposing with the <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><msup><mi>f</mi> <mo>*</mo></msup><mo>⊣</mo><msub><mi>f</mi> <mo>*</mo></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(f^\ast \dashv f_\ast)</annotation></semantics></math>-<a class='existingWikiWord' href='/nlab/show/unit+of+an+adjunction'>counit</a> is equivalent to just applying <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding='application/x-tex'>f^\ast</annotation></semantics></math>, since by <a class='existingWikiWord' href='/nlab/show/idempotent+monad'>idempotency</a> of <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>♭</mo></mrow><annotation encoding='application/x-tex'>\flat</annotation></semantics></math> the counit is an <a class='existingWikiWord' href='/nlab/show/isomorphism'>isomorphism</a> on the <a class='existingWikiWord' href='/nlab/show/discrete+object'>discrete object</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><msub><mi>f</mi> <mo>!</mo></msub><mi>X</mi></mrow><annotation encoding='application/x-tex'>f^\ast f_! X</annotation></semantics></math>. Therefore the points-to-pieces transformation and its adjunct are related by</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mo>(</mo><mo>♭</mo><mi>X</mi><mo>⟶</mo><mi>X</mi><mo>⟶</mo><mi>ʃ</mi><mi>X</mi><mo>)</mo></mrow><mo>=</mo><msup><mi>f</mi> <mo>*</mo></msup><mrow><mo>(</mo><msub><mi>f</mi> <mo>*</mo></msub><mi>X</mi><mo>⟶</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>X</mi><mo>)</mo></mrow><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+  \left(
+    \flat X \longrightarrow X \longrightarrow &amp;#643; X
+  \right)
+  = 
+  f^\ast \left(
+    f_\ast X \longrightarrow f_! X
+  \right).
+
+</annotation></semantics></math></div>
+<p>Observe then finally that since <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding='application/x-tex'>f^\ast</annotation></semantics></math> is a <a class='existingWikiWord' href='/nlab/show/full+and+faithful+functor'>full and faithful</a> <a class='existingWikiWord' href='/nlab/show/left+adjoint'>left</a> and <a class='existingWikiWord' href='/nlab/show/right+adjoint'>right adjoint</a>, the points-to-pieces transform is an <a class='existingWikiWord' href='/nlab/show/epimorphism'>epimorphism</a>/<a class='existingWikiWord' href='/nlab/show/isomorphism'>isomorphism</a>/<a class='existingWikiWord' href='/nlab/show/monomorphism'>monomorphism</a> precisely if its <a class='existingWikiWord' href='/nlab/show/adjunct'>adjunct</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>f</mi> <mo>*</mo></msub><mi>X</mi><mo>⟶</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>X</mi></mrow><annotation encoding='application/x-tex'>f_\ast X \longrightarrow f_! X</annotation></semantics></math> is, respectively.</p>
+</div>
+
+<h2 id='RelationToAufhebung'>Relation to Aufhebung of the initial opposition</h2>
+
+<p>For a cohesive 1-topos, if the pieces-to-points transform is an <a class='existingWikiWord' href='/nlab/show/epimorphism'>epimorphism</a> then there is <a class='existingWikiWord' href='/nlab/show/Aufhebung'>Aufhebung</a> of the initial opposition <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>∅</mi><mo>⊣</mo><mo>*</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\emptyset \dashv \ast)</annotation></semantics></math> in that <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>♯</mo><mi>∅</mi><mo>≃</mo><mi>∅</mi></mrow><annotation encoding='application/x-tex'>\sharp \emptyset \simeq \emptyset</annotation></semantics></math> (<a href='#LawvereMenni15'>Lawvere-Menni 15, lemma 4.1</a>). Conversely, if the <a class='existingWikiWord' href='/nlab/show/base+topos'>base topos</a> is a <a class='existingWikiWord' href='/nlab/show/Boolean+topos'>Boolean topos</a>, then this Aufhebung implies that the pieces-to-points transform is epi (<a href='#LawvereMenni15'>Lawvere-Menni 15, lemma 4.2</a>).</p>
+
+<h2 id='examples'>Examples</h2>
+
+<h3 id='BundleEquivalenceAndConcordance'>Bundle equivalence and concordance</h3>
+
+<p>Given an <a class='existingWikiWord' href='/nlab/show/infinity-group'>∞-group</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> in a <a class='existingWikiWord' href='/nlab/show/cohesive+%28infinity%2C1%29-topos'>cohesive (∞,1)-topos</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mi>H</mi></mstyle></mrow><annotation encoding='application/x-tex'>\mathbf{H}</annotation></semantics></math>, with <a class='existingWikiWord' href='/nlab/show/delooping'>delooping</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi></mrow><annotation encoding='application/x-tex'>\mathbf{B}G</annotation></semantics></math>, then for any other object <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> the <a class='existingWikiWord' href='/nlab/show/infinity-groupoid'>∞-groupoid</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mi>H</mi></mstyle><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\mathbf{H}(X,\mathbf{B}G)</annotation></semantics></math> is that of <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math>-<a class='existingWikiWord' href='/nlab/show/principal+infinity-bundle'>principal ∞-bundles</a> with <a class='existingWikiWord' href='/nlab/show/equivalence'>equivalences</a> between them. Alternatively one may form the <a class='existingWikiWord' href='/nlab/show/internal+hom'>internal hom</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>[</mo><mi>X</mi><mo>,</mo><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>[X,\mathbf{B}G]</annotation></semantics></math>. Applying the <a class='existingWikiWord' href='/nlab/show/shape+modality'>shape modality</a> to this yields the <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>∞</mn></mrow><annotation encoding='application/x-tex'>\infty</annotation></semantics></math>-groupoid <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mstyle mathvariant='bold'><mi>H</mi></mstyle> <mn>∞</mn></msup><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi><mo stretchy='false'>)</mo><mo>≔</mo><mi>ʃ</mi><mo stretchy='false'>[</mo><mi>X</mi><mo>,</mo><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>\mathbf{H}^\infty(X,\mathbf{B}G) \coloneqq  &amp;#643; [X,\mathbf{B}G]</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math>-principal <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>∞</mn></mrow><annotation encoding='application/x-tex'>\infty</annotation></semantics></math>-bundles and <a class='existingWikiWord' href='/nlab/show/concordance'>concordances</a> between them. Alternatively, the <a class='existingWikiWord' href='/nlab/show/flat+modality'>flat modality</a> applied to the internal hom is again just the external hom <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>♭</mo><mo stretchy='false'>[</mo><mi>X</mi><mo>,</mo><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi><mo stretchy='false'>]</mo><mo>≃</mo><mstyle mathvariant='bold'><mi>H</mi></mstyle><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\flat [X,\mathbf{B}G] \simeq \mathbf{H}(X,\mathbf{B}G)</annotation></semantics></math>.</p>
+
+<p>In conclusion, in this situation the points-to-pieces transform is the canonical map</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mi>H</mi></mstyle><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi><mo stretchy='false'>)</mo><mo>⟶</mo><msup><mstyle mathvariant='bold'><mi>H</mi></mstyle> <mn>∞</mn></msup><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mstyle mathvariant='bold'><mi>B</mi></mstyle><mi>G</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>
+  \mathbf{H}(X,\mathbf{B}G) \longrightarrow \mathbf{H}^\infty(X,\mathbf{B}G)
+
+</annotation></semantics></math></div>
+<p>from <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math>-principal <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>∞</mn></mrow><annotation encoding='application/x-tex'>\infty</annotation></semantics></math>-bundles with bundle equivalences between them, to <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math>-principal <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>∞</mn></mrow><annotation encoding='application/x-tex'>\infty</annotation></semantics></math>-bundles with concordances between them.</p>
+
+<h3 id='in_tangent_cohesion_the_differential_cohomology_diagram'>In tangent cohesion: the differential cohomology diagram</h3>
+
+<p>In a <a class='existingWikiWord' href='/nlab/show/tangent+cohesive+%28%E2%88%9E%2C1%29-topos'>tangent cohesive (∞,1)-topos</a> on <a class='existingWikiWord' href='/nlab/show/stable+homotopy+type'>stable homotopy types</a> the points-to-pieces transform is one stage in a natural hexagonal <a class='existingWikiWord' href='/nlab/show/exact+sequence'>long exact sequence</a>, the <em><a class='existingWikiWord' href='/nlab/show/differential+cohomology+diagram'>differential cohomology diagram</a></em>. See there for more.</p>
+
+<h3 id='comparison_map_between_algebraic_and_topological_ktheory'>Comparison map between algebraic and topological K-theory</h3>
+
+<p>Applied to <a class='existingWikiWord' href='/nlab/show/stable+homotopy+type'>stable homotopy types</a> in <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Stab</mi><mo stretchy='false'>(</mo><mstyle mathvariant='bold'><mi>H</mi></mstyle><mo stretchy='false'>)</mo><mo>↪</mo><mi>T</mi><mstyle mathvariant='bold'><mi>H</mi></mstyle></mrow><annotation encoding='application/x-tex'>Stab(\mathbf{H}) \hookrightarrow T\mathbf{H}</annotation></semantics></math> the <a class='existingWikiWord' href='/nlab/show/tangent+cohesive+%28%E2%88%9E%2C1%29-topos'>tangent cohesive (∞,1)-topos</a> which arise from a <a class='existingWikiWord' href='/nlab/show/symmetric+monoidal+%28infinity%2C1%29-category'>symmetric monoidal (∞,1)-category</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi><mo>∈</mo><msub><mi>CMon</mi> <mn>∞</mn></msub><mo stretchy='false'>(</mo><msub><mi>Cat</mi> <mn>∞</mn></msub><mo stretchy='false'>(</mo><mstyle mathvariant='bold'><mi>H</mi></mstyle><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>V \in CMon_\infty(Cat_\infty(\mathbf{H}))</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/category+object+in+an+%28infinity%2C1%29-category'>internal</a> to <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mi>H</mi></mstyle></mrow><annotation encoding='application/x-tex'>\mathbf{H}</annotation></semantics></math> under internal <a class='existingWikiWord' href='/nlab/show/K-theory+of+a+symmetric+monoidal+%28%E2%88%9E%2C1%29-category'>algebraic K-theory of a symmetric monoidal (∞,1)-category</a>, the points-to-pieces transform interprets as the <a class='existingWikiWord' href='/nlab/show/comparison+map+between+algebraic+and+topological+K-theory'>comparison map between algebraic and topological K-theory</a>. See there for more</p>
+
+<h3 id='in_infinitesimal_cohesion'>In infinitesimal cohesion</h3>
+
+<p>In <a class='existingWikiWord' href='/nlab/show/infinitesimal+cohesive+%28infinity%2C1%29-topos'>infinitesimal cohesion</a> the points-to-pieces transform in an <a class='existingWikiWord' href='/nlab/show/equivalence'>equivalence</a>.</p>
+
+<h2 id='related_concepts'>Related concepts</h2>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/cohesive'>cohesion</a></strong></p>
+
+<ul>
+<li>
+<p>(<a class='existingWikiWord' href='/nlab/show/shape+modality'>shape modality</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/flat+modality'>flat modality</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/sharp+modality'>sharp modality</a>)</p>
+
+<p><math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>ʃ</mi><mo>⊣</mo><mo>♭</mo><mo>⊣</mo><mo>♯</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(&amp;#643; \dashv \flat \dashv \sharp )</annotation></semantics></math></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/discrete+object'>discrete object</a>, <a class='existingWikiWord' href='/nlab/show/codiscrete+object'>codiscrete object</a>, <a class='existingWikiWord' href='/nlab/show/concrete+object'>concrete object</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/points-to-pieces+transform'>points-to-pieces transform</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cohesive+%28infinity%2C1%29-topos+--+structures'>structures in cohesion</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/dR-shape+modality'>dR-shape modality</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/dR-flat+modality'>dR-flat modality</a></p>
+
+<p><math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ʃ</mi> <mi>dR</mi></msub><mo>⊣</mo><msub><mo>♭</mo> <mi>dR</mi></msub></mrow><annotation encoding='application/x-tex'>&amp;#643;_{dR} \dashv \flat_{dR}</annotation></semantics></math></p>
+</li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/tangent+cohesive+%28%E2%88%9E%2C1%29-topos'>tangent cohesion</a></strong></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/differential+cohomology+diagram'>differential cohomology diagram</a></li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/differential+cohesive+%28infinity%2C1%29-topos'>differential cohesion</a></strong></p>
+
+<ul>
+<li>
+<p>(<a class='existingWikiWord' href='/nlab/show/reduction+modality'>reduction modality</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/infinitesimal+shape+modality'>infinitesimal shape modality</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/infinitesimal+flat+modality'>infinitesimal flat modality</a>)</p>
+
+<p><math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>ℜ</mi><mo>⊣</mo><mi>ℑ</mi><mo>⊣</mo><mi>&amp;</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\Re \dashv \Im \dashv \&amp;)</annotation></semantics></math></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/reduced+object'>reduced object</a>, <a class='existingWikiWord' href='/nlab/show/coreduced+object'>coreduced object</a>, <a class='existingWikiWord' href='/nlab/show/formally+smooth+object'>formally smooth object</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/formally+etale+morphism'>formally étale map</a></p>
+</li>
+
+<li>
+<p><a href='cohesive+%28infinity%2C1%29-topos+--+infinitesimal+cohesion#StructuresInDifferentialCohesion'>structures in differential cohesion</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/super+formal+smooth+infinity-groupoid'>graded differential cohesion</a></strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/bosonic+modality'>fermionic modality</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/bosonic+modality'>bosonic modality</a> <math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊣</mo></mrow><annotation encoding='application/x-tex'>\dashv</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/rheonomy+modality'>rheonomy modality</a></p>
+
+<p><math class='maruku-mathml' display='inline' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mo>⇉</mo><mo>⊣</mo><mo>⇝</mo><mo>⊣</mo><mi>Rh</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\rightrightarrows \dashv \rightsquigarrow \dashv Rh)</annotation></semantics></math></p>
+</li>
+</ul>
+<div class='maruku-equation' id='Diagram'><math class='maruku-mathml' display='block' id='mathml_6abcdc1e1a18b86de8d265f58556ac115c8f9476_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mi>id</mi></mtd> <mtd><mo>⊣</mo></mtd> <mtd><mi>id</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo>∨</mo></mtd> <mtd></mtd> <mtd><mo>∨</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mover><mrow></mrow><mi>fermionic</mi></mover></mtd> <mtd><mo>⇉</mo></mtd> <mtd><mo>⊣</mo></mtd> <mtd><mo>⇝</mo></mtd> <mtd><mover><mrow></mrow><mi>bosonic</mi></mover></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo>⊥</mo></mtd> <mtd></mtd> <mtd><mo>⊥</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mover><mrow></mrow><mi>bosonic</mi></mover></mtd> <mtd><mo>⇝</mo></mtd> <mtd><mo>⊣</mo></mtd> <mtd><mi>Rh</mi></mtd> <mtd><mover><mrow></mrow><mi>rheonomic</mi></mover></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo>∨</mo></mtd> <mtd></mtd> <mtd><mo>∨</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mover><mrow></mrow><mi>reduced</mi></mover></mtd> <mtd><mi>ℜ</mi></mtd> <mtd><mo>⊣</mo></mtd> <mtd><mi>ℑ</mi></mtd> <mtd><mover><mrow></mrow><mi>infinitesimal</mi></mover></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo>⊥</mo></mtd> <mtd></mtd> <mtd><mo>⊥</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mover><mrow></mrow><mi>infinitesimal</mi></mover></mtd> <mtd><mi>ℑ</mi></mtd> <mtd><mo>⊣</mo></mtd> <mtd><mi>&amp;</mi></mtd> <mtd><mover><mrow></mrow><mtext>étale</mtext></mover></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo>∨</mo></mtd> <mtd></mtd> <mtd><mo>∨</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mover><mrow></mrow><mi>cohesive</mi></mover></mtd> <mtd><mi>ʃ</mi></mtd> <mtd><mo>⊣</mo></mtd> <mtd><mo>♭</mo></mtd> <mtd><mover><mrow></mrow><mi>discrete</mi></mover></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo>⊥</mo></mtd> <mtd></mtd> <mtd><mo>⊥</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mover><mrow></mrow><mi>discrete</mi></mover></mtd> <mtd><mo>♭</mo></mtd> <mtd><mo>⊣</mo></mtd> <mtd><mo>♯</mo></mtd> <mtd><mover><mrow></mrow><mi>continuous</mi></mover></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo>∨</mo></mtd> <mtd></mtd> <mtd><mo>∨</mo></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>∅</mi></mtd> <mtd><mo>⊣</mo></mtd> <mtd><mo>*</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>
+  \array{
+    &amp;&amp; id &amp;\dashv&amp; id 
+    \\
+    &amp;&amp; \vee &amp;&amp; \vee
+    \\
+    &amp;\stackrel{fermionic}{}&amp; \rightrightarrows &amp;\dashv&amp; \rightsquigarrow &amp; \stackrel{bosonic}{}
+    \\
+    &amp;&amp; \bot &amp;&amp; \bot
+    \\
+    &amp;\stackrel{bosonic}{} &amp; \rightsquigarrow &amp;\dashv&amp; Rh &amp; \stackrel{rheonomic}{}
+    \\
+    &amp;&amp; \vee &amp;&amp; \vee
+    \\
+    &amp;\stackrel{reduced}{} &amp; \Re &amp;\dashv&amp; \Im &amp; \stackrel{infinitesimal}{}
+    \\
+    &amp;&amp; \bot &amp;&amp; \bot
+    \\
+    &amp;\stackrel{infinitesimal}{}&amp; \Im &amp;\dashv&amp; \&amp; &amp; \stackrel{\text{étale}}{}
+    \\
+    &amp;&amp; \vee &amp;&amp; \vee
+    \\
+    &amp;\stackrel{cohesive}{}&amp; &amp;#643; &amp;\dashv&amp; \flat &amp; \stackrel{discrete}{}
+    \\
+    &amp;&amp; \bot &amp;&amp; \bot
+    \\
+    &amp;\stackrel{discrete}{}&amp; \flat &amp;\dashv&amp; \sharp &amp; \stackrel{continuous}{}
+    \\
+    &amp;&amp; \vee &amp;&amp; \vee
+    \\
+    &amp;&amp; \emptyset &amp;\dashv&amp; \ast
+  }
+
+</annotation></semantics></math></div>
+<h2 id='references'>References</h2>
+
+<ul>
+<li id='LawvereMenni15'><a class='existingWikiWord' href='/nlab/show/William+Lawvere'>William Lawvere</a>, <a class='existingWikiWord' href='/nlab/show/Mat%C3%ADas+Menni'>Matías Menni</a>, <em>Internal choice holds in the discrete part of any cohesive topos satisfying stable connected codiscreteness</em>, Theory and Applications of Categories, Vol. 30, 2015, No. 26, pp 909-932. (<a href='http://www.tac.mta.ca/tac/volumes/30/26/30-26abs.html'>TAC</a>)</li>
+</ul>
+
+<p>
+</p>
+
+<p>
+ 
+</p>
+
+<p>
+ 
+</p>
+
+<p>
+ 
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on July 18, 2015 06:19:24 
+  by <a class="existingWikiWord" href="/nlab/show/Urs+Schreiber">Urs Schreiber</a>
+  (82.69.72.163)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/points-to-pieces+transform" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/points-to-pieces+transform/3" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(3 revisions)</span> | <a href="/nlab/show/diff/points-to-pieces+transform" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/points-to-pieces+transform" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/points-to-pieces+transform" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/points-to-pieces+transform" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/points-to-pieces+transform" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

@@ -1,0 +1,807 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      adjoint monad in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      adjoint monad
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='category_theory'>Category theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/category+theory'>category theory</a></strong></p>
+
+<h2 id='concepts'>Concepts</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/category'>category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/functor'>functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Cat'>Cat</a></p>
+</li>
+</ul>
+
+<h2 id='universal_constructions'>Universal constructions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/universal+construction'>universal construction</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/representable+functor'>representable functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+functor'>adjoint functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/limit'>limit</a>/<a class='existingWikiWord' href='/nlab/show/colimit'>colimit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/weighted+limit'>weighted limit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/end'>end</a>/<a class='existingWikiWord' href='/nlab/show/end'>coend</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Kan+extension'>Kan extension</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id='theorems'>Theorems</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma'>Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Isbell+duality'>Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Grothendieck+construction'>Grothendieck construction</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+functor+theorem'>adjoint functor theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/monadicity+theorem'>monadicity theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjoint+lifting+theorem'>adjoint lifting theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Tannaka+duality'>Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Gabriel-Ulmer+duality'>Gabriel-Ulmer duality</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/small+object+argument'>small object argument</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Freyd-Mitchell+embedding+theorem'>Freyd-Mitchell embedding theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/relation+between+type+theory+and+category+theory'>relation between type theory and category theory</a></p>
+</li>
+</ul>
+
+<h2 id='extensions'>Extensions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sheaf+and+topos+theory'>sheaf and topos theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/enriched+category+theory'>enriched category theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/higher+category+theory'>higher category theory</a></p>
+</li>
+</ul>
+
+<h2 id='applications'>Applications</h2>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/applications+of+%28higher%29+category+theory'>applications of (higher) category theory</a></li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/category+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+
+<h4 id='2category_theory'>2-Category theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/2-category+theory'>2-category theory</a></strong></p>
+
+<h2 id='definitions'>Definitions</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-category'>2-category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/strict+2-category'>strict 2-category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/bicategory'>bicategory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/enriched+bicategory'>enriched bicategory</a></p>
+</li>
+</ul>
+
+<h2 id='transfors_between_2categories'>Transfors between 2-categories</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-functor'>2-functor</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/pseudofunctor'>pseudofunctor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/lax+functor'>lax functor</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/equivalence+of+2-categories'>equivalence of 2-categories</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/strict+2-natural+transformation'>2-natural transformation</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/lax+natural+transformation'>lax natural transformation</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/icon'>icon</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/modification'>modification</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Yoneda+lemma+for+bicategories'>Yoneda lemma for bicategories</a></p>
+</li>
+</ul>
+
+<h2 id='morphisms_in_2categories'>Morphisms in 2-categories</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fully+faithful+morphism'>fully faithful morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/faithful+morphism'>faithful morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/conservative+morphism'>conservative morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/pseudomonic+morphism'>pseudomonic morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/discrete+morphism'>discrete morphism</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/eso+morphism'>eso morphism</a></p>
+</li>
+</ul>
+
+<h2 id='structures_in_2categories'>Structures in 2-categories</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/adjunction'>adjunction</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/mate'>mate</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/monad'>monad</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cartesian+object'>cartesian object</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/fibration+in+a+2-category'>fibration in a 2-category</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/codiscrete+cofibration'>codiscrete cofibration</a></p>
+</li>
+</ul>
+
+<h2 id='limits_in_2categories'>Limits in 2-categories</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-limit'>2-limit</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-pullback'>2-pullback</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/comma+object'>comma object</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/inserter'>inserter</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/inverter'>inverter</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/equifier'>equifier</a></p>
+</li>
+</ul>
+
+<h2 id='structures_on_2categories'>Structures on 2-categories</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-monad'>2-monad</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/lax-idempotent+2-monad'>lax-idempotent 2-monad</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-monad'>pseudomonad</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/pseudoalgebra+for+a+2-monad'>pseudoalgebra for a 2-monad</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/monoidal+bicategory'>monoidal 2-category</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/cartesian+bicategory'>cartesian bicategory</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Gray+tensor+product'>Gray tensor product</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-category+equipped+with+proarrows'>proarrow equipment</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/2-category+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='contents'>Contents</h1>
+<div class='maruku_toc'><ul><li><a href='#definition'>Definition</a></li><li><a href='#construction'>Construction</a></li><li><a href='#adjoint_monad_and_comonad_from_an_adjoint_triple_of_functors'>Adjoint monad and comonad from an adjoint triple of functors</a></li><li><a href='#general_adjoint_algebras_and_coalgebras_in_'>General adjoint algebras and coalgebras in <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>End</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>End(A)</annotation></semantics></math></a></li><li><a href='#examples'>Examples</a><ul><li><a href='#adjoint_modalities'>Adjoint modalities</a></li></ul></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='definition'>Definition</h2>
+
+<p>A <a class='existingWikiWord' href='/nlab/show/monad'>monad</a> <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>T</mi><mo>,</mo><mi>μ</mi><mo>,</mo><mi>η</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(T,\mu,\eta)</annotation></semantics></math> is adjoint to a <a class='existingWikiWord' href='/nlab/show/comonad'>comonad</a> <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>G</mi><mo>,</mo><mi>δ</mi><mo>,</mo><mi>ϵ</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(G,\delta,\epsilon)</annotation></semantics></math>, if its underlying endofunctor <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>T</mi></mrow><annotation encoding='application/x-tex'>T</annotation></semantics></math> is <em><a class='existingWikiWord' href='/nlab/show/left+adjoint'>left adjoint</a></em> to the underlying 1-cell <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> of the comonad, and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>δ</mi></mrow><annotation encoding='application/x-tex'>\delta</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding='application/x-tex'>\epsilon</annotation></semantics></math> are conjugate/adjoint/<a class='existingWikiWord' href='/nlab/show/mate'>mate</a> 2-cells to <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>μ</mi></mrow><annotation encoding='application/x-tex'>\mu</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>η</mi></mrow><annotation encoding='application/x-tex'>\eta</annotation></semantics></math> in the sense explained below.</p>
+
+<h2 id='construction'>Construction</h2>
+
+<p>In fact given a <a class='existingWikiWord' href='/nlab/show/monad'>monad</a> <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mi>T</mi></mstyle><mo>=</mo><mo stretchy='false'>(</mo><mi>T</mi><mo>,</mo><msup><mi>μ</mi> <mi>T</mi></msup><mo>,</mo><msup><mi>η</mi> <mi>T</mi></msup><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\mathbf{T} = (T,\mu^T,\eta^T)</annotation></semantics></math> which has a <em><a class='existingWikiWord' href='/nlab/show/right+adjoint'>right adjoint</a></em> <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math>, automatically <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> is a part of a comonad <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mi>G</mi></mstyle><mo>=</mo><mo stretchy='false'>(</mo><mi>G</mi><mo>,</mo><msup><mi>δ</mi> <mi>G</mi></msup><mo>,</mo><msup><mi>ϵ</mi> <mi>G</mi></msup><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\mathbf{G} = (G,\delta^G,\epsilon^G)</annotation></semantics></math> where <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>δ</mi> <mi>G</mi></msup></mrow><annotation encoding='application/x-tex'>\delta^G</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>ϵ</mi> <mi>G</mi></msup></mrow><annotation encoding='application/x-tex'>\epsilon^G</annotation></semantics></math> are in some sense dual to <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>μ</mi> <mi>T</mi></msup></mrow><annotation encoding='application/x-tex'>\mu^T</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>η</mi> <mi>T</mi></msup></mrow><annotation encoding='application/x-tex'>\eta^T</annotation></semantics></math>.</p>
+
+<p>Thus there is a bijective correspondence between monads having a right adjoint and comonads having a left adjoint (what <a class='existingWikiWord' href='/nlab/show/Alexander+Rosenberg'>Alexander Rosenberg</a> calls <strong>duality</strong>). I am not sure that the terminology is optimal. In any case, it is a little more than a consequence of two general facts.</p>
+
+<ol>
+<li>
+<p>If <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>T</mi><mo>⊣</mo><mi>G</mi></mrow><annotation encoding='application/x-tex'>T\dashv G</annotation></semantics></math> then <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>T</mi> <mi>k</mi></msup><mo>⊣</mo><msup><mi>G</mi> <mi>k</mi></msup></mrow><annotation encoding='application/x-tex'>T^k \dashv G^k</annotation></semantics></math> for every <a class='existingWikiWord' href='/nlab/show/natural+number'>natural number</a> <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>k</mi></mrow><annotation encoding='application/x-tex'>k</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>Given two <a class='existingWikiWord' href='/nlab/show/adjunction'>adjunction</a>s <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo>⊣</mo><mi>T</mi></mrow><annotation encoding='application/x-tex'>S\dashv T</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo>′</mo><mo>⊣</mo><mi>T</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>S&#39;\dashv T&#39;</annotation></semantics></math> where <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo>,</mo><mi>S</mi><mo>′</mo><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding='application/x-tex'>S,S&#39;: B\to A</annotation></semantics></math>, then there is a <a class='existingWikiWord' href='/nlab/show/bijection'>bijection</a> between the <a class='existingWikiWord' href='/nlab/show/natural+transformation'>natural transformation</a>s <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϕ</mi><mo>:</mo><mi>S</mi><mo>′</mo><mo>⇒</mo><mi>S</mi></mrow><annotation encoding='application/x-tex'>\phi:S&#39;\Rightarrow S</annotation></semantics></math> and natural transformations <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ψ</mi><mo>:</mo><mi>T</mi><mo>⇒</mo><mi>T</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>\psi:T\Rightarrow T&#39;</annotation></semantics></math> such that</p>
+</li>
+</ol>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><mi>A</mi><mo stretchy='false'>(</mo><mi>S</mi><mo>,</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo stretchy='false'>)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>B</mi><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>T</mi><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd><msup><mrow></mrow> <mpadded lspace='-100%width' width='0'><mrow><mi>A</mi><mo stretchy='false'>(</mo><mi>ϕ</mi><mo>,</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo stretchy='false'>)</mo></mrow></mpadded></msup><mo stretchy='false'>↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msup><mrow></mrow> <mpadded width='0'><mrow><mi>B</mi><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>ψ</mi><mo stretchy='false'>)</mo></mrow></mpadded></msup></mtd></mtr> <mtr><mtd><mi>A</mi><mo stretchy='false'>(</mo><mi>S</mi><mo>′</mo><mo>,</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo stretchy='false'>)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>B</mi><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>T</mi><mo>′</mo><mo stretchy='false'>)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>
+\array{
+  A (S,-) &amp;\to&amp; B(-,T)
+  \\
+  {}^{\mathllap{A(\phi,-)}}\downarrow &amp;&amp;\downarrow {}^{\mathrlap{B(-,\psi)}}
+  \\
+  A(S&#39;,-)&amp;\to &amp; B(-,T&#39;)
+}
+
+</annotation></semantics></math></div>
+<p>where the horizontal arrows are the natural bijections given by the adjunctions. <a href='#EilenbergMoore'>Eilenberg and Moore</a> would write <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϕ</mi><mo>⊣</mo><mi>ψ</mi></mrow><annotation encoding='application/x-tex'>\phi\dashv\psi</annotation></semantics></math> and talk about “adjointness for morphisms” (of functors), which is of course relative to the given adjunctions among functors. MacLane calls the correspondence <em>conjugation</em> (<a class='existingWikiWord' href='/nlab/show/Categories+Work'>Categories for Working Mathematician</a>, 99-102). It is a special case, of a general construction of <a class='existingWikiWord' href='/nlab/show/mate'>mate</a>s, in terminology of Australian category school.</p>
+
+<p>If <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>η</mi><mo>,</mo><mi>η</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>\eta,\eta&#39;</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϵ</mi><mo>,</mo><mi>ϵ</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>\epsilon,\epsilon&#39;</annotation></semantics></math> are their <a class='existingWikiWord' href='/nlab/show/unit+of+an+adjunction'>unit</a> and counit of course the upper arrow is <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>S</mi><mi>M</mi><mover><mo>→</mo><mi>f</mi></mover><mi>N</mi><mo stretchy='false'>)</mo><mo>↦</mo><mi>Tf</mi><mo>∘</mo><msub><mi>η</mi> <mi>M</mi></msub></mrow><annotation encoding='application/x-tex'>(S M\stackrel{f}\to N)\mapsto Tf\circ \eta_M</annotation></semantics></math> and the lower arrow <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>S</mi><mo>′</mo><mi>M</mi><mover><mo>→</mo><mi>g</mi></mover><mi>N</mi><mo stretchy='false'>)</mo><mo>↦</mo><mi>T</mi><mo>′</mo><mi>g</mi><mo>∘</mo><mi>η</mi><msub><mo>′</mo> <mi>M</mi></msub></mrow><annotation encoding='application/x-tex'>(S&#39;M\stackrel{g}\to N)\mapsto T&#39;g\circ\eta&#39;_M</annotation></semantics></math>. Thus the condition renders as</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>T</mi><mo>′</mo><mo stretchy='false'>(</mo><mi>f</mi><mo>∘</mo><msub><mi>ϕ</mi> <mi>M</mi></msub><mo stretchy='false'>)</mo><mo>∘</mo><mi>η</mi><msub><mo>′</mo> <mi>M</mi></msub><mo>=</mo><msub><mi>ψ</mi> <mi>N</mi></msub><mo>∘</mo><mi>Tf</mi><mo>∘</mo><msub><mi>η</mi> <mi>M</mi></msub></mrow><annotation encoding='application/x-tex'>T&#39;(f\circ\phi_M)\circ\eta&#39;_M = \psi_N\circ Tf\circ\eta_M</annotation></semantics></math></div>
+<p>or <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>T</mi><mo>′</mo><mi>f</mi><mo>∘</mo><mi>T</mi><mo>′</mo><msub><mi>ϕ</mi> <mi>M</mi></msub><mo>∘</mo><mi>η</mi><msub><mo>′</mo> <mi>M</mi></msub><mo>=</mo><mi>T</mi><mo>′</mo><mi>f</mi><mo>∘</mo><msub><mi>ψ</mi> <mi>SM</mi></msub><mo>∘</mo><msub><mi>η</mi> <mi>M</mi></msub></mrow><annotation encoding='application/x-tex'>T&#39;f\circ T&#39;\phi_M\circ\eta&#39;_M = T&#39;f\circ \psi_{SM}\circ\eta_M</annotation></semantics></math>. Given <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding='application/x-tex'>\phi</annotation></semantics></math>, the uniqueness of <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>ψ</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>B(-,\psi)</annotation></semantics></math> is clear from the above <a class='existingWikiWord' href='/nlab/show/diagram'>diagram</a>, as the horizontal arrows are <a class='existingWikiWord' href='/nlab/show/isomorphism'>invertible</a>. <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>B</mi><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>ψ</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>B(-,\psi)</annotation></semantics></math> determines <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ψ</mi></mrow><annotation encoding='application/x-tex'>\psi</annotation></semantics></math>, namely <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ψ</mi> <mi>N</mi></msub><mo>=</mo><mi>B</mi><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>,</mo><mi>ψ</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><msub><mi>id</mi> <mi>N</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\psi_N = B(-,\psi)(id_N)</annotation></semantics></math>. For the existence of <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ψ</mi></mrow><annotation encoding='application/x-tex'>\psi</annotation></semantics></math> (given <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding='application/x-tex'>\phi</annotation></semantics></math>) satisfying the above equation, one proposes that <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ψ</mi></mrow><annotation encoding='application/x-tex'>\psi</annotation></semantics></math> is the composition <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ψ</mi><mo>=</mo><mi>T</mi><mo>′</mo><mi>ϵ</mi><mo>∘</mo><mi>T</mi><mo>′</mo><mi>ϕ</mi><mi>T</mi><mo>∘</mo><mi>η</mi><mo>′</mo><mi>T</mi></mrow><annotation encoding='application/x-tex'>\psi  = T&#39;\epsilon \circ T&#39;\phi T \circ \eta&#39;T</annotation></semantics></math>, i.e.</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>T</mi><mover><mo>⟶</mo><mrow><mi>η</mi><mo>′</mo><mi>T</mi></mrow></mover><mi>T</mi><mo>′</mo><mi>S</mi><mo>′</mo><mi>T</mi><mover><mo>⟶</mo><mrow><mi>T</mi><mo>′</mo><mi>ψ</mi><mi>T</mi></mrow></mover><mi>T</mi><mo>′</mo><mi>ST</mi><mover><mo>⟶</mo><mrow><mi>T</mi><mo>′</mo><mi>ϵ</mi></mrow></mover><mi>T</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>
+T\stackrel{\eta&#39; T}\longrightarrow T&#39;S&#39; T\stackrel{T&#39;\psi T}\longrightarrow T&#39;ST \stackrel{T&#39;\epsilon}\longrightarrow T&#39;
+
+</annotation></semantics></math></div>
+<p>and checks that it works. The inverse is similarly given by the composition</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo>′</mo><mover><mo>⟶</mo><mrow><mi>S</mi><mo>′</mo><mi>η</mi></mrow></mover><mi>S</mi><mo>′</mo><mi>TS</mi><mover><mo>⟶</mo><mrow><mi>S</mi><mo>′</mo><mi>ψ</mi><mi>S</mi></mrow></mover><mi>S</mi><mo>′</mo><mi>T</mi><mo>′</mo><mi>S</mi><mover><mo>⟶</mo><mrow><mi>ϵ</mi><mo>′</mo><mi>S</mi></mrow></mover><mi>S</mi></mrow><annotation encoding='application/x-tex'>
+S&#39;\stackrel{S&#39;\eta}\longrightarrow S&#39; TS\stackrel{S&#39;\psi S}\longrightarrow S&#39;T&#39;S\stackrel{\epsilon&#39; S}\longrightarrow S
+
+</annotation></semantics></math></div>
+<p>This correspondence now enables in our special case to dualize <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>μ</mi> <mi>T</mi></msup></mrow><annotation encoding='application/x-tex'>\mu^T</annotation></semantics></math> to <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>δ</mi> <mi>G</mi></msup></mrow><annotation encoding='application/x-tex'>\delta^G</annotation></semantics></math>, and similarly unit to the counit.</p>
+
+<h2 id='adjoint_monad_and_comonad_from_an_adjoint_triple_of_functors'>Adjoint monad and comonad from an adjoint triple of functors</h2>
+
+<p>Every <a class='existingWikiWord' href='/nlab/show/adjoint+triple'>adjoint triple</a> <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>F</mi> <mo>*</mo></msup><mo>⊣</mo><msub><mi>F</mi> <mo>*</mo></msub><mo>⊣</mo><msup><mi>F</mi> <mo>!</mo></msup></mrow><annotation encoding='application/x-tex'>F^*\dashv F_* \dashv F^!</annotation></semantics></math> induces an <a class='existingWikiWord' href='/nlab/show/adjunction'>adjoint pair</a> <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>F</mi> <mo>*</mo></msub><msup><mi>F</mi> <mo>*</mo></msup><mo>⊣</mo><msub><mi>F</mi> <mo>*</mo></msub><msup><mi>F</mi> <mo>!</mo></msup></mrow><annotation encoding='application/x-tex'>F_* F^*\dashv F_* F^!</annotation></semantics></math>. The endofunctor <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>F</mi> <mo>*</mo></msub><msup><mi>F</mi> <mo>*</mo></msup></mrow><annotation encoding='application/x-tex'>F_* F^*</annotation></semantics></math> is underlying a monad induced by the adjunction <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>F</mi> <mo>*</mo></msup><mo>⊣</mo><msub><mi>F</mi> <mo>*</mo></msub></mrow><annotation encoding='application/x-tex'>F^*\dashv F_*</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>F</mi> <mo>*</mo></msub><msup><mi>F</mi> <mo>!</mo></msup></mrow><annotation encoding='application/x-tex'>F_* F^!</annotation></semantics></math> is underlying a comonad induced by the adjuntion <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>F</mi> <mo>*</mo></msub><mo>⊣</mo><msup><mi>F</mi> <mo>!</mo></msup></mrow><annotation encoding='application/x-tex'>F_*\dashv F^!</annotation></semantics></math>. This pair of a monad and a comonad are adjoint.</p>
+
+<h2 id='general_adjoint_algebras_and_coalgebras_in_'>General adjoint algebras and coalgebras in <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>End</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>End(A)</annotation></semantics></math></h2>
+
+<p>Given a small category <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math>, the category <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>End</mi><mo stretchy='false'>(</mo><mi>A</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>End(A)</annotation></semantics></math> of endofunctors and natural transformations of endofunctors (with vertical composition as composition) is monoidal with respect to the composition as the tensor product of objects (endofunctor) and Godement product (horizontal composition) as the tensor product of morphisms (natural transformations). Hence we can consider operads and algebras over operads, as well as, dually, coalgebras over cooperads; or some other framework for general algebras and coalgebras (or even props).</p>
+
+<p>In any case, given an adjunction <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_56' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>T</mi><mo>⊣</mo><mi>G</mi></mrow><annotation encoding='application/x-tex'>T\dashv G</annotation></semantics></math>, operations <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_57' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>T</mi> <mi>n</mi></msup><mo>→</mo><mi>T</mi></mrow><annotation encoding='application/x-tex'>T^n\to T</annotation></semantics></math> dualize to cooperations <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_58' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi><mo>→</mo><msup><mi>G</mi> <mi>n</mi></msup></mrow><annotation encoding='application/x-tex'>G\to G^n</annotation></semantics></math>, and more generally multioperations <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_59' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>T</mi> <mi>k</mi></msup><mo>→</mo><msup><mi>T</mi> <mi>l</mi></msup></mrow><annotation encoding='application/x-tex'>T^k\to T^l</annotation></semantics></math> dualize to the multioperations <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_60' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>T</mi> <mi>l</mi></msup><mo>→</mo><msup><mi>T</mi> <mi>k</mi></msup></mrow><annotation encoding='application/x-tex'>T^l\to T^k</annotation></semantics></math>. We would like to sketch the proof that the identities for operations on <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_61' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>T</mi></mrow><annotation encoding='application/x-tex'>T</annotation></semantics></math>, correspond to the identities on cooperations on <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_62' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>G</mi></mrow><annotation encoding='application/x-tex'>G</annotation></semantics></math> (and more generally there is a duality among the identities for multioperations). This is essentially the consequence of</p>
+
+<p><strong>Lemma.</strong> (<a class='existingWikiWord' href='/nlab/show/Zoran+%C5%A0koda'>Zoran</a>) Given the adjunction <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_63' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>T</mi><mo>⊣</mo><mi>G</mi></mrow><annotation encoding='application/x-tex'>T\dashv G</annotation></semantics></math> with unit <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_64' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>η</mi></mrow><annotation encoding='application/x-tex'>\eta</annotation></semantics></math> and counit <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_65' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding='application/x-tex'>\epsilon</annotation></semantics></math>, and the sequence</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_66' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>T</mi> <mi>k</mi></msup><mover><mo>⟶</mo><mi>α</mi></mover><msup><mi>T</mi> <mi>l</mi></msup><mover><mo>⟶</mo><mi>β</mi></mover><msup><mi>T</mi> <mi>s</mi></msup></mrow><annotation encoding='application/x-tex'>
+T^k \stackrel{\alpha}\longrightarrow T^l\stackrel\beta\longrightarrow T^s
+
+</annotation></semantics></math></div>
+<p>the composition <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_67' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>α</mi> <mo>*</mo></msup><mo>∘</mo><msup><mi>β</mi> <mo>*</mo></msup></mrow><annotation encoding='application/x-tex'>\alpha^*\circ\beta^*</annotation></semantics></math> of the dual (in the above sense) sequence</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_68' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>G</mi> <mi>k</mi></msup><mover><mo>⟵</mo><mrow><msup><mi>α</mi> <mo>*</mo></msup></mrow></mover><msup><mi>G</mi> <mi>l</mi></msup><mover><mo>⟵</mo><mrow><msup><mi>β</mi> <mo>*</mo></msup></mrow></mover><msup><mi>G</mi> <mi>s</mi></msup></mrow><annotation encoding='application/x-tex'>
+G^k \stackrel{\alpha^*}\longleftarrow G^l\stackrel{\beta^*}\longleftarrow G^s
+
+</annotation></semantics></math></div>
+<p>equal to the dual <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_69' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>β</mi><mo>∘</mo><mi>α</mi><msup><mo stretchy='false'>)</mo> <mo>*</mo></msup></mrow><annotation encoding='application/x-tex'>(\beta\circ\alpha)^*</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_70' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>β</mi><mo>∘</mo><mi>α</mi></mrow><annotation encoding='application/x-tex'>\beta\circ\alpha</annotation></semantics></math>,</p>
+
+<p><em>Proof</em>. <a class='existingWikiWord' href='/nlab/show/Mike+Shulman'>Mike Shulman</a> notices that this is a special case of known contravariant functoriality of <a class='existingWikiWord' href='/nlab/show/mate'>mate</a>s, but here is a direct proof.</p>
+
+<p>We need to prove that the composition</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_71' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>G</mi> <mi>s</mi></msup><mover><mo>→</mo><mrow><msub><mi>η</mi> <mi>l</mi></msub><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup><mover><mo>→</mo><mrow><msup><mi>G</mi> <mi>l</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup><mover><mo>→</mo><mrow><msup><mi>G</mi> <mi>l</mi></msup><msub><mi>ϵ</mi> <mi>s</mi></msub></mrow></mover><msup><mi>G</mi> <mi>l</mi></msup><mover><mo>→</mo><mrow><msub><mi>η</mi> <mi>k</mi></msub><msup><mi>G</mi> <mi>l</mi></msup></mrow></mover><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><mover><mo>→</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><mi>α</mi><msup><mi>G</mi> <mi>l</mi></msup></mrow></mover><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><mover><mo>→</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msub><mi>ϵ</mi> <mi>l</mi></msub></mrow></mover><msup><mi>G</mi> <mi>k</mi></msup></mrow><annotation encoding='application/x-tex'>
+G^s\stackrel{\eta_l G^s}\to G^l T^l G^s\stackrel{G^l\beta G^s}\to G^l T^s G^s\stackrel{G^l \epsilon_s}\to G^l\stackrel{\eta_k G^l}\to G^k T^k G^l\stackrel{G^k\alpha G^l}\to G^k T^l G^l\stackrel{G^k\epsilon_l}\to G^k 
+
+</annotation></semantics></math></div>
+<p>equals the composition</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_72' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>G</mi> <mi>s</mi></msup><mover><mo>→</mo><mrow><msub><mi>η</mi> <mi>k</mi></msub><msup><mi>G</mi> <mi>l</mi></msup></mrow></mover><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>s</mi></msup><mover><mo>→</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><mi>α</mi><msup><mi>G</mi> <mi>l</mi></msup></mrow></mover><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup><mover><mo>→</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup><mover><mo>→</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msub><mi>ϵ</mi> <mi>s</mi></msub></mrow></mover><msup><mi>G</mi> <mi>k</mi></msup><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+G^s\stackrel{\eta_k G^l}\to G^k T^k G^s\stackrel{G^k\alpha G^l}\to G^k T^l G^s\stackrel{G^k\beta G^s}\to G^k T^s G^s\stackrel{G^k\epsilon_s}\to G^k.
+
+</annotation></semantics></math></div>
+<p>Note that in the two compositions there is an opposite order between the expressions involving <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_73' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi></mrow><annotation encoding='application/x-tex'>\alpha</annotation></semantics></math> and those involving <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_74' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>β</mi></mrow><annotation encoding='application/x-tex'>\beta</annotation></semantics></math>. But anyway, their equality reduces to a naturality calculation (which in particular exchanges the order of <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_75' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>α</mi></mrow><annotation encoding='application/x-tex'>\alpha</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_76' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>β</mi></mrow><annotation encoding='application/x-tex'>\beta</annotation></semantics></math> in effect):</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_77' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>η</mi> <mi>l</mi></msub><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>→</mo><mrow><msup><mi>G</mi> <mi>l</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>G</mi> <mi>l</mi></msup><msub><mi>ϵ</mi> <mi>s</mi></msub></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>l</mi></msup></mtd></mtr> <mtr><mtd><msup><mi>η</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>s</mi></msup><mo stretchy='false'>↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msub><mi>η</mi> <mi>k</mi></msub><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msub><mi>η</mi> <mi>k</mi></msub><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msub><mi>η</mi> <mi>k</mi></msub><msup><mi>G</mi> <mi>l</mi></msup></mtd></mtr> <mtr><mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msub><mi>η</mi> <mi>l</mi></msub><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><msub><mi>ϵ</mi> <mi>s</mi></msub></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>k</mi></msup><msup><mi>G</mi> <mi>l</mi></msup></mtd></mtr> <mtr><mtd><msup><mi>G</mi> <mi>k</mi></msup><mi>α</mi><msup><mi>G</mi> <mi>s</mi></msup><mo stretchy='false'>↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msup><mi>G</mi> <mi>k</mi></msup><mi>α</mi><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msup><mi>G</mi> <mi>k</mi></msup><mi>α</mi><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msup><mi>G</mi> <mi>k</mi></msup><mi>α</mi><msup><mi>G</mi> <mi>l</mi></msup></mtd></mtr> <mtr><mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msub><mi>η</mi> <mi>l</mi></msub><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><msub><mi>ϵ</mi> <mi>s</mi></msub></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>l</mi></msup></mtd></mtr> <mtr><mtd><msup><mi>G</mi> <mi>k</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup><mo stretchy='false'>↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><mi>ρ</mi></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msup><mi>G</mi> <mi>k</mi></msup><msub><mi>ϵ</mi> <mi>l</mi></msub><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd></mtd> <mtd><mo stretchy='false'>↓</mo><msup><mi>G</mi> <mi>k</mi></msup><msub><mi>ϵ</mi> <mi>l</mi></msub></mtd></mtr> <mtr><mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mo>=</mo></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>l</mi></msup></mtd> <mtd><mo>=</mo></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>G</mi> <mi>k</mi></msup><msub><mi>ϵ</mi> <mi>s</mi></msub></mrow></mover></mtd> <mtd><msup><mi>G</mi> <mi>k</mi></msup></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>\array{
+G^s &amp;\stackrel{\eta_l G^s}\to &amp; G^l T^l G^s &amp;\stackrel{G^l\beta G^s}\to &amp; G^l T^s G^s&amp;\stackrel{G^l \epsilon_s}\longrightarrow&amp; G^l\\
+\eta^k G^s\downarrow &amp;&amp;\downarrow \eta_k G^l T^l G^s&amp;&amp;\downarrow \eta_k G^l T^s G^s&amp;&amp; \downarrow \eta_k G^l \\
+G^k T^k G^s &amp;\stackrel{G^k T^k\eta_l G^s}\longrightarrow &amp;G^k T^k G^l T^l G^s &amp;\stackrel{G^k T^k G^l \beta G^s}\longrightarrow &amp; G^k T^k G^l T^s G^s &amp;\stackrel{G^k T^k G^l \epsilon_s}\longrightarrow &amp; G^k T^k G^l\\
+G^k \alpha G^s \downarrow &amp;&amp; \downarrow G^k \alpha G^l T^l G^s&amp;&amp;\downarrow G^k \alpha G^k T^s G^s&amp;&amp;\downarrow G^k \alpha G^l\\
+G^k T^l G^s &amp;\stackrel{G^k T^l\eta_l G^s}\longrightarrow &amp; G^k T^l G^l T^l G^s &amp;\stackrel{G^k T^l G^l \beta G^s}\longrightarrow &amp; G^k T^l G^l T^s G^s &amp;\stackrel{G^k T^l G^l\epsilon_s}\longrightarrow &amp; G^k T^l G^l\\
+G^k\beta G^s \downarrow &amp;&amp;\downarrow{\rho} &amp;&amp;\downarrow G^k \epsilon_l T^s G^s &amp;&amp;\downarrow G^k\epsilon_l \\
+G^k T^s G^s &amp;=&amp;G^k T^s G^l &amp;=&amp;G^k T^s G^s&amp;\stackrel{G^k \epsilon_s}\longrightarrow&amp; G^k
+}
+</annotation></semantics></math></div>
+<p>where <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_78' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>ρ</mi><mo>:</mo><mo>=</mo><msup><mi>G</mi> <mi>k</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup><mo>∘</mo><msup><mi>G</mi> <mi>k</mi></msup><msub><mi>ϵ</mi> <mi>l</mi></msub><msup><mi>G</mi> <mi>s</mi></msup><mo>=</mo><msup><mi>G</mi> <mi>k</mi></msup><msub><mi>ϵ</mi> <mi>l</mi></msub><msup><mi>T</mi> <mi>s</mi></msup><msup><mi>G</mi> <mi>s</mi></msup><mo>∘</mo><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>l</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup></mrow><annotation encoding='application/x-tex'>\rho := G^k \beta G^s \circ G^k \epsilon_l G^s = G^k\epsilon_l T^s G^s\circ G^k T^l G^l \beta G^s</annotation></semantics></math>. The commutativity of all small squares in the diagram is evident, except the lower left corner. This one follows by one of the triangle identities for the adjunction <math class='maruku-mathml' display='inline' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_79' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>T</mi> <mi>l</mi></msup><mo>⊣</mo><msup><mi>G</mi> <mi>l</mi></msup></mrow><annotation encoding='application/x-tex'>T^l\dashv G^l</annotation></semantics></math>. Namely,</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8cbc0faa345bea25dc2e68600ba2460285db495d_80' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>G</mi> <mi>k</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup><mo>=</mo><msup><mi>G</mi> <mi>k</mi></msup><mi>β</mi><msup><mi>G</mi> <mi>s</mi></msup><mo>∘</mo><mo stretchy='false'>(</mo><msup><mi>G</mi> <mi>k</mi></msup><msub><mi>ϵ</mi> <mi>l</mi></msub><msup><mi>T</mi> <mi>l</mi></msup><msup><mi>G</mi> <mi>s</mi></msup><mo>∘</mo><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msub><mi>η</mi> <mi>l</mi></msub><msup><mi>G</mi> <mi>s</mi></msup><mo stretchy='false'>)</mo><mo>=</mo><mi>ρ</mi><mo>∘</mo><msup><mi>G</mi> <mi>k</mi></msup><msup><mi>T</mi> <mi>l</mi></msup><msub><mi>η</mi> <mi>l</mi></msub><msup><mi>G</mi> <mi>s</mi></msup></mrow><annotation encoding='application/x-tex'>
+G^k \beta G^s = G^k \beta G^s \circ (G^k \epsilon_l T^l G^s\circ G^k T^l \eta_l G^s) = \rho \circ G^k T^l \eta_l G^s
+
+</annotation></semantics></math></div>
+<h2 id='examples'>Examples</h2>
+
+<h3 id='adjoint_modalities'>Adjoint modalities</h3>
+
+<p>An <a class='existingWikiWord' href='/nlab/show/adjoint+modality'>adjoint modality</a> is an example of a pair of adjoint monads.</p>
+
+<h2 id='references'>References</h2>
+
+<p>There is a section 3, “adjoint triples” in</p>
+
+<ul id='EilenbergMoore'>
+<li><a class='existingWikiWord' href='/nlab/show/Samuel+Eilenberg'>Samuel Eilenberg</a>, <a class='existingWikiWord' href='/nlab/show/John+Moore'>John Moore</a>, <em>Adjoint functors and triples</em>, Illinois J. Math. <strong>9</strong>, 3 (1965), 381-398,</li>
+</ul>
+
+<p>where triple is in the sense of <a class='existingWikiWord' href='/nlab/show/monad'>monad</a>. So we say instead a <strong>monad adjoint to a comonad</strong>. Distinguish from the <a class='existingWikiWord' href='/nlab/show/adjoint+triple'>adjoint triple</a> of functors.</p>
+
+<p>Discussion in the context of <a class='existingWikiWord' href='/nlab/show/ambidextrous+adjunction'>ambidextrous adjunctions</a> is in</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/Aaron+Lauda'>Aaron Lauda</a>, <em>Frobenius algebras and ambidextrous adjunctions</em> (<a href='http://arxiv.org/abs/math/0502550'>arXiv:math/0502550</a>)</li>
+</ul>
+
+<p>
+ 
+ 
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on January  9, 2014 21:00:47 
+  by <a class="existingWikiWord" href="/nlab/show/Urs+Schreiber">Urs Schreiber</a>
+  (89.204.130.45)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/adjoint+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/adjoint+monad/6" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(6 revisions)</span> | <a href="/nlab/show/diff/adjoint+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/adjoint+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/adjoint+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/adjoint+monad" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/adjoint+monad" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

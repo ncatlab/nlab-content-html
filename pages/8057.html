@@ -1,0 +1,629 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      fixed-point combinator in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  
+ 
+  <link href="/stylesheets/instiki.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1505574123" media="all" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 { 
+      color: #008B26; 
+    }
+    a:visited.existingWikiWord {
+      color: #005c19;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/    
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #005000;
+}
+
+a.existingWikiWord:visited {
+color: #005000;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1505574123" type="text/javascript"></script>
+<script src="/javascripts/application.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1505574123" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1505574123" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    
+<span id="svg_logo"><svg version="1.1" width="100%" height="100%" viewBox='0 -1 180 198' xmlns='http://www.w3.org/2000/svg'>
+      <path id="svg_logo_path" fill="#008B26" stroke-width='0.5' stroke='#000' d='
+        M170,60c4,11-1,20-12,25c-9,4-25,3-20,15c5,5,15,0,24,1c11,1,21,11,14,21c-10,15-35,6-48-1c-5-3-27-23-32-10c-1,13,15,10,22,16
+        c11,4,24,14,34,20c12,10,7,25-9,23c-11-1-22-9-30-16c-5-5-13-18-21-9c-2,6,2,11,5,14c9,9,22,14,22,31c-2,8-12,8-18,4c-4-3-9-8-11-13
+        c-3-6-5-18-12-18c-14-1-5,28-18,30c-9,2-13-9-12-16c1-14,12-24,21-31c5-4,17-13,10-20c-9-10-19,12-23,16c-7,7-17,16-31,15
+        c-9-1-18-9-11-17c5-7,14-4,23-6c6-1,15-8,8-15c-5-6-57,2-42-24c7-12,51,4,61,6c6,1,17,4,18-4c2-11-12-7-21-8c-21-2-49-14-49-34
+        c0-5,3-11,8-11C31,42,34,65,42,67c6,1,9-3,8-9C49,49,38,40,40,25c1-5,4-15,13-14c10,2,11,18,13,29c1,8,0,24,7,28c15,0,5-22,4-30
+        C74,23,78,7,87,1c8-4,14,1,16,9c2,11-8,21-2,30c8,2,11-6,14-12c9-14,36-18,30,5c-3,9-12,19-21,24c-6,4-22,10-23,19c-2,14,15,2,18-2
+        c9-9,20-18,33-22C159,52,166,54,170,60' />
+    </svg></span>
+      <span class="webName">nLab</span><br />
+      fixed-point combinator
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home, Sweet Home">Home Page</a> | 
+    <a href="/nlab/list" accesskey="A" title="Alphabetically sorted list of pages">All Pages</a> | 
+    <a href="/nlab/latest_revisions" accesskey="U" title="View latest revisions on this web">Latest Revisions</a> |
+    <a href="/nlab/authors" title="Who wrote what">Authors</a> | 
+    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> | 
+    <a href="/nlab/export" accesskey="X" title="Download a zip with all the pages in this wiki">Export</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <div class='rightHandSide'>
+<div class='toc clickDown' tabindex='0'>
+<h3 id='context'>Context</h3>
+
+<h4 id='type_theory'>Type theory</h4>
+
+<div class='hide'>
+<p><strong><a class='existingWikiWord' href='/nlab/show/natural+deduction'>natural deduction</a></strong> <a class='existingWikiWord' href='/nlab/show/metalanguage'>metalanguage</a>, <a class='existingWikiWord' href='/nlab/show/practical+foundation+of+mathematics'>practical foundations</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/judgment'>judgement</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/sequent'>hypothetical judgement</a>, <a class='existingWikiWord' href='/nlab/show/sequent'>sequent</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/antecedent'>antecedents</a> <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊢</mo></mrow><annotation encoding='application/x-tex'>\vdash</annotation></semantics></math> <a class='existingWikiWord' href='/nlab/show/consequent'>consequent</a>, <a class='existingWikiWord' href='/nlab/show/succedent'>succedents</a></li>
+</ul>
+</li>
+</ul>
+
+<ol>
+<li><a class='existingWikiWord' href='/nlab/show/type+formation'>type formation rule</a></li>
+
+<li><a class='existingWikiWord' href='/nlab/show/natural+deduction'>term introduction rule</a></li>
+
+<li><a class='existingWikiWord' href='/nlab/show/natural+deduction'>term elimination rule</a></li>
+
+<li><a class='existingWikiWord' href='/nlab/show/natural+deduction'>computation rule</a></li>
+</ol>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a></strong> (<a class='existingWikiWord' href='/nlab/show/dependent+type+theory'>dependent</a>, <a class='existingWikiWord' href='/nlab/show/intensional+type+theory'>intensional</a>, <a class='existingWikiWord' href='/nlab/show/observational+type+theory'>observational type theory</a>, <a class='existingWikiWord' href='/nlab/show/homotopy+type+theory'>homotopy type theory</a>)</p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/calculus+of+constructions'>calculus of constructions</a></li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/syntax'>syntax</a></strong> <a class='existingWikiWord' href='/nlab/show/metalanguage'>object language</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/theory'>theory</a>, <a class='existingWikiWord' href='/nlab/show/axiom'>axiom</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/proposition'>proposition</a>/<a class='existingWikiWord' href='/nlab/show/type'>type</a> (<a class='existingWikiWord' href='/nlab/show/propositions+as+types'>propositions as types</a>)</p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/definition'>definition</a>/<a class='existingWikiWord' href='/nlab/show/proof'>proof</a>/<a class='existingWikiWord' href='/nlab/show/program'>program</a> (<a class='existingWikiWord' href='/nlab/show/proofs+as+programs'>proofs as programs</a>)</p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/theorem'>theorem</a></p>
+</li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/computational+trinitarianism'>computational trinitarianism</a></strong> = <strong><a class='existingWikiWord' href='/nlab/show/propositions+as+types'>propositions as types</a></strong> +<strong><a class='existingWikiWord' href='/nlab/show/proofs+as+programs'>programs as proofs</a></strong> +<strong><a class='existingWikiWord' href='/nlab/show/relation+between+type+theory+and+category+theory'>relation type theory/category theory</a></strong></p>
+<table><thead><tr><th><a class='existingWikiWord' href='/nlab/show/logic'>logic</a></th><th><a class='existingWikiWord' href='/nlab/show/category+theory'>category theory</a></th><th><a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a></th></tr></thead><tbody><tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/true+proposition'>true</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/terminal+object'>terminal object</a>/<a class='existingWikiWord' href='/nlab/show/truncated+object'>(-2)-truncated object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/contractible+type'>h-level 0</a>-<a class='existingWikiWord' href='/nlab/show/type'>type</a>/<a class='existingWikiWord' href='/nlab/show/unit+type'>unit type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/falsehood'>false</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/initial+object'>initial object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/empty+type'>empty type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/proposition'>proposition</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/truncated+object'>(-1)-truncated object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/mere+proposition'>h-proposition</a>, <a class='existingWikiWord' href='/nlab/show/mere+proposition'>mere proposition</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/proof'>proof</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/generalized+element'>generalized element</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/program'>program</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/cut+rule'>cut rule</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/composition'>composition</a> of <a class='existingWikiWord' href='/nlab/show/classifying+morphism'>classifying morphisms</a> / <a class='existingWikiWord' href='/nlab/show/pullback'>pullback</a> of <a class='existingWikiWord' href='/nlab/show/display+map'>display maps</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/substitution'>substitution</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/cut+rule'>cut elimination</a> for <a class='existingWikiWord' href='/nlab/show/implication'>implication</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/unit+of+an+adjunction'>counit</a> for hom-tensor adjunction</td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/beta-reduction'>beta reduction</a></td></tr>
+<tr><td style='text-align: left;'>introduction rule for <a class='existingWikiWord' href='/nlab/show/implication'>implication</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/unit'>unit</a> for hom-tensor adjunction</td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/eta-conversion'>eta conversion</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/logical+conjunction'>logical conjunction</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/cartesian+product'>product</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/product+type'>product type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/disjunction'>disjunction</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/coproduct'>coproduct</a> (<a class='existingWikiWord' href='/nlab/show/truncated+object'>(-1)-truncation</a> of)</td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/sum+type'>sum type</a> (<a class='existingWikiWord' href='/nlab/show/bracket+type'>bracket type</a> of)</td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/implication'>implication</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/internal+hom'>internal hom</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/function+type'>function type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/negation'>negation</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/internal+hom'>internal hom</a> into <a class='existingWikiWord' href='/nlab/show/initial+object'>initial object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/function+type'>function type</a> into <a class='existingWikiWord' href='/nlab/show/empty+type'>empty type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/universal+quantifier'>universal quantification</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/dependent+product'>dependent product</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/dependent+product+type'>dependent product type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/existential+quantifier'>existential quantification</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/dependent+sum'>dependent sum</a> (<a class='existingWikiWord' href='/nlab/show/truncated+object'>(-1)-truncation</a> of)</td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/dependent+sum+type'>dependent sum type</a> (<a class='existingWikiWord' href='/nlab/show/bracket+type'>bracket type</a> of)</td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/equivalence'>equivalence</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/path+space+object'>path space object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/identity+type'>identity type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/equivalence+class'>equivalence class</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/quotient+object'>quotient</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/quotient+type'>quotient type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/induction'>induction</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/colimit'>colimit</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/inductive+type'>inductive type</a>, <a class='existingWikiWord' href='/nlab/show/W-type'>W-type</a>, <a class='existingWikiWord' href='/nlab/show/M-type'>M-type</a></td></tr>
+<tr><td style='text-align: left;'>higher <a class='existingWikiWord' href='/nlab/show/induction'>induction</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/%28%E2%88%9E%2C1%29-limit'>higher colimit</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/higher+inductive+type'>higher inductive type</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/preset'>completely presented set</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/discrete+object'>discrete object</a>/<a class='existingWikiWord' href='/nlab/show/truncated+object'>0-truncated object</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/h-set'>h-level 2</a>-<a class='existingWikiWord' href='/nlab/show/type'>type</a>/<a class='existingWikiWord' href='/nlab/show/preset'>preset</a>/<a class='existingWikiWord' href='/nlab/show/h-set'>h-set</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/set'>set</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/groupoid+object+in+an+%28infinity%2C1%29-category'>internal 0-groupoid</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/Bishop+set'>Bishop set</a>/<a class='existingWikiWord' href='/nlab/show/equivalence+relation'>setoid</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/universe'>universe</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/%28sub%29object+classifier+in+an+%28infinity%2C1%29-topos'>object classifier</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/type+of+types'>type of types</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/modality'>modality</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/closure+operator'>closure operator</a>, (<a class='existingWikiWord' href='/nlab/show/idempotent+monad'>idemponent</a>) <a class='existingWikiWord' href='/nlab/show/monad'>monad</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/modal+type+theory'>modal type theory</a>, <a class='existingWikiWord' href='/nlab/show/monad+%28in+computer+science%29'>monad (in computer science)</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/linear+logic'>linear logic</a></td><td style='text-align: left;'>(<a class='existingWikiWord' href='/nlab/show/symmetric+monoidal+category'>symmetric</a>, <a class='existingWikiWord' href='/nlab/show/closed+monoidal+category'>closed</a>) <a class='existingWikiWord' href='/nlab/show/monoidal+category'>monoidal category</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/linear+type+theory'>linear type theory</a>/<a class='existingWikiWord' href='/nlab/show/quantum+computation'>quantum computation</a></td></tr>
+<tr><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/proof+net'>proof net</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/string+diagram'>string diagram</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/quantum+circuit'>quantum circuit</a></td></tr>
+<tr><td style='text-align: left;'>(absence of) <a class='existingWikiWord' href='/nlab/show/contraction+rule'>contraction rule</a></td><td style='text-align: left;'>(absence of) <a class='existingWikiWord' href='/nlab/show/diagonal+morphism'>diagonal</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/no-cloning+theorem'>no-cloning theorem</a></td></tr>
+<tr><td style='text-align: left;'></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/synthetic+mathematics'>synthetic mathematics</a></td><td style='text-align: left;'><a class='existingWikiWord' href='/nlab/show/domain+specific+embedded+programming+language'>domain specific embedded programming language</a></td></tr>
+</tbody></table>
+<p><strong><a class='existingWikiWord' href='/nlab/show/homotopy+level'>homotopy levels</a></strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/2-type+theory'>2-type theory</a>, <a class='existingWikiWord' href='/michaelshulman/show/2-categorical+logic' title='michaelshulman'>2-categorical logic</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+type+theory'>homotopy type theory</a>, <a class='existingWikiWord' href='/nlab/show/homotopy+type+theory+-+contents'>homotopy type theory - contents</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/homotopy+type'>homotopy type</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/univalence+axiom'>univalence</a>, <a class='existingWikiWord' href='/nlab/show/function+extensionality'>function extensionality</a>, <a class='existingWikiWord' href='/nlab/show/internal+logic+of+an+%28infinity%2C1%29-topos'>internal logic of an (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/cohesive+homotopy+type+theory'>cohesive homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/directed+homotopy+type+theory'>directed homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/HoTT+methods+for+homotopy+theorists'>HoTT methods for homotopy theorists</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong><a class='existingWikiWord' href='/nlab/show/semantics'>semantics</a></strong></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/internal+logic'>internal logic</a>, <a class='existingWikiWord' href='/nlab/show/categorical+semantics'>categorical semantics</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/display+map'>display map</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Mitchell-B%C3%A9nabou+language'>internal logic of a topos</a></p>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Mitchell-B%C3%A9nabou+language'>Mitchell-Benabou language</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Kripke-Joyal+semantics'>Kripke-Joyal semantics</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/internal+logic+of+an+%28infinity%2C1%29-topos'>internal logic of an (∞,1)-topos</a></p>
+
+<ul>
+<li><a class='existingWikiWord' href='/nlab/show/type-theoretic+model+category'>type-theoretic model category</a></li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href='/nlab/edit/type+theory+-+contents'>Edit this sidebar</a>
+</p>
+</div></div>
+</div>
+</div>
+
+<h1 id='fixedpoint_combinators'>Fixed-point combinators</h1>
+<div class='maruku_toc'><ul><li><a href='#idea'>Idea</a></li><li><a href='#implementing_general_recursion'>Implementing general recursion</a></li><li><a href='#existence'>Existence</a><ul><li><a href='#unityped_calculus'>Unityped <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi></mrow><annotation encoding='application/x-tex'>\lambda</annotation></semantics></math>-calculus</a></li><li><a href='#combinatory_logic'>Combinatory logic</a></li><li><a href='#typed_calculus'>Typed <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi></mrow><annotation encoding='application/x-tex'>\lambda</annotation></semantics></math>-calculus</a></li></ul></li><li><a href='#related_pages'>Related pages</a></li><li><a href='#references'>References</a></li></ul></div>
+<h2 id='idea'>Idea</h2>
+
+<p>In <a class='existingWikiWord' href='/nlab/show/combinatory+logic'>combinatory logic</a>, in the <a class='existingWikiWord' href='/nlab/show/lambda-calculus'>λ-calculus</a>, or more generally in <a class='existingWikiWord' href='/nlab/show/type+theory'>type theory</a>, a <em>fixed-point <span class='newWikiWord'>combinator<a href='/nlab/new/combinator'>?</a></span></em> is a <a class='existingWikiWord' href='/nlab/show/term'>term</a> <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> which, when <a class='existingWikiWord' href='/nlab/show/function+application'>applied</a> to a term <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>, yields a term <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mi>n</mi></mrow><annotation encoding='application/x-tex'>Y n</annotation></semantics></math> that is a fixed-point of <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi><mo stretchy='false'>(</mo><mi>Y</mi><mi>n</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>Y</mi><mi>n</mi><mo>.</mo></mrow><annotation encoding='application/x-tex'> n (Y n) = Y n .</annotation></semantics></math></div>
+<p>This equality is usually a directed <a class='existingWikiWord' href='/nlab/show/beta-reduction'>beta-reduction</a> as follows:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mi>n</mi><msub><mo>→</mo> <mi>β</mi></msub><mi>n</mi><mo stretchy='false'>(</mo><mi>Y</mi><mi>n</mi><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'> Y n \to_\beta n (Y n) .</annotation></semantics></math></div>
+<h2 id='implementing_general_recursion'>Implementing general recursion</h2>
+
+<p>When “programming” in any of these systems, a fixed-point combinator serves as a mechanism for implementing general <a class='existingWikiWord' href='/nlab/show/recursion'>recursion</a>. When writing a <a class='existingWikiWord' href='/nlab/show/recursive+function'>recursive function</a> in a standard <a class='existingWikiWord' href='/nlab/show/programming+language'>programming language</a>, such as the <span class='newWikiWord'>factorial<a href='/nlab/new/factorial'>?</a></span></p>
+
+<pre><code>def fact(n:nat) : nat = {
+  if (n == 0) {
+    return 1
+  } else {
+    return n * fact(n-1)
+  }
+}</code></pre>
+
+<p>one generally calls the function being defined inside of its own body. This is not possible for a combinator or a lambda-term to do directly, but it can be implemented using a fixed-point combinator. One first defines a “generator” which takes “the function to call recursively” as an additional argument:</p>
+
+<pre><code>def genfact(f : nat -&gt; nat)(n:nat) : nat = {
+  if (n == 0) {
+    return 1
+  } else {
+    return n * f(n-1)
+  }
+}</code></pre>
+
+<p>and then “closes the loop” by applying the fixed-point combinator. That is, we <a class='existingWikiWord' href='/nlab/show/currying'>curry</a> <code>genfact</code> to view it as an <a class='existingWikiWord' href='/nlab/show/endofunction'>endofunction</a> of <code>nat -&gt; nat</code> (an <a class='existingWikiWord' href='/nlab/show/operator'>operator</a>) and then construct its fixed point,</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>fact</mi><mo>=</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'> fact = Y(genfact). </annotation></semantics></math></div>
+<p>The directed <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>β</mi></mrow><annotation encoding='application/x-tex'>\beta</annotation></semantics></math>-reduction version of the fixed-point property of <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> then implements the process of calling a function recursively:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable columnalign='right left right left right left right left right left' columnspacing='0em' displaystyle='true'><mtr><mtd><mi>fact</mi><mo stretchy='false'>(</mo><mn>3</mn><mo stretchy='false'>)</mo></mtd> <mtd><mo>=</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>3</mn><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo>→</mo> <mi>β</mi></msub><mi>genfact</mi><mo stretchy='false'>(</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>3</mn><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo>→</mo> <mi>β</mi></msub><mn>3</mn><mo>*</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>2</mn><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo>→</mo> <mi>β</mi></msub><mn>3</mn><mo>*</mo><mi>genfact</mi><mo stretchy='false'>(</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>2</mn><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo>→</mo> <mi>β</mi></msub><mn>3</mn><mo>*</mo><mn>2</mn><mo>*</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo>→</mo> <mi>β</mi></msub><mn>3</mn><mo>*</mo><mn>2</mn><mo>*</mo><mi>genfact</mi><mo stretchy='false'>(</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>1</mn><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo>→</mo> <mi>β</mi></msub><mn>3</mn><mo>*</mo><mn>2</mn><mo>*</mo><mn>1</mn><mo>*</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>0</mn><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo>→</mo> <mi>β</mi></msub><mn>3</mn><mo>*</mo><mn>2</mn><mo>*</mo><mn>1</mn><mo>*</mo><mi>genfact</mi><mo stretchy='false'>(</mo><mi>Y</mi><mo stretchy='false'>(</mo><mi>genfact</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mn>0</mn><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mo>→</mo> <mi>β</mi></msub><mn>3</mn><mo>*</mo><mn>2</mn><mo>*</mo><mn>1</mn><mo>*</mo><mn>1</mn></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mn>6</mn></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>
+\begin{aligned}
+  fact(3) &amp;= Y(genfact)(3)\\
+  &amp;\to_\beta genfact(Y(genfact))(3)\\
+  &amp;\to_\beta 3 * Y(genfact)(2)\\
+  &amp;\to_\beta 3 * genfact(Y(genfact))(2)\\
+  &amp;\to_\beta 3 * 2 * Y(genfact)(1)\\
+  &amp;\to_\beta 3 * 2 * genfact(Y(genfact))(1)\\
+  &amp;\to_\beta 3 * 2 * 1 * Y(genfact)(0)\\
+  &amp;\to_\beta 3 * 2 * 1 * genfact(Y(genfact))(0)\\
+  &amp;\to_\beta 3 * 2 * 1 * 1\\
+  &amp;= 6
+\end{aligned}
+
+</annotation></semantics></math></div>
+<p>In particular, observe that because general recursion allows the definition of nonterminating functions, so does a fixed-point combinator. An obvious example is the fixed point of the identity function <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>I</mi></mrow><annotation encoding='application/x-tex'>I</annotation></semantics></math>, which reduces as follows:</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mi>I</mi><msub><mo>→</mo> <mi>β</mi></msub><mi>I</mi><mo stretchy='false'>(</mo><mi>Y</mi><mi>I</mi><mo stretchy='false'>)</mo><msub><mo>→</mo> <mi>β</mi></msub><mi>Y</mi><mi>I</mi><msub><mo>→</mo> <mi>β</mi></msub><mi>I</mi><mo stretchy='false'>(</mo><mi>Y</mi><mi>I</mi><mo stretchy='false'>)</mo><msub><mo>→</mo> <mi>β</mi></msub><mi>Y</mi><mi>I</mi><msub><mo>→</mo> <mi>β</mi></msub><mi>⋯</mi></mrow><annotation encoding='application/x-tex'> Y I \to_\beta I(Y I) \to_\beta Y I \to_\beta I(Y I) \to_\beta Y I \to_\beta \cdots  </annotation></semantics></math></div>
+<h2 id='existence'>Existence</h2>
+
+<p>There are many ways of constructing or otherwise obtaining a fixed-point combinator, varying with the formal system in which one works.</p>
+
+<h3 id='unityped_calculus'>Unityped <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi></mrow><annotation encoding='application/x-tex'>\lambda</annotation></semantics></math>-calculus</h3>
+
+<p>In the <a class='existingWikiWord' href='/nlab/show/lambda-calculus'>unityped λ-calculus</a>, a traditional construction (due to Curry) is</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo>=</mo><mi>λ</mi><mi>n</mi><mo>.</mo><mo stretchy='false'>(</mo><mi>λ</mi><mi>s</mi><mo>.</mo><mi>n</mi><mo stretchy='false'>(</mo><mi>s</mi><mi>s</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>λ</mi><mi>s</mi><mo>.</mo><mi>n</mi><mo stretchy='false'>(</mo><mi>s</mi><mi>s</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'> Y = \lambda n. (\lambda s. n (s s)) (\lambda s. n (s s)) </annotation></semantics></math></div>
+<p>For a given term <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>, put <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>t</mi><mo>=</mo><mi>λ</mi><mi>s</mi><mo>.</mo><mi>n</mi><mo stretchy='false'>(</mo><mi>s</mi><mi>s</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>t = \lambda s. n (s s)</annotation></semantics></math>. We then have <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mi>n</mi><mo>=</mo><mi>t</mi><mi>t</mi></mrow><annotation encoding='application/x-tex'>Y n = t t</annotation></semantics></math>, and we also have</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><mi>Y</mi><mi>n</mi></mtd> <mtd><mo>=</mo></mtd> <mtd><mo stretchy='false'>(</mo><mi>λ</mi><mi>s</mi><mo>.</mo><mi>n</mi><mo stretchy='false'>(</mo><mi>s</mi><mi>s</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>λ</mi><mi>s</mi><mo>.</mo><mi>n</mi><mo stretchy='false'>(</mo><mi>s</mi><mi>s</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mo stretchy='false'>(</mo><mi>λ</mi><mi>s</mi><mo>.</mo><mi>n</mi><mo stretchy='false'>(</mo><mi>s</mi><mi>s</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>t</mi><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>n</mi><mo stretchy='false'>(</mo><mi>t</mi><mi>t</mi><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>n</mi><mo stretchy='false'>(</mo><mi>Y</mi><mi>n</mi><mo stretchy='false'>)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'> \array {
+Y n &amp; = &amp; (\lambda s. n (s s)) (\lambda s. n (s s)) \\
+ &amp; = &amp; (\lambda s. n (s s)) (t) \\ 
+ &amp; = &amp; n (t t) \\ 
+ &amp; = &amp; n (Y n)
+}
+</annotation></semantics></math></div>
+<p>so that <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mi>n</mi></mrow><annotation encoding='application/x-tex'>Y n</annotation></semantics></math> is a fixed point of <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>. Compare <a class='existingWikiWord' href='/nlab/show/Lawvere%27s+fixed+point+theorem'>Lawvere&#39;s proof</a> of <a class='existingWikiWord' href='/nlab/show/Cantor%27s+theorem'>Cantor&#39;s theorem</a>.</p>
+
+<p>Another construction is due to (<a href='#Klop07'>Klop 07</a>):</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>Y</mi> <mi>K</mi></msub><mo>=</mo><mi>LLLLLLLLLLLLLLLLLLLLLLLLLL</mi></mrow><annotation encoding='application/x-tex'>Y_K = LLLLLLLLLLLLLLLLLLLLLLLLLL</annotation></semantics></math></div>
+<p>where</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>L</mi><mo>=</mo><mi>λ</mi><mi>abcdefghijklmnopqstuvwxyzr</mi><mo>.</mo><mi>r</mi><mo stretchy='false'>(</mo><mi>thisisafixedpointcombinator</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>L = \lambda abcdefghijklmnopqstuvwxyzr. r (thisisafixedpointcombinator)</annotation></semantics></math></div>
+<p>Note that <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>Y</mi> <mi>K</mi></msub></mrow><annotation encoding='application/x-tex'>Y_K</annotation></semantics></math> is <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>L</mi></mrow><annotation encoding='application/x-tex'>L</annotation></semantics></math> repeated 26 times, and the string <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>thisisafixedpointcombinator</mi></mrow><annotation encoding='application/x-tex'>thisisafixedpointcombinator</annotation></semantics></math> contains 27 characters. Thus</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>Y</mi> <mi>K</mi></msub><mi>n</mi></mtd> <mtd><mo>=</mo></mtd> <mtd><mo stretchy='false'>(</mo><mi>λ</mi><mi>r</mi><mo>.</mo><mi>r</mi><mo stretchy='false'>(</mo><mi>LLLLLLLLLLLLLLLLLLLLLLLLLLr</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mi>n</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mo stretchy='false'>(</mo><mi>λ</mi><mi>r</mi><mo>.</mo><mi>r</mi><mo stretchy='false'>(</mo><msub><mi>Y</mi> <mi>K</mi></msub><mi>r</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mi>n</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>n</mi><mo stretchy='false'>(</mo><msub><mi>Y</mi> <mi>K</mi></msub><mi>n</mi><mo stretchy='false'>)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>\array { 
+Y_K n &amp; = &amp; (\lambda r. r(LLLLLLLLLLLLLLLLLLLLLLLLLLr)) n \\
+      &amp; = &amp; (\lambda r. r(Y_K r)) n \\ 
+      &amp; = &amp; n (Y_K n)
+}
+</annotation></semantics></math></div>
+<h3 id='combinatory_logic'>Combinatory logic</h3>
+
+<p>In <a class='existingWikiWord' href='/nlab/show/combinatory+logic'>combinatory logic</a> (based on the combinators <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math>, <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>K</mi></mrow><annotation encoding='application/x-tex'>K</annotation></semantics></math>, and <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>I</mi></mrow><annotation encoding='application/x-tex'>I</annotation></semantics></math>), one construction is</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo>=</mo><mi>S</mi><mo stretchy='false'>(</mo><mi>K</mi><mo stretchy='false'>(</mo><mi>S</mi><mi>I</mi><mi>I</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>(</mo><mi>K</mi><mi>S</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>S</mi><mo stretchy='false'>(</mo><mi>K</mi><mi>K</mi><mo stretchy='false'>)</mo><mi>I</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>K</mi><mo stretchy='false'>(</mo><mi>S</mi><mi>I</mi><mi>I</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'> Y =  S(K (S I I))(S(S (K S)(S(K K)I)))(K (S I I))</annotation></semantics></math></div>
+<p>following the standard formulas <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mi>x</mi><mi>y</mi><mi>z</mi><mo>=</mo><mo stretchy='false'>(</mo><mi>x</mi><mi>z</mi><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>y</mi><mi>z</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>S x y z = (x z)(y z)</annotation></semantics></math>, <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>K</mi><mi>x</mi><mi>y</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding='application/x-tex'>K x y = x</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>I</mi><mi>x</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding='application/x-tex'>I x = x</annotation></semantics></math>, and where bracketings left unspecified are by convention to the left. For a derivation of this, see the article on <a href='http://ncatlab.org/nlab/show/partial+combinatory+algebra#examples_of_combinators_8'>combinatory algebra</a>.</p>
+
+<h3 id='typed_calculus'>Typed <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi></mrow><annotation encoding='application/x-tex'>\lambda</annotation></semantics></math>-calculus</h3>
+
+<p>In many forms of (multi-) <em>typed</em> <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi></mrow><annotation encoding='application/x-tex'>\lambda</annotation></semantics></math>-calculus (and more general type theory), a fixed-point combinator cannot be constructed, because there is no type whose terms can be applied to themselves. This is usually intentional, because it avoids the nontermination inherent in the existence of a fixed-point combinator.</p>
+
+<p>However, it is possible to add a fixed-point combinator to typed <math class='maruku-mathml' display='inline' id='mathml_97e50b0b4927989a54368783b43794cec38ab492_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>λ</mi></mrow><annotation encoding='application/x-tex'>\lambda</annotation></semantics></math>-calculus by fiat, obtaining a typed system which includes general recursion and hence nontermination. This is appropriate for some forms of <a class='existingWikiWord' href='/nlab/show/domain+semantics'>domain semantics</a>, and for modeling some real-world programming languages (<a class='existingWikiWord' href='/nlab/show/Haskell'>Haskell</a> is a notable example).</p>
+
+<h2 id='related_pages'>Related pages</h2>
+
+<ul>
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/L%C3%B6b%27s+theorem'>Löb&#39;s theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/Lawvere%27s+fixed+point+theorem'>Lawvere fixed point theorem</a></p>
+</li>
+
+<li>
+<p><a class='existingWikiWord' href='/nlab/show/looping+combinator'>looping combinator</a></p>
+</li>
+</ul>
+
+<h2 id='references'>References</h2>
+
+<ul>
+<li id='Klop07'>Jan Willem Klop, <em><a href='http://www.cs.ru.nl/barendregt60/essays/klop/'>New Fixed Point Combinators from Old</a></em>, in <br/><em>Reflections on Type Theory, Lambda Calculus, and the Mind: Essays Dedicated to Henk Barendregt on the Occasion of his 60th Birthday</em></li>
+</ul>
+
+<p>
+ 
+</p>
+</div>
+
+<div class="revisedby">
+  Revised on July  8, 2017 09:59:24 
+  by <a class="existingWikiWord" href="/nlab/show/Urs+Schreiber">Urs Schreiber</a>
+  (188.100.200.251)
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/fixed-point+combinator" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/fixed-point+combinator/11" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(11 revisions)</span> | <a href="/nlab/show/diff/fixed-point+combinator" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/fixed-point+combinator" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  
+  <span class="views">
+    | Views: 
+    <a href="/nlab/print/fixed-point+combinator" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    | 
+    <a href="/nlab/tex/fixed-point+combinator" id="view_tex" rel="nofollow">TeX</a>
+    |
+    <a href="/nlab/source/fixed-point+combinator" id="view_source" rel="nofollow">Source</a>
+  </span>
+
+  
+
+
+</div>
+
+
+    <div id="footer">
+    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
+    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
+    </div>
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>
