@@ -258,8 +258,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -319,8 +319,12 @@ margin-left: 0em;
 <li><a href='#bidirectionality'>Bidirectionality</a></li>
 <li><a href='#contexts'>Contexts</a></li>
 <li><a href='#judgment_forms'>Judgment forms</a></li>
+<ul>
+<li><a href='#modes_preconditions_etc'>Modes, preconditions, etc.</a></li>
+</ul>
 <li><a href='#primitive_rules'>Primitive rules</a></li>
 <ul>
+<li><a href='#context_rules'>Context rules</a></li>
 <li><a href='#structural_rules'>Structural rules</a></li>
 <li><a href='#modeswitching_rule'>Mode-switching rule</a></li>
 <li><a href='#equality_rules'>Equality rules</a></li>
@@ -370,13 +374,15 @@ margin-left: 0em;
 
 <p>A <strong>raw context</strong> is a finite list of pairs consisting of a variable and a raw term. Each such pair, written <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">x:A</annotation></semantics></math>, is called a <strong>typing declaration</strong>, with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> being a type to which the variable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> belongs.</p>
 
-<p>A <strong>valid context</strong> will be a raw context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>x</mi> <mn>1</mn></msub><mo>:</mo><msub><mi>A</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi> <mi>n</mi></msub><mo>:</mo><msub><mi>A</mi> <mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x_1:A_1, \dots ,x_n:A_n)</annotation></semantics></math> such that each judgment <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>x</mi> <mn>1</mn></msub><mo>:</mo><msub><mi>A</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi> <mi>k</mi></msub><mo>:</mo><msub><mi>A</mi> <mi>k</mi></msub><mo>⊢</mo><msub><mi>A</mi> <mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">x_1:A_1,\dots, x_k:A_k \vdash A_{k+1} \, type</annotation></semantics></math> is derivable by the rules below. The rules do not explicitly assume context validity; instead we will prove after the fact that the context in any <em>derivable</em> judgment must be valid.</p>
+<p>A <em>valid context</em> will be a raw context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>x</mi> <mn>1</mn></msub><mo>:</mo><msub><mi>A</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi> <mi>n</mi></msub><mo>:</mo><msub><mi>A</mi> <mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x_1:A_1, \dots ,x_n:A_n)</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>x</mi> <mi>k</mi></msub><mo>≠</mo><msub><mi>x</mi> <mi>ℓ</mi></msub></mrow><annotation encoding="application/x-tex">x_k \neq x_\ell</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>≠</mo><mi>ℓ</mi></mrow><annotation encoding="application/x-tex">k\neq \ell</annotation></semantics></math>, and each judgment <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>x</mi> <mn>1</mn></msub><mo>:</mo><msub><mi>A</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi> <mi>k</mi></msub><mo>:</mo><msub><mi>A</mi> <mi>k</mi></msub><mo>⊢</mo><msub><mi>A</mi> <mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">x_1:A_1,\dots, x_k:A_k \vdash A_{k+1} \, type</annotation></semantics></math> is derivable by the rules below. In fact this notion is defined by a judgment mutually-inductively with the other rules to ensure that the context in any derivable judgment is valid, although in only a few cases (rules without any other premise) do we need that premise explicitly.</p>
 
 <h2 id="judgment_forms">Judgment forms</h2>
 
-<p>Our type theory has five judgment forms. Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> is a metavariable ranging over raw contexts, while <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>,</mo><mi>T</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">S,T,A,B</annotation></semantics></math> are metavariables ranging over raw terms.</p>
+<p>Our type theory has six judgment forms. Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> is a metavariable ranging over raw contexts, while <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>,</mo><mi>T</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">S,T,A,B</annotation></semantics></math> are metavariables ranging over raw terms.</p>
 
 <ol>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mspace width="thinmathspace"></mspace><mi>ok</mi></mrow><annotation encoding="application/x-tex">\Gamma \, ok</annotation></semantics></math> — “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> is a valid context”</li>
+
 <li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A\,type</annotation></semantics></math> — “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a type in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>”</li>
 
 <li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>T</mi><mo>⇐</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash T \Leftarrow A</annotation></semantics></math> — “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> can be checked to have type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>”</li>
@@ -388,12 +394,20 @@ margin-left: 0em;
 <li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>S</mi><mo>≡</mo><mi>T</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash S \equiv T : A</annotation></semantics></math> — “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> are judgmentally equal terms of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>”</li>
 </ol>
 
+<h3 id="modes_preconditions_etc">Modes, preconditions, etc.</h3>
+
+<p>TODO</p>
+
 <h2 id="primitive_rules">Primitive rules</h2>
 
+<h3 id="context_rules">Context rules</h3>
+
+<p>The empty context is valid, and any valid context can be extended by a new variable belonging to a valid type:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow></mrow><mrow><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>ok</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>Γ</mi><mspace width="thinmathspace"></mspace><mi>ok</mi><mspace width="2em"></mspace><mi>x</mi><mo>∉</mo><mi>Γ</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>ok</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex"> \frac{ }{() \, ok} \qquad \frac{\Gamma \,ok \qquad x\notin \Gamma \qquad \Gamma \vdash A\,type}{(\Gamma,x:A) \, ok}</annotation></semantics></math></div>
 <h3 id="structural_rules">Structural rules</h3>
 
-<p>The main structural rule is the “variable” or “hypothesis” rule, which says that if a variable is declared in a context, then as a term it synthesizes the type that it is declared with.</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>Γ</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>x</mi><mo>⇒</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex"> \frac{(x:A) \in \Gamma}{\Gamma \vdash x \Rightarrow A}</annotation></semantics></math></div>
+<p>The main structural rule is the “variable” or “hypothesis” rule, which says that if a variable is declared in a context, then as a term it synthesizes the type that it is declared with:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mspace width="thinmathspace"></mspace><mi>ok</mi><mspace width="2em"></mspace><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>Γ</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>x</mi><mo>⇒</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex"> \frac{\Gamma\, ok \qquad (x:A) \in \Gamma}{\Gamma \vdash x \Rightarrow A}</annotation></semantics></math></div>
 <p>The other structural rules of weakening, contraction, and substitution will be admissible.</p>
 
 <h3 id="modeswitching_rule">Mode-switching rule</h3>
@@ -406,9 +420,9 @@ margin-left: 0em;
 
 <h3 id="equality_rules">Equality rules</h3>
 
-<p>We have primitive rules asserting that equality of terms and types are both reflexive, transitive, and symmetric.</p>
+<p>We have primitive rules asserting that equality of terms and types are both reflexive, transitive, and symmetric, and moreover that equality of terms is invariant under equality of types.</p>
 
-<p>(TODO)</p>
+<p>TODO.</p>
 
 <h3 id="constant_rules">Constant rules</h3>
 
@@ -431,9 +445,26 @@ margin-left: 0em;
 </ul>
 
 <h4 id="types"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math>-types</h4>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>Π</mi><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mo>.</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+\frac{\Gamma \vdash A \, type \qquad \Gamma, x:A \vdash B\,type}{\Gamma \vdash \Pi(x:A) .B \, type}
 
-<p>include <span class="newWikiWord">Initiality Project - Type Theory - Pi-types<a href="/nlab/new/Initiality+Project+-+Type+Theory+-+Pi-types">?</a></span></p>
+</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>M</mi><mo>⇐</mo><mi>Π</mi><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mo>.</mo><mi>B</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>N</mi><mo>⇐</mo><mi>A</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><msup><mi>App</mi> <mrow><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi></mrow></msup><mo stretchy="false">(</mo><mi>M</mi><mo>,</mo><mi>N</mi><mo stretchy="false">)</mo><mo>⇒</mo><mi>B</mi><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex"></annotation></semantics></math></div>
+<p>\frac{\Gamma \vdash A \, type \qquad \Gamma, x:A \vdash B\,type \qquad \Gamma \vdash M \Leftarrow \Pi(x:A). B \qquad \Gamma \vdash N \Leftarrow A}{\Gamma \vdash App^{x:A.B}(M,N) \Rightarrow B[N/x]}</p>
 
+<p>&lt;/semantics&gt;&lt;/math&gt;&lt;/div&gt;<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>M</mi><mo>⇐</mo><mi>B</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>λ</mi><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">)</mo><mo>.</mo><mi>M</mi><mo>⇒</mo><mi>Π</mi><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mo>.</mo><mi>B</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex"></annotation></semantics></math></div></p>
+
+<p>\frac{\Gamma \vdash A \, type \qquad \Gamma,x:A \vdash B \,type \qquad \Gamma,x:A \vdash M \Leftarrow B}{\Gamma \vdash \lambda(x:A.B).M \Rightarrow \Pi(x:A). B}</p>
+
+<p>&lt;/semantics&gt;&lt;/math&gt;&lt;/div&gt;<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>≡</mo><mi>A</mi><mo>′</mo><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mo>≡</mo><mi>B</mi><mo>′</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><msup><mi>App</mi> <mrow><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi></mrow></msup><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>′</mo><mo>.</mo><mi>B</mi><mo>′</mo><mo stretchy="false">)</mo><mo>.</mo><mi>M</mi><mo>,</mo><mi>N</mi><mo stretchy="false">)</mo><mo>≡</mo><mi>M</mi><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo><mo>:</mo><mi>B</mi><mo stretchy="false">[</mo><mi>N</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex"></annotation></semantics></math></div></p>
+
+<p>\frac{\Gamma\vdash A \equiv A’ \, type \qquad \Gamma, x:A \vdash B \equiv B’ \, type}{\Gamma \vdash App^{x:A.B}(\lambda(x:A’.B’).M,N) \equiv M[N/x] : B[N/x]}</p>
+
+<p>&lt;/semantics&gt;&lt;/math&gt;&lt;/div&gt;<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>y</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><msup><mi>App</mi> <mrow><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi></mrow></msup><mo stretchy="false">(</mo><mi>M</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>≡</mo><msup><mi>App</mi> <mrow><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi></mrow></msup><mo stretchy="false">(</mo><mi>M</mi><mo>′</mo><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>:</mo><mi>B</mi><mo stretchy="false">[</mo><mi>y</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>M</mi><mo>≡</mo><mi>M</mi><mo>′</mo><mo>:</mo><mi>Π</mi><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mo>.</mo><mi>B</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex"></annotation></semantics></math></div></p>
+
+<p>\frac{\Gamma, y:A \vdash App^{x:A.B}(M,y) \equiv App^{x:A.B}(M’,y) : B[y/x]}{\Gamma \vdash M \equiv M’ : \Pi(x:A).B }</p>
+
+<p>&lt;/semantics&gt;&lt;/math&gt;&lt;/div&gt;</p>
+<p>TODO: Congruence rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi><mo>,</mo><mi>λ</mi><mo>,</mo><mi>App</mi></mrow><annotation encoding="application/x-tex">\Pi, \lambda, App</annotation></semantics></math>.</p>
 <h2 id="admissible_rules">Admissible rules</h2>
 
 <p>(TODO)</p>
@@ -443,14 +474,14 @@ margin-left: 0em;
 
 <div class="revisedby">
   <p>
-  Created on October 26, 2018 at 14:51:53.
+  Last revised on October 26, 2018 at 16:34:33.
   See the <a href="https://ncatlab.org/nlab/history/Initiality Project - Type Theory" style="color: #005c19">history</a> of this page for a list of all contributions to it.
   </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Initiality+Project+-+Type+Theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a>
+  <a href="/nlab/edit/Initiality+Project+-+Type+Theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/Initiality+Project+-+Type+Theory/1" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(1 revision)</span> | <a href="/nlab/show/diff/Initiality+Project+-+Type+Theory" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/Initiality+Project+-+Type+Theory" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   | <a href="https://ncatlab.org/nlab/show/Initiality Project - Type Theory/cite" style="color: black">Cite</a>
   <span class="views">
     | Views:
