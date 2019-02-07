@@ -749,13 +749,13 @@ margin-left: 0em;
 <li><a href='#contributors'>Contributors</a></li>
 </ul>
 <li><a href='#OverviewOfFunctionality'>Overview of functionality</a></li>
-<li><a href='#combinatorial_foundation'>Combinatorial foundation</a></li>
 <li><a href='#constructing_homotopies'>Constructing homotopies</a></li>
 <ul>
 <li><a href='#triggering_homotopies'>Triggering homotopies</a></li>
 <li><a href='#base_cases'>Base cases</a></li>
 <li><a href='#recursive_cases'>Recursive cases</a></li>
 </ul>
+<li><a href='#CombinatorialFoundation'>Combinatorial foundation</a></li>
 <li><a href='#type_checking_and_normalization'>Type checking and normalization</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -792,7 +792,7 @@ margin-left: 0em;
 
 <p><strong>Diagrams.</strong> An <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram is a composite of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>-cells from the signature, for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>≤</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">k \leq n</annotation></semantics></math>. To build a diagram, we first click on the thumbnail of a cell in the signature, which will display it in the central window. We can <em>compose</em> it with other cells by clicking near the boundary. These compositions are always <a class="existingWikiWord" href="/nlab/show/whiskering">whiskerings</a>, with a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>-cell generator attached to an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram along a common <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mtext>min</mtext><mo stretchy="false">(</mo><mi>k</mi><mo>,</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{min}(k,n)</annotation></semantics></math>-dimensional boundary. Non-whiskered composites can be obtained by first building whiskered composites, and then rewriting the interior of the diagram using homotopies. We can <em>rewrite</em> parts of an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram by clicking in the diagram interior, which will apply an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>-cell, or clicking and dragging, which will apply a homotopy.</p>
 
-<p><strong>Homotopies.</strong> Once a diagram has been constructed, we can modify it by applying homotopies, triggered by clicking and dragging on the diagram. If this is performed on the boundary of the diagram, it will attach the homotopy to the boundary of the diagram; if this is performed in the interior of the diagram, it will rewrite it.</p>
+<p><strong>Homotopies.</strong> Once a diagram has been constructed, we can modify it by applying a <em>homotopy</em>, which we trigger by clicking and dragging on the diagram. If this is performed on the boundary of the diagram, it will attach the homotopy to the boundary; if this is performed in the interior of the diagram, it will rewrite it.</p>
 
 <p><strong>Renderer (experimental).</strong> Diagrams can be rendered in both 2d and 3d. At the moment, only the 2d renderer is interactive, allowing diagrams to be manipulated directly using the mouse; the 3d renderer is for display only, and is currently quite buggy, only working reliably for small diagrams with a connected geometry. It is hoped that <em>homotopy.io</em> will soon allow rendering and smooth animation of arbitrary 3d composites.</p>
 
@@ -800,7 +800,62 @@ margin-left: 0em;
 
 <p><strong>Slice.</strong> For an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n \gt 2</annotation></semantics></math>, projection will always lose some information about the diagram. <em>Slicing</em> allows an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(n+1)</annotation></semantics></math>-dimensional diagram to be viewed as a movie of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-dimensional diagrams, in a way which preserves all information about the diagram. For example, for a 9-dimensional diagram with projection set to 3, there are still 6 remaining dimensions to display. With the renderer set to 2d, this leaves 4 dimensions to be handled with slice controls, which allows us to investigate the 6d displayed geometry as a movie of movies of movies of movies of 2d diagrams.</p>
 
-<h2 id="combinatorial_foundation">Combinatorial foundation</h2>
+<p><strong>Undo and redo.</strong> Use the browser back and forward buttons to undo and redo your interactions with the proof assistant.</p>
+
+<p><strong>Server.</strong> The proof assistant has a backend that lets you log in and save proofs to the server. You can also make proofs shareable, and obtain a short URL suitable for sharing with others, or embedding in a research paper. In the future you will also be able to publish proofs, obtaining a permanent date-stamped URL</p>
+
+<h2 id="constructing_homotopies">Constructing homotopies</h2>
+
+<p>A composite diagram can be deformed by clicking and dragging in its interior. If the indicated deformation would be geometrically invalid, an error message is displayed in the lower-right corner, and the diagram does not change. Otherwise, a new diagram is displayed, which is homotopic to the original diagram. The proof assistant manipulates finite combinatorial structures, and we use the word ‘homotopic’ with reference to their presumed geometrical realization. We do not make this precise here, nor has it yet been made precise in the literature; for this reason, our use of the term ‘homotopy’ is not yet well connected to the standard notion.</p>
+
+<p>Every homotopy is either a <em>contraction</em>, which make the geometry locally more singular, or an <em>expansion</em>, which make it locally more generic. If we view our original diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> as a zigzag (see <a href="#CombinatorialFoundation">Combinatorial foundation</a>, a contraction is encoded as a zigzag map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>→</mo><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">D \to D'</annotation></semantics></math>, and an expansion as a zigzag map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>′</mo><mo>→</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">D' \to D</annotation></semantics></math>, for some other diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">D'</annotation></semantics></math>.</p>
+
+<h3 id="triggering_homotopies">Triggering homotopies</h3>
+
+<p>Every homotopy is triggered by choosing an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n \geq 2</annotation></semantics></math>, choosing some vertex that it contains, and dragging that vertex <em>vertically</em>; that is, either up or down. If a homotopy is performed on a diagram at the top level, it is directly constructed by one of the base case procedures given below. Alternatively, if it is performed in a slice of a diagram, the effect on the diagram as a whole is computed by a recursive scheme, which propagates the homotopy up from the slice where it was triggered.</p>
+
+<p>If we are viewing an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n \geq 3</annotation></semantics></math>, then at each height <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math> of the diagram, there is a subdiagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>h</mi></msub></mrow><annotation encoding="application/x-tex">D_h</annotation></semantics></math> with dimension <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n-1 \geq 2</annotation></semantics></math>. If we drag a vertex or wire of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> <em>horizontally</em> at some height <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math>, we can think of this as dragging some geometrical entity vertically within the subdiagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>h</mi></msub></mrow><annotation encoding="application/x-tex">D_h</annotation></semantics></math>. For this reason, this mouse gesture will trigger a homotopy in the subdiagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>h</mi></msub></mrow><annotation encoding="application/x-tex">D_h</annotation></semantics></math>, and the recursive case below will apply. This could alternatively be triggered by reducing the projection level by 1, navigating to the subdiagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>h</mi></msub></mrow><annotation encoding="application/x-tex">D_h</annotation></semantics></math> directly, and dragging the corresponding vertex up or down.</p>
+
+<h3 id="base_cases">Base cases</h3>
+
+<p>The base case applies when we are clicking on a top-level vertex, either in the diagram itself (meaning that there are no slice controls present), or in a boundary subdiagram (with every slice control showing either S or T.) If the chosen vertex is in <em>generic position</em>, meaning that it is the unique vertex at its height, a contraction will be triggered; otherwise, an expansion will be triggered. We illustrate this with the following diagram.</p>
+<table style="border-style:hidden !important; border:none !important;">
+<tr>
+<td></td><td></td><td>
+<img width="100" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/2-up.png" />
+</td>
+<td></td><td></td>
+</tr>
+<tr>
+<td></td><td></td><td>$\uparrow$</td>
+<td></td><td></td>
+</tr>
+<tr>
+<td>
+<img width="100" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/4-down.png" />
+</td>
+<td>$\rightarrow$</td>
+<td>
+<img width="100" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/contraction-expansion-labelled.png" />
+</td>
+<td>$\leftarrow$←</td>
+<td>
+<img width="100" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/1-up.png" />
+</td>
+</tr>
+<tr>
+<td></td><td></td><td>$\downarrow$</td><td></td><td></td>
+</tr>
+<tr>
+<td></td><td></td><td>
+<img width="100" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/2-down.png" />
+</td>
+<td></td><td></td>
+</tr>
+</table>
+<h3 id="recursive_cases">Recursive cases</h3>
+
+<h2 id="CombinatorialFoundation">Combinatorial foundation</h2>
 
 <p>The combinatorial data stored by the proof assistant can be understood in terms of zigzags.</p>
 
@@ -810,6 +865,8 @@ margin-left: 0em;
 <p>In a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, a <em>zigzag</em> is a finite diagram of the following sort:</p>
 
 <p><img height="120" style="margin-left:auto; margin-right:auto;" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/zigzag.png" alt="A zigzag" /></p>
+
+<p>We write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mi>r</mi></msub><mo>=</mo><mo stretchy="false">{</mo><msub><mi>r</mi> <mn>0</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>r</mi> <mi>n</mi></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">Z_r = \{ r_0, \ldots, r_n \}</annotation></semantics></math> for the set of <em>regular slices</em>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mi>s</mi></msub><mo>=</mo><mo stretchy="false">{</mo><msub><mi>s</mi> <mn>0</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>s</mi> <mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">Z_s = \{ s_0, \ldots, s_{n-1} \}</annotation></semantics></math> for the set of <em>singular slices</em>.</p>
 </div>
 
 <div class="num_defn">
@@ -852,28 +909,6 @@ margin-left: 0em;
 
 <p>Given a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>Σ</mi><mo stretchy="false">|</mo></mrow><annotation encoding="application/x-tex">|\Sigma|</annotation></semantics></math>-typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>, we can then ask if it is <em>well-typed</em> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>. This involves identifying the neighbourhoods of every point, and checking that they agree with the standard type neighbourhoods defined in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>. This procedure is explained in the references below.</p>
 
-<h2 id="constructing_homotopies">Constructing homotopies</h2>
-
-<p>A composite diagram can be deformed by clicking and dragging in its interior. If the indicated deformation would be geometrically invalid, an error message is displayed in the lower-right corner, and the diagram does not change. Otherwise, a new diagram is displayed, which is homotopic to the original diagram.</p>
-
-<p>The proof assistant manipulates finite combinatorial structures, and we use the word ‘homotopic’ with reference to their geometrical realization. We do not make this precise here, nor has it yet been made precise in the literature; for this reason, our use of the term ‘homotopy’ is not yet well connected to the standard notion.</p>
-
-<p>Every homotopy is either a <em>contraction</em>, which make the geometry locally more singular, or an <em>expansion</em>, which make it locally more generic. If a homotopy is performed on a diagram at the top level, it is directly constructed by one of the base case procedures given below. Alternatively, if it is performed in a slice of a diagram, the effect on the diagram as a whole is computed by a recursive scheme, which propagates the homotopy up from the slice where it was triggered.</p>
-
-<h3 id="triggering_homotopies">Triggering homotopies</h3>
-
-<p>Every homotopy is triggered by choosing an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n \geq 2</annotation></semantics></math>, choosing some vertex that it contains, and dragging that vertex <em>vertically</em>; that is, either up or down.</p>
-
-<p>If the vertex is in <em>generic position</em>, meaning that it is the unique vertex at its height, a contraction will be triggered; otherwise, an expansion will be triggered.</p>
-
-<p>The <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram that we choose could be the diagram as a whole, in which case one of the base cases will be triggered. Alternatively, it could be some slice of the diagram, in which case one of the recursive cases will be triggered.</p>
-
-<p>If we are viewing an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n \geq 3</annotation></semantics></math>, then at each height <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math> of the diagram, there is a subdiagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>h</mi></msub></mrow><annotation encoding="application/x-tex">D_h</annotation></semantics></math> with dimension <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n-1 \geq 2</annotation></semantics></math>. If we drag a vertex or wire of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> <em>horizontally</em> at some height <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math>, this will trigger a homotopy in the subdiagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>h</mi></msub></mrow><annotation encoding="application/x-tex">D_h</annotation></semantics></math>, and the recursive case below will apply. This could alternatively be triggered by reducing the projection level by 1, and navigating to the subdiagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>h</mi></msub></mrow><annotation encoding="application/x-tex">D_h</annotation></semantics></math> directly, and dragging the corresponding vertex up or down.</p>
-
-<h3 id="base_cases">Base cases</h3>
-
-<h3 id="recursive_cases">Recursive cases</h3>
-
 <h2 id="type_checking_and_normalization">Type checking and normalization</h2>
 
 <h2 id="references">References</h2>
@@ -897,14 +932,14 @@ margin-left: 0em;
 
 <div class="revisedby">
   <p>
-  Last revised on February  7, 2019 at 11:17:24.
+  Last revised on February  7, 2019 at 16:58:54.
   See the <a href="https://ncatlab.org/nlab/history/homotopy.io" style="color: #005c19">history</a> of this page for a list of all contributions to it.
   </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/homotopy.io" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/homotopy.io/14" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(14 revisions)</span> | <a href="/nlab/show/diff/homotopy.io" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/homotopy.io" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/homotopy.io" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/homotopy.io/15" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(15 revisions)</span> | <a href="/nlab/show/diff/homotopy.io" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/homotopy.io" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   | <a href="https://ncatlab.org/nlab/show/homotopy.io/cite" style="color: black">Cite</a>
   <span class="views">
     | Views:
