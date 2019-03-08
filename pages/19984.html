@@ -258,8 +258,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://www.ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://www.ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -849,11 +849,44 @@ margin-left: 0em;
 </table>
 <p>Dragging vertex 1 up, or vertex 4 down, has no effect, as vertices cannot be dragged off the top or bottom edge of a diagram.</p>
 
-<p>The following images illustrate non-contractible scenarios:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtext>INSERT PICTURES</mtext></mrow><annotation encoding="application/x-tex">\text{INSERT PICTURES}</annotation></semantics></math></div>
-<p>In both of these cases, attempting to perform the contraction will give an error message. In the first case, the contraction fails because there is no canonical ordering on the rear wires. In the second case, the contraction is successful at the level of the untyped diagram, but it is rejected by the type checker, since it merges two distinct generating cells, changing their neighbourhoods in a way which does not make sense in the type system.</p>
+<p>The contractions illustrated above are unique. However, in some cases, contractions are non-unique, as illustrated here (<a href="https://homotopy.io/?id=9DDbCH0V7xdKULkqroIz"><i>live workspace</i></a>):</p>
+<table style="border-style:hidden !important; padding:0px!important">
+<tr>
+<td>
+<img height="88" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/unitcounit-2.png" />
+</td>
+<td>→</td>
+<td>
+<img height="133" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/unitcounit-1.png" />
+</td>
+<td>←</td>
+<td>
+<img height="88" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/unitcounit-3.png" />
+</td>
+</tr>
+</table>
+<p>Starting with the central diagram, we produce the leftmost diagram by dragging the upper vertex south-east or the lower vertex north-west, and produce the rightmost diagram by dragging the upper vertex south-west or the lower vertex north-east.</p>
 
-<p>If there are no slice controls displayed, then the homotopy is being performed at codimension 0 (that is, at the top level), and the diagram will be rewritten in the obvious way. If every slice control shows S or T, then we are viewing a boundary of the main diagram, and the homotopy we are building will be attached to the boundary. Otherwise, we are in the interior of the diagram, working in some positive codimension, and the homotopy must now be propagated to lower codimension.</p>
+<p>Contraction is not always possible. The following images illustrate non-contractible scenarios:</p>
+<table style="border-style:hidden !important; padding:5px!important">
+<tr>
+<td>
+<img height="133" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/noncontractible-1.png" />
+</td>
+<td>
+<img height="133" src="https://www.cs.bham.ac.uk/~vicaryjo/homotopy.io/nlab/noncontractible-2.png" />
+</td>
+</tr>
+<tr>
+<td>
+(<a href="https://homotopy.io/?id=HWcBiyNFuYg3dGrlOqZh"><i>live workspace</i></a>)
+</td>
+<td>
+(<a href="https://homotopy.io/?id=2JlXs4ei0lGsUGeHWJtr"><i>live workspace</i></a>)
+</td></tr></table>
+<p>In both of these cases, attempting to perform the contraction will give an error message. In the first case, the contraction fails because there is no canonical ordering on the rear wires; this is analogous to the nonunique contraction case given above, but here, because of the projection, we cannot give extra data to break the symmetry. In the second case, the contraction is successful at the level of the untyped diagram, but it is rejected by the type checker, since it merges two distinct generating cells, changing their neighbourhoods in a way which is not allowed by the type system.</p>
+
+<p>If there are no slice controls displayed, then the homotopy is being performed at codimension 0 (that is, at the top level), and the diagram will be rewritten according to the homotopy. If every slice control shows S or T, then we are viewing a boundary of the main diagram, and the homotopy we are building will be attached to that boundary. Otherwise, we are in the interior of the diagram, working in some positive codimension, and the homotopy must now be propagated to lower codimension, using the recursive scheme detailed in the next section.</p>
 
 <h3 id="recursive_cases">Recursive cases</h3>
 
@@ -911,9 +944,9 @@ margin-left: 0em;
 <p>A <em><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>Σ</mi><mo stretchy="false">|</mo></mrow><annotation encoding="application/x-tex">|\Sigma|</annotation></semantics></math>-typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram</em> is an object of the category obtained by starting with the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒫</mi> <mi>Σ</mi></msub></mrow><annotation encoding="application/x-tex">\mathcal{P}_\Sigma</annotation></semantics></math>, and applying the zigzag category construction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> times.</p>
 </div>
 
-<p>Given a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>Σ</mi><mo stretchy="false">|</mo></mrow><annotation encoding="application/x-tex">|\Sigma|</annotation></semantics></math>-typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>, we can then ask if it is <em>well-typed</em> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>. This involves identifying the neighbourhoods of every point, and checking that they agree with the standard type neighbourhoods defined in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>. This procedure is explained in the references below.</p>
-
 <h2 id="type_checking_and_normalization">Type checking and normalization</h2>
+
+<p>Given a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>Σ</mi><mo stretchy="false">|</mo></mrow><annotation encoding="application/x-tex">|\Sigma|</annotation></semantics></math>-typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>, we can then ask if it is <em>well-typed</em> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>. This involves identifying the neighbourhoods of every point, and checking that they agree with the standard type neighbourhoods defined in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>. This procedure is explained in Christoph Dorn’s PhD thesis referenced below.</p>
 
 <h2 id="references">References</h2>
 
@@ -939,15 +972,15 @@ margin-left: 0em;
 </div>
 
 <div class="revisedby">
-  <p>
-  Last revised on February 12, 2019 at 10:11:12.
-  See the <a href="https://ncatlab.org/nlab/history/homotopy.io" style="color: #005c19">history</a> of this page for a list of all contributions to it.
-  </p>
+    <p>
+    Last revised on March  8, 2019 at 06:59:39.
+    See the <a href="https://ncatlab.org/nlab/history/homotopy.io" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/homotopy.io" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/homotopy.io/18" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(18 revisions)</span> | <a href="/nlab/show/diff/homotopy.io" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/homotopy.io" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/homotopy.io" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/homotopy.io/20" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(20 revisions)</span> | <a href="/nlab/show/diff/homotopy.io" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/homotopy.io" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   | <a href="https://ncatlab.org/nlab/show/homotopy.io/cite" style="color: black">Cite</a>
   <span class="views">
     | Views:
@@ -963,11 +996,6 @@ margin-left: 0em;
 
 </div>
 
-
-    <div id="footer">
-    <div>This site is running on <a href="http://golem.ph.utexas.edu/instiki/show/HomePage">Instiki 0.19.7(MML+)</a></div>
-    <div>Powered by <a href="http://rubyonrails.com/">Ruby on Rails</a>  2.3.18</div>
-    </div>
 
 </div> <!-- Content -->
 
