@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/4582/#Item_37" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/4582/#Item_38" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
     <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
@@ -718,7 +718,37 @@ margin-left: 0em;
 
 <p>The definition is by <a class="existingWikiWord" href="/nlab/show/induction-recursion">induction-recursion</a>. We define the property “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a type” <em>inductively</em>, and simultaneously we define <em>recursively</em> two functions on such <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, one giving the collection of terms of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, and the other giving the collection of pairs of terms considered equal as elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>. Note that each such collection may itself be a prior inductive definition.</p>
 
-<p>The clauses which we include in each case depend on what type constructors we want to put into our type theory; in each case the base notion of untyped computation must include corresponding operators. Here are three paradigmatic examples.</p>
+<p>The definition is intended to satisfy some properties:</p>
+
+<ul>
+<li>
+<p>Equality:</p>
+
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a:A</annotation></semantics></math> if and only if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>=</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a=a:A</annotation></semantics></math>. (Reflexivity)</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>=</mo><mi>b</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a=b:A</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>=</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">b=a:A</annotation></semantics></math>. (Symmetry)</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>=</mo><mi>b</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a=b:A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>=</mo><mi>c</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">b=c:A</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>=</mo><mi>c</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a=c:A</annotation></semantics></math>. (Transitivity)</li>
+</ul>
+</li>
+
+<li>
+<p>Reverse reduction:</p>
+
+<ul>
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mspace width="thickmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">V\;type</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⇒</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">A \Rightarrow V</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mspace width="thickmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">A\;type</annotation></semantics></math>.</li>
+
+<li>The other judgment forms similarly respect reverse reduction in all positions.</li>
+</ul>
+</li>
+</ul>
+
+<p>By reflexivity, the specification of which terms have a type is technically redundant. It is just reiterating the reflexivity instances of equality. So for this meaning explanation, the recursive part of the definition is assigning types their meaning as <a class="existingWikiWord" href="/nlab/show/partial+equivalence+relations">partial equivalence relations</a> (PERs) on terms.</p>
+
+<p>The reverse reduction properties are saying that the relevant information about a term comes from the value it reduces to. Meaning explanations provide a sense in which type theory is about computational behavior. For this system, the computational behavior of a term is to return a value. Note however that not all terms reduce to a value, for example, the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math> combinator: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>x</mi><mspace width="thinmathspace"></mspace><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>x</mi><mspace width="thinmathspace"></mspace><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\lambda x.x\,x) (\lambda x.x\,x)</annotation></semantics></math>.</p>
+
+<p>The clauses we should include in the inductive-recursive definition depend on what type constructors we want to put into our type theory; in each case the base notion of untyped computation must include corresponding operators. Here are three paradigmatic examples.</p>
 
 <h3 id="natural_numbers">Natural numbers</h3>
 
@@ -881,14 +911,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on April 15, 2019 at 07:20:58.
+    Last revised on April 15, 2019 at 08:47:13.
     See the <a href="https://ncatlab.org/nlab/history/meaning explanation" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/meaning+explanation" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/meaning+explanation/22" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(22 revisions)</span> | <a href="/nlab/show/diff/meaning+explanation" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/meaning+explanation" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/meaning+explanation" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a> | <a href="/nlab/revision/meaning+explanation/23" accesskey="B" class="navlink" id="to_previous_revision" rel="nofollow">Back in time</a> <span class='revisions'>(23 revisions)</span> | <a href="/nlab/show/diff/meaning+explanation" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a> | <a href="/nlab/history/meaning+explanation" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   | <a href="https://ncatlab.org/nlab/show/meaning explanation/cite" style="color: black">Cite</a>
   <span class="views">
     | Views:
