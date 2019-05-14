@@ -751,6 +751,18 @@ margin-left: 0em;
 
 <h2 id="rules">Rules</h2>
 
+<p>These rules are not the final rules that are planned to be implemented in CLF. The major differences planned for the final rules from those here are:</p>
+
+<ul>
+<li>Use roughly Nuprl-style hidden assumptions, but with unhiding handled automatically.</li>
+
+<li>Have an additional judgment form for goals whose realizer is ignored/arbitrary, which interacts with unhiding.</li>
+
+<li>Add formal proof terms.</li>
+</ul>
+
+<p>The expectation and hope is that the result will look fairly similar to algorithmic elaboration-style type checking rules. These rules will be the primitive tactics, and type checking will thus be a special case of running tactic trees.</p>
+
 <h3 id="type_formation">Type Formation</h3>
 
 <p>We have a strong equality formation rule, inspired by the medium-strength rule due to Anand &amp; Rahli, which is also stronger than the usual one. Here is respect-based equality formation:</p>
@@ -832,13 +844,14 @@ margin-left: 0em;
 <h3 id="functions">Functions</h3>
 
 <p>We have the standard application rule, and a variant of function extensionality:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" rowspacing="1.0ex"><mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>⊩</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>⊩</mo><mi>A</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>a</mi><mo>⊩</mo><mi>B</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>p</mi><mo>⊩</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>x</mi><mo>=</mo><mi>f</mi><mo>′</mo><mspace width="thinmathspace"></mspace><mi>x</mi><mo>∈</mo><mi>B</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>q</mi><mo>⊩</mo><mi>f</mi><mo>=</mo><mi>f</mi><mo>′</mo><mo>∈</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi></mrow></mfrac></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\begin{gathered}
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" rowspacing="1.0ex"><mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>⊩</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>⊩</mo><mi>A</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>a</mi><mo>⊩</mo><mi>B</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>p</mi><mo>⊩</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>x</mi><mo>=</mo><mi>f</mi><mo>′</mo><mspace width="thinmathspace"></mspace><mi>x</mi><mo>∈</mo><mi>B</mi><mspace width="2em"></mspace><mi>x</mi><mo>∉</mo><mi>FV</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>f</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>q</mi><mo>⊩</mo><mi>f</mi><mo>=</mo><mi>f</mi><mo>′</mo><mo>∈</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi></mrow></mfrac></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\begin{gathered}
 \frac{\Gamma \vdash f \Vdash \Pi x:A.B \qquad
 \Gamma \vdash a \Vdash A}
 {\Gamma \vdash f\,a \Vdash B[a/x]} \\
 \\
 \frac{\Gamma \vdash A\,type \qquad
-\Gamma,x:A \vdash p \Vdash f\,x = f'\,x \in B}
+\Gamma,x:A \vdash p \Vdash f\,x = f'\,x \in B \qquad
+x \notin FV(f,f')}
 {\Gamma \vdash q \Vdash f = f' \in \Pi x:A.B}
 \end{gathered}
 </annotation></semantics></math></div>
@@ -846,8 +859,26 @@ margin-left: 0em;
 
 <h3 id="intersection">Intersection</h3>
 
+<p>Elements of a family intersection are like elements of a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math> type, except you don’t have to apply them. An intersection element is <em>already</em> an element of all instances of the family. So the rules for family intersection are analogous to the rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" rowspacing="1.0ex"><mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>b</mi><mo>⊩</mo><mo>∩</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>⊩</mo><mi>A</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>b</mi><mo>⊩</mo><mi>B</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>p</mi><mo>⊩</mo><mi>b</mi><mo>=</mo><mi>b</mi><mo>′</mo><mo>∈</mo><mi>B</mi><mspace width="2em"></mspace><mi>x</mi><mo>∉</mo><mi>FV</mi><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>b</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>q</mi><mo>⊩</mo><mi>b</mi><mo>=</mo><mi>b</mi><mo>′</mo><mo>∈</mo><mo>∩</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi></mrow></mfrac></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\begin{gathered}
+\frac{\Gamma \vdash b \Vdash \cap x:A.B \qquad
+\Gamma \vdash a \Vdash A}
+{\Gamma \vdash b \Vdash B[a/x]} \\
+\\
+\frac{\Gamma \vdash A\,type \qquad
+\Gamma,x:A \vdash p \Vdash b = b' \in B \qquad
+x \notin FV(b,b')}
+{\Gamma \vdash q \Vdash b = b' \in \cap x:A.B}
+\end{gathered}
+</annotation></semantics></math></div>
 <h3 id="computation_formation">Computation Formation</h3>
-
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" rowspacing="1.0ex"><mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>Comp</mi><mo>⊢</mo><mi>b</mi><mo>⊩</mo><mi>Comp</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>λ</mi><mi>x</mi><mo>.</mo><mi>b</mi><mo>⊩</mo><mi>Comp</mi></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>⊩</mo><mi>Comp</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>⊩</mo><mi>Comp</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>a</mi><mo>⊩</mo><mi>Comp</mi></mrow></mfrac></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\begin{gathered}
+\frac{\Gamma,x:Comp \vdash b \Vdash Comp}{\Gamma \vdash \lambda x.b \Vdash Comp} \\
+\\
+\frac{\Gamma \vdash f \Vdash Comp \qquad \Gamma \vdash a \Vdash Comp}
+{\Gamma \vdash f\,a \Vdash Comp}
+\end{gathered}
+</annotation></semantics></math></div>
 <h3 id="subset">Subset</h3>
 
 <h3 id="per">PER</h3>
@@ -859,7 +890,7 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on May 14, 2019 at 12:58:32.
+    Last revised on May 14, 2019 at 13:41:35.
     See the <a href="https://ncatlab.org/nlab/history/prototype CLF" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
