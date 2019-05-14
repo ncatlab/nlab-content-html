@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_8" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_10" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
     <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
@@ -610,6 +610,17 @@ margin-left: 0em;
 </ul>
 </ul>
 <li><a href='#rules'>Rules</a></li>
+<ul>
+<li><a href='#type_formation'>Type Formation</a></li>
+<li><a href='#miscellaneous'>Miscellaneous</a></li>
+<li><a href='#equality'>Equality</a></li>
+<li><a href='#functions'>Functions</a></li>
+<li><a href='#intersection'>Intersection</a></li>
+<li><a href='#computation_formation'>Computation Formation</a></li>
+<li><a href='#subset'>Subset</a></li>
+<li><a href='#per'>PER</a></li>
+<li><a href='#booleans'>Booleans</a></li>
+</ul>
 </ul>
 </div>
 
@@ -740,21 +751,79 @@ margin-left: 0em;
 
 <h2 id="rules">Rules</h2>
 
-<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mi>test</mi><mi>render</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{test}{render}</annotation></semantics></math></p>
+<h3 id="type_formation">Type Formation</h3>
+
+<p>We have a strong equality formation rule, inspired by the medium-strength rule due to Anand &amp; Rahli, which is also stronger than the usual one. Here is respect-based equality formation:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>p</mi><mo>⊩</mo><mi>A</mi><mo>≺</mo><mi>C</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>q</mi><mo>⊩</mo><mi>B</mi><mo>≺</mo><mi>C</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>⊩</mo><mi>A</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>b</mi><mo>⊩</mo><mi>B</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>=</mo><mi>b</mi><mo>∈</mo><mi>C</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash p \Vdash A \prec C \qquad
+\Gamma \vdash q \Vdash B \prec C \qquad
+\Gamma \vdash a \Vdash A \qquad \Gamma \vdash b \Vdash B}
+{\Gamma \vdash a = b \in C\,type}</annotation></semantics></math></p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash A\,type \qquad \Gamma,x:A \vdash B\,type}
+{\Gamma \vdash \Pi x:A.B\,type}</annotation></semantics></math></p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mo lspace="thinmathspace" rspace="thinmathspace">⋂</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash A\,type \qquad \Gamma,x:A \vdash B\,type}
+{\Gamma \vdash \bigcap x:A.B\,type}</annotation></semantics></math></p>
+
+<p>The <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Comp</mi></mrow><annotation encoding="application/x-tex">Comp</annotation></semantics></math> type, which is called <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Base</mi></mrow><annotation encoding="application/x-tex">Base</annotation></semantics></math> in Nuprl:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>Comp</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{}{\Gamma \vdash Comp\,type}</annotation></semantics></math></p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">{</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">}</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash A\,type \qquad \Gamma,x:A \vdash B\,type}
+{\Gamma \vdash \{x:A | B\}\,type}</annotation></semantics></math></p>
+
+<p>The PER comprehension type is due to Anand &amp; Rahli. However, I think Nuprl had already had <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Base</mi></mrow><annotation encoding="application/x-tex">Base</annotation></semantics></math>, subsets, and quotients, which make it definable. The real innovation is how PER comprehension and the strengthened equality formation rule interact to allow internal, logical-relations-style type definitions. We only allow forming a PER from a pseudo-PER, rather than implicitly taking the symmetric transitive closure of any family:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mtable displaystyle="false" rowspacing="0.5ex" columnalign="left"><mtr><mtd><mi>Γ</mi><mo>,</mo><mi>x</mi><mn>1</mn><mo>:</mo><mi>Comp</mi><mo>,</mo><mi>x</mi><mn>2</mn><mo>:</mo><mi>Comp</mi><mo>⊢</mo><mi>R</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mtd></mtr> <mtr><mtd><mi>Γ</mi><mo>,</mo><mi>y</mi><mn>1</mn><mo>:</mo><mi>Comp</mi><mo>,</mo><mi>y</mi><mn>2</mn><mo>:</mo><mi>Comp</mi><mo>⊢</mo><mi>s</mi><mo>⊩</mo><mi>R</mi><mo stretchy="false">[</mo><mi>y</mi><mn>1</mn><mo>,</mo><mi>y</mi><mn>2</mn><mo stretchy="false">/</mo><mi>x</mi><mn>1</mn><mo>,</mo><mi>x</mi><mn>2</mn><mo stretchy="false">]</mo><mo>→</mo><mi>R</mi><mo stretchy="false">[</mo><mi>y</mi><mn>2</mn><mo>,</mo><mi>y</mi><mn>1</mn><mo stretchy="false">/</mo><mi>x</mi><mn>1</mn><mo>,</mo><mi>x</mi><mn>2</mn><mo stretchy="false">]</mo></mtd></mtr> <mtr><mtd><mi>Γ</mi><mo>,</mo><mi>y</mi><mn>1</mn><mo>:</mo><mi>Comp</mi><mo>,</mo><mi>y</mi><mn>2</mn><mo>:</mo><mi>Comp</mi><mo>,</mo><mi>y</mi><mn>3</mn><mo>:</mo><mi>Comp</mi><mo>⊢</mo><mi>t</mi><mo>⊩</mo><mi>R</mi><mo stretchy="false">[</mo><mi>y</mi><mn>1</mn><mo>,</mo><mi>y</mi><mn>2</mn><mo stretchy="false">/</mo><mi>x</mi><mn>1</mn><mo>,</mo><mi>x</mi><mn>2</mn><mo stretchy="false">]</mo><mo>→</mo><mi>R</mi><mo stretchy="false">[</mo><mi>y</mi><mn>2</mn><mo>,</mo><mi>y</mi><mn>3</mn><mo stretchy="false">/</mo><mi>x</mi><mn>1</mn><mo>,</mo><mi>x</mi><mn>2</mn><mo stretchy="false">]</mo><mo>→</mo><mi>R</mi><mo stretchy="false">[</mo><mi>y</mi><mn>1</mn><mo>,</mo><mi>y</mi><mn>3</mn><mo stretchy="false">/</mo><mi>x</mi><mn>1</mn><mo>,</mo><mi>x</mi><mn>2</mn><mo stretchy="false">]</mo></mtd></mtr></mtable><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">{</mo><mi>x</mi><mn>1</mn><mo>=</mo><mi>x</mi><mn>2</mn><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">}</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\begin{array}{l}\Gamma,x1:Comp,x2:Comp \vdash R\,type \\
+\Gamma,y1:Comp,y2:Comp \vdash s \Vdash R[y1,y2/x1,x2] \to R[y2,y1/x1,x2] \\
+\Gamma,y1:Comp,y2:Comp,y3:Comp \vdash t \Vdash R[y1,y2/x1,x2] \to R[y2,y3/x1,x2] \to R[y1,y3/x1,x2]\end{array}}
+{\Gamma \vdash \{x1 = x2 | R\}\,type}</annotation></semantics></math></p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>Bool</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{}{\Gamma \vdash Bool\,type}</annotation></semantics></math></p>
+
+<h3 id="miscellaneous">Miscellaneous</h3>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>A</mi><msub><mo>≡</mo> <mi>β</mi></msub><mi>B</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>⊩</mo><mi>A</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>⊩</mo><mi>B</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{A \equiv_\beta B \qquad \Gamma \vdash B\,type \qquad
+\Gamma \vdash t \Vdash A}
+{\Gamma \vdash t \Vdash B}</annotation></semantics></math></p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>t</mi><msub><mo>≡</mo> <mi>β</mi></msub><mi>t</mi><mo>′</mo><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>⊩</mo><mi>T</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>′</mo><mo>⊩</mo><mi>T</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{t \equiv_\beta t' \qquad \Gamma \vdash t \Vdash T}
+{\Gamma \vdash t' \Vdash T}</annotation></semantics></math></p>
+
+<p>Every type respects itself, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Comp</mi></mrow><annotation encoding="application/x-tex">Comp</annotation></semantics></math>. (Yes, you can use any term you like as the proof.):</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>p</mi><mo>⊩</mo><mi>A</mi><mo>≺</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash A\,type}{\Gamma \vdash p \Vdash A \prec A}</annotation></semantics></math></p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>p</mi><mo>⊩</mo><mi>Comp</mi><mo>≺</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash A\,type}{\Gamma \vdash p \Vdash Comp \prec A}</annotation></semantics></math></p>
+
+<h3 id="equality">Equality</h3>
+
+<h3 id="functions">Functions</h3>
+
+<h3 id="intersection">Intersection</h3>
+
+<h3 id="computation_formation">Computation Formation</h3>
+
+<h3 id="subset">Subset</h3>
+
+<h3 id="per">PER</h3>
+
+<h3 id="booleans">Booleans</h3>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on May 14, 2019 at 08:50:18.
+    Last revised on May 14, 2019 at 09:50:47.
     See the <a href="https://ncatlab.org/nlab/history/prototype CLF" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/5" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (5 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/6" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (6 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/prototype CLF/cite" style="color: black">Cite</a>
   <a href="/nlab/print/prototype+CLF" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/prototype+CLF" id="view_tex" rel="nofollow">TeX</a>
