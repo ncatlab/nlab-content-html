@@ -630,8 +630,8 @@ margin-left: 0em;
 <li><a href='#admissible_rules_vs_per_semantics'>Admissible Rules vs PER Semantics</a></li>
 <li><a href='#loose_ends'>Loose ends</a></li>
 <li><a href='#equality_uses_respect_which_uses_equality'>Equality uses respect which uses equality</a></li>
-<li><a href='#piintro_is_funny'>Pi-intro is funny</a></li>
-<li><a href='#where_are_all_the_congruence_rules'>Where are all the congruence rules?</a></li>
+<li><a href='#usual_piintro_rule'>Usual Pi-intro rule</a></li>
+<li><a href='#congruence_rules'>Congruence rules</a></li>
 </ul>
 <li><a href='#semantic_judgmental_reflection'>Semantic Judgmental Reflection</a></li>
 <li><a href='#per_theory'>PER theory</a></li>
@@ -1000,13 +1000,18 @@ x \notin FV(b,b')}
 
 <p>Because every type respects itself, we get all the instances of equality formation from Martin-Löf type theory. Equality types beyond that are for reasoning about membership.</p>
 
-<h4 id="piintro_is_funny">Pi-intro is funny</h4>
+<h4 id="usual_piintro_rule">Usual Pi-intro rule</h4>
 
-<p>Not only is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math> intro not about lambdas, it’s not apparently about elements at all; just equality. That’s (one place) where the selectivity rules are handy. The function extensionality rule is strong enough to combine with selectivity to derive elements of function type. Proving that lambdas are functions additionally uses beta conversion. Lambdas are functions, not by fiat, but because they produce results when applied. Note that not all functions are lambdas. At the very least, the empty function is denoted by any term you like. That is, a function type with empty domain has the same PER as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\top</annotation></semantics></math>.</p>
+<p>Taking function extensionality to be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math> intro seems odd. Not only is it not about lambdas, it’s not apparently about elements at all; just equality. That’s (one place) where the selectivity rules are handy. The function extensionality rule is strong enough to combine with selectivity (and reflexivity) to derive elements of function type. A term is a function when you can apply it to an argument to get a result:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>x</mi><mo>⊩</mo><mi>B</mi><mspace width="2em"></mspace><mi>x</mi><mo>∉</mo><mi>FV</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>⊩</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash A\,type \qquad
+\Gamma,x:A \vdash f\,x \Vdash B \qquad x \notin FV(f)}
+{\Gamma \vdash f \Vdash \Pi x:A.B}
+</annotation></semantics></math></div>
+<p>Proving that lambdas are functions additionally uses beta conversion. Lambdas are functions, not by fiat, but because they produce results when applied. Note that not all functions are lambdas. At the very least, the empty function is denoted by any term you like. That is, a function type with empty domain has the same PER as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\top</annotation></semantics></math>.</p>
 
-<h4 id="where_are_all_the_congruence_rules">Where are all the congruence rules?</h4>
+<h4 id="congruence_rules">Congruence rules</h4>
 
-<p>With such a small set of type constructors, it may be hard to tell, but congruence rules are rarely needed as primitives. Beta conversion was already defined as an untyped congruence closure, and for typed equality, the subsumptive rewrite rule does most of the work. The extensionality rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∩</mo></mrow><annotation encoding="application/x-tex">\cap</annotation></semantics></math> are needed to help with binders and (our ersatz) hidden assumptions. That may turn out to handle everything, with this judgmental setup.</p>
+<p>With such a small set of type constructors, it may be hard to tell, but congruence rules are rarely needed as primitives. Beta conversion was already defined as an untyped congruence closure, and for typed equality, the subsumptive rewrite rule does most of the work of congruence rules. The extensionality rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∩</mo></mrow><annotation encoding="application/x-tex">\cap</annotation></semantics></math> are needed to help with binders and (our ersatz) hidden assumptions. That may turn out to handle everything, with this judgmental setup.</p>
 
 <h3 id="semantic_judgmental_reflection">Semantic Judgmental Reflection</h3>
 
@@ -1039,14 +1044,14 @@ x \notin FV(b,b')}
 
 <div class="revisedby">
     <p>
-    Last revised on May 16, 2019 at 08:07:31.
+    Last revised on May 16, 2019 at 10:40:08.
     See the <a href="https://ncatlab.org/nlab/history/prototype CLF" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/17" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (17 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/18" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (18 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/prototype CLF/cite" style="color: black">Cite</a>
   <a href="/nlab/print/prototype+CLF" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/prototype+CLF" id="view_tex" rel="nofollow">TeX</a>
