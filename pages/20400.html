@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_20" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_21" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
     <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
@@ -621,22 +621,23 @@ margin-left: 0em;
 <li><a href='#per'>PER</a></li>
 <li><a href='#booleans'>Booleans</a></li>
 </ul>
-<li><a href='#discussion'>Discussion</a></li>
-<ul>
 <li><a href='#admissible_rules'>Admissible rules</a></li>
 <ul>
 <li><a href='#structural_rules'>Structural rules</a></li>
 <li><a href='#sanity_and_inversion'>Sanity and Inversion</a></li>
-<li><a href='#admissible_rules_vs_per_semantics'>Admissible Rules vs PER Semantics</a></li>
+<li><a href='#AdmissSem'>Admissible Rules vs PER Semantics</a></li>
 <li><a href='#loose_ends'>Loose ends</a></li>
+<ul>
 <li><a href='#equality_uses_respect_which_uses_equality'>Equality uses respect which uses equality</a></li>
 <li><a href='#usual_piintro_rule'>Usual Pi-intro rule</a></li>
 <li><a href='#congruence_rules'>Congruence rules</a></li>
 </ul>
-<li><a href='#semantic_judgmental_reflection'>Semantic Judgmental Reflection</a></li>
-<li><a href='#per_theory'>PER theory</a></li>
-<li><a href='#type_intensionality'>Type Intensionality</a></li>
 </ul>
+<li><a href='#semantic_judgmental_reflection'>Semantic Judgmental Reflection</a></li>
+<ul>
+<li><a href='#equality_reflection'>Equality reflection</a></li>
+</ul>
+<li><a href='#per_theory'>PER theory</a></li>
 <li><a href='#more_admissible_rules'>More admissible rules</a></li>
 <ul>
 <li><a href='#fun_with_subsets'>Fun with subsets</a></li>
@@ -954,23 +955,21 @@ x \notin FV(b,b')}
 \Gamma \vdash p \Vdash \bottom}
 {\Gamma \vdash t \Vdash T}
 </annotation></semantics></math></div>
-<h2 id="discussion">Discussion</h2>
+<h2 id="admissible_rules">Admissible rules</h2>
 
-<h3 id="admissible_rules">Admissible rules</h3>
-
-<h4 id="structural_rules">Structural rules</h4>
+<h3 id="structural_rules">Structural rules</h3>
 
 <p>The structural rules of weakening and substitution are admissible. “Strengthening” is not. Nonadmissibility of strengthening means: just because a variable isn’t free in the conclusion doesn’t mean the derivation isn’t using it. This is typical of “extensional type theory”. Typically it’s considered all the fault of equality reflection, which may be technically true for some systems. But Nuprl turned this apparent bug into a feature: subsets and intersections provide flexible control over which proofs make it into the computational content, and which are merely establishing external facts. Computational irrelevance is implemented by literally omitting the irrelevant proofs from terms. This leads to the lack of strengthening, and to undecidable type checking. The restriction imposed by equality reflection is that equality proofs never have computational content.</p>
 
 <p>CLF follows Nuprl in trying to give the user maximum control over the terms used to represent elements. The hope is that with care, this can allow significantly greater convenience and performance than with decidable dependent type systems, which are committed to retaining enough annotations to effectively reject ill-typed terms.</p>
 
-<h4 id="sanity_and_inversion">Sanity and Inversion</h4>
+<h3 id="sanity_and_inversion">Sanity and Inversion</h3>
 
 <p>You’d think a statement should make sense before you try to prove it. And likewise, that a type should be valid before you try to construct an element. But in practice, it also works to consider a typed construction as providing evidence that the type makes sense. Specifically, the only way to derive (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>⊩</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash t \Vdash T</annotation></semantics></math>) is if you could also derive (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>T</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash T\,type</annotation></semantics></math>). That’s a “sanity check” admissible rule. It’s <em>probably</em> admissible for the judgments defined by the rules above.</p>
 
 <p>Also, since the only way to derive type validity in this system (not using the sanity admissible rule) is to use a type former, a derivation of type validity implies that there are derivations of validity for the subexpressions of the type expression. These are “inversion” admissible rules.</p>
 
-<h4 id="admissible_rules_vs_per_semantics">Admissible Rules vs PER Semantics</h4>
+<h3 id="AdmissSem">Admissible Rules vs PER Semantics</h3>
 
 <p>For full Nuprl, it seems practically impossible to prove admissibility of sanity or inversion, if they’re not just included among the primitive rules. But they <em>can</em> be included among the primitive rules, because they’re true in the semantics. Due to the way hypothetical judgments are defined, making the inversion rules true requires making type equality intensional.</p>
 
@@ -986,7 +985,7 @@ x \notin FV(b,b')}
 
 <p>In my (Matt Oliveri’s) opinion, Nuprl-style systems are potentially relevant and useful to mathematics, but it’s not currently clear exactly how that might work.</p>
 
-<h4 id="loose_ends">Loose ends</h4>
+<h3 id="loose_ends">Loose ends</h3>
 
 <p>Now that we’ve covered the issue that the distinction between derivable and admissible doesn’t really matter for this system, we can get to explaining particular aspects that may seem to be in particular need of an explanation.</p>
 
@@ -1013,11 +1012,43 @@ x \notin FV(b,b')}
 
 <p>With such a small set of type constructors, it may be hard to tell, but congruence rules are rarely needed as primitives. Beta conversion was already defined as an untyped congruence closure, and for typed equality, the subsumptive rewrite rule does most of the work of congruence rules. The extensionality rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∩</mo></mrow><annotation encoding="application/x-tex">\cap</annotation></semantics></math> are needed to help with binders and (our ersatz) hidden assumptions. That may turn out to handle everything, with this judgmental setup.</p>
 
-<h3 id="semantic_judgmental_reflection">Semantic Judgmental Reflection</h3>
+<h2 id="semantic_judgmental_reflection">Semantic Judgmental Reflection</h2>
 
-<h3 id="per_theory">PER theory</h3>
+<h3 id="equality_reflection">Equality reflection</h3>
 
-<h3 id="type_intensionality">Type Intensionality</h3>
+<p>With many type theories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>, it’s cumbersome but straightforward to define collections of the formal derivations of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> as type families in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>. This provides a form of <em>syntactic</em> reflection of a system’s judgments within itself. <a class="existingWikiWord" href="/nlab/show/provability+logic">There</a> <a class="existingWikiWord" href="/nlab/show/modal+type+theory">are</a> <a class="existingWikiWord" href="/nlab/show/higher-order+abstract+syntax">ways</a> of making syntactic reflection more convenient and/or powerful.</p>
+
+<p>But Nuprl-style systems provide a quite different kind of judgmental reflection that we’ll call “<em>semantic</em> judgmental reflection”, or just “judgmental reflection” for short. The original example of judgmental reflection, and the basis of the name, is the equality reflection rule of extensional type theory (ETT), which makes the “identity” type family a reflection of the meaning of the element equality judgment of the same system. In a sense, this is still the only judgmental reflection principle in Nuprl-style systems. (But the type family is called “equality”.) The difference is in the interpretation of the equality judgment.</p>
+
+<p>There are two styles of interpretation for ETT: <a class="existingWikiWord" href="/nlab/show/intrinsic+and+extrinsic+views+of+typing">intrinsic and extrinsic</a>. Extrinsic is the original, since an example is Martin-Löf’s <a class="existingWikiWord" href="/nlab/show/meaning+explanation">meaning explanation</a>, which was the original justification for equality reflection. Intrinsic seems to have become the default one. It’s the style considered in <a href="#HofmannThesis">Martin Hofmann’s thesis</a>, for example. But Nuprl and CLF commit to the extrinsic style.</p>
+
+<p>An irony is that by considering terms extrinsically typed, you consider them intrinsically meaningful. In Nuprl and CLF, following Martin-Löf, terms have an intrinsic computational meaning. The role of the Nuprl-style type system is to reason about that. (Remember: this can all be considered a <a href="#AdmissSem">substitute for admissible rules</a>! …Probably.)</p>
+
+<p>There is actually no interpretation necessary, for terms in general. The type system can be layered over the terms as they are, making use of an operational model of their computational meaning. (A denotational semantics would probably work too.) The details need not concern us here, but some things are important:</p>
+
+<ul>
+<li>Computational meaning pertains principally to closed terms, because free variables don’t compute; they’re just placeholders.</li>
+
+<li>Some closed terms are designated as types, and denote PERs on closed terms.</li>
+
+<li>For closed terms and types, the equality judgment form (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>=</mo><mi>t</mi><mo>′</mo><mo>∈</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">t = t' \in T</annotation></semantics></math>) just accesses the PER of the type.</li>
+
+<li>For closed terms, the judgment of being an element of a type (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>∈</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">t \in T</annotation></semantics></math>) is a special case of equality.</li>
+
+<li>It’s the judgments about closed terms that are reflected as closed types; judgments about open terms are not involved.</li>
+</ul>
+
+<p>All of these points are important to the design of a Nuprl-style system. But the one that seems to distinguish the approach from intrinsic typing is that being an element is a special case of equality. In the intrinsic approach, equality is only meaningful when applied to two terms known to have the same type. So being an element must be somehow prior to equality. But with the judgment of being an element as a special case of equality, it’s simultaneous.</p>
+
+<p>A lot of the power of judgmental reflection is that it <em>can</em> be understood as reasoning about the computational content of the language as it actually is. But since it’s probably not <em>necessary</em> to interpret Nuprl-style systems as being about their own syntax, we should speak of “computations”, not “closed terms”. In CLF, however they’re interpreted, computations are axiomatized as the elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Comp</mi></mrow><annotation encoding="application/x-tex">Comp</annotation></semantics></math>. (And actually, it may be that types need not be computations.) Types are PERs on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Comp</mi></mrow><annotation encoding="application/x-tex">Comp</annotation></semantics></math>, and are accessed by the equality judgment form, which is reflected by the equality type constructor. So you use equality types to reason about equality in types, and also membership of computations in types.</p>
+
+<p>So then what’s with all this respect (“<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>≺</mo></mrow><annotation encoding="application/x-tex">\prec</annotation></semantics></math>”) stuff in the equality formation rule? If terms have an intrinsic computational meaning, and equality reasons about it, shouldn’t the rule be just:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>T</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mn>1</mn><mo>=</mo><mi>t</mi><mn>2</mn><mo>∈</mo><mi>T</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash T\,type}{\Gamma \vdash t1 = t2 \in T\,type}</annotation></semantics></math></div>
+<p>?</p>
+
+<p>No, that doesn’t work. The extra complexity has to do with making the axiomatization work for open terms. Consider the type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">{</mo><mi>x</mi><mo>=</mo><mi>y</mi><mo stretchy="false">|</mo><mi>x</mi><mo>∈</mo><mi>Bool</mi><mo>∧</mo><mi>y</mi><mo>∈</mo><mi>Bool</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">I\;\coloneqq\;\{x = y | x \in Bool \wedge y \in Bool\}</annotation></semantics></math>. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>tru</mi><mo>=</mo><mi>fls</mi><mo>∈</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">tru = fls \in I</annotation></semantics></math>. But then consider (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>I</mi><mo>⊢</mo><mi>tru</mi><mo>=</mo><mi>x</mi><mo>∈</mo><mi>Bool</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">x:I \vdash tru = x \in Bool\,type</annotation></semantics></math>). The simple formation rule would derive it, but it doesn’t make sense, because (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>tru</mi><mo>=</mo><mi>tru</mi><mo>∈</mo><mi>Bool</mi></mrow><annotation encoding="application/x-tex">tru = tru \in Bool</annotation></semantics></math>) and (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>tru</mi><mo>=</mo><mi>fls</mi><mo>∈</mo><mi>Bool</mi></mrow><annotation encoding="application/x-tex">tru = fls \in Bool</annotation></semantics></math>) are different types, although <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>tru</mi></mrow><annotation encoding="application/x-tex">tru</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>fls</mi></mrow><annotation encoding="application/x-tex">fls</annotation></semantics></math> are the same <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math>. The problem is that equality of types and elements is generally different from equality of computations, and we want well-typed open terms to respect equality of elements. The respect-based equality formation rule doesn’t derive the bad type family because you’d need to derive <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi><mo>≺</mo><mi>Bool</mi></mrow><annotation encoding="application/x-tex">I \prec Bool</annotation></semantics></math>.</p>
+
+<h2 id="per_theory">PER theory</h2>
 
 <h2 id="more_admissible_rules">More admissible rules</h2>
 
@@ -1053,6 +1084,10 @@ x \notin FV(b,b')}
 <li id="PERTypes14">
 <p>Abhishek Anand, Mark Bickford, Robert L. Constable, Vincent Rahli, <em>A Type Theory with Partial Equivalence Relations as Types</em>, Types for Proofs and Programs (TYPES) 2014 (<a href="https://vrahli.github.io/articles/slides-per-types.pdf">slides</a>, <a href="http://www.nuprl.org/KB/show.php?ID=722">web</a>, <a href="http://www.nuprl.org/documents/Anand/ATypeTheoryWithPartialEquivalenceRelationsAsTypes.pdf">pdf</a>)</p>
 </li>
+
+<li id="HofmannThesis">
+<p>Martin Hofmann, <em>Extensional concepts in intensional type theory</em>, Ph.D. dissertation, University of Edinburgh (1995). (<a href="http://www.lfcs.inf.ed.ac.uk/reports/95/ECS-LFCS-95-327/">link</a>)</p>
+</li>
 </ul>
 </body></html>
 
@@ -1060,14 +1095,14 @@ x \notin FV(b,b')}
 
 <div class="revisedby">
     <p>
-    Last revised on May 16, 2019 at 13:10:42.
+    Last revised on May 17, 2019 at 08:54:32.
     See the <a href="https://ncatlab.org/nlab/history/prototype CLF" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/19" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (19 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/21" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (21 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/prototype CLF/cite" style="color: black">Cite</a>
   <a href="/nlab/print/prototype+CLF" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/prototype+CLF" id="view_tex" rel="nofollow">TeX</a>
