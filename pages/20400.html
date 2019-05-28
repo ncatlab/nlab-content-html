@@ -262,8 +262,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_33" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_34" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
     <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
@@ -484,6 +484,7 @@ margin-left: 0em;
 <h4 id="constructivism_realizability_computability">Constructivism, Realizability, Computability</h4>
 
 <div class="hide"><div>
+
 <p><strong><a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a></strong>, <strong><a class="existingWikiWord" href="/nlab/show/realizability">realizability</a></strong>, <strong><a class="existingWikiWord" href="/nlab/show/computability">computability</a></strong></p>
 
 <p><a class="existingWikiWord" href="/nlab/show/intuitionistic+mathematics">intuitionistic mathematics</a></p>
@@ -590,7 +591,8 @@ margin-left: 0em;
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/Church-Turing+thesis">Church-Turing thesis</a></p>
 </li>
-</ul></div></div>
+</ul>
+</div></div>
 </div>
 </div>
 
@@ -598,6 +600,12 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
+<ul>
+<li><a href='#motive'>Motive</a></li>
+<li><a href='#method'>Method</a></li>
+<li><a href='#intended_style'>Intended Style</a></li>
+<li><a href='#clf_as_a_metalogic'>CLF as a Metalogic</a></li>
+</ul>
 <li><a href='#syntax'>Syntax</a></li>
 <ul>
 <li><a href='#term_grammar'>Term grammar</a></li>
@@ -645,13 +653,73 @@ margin-left: 0em;
 <li><a href='#bool_eliminations'>Bool eliminations</a></li>
 <li><a href='#subtyping_conjectural'>Subtyping (Conjectural)</a></li>
 </ul>
+<li><a href='#CLFasLF'>CLF and Logical Frameworks</a></li>
+<ul>
+<li><a href='#lf'>LF=</a></li>
+<li><a href='#lf_signatures_as_inductiveinductive_families'>LF Signatures as Inductive-Inductive Families</a></li>
+<li><a href='#bishopstyle_quotients'>Bishop-style Quotients</a></li>
+</ul>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
 
 <h2 id="idea">Idea</h2>
 
-<p>Proto CLF is a work-in-progress <a class="existingWikiWord" href="/nlab/show/proof+assistant">proof assistant</a> design combining ideas from <a class="existingWikiWord" href="/nlab/show/Nuprl">Nuprl</a>, <a class="existingWikiWord" href="/nlab/show/LF">LF</a>, and <a class="existingWikiWord" href="/nlab/show/decidability">undecidable proof checking</a>. “CLF” abbreviates “Computational Logical Framework”. So far, it’s just Matt Oliveri’s unpublished plans and metatheory development, but information may appear here.</p>
+<p>Proto CLF is a work-in-progress <a class="existingWikiWord" href="/nlab/show/proof+assistant">proof assistant</a> design combining ideas from <a class="existingWikiWord" href="/nlab/show/Nuprl">Nuprl</a>, <a class="existingWikiWord" href="/nlab/show/LF">LF</a>, and <a class="existingWikiWord" href="/nlab/show/decidability">undecidable type checking</a>. “CLF” abbreviates “Computational Logical Framework”. So far, it’s just Matt Oliveri’s unpublished plans and metatheory development, but information may appear here.</p>
+
+<h3 id="motive">Motive</h3>
+
+<p>The motivation for CLF is to try and combine the convenience of type systems with the flexibility of program verification, and make the resulting style of correct program construction applicable to mathematics in a general way.</p>
+
+<p>In most typed computational languages—even those with rather strong type systems, like the dependent type systems of <a class="existingWikiWord" href="/nlab/show/Coq">Coq</a> and <a class="existingWikiWord" href="/nlab/show/Agda">Agda</a>—there is a distinction between types and program specifications. A specification should</p>
+
+<ul>
+<li>constrain the computational behavior of conforming terms, and</li>
+
+<li>not constrain the way this behavior is implemented.</li>
+</ul>
+
+<p>Types typically constrain both behavior and implementation. Intuitively, this is because types are typically implemented using elaborate syntax checks, so they constrain behavior <em>by</em> constraining implementation.</p>
+
+<p>A <em>program logic</em> provides predicates and proofs about programs, and this provides an adequate approach to specifications and verification of computational behavior. The requirement to satisfy a predicate doesn’t constrain the way a program is implemented because the syntax rules for forming a program don’t take into account any predicates the programmer may hope the program to satisfy. This is the sense in which program verification is more flexible than syntactic typing.</p>
+
+<p>By taking types to denote (certain) <a class="existingWikiWord" href="/nlab/show/PER">PER</a>s on terms, Nuprl provides an <a class="existingWikiWord" href="/nlab/show/intrinsic+and+extrinsic+views+of+typing">extrinsic</a> notion of type that subsumes program specifications. So Nuprl has a type system, and its types provide the flexibility of program verification; but it seems like Nuprl doesn’t provide the convenience of a type system with a type checking algorithm.</p>
+
+<p>From a naive perspective, it can’t be done. Type checking Nuprl would be undecidable, but more importantly, it would require automatically coming up with proofs of true mathematical statements, and there’s no good way to do that.</p>
+
+<p>But that just means there needs to be additional machinery for formal proofs and practical proof checking. The question is then whether the formal proof machinery is as convenient, for developing correct programs, as type checking. The answer, for Nuprl’s proof system, is supposedly “no”. CLF will try to do better, by checking proof terms in a manner similar to dependent type checking.</p>
+
+<h3 id="method">Method</h3>
+
+<p>CLF is planned to combine a semantics similar to that of Nuprl with a language of proof terms similar to that of <a href="https://cedille.github.io/">Cedille</a>. (Cedille is actually the latest in a series of dependent type systems (co)designed by Aaron Stump in which the meaning of equality pertains to realizers, not proof terms.)</p>
+
+<p>The terms that the CLF type system is about are called “realizers”. (Since its Nuprl-inspired PER semantics is a term realizability model.) The proof terms would be an <em>additional</em> class of terms. In the case of “obviously-well-typed” programs, the tree structures of the realizers and proof terms should be nearly isomorphic, so the system will resemble a typical syntactic type checker. In general, proof terms have additional information not present in realizers. This is the information that is needed for proof/type checking, but is not part of the computational content of the witness/element.</p>
+
+<p>CLF types only depend on realizers, never proof terms. So to handle proof checking rules analogous to certain rules of dependent type systems, a realizer needs to be extracted from a proof on the fly. (Nuprl works around such rules, since it doesn’t extract realizers on the fly.) This seems to be essentially the problem of dependent proof refinement discussed in <a href="#SterlingHarperRefinement">Algebraic Foundations of Proof Refinement</a>. An analogue of on-the-fly realizer extraction is used by Cedille too, and is called “erasure”.</p>
+
+<h3 id="intended_style">Intended Style</h3>
+
+<p>The primitives of CLF will probably be pretty low-level, and will rely on some “bootstrapping” up to the usual principles of type theory. (Some of this can be seen already, in the discussion of the rules below.) This bootstrapping will rely in crucial ways on the realizers being fundamentally untyped.</p>
+
+<p>However, once the bootstrapping is taken care of, the intent is that the main way of using CLF will be a lot like other dependently-typed proof assistants: Constructions will be thought of as elements of types, and the type system will guide the details of constructing elements.</p>
+
+<p>Given the goal of a system that feels typed, it may seem weird to explicitly base it on untyped realizers. The reason goes back to the flexibility of specifications, compared to purely syntactic typing. It should <em>always</em> be possible to construct elements in such a way that the computational content is well-implemented. But it seems that syntactic dependent typing requires ever more tricks to be added to the language in order to express elements using terms that are efficient.</p>
+
+<p>Rather than having to change the language, CLF provides the option of reasoning about assignment of types to untyped realizers to <em>prove</em> the missing type theoretic principles. Of course, reasoning about type assignment can also be used, to taste, even when not strictly necessary. In general, there’s a spectrum of styles for using an extrinsic type theory, based on how much of the well-typedness of a construction is true by construction, versus proven afterward. Correctness by construction makes the development feel more intrinsic, but this difference in style is not a commitment: the extrinsic perspective applies to everything.</p>
+
+<h3 id="clf_as_a_metalogic">CLF as a Metalogic</h3>
+
+<p>The above considerations motivate a whole class of type system implementations that combine Nuprl-style semantics with a Cedille-like proof term checker. But what about <a class="existingWikiWord" href="/nlab/show/category">categories</a>?</p>
+
+<p>To justify the proof rules, systems like Nuprl, Cedille, and CLF are based on term realizability models. But it’s not currently clear to what extent this approach is compatible with the <a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">categorical semantics of type theory</a>.</p>
+
+<p>The specifics of CLF are motivated by the insight (of Matt Oliveri, but strongly inspired by <a href="http://www.andromeda-prover.org/">Andromeda</a>) that <a class="existingWikiWord" href="/nlab/show/extensional+type+theory">extensional type theories</a> promise to make great logical frameworks. Although categorical semantics for “structural” fragments of Nuprl-style systems may be feasible and useful, CLF sidesteps the whole issue by being a metalogic for reasoning about formal systems.</p>
+
+<p>The idea is that by regarding CLF as a metalogic, its possible lack of categorical semantics is irrelevant because the object logic can be chosen so as to reason about the desired semantics. CLF as a metalogic is a way to try to make the (hypothesized) technical advantages of a Nuprl-Cedille-like approach applicable to any type theory.</p>
+
+<p>Some discussion is needed to explain what makes extensional type theory good for logical frameworks, what that has to do with metalogics, and what makes CLF a good metalogic. <a href="#CLFasLF">Later</a>.</p>
+
+<p>First, what follows is a draft version of the formal system that will be used in prototype CLF. These rules are non-algorithmic rules pertaining only to types and realizers; the details of the proof system are not designed yet. (And they won’t be until some issues are addressed in the semantics and rule set.)</p>
 
 <h2 id="syntax">Syntax</h2>
 
@@ -1104,6 +1172,16 @@ x \notin FV(b,b')}
 
 <h3 id="subtyping_conjectural">Subtyping (Conjectural)</h3>
 
+<h2 id="CLFasLF">CLF and Logical Frameworks</h2>
+
+<p>(Sorry, nothing here yet.)</p>
+
+<h3 id="lf">LF=</h3>
+
+<h3 id="lf_signatures_as_inductiveinductive_families">LF Signatures as Inductive-Inductive Families</h3>
+
+<h3 id="bishopstyle_quotients">Bishop-style Quotients</h3>
+
 <h2 id="references">References</h2>
 
 <ul>
@@ -1118,6 +1196,10 @@ x \notin FV(b,b')}
 <li id="HofmannThesis">
 <p>Martin Hofmann, <em>Extensional concepts in intensional type theory</em>, Ph.D. dissertation, University of Edinburgh (1995). (<a href="http://www.lfcs.inf.ed.ac.uk/reports/95/ECS-LFCS-95-327/">link</a>)</p>
 </li>
+
+<li id="SterlingHarperRefinement">
+<p>Jonathan Sterling, Robert Harper, <em>Algebraic Foundations of Proof Refinement</em>, 2017 (<a href="https://arxiv.org/abs/1703.05215">arXiv</a>)</p>
+</li>
 </ul>
 </body></html>
 
@@ -1125,14 +1207,14 @@ x \notin FV(b,b')}
 
 <div class="revisedby">
     <p>
-    Last revised on May 25, 2019 at 19:13:22.
+    Last revised on May 28, 2019 at 16:14:50.
     See the <a href="https://ncatlab.org/nlab/history/prototype CLF" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/29" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (29 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/30" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (30 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/prototype CLF/cite" style="color: black">Cite</a>
   <a href="/nlab/print/prototype+CLF" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/prototype+CLF" id="view_tex" rel="nofollow">TeX</a>
