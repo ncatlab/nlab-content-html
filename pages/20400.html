@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_37" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_38" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
     <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
@@ -662,7 +662,7 @@ margin-left: 0em;
 <ul>
 <li><a href='#LFEq'>LF=</a></li>
 <li><a href='#lf_signatures_as_inductiveinductive_families'>LF Signatures as Inductive-Inductive Families</a></li>
-<li><a href='#bishopstyle_quotients'>Bishop-style Quotients</a></li>
+<li><a href='#RefinementQuotients'>Refinement-style Quotients</a></li>
 </ul>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -1053,9 +1053,14 @@ x \notin FV(b,b')}
 
 <h3 id="structural_rules">Structural rules</h3>
 
-<p>The structural rules of weakening and substitution are admissible. “Strengthening” is not. Nonadmissibility of strengthening means: just because a variable isn’t free in the conclusion doesn’t mean the derivation isn’t using it. This is typical of extensional type theory. Typically it’s considered all the fault of equality reflection, which may be technically true for some systems. But Nuprl turned this apparent bug into a feature: subsets and intersections provide flexible control over which proofs make it into the computational content, and which are merely establishing external facts. Computational irrelevance is implemented by literally omitting the irrelevant proofs from terms. This leads to the lack of strengthening, and to undecidable type checking. The restriction imposed by equality reflection is that equality proofs never have computational content.</p>
+<p>The structural rules of weakening and substitution are admissible. “Strengthening” is not. Strengthening says that a variable that’s not free in the conclusion can be removed from the context:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><msub><mi>Γ</mi> <mn>1</mn></msub><mo>,</mo><mi>x</mi><mo>:</mo><mi>T</mi><mo>,</mo><msub><mi>Γ</mi> <mn>2</mn></msub><mo>⊢</mo><mi>𝒥</mi><mspace width="2em"></mspace><mi>x</mi><mo>∉</mo><mi>FV</mi><mo stretchy="false">(</mo><msub><mi>Γ</mi> <mn>2</mn></msub><mo>,</mo><mi>𝒥</mi><mo stretchy="false">)</mo></mrow><mrow><msub><mi>Γ</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>Γ</mi> <mn>2</mn></msub><mo>⊢</mo><mi>𝒥</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma_1,x:T,\Gamma_2 \vdash \mathcal{J} \qquad
+x \notin FV(\Gamma_2,\mathcal{J})}
+{\Gamma_1,\Gamma_2 \vdash \mathcal{J}}
+</annotation></semantics></math></div>
+<p>So nonadmissibility of strengthening means that a derivation can be using a hypothesis without it being obvious from the conclusion derived. This is typical of extensional type theory. Typically it’s considered all the fault of equality reflection, which may be technically true for some systems. But Nuprl benefits more from the lack of strengthening: subsets, intersections, quotients, and other “refinement-style” type constructors provide flexible control over which proofs make it into the computational content, and which are merely establishing external facts. (<a class="existingWikiWord" href="/nlab/show/quotient">Quotients</a> don’t have to be refinement-style, but in Nuprl and CLF, they are. See <a href="#RefinementQuotients">below</a>.) Computational irrelevance is implemented by literally omitting the irrelevant proofs from terms. This leads to the lack of strengthening, and to undecidable type checking. The restriction imposed by equality reflection is that equality proofs never have computational content.</p>
 
-<p>CLF follows Nuprl in trying to give the user maximum control over the terms used to represent elements. The hope is that with care, this can allow significantly greater convenience and performance than with decidable dependent type systems, which are committed to retaining enough annotations to effectively reject ill-typed terms.</p>
+<p>CLF follows Nuprl in trying to give the user maximum control over the terms used to represent elements. The hope is that with care, this can allow significantly greater convenience and performance than with decidable dependent type systems, which are committed to retaining enough annotations to effectively reject ill-typed terms. Once proof terms are added to the formal judgments, you probably do get strengthening. (But not decidability.)</p>
 
 <h3 id="sanity_and_inversion">Sanity and Inversion</h3>
 
@@ -1231,7 +1236,7 @@ x \notin FV(b,b')}
 
 <h3 id="lf_signatures_as_inductiveinductive_families">LF Signatures as Inductive-Inductive Families</h3>
 
-<h3 id="bishopstyle_quotients">Bishop-style Quotients</h3>
+<h3 id="RefinementQuotients">Refinement-style Quotients</h3>
 
 <h2 id="references">References</h2>
 
@@ -1258,14 +1263,14 @@ x \notin FV(b,b')}
 
 <div class="revisedby">
     <p>
-    Last revised on June  7, 2019 at 23:56:26.
+    Last revised on June  8, 2019 at 13:30:30.
     See the <a href="https://ncatlab.org/nlab/history/prototype CLF" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/41" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (41 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/42" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (42 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/prototype CLF/cite" style="color: black">Cite</a>
   <a href="/nlab/print/prototype+CLF" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/prototype+CLF" id="view_tex" rel="nofollow">TeX</a>
