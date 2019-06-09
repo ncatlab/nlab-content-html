@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_38" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_39" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
     <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
@@ -660,6 +660,7 @@ margin-left: 0em;
 </ul>
 <li><a href='#CLFasLF'>CLF and Logical Frameworks</a></li>
 <ul>
+<li><a href='#martinlfs_logical_framework'>Martin-Löf’s Logical Framework</a></li>
 <li><a href='#LFEq'>LF=</a></li>
 <li><a href='#lf_signatures_as_inductiveinductive_families'>LF Signatures as Inductive-Inductive Families</a></li>
 <li><a href='#RefinementQuotients'>Refinement-style Quotients</a></li>
@@ -1230,7 +1231,29 @@ x \notin FV(\Gamma_2,\mathcal{J})}
 
 <h2 id="CLFasLF">CLF and Logical Frameworks</h2>
 
-<p>(Sorry, nothing here yet.)</p>
+<p><a class="existingWikiWord" href="/nlab/show/logical+framework">Logical frameworks</a> provide a formal notation for languages. (Especially languages that support logical deduction.) The kind of logical framework CLF aims to provide is one that represents dependent type systems using HOAS signatures.</p>
+
+<p>The logical framework “<a class="existingWikiWord" href="/nlab/show/LF">LF</a>” uses HOAS, and can already represent seemingly any language, including dependent type systems. But the issue is not only whether a language can be represented at all, but how “deep” the encoding is. With a <em>shallow</em> encoding, the framework representation of encoded expressions of the language is close to a custom representation tailored to that language. With a <em>deep</em> encoding, a lot of overhead is introduced by the encoding, making the framework representation much less convenient than a custom one.</p>
+
+<p>LF’s use of HOAS makes the encoding of many languages shallower, but only works for languages that can be expressed using <a class="existingWikiWord" href="/nlab/show/natural+deduction">natural-deduction</a>-style rules. (That includes the degenerate case of languages with no binding forms. That is, <a class="existingWikiWord" href="/nlab/show/combinatory+logic">combinator</a> languages.) So to encode <a class="existingWikiWord" href="/nlab/show/substructural+logic">substructural</a> languages, for example, evidence of substructural variable use needs to be handled explicitly, unlike with a custom representation.</p>
+
+<p>There are two styles of HOAS-based encoding associated with LF, called “synthetic” and “analytic”. (See the <a class="existingWikiWord" href="/nlab/show/logical+framework">logical framework</a> page.) Synthetic is a deeper style of encoding than analytic, but analytic only works for languages where type equality is just <a class="existingWikiWord" href="/nlab/show/alpha+equivalence">alpha equivalence</a>.</p>
+
+<p>The formal description of a language in LF and similar logical frameworks is called a “signature”, since it’s similar to a <a class="existingWikiWord" href="/nlab/show/signature+%28in+logic%29">signature</a> for some fixed logic.</p>
+
+<h3 id="martinlfs_logical_framework">Martin-Löf’s Logical Framework</h3>
+
+<p>To see how equality reflection is useful for a logical framework, we will propose an extension of LF, called “LF=” (LF with equality), that combines the flexibility of LF’s synthetic encoding with the shallowness of LF’s analytic encoding. (But in LF=, the encoding is generally not analytic, in the sense of algorithmic judgments. That’s the catch.) But first, it’s instructive to cover analytic encoding in Martin-Löf’s logical framework (“MLLF”).</p>
+
+<p>Unlike LF, MLLF doesn’t have a fixed judgmental equality. Term formers are specified in roughly the same intrinsically typed way as with the analytic encoding for LF. But then judgmental equality rules for the object language are added by adding corresponding judgmental equality rules to the framework. Thus, MLLF can shallowly encode many type systems with analytic judgments, not just the ones where type equality is very simple, like with LF. MLLF is particularly well suited to specifying variants of Martin-Löf type theory.</p>
+
+<p>MLLF is defined and discussed in Martin-Löf’s <a href="#AnaSynJudg">Analytic and Synthetic Judgements in Type Theory</a> and in part III of <a href="#ProgMLTT">Programming in Martin-Löf’s Type Theory</a>. The former reference also discusses the notions of analytic and synthetic judgment, while the latter makes it perhaps clearer how the “theory of types” is intended to be used as a logical framework. Martin-Löf’s main theory of mathematical collections is the “theory of sets”, which is specified using the logical framework.</p>
+
+<p>There are tools that provide a style of language specification very similar to MLLF. <a href="https://deducteam.github.io/">Dedukti</a> implements a logical framework similar to LF, but signatures can also include typed rewrite rules that extend judgmental equality. There’s an <a href="#AgdaJudgRewr16">Agda feature</a> that allows proven or hypothesized equations to be declared as rewrites that extend judgmental equality. This can presumably be combined with axioms to imitate Dedukti signatures, and quite possibly more.</p>
+
+<p>These tools are designed under the assumption that, while open-ended, judgmental equality remains analytic. That is, it’s something that you can sanely just check automatically. (Or so the story goes.) Trying to add extensional type theory’s equality reflection rule to a rewrite engine is not going to work. It generally won’t have a good way to solve the premise that proves the equation. (Either the system will give up, or do something useless.)</p>
+
+<p>The equality reflection rule is enough to make the judgments synthetic. That is, something you generally have to prove. To handle type systems with synthetic judgments, you either need to use a synthetic encoding, or use a tool designed to handle synthetic judgments, like Nuprl, <a href="http://www.andromeda-prover.org/">Andromeda</a>, or (eventually, hopefully) CLF.</p>
 
 <h3 id="LFEq">LF=</h3>
 
@@ -1256,6 +1279,18 @@ x \notin FV(\Gamma_2,\mathcal{J})}
 <li id="SterlingHarperRefinement">
 <p><a class="existingWikiWord" href="/nlab/show/Jonathan+Sterling">Jonathan Sterling</a>, <a class="existingWikiWord" href="/nlab/show/Robert+Harper">Robert Harper</a>, <em>Algebraic Foundations of Proof Refinement</em>, 2017 (<a href="https://arxiv.org/abs/1703.05215">arXiv</a>)</p>
 </li>
+
+<li id="AnaSynJudg">
+<p>Per Martin-Löf, <em>Analytic and Synthetic Judgments in Type Theory</em>, 1994 (<a href="http://archive-pml.github.io/martin-lof/pdfs/Martin-Lof-Analytic-and-Synthetic-Judgements-in-Type-Theory.pdf">pdf</a>)</p>
+</li>
+
+<li id="ProgMLTT">
+<p>Bengt Nordström, Kent Petersson, Jan M. Smith, <em>Programming in Martin-Löf’s Type Theory</em>, Oxford University Press (1990) (<a href="http://www.cse.chalmers.se/research/group/logic/book/">web</a>)</p>
+</li>
+
+<li id="AgdaJudgRewr16">
+<p>Jesper Cockx, Andreas Abel, <em>Sprinkles of extensionality for your vanilla type theory</em>, Types for Proofs and Programs (TYPES) 2016 (<a href="http://www.cse.chalmers.se/~abela/types16-cockx.pdf">pdf</a>)</p>
+</li>
 </ul>
 </body></html>
 
@@ -1263,14 +1298,14 @@ x \notin FV(\Gamma_2,\mathcal{J})}
 
 <div class="revisedby">
     <p>
-    Last revised on June  8, 2019 at 13:30:30.
+    Last revised on June  9, 2019 at 13:48:40.
     See the <a href="https://ncatlab.org/nlab/history/prototype CLF" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/42" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (42 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/43" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (43 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/prototype CLF/cite" style="color: black">Cite</a>
   <a href="/nlab/print/prototype+CLF" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/prototype+CLF" id="view_tex" rel="nofollow">TeX</a>
