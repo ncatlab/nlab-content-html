@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_43" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9916/#Item_44" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
     <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
@@ -741,7 +741,7 @@ margin-left: 0em;
 
 <p>To justify the proof rules, systems like Nuprl, Cedille, and CLF are based on term realizability models. But it’s not currently clear to what extent this approach is compatible with the <a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">categorical semantics of type theory</a>.</p>
 
-<p>The specifics of CLF are motivated by the insight (of Matt Oliveri, but strongly inspired by <a href="http://www.andromeda-prover.org/">Andromeda</a>) that <a class="existingWikiWord" href="/nlab/show/extensional+type+theory">extensional type theories</a> (with equality reflection) promise to make great logical frameworks. Although categorical semantics for “structural” fragments of Nuprl-style systems may be feasible and useful, CLF sidesteps the whole issue by being a metalogic for reasoning about formal systems.</p>
+<p>The specifics of CLF are motivated by the insight (of Matt Oliveri, but strongly inspired by <a href="#Andromeda">Andromeda</a>) that <a class="existingWikiWord" href="/nlab/show/extensional+type+theory">extensional type theories</a> (with equality reflection) promise to make great logical frameworks. Although categorical semantics for “structural” fragments of Nuprl-style systems may be feasible and useful, CLF sidesteps the whole issue by being a metalogic for reasoning about formal systems.</p>
 
 <p>The idea is that by regarding CLF as a metalogic, its possible lack of categorical semantics is irrelevant because the object logic can be chosen so as to reason about the desired semantics. CLF as a metalogic is a way to try to make the (hypothesized) technical advantages of a Nuprl-Cedille-like approach applicable to any type theory.</p>
 
@@ -1351,9 +1351,64 @@ x \notin FV(\Gamma_2,\mathcal{J})}
 
 <p>These tools are designed under the assumption that, while open-ended, judgmental equality remains analytic. That is, it’s something that you can sanely just check automatically. (Or so the story goes.) Trying to add extensional type theory’s equality reflection rule to a rewrite engine is not going to work. It generally won’t have a good way to solve the premise that proves the equation. (Either the system will give up, or do something useless.)</p>
 
-<p>The equality reflection rule is enough to make the judgments synthetic. That is, something you generally have to prove. To handle type systems with synthetic judgments, you either need to use a synthetic encoding, or use a tool designed to handle synthetic judgments, like Nuprl, <a href="http://metaprl.org/">MetaPRL</a>, <a href="http://www.andromeda-prover.org/">Andromeda</a>, or (eventually, hopefully) CLF.</p>
+<p>The equality reflection rule is enough to make the judgments synthetic. That is, something you generally have to prove. To handle type systems with synthetic judgments, you either need to use a synthetic encoding (for example, in LF or Isabelle), or use a tool designed to handle synthetic judgments, like Nuprl, <a href="http://metaprl.org/">MetaPRL</a>, <a href="#Andromeda">Andromeda</a>, or (eventually, hopefully) CLF.</p>
 
 <h3 id="LFEq">LF=</h3>
+
+<p>Like LF, and unlike MLLF, LF= has a fixed judgmental equality. Unlike either LF or MLLF, this judgmental equality is synthetic, because LF= has equality reflection. (LF=’s typing judgment form is synthetic as well, for the usual reason that it makes use of judgmental equality.)</p>
+
+<p>LF= is LF plus a reflective equality type constructor. (Combined with LF’s eta equality for function types, this gets function extensionality.) But still no equality kinds. LF is often formulated such that only canonical forms (beta normal, eta long) are well typed. This probably does not work for LF=; use your favorite way of formulating extensional type theory. (The details don’t matter here, since I’m going to propose CLF as a generalization of LF=.)</p>
+
+<p>To encode an intrinsically typed language in LF=, you can declare intrinsically typed constants/axioms in LF=, much like LF’s analytic encoding:</p>
+
+<pre><code>tp : Type
+el : tp -&gt; Type
+
+Pi : {A:tp} (el A -&gt; tp) -&gt; tp
+lam : {A:tp} {B:el A-&gt;tp} ({a:el A} el (B a)) -&gt; el (Pi A B)
+app : {A:tp} {B:el A-&gt;tp} el (Pi A B) -&gt; {a:el A} el (B a)</code></pre>
+
+<p>Like in MLLF, the object language’s judgmental equality is identified with the framework’s judgmental equality. This means you don’t need to encode congruence rules. Interesting equality rules are encoded by assuming an equation:</p>
+
+<pre><code>pi_beta : {A:tp} {B:el A-&gt;tp} {b:{a:el A} el (B a)} {a:el A} app A B (lam A B b) a = b a
+pi_eta : {A:tp} {B:el A-&gt;tp} {f:el (Pi A B)} f = lam A B ([a] app A B f a)</code></pre>
+
+<p>Unlike MLLF, these axioms are just additional constants; there is no restriction other than that they be well typed declarations in LF=. Although these equations are just constants, by using equality reflection to use them, no coercions appear in the terms. If using LF= equations added a coercion to the term, LF= equality would not be an adequate representation of judgmental equality. (The adequacy of reflective equality is inspired by <a href="#Andromeda">Andromeda</a>.)</p>
+
+<p>For an example of why using equality reflection in the framework doesn’t automatically make the object language extensional, we will cover the non-derivability of (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>nat</mi><mo>,</mo><mi>m</mi><mo>:</mo><mi>nat</mi><mo>⊢</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>≡</mo><mi>m</mi><mo>+</mo><mi>n</mi><mspace width="thickmathspace"></mspace><mo>:</mo><mspace width="thickmathspace"></mspace><mi>nat</mi></mrow><annotation encoding="application/x-tex">n:nat,m:nat \vdash n + m \equiv m + n\;:\;nat</annotation></semantics></math>) in intensional type theory. So we add natural numbers:</p>
+
+<pre><code>nat : tp
+
+zro : el nat
+suc : el nat -&gt; el nat
+
+natrec : ...
+
+natrec_zro : ...
+natrec_suc : ...</code></pre>
+
+<p><code>natrec</code> should be the dependent elimination form for the inductive type of natural numbers. <code>natrec_zro</code> and <code>natrec_suc</code> are its defining equations.</p>
+
+<p>We can then define—in the metalanguage—a derived form</p>
+
+<pre><code>plus : el nat -&gt; el nat -&gt; el nat</code></pre>
+
+<p>using <code>natrec</code>. We will write (<code>plus n m</code>) as (<code>n + m</code>).</p>
+
+<p>The judgment (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>nat</mi><mo>,</mo><mi>m</mi><mo>:</mo><mi>nat</mi><mo>⊢</mo><mi>n</mi><mo>+</mo><mi>m</mi><mo>≡</mo><mi>m</mi><mo>+</mo><mi>n</mi><mspace width="thickmathspace"></mspace><mo>:</mo><mspace width="thickmathspace"></mspace><mi>nat</mi></mrow><annotation encoding="application/x-tex">n:nat,m:nat \vdash n + m \equiv m + n\;:\;nat</annotation></semantics></math>) is represented as (<code>{n:el nat} {m:el nat} n + m = m + n</code>). There is “obviously” no LF= term of that type, since there’s no induction principle for the LF= type <code>el nat</code>, and the only interesting equations about <code>el nat</code> don’t apply for a general element. The object language has <code>natrec</code> as an induction principle, but that only works for proving object language types, not LF= equality.</p>
+
+<p>Of course, if we add reflective equality to the <em>object language</em>, then we should be able to combine <code>natrec</code> and the object language’s equality reflection to prove the LF= equation. Here is a reflective equality type constructor:</p>
+
+<pre><code>eq : {T:tp} el T -&gt; el T -&gt; tp
+eqI : {T:tp} {t:el T} el (eq T t t)
+eqE : {T:tp} {t1 t2:el T} el (eq T t1 t2) -&gt; t1 = t2
+eqK : {T:tp} {t:el T} {p:el (eq T t t)} p = eqI T t</code></pre>
+
+<p><code>eqE</code> is the equality reflection rule for the object language. Note that there’s no trouble declaring this constant. It’s just another judgmental equality rule for the object language. LF= was prepared all along for equality requiring proof. On the other hand, that means that it requires <em>boring</em> proof in the common case that it’s obvious. So an implementation of LF= would have a practical need for proof automation, to effect type checking of the object language.</p>
+
+<p>The motivation behind CLF—and seemingly many other type system implementations based on synthetic judgments—is that there’s no <em>implementation</em> reason to distinguish type checking from other forms of proof automation. That type checking really is just automatic “proving” of judgments. So a general “logic of judgments” should be available to provide a common basis for the implementation of type checkers.</p>
+
+<p>On the other hand, if you insist upon decidable type checking, that would be a reason to distinguish type checking from general proof automation. Implementers of synthetic type systems seem united in not considering decidability very important.</p>
 
 <h3 id="lf_signatures_as_inductiveinductive_families">LF Signatures as Inductive-Inductive Families</h3>
 
@@ -1378,6 +1433,10 @@ x \notin FV(\Gamma_2,\mathcal{J})}
 <p><a class="existingWikiWord" href="/nlab/show/Jonathan+Sterling">Jonathan Sterling</a>, <a class="existingWikiWord" href="/nlab/show/Robert+Harper">Robert Harper</a>, <em>Algebraic Foundations of Proof Refinement</em>, 2017 (<a href="https://arxiv.org/abs/1703.05215">arXiv</a>)</p>
 </li>
 
+<li id="Andromeda">
+<p><a class="existingWikiWord" href="/nlab/show/Andrej+Bauer">Andrej Bauer</a>, Gaëtan Gilbert, Philipp G. Haselwarter, <a class="existingWikiWord" href="/nlab/show/Matija+Pretnar">Matija Pretnar</a>, Christopher A. Stone, <em>Design and Implementation of the Andromeda Proof Assistant</em>, 2018 (<a href="https://arxiv.org/abs/1802.06217v1">arXiv</a>, <a href="http://www.andromeda-prover.org/">project web</a>)</p>
+</li>
+
 <li id="AnaSynJudg">
 <p><a class="existingWikiWord" href="/nlab/show/Per+Martin-L%C3%B6f">Per Martin-Löf</a>, <em>Analytic and Synthetic Judgments in Type Theory</em>, 1994 (<a href="http://archive-pml.github.io/martin-lof/pdfs/Martin-Lof-Analytic-and-Synthetic-Judgements-in-Type-Theory.pdf">pdf</a>)</p>
 </li>
@@ -1396,14 +1455,14 @@ x \notin FV(\Gamma_2,\mathcal{J})}
 
 <div class="revisedby">
     <p>
-    Last revised on June 13, 2019 at 00:03:50.
+    Last revised on June 23, 2019 at 16:55:51.
     See the <a href="https://ncatlab.org/nlab/history/prototype CLF" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/51" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (51 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/prototype+CLF" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/prototype+CLF/52" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (52 revisions)</span><a href="/nlab/show/diff/prototype+CLF" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/prototype+CLF" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/prototype CLF/cite" style="color: black">Cite</a>
   <a href="/nlab/print/prototype+CLF" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/prototype+CLF" id="view_tex" rel="nofollow">TeX</a>
