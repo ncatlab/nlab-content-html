@@ -8,7 +8,7 @@
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="robots" content="index,follow" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link href="/stylesheets/instiki.css?1553353531" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1534319116" media="all" rel="stylesheet" type="text/css" />
@@ -262,8 +262,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -313,6 +313,10 @@ margin-left: 0em;
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
 <body>
+<blockquote>
+<p>under construction</p>
+</blockquote>
+
 <div class="rightHandSide">
 <div class="toc clickDown" tabindex="0">
 <h3 id="context">Context</h3>
@@ -708,7 +712,8 @@ margin-left: 0em;
 <h1 id="contents">Contents</h1>
 <div class='maruku_toc'>
 <ul>
-<li><a href='#GraphComplex'>Graph complex</a></li>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#GraphComplex'>Definition</a></li>
 <li><a href='#properties'>Properties</a></li>
 <ul>
 <li><a href='#general_properties'>General properties</a></li>
@@ -724,31 +729,62 @@ margin-left: 0em;
 </ul>
 </div>
 
-<h2 id="GraphComplex">Graph complex</h2>
+<h2 id="idea">Idea</h2>
 
-<p>Roughly:</p>
+<p>A <em>graph complex</em> is a certain <a class="existingWikiWord" href="/nlab/show/cochain+complex">cochain complex</a> <a class="existingWikiWord" href="/nlab/show/linear+span">spanned</a> by <a class="existingWikiWord" href="/nlab/show/equivalence+classes">equivalence classes</a> of certain labeled <a class="existingWikiWord" href="/nlab/show/directed+graphs">directed graphs</a>, whose <a class="existingWikiWord" href="/nlab/show/differential">differential</a> encodes the operation of contracting away <a class="existingWikiWord" href="/nlab/show/edges">edges</a> in a graph.</p>
 
-<p>Consider the <a class="existingWikiWord" href="/nlab/show/complex+vector+space">complex vector space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒢</mi></mrow><annotation encoding="application/x-tex">\mathcal{G}</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/linear+span">spanned</a> by the <a class="existingWikiWord" href="/nlab/show/isomorphism+classes">isomorphism classes</a> of <a class="existingWikiWord" href="/nlab/show/orientation">oriented</a> <a class="existingWikiWord" href="/nlab/show/ribbon+graphs">ribbon graphs</a> <a class="existingWikiWord" href="/nlab/show/quotient">modulo</a> the <a class="existingWikiWord" href="/nlab/show/relation">relation</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mi>σ</mi><mo stretchy="false">)</mo><mo>=</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">(</mo><mi>Γ</mi><mo>,</mo><mi>σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\Gamma,-\sigma) = - (\Gamma, \sigma)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/orientation">orientation</a> on the <a class="existingWikiWord" href="/nlab/show/graph">graph</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>.</p>
-
-<p>A <a class="existingWikiWord" href="/nlab/show/differential">differential</a> on this vector space is given by</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∂</mo><mo stretchy="false">(</mo><mi>Γ</mi><mo stretchy="false">)</mo><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>e</mi><mo>∈</mo><mi>E</mi><mo stretchy="false">(</mo><mi>Γ</mi><mo stretchy="false">)</mo><mo>\</mo><mi>Loop</mi><mo stretchy="false">(</mo><mi>Γ</mi><mo stretchy="false">)</mo></mrow></munder><mi>Γ</mi><mo stretchy="false">/</mo><mi>e</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
-  \partial(\Gamma) 
-    \coloneqq 
-  \sum_{e\in E(\Gamma)\backslash Loop(\Gamma)} \Gamma/e
+<p>A concrete implementation of this general idea, often referred to by default <em>the graph complex</em>, yields a <a class="existingWikiWord" href="/nlab/show/real+numbers">real</a> <a class="existingWikiWord" href="/nlab/show/cochain+complex">cochain complex</a>, and in fact a <a class="existingWikiWord" href="/nlab/show/differential+graded-commutative+algebra">differential graded-commutative algebra</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Graphs</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>∈</mo><mspace width="thickmathspace"></mspace><msub><mi>dgcAlg</mi> <mi>ℝ</mi></msub><mphantom><mi>AA</mi></mphantom><mi>n</mi><mo>,</mo><mi>D</mi><mo>∈</mo><mi>ℕ</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  Graphs_n(D)
+  \;\in\;
+  dgcAlg_{\mathbb{R}}
+  \phantom{AA}
+  n, D \in \mathbb{N}
   \,,
 
 </annotation></semantics></math></div>
-<p>where the <a class="existingWikiWord" href="/nlab/show/sum">sum</a> is over <a class="existingWikiWord" href="/nlab/show/edges">edges</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> which are not <a class="existingWikiWord" href="/nlab/show/loops">loops</a> (have distinct <a class="existingWikiWord" href="/nlab/show/source">source</a> and <a class="existingWikiWord" href="/nlab/show/target">target</a>) and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo stretchy="false">/</mo><mi>e</mi></mrow><annotation encoding="application/x-tex">\Gamma/e</annotation></semantics></math> is obtained from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> by contraction at edge <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> (cf. <a class="existingWikiWord" href="/nlab/show/ribbon+graph">ribbon graph</a>).</p>
+<p>which is <a class="existingWikiWord" href="/nlab/show/quasi-isomorphism">quasi-isomorphic</a> to the semi-algebraic <a class="existingWikiWord" href="/nlab/show/de+Rham+cohomology">de Rham cohomology</a>, or in fact to the <a class="existingWikiWord" href="/nlab/show/de+Rham+algebra">de Rham algebra</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi>Ω</mi> <mi>salg</mi> <mo>•</mo></msubsup><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>Conf</mi> <mi>n</mi></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>ℝ</mi> <mi>D</mi></msup><mo maxsize="1.2em" minsize="1.2em">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>∈</mo><mspace width="thickmathspace"></mspace><msub><mi>dgcAlg</mi> <mi>ℝ</mi></msub><mphantom><mi>AA</mi></mphantom><mi>n</mi><mo>,</mo><mi>D</mi><mo>∈</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">
+  \Omega^\bullet_{salg}
+  \big(
+    Conf_n
+    \big( 
+      \mathbb{R}^D
+    \big)
+  \big)
+  \;\in\;
+  dgcAlg_{\mathbb{R}}
+  \phantom{AA}
+  n, D \in \mathbb{N}
 
-<p>This function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∂</mo></mrow><annotation encoding="application/x-tex">\partial</annotation></semantics></math> is indeed a differential, in that it satisfies <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mo>∂</mo> <mn>2</mn></msup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\partial^2 = 0</annotation></semantics></math>, because two contractions in different order produce a different orientation.</p>
+</annotation></semantics></math></div>
+<p>of (the <a class="existingWikiWord" href="/nlab/show/Fulton-MacPherson+compactification">Fulton-MacPherson compactification</a> of) the <a class="existingWikiWord" href="/nlab/show/configuration+space+of+points">configuration space of points</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Conf</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><msup><mi>ℝ</mi> <mi>D</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Conf_n(\mathbb{R}^D)</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> points in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>-dimensional <a class="existingWikiWord" href="/nlab/show/Euclidean+space">Euclidean space</a>.</p>
 
-<blockquote>
-<p>some details missing here…</p>
-</blockquote>
+<p>The <a class="existingWikiWord" href="/nlab/show/chain+map">chain map</a> which exhibits this <a class="existingWikiWord" href="/nlab/show/quasi-isomorphism">quasi-isomorphism</a> is essentially given by sending each graph to the corresponding <a class="existingWikiWord" href="/nlab/show/Feynman+amplitude">Feynman amplitude</a> in <a class="existingWikiWord" href="/nlab/show/perturbative+quantum+field+theory">perturbative</a> <a class="existingWikiWord" href="/nlab/show/Chern-Simons+theory">Chern-Simons theory</a>/<a class="existingWikiWord" href="/nlab/show/AKSZ+theory">AKSZ theory</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, by regarding <span class="newWikiWord">Feynman ampplitudes as differential forms on configuration spaces of points<a href="/nlab/new/Feynman+ampplitudes+as+differential+forms+on+configuration+spaces+of+points">?</a></span>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Graphs</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><munderover><mo>⟶</mo><mrow><msub><mo>≃</mo> <mpadded width="0"><mi>qi</mi></mpadded></msub></mrow><mtext>
+     CS/AKSZ Feynman amplitudes
+    </mtext></munderover><msubsup><mi>Ω</mi> <mi>salg</mi> <mo>•</mo></msubsup><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>Conf</mi> <mi>n</mi></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>ℝ</mi> <mi>D</mi></msup><mo maxsize="1.2em" minsize="1.2em">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  Graphs_n(D)
+  \underoverset{
+    \simeq_{\mathrlap{qi}}
+  }
+  {
+    \text{
+     CS/AKSZ Feynman amplitudes
+    }
+  }
+  {
+    \longrightarrow
+  }
+  \Omega^\bullet_{salg}
+  \big(
+    Conf_n\big(  \mathbb{R}^D \big)
+  \big)
 
-<p>The resulting <a class="existingWikiWord" href="/nlab/show/chain+complex">chain complex</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>𝒢</mi> <mo>•</mo></msub><mo>,</mo><mo>∂</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\mathcal{G}_\bullet, \partial)</annotation></semantics></math> is called the <em>graph complex</em>. Its <a class="existingWikiWord" href="/nlab/show/chain+homology">chain homology</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>H</mi> <mo>•</mo></msub><mo stretchy="false">(</mo><mi>𝒢</mi><mo>,</mo><mo>∂</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">H_\bullet(\mathcal{G}, \partial)</annotation></semantics></math> is called <em>graph homology</em>.</p>
+</annotation></semantics></math></div>
+<p>This was originally indicated in (<a href="#Kontsevich94">Kontsevich 94, pages 11-12</a>). A detailed and careful construction and proof was laid out in <a href="#LambrechtsVolic14">Lambrechts-Volic 14</a>. Other authors have claimed various generalizations of this result, generalizing <a class="existingWikiWord" href="/nlab/show/Euclidean+space">Euclidean space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>ℝ</mi> <mi>D</mi></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^D</annotation></semantics></math> to more general <a class="existingWikiWord" href="/nlab/show/smooth+manifolds">smooth manifolds</a>, possibly <a class="existingWikiWord" href="/nlab/show/manifold+with+boundary">with boundary</a>.</p>
 
-<p>This was originally indicated in (<a href="#Kontsevich94">Kontsevich 94, pages 11-12</a>). For a detailed and careful account see <a href="#LambrechtsVolic14">Lambrechts-Volic 14, section 6</a>.</p>
+<h2 id="GraphComplex">Definition</h2>
 
 <div class="num_example" id="ThreeTermRelation">
 <h6 id="example">Example</h6>
@@ -986,14 +1022,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on August 17, 2019 at 03:12:22.
+    Last revised on September 29, 2019 at 09:56:15.
     See the <a href="https://ncatlab.org/nlab/history/graph complex" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/graph+complex" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/graph+complex/36" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (36 revisions)</span><a href="/nlab/show/diff/graph+complex" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/graph+complex" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/graph+complex" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/graph+complex/37" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (37 revisions)</span><a href="/nlab/show/diff/graph+complex" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/graph+complex" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/graph complex/cite" style="color: black">Cite</a>
   <a href="/nlab/print/graph+complex" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/graph+complex" id="view_tex" rel="nofollow">TeX</a>
