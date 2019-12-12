@@ -262,8 +262,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -313,27 +313,65 @@ margin-left: 0em;
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title></title></head>
 <body>
-<h2 id="shoulderer">Shoulderer</h2>
+<h2 id="idea">Idea</h2>
 
-<p>Judgment form: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>⊆</mo><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mspace width="thinmathspace"></mspace><mo>:</mo><mspace width="thinmathspace"></mspace><mi>T</mi><mspace width="thinmathspace"></mspace><mo>□</mo><mspace width="thinmathspace"></mspace><mi>U</mi><mo>′</mo><mo>⊆</mo><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">U \subseteq \Gamma \vdash t\,:\,T\,\square\,U' \subseteq \Gamma'</annotation></semantics></math></p>
+<p>How do you type check MILL, but with projections rather than matching to eliminate <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math>? This page gives algorithmic rules that are intended to do that. <a href="#Shulman">Mike Shulman</a> showed a not-especially-algorithmic type system based on props, but it doesn’t handle linear implication.</p>
+
+<h2 id="judgment_form">Judgment form</h2>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>⊆</mo><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mspace width="thinmathspace"></mspace><mo>:</mo><mspace width="thinmathspace"></mspace><mi>T</mi><mspace width="thinmathspace"></mspace><mo>□</mo><mspace width="thinmathspace"></mspace><mi>U</mi><mo>′</mo><mo>⊆</mo><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">U \subseteq \Gamma \vdash t\,:\,T\,\Box\,U' \subseteq \Gamma'</annotation></semantics></math></p>
+
+<p>The <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>□</mo></mrow><annotation encoding="application/x-tex">\Box</annotation></semantics></math> would ideally be a <code>\boxtimes</code>, like in <a href="#Allais">Allais</a>, but that doesn’t seem to be available. The observation was that a term is implicitly tensored with the identity on all the unused resources.</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Gamma'</annotation></semantics></math> are contexts with some natural number of semicolon “scope” delimiters. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">U'</annotation></semantics></math> are “usage” sets, which are subsets of the (domains of the) respective contexts. In <a href="#Allais">Allais</a>, the usage sets are represented as bit vectors (which is a fine way to implement them). Unlike <a href="#Allais">Allais</a>, the usage before and after are for <em>different</em> contexts, because type checking a term generally adds projections to the context as potentially-consumed resources.</p>
+
+<p>The purpose of delimited scopes in the context is to remember by when we must’ve consumed tensor projections. Currently, only lambda adds a scope delimiter. The current algorithm puts projections in the outermost scope it can get away with. This approach will not work when adding additive connectives.</p>
+
+<p>In the rules, I implicitly coerce a context to the usage set of its entire domain. I use the abbreviation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>↦</mo><mi>Γ</mi><mo>′</mo><mo stretchy="false">)</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">(\Gamma \mapsto \Gamma')U</annotation></semantics></math> to “weaken” <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> to include all entries in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Gamma'</annotation></semantics></math> but not <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>. Set theoretically speaking: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>↦</mo><mi>Γ</mi><mo>′</mo><mo stretchy="false">)</mo><mi>U</mi><mo>≔</mo><mi>U</mi><mo>∪</mo><mo stretchy="false">(</mo><mi>Γ</mi><mo>′</mo><mo>∖</mo><mi>Γ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\Gamma \mapsto \Gamma')U \coloneqq U \cup (\Gamma' \setminus \Gamma)</annotation></semantics></math>.</p>
+
+<p>Some important (intended) properties of the judgment form are that if (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>⊆</mo><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mspace width="thinmathspace"></mspace><mo>:</mo><mspace width="thinmathspace"></mspace><mi>T</mi><mspace width="thinmathspace"></mspace><mo>□</mo><mspace width="thinmathspace"></mspace><mi>U</mi><mo>′</mo><mo>⊆</mo><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">U \subseteq \Gamma \vdash t\,:\,T\,\Box\,U' \subseteq \Gamma'</annotation></semantics></math>), then:</p>
+
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Gamma'</annotation></semantics></math> have the same number of delimiters.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Gamma'</annotation></semantics></math> includes all the entries of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>, in the same scopes. (So in particular, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊆</mo><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Gamma \subseteq \Gamma'</annotation></semantics></math>.)</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>′</mo><mo>⊆</mo><mo stretchy="false">(</mo><mi>Γ</mi><mo>↦</mo><mi>Γ</mi><mo>′</mo><mo stretchy="false">)</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">U' \subseteq (\Gamma \mapsto \Gamma')U</annotation></semantics></math></li>
+</ul>
+
+<p>Note that the context grows while the usage shrinks. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>↦</mo><mi>Γ</mi><mo>′</mo><mo stretchy="false">)</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">(\Gamma \mapsto \Gamma')U</annotation></semantics></math> should be understood as the actual usage indicated by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>⊆</mo><mi>Γ</mi></mrow><annotation encoding="application/x-tex">U \subseteq \Gamma</annotation></semantics></math>, in light of the additional resources in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Gamma'</annotation></semantics></math>.</p>
 
 <h2 id="header">Header</h2>
 
 <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mspace width="thinmathspace"></mspace><mo>:</mo><mspace width="thinmathspace"></mspace><mi>A</mi></mrow><mo>→</mo></mover></mrow><annotation encoding="application/x-tex">\overrightarrow{\Gamma \vdash a\,:\,A}</annotation></semantics></math></p>
+
+<h2 id="references">References</h2>
+
+<p>These algorithmic rules are loosely based on:</p>
+
+<ul>
+<li id="Allais">Guillaume Allais, <em>Typing with Leftovers – A mechanization of Intuitionistic Multiplicative-Additive Linear Logic</em>, TYPES 2017 (<a href="http://drops.dagstuhl.de/opus/volltexte/2018/10049/pdf/LIPIcs-TYPES-2017-1.pdf">pdf</a>)</li>
+</ul>
+
+<p>The idea to allow tensor projections in some sound way, and a lot of the notation, are from:</p>
+
+<ul>
+<li id="Shulman">Michael Shulman, <em>A practical type theory for symmetric monoidal categories</em>, 2019 (<a href="https://arxiv.org/abs/1911.00818">arXiv</a>)</li>
+</ul>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Created on December 11, 2019 at 21:37:44.
+    Last revised on December 11, 2019 at 22:56:11.
     See the <a href="https://ncatlab.org/nlab/history/tensor projection" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/tensor+projection" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a>
+  <a href="/nlab/edit/tensor+projection" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/tensor+projection/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (1 revision)</span><a href="/nlab/show/diff/tensor+projection" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/tensor+projection" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/tensor projection/cite" style="color: black">Cite</a>
   <a href="/nlab/print/tensor+projection" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/tensor+projection" id="view_tex" rel="nofollow">TeX</a>
