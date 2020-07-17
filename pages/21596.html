@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/11544/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/11544/#Item_3" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
     <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
@@ -505,7 +505,16 @@ x,x',h \notin FV(c,c')\end{array}}
 
 <h2 id="IdType">Identity Types</h2>
 
-<p>TODO</p>
+<p>Identity types provide <em>another</em> kind of equality type that also provides subsumptive rewriting. Unlike the main equality, which is type-directed, and only rewrites in well-typed goals, identity is untyped, and rewrites in any goal at all: rewriting has no motive premise. This identity should be thought of as a relation that’s true only for things that are identical, not a type of “<a class="existingWikiWord" href="/nlab/show/identity+type">identifications</a>” of things that generally aren’t already identical.</p>
+
+<p>The restriction, which prevents the two notions from collapsing, is that identity types are usually not valid unless they’re true. Only when dealing with computations is it safe to assume identity. But in that case, it coincides with equality. In fact, identity <em>is</em> equality of computations, in the semantics. The different rules are due entirely to the difference in when the types are valid. (TODO: Explain how this is possible.) Because of the sanity rule, it’s implicit that (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>≡</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">t \equiv t</annotation></semantics></math>) is a valid type for any term <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>, since it’s true. That’s why identity has no inversion rules.</p>
+
+<p>When dealing with computations, where equality and identity coincide, the rules for identity types do indeed expose a stronger (derived) rewrite rule for equality. The motive premise is avoided:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>p</mi><mo>⊩</mo><mi>t</mi><mo>=</mo><mi>t</mi><mo>′</mo><mo>∈</mo><mi>Comp</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>c</mi><mo>⊩</mo><mi>C</mi><mo stretchy="false">[</mo><mi>t</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>c</mi><mo>⊩</mo><mi>C</mi><mo stretchy="false">[</mo><mi>t</mi><mo>′</mo><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash p \Vdash t = t' \in Comp \qquad
+\Gamma \vdash c \Vdash C[t/x]}
+{\Gamma \vdash c \Vdash C[t'/x]}
+</annotation></semantics></math></div>
+<p>The identity type constructor <a href="#CompEqvITP13">comes from Nuprl</a>, where it’s called “computational equivalence”. That’s exactly what it is, semantically. But internally, it seems weird to think of it as a mere equivalence, since it’s the most intensional equality that can be expressed as a type. Nuprl has additional features that facilitate internal reasoning about computational equivalence. But in v1, identity seems scarcely different from beta conversion in practice.</p>
 
 <h2 id="miscellaneous">Miscellaneous</h2>
 
@@ -518,7 +527,13 @@ x,x',h \notin FV(c,c')\end{array}}
 <h2 id="references">References</h2>
 
 <ul>
-<li id="MZFuncRefine">Paul-André Melliès, Noam Zeilberger, <em>Functors are Type Refinement Systems</em>, POPL 2015 (<a href="https://www.irif.fr/~mellies/papers/functors-are-type-refinement-systems.pdf">pdf</a>)</li>
+<li id="CompEqvITP13">
+<p>Vincent Rahli, Mark Bickford, Abhishek Anand, <em>Formal Program Optimization in Nuprl Using Computational Equivalence and Partial Types</em>, Interactive Theorem Proving (ITP) 2013 (<a href="http://www.nuprl.org/KB/show.php?ShowPub=RBA13">web</a>, <a href="http://www.nuprl.org/documents/Rahli/optimization_ITP_2013_04_22">pdf</a>)</p>
+</li>
+
+<li id="MZFuncRefine">
+<p>Paul-André Melliès, Noam Zeilberger, <em>Functors are Type Refinement Systems</em>, POPL 2015 (<a href="https://www.irif.fr/~mellies/papers/functors-are-type-refinement-systems.pdf">pdf</a>)</p>
+</li>
 </ul>
 </body></html>
 
@@ -526,14 +541,14 @@ x,x',h \notin FV(c,c')\end{array}}
 
 <div class="revisedby">
     <p>
-    Last revised on July 17, 2020 at 16:34:01.
+    Last revised on July 17, 2020 at 17:59:19.
     See the <a href="https://ncatlab.org/nlab/history/differences between CompLF v0 and v1" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/differences+between+CompLF+v0+and+v1" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/differences+between+CompLF+v0+and+v1/3" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (3 revisions)</span><a href="/nlab/show/diff/differences+between+CompLF+v0+and+v1" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/differences+between+CompLF+v0+and+v1" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/differences+between+CompLF+v0+and+v1" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/differences+between+CompLF+v0+and+v1/4" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (4 revisions)</span><a href="/nlab/show/diff/differences+between+CompLF+v0+and+v1" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/differences+between+CompLF+v0+and+v1" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/differences between CompLF v0 and v1/cite" style="color: black">Cite</a>
   <a href="/nlab/print/differences+between+CompLF+v0+and+v1" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/differences+between+CompLF+v0+and+v1" id="view_tex" rel="nofollow">TeX</a>
