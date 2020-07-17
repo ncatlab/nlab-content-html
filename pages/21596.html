@@ -326,7 +326,9 @@ margin-left: 0em;
 </ul>
 <li><a href='#BetaConv'>Shortcut Beta Conversion</a></li>
 <li><a href='#letcomp'>Let-Comp</a></li>
+<li><a href='#IdType'>Identity Types</a></li>
 <li><a href='#miscellaneous'>Miscellaneous</a></li>
+<li><a href='#references'>References</a></li>
 </ul>
 </div>
 
@@ -386,7 +388,7 @@ margin-left: 0em;
 </li>
 
 <li>
-<p>Another consequence of the strengthened <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Bool</mi></mrow><annotation encoding="application/x-tex">Bool</annotation></semantics></math> elimination which is perhaps much more surprising: the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo></mrow><annotation encoding="application/x-tex">\bot</annotation></semantics></math> elimination rule, which effectively said that the two booleans aren’t equal, has become redundant and has been removed. Like in type theory with universes, you can prove this by interpreting the booleans as true and false <em>types</em>. This is possible despite the absence of universes because syntactically types are terms, so <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Bool</mi></mrow><annotation encoding="application/x-tex">Bool</annotation></semantics></math> elimination allows type-level branching. The reason this didn’t work in v0 is precisely that you’d need a universe as the motive of the elimination. There’s another ingredient to the argument though, which is that type validity judgments can actually be expressed as trivial typing judgments, due to the primitive sanity and inversion rules. This is probably the best example of how those new primitive rules make an existing rule (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Bool</mi></mrow><annotation encoding="application/x-tex">Bool</annotation></semantics></math> elim) stronger: It’s now effectively a judgment-level case analysis in that the motive can be any judgment that’s syntactically well-formed, not just a type. (As icing on the cake, the derived <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo></mrow><annotation encoding="application/x-tex">\bot</annotation></semantics></math> elimination rule doesn’t need a motive validity premise either. But this seems to require identity, a different v1 addition.)</p>
+<p>Another consequence of the strengthened <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Bool</mi></mrow><annotation encoding="application/x-tex">Bool</annotation></semantics></math> elimination which is perhaps much more surprising: The <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo></mrow><annotation encoding="application/x-tex">\bot</annotation></semantics></math> elimination rule, which effectively said that the two booleans aren’t equal, has become redundant and has been removed. Like in type theory with universes, you can prove this by interpreting the booleans as true and false <em>types</em>. Why this is possible without universes is <span class="newWikiWord">explained elsewhere<a href="/nlab/new/just+kidding">?</a></span>, but it boils down to types syntactically being terms, having primitive sanity and inversion, and the strengthened <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Bool</mi></mrow><annotation encoding="application/x-tex">Bool</annotation></semantics></math> elimination rule. (TODO: Explain this elsewhere!) (As icing on the cake, the derived <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo></mrow><annotation encoding="application/x-tex">\bot</annotation></semantics></math> elimination rule doesn’t need a motive validity premise either. But this seems to require <a href="#IdType">identity</a>, a different v1 addition.)</p>
 </li>
 </ul>
 
@@ -490,29 +492,39 @@ x,x',h \notin FV(c,c')\end{array}}
 
 <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>≫</mo><mi>c</mi><mo>=</mo><mi>c</mi><mo>′</mo><mo>∈</mo><mi>C</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>↔</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>≫</mo><mi>C</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mo stretchy="false">)</mo><mo>∧</mo><mo>∀</mo><mi>a</mi><mo>,</mo><mi>a</mi><mo>′</mo><mo>.</mo><mo stretchy="false">(</mo><mi>a</mi><mo>=</mo><mi>a</mi><mo>′</mo><mo>∈</mo><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo><mo>=</mo><mi>c</mi><mo>′</mo><mo stretchy="false">[</mo><mi>a</mi><mo>′</mo><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo><mo>∈</mo><mi>C</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x:A \gg c = c' \in C)\;\leftrightarrow\;((A\,type) \to ((x:A \gg C\,type) \wedge \forall a,a'.(a = a' \in A) \to (c[a/x] = c'[a'/x] \in C[a/x])))</annotation></semantics></math></p>
 
-<p>With this grand purpose as an attempt to complete the internalization of the PER semantics, it may not be surprising that letcomp is very useful for deriving rules for type constructors defined by PER comprehension. But it’s not perfect. Rules that involve metavariables without an associated typing premise tend to cause trouble. Alas, it seems very difficult to do much about that. (“Pullback” types à la <a href="#Foo">Melliès &amp; Zeilberger</a> might address the most serious gaps. I have not tried this yet.) Notice however that intrinsic dependent type systems would not need rules with metavariables without typing premises. So the ability to derive type constructors and their rules seems quite substantial already.</p>
+<p>With this grand purpose as an attempt to complete the internalization of the PER semantics, it may not be surprising that letcomp is very useful for deriving rules for type constructors defined by PER comprehension. But it’s not perfect. Rules that involve metavariables without an associated typing premise tend to cause trouble. Alas, it seems very difficult to do much about that. (“Pullback” types à la <a href="#MZFuncRefine">Melliès &amp; Zeilberger</a> might address the most serious gaps. I have not tried this yet.) Notice however that intrinsic dependent type systems would not need rules with metavariables without typing premises. So the ability to derive type constructors and their rules seems quite substantial already.</p>
 
 <p>There was actually an early version of letcomp for v0. But the soundness of letcomp was not established until after changing the semantics to support primitive inversions.</p>
 
+<h2 id="IdType">Identity Types</h2>
+
+<p>TODO</p>
+
 <h2 id="miscellaneous">Miscellaneous</h2>
 
-<p>In v0, there was a reflexivity rule in addition to the uniqueness and selectivity rules. That was redundant, and I simply hadn’t noticed. So now reflexivity is derived from uniqueness and select left.</p>
+<p>In v0, there was a reflexivity rule for equality, in addition to the uniqueness and selectivity rules. That was redundant, and I simply hadn’t noticed. So now reflexivity is derived from uniqueness and select left.</p>
 
-<p>Some reordering of rules, premises, and renaming of metavariables.</p>
+<p>There’s been some reordering of rules, premises, and renaming of metavariables.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li id="MZFuncRefine">Paul-André Melliès, Noam Zeilberger, <em>Functors are Type Refinement Systems</em>, POPL 2015 (<a href="https://www.irif.fr/~mellies/papers/functors-are-type-refinement-systems.pdf">pdf</a>)</li>
+</ul>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Created on July 17, 2020 at 00:19:20.
+    Last revised on July 17, 2020 at 01:53:22.
     See the <a href="https://ncatlab.org/nlab/history/differences between CompLF v0 and v1" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/differences+between+CompLF+v0+and+v1" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a>
+  <a href="/nlab/edit/differences+between+CompLF+v0+and+v1" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/differences+between+CompLF+v0+and+v1/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (1 revision)</span><a href="/nlab/show/diff/differences+between+CompLF+v0+and+v1" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/differences+between+CompLF+v0+and+v1" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/differences between CompLF v0 and v1/cite" style="color: black">Cite</a>
   <a href="/nlab/print/differences+between+CompLF+v0+and+v1" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/differences+between+CompLF+v0+and+v1" id="view_tex" rel="nofollow">TeX</a>
