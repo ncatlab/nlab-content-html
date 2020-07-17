@@ -368,7 +368,7 @@ margin-left: 0em;
 </li>
 
 <li>
-<p>The “select right” rule of equality, which goes from (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>=</mo><mi>a</mi><mo>′</mo><mo>∈</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a = a' \in A</annotation></semantics></math>) to (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>′</mo><mo>⊩</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a' \Vdash A</annotation></semantics></math>) has become redundant and has been removed. Prove symmetry in the usual way, and combine with select left. I don’t remember exactly what prevented that before, but I seem to remember trying it, and failing. Now it works.</p>
+<p>The “select right” rule of equality, which goes from (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>=</mo><mi>a</mi><mo>′</mo><mo>∈</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a = a' \in A</annotation></semantics></math>) to (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>′</mo><mo>⊩</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a' \Vdash A</annotation></semantics></math>) has become redundant and has been removed. Prove symmetry in the usual way, and combine with select left. (Maybe it was already redundant before, who knows?)</p>
 </li>
 
 <li>
@@ -394,7 +394,7 @@ margin-left: 0em;
 
 <h2 id="relaxed_equality">Relaxed Equality</h2>
 
-<p>The change I’m most proud of is the new equality formation rule. Here is the v0 rule:</p>
+<p>Another important change is the new equality formation rule. Here is the v0 rule:</p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>p</mi><mo>⊩</mo><mi>A</mi><mo>≺</mo><mi>C</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>q</mi><mo>⊩</mo><mi>B</mi><mo>≺</mo><mi>C</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>⊩</mo><mi>A</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>b</mi><mo>⊩</mo><mi>B</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>=</mo><mi>b</mi><mo>∈</mo><mi>C</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash p \Vdash A \prec C \qquad
 \Gamma \vdash q \Vdash B \prec C \qquad
 \Gamma \vdash a \Vdash A \qquad \Gamma \vdash b \Vdash B}
@@ -404,7 +404,7 @@ margin-left: 0em;
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mn>1</mn><mo>⊩</mo><mi>Relax</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mn>2</mn><mo>⊩</mo><mi>Relax</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mn>1</mn><mo>=</mo><mi>a</mi><mn>2</mn><mo>∈</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash a1 \Vdash Relax(A) \qquad \Gamma \vdash a2 \Vdash Relax(A)}
 {\Gamma \vdash a1 = a2 \in A\,type}
 </annotation></semantics></math></div>
-<p>The new rule uses the new type constructor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Relax</mi></mrow><annotation encoding="application/x-tex">Relax</annotation></semantics></math>, instead of the defined notion of respect (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>≺</mo></mrow><annotation encoding="application/x-tex">\prec</annotation></semantics></math>). Since respect is defined in terms of equality, respect-based equality was a rather annoying circularity in the rules, which made the soundness proof a nuisance. But that is <em>not</em> the main improvement. One could just make respect into a primitive type constructor to avoid the circularity. (And there was a point when I was planning to do that.)</p>
+<p>The new rule uses the new type constructor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Relax</mi></mrow><annotation encoding="application/x-tex">Relax</annotation></semantics></math>, instead of the defined notion of respect (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>≺</mo></mrow><annotation encoding="application/x-tex">\prec</annotation></semantics></math>). Since respect is defined in terms of equality, respect-based equality was a rather annoying circularity in the rules, which made the soundness proof a nuisance. But that is <em>not</em> the main improvement. One could just make respect into a primitive type constructor to avoid the circularity.</p>
 
 <p>The real improvement is that “relaxed equality” avoids the implicit quantification over types in the v0 formation rule. Notice that the v0 rule involves the types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> which are not mentioned in the conclusion. Because of this, it was not clear at all how to give a strong inversion rule for equality formation. With relaxed equality, the inversion rules are rather obvious.</p>
 
@@ -492,7 +492,7 @@ x,x',h \notin FV(c,c')\end{array}}
 
 <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>≫</mo><mi>c</mi><mo>=</mo><mi>c</mi><mo>′</mo><mo>∈</mo><mi>C</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>↔</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>≫</mo><mi>C</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mo stretchy="false">)</mo><mo>∧</mo><mo>∀</mo><mi>a</mi><mo>,</mo><mi>a</mi><mo>′</mo><mo>.</mo><mo stretchy="false">(</mo><mi>a</mi><mo>=</mo><mi>a</mi><mo>′</mo><mo>∈</mo><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo><mo>=</mo><mi>c</mi><mo>′</mo><mo stretchy="false">[</mo><mi>a</mi><mo>′</mo><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo><mo>∈</mo><mi>C</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>x</mi><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x:A \gg c = c' \in C)\;\leftrightarrow\;((A\,type) \to ((x:A \gg C\,type) \wedge \forall a,a'.(a = a' \in A) \to (c[a/x] = c'[a'/x] \in C[a/x])))</annotation></semantics></math></p>
 
-<p>With this grand purpose as an attempt to complete the internalization of the PER semantics, it may not be surprising that letcomp is very useful for deriving rules for type constructors defined by PER comprehension. But it’s not perfect. Rules that involve metavariables without an associated typing premise tend to cause trouble. Alas, it seems very difficult to do much about that. (“Pullback” types à la <a href="#MZFuncRefine">Melliès &amp; Zeilberger</a> might address the most serious gaps. I have not tried this yet.) Notice however that intrinsic dependent type systems would not need rules with metavariables without typing premises. So the ability to derive type constructors and their rules seems quite substantial already.</p>
+<p>With this grand purpose as an attempt to complete the internalization of the PER semantics, it may not be surprising that letcomp is very useful for deriving rules for type constructors defined by PER comprehension. But it’s not perfect. Rules that involve metavariables without an associated typing premise tend to cause trouble. Alas, it seems very difficult to do much about that. (“Pullback” types à la <a href="#MZFuncRefine">Melliès &amp; Zeilberger</a> might address the most serious gaps.) Notice however that intrinsic dependent type systems would not need rules with metavariables without typing premises. So the ability to derive type constructors and their rules seems quite substantial already.</p>
 
 <p>There was actually an early version of letcomp for v0. But the soundness of letcomp was not established until after changing the semantics to support primitive inversions.</p>
 
@@ -502,7 +502,7 @@ x,x',h \notin FV(c,c')\end{array}}
 
 <h2 id="miscellaneous">Miscellaneous</h2>
 
-<p>In v0, there was a reflexivity rule for equality, in addition to the uniqueness and selectivity rules. That was redundant, and I simply hadn’t noticed. So now reflexivity is derived from uniqueness and select left.</p>
+<p>In v0, there was a reflexivity rule for equality, in addition to the uniqueness and selectivity rules. That was redundant. So now reflexivity is derived from uniqueness and select left.</p>
 
 <p>There’s been some reordering of rules, premises, and renaming of metavariables.</p>
 
@@ -517,14 +517,14 @@ x,x',h \notin FV(c,c')\end{array}}
 
 <div class="revisedby">
     <p>
-    Last revised on July 17, 2020 at 01:53:22.
+    Last revised on July 17, 2020 at 14:39:33.
     See the <a href="https://ncatlab.org/nlab/history/differences between CompLF v0 and v1" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/differences+between+CompLF+v0+and+v1" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/differences+between+CompLF+v0+and+v1/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (1 revision)</span><a href="/nlab/show/diff/differences+between+CompLF+v0+and+v1" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/differences+between+CompLF+v0+and+v1" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/differences+between+CompLF+v0+and+v1" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/differences+between+CompLF+v0+and+v1/2" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (2 revisions)</span><a href="/nlab/show/diff/differences+between+CompLF+v0+and+v1" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/differences+between+CompLF+v0+and+v1" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/differences between CompLF v0 and v1/cite" style="color: black">Cite</a>
   <a href="/nlab/print/differences+between+CompLF+v0+and+v1" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/differences+between+CompLF+v0+and+v1" id="view_tex" rel="nofollow">TeX</a>
