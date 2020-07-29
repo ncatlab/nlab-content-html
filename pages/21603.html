@@ -351,11 +351,16 @@ margin-left: 0em;
 </ul>
 <li><a href='#IdType'>Identity</a></li>
 </ul>
-<li><a href='#checking_mode'>Checking Mode</a></li>
+<li><a href='#CheckingMode'>Checking Mode</a></li>
 <ul>
 <li><a href='#basics'>Basics</a></li>
 <li><a href='#functions_2'>Functions</a></li>
 <li><a href='#caveat'>Caveat</a></li>
+</ul>
+<li><a href='#strengthening_type_validity'>Strengthening Type Validity</a></li>
+<ul>
+<li><a href='#TpV'>Type Validity</a></li>
+<li><a href='#custom_presuppositions'>Custom Presuppositions</a></li>
 </ul>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -675,7 +680,7 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <p>(TODO: Explain how many presuppositions arise from intensional type equality, and that equality of identity types is extensional, making them valid when they’re pointwise true. Maybe on another page.)</p>
 
-<h2 id="checking_mode">Checking Mode</h2>
+<h2 id="CheckingMode">Checking Mode</h2>
 
 <p>The sanity rule says that the usual formal typing judgment (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>⊩</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a \Vdash A</annotation></semantics></math>) implies type validity (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">A\,type</annotation></semantics></math>). This is analogous to the <em>admissible</em> sanity rule of unidirectional typing rules:</p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mspace width="thinmathspace"></mspace><mi>ctx</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mspace width="thinmathspace"></mspace><mo>:</mo><mspace width="thinmathspace"></mspace><mi>A</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma\,ctx \qquad \Gamma \vdash a\,:\,A}{\Gamma \vdash A\,type}</annotation></semantics></math></div>
@@ -725,6 +730,30 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <p>Sometimes though, even for judgment-level reasoning, bidirectional rules can avoid a large number of very silly subgoals, like when introducing an element of a deeply nested type. In this case, the unidirectional rules would make you prove many copies of the same type validity goals, and bidirectional rules are the perfect plumbing.</p>
 
+<h2 id="strengthening_type_validity">Strengthening Type Validity</h2>
+
+<p>Most of the primitive type constructors have inversions for their formation rules. When deriving rules for a new “type constructor” defined using PER comprehension, an extra trick or two are needed to get the inversion rules you want.</p>
+
+<p>The reason why inversion rules are usually desirable when deriving a type constructor is that the elimination rules typically need to know that the subexpressions of the type being eliminated are well-typed. (Type subexpressions are valid; element subexpressions have the appropriate type.) These facts are proven when forming the type, so it’s only fair to be able to get back what you’ve paid for. Otherwise they would need to be proven again whenever applying an elimination rule. (This is assuming the derived rules are for the primitive typing judgment, where the introduction rules establish type validity. For <a href="#CheckingMode">checking mode</a> rules you would expect introduction rules to avoid that, but this also requires inversion rules.)</p>
+
+<p>The PER comprehension type constructor itself does not have any formation inversion rules. Partially this is because a later version of CompLF may strengthen the introduction rules in a way that’s incompatible with the obvious inversion rules. But mostly this is because the inversion rules wouldn’t really help. It’s easier and more flexible to add your own type validity conditions than to take whatever falls out of the PER comprehension.</p>
+
+<p>For example, suppose we’re deriving <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> types. We should start with the PER for a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> type:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>′</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">{</mo><mi>p</mi><mo>=</mo><mi>p</mi><mo>′</mo><mo stretchy="false">|</mo><mo>∃</mo><mi>a</mi><mo>,</mo><mi>a</mi><mo>′</mo><mo>,</mo><mi>b</mi><mo>,</mo><mi>b</mi><mo>′</mo><mo>:</mo><mi>Comp</mi><mo>.</mo><mi>a</mi><mo>=</mo><mi>a</mi><mo>′</mo><mo>∈</mo><mi>A</mi><mo>∧</mo><mi>b</mi><mo>=</mo><mi>b</mi><mo>′</mo><mo>∈</mo><mi>B</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">]</mo><mo>∧</mo><mi>p</mi><mo>≡</mo><mo stretchy="false">⟨</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">⟩</mo><mo>∧</mo><mi>p</mi><mo>′</mo><mo>≡</mo><mo stretchy="false">⟨</mo><mi>a</mi><mo>′</mo><mo>,</mo><mi>b</mi><mo>′</mo><mo stretchy="false">⟩</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\Sigma' x:A.B[x]\;\coloneqq\;\{p = p' | \exists a,a',b,b':Comp.a = a' \in A \wedge b = b' \in B[a] \wedge p \equiv \lang a,b \rang \wedge p' \equiv \lang a',b' \rang\}</annotation></semantics></math></p>
+
+<p>Where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∃</mo></mrow><annotation encoding="application/x-tex">\exists</annotation></semantics></math> was defined as a squashed subset, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\lang a,b \rang</annotation></semantics></math> is some encoding of ordered pairs, suppose.</p>
+
+<p>We could try to derive the inversion rules</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Σ</mi><mo>′</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>Σ</mi><mo>′</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>a</mi><mo>⊩</mo><mi>A</mi></mrow><mrow><mi>B</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">]</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Sigma' x:A.B[x]\,type}{A\,type} \qquad
+\frac{\Sigma' x:A.B[x]\,type \qquad a \Vdash A}{B[a]\,type}
+</annotation></semantics></math></div>
+<p>for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Sigma'</annotation></semantics></math> somehow by pulling things out of that (relatively) complicated PER comprehension. But it’s easier to just define another type operation (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\Sigma x:A.B[x]</annotation></semantics></math>) to be just like (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>′</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\Sigma' x:A.B[x]</annotation></semantics></math>), but only a valid type if (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\Pi x:A.B[x]</annotation></semantics></math>) is. (The choice of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math> over the other type constructors with the same validity conditions is arbitrary.)</p>
+
+<h3 id="TpV">Type Validity</h3>
+
+<h3 id="custom_presuppositions">Custom Presuppositions</h3>
+
 <h2 id="references">References</h2>
 
 <ul>
@@ -736,14 +765,14 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <div class="revisedby">
     <p>
-    Last revised on July 29, 2020 at 02:37:23.
+    Last revised on July 29, 2020 at 18:30:42.
     See the <a href="https://ncatlab.org/nlab/history/CompLF/HOAS" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/CompLF%2FHOAS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/CompLF%2FHOAS/17" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (17 revisions)</span><a href="/nlab/show/diff/CompLF%2FHOAS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/CompLF%2FHOAS" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/CompLF%2FHOAS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/CompLF%2FHOAS/18" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (18 revisions)</span><a href="/nlab/show/diff/CompLF%2FHOAS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/CompLF%2FHOAS" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/CompLF/HOAS/cite" style="color: black">Cite</a>
   <a href="/nlab/print/CompLF%2FHOAS" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/CompLF%2FHOAS" id="view_tex" rel="nofollow">TeX</a>
