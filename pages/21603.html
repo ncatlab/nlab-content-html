@@ -346,6 +346,9 @@ margin-left: 0em;
 <li><a href='#membership_in_a_type_sometimes'>Membership in a Type (Sometimes)</a></li>
 </ul>
 <li><a href='#combined_truth'>Combined Truth</a></li>
+<ul>
+<li><a href='#CombElim'>Elimination into Combined Truth</a></li>
+</ul>
 <li><a href='#IdType'>Identity</a></li>
 </ul>
 <li><a href='#checking_mode'>Checking Mode</a></li>
@@ -632,6 +635,34 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <p>As for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpOK</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">TpOK(A)</annotation></semantics></math>, the intuitive truth is vacuous, and the presupposition is basically just that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a type, so the combined truth of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpOK</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">TpOK(A)</annotation></semantics></math> says that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a type.</p>
 
+<h4 id="CombElim">Elimination into Combined Truth</h4>
+
+<p>Some of the elimination rules do not have a premise requiring that the elimination motive be a valid type family. The substitution instance of the motive appearing in the conclusion still must be a valid type, due to combined truth. But the validity of that substitution instance follows from the validity of substitution instances obtained from the premises.</p>
+
+<p>This is the case for identity elimination (rewrite), subset elimination, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Bool</mi></mrow><annotation encoding="application/x-tex">Bool</annotation></semantics></math> elimination, and PER comprehension elimination. Although they’re ostensibly not eliminating anything, the direct computation rules are similar in that they can be used to rewrite with beta conversion in any typing goal.</p>
+
+<p>Because combined truth allows many semantic judgment forms—even <a href="#TpOK">type validity</a>—to be represented as typing judgments, these “combined elimination” principles are stronger than they may look.</p>
+
+<p>A common problem with the representation of judgment forms as type operations is the reliance on combined truth, which means that presuppositions are carrying some or all of the weight, but they don’t get propagated in the same way as ordinary truth.</p>
+
+<p>If an elimination rule requires a premise showing that the motive is a valid type family, the presupposition part of combined truth effectively has to be shown prior to the application of the rule. In other words, such ordinary elimination rules help to conclude ordinary truth only. But with a combined elimination rule, there is no motive validity premise, so the rule helps to conclude the combined truth of the motive.</p>
+
+<p>Here are some consequences of combined elimination on represented judgments:</p>
+
+<ul>
+<li>You can beta convert in the subject of a typing judgment, not just the type.</li>
+
+<li>You can beta convert in a type validity judgment.</li>
+
+<li>Same goes for rewriting with an identity.</li>
+
+<li>You can branch on a boolean in a valid type.</li>
+</ul>
+
+<p>That last one—type-level branching—is provided by the following derived rule:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>b</mi><mo>⊩</mo><mi>Bool</mi><mspace width="2em"></mspace><mi>T</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>F</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mo stretchy="false">(</mo><mi>b</mi><mspace width="thinmathspace"></mspace><mi>T</mi><mspace width="thinmathspace"></mspace><mi>F</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{b \Vdash Bool \qquad T\,type \qquad F\,type}{(b\,T\,F)\,type}</annotation></semantics></math></div>
+<p>This is shown by eliminating <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> with the motive (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo><mo>≔</mo><mi>TpOK</mi><mo stretchy="false">(</mo><mi>x</mi><mspace width="thinmathspace"></mspace><mi>T</mi><mspace width="thinmathspace"></mspace><mi>F</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C[x] \coloneqq TpOK(x\,T\,F)</annotation></semantics></math>). Since type validity is non-negatable, we would not be able to show this motive to be valid except by proving each case. But proving each case is exactly why we want to use <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Bool</mi></mrow><annotation encoding="application/x-tex">Bool</annotation></semantics></math> elimination in the first place! So without the combined elimination, we’d be in an infinite regress. As for proving each case, it goes by beta reducing the applied Church boolean, yielding one of the premises.</p>
+
 <h3 id="IdType">Identity</h3>
 
 <p>(<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mn>1</mn><mo>=</mo><mi>t</mi><mn>2</mn><mo>∈</mo><mi>Comp</mi></mrow><annotation encoding="application/x-tex">t1 = t2 \in Comp</annotation></semantics></math>) intuitively says that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">t1</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">t2</annotation></semantics></math> are computationally equivalent. But it presupposes that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">t1</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">t2</annotation></semantics></math> are computations, so the combined truth is that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">t1</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">t2</annotation></semantics></math> are the same computation.</p>
@@ -705,14 +736,14 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <div class="revisedby">
     <p>
-    Last revised on July 28, 2020 at 20:55:16.
+    Last revised on July 29, 2020 at 02:37:23.
     See the <a href="https://ncatlab.org/nlab/history/CompLF/HOAS" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/CompLF%2FHOAS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/CompLF%2FHOAS/16" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (16 revisions)</span><a href="/nlab/show/diff/CompLF%2FHOAS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/CompLF%2FHOAS" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/CompLF%2FHOAS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/CompLF%2FHOAS/17" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (17 revisions)</span><a href="/nlab/show/diff/CompLF%2FHOAS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/CompLF%2FHOAS" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/CompLF/HOAS/cite" style="color: black">Cite</a>
   <a href="/nlab/print/CompLF%2FHOAS" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/CompLF%2FHOAS" id="view_tex" rel="nofollow">TeX</a>
