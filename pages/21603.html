@@ -752,6 +752,41 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <h3 id="TpV">Type Validity</h3>
 
+<p>We can define a utility type constructor to add a type validity condition to another type, while leaving its PER unmodified:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpV</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>TpOK</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mo>⊃</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">TpV(A | B)\;\coloneqq\;TpOK(B) \supset A</annotation></semantics></math></p>
+
+<p>Intuitively, we want some kind of validity-level conjunction, so it’s unintuitive that this definition uses implication (non-dependent intersection). But for validity, intersection <em>is</em> actually a conjunction. (That’s another way to see why type-level implications mess up reasoning about combined truth.)</p>
+
+<p>If we used</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpV</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">{</mo><munder><mspace width="thickmathspace"></mspace><mo>̲</mo></munder><mo>:</mo><mi>A</mi><mo stretchy="false">|</mo><mi>TpOK</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo><mspace width="2em"></mspace><mo stretchy="false">(</mo><mi>wrong</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">TpV(A | B)\;\coloneqq\;\{\underline{\;}:A | TpOK(B)\} \qquad (wrong)</annotation></semantics></math></p>
+
+<p>it would only add the validity condition (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mspace width="thickmathspace"></mspace><mo>̲</mo></munder><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><annotation encoding="application/x-tex">\underline{\;}:A \vdash B\,type</annotation></semantics></math>). And if we used</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpV</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>TpOK</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mo>∧</mo><mi>A</mi><mspace width="2em"></mspace><mo stretchy="false">(</mo><mi>wrong</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">TpV(A | B)\;\coloneqq\;TpOK(B) \wedge A \qquad (wrong)</annotation></semantics></math></p>
+
+<p>it would squash <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, so the PER would generally not be the same. (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpOK</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mo>⊃</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">TpOK(B) \supset A</annotation></semantics></math>) is not the only way to do it, but it seems like a good way to do it.</p>
+
+<p>Here are the derived rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpV</mi></mrow><annotation encoding="application/x-tex">TpV</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" rowspacing="1.0ex"><mtr><mtd><mfrac><mrow><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>TpV</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd><mfrac><mrow><mi>TpV</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>A</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>TpV</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>type</mi></mrow><mrow><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd><mfrac><mrow><mi>B</mi><mspace width="thinmathspace"></mspace><mi>type</mi><mspace width="2em"></mspace><mi>a</mi><mo>⊩</mo><mi>A</mi></mrow><mrow><mi>a</mi><mo>⊩</mo><mi>TpV</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd><mfrac><mrow><mi>a</mi><mo>⊩</mo><mi>TpV</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><mrow><mi>a</mi><mo>⊩</mo><mi>A</mi></mrow></mfrac></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\begin{gathered}
+\frac{A\,type \qquad B\,type}{TpV(A | B)\,type} \\
+\\
+\frac{TpV(A | B)\,type}{A\,type} \qquad
+\frac{TpV(A | B)\,type}{B\,type} \\
+\\
+\\
+\frac{B\,type \qquad a \Vdash A}{a \Vdash TpV(A | B)} \\
+\\
+\frac{a \Vdash TpV(A | B)}{a \Vdash A}
+\end{gathered}
+</annotation></semantics></math></div>
+<p>With <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpV</mi></mrow><annotation encoding="application/x-tex">TpV</annotation></semantics></math>, we can complete the definition of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> types as suggested above:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>TpV</mi><mo stretchy="false">(</mo><mi>Σ</mi><mo>′</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><mspace width="thickmathspace"></mspace><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Sigma x:A.B[x]\;\coloneqq\;TpV(\Sigma' x:A.B[x]\;|\;\Pi x:A.B[x])</annotation></semantics></math></p>
+
+<p>Combining the inversion rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TpV</mi></mrow><annotation encoding="application/x-tex">TpV</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math>, we get the desired inversion rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>. Inversion rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Sigma'</annotation></semantics></math> are not needed at all. In general, there seems to be no use for inversion rules for PER comprehension.</p>
+
 <h3 id="custom_presuppositions">Custom Presuppositions</h3>
 
 <h2 id="references">References</h2>
@@ -765,14 +800,14 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <div class="revisedby">
     <p>
-    Last revised on July 29, 2020 at 18:30:42.
+    Last revised on July 29, 2020 at 19:42:03.
     See the <a href="https://ncatlab.org/nlab/history/CompLF/HOAS" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/CompLF%2FHOAS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/CompLF%2FHOAS/18" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (18 revisions)</span><a href="/nlab/show/diff/CompLF%2FHOAS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/CompLF%2FHOAS" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/CompLF%2FHOAS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/CompLF%2FHOAS/19" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (19 revisions)</span><a href="/nlab/show/diff/CompLF%2FHOAS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/CompLF%2FHOAS" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/CompLF/HOAS/cite" style="color: black">Cite</a>
   <a href="/nlab/print/CompLF%2FHOAS" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/CompLF%2FHOAS" id="view_tex" rel="nofollow">TeX</a>
