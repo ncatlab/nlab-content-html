@@ -329,7 +329,7 @@ margin-left: 0em;
 <li><a href='#booleans'>Booleans</a></li>
 <li><a href='#per'>PER</a></li>
 </ul>
-<li><a href='#judgmentlevel_reasoning'>Judgment-level reasoning</a></li>
+<li><a href='#JudgReason'>Judgment-level reasoning</a></li>
 <ul>
 <li><a href='#vs_reasoning_about_reflected_judgments'>Vs reasoning about Reflected Judgments</a></li>
 <ul>
@@ -339,7 +339,7 @@ margin-left: 0em;
 <li><a href='#related_pairs_of_computations'>Related Pairs of Computations</a></li>
 <li><a href='#lessons'>Lessons</a></li>
 </ul>
-<li><a href='#nonnegatable_types'>“Non-negatable” Types</a></li>
+<li><a href='#NonNegate'>“Non-negatable” Types</a></li>
 <ul>
 <li><a href='#membership_in_a_type_formerly'>Membership in a Type (Formerly)</a></li>
 <li><a href='#TpOK'>Type Validity</a></li>
@@ -500,7 +500,7 @@ h:R[t1,t2] \vdash c \Vdash C
 {c \Vdash C}
 \end{gathered}
 </annotation></semantics></math></div>
-<h2 id="judgmentlevel_reasoning">Judgment-level reasoning</h2>
+<h2 id="JudgReason">Judgment-level reasoning</h2>
 
 <p>Reasoning at the judgment level using this logical framework is not as convenient as having a type checker for terms, or even as convenient as having a Nuprl-like proof refiner that extracts the realizers. But it’s very straightforward and expressive. It can be used to prove derived rules, and other facts about derivability that aren’t of the form to be rules. For example, you can show that adding a certain new rule would allow deriving a contradiction.</p>
 
@@ -608,7 +608,7 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <p>The last point—about respect for equality, except when dealing with elements of a particular type—seems very peculiar to PER semantics. You don’t need PER semantics to get those other “Frege phenomena”, and you don’t need PER semantics to get implicit respect for extensional equality, but the way they interact in PER semantics is quite extraordinary.</p>
 
-<h3 id="nonnegatable_types">“Non-negatable” Types</h3>
+<h3 id="NonNegate">“Non-negatable” Types</h3>
 
 <p>We have <a href="#DiffPresup">seen</a> that just because a judgment form is representable as a type operation doesn’t mean that that type operation gets you a valid type in all the situations you might want. In the most extreme case of this, the type is only meaningful when it’s true. In other words, the type presupposes itself. Karl Crary <a href="#KCThesis">called</a> these types “non-negatable”, since they’re intuitively either true or nonsense, never false. Assuming a non-negatable type with a type-level implication is guaranteed to be useless, since you must prove it in order to safely assume it.</p>
 
@@ -852,6 +852,16 @@ h:R[t1,t2] \vdash c \Vdash C
 </li>
 </ul>
 
+<p>Kahle’s paper is very much about the representability of formulas as propositions in Frege structures, which corresponds to the representability of framework formulas as squashed types in CompLF <a href="#JudgReason">discussed above</a>. With Frege structures, there’s a strong metatheorem about representability; Kahle calls it “Proposition 5”. This allows representing any formula with only positive occurrences of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>. By adding universes to Frege structures, Kahle stratifies the propositions, allowing for negative occurrences of combined truth for lower lever propositions. (TODO: Double check this.)</p>
+
+<p>(It seems that there’s nothing as strong as Proposition 5 available for CompLF. For example, there doesn’t seem to be a way to express disjunction of combined truth in CompLF. The disjunction available in CompLF is only a type when both disjuncts are. Frege structures have a “parallel or” that’s (combined) true when either disjunct is.)</p>
+
+<p>Since proposition validity (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>T</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∨</mo><mi>T</mi><mo stretchy="false">(</mo><mover><mo>¬</mo><mo>˙</mo></mover><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(x)\;\coloneqq\;T(x) \vee T(\dot{\not} x)</annotation></semantics></math>) uses only positive occurrences of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>, it’s representable. Namely, (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mover><mo>¬</mo><mo>˙</mo></mover><mo stretchy="false">(</mo><mover><mo>¬</mo><mo>˙</mo></mover><mi>x</mi><mover><mo>∧</mo><mo>˙</mo></mover><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>↔</mo><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∨</mo><mi>T</mi><mo stretchy="false">(</mo><mover><mo>¬</mo><mo>˙</mo></mover><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(\dot{\not}(\dot{\not} x \dot{\wedge} x)) \leftrightarrow (T(x) \vee T(\dot{\not} x))</annotation></semantics></math>). So with appropriate definitions of disjunction and implication for classical logic, the representation could also be (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mover><mo>∨</mo><mo>˙</mo></mover><mover><mo>¬</mo><mo>˙</mo></mover><mi>x</mi></mrow><annotation encoding="application/x-tex">x \dot{\vee} \dot{\not} x</annotation></semantics></math>) or (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mover><mo>→</mo><mo>˙</mo></mover><mi>x</mi></mrow><annotation encoding="application/x-tex">x \dot{\to} x</annotation></semantics></math>). So the idea is essentially the same as representing <a href="#TpOK">type validity</a> as a type in CompLF: use some tautology that mentions the thing that should be valid.</p>
+
+<p>In Frege structures, too, proposition validity is <a href="#NonNegate">non-negatable</a>. In Frege structures, this can be expressed quite clearly as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><mi>T</mi><mo stretchy="false">(</mo><mover><mo>¬</mo><mo>˙</mo></mover><mo stretchy="false">(</mo><mi>x</mi><mover><mo>→</mo><mo>˙</mo></mover><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\not T(\dot{\not}(x \dot{\to} x))</annotation></semantics></math>. In Frege structures terminology, this is saying that (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mover><mo>→</mo><mo>˙</mo></mover><mi>x</mi></mrow><annotation encoding="application/x-tex">x \dot{\to} x</annotation></semantics></math>) is “not false”. It’s either “true” (combined true) or not a proposition.</p>
+
+<p>So intuitively, the problem with representing negative occurrences of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> without stratification is that this allows assuming proposition validity in a proposition. But you can’t, since proposition validity is non-negatable.</p>
+
 <h3 id="fitchscott_partial_logic">Fitch-Scott Partial Logic</h3>
 
 <h3 id="free_logic">Free Logic</h3>
@@ -873,14 +883,14 @@ h:R[t1,t2] \vdash c \Vdash C
 
 <div class="revisedby">
     <p>
-    Last revised on August 12, 2020 at 02:22:39.
+    Last revised on August 12, 2020 at 19:03:54.
     See the <a href="https://ncatlab.org/nlab/history/CompLF/HOAS" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/CompLF%2FHOAS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/CompLF%2FHOAS/24" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (24 revisions)</span><a href="/nlab/show/diff/CompLF%2FHOAS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/CompLF%2FHOAS" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/CompLF%2FHOAS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/CompLF%2FHOAS/25" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (25 revisions)</span><a href="/nlab/show/diff/CompLF%2FHOAS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/CompLF%2FHOAS" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
   <a href="https://ncatlab.org/nlab/show/CompLF/HOAS/cite" style="color: black">Cite</a>
   <a href="/nlab/print/CompLF%2FHOAS" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/tex/CompLF%2FHOAS" id="view_tex" rel="nofollow">TeX</a>
