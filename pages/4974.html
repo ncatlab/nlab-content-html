@@ -8,12 +8,12 @@
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="robots" content="index,follow" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link href="/stylesheets/instiki.css?1553353531" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1534319116" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1531905161" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1562366333" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1592003439" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css"/>
 
   <style type="text/css">
@@ -262,8 +262,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -296,7 +296,6 @@ margin-left: 0em;
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
     <a href="https://nforum.ncatlab.org/discussions/?CategoryID=0" title="Discuss this page on the nForum. It does not yet have a dedicated thread; feel free to create one, giving it the same name as the title of this page" style="color:black">Discuss this page</a> |
-    <a href="/nlab/feeds" title="Subscribe to changes by Atom">Feeds</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -317,11 +316,14 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#original_form'>Original form</a></li>
+<li><a href='#definition'>Definition</a></li>
 <ul>
 <li><a href='#gloss'>Gloss</a></li>
 </ul>
-<li><a href='#alternative_form'>Alternative form</a></li>
+<li><a href='#the_category_of_event_structures'>The category of event structures</a></li>
+<li><a href='#event_structures_as_domains'>Event structures as domains</a></li>
+<li><a href='#event_structures_as_presheaves'>Event structures as presheaves </a></li>
+<li><a href='#event_structures_with_symmetry'>Event structures with symmetry</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
@@ -330,26 +332,57 @@ margin-left: 0em;
 
 <p>Event structures were introduced in order to abstract away from the precise ‘places’ and times at which events occur in distributed systems. The structure focuses on the events and the causal ordering between them.</p>
 
-<h2 id="original_form">Original form</h2>
+<h2 id="definition">Definition</h2>
 
-<div class="un_defn">
-<h6 id="definition">Definition</h6>
+<p>Event structures in the following sense are sometimes also called <em>prime</em> event structures.</p>
 
-<p>An <em>event structure</em>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mo>≤</mo><mo>,</mo><mo>♯</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E,\le, \sharp)</annotation></semantics></math>, consists of a <a class="existingWikiWord" href="/nlab/show/poset">poset</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mo>≤</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E,\le)</annotation></semantics></math> of <em>events</em>, where the partial order relation expresses <em>causal dependency</em>, together with a symmetric irreflexive relation, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>♯</mo></mrow><annotation encoding="application/x-tex">\sharp</annotation></semantics></math>, called <em>incompatibility</em>. This data is to satisfy</p>
-
-<ul>
-<li>finite causes: for every event <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">↓</mo><mi>e</mi><mo>=</mo><mo stretchy="false">{</mo><mi>e</mi><mo>′</mo><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>e</mi><mo>′</mo><mo>≤</mo><mi>e</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\downarrow e = \{e'\mid e'\le e\}</annotation></semantics></math> is finite;</li>
-</ul>
-
-<p>and</p>
+<p>
+<div class='num_defn'>
+<h6>Definition</h6>
+<p>An <em>event structure</em> is a tuple <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mo>≤</mo><mo>,</mo><mi mathvariant="normal">Con</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E,\leq, \mathrm{Con})</annotation></semantics></math> consisting of a <a class="existingWikiWord" href="/nlab/show/poset">poset</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mo>≤</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E,\le)</annotation></semantics></math> of <em>events</em>, and a nonempty set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Con</mi><mo>⊆</mo><mi>𝒫</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Con} \subseteq \mathcal{P}(E)</annotation></semantics></math> of <em>consistent subsets</em>, satisfying the following axioms:</p>
 
 <ul>
-<li><em>hereditary incompatibility</em>: for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>,</mo><mi>e</mi><mo>′</mo><mo>,</mo><mi>e</mi><mo>″</mo><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">e,e',e'' \in E</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>♯</mo><mi>e</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">e\sharp e'</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>′</mo><mo>≤</mo><mi>e</mi><mo>″</mo></mrow><annotation encoding="application/x-tex">e'\le e''</annotation></semantics></math> implies <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>♯</mo><mi>e</mi><mo>″</mo></mrow><annotation encoding="application/x-tex">e\sharp e''</annotation></semantics></math>.</li>
+<li>
+<p>finite causes: for every event <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mi>e</mi><mo>′</mo><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>e</mi><mo>′</mo><mo>≤</mo><mi>e</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{e'\mid e'\le e\}</annotation></semantics></math> is finite;</p>
+</li>
+
+<li>
+<p>if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">e \in E</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mi>e</mi><mo stretchy="false">}</mo><mo>∈</mo><mi mathvariant="normal">Con</mi></mrow><annotation encoding="application/x-tex">\{ e \} \in \mathrm{Con}</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mi mathvariant="normal">Con</mi></mrow><annotation encoding="application/x-tex">X \in \mathrm{Con}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y \subseteq X</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi><mo>∈</mo><mi mathvariant="normal">Con</mi></mrow><annotation encoding="application/x-tex">Y \in \mathrm{Con}</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mi mathvariant="normal">Con</mi></mrow><annotation encoding="application/x-tex">X \in \mathrm{Con}</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">e \in X</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>′</mo><mo>≤</mo><mi>e</mi></mrow><annotation encoding="application/x-tex">e' \leq e</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∪</mo><mo stretchy="false">{</mo><mi>e</mi><mo stretchy="false">}</mo><mo>∈</mo><mi mathvariant="normal">Con</mi></mrow><annotation encoding="application/x-tex">X \cup \{ e\} \in \mathrm{Con}</annotation></semantics></math>;</p>
+</li>
 </ul>
+
+<p></p>
 </div>
+</p>
 
-<div class="un_defn">
-<h6 id="definition_2">Definition</h6>
+<p>A restricted but simpler definition is as follows:</p>
+
+<p>
+<div class='num_defn'>
+<h6>Definition</h6>
+<p>An <em>event structure with binary conflict</em> is a tuple <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mo>≤</mo><mo>,</mo><mo>#</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E, \leq, \#)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mo>≤</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E, \leq)</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/poset">poset</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>#</mo></mrow><annotation encoding="application/x-tex">\#</annotation></semantics></math> is an irreflexive binary relation on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>, the <em>conflict relation</em>, satisfying:</p>
+
+<ul>
+<li>
+<p>finite causes: for every event <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mi>e</mi><mo>′</mo><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>e</mi><mo>′</mo><mo>≤</mo><mi>e</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{e'\mid e'\le e\}</annotation></semantics></math> is finite;</p>
+</li>
+
+<li>
+<p>hereditary conflict: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo lspace="thickmathspace" rspace="thickmathspace">\#</mo><mi>e</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">e \mathrel{\#} e'</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>′</mo><mo>≤</mo><mi>e</mi><mo>″</mo></mrow><annotation encoding="application/x-tex">e' \leq e''</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>#</mo><mi>e</mi><mo>″</mo></mrow><annotation encoding="application/x-tex">e \# e''</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<p></p>
+</div>
+</p>
 
 <p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝔼</mi><mo>=</mo><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mo>≤</mo><mo>,</mo><mo>♯</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbb{E} = (E,\le, \sharp)</annotation></semantics></math> be an event structure. Define its set of <strong>configurations</strong>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>𝔼</mi><mo stretchy="false">)</mo><mo>=</mo><mi>C</mi><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mo>≤</mo><mo>,</mo><mo>♯</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(\mathbb{E}) = C(E,\le, \sharp)</annotation></semantics></math>, to consist of those subsets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>⊆</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">X \subseteq E</annotation></semantics></math>, which are</p>
 
@@ -360,9 +393,8 @@ margin-left: 0em;
 <p>and</p>
 
 <ul>
-<li>downward closed: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">e\in X</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">↓</mo><mi>e</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\downarrow e\subseteq X</annotation></semantics></math>.</li>
+<li>downward closed: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">e\in X</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">↓</mo><mi>e</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\downarrow e\subseteq X</annotation></semantics></math>. \end{definition}</li>
 </ul>
-</div>
 
 <p>A morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>𝔼</mi><mo>→</mo><mi>𝔼</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">f : \mathbb{E}\to \mathbb{E}'</annotation></semantics></math> of event structures consists of a <a class="existingWikiWord" href="/nlab/show/partial+function">partial function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>E</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">f : E \to  E'</annotation></semantics></math> such that</p>
 
@@ -388,8 +420,6 @@ margin-left: 0em;
 
 <p>With this definition of morphism, we get the category, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>ES</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{ES}</annotation></semantics></math> of event structures.</p>
 
-<h2 id="alternative_form">Alternative form</h2>
-
 <p>In some sources, rather than stress the <em>inconsistency relation</em>, the complementary <em>consistency relation</em>. This leads to the definition of a family, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Con</mi></mrow><annotation encoding="application/x-tex">Con</annotation></semantics></math>, of finite subsets of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>, which satisfy</p>
 
 <ul>
@@ -407,6 +437,14 @@ margin-left: 0em;
 <ul>
 <li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mi>Con</mi></mrow><annotation encoding="application/x-tex">X\in Con</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>≤</mo><mi>e</mi><mo>′</mo><mo>∈</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">e\leq e'\in X</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∪</mo><mo stretchy="false">{</mo><mi>e</mi><mo stretchy="false">}</mo><mo>∈</mo><mi>Con</mi></mrow><annotation encoding="application/x-tex">X\cup \{e\}\in Con</annotation></semantics></math>.</li>
 </ul>
+
+<h2 id="the_category_of_event_structures">The category of event structures</h2>
+
+<h2 id="event_structures_as_domains">Event structures as domains</h2>
+
+<h2 id="event_structures_as_presheaves">Event structures as presheaves </h2>
+
+<h2 id="event_structures_with_symmetry">Event structures with symmetry</h2>
 
 <h2 id="references">References</h2>
 
@@ -431,17 +469,16 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on July 18, 2019 at 05:43:12.
+    Last revised on February 19, 2021 at 17:57:16.
     See the <a href="https://ncatlab.org/nlab/history/event structure" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/event+structure" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><span class="backintime"><a href="/nlab/revision/event+structure/9" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Back in time</a> (9 revisions)</span><a href="/nlab/show/diff/event+structure" accesskey="C" class="navlink" id="see_changes" rel="nofollow">See changes</a><a href="/nlab/history/event+structure" accesskey="S" class="navlink" id="history" rel="nofollow">History</a>
+  <a href="/nlab/edit/event+structure" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/event+structure/10" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/event+structure" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/event+structure" accesskey="S" class="navlink" id="history" rel="nofollow">History (10 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/event structure/cite" style="color: black">Cite</a>
   <a href="/nlab/print/event+structure" accesskey="p" id="view_print" rel="nofollow">Print</a>
-    <a href="/nlab/tex/event+structure" id="view_tex" rel="nofollow">TeX</a>
     <a href="/nlab/source/event+structure" id="view_source" rel="nofollow">Source</a>
 
   
