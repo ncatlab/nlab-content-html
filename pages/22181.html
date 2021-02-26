@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>
-      interval type in nLab
+      suspension type in nLab
   </title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -284,7 +284,7 @@ margin-left: 0em;
       </svg>
     </span>
       <span class="webName">nLab</span><br />
-      interval type
+      suspension type
   </h1>
 
 
@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/3382/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/12364/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -488,44 +488,43 @@ margin-left: 0em;
 <ul>
 <li><a href='#idea'>Idea</a></li>
 <li><a href='#definition'>Definition</a></li>
-<li><a href='#properties'>Properties</a></li>
+<li><a href='#examples'>Examples</a></li>
 <li><a href='#related_concepts'>Related concepts</a></li>
-<li><a href='#references'>References</a></li>
 </ul>
 </div>
 
 <h2 id="idea">Idea</h2>
 
-<p>The <em>interval type</em> is an <a class="existingWikiWord" href="/nlab/show/axiom">axiomatization</a> of the cellular <a class="existingWikiWord" href="/nlab/show/interval+object">interval object</a> in the context of <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>.</p>
+<p>The <em>suspension type</em> is an <a class="existingWikiWord" href="/nlab/show/axiom">axiomatization</a> of the <a class="existingWikiWord" href="/nlab/show/suspension+object">suspension object</a> in the context of <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>.</p>
 
 <h2 id="definition">Definition</h2>
 
-<p>As a <a class="existingWikiWord" href="/nlab/show/higher+inductive+type">higher inductive type</a>, the interval is given by</p>
+<p>As a <a class="existingWikiWord" href="/nlab/show/higher+inductive+type">higher inductive type</a>, the suspension is given by</p>
 
-<pre><code>Inductive Interval : Type
-  | left : Interval
-  | right : Interval
-  | segment : Id Interval left right</code></pre>
+<pre><code>Inductive Suspension (A : Type) : Type
+  | north : Suspension A
+  | south : Suspension A
+  | meridian : A -&gt; Id Suspension A north south</code></pre>
 
-<p>This says that the type is inductive constructed from two <a class="existingWikiWord" href="/nlab/show/terms">terms</a> in the interval, whose <a class="existingWikiWord" href="/nlab/show/semantics">interpretation</a> is as the endpoints of the interval, together with a term in the <a class="existingWikiWord" href="/nlab/show/identity+type">identity type</a> of paths between these two terms, which interprets as the 1-cell of the interval</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>left</mi><mover><mo>→</mo><mi>segment</mi></mover><mi>right</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
-  left \stackrel{segment}{\to} right
-  \,.
+<p>This says that the type is <a class="existingWikiWord" href="/nlab/show/dependent+type">dependent</a> on the type A and inductive constructed from two <a class="existingWikiWord" href="/nlab/show/terms">terms</a> in the suspension, whose <a class="existingWikiWord" href="/nlab/show/semantics">interpretation</a> is as the north and south poles of the suspension, together with a term in the <a class="existingWikiWord" href="/nlab/show/function+type">function type</a> from A to the <a class="existingWikiWord" href="/nlab/show/identity+type">identity type</a> of paths between these two terms, representing the meridians from the north to the south pole.</p>
 
-</annotation></semantics></math></div>
-<h2 id="properties">Properties</h2>
+<h2 id="examples">Examples</h2>
 
 <ul>
 <li>
-<p>An interval type is provably <a class="existingWikiWord" href="/nlab/show/contractible+type">contractible</a>. Conversely, any contractible type satisfies the rules of an interval type up to propositional equality.</p>
+<p>The type of <a class="existingWikiWord" href="/nlab/show/boolean">booleans</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mn>2</mn></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{2}</annotation></semantics></math> is the suspension type of the <a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mn>0</mn></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{0}</annotation></semantics></math>.</p>
 </li>
 
 <li>
-<p>On the other hand, postulating an interval type with <em>definitional</em> computation rules for <code>left</code> and <code>right</code> implies <a class="existingWikiWord" href="/nlab/show/function+extensionality">function extensionality</a>. (<a href="#Shulman">Shulman</a>).</p>
+<p>The <a class="existingWikiWord" href="/nlab/show/interval+type">interval type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math> is the suspension type of the <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mn>1</mn></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{1}</annotation></semantics></math>.</p>
 </li>
 
 <li>
-<p>An interval type is a <a class="existingWikiWord" href="/nlab/show/suspension+type">suspension type</a> of the <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a>.</p>
+<p>The <span class="newWikiWord">circle type<a href="/nlab/new/circle+type">?</a></span> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow><annotation encoding="application/x-tex">S^1</annotation></semantics></math> is the suspension type of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mn>2</mn></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{2}</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>Sphere types of dimension <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>d</mi><mo>:</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">d:\mathbb{N}</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mi>d</mi></msup></mrow><annotation encoding="application/x-tex">S^d</annotation></semantics></math>, are suspension types of the sphere type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">S^{d-1}</annotation></semantics></math>.</p>
 </li>
 </ul>
 
@@ -533,18 +532,18 @@ margin-left: 0em;
 
 <ul>
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/interval">interval</a>, <a class="existingWikiWord" href="/nlab/show/interval+object">interval object</a></p>
+<p><a class="existingWikiWord" href="/nlab/show/suspension+object">suspension object</a></p>
+
+<ul>
+<li>
+<p><strong>suspension type</strong></p>
 </li>
 
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/suspension+type">suspension type</a></p>
+<p><a class="existingWikiWord" href="/nlab/show/suspension">suspension</a>, <a class="existingWikiWord" href="/nlab/show/reduced+suspension">reduced suspension</a></p>
 </li>
 </ul>
-
-<h2 id="references">References</h2>
-
-<ul id="Shulman">
-<li><a class="existingWikiWord" href="/nlab/show/Mike+Shulman">Mike Shulman</a>, <em>An interval type implies functional extensionality</em> (<a href="http://homotopytypetheory.org/2011/04/04/an-interval-type-implies-function-extensionality/#comment-697">blog post</a>)</li>
+</li>
 </ul>
 </body></html>
 
@@ -552,17 +551,17 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on February 26, 2021 at 11:43:54.
-    See the <a href="https://ncatlab.org/nlab/history/interval type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    Created on February 26, 2021 at 11:09:05.
+    See the <a href="https://ncatlab.org/nlab/history/suspension type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/interval+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/3382/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/interval+type/3" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/interval+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/interval+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (3 revisions)</a>
-  <a href="https://ncatlab.org/nlab/show/interval type/cite" style="color: black">Cite</a>
-  <a href="/nlab/print/interval+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
-    <a href="/nlab/source/interval+type" id="view_source" rel="nofollow">Source</a>
+  <a href="/nlab/edit/suspension+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/12364/#Item_1">Discuss</a>
+  <a href="https://ncatlab.org/nlab/show/suspension type/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/suspension+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/suspension+type" id="view_source" rel="nofollow">Source</a>
 
   
 
