@@ -317,26 +317,73 @@ margin-left: 0em;
 <ul>
 <li><a href='#idea'>Idea</a></li>
 <li><a href='#forward_and_reverse_automatic_differentiation'>Forward and reverse automatic differentiation</a></li>
+<li><a href='#combinatory_homomorphic_automatic_differentiation_chad__a_categorical_take_on_ad'>Combinatory Homomorphic Automatic Differentiation (CHAD) - a categorical take on AD</a></li>
+<ul>
+<li><a href='#the_source_language'>The source language</a></li>
+<li><a href='#the_target_language'>The target language</a></li>
+<li><a href='#correctness'>Correctness</a></li>
+</ul>
+<li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
 
 <h2 id="idea">Idea</h2>
 
-<p><em>Automatic differentiation</em> is a technique for computing (<span class="newWikiWord">transpose matrix<a href="/nlab/new/transposed">?</a></span>) <a class="existingWikiWord" href="/nlab/show/derivative">derivatives</a> of functions implemented by computer programs, essentially by applying the chain-rule across program code. It is typically the method of choice for computing derivatives in machine learning and scientific computing because of its efficiency and numerical stability.</p>
+<p><em>Automatic differentiation</em> (AD) is a technique for computing (<span class="newWikiWord">transpose matrix<a href="/nlab/new/transposed">?</a></span>) <a class="existingWikiWord" href="/nlab/show/derivative">derivatives</a> of functions implemented by computer programs, essentially by applying the chain-rule across program code. It is typically the method of choice for computing derivatives in machine learning and scientific computing because of its efficiency and numerical stability.</p>
 
 <h2 id="forward_and_reverse_automatic_differentiation">Forward and reverse automatic differentiation</h2>
 
-<p>Automatic differentiation works by calculating the (transposed) derivative of a composite program in terms of the (transposed) derivatives of the parts, by using the chain-rule. The distinction between derivatives and transposed derivatives leads to the main distinction in automatic differentiation modes:</p>
+<p>AD works by calculating the (transposed) derivative of a composite program in terms of the (transposed) derivatives of the parts, by using the chain-rule. The distinction between derivatives and transposed derivatives leads to the main distinction in automatic differentiation modes:</p>
 
 <ul>
 <li>
-<p>forward mode: this implements the <a class="existingWikiWord" href="/nlab/show/tangent+bundle">tangent bundle</a> functor and calculates derivatives by a forward pass to calculate function values (primals), followed by another forward pass to calculate derivative values (tangents); these two forward passes can be interleaved into a single forward pass for efficiency</p>
+<p><em>forward mode AD</em>: this implements the <a class="existingWikiWord" href="/nlab/show/tangent+bundle">tangent bundle</a> functor and calculates derivatives by a forward pass to calculate function values (primals), followed by another forward pass to calculate derivative values (tangents); these two forward passes can be interleaved into a single forward pass for efficiency</p>
 </li>
 
 <li>
-<p>reverse mode: this implements the <a class="existingWikiWord" href="/nlab/show/cotangent+bundle">cotangent bundle</a> functor and calculates transposed derivatives by a forward pass to calculate function values (primals), followed by a <em>reverse</em> pass (inverting the control flow of the original program) to calculate transposed derivative values (cotangents); these two passes cannot easily be interleaved due to their differing direction.</p>
+<p><em>reverse mode AD</em>: this implements the <a class="existingWikiWord" href="/nlab/show/cotangent+bundle">cotangent bundle</a> functor and calculates transposed derivatives by a forward pass to calculate function values (primals), followed by a <em>reverse</em> pass (inverting the control flow of the original program) to calculate transposed derivative values (cotangents); these two passes cannot easily be interleaved due to their differing direction.</p>
 </li>
+</ul>
+
+<h2 id="combinatory_homomorphic_automatic_differentiation_chad__a_categorical_take_on_ad">Combinatory Homomorphic Automatic Differentiation (CHAD) - a categorical take on AD</h2>
+
+<p>Let us fix some class of categories with <a class="existingWikiWord" href="/nlab/show/stuff">stuff</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>. We will call its members <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-categories. For example, for our purposes, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> might include <a class="existingWikiWord" href="/nlab/show/property">properties</a> like</p>
+
+<ul>
+<li>closure under finite <a class="existingWikiWord" href="/nlab/show/products">products</a> (aka tuples, in programming-speak);</li>
+
+<li><span class="newWikiWord">cartesian closed category<a href="/nlab/new/Cartesian+closure">?</a></span> (aka higher-order functions);</li>
+
+<li>closure under finite <a class="existingWikiWord" href="/nlab/show/coproducts">coproducts</a> (aka sum or variant types);</li>
+</ul>
+
+<p>and <a class="existingWikiWord" href="/nlab/show/structure">structure</a> like</p>
+
+<ul>
+<li>designated objects like <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math> (which we think of as real numbers and integers)</li>
+
+<li>designated morphisms like <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>sin</mi><mo>:</mo><mi>R</mi><mo>→</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">sin:R\to R</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>cos</mi><mo>:</mo><mi>R</mi><mo>→</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">cos: R\to R</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo stretchy="false">)</mo><mo>:</mo><mi>R</mi><mo>×</mo><mi>R</mi><mo>→</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">(+): R\times R\to R</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo><mo>:</mo><mi>R</mi><mo>×</mo><mi>R</mi><mo>→</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">(*):R\times R\to R</annotation></semantics></math> (which we think of as the corresponding mathematical operations).</li>
+</ul>
+
+<p>The idea behind CHAD will be to view forward and reverse AD as the unique structure (stuff) preserving functor (homomorphism of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-categories) from the initial <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-category to a two suitably chosen <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-categories.</p>
+
+<h3 id="the_source_language">The source language</h3>
+
+<p>Consider the initial <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Syn</mi></mrow><annotation encoding="application/x-tex">Syn</annotation></semantics></math> (put differently, the S-properties category that is freely generated from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-stuff). We can think of this category as a programming language: its objects are types and its morphisms are programs modulo <a class="existingWikiWord" href="/nlab/show/beta-equivalence">beta-equivalence</a> and <a class="existingWikiWord" href="/nlab/show/eta-equivalence">eta-equivalence</a>. We will refer to this category as the “urce language’‘ of our AD transformation: its morphisms are the programs we want to differentiate.</p>
+
+<p>For example, if we choose the property part of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> to consist of Cartesian closure and the structure part of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> consists of designated objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math> and morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>sin</mi></mrow><annotation encoding="application/x-tex">sin</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>cos</mi></mrow><annotation encoding="application/x-tex">cos</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(+)</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(*)</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Syn</mi></mrow><annotation encoding="application/x-tex">Syn</annotation></semantics></math> is the simply typed <a class="existingWikiWord" href="/nlab/show/lambda-calculus">lambda-calculus</a> with base types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math> and the primitive operations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>sin</mi></mrow><annotation encoding="application/x-tex">sin</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>cos</mi></mrow><annotation encoding="application/x-tex">cos</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(+)</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(*)</annotation></semantics></math>.</p>
+
+<h3 id="the_target_language">The target language</h3>
+
+<h3 id="correctness">Correctness</h3>
+
+<p>CHAD is correct in the sense that the semantics of a forward (resp. reverse) AD transformed program is the derivative (resp. transposed derivative) of the semantics of the original program. We can prove this by a standard <a class="existingWikiWord" href="/nlab/show/logical+relations">logical relations</a> argument. Viewed more abstractly, the proof follows because the <span class="newWikiWord">scone<a href="/nlab/new/subscone">?</a></span> of an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-category is itself again an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-category, for common most choices of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>.</p>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/differential+programming">differential programming</a></li>
 </ul>
 
 <h2 id="references">References</h2>
@@ -358,13 +405,25 @@ margin-left: 0em;
 <ul>
 <li><span class="newWikiWord">Seppo Linnainmaa<a href="/nlab/new/Seppo+Linnainmaa">?</a></span>, The representation of the cumulative rounding error of an algorithm as a Taylor expansion of the local rounding errors. Master’s Thesis (in Finnish), Univ. Helsinki. 1970.</li>
 </ul>
+
+<p>A categorical analysis of (non-interleaved) forward and reverse AD is given by</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Matthijs+V%C3%A1k%C3%A1r">Matthijs Vákár</a>, CHAD: Combinatory Homomorphic Automatic Differentiation. 2021. <a href="https://arxiv.org/abs/2103.15776">arXiv preprint 2103.15776</a></li>
+</ul>
+
+<p>A categorical analysis of (interleaved) forward mode AD for calculating higher order derivatives is given by</p>
+
+<ul>
+<li><span class="newWikiWord">Mathieu Huot<a href="/nlab/new/Mathieu+Huot">?</a></span>, <a class="existingWikiWord" href="/nlab/show/Sam+Staton">Sam Staton</a>, <a class="existingWikiWord" href="/nlab/show/Matthijs+V%C3%A1k%C3%A1r">Matthijs Vákár</a>, Higher Order AD of Higher Order Functions. 2021. <a href="https://arxiv.org/abs/2101.06757">arXiv preprint 2101.06757</a></li>
+</ul>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on April 16, 2021 at 09:45:37.
+    Last revised on April 16, 2021 at 10:49:35.
     See the <a href="https://ncatlab.org/nlab/history/automatic differentiation" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
