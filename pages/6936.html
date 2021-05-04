@@ -262,8 +262,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -661,19 +661,47 @@ margin-left: 0em;
 
 <h3 id="integers">Integers</h3>
 
-<p>A definition of the set of integers as a higher inductive type.</p>
+<p>A definition of the set of <a class="existingWikiWord" href="/nlab/show/integers">integers</a> as a higher inductive type.</p>
 
-<pre><code>Inductive integers. (A : Type) :=
-| zero : A
-| succ : A -&gt; A
-| pred : A -&gt; A
-| linv : forall (x : A) pred(succ(x)) == x
-| rinv : forall (a : A) succ(pred(x)) == x
-| contr1 : forall (x y : A) (p q : x == y), p == q.</code></pre>
+<pre><code>Inductive int : Type :=
+| zero : int
+| succ : int -&gt; int
+| pred : int -&gt; int
+| linv : forall (x : int) pred succ x == x
+| rinv : forall (x : int) succ pred x == x
+| contr1 : forall (x y : int) (p q : x == y), p == q.</code></pre>
 
 <p>Another definition of the integers as an inductive type:</p>
 
-<p>Inductive integers. (A : Type) := | zero : A | succ : A -&gt; A | neg : A -&gt; A | axiom1 : neg(0) == 0 | axiom2 : forall (a : A) succ(neg(succ(x))) == neg(x) | contr1 : forall (x y : A) (p q : x == y), p == q.</p>
+<pre><code>Inductive int : Type :=
+| zero : int
+| succ : int -&gt; int
+| neg : int -&gt; int
+| axiom1 : neg zero  == zero
+| axiom2 : forall (x : int) succ neg succ x == neg x
+| contr1 : forall (x y : int) (p q : x == y), p == q.</code></pre>
+
+<p>A definition of the <a class="existingWikiWord" href="/nlab/show/commutative+ring">commutative ring</a> of integers as a higher inductive type.</p>
+
+<pre><code>Inductive int : Type :=
+| zero : int
+| one : int
+| neg : int -&gt; int
+| add : int -&gt; int -&gt; int
+| mult : int -&gt; int -&gt; int
+| alunital : forall (x : int) add zero x == x
+| arunital : forall (x : int) add x zero == x
+| aassoc : forall (x y z : int) add x (add y z) == add (add x y) z
+| acomm : forall (x y : int) add x y = add y x
+| alinv : forall (x : int) add (neg x) x == zero
+| arinv : forall (x : int) add x (neg x) == zero
+| ldist : forall (x y z : int) mult x (add y z) == add (mult x y) (mult x z)
+| rdist : forall (x y z : int) mult (add x y) z == add (mult x z) (mult y z)
+| mlunital : forall (x : int) mult one x == x
+| mrunital : forall (x : int) mult x one == x
+| massoc : forall (x y z : int) mult x (mult y z) == mult (mult x y) z
+| mcomm : forall (x y : int) mult x y = mult y x
+| contr1 : forall (x y : int) (p q : x == y), p == q.</code></pre>
 
 <h3 id="localization">Localization</h3>
 
@@ -840,7 +868,7 @@ Hypothesis f : forall i, S i -&gt; T i.</code></pre>
 
 <div class="revisedby">
     <p>
-    Last revised on May  4, 2021 at 08:59:35.
+    Last revised on May  4, 2021 at 09:50:49.
     See the <a href="https://ncatlab.org/nlab/history/higher inductive type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
