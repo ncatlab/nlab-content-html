@@ -262,8 +262,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="http://nlab-local/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="http://nlab-local/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -554,7 +554,6 @@ margin-left: 0em;
 <li><a href='#cumulative_hierarchy'>Cumulative hierarchy</a></li>
 <li><a href='#integers'>Integers</a></li>
 <li><a href='#polynomial_rings_over_integers'>Polynomial rings over integers</a></li>
-<li><a href='#rational_numbers'>Rational numbers</a></li>
 <li><a href='#localization'>Localization</a></li>
 <li><a href='#spectrification'>Spectrification</a></li>
 </ul>
@@ -722,63 +721,6 @@ margin-left: 0em;
 | mcomm : forall (x y : intpoly(A)) mult x y = mult y x
 | contr1 : forall (x y : intpoly(A)) (p q : x == y), p == q.</code></pre>
 
-<h3 id="rational_numbers">Rational numbers</h3>
-
-<p>A definition of the <a class="existingWikiWord" href="/nlab/show/rational+numbers">rational numbers</a> as a polynomial ring over the integers whose set of indeterminants is the natural numbers <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math> satisfying certain axioms.</p>
-
-<pre><code>Inductive nat : Type :=
-| zero : nat
-| succ : nat -&gt; nat
-
-Inductive rational : Type  :=
-| invelem : nat -&gt; rational
-| inj : nat -&gt; rational
-| zero : rational
-| one : rational
-| neg : rational -&gt; rational
-| add : rational -&gt; rational -&gt; rational
-| mult : rational -&gt; rational -&gt; rational
-| injzero: inj zero == one
-| injsucc: forall (n : nat) inj succ n == add (inj n) one
-| alunital : forall (x : rational) add zero x == x
-| arunital : forall (x : rational) add x zero == x
-| aassoc : forall (x y z : rational) add x (add y z) == add (add x y) z
-| acomm : forall (x y : rational) add x y = add y x
-| alinv : forall (x : rational) add (neg x) x == zero
-| arinv : forall (x : rational) add x (neg x) == zero
-| ldist : forall (x y z : rational) mult x (add y z) == add (mult x y) (mult x z)
-| rdist : forall (x y z : rational) mult (add x y) z == add (mult x z) (mult y z)
-| mlunital : forall (x : rational) mult one x == x
-| mrunital : forall (x : rational) mult x one == x
-| massoc : forall (x y z : rational) mult x (mult y z) == mult (mult x y) z
-| mcomm : forall (x y : rational) mult x y = mult y x
-| mlinv: forall (n : nat) mult (invelem n) (inj n) == one
-| mrinv: forall (n : nat) mult (inj n) (invelem n) == one
-| contr1 : forall (x y : rational) (p q : x == y), p == q.</code></pre>
-
-<p>Another definition of the rationals as an abelian group with an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math>-action</p>
-
-<pre><code>Inductive rational : Type  :=
-| invelem : nat -&gt; rational
-| zero : rational
-| one : rational
-| neg : rational -&gt; rational
-| add : rational -&gt; rational -&gt; rational
-| act : nat -&gt; rational -&gt; rational
-| injzero: inj zero == zero
-| injsucc: forall (n : nat) inj succ n == add (inj n) one
-| alunital : forall (x : rational) add zero x == x
-| arunital : forall (x : rational) add x zero == x
-| aassoc : forall (x y z : rational) add x (add y z) == add (add x y) z
-| acomm : forall (x y : rational) add x y = add y x
-| alinv : forall (x : rational) add (neg x) x == zero
-| arinv : forall (x : rational) add x (neg x) == zero
-| dist : forall (x : nat) forall (y z : rational) act x (add y z) == add (act x y) (act x z)
-| actzero : forall (x : rational) act zero x == zero
-| actsucc : forall (x : nat) forall (y : rational) act (succ x) y == add y (act x y)
-| actinv: forall (n : nat) act (succ n) (invelem n) == one
-| contr1 : forall (x y : rational) (p q : x == y), p == q.</code></pre>
-
 <h3 id="localization">Localization</h3>
 
 <p>Suppose we are given a family of <a class="existingWikiWord" href="/nlab/show/function+type">functions</a>:</p>
@@ -944,14 +886,14 @@ Hypothesis f : forall i, S i -&gt; T i.</code></pre>
 
 <div class="revisedby">
     <p>
-    Last revised on May  7, 2021 at 21:47:08.
+    Last revised on May  7, 2021 at 22:29:23.
     See the <a href="https://ncatlab.org/nlab/history/higher inductive type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/higher+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6691/#Item_73">Discuss</a><span class="backintime"><a href="/nlab/revision/higher+inductive+type/41" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/higher+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/higher+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (41 revisions)</a>
+  <a href="/nlab/edit/higher+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6691/#Item_73">Discuss</a><span class="backintime"><a href="/nlab/revision/higher+inductive+type/42" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/higher+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/higher+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (42 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/higher inductive type/cite" style="color: black">Cite</a>
   <a href="/nlab/print/higher+inductive+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/higher+inductive+type" id="view_source" rel="nofollow">Source</a>
