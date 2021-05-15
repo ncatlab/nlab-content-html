@@ -373,7 +373,7 @@ margin-left: 0em;
 </ul>
 <div>
 
-<p><strong><a class="existingWikiWord" href="/nlab/show/computational+trinitarianism">computational trinitarianism</a></strong> = <strong><a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a></strong> +<strong><a class="existingWikiWord" href="/nlab/show/programs+as+proofs">programs as proofs</a></strong> +<strong><a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">relation type theory/category theory</a></strong></p>
+<p><strong><a class="existingWikiWord" href="/nlab/show/computational+trinitarianism">computational trinitarianism</a></strong> = <br /> <strong><a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a></strong> +<strong><a class="existingWikiWord" href="/nlab/show/programs+as+proofs">programs as proofs</a></strong> +<strong><a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">relation type theory/category theory</a></strong></p>
 
 <table><thead><tr><th><a class="existingWikiWord" href="/nlab/show/logic">logic</a></th><th><a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a></th><th><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></th></tr></thead><tbody><tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/true">true</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a>/<a class="existingWikiWord" href="/nlab/show/%28-2%29-truncated+object">(-2)-truncated object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/h-level+0">h-level 0</a>-<a class="existingWikiWord" href="/nlab/show/type">type</a>/<a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a></td></tr>
 <tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/false">false</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a></td></tr>
@@ -663,6 +663,13 @@ margin-left: 0em;
 
 <p>This is already interesting in <a class="existingWikiWord" href="/nlab/show/extensional+type+theory">extensional type theory</a>, where <a class="existingWikiWord" href="/nlab/show/quotient+types">quotient types</a> are not always included. For more general homotopical quotients of “<a class="existingWikiWord" href="/nlab/show/internal+groupoids">internal groupoids</a>” as in the <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-Giraud+theorem">(∞,1)-Giraud theorem</a>, we first need a good definition of what such an internal groupoid is.</p>
 
+<p>One could also define a quotient of a <a class="existingWikiWord" href="/nlab/show/two-valued+type">boolean</a>-valued equivalence relation:</p>
+
+<pre><code>Inductive quotient (A : Type) (R : A -&gt; A -&gt; boolean) : Type :=
+| proj : A -&gt; quotient A R
+| relate : forall (x y : A), (R x y == true) -&gt; proj x == proj y
+| contr1 : forall (x y : quotient A R) (p q : x == y), p == q.</code></pre>
+
 <h3 id="rezk_completion">Rezk completion</h3>
 
 <p>According to <a class="existingWikiWord" href="/nlab/show/Homotopy+Type+Theory+--+Univalent+Foundations+of+Mathematics">Homotopy Type Theory – Univalent Foundations of Mathematics</a> the <span class="newWikiWord">Rezk completion<a href="/nlab/new/Rezk+completion">?</a></span> or <span class="newWikiWord">stack completion<a href="/nlab/new/stack+completion">?</a></span> of a <span class="newWikiWord">pregroupoid<a href="/nlab/new/pregroupoid">?</a></span> to a <a class="existingWikiWord" href="/nlab/show/groupoid">groupoid</a> is a higher inductive type and the <a class="existingWikiWord" href="/nlab/show/1-truncated">1-truncated</a> analogue of the quotient set construction above.</p>
@@ -713,25 +720,25 @@ margin-left: 0em;
 <p>A definition of the <a class="existingWikiWord" href="/nlab/show/polynomial+ring">polynomial ring</a> over the integers with a set of indeterminants <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>.</p>
 
 <pre><code>Inductive intpoly (A: Type)  :=
-| indet : A -&gt; intpoly(A)
-| zero : intpoly(A)
-| one : intpoly(A)
-| neg : intpoly(A) -&gt; intpoly(A)
-| add : intpoly(A) -&gt; intpoly(A) -&gt; intpoly(A)
-| mult : intpoly(A) -&gt; intpoly(A) -&gt; intpoly(A)
-| alunital : forall (x : intpoly(A)) add zero x == x
-| arunital : forall (x : intpoly(A)) add x zero == x
-| aassoc : forall (x y z : intpoly(A)) add x (add y z) == add (add x y) z
-| acomm : forall (x y : intpoly(A)) add x y = add y x
-| alinv : forall (x : intpoly(A)) add (neg x) x == zero
-| arinv : forall (x : intpoly(A)) add x (neg x) == zero
-| ldist : forall (x y z : intpoly(A)) mult x (add y z) == add (mult x y) (mult x z)
-| rdist : forall (x y z : intpoly(A)) mult (add x y) z == add (mult x z) (mult y z)
-| mlunital : forall (x : intpoly(A)) mult one x == x
-| mrunital : forall (x : intpoly(A)) mult x one == x
-| massoc : forall (x y z : intpoly(A)) mult x (mult y z) == mult (mult x y) z
-| mcomm : forall (x y : intpoly(A)) mult x y = mult y x
-| contr1 : forall (x y : intpoly(A)) (p q : x == y), p == q.</code></pre>
+| indet : A -&gt; (intpoly A)
+| zero : intpoly A
+| one : intpoly A
+| neg : (intpoly A) -&gt; (intpoly A)
+| add : (intpoly A) -&gt; (intpoly A) -&gt; (intpoly A)
+| mult : (intpoly A) -&gt; (intpoly A) -&gt; (intpoly A)
+| alunital : forall (x : intpoly A) add zero x == x
+| arunital : forall (x : intpoly A) add x zero == x
+| aassoc : forall (x y z : intpoly A) add x (add y z) == add (add x y) z
+| acomm : forall (x y : intpoly A) add x y = add y x
+| alinv : forall (x : intpoly A) add (neg x) x == zero
+| arinv : forall (x : intpoly A) add x (neg x) == zero
+| ldist : forall (x y z : intpoly A) mult x (add y z) == add (mult x y) (mult x z)
+| rdist : forall (x y z : intpoly A) mult (add x y) z == add (mult x z) (mult y z)
+| mlunital : forall (x : intpoly A) mult one x == x
+| mrunital : forall (x : intpoly A) mult x one == x
+| massoc : forall (x y z : intpoly A) mult x (mult y z) == mult (mult x y) z
+| mcomm : forall (x y : intpoly A) mult x y = mult y x
+| contr1 : forall (x y : intpoly A) (p q : x == y), p == q.</code></pre>
 
 <h3 id="localization">Localization</h3>
 
@@ -898,14 +905,14 @@ Hypothesis f : forall i, S i -&gt; T i.</code></pre>
 
 <div class="revisedby">
     <p>
-    Last revised on May  8, 2021 at 11:37:46.
+    Last revised on May 15, 2021 at 17:11:49.
     See the <a href="https://ncatlab.org/nlab/history/higher inductive type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/higher+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6691/#Item_73">Discuss</a><span class="backintime"><a href="/nlab/revision/higher+inductive+type/43" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/higher+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/higher+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (43 revisions)</a>
+  <a href="/nlab/edit/higher+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6691/#Item_73">Discuss</a><span class="backintime"><a href="/nlab/revision/higher+inductive+type/44" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/higher+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/higher+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (44 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/higher inductive type/cite" style="color: black">Cite</a>
   <a href="/nlab/print/higher+inductive+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/higher+inductive+type" id="view_source" rel="nofollow">Source</a>
