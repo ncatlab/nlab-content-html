@@ -316,7 +316,7 @@ margin-left: 0em;
 <div class="toc clickDown" tabindex="0">
 <h3 id="context">Context</h3>
 
-<h4 id="combinatorics">Combinatorics</h4>
+<p>#### Combinatorics</p>
 
 <div class="hide"><div>
 <p><strong><a class="existingWikiWord" href="/nlab/show/combinatorics">combinatorics</a></strong></p>
@@ -406,7 +406,12 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
+<li><a href='#preliminaries'>Preliminaries</a></li>
 <li><a href='#details'>Details</a></li>
+<ul>
+<li><a href='#for_standard_young_tableaux'>For standard Young tableaux</a></li>
+<li><a href='#for_semistandard_young_tableau'>For semi-standard Young tableau</a></li>
+</ul>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -414,17 +419,97 @@ margin-left: 0em;
 
 <h2 id="idea">Idea</h2>
 
-<p>The <em>hook length formula</em> counts the number of standard <a class="existingWikiWord" href="/nlab/show/Young+tableaux">Young tableaux</a> with fixed underlying <a class="existingWikiWord" href="/nlab/show/Young+diagram">Young diagram</a>. This number is also equal to the <a class="existingWikiWord" href="/nlab/show/dimension">dimension</a> of the <a class="existingWikiWord" href="/nlab/show/irreducible+representation">irreducible representation</a> of the <a class="existingWikiWord" href="/nlab/show/symmetric+group">symmetric group</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Sym</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Sym(n)</annotation></semantics></math> corresponding to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>, a <a class="existingWikiWord" href="/nlab/show/partition">partition</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+<p>The <em>hook length formula</em> counts the <a class="existingWikiWord" href="/nlab/show/number">number</a> of <a class="existingWikiWord" href="/nlab/show/semistandard+Young+tableaux">(semi-)</a><a class="existingWikiWord" href="/nlab/show/standard+Young+tableaux">standard Young tableaux</a> with fixed underlying <a class="existingWikiWord" href="/nlab/show/Young+diagram">Young diagram</a>.</p>
+
+<p>In the case of <a class="existingWikiWord" href="/nlab/show/standard+Young+tableau">standard Young tableau</a> this number is also equal to the <a class="existingWikiWord" href="/nlab/show/dimension">dimension</a> of the <a class="existingWikiWord" href="/nlab/show/irreducible+representation">irreducible representation</a> of the <a class="existingWikiWord" href="/nlab/show/symmetric+group">symmetric group</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Sym</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Sym(n)</annotation></semantics></math> corresponding to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>, a <a class="existingWikiWord" href="/nlab/show/partition">partition</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> (the <a class="existingWikiWord" href="/nlab/show/Specht+module">Specht module</a>, see at <em><a class="existingWikiWord" href="/nlab/show/representation+theory+of+the+symmetric+group">representation theory of the symmetric group</a></em>).</p>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>Given a <a class="existingWikiWord" href="/nlab/show/Young+diagram">Young diagram</a>, the <em>hook</em> at any one of its boxes is the collection of boxes to the right and below that box, and including the box itself. We write “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℓ</mi><mi>hook</mi></mrow><annotation encoding="application/x-tex">\ell hook</annotation></semantics></math>” for the <em>length</em> of such a hook, i.e. for the number of boxes it contains. Formally:</p>
+
+<p>
+<div class='num_defn' id='HookLength'>
+<h6>Definition</h6>
+<p><strong>(hook length)</strong> <br /> Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi>λ</mi> <mn>1</mn></msub><mo>≥</mo><mi>⋯</mi><mo>≥</mo><msub><mi>λ</mi> <mrow><mi>rows</mi><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda = (\lambda_1 \geq \cdots \geq \lambda_{rows(\lambda)})</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/partition">partition</a>/<a class="existingWikiWord" href="/nlab/show/Young+diagram">Young diagram</a>. Then for</p>
+
+<ul>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi>⋯</mi><mo>,</mo><mi>rows</mi><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">i \in \{1, \cdots, rows(\lambda)\}</annotation></semantics></math>,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>j</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi>⋯</mi><mo>,</mo><msub><mi>λ</mi> <mi>i</mi></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">j \in \{1, \cdots, \lambda_i\}</annotation></semantics></math></p>
+</li>
+</ul>
+
+<p>the <em>hook length</em> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(i,j)</annotation></semantics></math> is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ℓ</mi><mi>hook</mi><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mn>1</mn><mo>+</mo><mo stretchy="false">(</mo><msub><mi>λ</mi> <mi>i</mi></msub><mo>−</mo><mi>j</mi><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mi>λ</mi><msub><mo>′</mo> <mi>j</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \ell hook(i,j)
+  \;\coloneqq\;
+  1 +
+  (\lambda_i - j) + (\lambda'_j - 1)
+  \,,
+
+</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\lambda'</annotation></semantics></math> denotes the <em>conjugate partition</em> (see <a href="Young+diagram#Conjugation">there</a>).</p>
+
+<p></p>
+</div>
+</p>
+
+<p>
+<div class='num_defn'>
+<h6>Definition</h6>
+<p><strong>(numbers of (semi-)standard Young tableaux)</strong> <br /> Given a <a class="existingWikiWord" href="/nlab/show/partition">partition</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo>∈</mo><mi>Part</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda \in Part(n)</annotation></semantics></math>, consider</p>
+
+<ul>
+<li>
+<p>the number of <a class="existingWikiWord" href="/nlab/show/standard+Young+tableaux">standard Young tableaux</a>:</p>
+<div class="maruku-equation" id="eq:NumberOfStandardYoungTableauxOfFixedShape"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>#</mo><msub><mi>sYTableaux</mi> <mi>λ</mi></msub><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mrow><mo>|</mo><msub><mi>sYTableaux</mi> <mi>λ</mi></msub><mo>|</mo></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \# sYTableaux_\lambda \;\coloneqq\; \left\vert sYTableaux_\lambda\right\vert
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>the number of <a class="existingWikiWord" href="/nlab/show/standard+Young+tableaux">standard Young tableaux</a>:</p>
+<div class="maruku-equation" id="eq:NumberOfSemiStandardYoungTableauxOfFixedShape"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>#</mo><msub><mi>ssYTableaux</mi> <mi>λ</mi></msub><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mrow><mo>|</mo><msub><mi>ssYTableaux</mi> <mi>λ</mi></msub><mo>|</mo></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \# ssYTableaux_\lambda \;\coloneqq\; \left\vert ssYTableaux_\lambda\right\vert
+
+</annotation></semantics></math></div></li>
+</ul>
+
+<p>of shape <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.</p>
+</div>
+</p>
 
 <h2 id="details">Details</h2>
 
-<p>Given a <a class="existingWikiWord" href="/nlab/show/Young+diagram">Young diagram</a>, the <em>hook</em> at any one of its boxes is the collection of boxes to the right and below that box, and including the box itself. We write “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℓ</mi><mi>hook</mi></mrow><annotation encoding="application/x-tex">\ell hook</annotation></semantics></math>” for the <em>length</em> of such a hook, i.e. for the number of boxes it contains.</p>
+<h3 id="for_standard_young_tableaux">For standard Young tableaux</h3>
 
-<p>Given a <a class="existingWikiWord" href="/nlab/show/partition">partition</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo>⊢</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\lambda \vdash n</annotation></semantics></math>, let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mi>λ</mi></msup></mrow><annotation encoding="application/x-tex">f^{\lambda}</annotation></semantics></math> be the number of standard Young tableaux for the Young diagram corresponding to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>. Then</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mi>λ</mi></msup><mo>=</mo><mfrac><mrow><mi>n</mi><mo>!</mo></mrow><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>u</mi><mo>:</mo><mi>λ</mi></mrow></munder><mi>ℓ</mi><mi>hook</mi><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>.</mo></mrow><annotation encoding="application/x-tex">
-f^{\lambda} = \frac{n!}{\prod_{u: \lambda} \ell hook(u)}.
+<p>
+<div class='num_prop'>
+<h6>Proposition</h6>
+<p>Given a <a class="existingWikiWord" href="/nlab/show/partition">partition</a> (<a class="existingWikiWord" href="/nlab/show/Young+diagram">Young diagram</a>) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> (boxes), the number <a class="maruku-eqref" href="#eq:NumberOfStandardYoungTableauxOfFixedShape">(1)</a> of <a class="existingWikiWord" href="/nlab/show/standard+Young+tableaux">standard Young tableaux</a> of shape <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> equals the <a class="existingWikiWord" href="/nlab/show/factorial">factorial</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> over the <a class="existingWikiWord" href="/nlab/show/multiplication">product</a> of the hook lengths (Def. <a class="maruku-ref" href="#HookLength"></a>) at all the boxes of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>#</mo><msub><mi>sYTableaux</mi> <mi>λ</mi></msub><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mfrac><mrow><mi>n</mi><mo>!</mo></mrow><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></munder><mi>ℓ</mi><mi>hook</mi><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \# sYTableaux_\lambda
+    \;=\; 
+  \frac{
+    n!  
+  }{
+    \prod_{(i,j)} \ell hook(i,j)
+  }.
 
 </annotation></semantics></math></div>
+<p></p>
+</div>
+</p>
+
+<h3 id="for_semistandard_young_tableau">For semi-standard Young tableau</h3>
+
+<p>(…)</p>
+
 <h2 id="related_concepts">Related concepts</h2>
 
 <ul>
@@ -433,8 +518,16 @@ f^{\lambda} = \frac{n!}{\prod_{u: \lambda} \ell hook(u)}.
 
 <h2 id="references">References</h2>
 
+<p>Review:</p>
+
 <ul>
-<li>Yufei Zhao, <em>Young Tableaux and the Representations of the Symmetric Group</em>, (<a href="https://yufeizhao.com/research/youngtab-hcmr.pdf">pdf</a>)</li>
+<li><a class="existingWikiWord" href="/nlab/show/Yufei+Zhao">Yufei Zhao</a>, <em>Young Tableaux and the Representations of the Symmetric Group</em> (<a href="https://yufeizhao.com/research/youngtab-hcmr.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/ZhaoYoungTableaux.pdf" title="pdf">pdf</a>)</li>
+</ul>
+
+<p>See also:</p>
+
+<ul>
+<li>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Hook_length_formula">Hook length formula</a></em></li>
 </ul>
 </body></html>
 
@@ -442,14 +535,14 @@ f^{\lambda} = \frac{n!}{\prod_{u: \lambda} \ell hook(u)}.
 
 <div class="revisedby">
     <p>
-    Last revised on May 13, 2021 at 02:30:29.
+    Last revised on May 15, 2021 at 12:59:52.
     See the <a href="https://ncatlab.org/nlab/history/hook length formula" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/hook+length+formula" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/12885/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/hook+length+formula/2" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/hook+length+formula" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/hook+length+formula" accesskey="S" class="navlink" id="history" rel="nofollow">History (2 revisions)</a>
+  <a href="/nlab/edit/hook+length+formula" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/12885/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/hook+length+formula/3" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/hook+length+formula" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/hook+length+formula" accesskey="S" class="navlink" id="history" rel="nofollow">History (3 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/hook length formula/cite" style="color: black">Cite</a>
   <a href="/nlab/print/hook+length+formula" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/hook+length+formula" id="view_source" rel="nofollow">Source</a>
