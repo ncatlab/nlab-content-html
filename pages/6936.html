@@ -388,7 +388,7 @@ margin-left: 0em;
 <tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/negation">negation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a> into <a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+type">function type</a> into <a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a></td></tr>
 <tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/universal+quantification">universal quantification</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+product+type">dependent product type</a></td></tr>
 <tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/existential+quantification">existential quantification</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+sum">dependent sum</a> (<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncation">(-1)-truncation</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a> (<a class="existingWikiWord" href="/nlab/show/bracket+type">bracket type</a> of)</td></tr>
-<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equivalence">equivalence</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/path+space+object">path space object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/identity+type">identity type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equivalence">equivalence</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/path+space+object">path space object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/identity+type">identity type</a>/<a class="existingWikiWord" href="/nlab/show/path+type">path type</a></td></tr>
 <tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equivalence+class">equivalence class</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quotient">quotient</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quotient+type">quotient type</a></td></tr>
 <tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/induction">induction</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/colimit">colimit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/inductive+type">inductive type</a>, <a class="existingWikiWord" href="/nlab/show/W-type">W-type</a>, <a class="existingWikiWord" href="/nlab/show/M-type">M-type</a></td></tr>
 <tr><td style="text-align: left;">higher <a class="existingWikiWord" href="/nlab/show/induction">induction</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-colimit">higher colimit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/higher+inductive+type">higher inductive type</a></td></tr>
@@ -554,6 +554,7 @@ margin-left: 0em;
 <li><a href='#cumulative_hierarchy'>Cumulative hierarchy</a></li>
 <li><a href='#classically_extended_natural_numbers'>Classically extended natural numbers</a></li>
 <li><a href='#integers'>Integers</a></li>
+<li><a href='#dyadic_rational_numbers'>Dyadic rational numbers</a></li>
 <li><a href='#polynomial_rings_over_integers'>Polynomial rings over integers</a></li>
 <li><a href='#localization'>Localization</a></li>
 <li><a href='#spectrification'>Spectrification</a></li>
@@ -714,6 +715,21 @@ margin-left: 0em;
 | axiom1 : neg zero  == zero
 | axiom2 : forall (x : int) succ neg succ x == neg x
 | contr1 : forall (x y : int) (p q : x == y), p == q.</code></pre>
+
+<h3 id="dyadic_rational_numbers">Dyadic rational numbers</h3>
+
+<p>A minimal inductive definition of the <a class="existingWikiWord" href="/nlab/show/dyadic+rational+numbers">dyadic rational numbers</a>:</p>
+
+<pre><code>Inductive dyadic : Type :=
+| zero : dyadic
+| succ : dyadic -&gt; dyadic
+| neg : dyadic -&gt; dyadic
+| act : nat -&gt; dyadic -&gt; dyadic
+| zeroneg : neg zero  == zero
+| axiom2 : forall (x : dyadic) succ neg succ x == neg x
+| forall (x : dyadic) initstep : act 0 x == succ x
+| halfstep : forall (n : nat) forall (x : dyadic) act (succ n) (act (succ n) x) == act n x
+| contr1 : forall (x y : dyadic) (p q : x == y), p == q.</code></pre>
 
 <h3 id="polynomial_rings_over_integers">Polynomial rings over integers</h3>
 
@@ -905,14 +921,14 @@ Hypothesis f : forall i, S i -&gt; T i.</code></pre>
 
 <div class="revisedby">
     <p>
-    Last revised on May 15, 2021 at 17:11:49.
+    Last revised on May 25, 2021 at 15:59:32.
     See the <a href="https://ncatlab.org/nlab/history/higher inductive type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/higher+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6691/#Item_73">Discuss</a><span class="backintime"><a href="/nlab/revision/higher+inductive+type/44" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/higher+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/higher+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (44 revisions)</a>
+  <a href="/nlab/edit/higher+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6691/#Item_73">Discuss</a><span class="backintime"><a href="/nlab/revision/higher+inductive+type/45" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/higher+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/higher+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (45 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/higher inductive type/cite" style="color: black">Cite</a>
   <a href="/nlab/print/higher+inductive+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/higher+inductive+type" id="view_source" rel="nofollow">Source</a>
