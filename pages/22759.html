@@ -666,15 +666,28 @@ margin-left: 0em;
 | setcontr: forall (x y: poset A) (p q : x == y), p == q.
 
 Inductive \leq {poset A}: poset A -&gt; poset A -&gt; Type :=
-| refl: (forall x) x \leq x
-| trans: (forall x y z) (x \leq y) -&gt; (y \leq z) -&gt; (x \leq z)
-| pordercontr: forall (x y) (p q : x \leq y), p == q.</code></pre>
+| refl: (forall x: poset A) x \leq x
+| trans: (forall x y z: poset A) (x \leq y) -&gt; (y \leq z) -&gt; (x \leq z)
+| pordercontr: forall (x y : poset A) (p q : x \leq y), p == q.</code></pre>
 
 <h3 id="partial_map_classifiers">Partial map classifiers</h3>
 
-<p>From Altenkirch, Danielsson, and Kraus 2016</p>
+<p>Every <a class="existingWikiWord" href="/nlab/show/partial+map+classifier">partial map classifier</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mo>⊥</mo></msub></mrow><annotation encoding="application/x-tex">A_\bot</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/free+object">free</a> <a class="existingWikiWord" href="/nlab/show/pointed+object">pointed</a> <a class="existingWikiWord" href="/nlab/show/countable+set">denumerably</a> complete <a class="existingWikiWord" href="/nlab/show/partial+order">partial order</a> on a 0-truncated type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>. They are also called free pointed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math>-cpos. <a href="#partial">See Altenkirch, Danielsson, and Kraus, 2016</a></p>
 
-<p>partial map classifiers are <a class="existingWikiWord" href="/nlab/show/free+object">free</a> <a class="existingWikiWord" href="/nlab/show/countable+set">denumerably</a> complete <a class="existingWikiWord" href="/nlab/show/partial+orders">partial orders</a>.</p>
+<pre><code>Inductive omegacpo (A: Type) :=
+| inj: A -&gt; omegacpo A
+| bottom: omegacpo A
+| denumjoin: (exists a: nat -&gt; omegacpo A) (forall n: nat) a n \leq a succ n
+| antisym: (forall x y : omegacpo A) (x \leq y) -&gt; (y \leq x) -&gt; (x == y)
+| setcontr: forall (x y: omegacpo A) (p q : x == y), p == q.
+
+Inductive \leq {omegacpo A}: omegacpo A -&gt; omegacpo A -&gt; Type :=
+| refl: (forall x: omegacpo A) x \leq x
+| trans: (forall x y z: omegacpo A) (x \leq y) -&gt; (y \leq z) -&gt; (x \leq z)
+| init: (forall x : omegacpo A) bottom \leq x
+| upperbound: (forall a: nat -&gt; omegacpo A) ((forall n: nat) a n) \leq denumjoin a p
+| leastupper: (forall x : omegacpo A) ((forall a: nat -&gt; omegacpo A) ((forall n: nat) a n) \leq x) -&gt; (forall a: nat -&gt; omegacpo A) denum a p \leq x)
+| pordercontr: forall (x y : poset A) (p q : x \leq y), p == q.</code></pre>
 
 <p>Examples include the <a class="existingWikiWord" href="/nlab/show/Sierpinski+space">Sierpinski space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mn>1</mn> <mo>⊥</mo></msub></mrow><annotation encoding="application/x-tex">1_\bot</annotation></semantics></math>.</p>
 
@@ -695,7 +708,7 @@ Inductive \leq {poset A}: poset A -&gt; poset A -&gt; Type :=
 <p><a class="existingWikiWord" href="/nlab/show/Univalent+Foundations+Project">Univalent Foundations Project</a>, section 11 of <em><a class="existingWikiWord" href="/nlab/show/Homotopy+Type+Theory+--+Univalent+Foundations+of+Mathematics">Homotopy Type Theory – Univalent Foundations of Mathematics</a></em> (2013)</p>
 </li>
 
-<li>
+<li id="partial">
 <p><a class="existingWikiWord" href="/nlab/show/Thorsten+Altenkirch">Thorsten Altenkirch</a>, Nils Anders Danielsson, Nicolai Kraus, <em>Partiality, Revisited: The Partiality Monad as a Quotient Inductive-Inductive Type</em> <a href="https://arxiv.org/abs/1610.09254">arXiv</a>, 2016</p>
 </li>
 
@@ -717,14 +730,14 @@ Inductive \leq {poset A}: poset A -&gt; poset A -&gt; Type :=
 
 <div class="revisedby">
     <p>
-    Last revised on May 30, 2021 at 18:02:16.
+    Last revised on May 30, 2021 at 19:37:32.
     See the <a href="https://ncatlab.org/nlab/history/quotient inductive type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/quotient+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13023/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/quotient+inductive+type/4" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quotient+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quotient+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (4 revisions)</a>
+  <a href="/nlab/edit/quotient+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13023/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/quotient+inductive+type/5" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quotient+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quotient+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (5 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/quotient inductive type/cite" style="color: black">Cite</a>
   <a href="/nlab/print/quotient+inductive+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/quotient+inductive+type" id="view_source" rel="nofollow">Source</a>
