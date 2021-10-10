@@ -1,7 +1,1514 @@
-<html>
-<head><title>504 Gateway Time-out</title></head>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      slice model structure in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1553353531" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1534319116" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1531905161" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1592003439" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1532905251" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1532905251" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1532905252" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1532905250" type="text/javascript"></script>
+<script src="/javascripts/application.js?1532905250" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1533109147" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1533108238" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
 <body>
-<center><h1>504 Gateway Time-out</h1></center>
-<hr><center>nginx/1.21.3</center>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span><br />
+      slice model structure
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/430/#Item_31" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="model_category_theory">Model category theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/model+category">model category</a></strong></p>
+
+<h2 id="definitions">Definitions</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/category+with+weak+equivalences">category with weak equivalences</a></p>
+
+<p>(<a class="existingWikiWord" href="/nlab/show/relative+category">relative category</a>, <a class="existingWikiWord" href="/nlab/show/homotopical+category">homotopical category</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fibration">fibration</a>, <a class="existingWikiWord" href="/nlab/show/cofibration">cofibration</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/weak+factorization+system">weak factorization system</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/resolution">resolution</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cell+complex">cell complex</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/small+object+argument">small object argument</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+%28as+an+operation%29">homotopy</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+category">homotopy category</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thickmathspace"></mspace></mrow><annotation encoding="application/x-tex">\;</annotation></semantics></math><a class="existingWikiWord" href="/nlab/show/homotopy+category+of+a+model+category">of a model category</a></p>
+</li>
+</ul>
+
+<h2 id="morphisms">Morphisms</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Quillen+adjunction">Quillen adjunction</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Quillen+equivalence">Quillen equivalence</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Quillen+bifunctor">Quillen bifunctor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/derived+functor">derived functor</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id="universal_constructions">Universal constructions</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+Kan+extension">homotopy Kan extension</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+limit">homotopy limit</a>/<a class="existingWikiWord" href="/nlab/show/homotopy+colimit">homotopy colimit</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+weighted+colimit">homotopy weighted (co)limit</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coend">homotopy (co)end</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bousfield-Kan+map">Bousfield-Kan map</a></p>
+</li>
+</ul>
+
+<h2 id="refinements">Refinements</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+model+category">monoidal model category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/monoidal+Quillen+adjunction">monoidal Quillen adjunction</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/enriched+model+category">enriched model category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/enriched+Quillen+adjunction">enriched Quillen adjunction</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/simplicial+model+category">simplicial model category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/simplicial+Quillen+adjunction">simplicial Quillen adjunction</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cofibrantly+generated+model+category">cofibrantly generated model category</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/combinatorial+model+category">combinatorial model category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cellular+model+category">cellular model category</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebraic+model+category">algebraic model category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/compactly+generated+model+category">compactly generated model category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/proper+model+category">proper model category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cartesian+closed+model+category">cartesian closed model category</a>, <a class="existingWikiWord" href="/nlab/show/locally+cartesian+closed+model+category">locally cartesian closed model category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/stable+model+category">stable model category</a></p>
+</li>
+</ul>
+
+<h2 id="producing_new_model_structures">Producing new model structures</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/global+model+structures+on+functor+categories">on functor categories (global)</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Reedy+model+structure">Reedy model structure</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+an+overcategory">on slice categories</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bousfield+localization+of+model+categories">Bousfield localization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/transferred+model+structure">transferred model structure</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebraic+fibrant+objects">on algebraic fibrant objects</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+construction+for+model+categories">Grothendieck construction for model categories</a></p>
+</li>
+</ul>
+
+<h2 id="presentation_of_categories">Presentation of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\infty,1)</annotation></semantics></math>-categories</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category">(∞,1)-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/simplicial+localization">simplicial localization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-categorical+hom-space">(∞,1)-categorical hom-space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/presentable+%28%E2%88%9E%2C1%29-category">presentable (∞,1)-category</a></p>
+</li>
+</ul>
+
+<h2 id="model_structures">Model structures</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Cisinski+model+structure">Cisinski model structure</a></li>
+</ul>
+
+<h3 id="for_groupoids">for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoids</h3>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+for+%E2%88%9E-groupoids">for ∞-groupoids</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+topological+spaces">on topological spaces</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/classical+model+structure+on+topological+spaces">classical model structure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+compactly+generated+topological+spaces">on compactly generated spaces</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+Delta-generated+topological+spaces">on Delta-generated spaces</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+diffeological+spaces">on diffeological spaces</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Str%C3%B8m+model+structure">Strøm model structure</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Thomason+model+structure">Thomason model structure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+presheaves+over+a+test+category">model structure on presheaves over a test category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+sets">on simplicial sets</a>, <a class="existingWikiWord" href="/nlab/show/model+structure+on+semi-simplicial+sets">on semi-simplicial sets</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/classical+model+structure+on+simplicial+sets">classical model structure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/constructive+model+structure+on+simplicial+sets">constructive model structure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+for+right+fibrations">for right/left fibrations</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+groupoids">model structure on simplicial groupoids</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+cubical+sets">on cubical sets</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+strict+%E2%88%9E-groupoids">on strict ∞-groupoids</a>, <a class="existingWikiWord" href="/nlab/show/natural+model+structure+on+groupoids">on groupoids</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+chain+complexes">on chain complexes</a>/<a class="existingWikiWord" href="/nlab/show/model+structure+on+cosimplicial+abelian+groups">model structure on cosimplicial abelian groups</a></p>
+
+<p>related by the <a class="existingWikiWord" href="/nlab/show/Dold-Kan+correspondence">Dold-Kan correspondence</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+cosimplicial+simplicial+sets">model structure on cosimplicial simplicial sets</a></p>
+</li>
+</ul>
+
+<h3 id="for_equivariant_groupoids">for equivariant <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoids</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fine+model+structure+on+topological+G-spaces">fine model structure on topological G-spaces</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/coarse+model+structure+on+topological+G-spaces">coarse model structure on topological G-spaces</a></p>
+
+<p>(<a class="existingWikiWord" href="/nlab/show/Borel+model+structure">Borel model structure</a>)</p>
+</li>
+</ul>
+
+<h3 id="for_rational_groupoids">for rational <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoids</h3>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/model+structure+on+dgc-algebras">model structure on dgc-algebras</a></li>
+</ul>
+
+<h3 id="for_rational_equivariant_groupoids">for rational equivariant <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoids</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+equivariant+chain+complexes">model structure on equivariant chain complexes</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+equivariant+dgc-algebras">model structure on equivariant dgc-algebras</a></p>
+</li>
+</ul>
+
+<h3 id="for_groupoids_2">for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-groupoids</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+for+n-groupoids">for n-groupoids</a>/<a class="existingWikiWord" href="/nlab/show/model+structure+for+n-groupoids">for n-types</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/canonical+model+structure+on+groupoids">for 1-groupoids</a></p>
+</li>
+</ul>
+
+<h3 id="for_groups">for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groups</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+groups">model structure on simplicial groups</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+reduced+simplicial+sets">model structure on reduced simplicial sets</a></p>
+</li>
+</ul>
+
+<h3 id="for_algebras">for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-algebras</h3>
+
+<h4 id="general">general</h4>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+monoids">on monoids</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+T-algebras">on simplicial T-algebras</a>, on <a class="existingWikiWord" href="/nlab/show/homotopy+T-algebra">homotopy T-algebra</a>s</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebras+over+a+monad">on algebas over a monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebras+over+an+operad">on algebras over an operad</a>,</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+modules+over+an+algebra+over+an+operad">on modules over an algebra over an operad</a></p>
+</li>
+</ul>
+
+<h4 id="specific">specific</h4>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+dg-algebras">model structure on differential-graded commutative algebras</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+differential+graded-commutative+superalgebras">model structure on differential graded-commutative superalgebras</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+dg-algebras+over+an+operad">on dg-algebras over an operad</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+dg-algebras">on dg-algebras</a> and on <a class="existingWikiWord" href="/nlab/show/simplicial+ring">on simplicial rings</a>/<a class="existingWikiWord" href="/nlab/show/model+structure+on+cosimplicial+rings">on cosimplicial rings</a></p>
+
+<p>related by the <a class="existingWikiWord" href="/nlab/show/monoidal+Dold-Kan+correspondence">monoidal Dold-Kan correspondence</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+for+L-%E2%88%9E+algebras">for L-∞ algebras</a>: <a class="existingWikiWord" href="/nlab/show/model+structure+on+dg-Lie+algebras">on dg-Lie algebras</a>, <a class="existingWikiWord" href="/nlab/show/model+structure+on+dg-coalgebras">on dg-coalgebras</a>, <a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+Lie+algebras">on simplicial Lie algebras</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+dg-modules">model structure on dg-modules</a></p>
+</li>
+</ul>
+
+<h3 id="for_stablespectrum_objects">for stable/spectrum objects</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+spectra">model structure on spectra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+ring+spectra">model structure on ring spectra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+presheaves+of+spectra">model structure on presheaves of spectra</a></p>
+</li>
+</ul>
+
+<h3 id="for_categories">for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\infty,1)</annotation></semantics></math>-categories</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+categories+with+weak+equivalences">on categories with weak equivalences</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+quasi-categories">Joyal model for quasi-categories</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+sSet-categories">on sSet-categories</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+for+complete+Segal+spaces">for complete Segal spaces</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+for+Cartesian+fibrations">for Cartesian fibrations</a></p>
+</li>
+</ul>
+
+<h3 id="for_stable_categories">for stable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\infty,1)</annotation></semantics></math>-categories</h3>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/model+structure+on+dg-categories">on dg-categories</a></li>
+</ul>
+
+<h3 id="for_operads">for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\infty,1)</annotation></semantics></math>-operads</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+operads">on operads</a>, <a class="existingWikiWord" href="/nlab/show/model+structure+for+Segal+operads">for Segal operads</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebras+over+an+operad">on algebras over an operad</a>,</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+modules+over+an+algebra+over+an+operad">on modules over an algebra over an operad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+dendroidal+sets">on dendroidal sets</a>, <a class="existingWikiWord" href="/nlab/show/model+structure+for+dendroidal+complete+Segal+spaces">for dendroidal complete Segal spaces</a>, <a class="existingWikiWord" href="/nlab/show/model+structure+for+dendroidal+Cartesian+fibrations">for dendroidal Cartesian fibrations</a></p>
+</li>
+</ul>
+
+<h3 id="for_categories_2">for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>r</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(n,r)</annotation></semantics></math>-categories</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Theta+space">for (n,r)-categories as ∞-spaces</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+for+weak+complicial+sets">for weak ∞-categories as weak complicial sets</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+cellular+sets">on cellular sets</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/canonical+model+structure">on higher categories in general</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+strict+%E2%88%9E-categories">on strict ∞-categories</a></p>
+</li>
+</ul>
+
+<h3 id="for_sheaves__stacks">for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\infty,1)</annotation></semantics></math>-sheaves / <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-stacks</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+homotopical+presheaves">on homotopical presheaves</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+presheaves">on simplicial presheaves</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/global+model+structure+on+simplicial+presheaves">global model structure</a>/<a class="existingWikiWord" href="/nlab/show/Cech+model+structure+on+simplicial+presheaves">Cech model structure</a>/<a class="existingWikiWord" href="/nlab/show/local+model+structure+on+simplicial+presheaves">local model structure</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+sheaves">on simplicial sheaves</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+presheaves+of+simplicial+groupoids">on presheaves of simplicial groupoids</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+sSet-enriched+presheaves">on sSet-enriched presheaves</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+for+%282%2C1%29-sheaves">model structure for (2,1)-sheaves</a>/for stacks</p>
+</li>
+</ul>
+</div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#definition'>Definition</a></li>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#cofibrant_generation_properness_combinatoriality'>Cofibrant generation, properness, combinatoriality</a></li>
+<li><a href='#as_presentations_for_over_1categories'>As presentations for over (∞,1)-categories</a></li>
+<li><a href='#PropertiesQuillenAdjunctions'>Quillen adjunctions</a></li>
+<ul>
+<li><a href='#BaseChangeQuillenAdjunction'>Base change Quillen adjunction</a></li>
+<li><a href='#sliced_quillen_adjunctions'>Sliced Quillen adjunctions</a></li>
+</ul>
+</ul>
+<li><a href='#examples'>Examples</a></li>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="definition">Definition</h2>
+
+<p>
+<div class='num_prop' id='SliceModelStructure'>
+<h6>Proposition</h6>
+<p><strong>(slice model structure)</strong> <br /> For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">X \in \mathcal{C}</annotation></semantics></math> any <a class="existingWikiWord" href="/nlab/show/object">object</a>, the <a class="existingWikiWord" href="/nlab/show/slice+category">slice category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/X}</annotation></semantics></math> as well as the <a class="existingWikiWord" href="/nlab/show/coslice+category">coslice category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mrow><mi>X</mi><mo stretchy="false">/</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\mathcal{C}^{X/}</annotation></semantics></math> inherit themselves structures of <a class="existingWikiWord" href="/nlab/show/model+categories">model categories</a>, whose <a class="existingWikiWord" href="/nlab/show/fibrations">fibrations</a>, <a class="existingWikiWord" href="/nlab/show/cofibrations">cofibrations</a> and <a class="existingWikiWord" href="/nlab/show/weak+equivalences">weak equivalences</a> are precisely the morphism whose images under the <a class="existingWikiWord" href="/nlab/show/forgetful+functors">forgetful functors</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub><mo>→</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/X} \to \mathcal{C}</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mrow><mi>X</mi><mo stretchy="false">/</mo></mrow></msup><mo>→</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}^{X/} \to \mathcal{C}</annotation></semantics></math> are fibrations, cofibrations or weak equivalences, respectively, in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>.</p>
+</div>
+</p>
+
+<p>(<a href="#Hirschhorn02">Hirschhorn 2002, Thm. 7.6.5</a>, <a href="#MayPonto12">May &amp; Ponto 2012, Th. 15.3.6</a>)</p>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="cofibrant_generation_properness_combinatoriality">Cofibrant generation, properness, combinatoriality</h3>
+
+<div class="num_prop" id="ModelStructureInheritsGoodProperties">
+<h6 id="proposition">Proposition</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is</p>
+
+<ul>
+<li>
+<p>a <a class="existingWikiWord" href="/nlab/show/cofibrantly+generated+model+category">cofibrantly generated model category</a></p>
+</li>
+
+<li>
+<p>or a <a class="existingWikiWord" href="/nlab/show/proper+model+category">proper model category</a></p>
+</li>
+
+<li>
+<p>or a <a class="existingWikiWord" href="/nlab/show/cellular+model+category">cellular model category</a></p>
+</li>
+</ul>
+
+<p>then so are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/X}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mrow><mi>X</mi><mo stretchy="false">/</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\mathcal{C}^{X/}</annotation></semantics></math>.</p>
+
+<p>More in detail, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi><mo>,</mo><mi>J</mi><mo>⊂</mo><mi>Mor</mi><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">I,J \subset Mor(\mathcal{C})</annotation></semantics></math> are the classes of <a class="existingWikiWord" href="/nlab/show/generating+cofibrations">generating cofibrations</a> and of generating acylic cofibrations of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, respectively, then</p>
+
+<ul>
+<li>the generating (acyclic) cofibrations of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mrow><mi>X</mi><mo stretchy="false">/</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\mathcal{C}^{X/}</annotation></semantics></math> are the image under <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>⊔</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">X \sqcup(-)</annotation></semantics></math> of those of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>.</li>
+</ul>
+</div>
+
+<p>(<a href="#Hirschhorn05">Hirschhorn 05</a>, <a href="#MayPonto12">May &amp; Ponto 2012, Th. 15.3.6</a>).</p>
+
+<div class="num_prop" id="ModelStructureInheritsCombinatorial">
+<h6 id="proposition_2">Proposition</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/combinatorial+model+category">combinatorial model category</a>, then so is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/X}</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p>By <a href="locally+presentable+category#Properties">basic properties</a> of <a class="existingWikiWord" href="/nlab/show/locally+presentable+categories">locally presentable categories</a> they are stable under slicing. Hence with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> locally presentable also <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/X}</annotation></semantics></math> is, and by prop. <a class="maruku-ref" href="#ModelStructureInheritsGoodProperties"></a> with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> cofibrantly generated also <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/X}</annotation></semantics></math> is.</p>
+</div>
+
+<div class="num_prop" id="ModelStructureInheritsEnriched">
+<h6 id="proposition_3">Proposition</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is an <span class="newWikiWord">cartesian enriched model category<a href="/nlab/new/cartesian+enriched+model+category">?</a></span>, then so is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/X}</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_2">Proof</h6>
+
+<p>By basic properties of <span class="newWikiWord">cartesian enriched categories<a href="/nlab/new/cartesian+enriched+categories">?</a></span> they are stable under slicing, where tensoring is computed in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>. Hence with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> enriched also <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/X}</annotation></semantics></math> is. The <a class="existingWikiWord" href="/nlab/show/pushout+product+axiom">pushout product axiom</a> now follows from the fact that in overcategories pushouts can be computed in the underlying category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>. The <a class="existingWikiWord" href="/nlab/show/unit+axiom">unit axiom</a> follows from the unit axiom of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> using the fact that tensorings are computed in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>.</p>
+</div>
+
+<h3 id="as_presentations_for_over_1categories">As presentations for over (∞,1)-categories</h3>
+
+<p>When restricted to <a class="existingWikiWord" href="/nlab/show/fibrant+objects">fibrant objects</a>, the operation of forming the model structure on an overcategory presents the operation of forming the <a class="existingWikiWord" href="/nlab/show/over+%28%E2%88%9E%2C1%29-category">over (∞,1)-category</a> of an <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category">(∞,1)-category</a>.</p>
+
+<p>More explicitly, for any <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, let</p>
+<div class="maruku-equation" id="eq:LocalizationFunctor"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>γ</mi><mo lspace="verythinmathspace">:</mo><mi>𝒞</mi><mo>⟶</mo><msub><mi>L</mi> <mi>W</mi></msub><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">
+  
+  \gamma \colon \mathcal{C} \longrightarrow L_W \mathcal{C}
+
+</annotation></semantics></math></div>
+<p>denote the localization of an (infinity,1)-category|localization]] (as an <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category">(∞,1)-category</a>) inverting the <a class="existingWikiWord" href="/nlab/show/weak+equivalences">weak equivalences</a> (as e.g. given by <a class="existingWikiWord" href="/nlab/show/simplicial+localization">simplicial localization</a>; see also the <a class="existingWikiWord" href="/nlab/show/model+structure+on+relative+categories">model structure on relative categories</a>). Then:</p>
+
+<div class="num_prop" id="PresentationOfSliceInfinityCatAlt">
+<h6 id="proposition_4">Proposition</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">X \in \mathcal{C}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/fibrant+object">fibrant</a>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>γ</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math> <a class="maruku-eqref" href="#eq:LocalizationFunctor">(1)</a> induces an <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-functor">(∞,1)-functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi><mo>→</mo><msub><mi>L</mi> <mi>W</mi></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mi>γ</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{C}/X \to L_W(\mathcal{C})/\gamma(X)</annotation></semantics></math>, which in turn induces an <a class="existingWikiWord" href="/nlab/show/equivalence+of+%28%E2%88%9E%2C1%29-categories">equivalence of (∞,1)-categories</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>W</mi></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi><mo stretchy="false">)</mo><mover><mo>⟶</mo><mo>≃</mo></mover><msub><mi>L</mi> <mi>W</mi></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mi>γ</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  L_W(\mathcal{C}/X) 
+    \overset{\simeq}{\longrightarrow}
+  L_W(\mathcal{C})/\gamma(X)
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<p>This main result is corollary 7.6.13 of <a href="#Cisinski20">Cisinski 20</a>. Model categories are (∞,1)-categories with weak equivalences and fibrations as defined in <a href="#Cisinski20">Cisinski Def. 7.4.12</a>.</p>
+
+<p>We spell out a proof for the special case that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> carries the <a class="existingWikiWord" href="/nlab/show/extra+structure">extra structure</a> of a <a class="existingWikiWord" href="/nlab/show/simplicial+model+category">simplicial model category</a> (this proof was written <a href="https://ncatlab.org/nlab/revision/model+structure+on+an+over+category/7">in 2011</a> when no comparable statement seemed to be available in the literature):</p>
+
+<div class="num_prop" id="PresentationOfSliceInfinityCat">
+<h6 id="proposition_5">Proposition</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/simplicial+model+category">simplicial model category</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">X \in \mathcal{C}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/fibrant+object">fibrant</a>, then the <a class="existingWikiWord" href="/nlab/show/overcategory">overcategory</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}/X</annotation></semantics></math> with the above slice model structure is a <a class="existingWikiWord" href="/nlab/show/presentable+%28infinity%2C1%29-category">presentation</a> of the <a class="existingWikiWord" href="/nlab/show/over-%28%E2%88%9E%2C1%29-category">over-(∞,1)-category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>W</mi></msub><mi>𝒞</mi><mo stretchy="false">/</mo><mi>γ</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L_W \mathcal{C} / \gamma(X)</annotation></semantics></math>: we have an <a class="existingWikiWord" href="/nlab/show/equivalence+of+%28%E2%88%9E%2C1%29-categories">equivalence of (∞,1)-categories</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>W</mi></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi><mo stretchy="false">)</mo><mo>≃</mo><mo stretchy="false">(</mo><msub><mi>L</mi> <mi>W</mi></msub><mi>𝒞</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mi>γ</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  L_W(\mathcal{C}/X) \simeq  (L_W\mathcal{C}) / \gamma(X)
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<div class="proof">
+<h6 id="proof_3">Proof</h6>
+
+<p>We write equivalently <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mo>∘</mo></msup><mo>≔</mo><msub><mi>L</mi> <mi>W</mi></msub><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-)^\circ \coloneqq L_W(-)</annotation></semantics></math>.</p>
+
+<p>It is clear that we have an <a class="existingWikiWord" href="/nlab/show/essentially+surjective+%28%E2%88%9E%2C1%29-functor">essentially surjective (∞,1)-functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mo>∘</mo></msup><mo stretchy="false">/</mo><mi>X</mi><mo>→</mo><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi><msup><mo stretchy="false">)</mo> <mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\mathcal{C}^\circ/X \to (\mathcal{C}/X)^\circ</annotation></semantics></math>. What has to be shown is that this is a <a class="existingWikiWord" href="/nlab/show/full+and+faithful+%28%E2%88%9E%2C1%29-functor">full and faithful (∞,1)-functor</a> in that it is an <a class="existingWikiWord" href="/nlab/show/equivalence+in+an+%28%E2%88%9E%2C1%29-category">equivalence</a> on all <a class="existingWikiWord" href="/nlab/show/hom-object">hom</a>-<a class="existingWikiWord" href="/nlab/show/%E2%88%9E-groupoid">∞-groupoid</a>s <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mo>∘</mo></msup><mo stretchy="false">/</mo><mi>X</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>≃</mo><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi><msup><mo stretchy="false">)</mo> <mo>∘</mo></msup><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{C}^\circ/X(a,b) \simeq (\mathcal{C}/X)^\circ(a,b)</annotation></semantics></math>.</p>
+
+<p>To see this, notice that the hom-space in an <a class="existingWikiWord" href="/nlab/show/over-%28%E2%88%9E%2C1%29-category">over-(∞,1)-category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mo>∘</mo></msup><mo stretchy="false">/</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}^\circ/X</annotation></semantics></math> between objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">a \colon A \to X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">b \colon B \to X</annotation></semantics></math> is given (as discussed there) by the <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-pullback">(∞,1)-pullback</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msup><mi>𝒞</mi> <mo>∘</mo></msup><mo stretchy="false">/</mo><mi>X</mi><mo stretchy="false">(</mo><mi>A</mi><mover><mo>→</mo><mi>a</mi></mover><mi>X</mi><mo>,</mo><mi>B</mi><mover><mo>→</mo><mi>b</mi></mover><mi>X</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><msup><mi>𝒞</mi> <mo>∘</mo></msup><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd></mtd> <mtd><msup><mo maxsize="1.2em" minsize="1.2em">↓</mo> <mpadded width="0"><mrow><msub><mi>b</mi> <mo>*</mo></msub></mrow></mpadded></msup></mtd></mtr> <mtr><mtd><mo>*</mo></mtd> <mtd><mover><mo>→</mo><mi>a</mi></mover></mtd> <mtd><msup><mi>𝒞</mi> <mo>∘</mo></msup><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathcal{C}^\circ/X(A \stackrel{a}{\to} X, B \stackrel{b}{\to} X) 
+     &amp;\to&amp; \mathcal{C}^\circ(A,B)
+    \\
+    \big\downarrow 
+      &amp;&amp; 
+    \big\downarrow^{\mathrlap{b_*}}
+    \\
+    {*} &amp;\stackrel{a}{\to}&amp; \mathcal{C}^\circ(A,X)
+  }
+
+</annotation></semantics></math></div>
+<p>in <a class="existingWikiWord" href="/nlab/show/%E2%88%9EGrpd">∞Grpd</a>.</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A \in C</annotation></semantics></math> be a cofibrant representative and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">b \colon B \to X</annotation></semantics></math> be a fibration representative in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> (which always exists) of the objects of these names in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>C</mi> <mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">C^\circ</annotation></semantics></math>, respectively. In terms of these we have a cofibration</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>∅</mi></mtd> <mtd></mtd> <mtd><mo>↪</mo></mtd> <mtd></mtd> <mtd><mi>A</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↘</mo></mtd> <mtd></mtd> <mtd><msub><mo>↙</mo> <mpadded width="0"><mi>a</mi></mpadded></msub></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>X</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \emptyset &amp;&amp;\hookrightarrow&amp;&amp; A
+    \\
+    &amp; \searrow &amp;&amp; \swarrow_{\mathrlap{a}}
+    \\ 
+    &amp;&amp; X
+  }
+
+</annotation></semantics></math></div>
+<p>in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}/X</annotation></semantics></math>, exhibiting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> as a cofibrant object of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}/X</annotation></semantics></math>; and a fibration</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>B</mi></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mi>b</mi></mover></mtd> <mtd></mtd> <mtd><mi>X</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mrow></mrow> <mpadded width="0" lspace="-100%width"><mi>b</mi></mpadded></msub><mo>↘</mo></mtd> <mtd></mtd> <mtd><msub><mo>↙</mo> <mpadded width="0"><mi>Id</mi></mpadded></msub></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>X</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    B &amp;&amp;\stackrel{b}{\to}&amp;&amp; X
+    \\
+    &amp; {}_{\mathllap{b}}\searrow &amp;&amp; \swarrow_{\mathrlap{Id}}
+    \\ 
+    &amp;&amp; X
+  }
+
+</annotation></semantics></math></div>
+<p>in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}/X</annotation></semantics></math>, exhibiting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> as a fibrant object in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}/X</annotation></semantics></math>.</p>
+
+<p>Moreover, the diagram in <a class="existingWikiWord" href="/nlab/show/sSet">sSet</a> given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>𝒞</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd></mtd> <mtd><msup><mo maxsize="1.2em" minsize="1.2em">↓</mo> <mpadded width="0"><mrow><msub><mi>b</mi> <mo>*</mo></msub></mrow></mpadded></msup></mtd></mtr> <mtr><mtd><mo>*</mo></mtd> <mtd><mover><mo>→</mo><mi>a</mi></mover></mtd> <mtd><mi>𝒞</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathcal{C}/X(a, b) &amp;\longrightarrow&amp; \mathcal{C}(A,B)
+    \\
+    \big\downarrow &amp;&amp; \big\downarrow^{\mathrlap{b_*}}
+    \\
+    {*} &amp;\stackrel{a}{\to}&amp; \mathcal{C}(A,X)
+  }
+
+</annotation></semantics></math></div>
+<p>is</p>
+
+<ol>
+<li>
+<p>a <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> diagram in <a class="existingWikiWord" href="/nlab/show/sSet">sSet</a> (by the definition of morphism in an ordinary <a class="existingWikiWord" href="/nlab/show/overcategory">overcategory</a>);</p>
+</li>
+
+<li>
+<p>a <a class="existingWikiWord" href="/nlab/show/homotopy+pullback">homotopy pullback</a> in the <a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+sets">model structure on simplicial sets</a>, because by the <a class="existingWikiWord" href="/nlab/show/pullback+power+axiom">pullback power axiom</a> on the <a class="existingWikiWord" href="/nlab/show/sSet">sSet</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mrow></mrow> <mi>Quillen</mi></msub></mrow><annotation encoding="application/x-tex">{}_{Quillen}</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/enriched+model+category">enriched model category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> and the above (co)fibrancy assumptions, all objects are <a class="existingWikiWord" href="/nlab/show/Kan+complexes">Kan complexes</a> and the right vertical morphism is a <a class="existingWikiWord" href="/nlab/show/Kan+fibration">Kan fibration</a>;</p>
+</li>
+
+<li>
+<p>has in the top left the correct <a class="existingWikiWord" href="/nlab/show/derived+hom-space">derived hom-space</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">/</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">C/X</annotation></semantics></math> (since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> is cofibrant and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> fibrant).</p>
+</li>
+</ol>
+
+<p>This means that this correct hom-space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>≃</mo><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">/</mo><mi>X</mi><msup><mo stretchy="false">)</mo> <mo>∘</mo></msup><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>sSet</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}/X(a,b) \simeq (\mathcal{C}/X)^\circ(a,b) \in sSet</annotation></semantics></math> is indeed a model for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mo>∘</mo></msup><mo stretchy="false">/</mo><mi>X</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>∈</mo><mn>∞</mn><mi>Grpd</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}^\circ/X(a,b) \in \infty Grpd</annotation></semantics></math>.</p>
+</div>
+
+<h3 id="PropertiesQuillenAdjunctions">Quillen adjunctions</h3>
+
+<h4 id="BaseChangeQuillenAdjunction">Base change Quillen adjunction</h4>
+
+<p>
+<div class='num_prop' id='LeftBaseChangeQuillenAdjunction'>
+<h6>Proposition</h6>
+<p><strong>(left base change Quillen adjunction)</strong> <br /> For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>1</mn></msub><mover><mo>→</mo><mi>f</mi></mover><msub><mi>c</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">c_1 \xrightarrow{f} c_2</annotation></semantics></math> any <a class="existingWikiWord" href="/nlab/show/morphism">morphism</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, the left <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> adjunction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>f</mi> <mn>1</mn></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(f_1 \dashv f^\ast)</annotation></semantics></math> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> (where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/postcomposition">postcomposition</a> with and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>) is a <a class="existingWikiWord" href="/nlab/show/Quillen+adjunction">Quillen adjunction</a> between the slice model structures (from Prop. <a class="maruku-ref" href="#SliceModelStructure"></a>):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><msub><mi>c</mi> <mn>1</mn></msub></mrow></msub><munderover><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>⊥</mo> <mpadded width="0"><mi>Qu</mi></mpadded></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><munder><mo>⟵</mo><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow></munder><mover><mo>⟶</mo><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow></mover></munderover><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><msub><mi>c</mi> <mn>2</mn></msub></mrow></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+    \mathcal{C}_{/c_1}
+      \underoverset
+        {\underset{f^\ast}{\longleftarrow}}
+        {\overset{f_!}{\longrightarrow}}
+        {\;\;\;\;\bot_{\mathrlap{Qu}}\;\;\;\;}    
+    \mathcal{C}_{/c_2}
+    \,.
+  
+</annotation></semantics></math></div>
+<p></p>
+</div>
+ 
+<div class='proof'>
+<h6>Proof</h6>
+<p>Since the <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">f_1</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/postcomposition">postcomposition</a> operation, it manifestly preserves the classes of <a class="existingWikiWord" href="/nlab/show/underlying">underlying</a> morphisms, hence in particular preserves the classes of (acyclic) cofibrations in the slice model structure (by Prop. <a class="maruku-ref" href="#SliceModelStructure"></a>), hence is a <a class="existingWikiWord" href="/nlab/show/left+Quillen+functor">left Quillen functor</a>.</p>
+</div>
+</p>
+
+<p>
+<div class='num_prop' id='LeftBaseChangeQuillenEquivalence'>
+<h6>Proposition</h6>
+<p><strong>(<a class="existingWikiWord" href="/nlab/show/left+base+change+Quillen+equivalence">left base change Quillen equivalence</a>)</strong> <br /></p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo lspace="verythinmathspace">:</mo><mi>S</mi><mover><mo>⟶</mo><mrow><mo>∈</mo><mi mathvariant="normal">W</mi></mrow></mover><mi>T</mi></mrow><annotation encoding="application/x-tex">\phi \colon S \overset{ \in \mathrm{W} }{\longrightarrow} T</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/weak+equivalence">weak equivalence</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>.</p>
+
+<p>Then the left base change Quillen adjunction along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> (Prop. <a class="maruku-ref" href="#LeftBaseChangeQuillenAdjunction"></a>) is a <a class="existingWikiWord" href="/nlab/show/Quillen+equivalence">Quillen equivalence</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>T</mi></mrow></msub><munderover><mrow><mphantom><mrow><msub><mrow></mrow> <mi>Qu</mi></msub></mrow></mphantom><msub><mo>≃</mo> <mi>Qu</mi></msub></mrow><munder><mo>⟶</mo><mrow><msup><mi>ϕ</mi> <mo>*</mo></msup></mrow></munder><mover><mo>⟵</mo><mrow><msub><mi>ϕ</mi> <mo>!</mo></msub></mrow></mover></munderover><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>S</mi></mrow></msub></mrow><annotation encoding="application/x-tex">
+  \mathcal{C}_{/T}
+    \underoverset
+      {\underset{\phi^*}{\longrightarrow}}
+      {\overset{\phi_!}{\longleftarrow}}
+      {\phantom{{}_{Qu}}\simeq_{Qu}}
+  \mathcal{C}_{/S}  
+
+</annotation></semantics></math></div>
+<p>if and only if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> has this property:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\ast)</annotation></semantics></math> <em>The <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> (<a class="existingWikiWord" href="/nlab/show/base+change">base change</a>) of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> along any <a class="existingWikiWord" href="/nlab/show/fibration">fibration</a> is still a <a class="existingWikiWord" href="/nlab/show/weak+equivalence">weak equivalence</a>.</em></p>
+</div>
+ Notice that the property <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\ast)</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> is implied as soon as either:</p>
+
+<ul>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/right+proper+model+category">right proper</a>, or</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/acyclic+fibration">acyclic fibration</a>, or</p>
+</li>
+
+<li>
+<p>both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/fibrant+objects">fibrant objects</a></p>
+</li>
+</ul>
+
+<p>(for the first this follows by definition; for the second by the fact that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>ϕ</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\phi^\ast</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/right+Quillen+functor">right Quillen functor</a> by Prop. <a class="maruku-ref" href="#LeftBaseChangeQuillenAdjunction"></a>; for the third by <a href="homotopy+pullback#HomotopyPullbackByOrdinaryPullback">this Prop.</a> on recognizing <a class="existingWikiWord" href="/nlab/show/homotopy+pullbacks">homotopy pullbacks</a>). 
+<div class='proof'>
+<h6>Proof</h6>
+<p>Using the characterization of Quillen equivalences by derived adjuncts (<a href="Quillen+equivalence#AdjunctOfWeakEquivalence">here</a>), the base change adjunction is a Quillen equivalence iff for</p>
+
+<ul>
+<li>
+<p>any <a class="existingWikiWord" href="/nlab/show/cofibrant+object">cofibrant object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">X \to S</annotation></semantics></math> in the slice over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> (i.e. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is cofibrant in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>)</p>
+</li>
+
+<li>
+<p>and a <a class="existingWikiWord" href="/nlab/show/fibrant+object">fibrant object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo lspace="verythinmathspace">:</mo><mi>Y</mi><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">p \colon Y \to T</annotation></semantics></math> in the slice over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> (i.e. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/fibration">fibration</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>),</p>
+</li>
+</ul>
+
+<p>we have that</p>
+
+<p>(1) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>→</mo><msup><mi>ϕ</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>S</mi><msub><mo>×</mo> <mi>T</mi></msub><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \to \phi^*(Y) = S \times_T Y</annotation></semantics></math> is a weak equivalence</p>
+
+<p>iff</p>
+
+<p>(2) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ϕ</mi> <mo>!</mo></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">\phi_!(X) \to Y</annotation></semantics></math> is a weak equivalence.</p>
+
+<p>But the latter morphism is the top composite in the following <a class="existingWikiWord" href="/nlab/show/commuting+diagram">commuting diagram</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>X</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>S</mi><msub><mo>×</mo> <mi>T</mi></msub><mi>Y</mi></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>p</mi> <mo>*</mo></msup><mi>ϕ</mi></mrow></mover></mtd> <mtd><mi>Y</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↘</mo></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd><msup><mrow></mrow> <mrow><msub><mo></mo><mrow><mo stretchy="false">(</mo><mi>pb</mi><mo stretchy="false">)</mo></mrow></msub></mrow></msup></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo><msup><mrow></mrow> <mpadded width="0"><mrow><mi>p</mi><mo>∈</mo><mi>Fib</mi></mrow></mpadded></msup></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>S</mi></mtd> <mtd><munder><mo>⟶</mo><mrow><mi>ϕ</mi><mo>∈</mo><mi mathvariant="normal">W</mi></mrow></munder></mtd> <mtd><mi>T</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    X 
+      &amp;\longrightarrow&amp; 
+    S \times_T Y 
+      &amp;\overset{p^\ast \phi}{\longrightarrow}&amp; 
+    Y
+    \\
+    &amp;\searrow&amp; 
+    \big\downarrow 
+    &amp;{}^{_{(pb)}}&amp; 
+    \big\downarrow {}^{\mathrlap{p \in Fib}}
+    \\
+    &amp;&amp; S &amp;\underset{\phi \in \mathrm{W} }{\longrightarrow}&amp; T
+  }
+
+</annotation></semantics></math></div>
+<p>Hence the <a class="existingWikiWord" href="/nlab/show/two-out-of-three">two-out-of-three</a>-property says that (1) is equivalent to (2) if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>p</mi> <mo>*</mo></msup><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">p^\ast \phi</annotation></semantics></math> is a weak equivalence.</p>
+
+<p>Conversely, taking <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>→</mo><msup><mi>ϕ</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">X \to \phi^\ast(X)</annotation></semantics></math> to be a weak equivalence (hence a <a class="existingWikiWord" href="/nlab/show/cofibrant+resolution">cofibrant resolution</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>ϕ</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi^\ast(X)</annotation></semantics></math>), <a class="existingWikiWord" href="/nlab/show/two-out-of-three">two-out-of-three</a> implies that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>ϕ</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>ϕ</mi> <mo>*</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\phi_! \dashv \phi^\ast)</annotation></semantics></math> is a Quillen equivalence, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>p</mi> <mo>*</mo></msup><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">p^\ast \phi</annotation></semantics></math> is a weak equivalence.</p>
+</div>
+</p>
+
+<p>In particular:</p>
+
+<p>
+<div class='num_prop' id='RightPropernessAndLeftQuillenBaseChange'>
+<h6>Proposition</h6>
+<p>The following are equivalent:</p>
+
+<ol>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/right+proper+model+category">right proper model category</a>.</p>
+</li>
+
+<li>
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><msub><mi>c</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>c</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">f \colon c_1 \to c_2</annotation></semantics></math> is any <a class="existingWikiWord" href="/nlab/show/weak+equivalence">weak equivalence</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, then the left base change Quillen adjunction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>f</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(f_! \dashv f^\ast)</annotation></semantics></math> (from Prop. <a class="maruku-ref" href="#LeftBaseChangeQuillenAdjunction"></a>) is a <a class="existingWikiWord" href="/nlab/show/Quillen+equivalence">Quillen equivalence</a>.</p>
+</li>
+</ol>
+
+<p></p>
+</div>
+</p>
+
+<p>This is due to <a href="#Rezk02">Rezk 02, Prop. 2.5</a>.</p>
+
+<h4 id="sliced_quillen_adjunctions">Sliced Quillen adjunctions</h4>
+
+<p>
+<div class='num_prop' id='SlicedQuillenAdjunction'>
+<h6>Proposition</h6>
+<p><strong>(slice Quillen adjunctions)</strong> <br /> Given a <a class="existingWikiWord" href="/nlab/show/Quillen+adjunction">Quillen adjunction</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>𝒟</mi><munderover><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>⊥</mo> <mpadded width="0"><mi>Qu</mi></mpadded></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><munder><mo>⟶</mo><mi>R</mi></munder><mover><mo>⟵</mo><mi>L</mi></mover></munderover><mi>𝒞</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{D}
+    \underoverset
+      {\underset{R}{\longrightarrow}}
+      {\overset{L}{\longleftarrow}}
+      {\;\;\;\;\bot_{\mathrlap{Qu}}\;\;\;\;}
+  \mathcal{C}
+  \,,
+
+</annotation></semantics></math></div>
+<p>then:</p>
+
+<ol>
+<li>
+<p>for any <a class="existingWikiWord" href="/nlab/show/object">object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">b \in \mathcal{C}</annotation></semantics></math> the <a href="over+category#OnSlices">sliced adjunction</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/Quillen+adjunction">Quillen adjunction</a> between the corresponding slice model categories (Prop. <a class="maruku-ref" href="#SliceModelStructure"></a>):</p>
+<div class="maruku-equation" id="eq:SlicedQuillenAdjointFunctorsOverLb"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>𝒟</mi> <mrow><mo stretchy="false">/</mo><mi>L</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></msub><munderover><mrow><msub><mo>⊥</mo> <mpadded width="0"><mi>Qu</mi></mpadded></msub></mrow><munder><mo>⟶</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>R</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></munder><mover><mo>⟵</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>L</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover></munderover><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow></mpadded></mrow><annotation encoding="application/x-tex">
+  
+  \mathcal{D}_{/L(c)}
+  \underoverset
+    {\underset{\;\;\;\;R_{/b}\;\;\;\;}{\longrightarrow}}
+    {\overset{\;\;\;\;L_{/b}\;\;\;\;}{\longleftarrow}}
+    {\bot_{\mathrlap{Qu}}}
+  \mathcal{C}_{/b}
+  \mathrlap{\,,}
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>for any <a class="existingWikiWord" href="/nlab/show/object">object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>𝒟</mi></mrow><annotation encoding="application/x-tex">b \in \mathcal{D}</annotation></semantics></math> the <a href="over+category#OnSlices">sliced adjunction</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/Quillen+adjunction">Quillen adjunction</a> between the corresponding slice model categories (Prop. <a class="maruku-ref" href="#SliceModelStructure"></a>):</p>
+<div class="maruku-equation" id="eq:SlicedQuillenAdjointFunctorsOverRb"><span class="maruku-eq-number">(3)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>𝒟</mi> <mrow><mo stretchy="false">/</mo><mi>c</mi></mrow></msub><munderover><mrow><msub><mo>⊥</mo> <mpadded width="0"><mi>Qu</mi></mpadded></msub></mrow><munder><mo>⟶</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>R</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></munder><mover><mo>⟵</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>L</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover></munderover><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>R</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></msub><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow></mpadded></mrow><annotation encoding="application/x-tex">
+  
+  \mathcal{D}_{/c}
+  \underoverset
+    {\underset{\;\;\;\;R_{/b}\;\;\;\;}{\longrightarrow}}
+    {\overset{\;\;\;\;L_{/b}\;\;\;\;}{\longleftarrow}}
+    {\bot_{\mathrlap{Qu}}}
+  \mathcal{C}_{/R(b)}
+  \mathrlap{\,,}
+
+</annotation></semantics></math></div></li>
+</ol>
+
+<p></p>
+</div>
+</p>
+
+<p>(e.g. <a href="#Li16">Li 2016, Prop. 2.5 (2)</a>)</p>
+
+<p>
+<div class='proof'>
+<h6>Proof</h6>
+<p>Consider the first case: By the nature of the <a href="over+category#OnSlices">sliced adjunction</a>, its <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L_{/b}</annotation></semantics></math> acts as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> on <a class="existingWikiWord" href="/nlab/show/underlying">underlying</a> <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a>. But since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is assumed to be a <a class="existingWikiWord" href="/nlab/show/left+Quillen+functor">left Quillen functor</a> and since the (acyclic) cofibrations of the slice model structure are those of <a class="existingWikiWord" href="/nlab/show/underlying">underlying</a> morphisms (Prop. <a class="maruku-ref" href="#SliceModelStructure"></a>), <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L_{/b}</annotation></semantics></math> preserves them and is hence itself a <a class="existingWikiWord" href="/nlab/show/left+Quillen+functor">left Quillen functor</a>.</p>
+
+<p>The second case is directly analogous: Here it is evident that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>R</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{/b}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/right+Quillen+functor">right Quillen functor</a>, since it acts via <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> on <a class="existingWikiWord" href="/nlab/show/underlying">underlying</a> morphisms, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> is right Quillen by assumption.</p>
+</div>
+</p>
+
+<p>
+<div class='num_prop' id='SlicedQuillenQuivalences'>
+<h6>Proposition</h6>
+<p><strong>(sliced Quillen equivalences)</strong> <br /> Consider a <a class="existingWikiWord" href="/nlab/show/Quillen+equivalence">Quillen equivalence</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>𝒟</mi><munderover><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>≃</mo> <mpadded width="0"><mi>Qu</mi></mpadded></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><munder><mo>⟶</mo><mi>R</mi></munder><mover><mo>⟵</mo><mi>L</mi></mover></munderover><mi>𝒞</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{D}
+    \underoverset
+      {\underset{R}{\longrightarrow}}
+      {\overset{L}{\longleftarrow}}
+      {\;\;\;\;\simeq_{\mathrlap{Qu}}\;\;\;\;}
+  \mathcal{C}
+  \,.
+
+</annotation></semantics></math></div>
+<p>Then:</p>
+
+<ol>
+<li>for a <a class="existingWikiWord" href="/nlab/show/cofibrant+object">cofibrant object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">b \in \mathcal{C}</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L(b)</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/fibrant+object">fibrant object</a>, the sliced Quillen adjunction <a class="maruku-eqref" href="#eq:SlicedQuillenAdjointFunctorsOverLb">(2)</a> from Prop. <a class="maruku-ref" href="#SlicedQuillenAdjunction"></a> is itself a <a class="existingWikiWord" href="/nlab/show/Quillen+equivalence">Quillen equivalence</a>:</li>
+</ol>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>𝒟</mi> <mrow><mo stretchy="false">/</mo><mi>L</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></msub><munderover><mrow><msub><mo>≃</mo> <mpadded width="0"><mi>Qu</mi></mpadded></msub></mrow><munder><mo>⟶</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>R</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></munder><mover><mo>⟵</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>L</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover></munderover><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub></mrow><annotation encoding="application/x-tex">
+  \mathcal{D}_{/L(b)}
+  \underoverset
+    {\underset{\;\;\;\;R_{/b}\;\;\;\;}{\longrightarrow}}
+    {\overset{\;\;\;\;L_{/b}\;\;\;\;}{\longleftarrow}}
+    {\simeq_{\mathrlap{Qu}}}
+  \mathcal{C}_{/b}
+
+</annotation></semantics></math></div>
+<ol>
+<li>for a <a class="existingWikiWord" href="/nlab/show/fibrant+object">fibrant object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>𝒟</mi></mrow><annotation encoding="application/x-tex">b \in \mathcal{D}</annotation></semantics></math>, the sliced Quillen adjunction <a class="maruku-eqref" href="#eq:SlicedQuillenAdjointFunctorsOverRb">(3)</a> from Prop. <a class="maruku-ref" href="#SlicedQuillenAdjunction"></a> is itself a <a class="existingWikiWord" href="/nlab/show/Quillen+equivalence">Quillen equivalence</a>:</li>
+</ol>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>𝒟</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><munderover><mrow><msub><mo>≃</mo> <mpadded width="0"><mi>Qu</mi></mpadded></msub></mrow><munder><mo>⟶</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>R</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></munder><mover><mo>⟵</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>L</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover></munderover><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>R</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">
+  \mathcal{D}_{/b}
+  \underoverset
+    {\underset{\;\;\;\;R_{/b}\;\;\;\;}{\longrightarrow}}
+    {\overset{\;\;\;\;L_{/b}\;\;\;\;}{\longleftarrow}}
+    {\simeq_{\mathrlap{Qu}}}
+  \mathcal{C}_{/R(b)}
+
+</annotation></semantics></math></div>
+<p></p>
+</div>
+ (e.g. <a href="#Li16">Li 16, Prop. 3.1</a>) 
+<div class='proof'>
+<h6>Proof</h6>
+<p>It is sufficient to check that the <a class="existingWikiWord" href="/nlab/show/derived+adjunction+unit">derived adjunction unit</a> and <a class="existingWikiWord" href="/nlab/show/derived+adjunction+counit">derived adjunction counit</a> are <a class="existingWikiWord" href="/nlab/show/weak+equivalences">weak equivalences</a> (…)</p>
+</div>
+</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>
+<div class='num_remark' id='ModelCategoriesOfPointedObjects'>
+<h6>Example</h6>
+<p><strong>(<a class="existingWikiWord" href="/nlab/show/model+categories+of+pointed+objects">model categories of pointed objects</a>)</strong> <br /> For every <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, its <a class="existingWikiWord" href="/nlab/show/category+of+pointed+objects">category of pointed objects</a>, hence the <a class="existingWikiWord" href="/nlab/show/undercategory">category under</a> the <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mrow><mo>*</mo><mo stretchy="false">/</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\mathcal{C}^{\ast/}</annotation></semantics></math> carries the under-category model structure: the canonical <em><a class="existingWikiWord" href="/nlab/show/model+structure+on+pointed+objects">model structure on pointed objects</a></em>.</p>
+
+<p>For instance, the <a class="existingWikiWord" href="/nlab/show/classical+model+structure+on+pointed+topological+spaces">classical model structure on pointed topological spaces</a> is the model structure on the <a class="existingWikiWord" href="/nlab/show/undercategory">undercategory</a> under the point (the <a class="existingWikiWord" href="/nlab/show/category+of+pointed+objects">category of pointed objects</a>) of the <a class="existingWikiWord" href="/nlab/show/classical+model+structure+on+topological+spaces">classical model structure on topological spaces</a>.</p>
+</div>
+</p>
+
+<p>
+<div class='num_prop' id='InducedQuilleAdjunctionsOnModelCategoriesOfPointedObjects'>
+<h6>Proposition</h6>
+<p><strong>(induced <a class="existingWikiWord" href="/nlab/show/Quillen+adjunction">Quillen adjunction</a> on <a class="existingWikiWord" href="/nlab/show/model+categories+of+pointed+objects">model categories of pointed objects</a>)</strong> <br /> Given a <a class="existingWikiWord" href="/nlab/show/Quillen+adjunction">Quillen adjunction</a> between <a class="existingWikiWord" href="/nlab/show/model+categories">model categories</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>𝒟</mi><munderover><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>⊥</mo> <mpadded width="0"><mrow><msub><mrow></mrow> <mi>Qu</mi></msub></mrow></mpadded></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><munder><mo>⟶</mo><mi>R</mi></munder><mover><mo>⟵</mo><mi>L</mi></mover></munderover><mi>𝒞</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{D}
+    \underoverset
+      {\underset{R}{\longrightarrow}}
+      {\overset{L}{\longleftarrow}}
+      {\;\;\;\;\;\bot_{\mathrlap{{}_{Qu}}}\;\;\;\;\;}
+  \mathcal{C}
+  \,,
+
+</annotation></semantics></math></div>
+<p>there is induced a <a class="existingWikiWord" href="/nlab/show/Quillen+adjunction">Quillen adjunction</a> between the corresponding <a class="existingWikiWord" href="/nlab/show/model+categories+of+pointed+objects">model categories of pointed objects</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>𝒟</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><munderover><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>⊥</mo> <mpadded width="0"><mrow><msub><mrow></mrow> <mi>Qu</mi></msub></mrow></mpadded></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><munder><mo>⟶</mo><mrow><msup><mi>R</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup></mrow></munder><mover><mo>⟵</mo><mrow><msup><mi>L</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup></mrow></mover></munderover><msup><mi>𝒞</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{D}^{\ast\!/}
+    \underoverset
+      {\underset{R^{\ast\!/}}{\longrightarrow}}
+      {\overset{L^{\ast\!/}}{\longleftarrow}}
+      {\;\;\;\;\;\bot_{\mathrlap{{}_{Qu}}}\;\;\;\;\;}
+  \mathcal{C}^{\ast\!/}
+  \,,
+
+</annotation></semantics></math></div>
+<p>where</p>
+
+<ul>
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/right+adjoint">right adjoint</a> acts directly as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> on the triangular <a class="existingWikiWord" href="/nlab/show/commuting+diagrams">commuting diagrams</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> that define the morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\mathcal{C}^{\ast\!/}</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> is the <a class="existingWikiWord" href="/nlab/show/composition">composite</a> of the corresponding direct application of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> followed by <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a> along the <a class="existingWikiWord" href="/nlab/show/adjunction+counit">adjunction counit</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo><mo>≃</mo><mi>L</mi><mo>∘</mo><mi>R</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><msub><mi>ϵ</mi> <mo>*</mo></msub><mspace width="thickmathspace"></mspace></mrow></mover><mo>*</mo></mrow><annotation encoding="application/x-tex">L(\ast) \simeq L \circ R(\ast) \xrightarrow{ \;\epsilon_\ast \; } \ast</annotation></semantics></math> (using that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo><mo>≃</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">R(\ast) \simeq \ast</annotation></semantics></math> since <a class="existingWikiWord" href="/nlab/show/right+adjoints+preserve+limits">right adjoints preserve limits</a> and hence <a class="existingWikiWord" href="/nlab/show/terminal+objects">terminal objects</a>):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msup><mi>𝒞</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>L</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover><msup><mi>𝒟</mi> <mrow><mi>L</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><msup><mi>𝒟</mi> <mrow><mi>L</mi><mo>∘</mo><mi>R</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>⊔</mo><msub><mi>ϵ</mi> <mo>*</mo></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover><msup><mi>𝒟</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  L^{\ast\!/}
+  \;\colon\;
+  \mathcal{C}^{\ast\!/}
+  \xrightarrow{ \;\; L  \;\; }
+  \mathcal{D}^{L(\ast)\!/}
+  \;\simeq\;
+  \mathcal{D}^{L\circ R(\ast)\!/}
+  \xrightarrow{ \;\; (-) \sqcup \epsilon_\ast \;\; }
+  \mathcal{D}^{\ast\!/}
+  \,.
+
+</annotation></semantics></math></div></li>
+</ul>
+
+<p></p>
+</div>
+ 
+<div class='proof'>
+<h6>Proof</h6>
+<p>It is fairly straightforward to check this directly (e.g. <a href="model+structure+on+pointed+objects#Hovey99">Hovey 1999, Prop. 1.3.5</a>), but it is also a special case of Prop. <a class="maruku-ref" href="#SlicedQuillenAdjunction"></a> — to make this explicit, notice that passing to <a class="existingWikiWord" href="/nlab/show/opposite+categories">opposite categories</a> with their <a class="existingWikiWord" href="/nlab/show/opposite+model+structures">opposite model structures</a> turns the original Quillen adjunction into the <a class="existingWikiWord" href="/nlab/show/opposite+Quillen+adjunction">opposite Quillen adjunction</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mi>op</mi></msup><munderover><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>⊥</mo> <mpadded width="0"><mrow><msub><mrow></mrow> <mi>Qu</mi></msub></mrow></mpadded></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><munder><mo>⟶</mo><mrow><msup><mi>L</mi> <mi>op</mi></msup></mrow></munder><mover><mo>⟵</mo><mrow><msup><mi>R</mi> <mi>op</mi></msup></mrow></mover></munderover><msup><mi>𝒟</mi> <mi>op</mi></msup><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{C}^{op}
+    \underoverset
+      {\underset{L^{op}}{\longrightarrow}}
+      {\overset{R^{op}}{\longleftarrow}}
+      {\;\;\;\;\;\bot_{\mathrlap{{}_{Qu}}}\;\;\;\;\;}
+  \mathcal{D}^{op}
+  \,.
+
+</annotation></semantics></math></div>
+<p>Now the passage to <a class="existingWikiWord" href="/nlab/show/pointed+objects">pointed objects</a> corresponds to <a class="existingWikiWord" href="/nlab/show/slice+category">slicing</a> (instead of <a class="existingWikiWord" href="/nlab/show/coslice+category">co-slicing</a>), since</p>
+<div class="maruku-equation" id="eq:PointedObjectsIsOppositeOfCopointedObjectsInOpposite"><span class="maruku-eq-number">(4)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msubsup><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mo>*</mo></mrow> <mi>op</mi></msubsup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>op</mi></msup><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>similarly</mtext><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msup><mi>𝒟</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msubsup><mi>𝒟</mi> <mrow><mo stretchy="false">/</mo><mi>R</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow> <mi>op</mi></msubsup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>op</mi></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  
+  \mathcal{C}^{\ast\!/}
+  \;\;
+  \simeq
+  \big(
+    \mathcal{C}^{op}_{/\ast}
+  \big)^{op}
+  \,,
+  \;\;\;\;\;\;\;
+  \text{similarly}
+  \;\;\;
+  \mathcal{D}^{\ast\!/}
+  \;\;
+  \simeq
+  \big(
+    \mathcal{D}^{op}_{/R(\ast)}
+  \big)^{op}
+  \,,
+
+</annotation></semantics></math></div>
+<p>whence item (1) in Prop. <a class="maruku-ref" href="#SlicedQuillenAdjunction"></a> says that there is a Quillen adjunction of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>R</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow> <mi>op</mi></msubsup><munderover><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>⊥</mo> <mpadded width="0"><mrow><msub><mrow></mrow> <mi>Qu</mi></msub></mrow></mpadded></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><munder><mo>⟶</mo><mrow><msubsup><mi>L</mi> <mrow><mo stretchy="false">/</mo><mo>*</mo></mrow> <mi>op</mi></msubsup></mrow></munder><mover><mo>⟵</mo><mrow><msubsup><mi>R</mi> <mrow><mo stretchy="false">/</mo><mo>*</mo></mrow> <mi>op</mi></msubsup></mrow></mover></munderover><msubsup><mi>𝒟</mi> <mrow><mo stretchy="false">/</mo><mo>*</mo></mrow> <mi>op</mi></msubsup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{C}^{op}_{/R(\ast)}
+    \underoverset
+      {\underset{L^{op}_{/\ast}}{\longrightarrow}}
+      {\overset{R^{op}_{/\ast}}{\longleftarrow}}
+      {\;\;\;\;\;\bot_{\mathrlap{{}_{Qu}}}\;\;\;\;\;}
+  \mathcal{D}^{op}_{/\ast}
+  \,,
+
+</annotation></semantics></math></div>
+<p>hence with <a class="existingWikiWord" href="/nlab/show/opposite+Quillen+adjunction">opposite Quillen adjunction</a> of the required form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>𝒟</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mo>≃</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msubsup><mi>𝒟</mi> <mrow><mo stretchy="false">/</mo><mi>R</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow> <mi>op</mi></msubsup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>op</mi></msup><munderover><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>⊥</mo> <mpadded width="0"><mrow><msub><mrow></mrow> <mi>Qu</mi></msub></mrow></mpadded></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><munder><mo>⟶</mo><mrow><msup><mi>R</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thinmathspace"></mspace><mo>≔</mo><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><msubsup><mi>R</mi> <mrow><mo stretchy="false">/</mo><mo>*</mo></mrow> <mi>op</mi></msubsup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>op</mi></msup></mrow></munder><mover><mo>⟵</mo><mrow><msup><mi>L</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thinmathspace"></mspace><mo>≔</mo><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><msubsup><mi>L</mi> <mrow><mo stretchy="false">/</mo><mo>*</mo></mrow> <mi>op</mi></msubsup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>op</mi></msup></mrow></mover></munderover><mo maxsize="1.2em" minsize="1.2em">(</mo><msubsup><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mo>*</mo></mrow> <mi>op</mi></msubsup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>op</mi></msup><mo>≃</mo><msup><mi>𝒞</mi> <mrow><mo>*</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo></mrow></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{D}^{\ast\!/}  
+  \simeq
+  \big(\mathcal{D}^{op}_{/R(\ast)}\big)^{op}
+    \underoverset
+      {\underset{ 
+        R^{\ast\!/} \,\coloneqq\, \big( R^{op}_{/\ast} \big)^{op}
+      }{\longrightarrow}}
+      {\overset{
+        L^{\ast\!/} \,\coloneqq\, \big( L^{op}_{/\ast} \big)^{op}
+      }{\longleftarrow}}
+      {\;\;\;\;\;\bot_{\mathrlap{{}_{Qu}}}\;\;\;\;\;}
+  \big(\mathcal{C}^{op}_{/\ast}\big)^{op}
+  \simeq
+  \mathcal{C}^{\ast\!/}
+  \,,
+
+</annotation></semantics></math></div>
+<p>with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>R</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">R^{op}</annotation></semantics></math> acting directly as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> on underlying diagrams, and with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">L^{op}</annotation></semantics></math> acting as the composite of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> following by <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> – in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒞</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">\mathcal{C}^{op}</annotation></semantics></math> – along the <a class="existingWikiWord" href="/nlab/show/adjunction+unit">adjunction unit</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>R</mi> <mi>op</mi></msup><mo>⊣</mo><msup><mi>L</mi> <mi>op</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(R^{op} \dashv L^{op})</annotation></semantics></math>. Since the component morphism of the <a class="existingWikiWord" href="/nlab/show/adjunction+unit">unit</a> of the <a class="existingWikiWord" href="/nlab/show/opposite+adjunction">opposite adjunction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>R</mi> <mi>op</mi></msup><mo>⊣</mo><msup><mi>L</mi> <mi>op</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(R^{op} \dashv L^{op})</annotation></semantics></math> is that of the adjunction unit of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mo>⊣</mo><mi>R</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(L \dashv R)</annotation></semantics></math>, and since <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> in an <a class="existingWikiWord" href="/nlab/show/opposite+category">opposite category</a> is <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a> in the original category, this implies the claim.</p>
+</div>
+</p>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/over-category">over-category</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/slice+category">slice category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/under+category">under category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/over+topos">over topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/over+%28%E2%88%9E%2C1%29-category">over (∞,1)-category</a>,</p>
+
+<ul>
+<li>
+<p><strong>model structure on an over-category</strong></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/over-%28%E2%88%9E%2C1%29-topos">over-(∞,1)-topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/opposite+model+structure">opposite model structure</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li id="Hirschhorn02">
+<p><a class="existingWikiWord" href="/nlab/show/Philip+Hirschhorn">Philip Hirschhorn</a>, Theorem 7.6.5 of: <em>Model Categories and Their Localizations</em>, AMS Math. Survey and Monographs Vol 99 (2002) (<a href="https://bookstore.ams.org/surv-99-s/">ISBN:978-0-8218-4917-0</a>, <a href="http://www.gbv.de/dms/goettingen/360115845.pdf">pdf toc</a>, <a href="http://www.maths.ed.ac.uk/~aar/papers/hirschhornloc.pdf">pdf</a>)</p>
+</li>
+
+<li id="Hirschhorn05">
+<p><a class="existingWikiWord" href="/nlab/show/Philip+Hirschhorn">Philip Hirschhorn</a>, <em>Overcategories and undercategories of model categories</em>, 2005 (<a href="http://www-math.mit.edu/~psh/undercat.pdf">pdf</a>, <a href="https://arxiv.org/abs/1507.01624">arXiv:1507.01624</a>)</p>
+</li>
+
+<li id="MayPonto12">
+<p><a class="existingWikiWord" href="/nlab/show/Peter+May">Peter May</a>, <a class="existingWikiWord" href="/nlab/show/Kate+Ponto">Kate Ponto</a>, Thm. 15.3.6 in: <em><a class="existingWikiWord" href="/nlab/show/More+concise+algebraic+topology">More concise algebraic topology</a></em>, University of Chicago Press (2012) (<a href="https://press.uchicago.edu/ucp/books/book/chicago/M/bo12322308.html">ISBN:9780226511795</a>, <a href="https://www.math.uchicago.edu/~may/TEAK/KateBookFinal.pdf">pdf</a>)</p>
+</li>
+
+<li id="Li16">
+<p>Zhi-Wei Li, <em>A note on the model (co-)slice categories</em>, Chinese Annals of Mathematics, Series B volume 37, pages 95–102 (2016) (<a href="https://arxiv.org/abs/1402.2033">arXiv:1402.2033</a>, <a href="https://doi.org/10.1007/s11401-015-0955-z">doi:10.1007/s11401-015-0955-z</a>)</p>
+</li>
+</ul>
+
+<p>See also:</p>
+
+<ul>
+<li id="Rezk02">
+<p><a class="existingWikiWord" href="/nlab/show/Charles+Rezk">Charles Rezk</a>, <em>Every homotopy theory of simplicial algebras admits a proper model</em>, Topology and its Applications, Volume 119, Issue 1, 2002, Pages 65-94, (<a href="https://doi.org/10.1016/S0166-8641(01)00057-8">doi:10.1016/S0166-8641(01)00057-8</a>, <a href="http://arxiv.org/abs/math/0003065">arXiv:math/0003065</a>)</p>
+</li>
+
+<li id="Cisinski20">
+<p><a class="existingWikiWord" href="/nlab/show/Denis-Charles+Cisinski">Denis-Charles Cisinski</a>, <em>Higher category theory and homotopical algebra</em>, 2020 (<a href="http://www.mathematik.uni-regensburg.de/cisinski/CatLR.pdf">pdf</a>)</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on October 10, 2021 at 15:05:32.
+    See the <a href="https://ncatlab.org/nlab/history/slice model structure" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/slice+model+structure" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/430/#Item_31">Discuss</a><span class="backintime"><a href="/nlab/revision/slice+model+structure/35" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/slice+model+structure" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/slice+model+structure" accesskey="S" class="navlink" id="history" rel="nofollow">History (35 revisions)</a>
+  <a href="https://ncatlab.org/nlab/show/slice model structure/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/slice+model+structure" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/slice+model+structure" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
 </body>
 </html>
