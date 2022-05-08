@@ -548,6 +548,7 @@ margin-left: 0em;
 <li><a href='#classically_extended_natural_numbers'>Classically extended natural numbers</a></li>
 <li><a href='#polynomial_rings_over_integers'>Polynomial rings over integers</a></li>
 <li><a href='#quotients_of_sets'>Quotients of sets</a></li>
+<li><a href='#sierpinski_space'>Sierpinski space</a></li>
 <li><a href='#cumulative_hierarchy'>Cumulative hierarchy</a></li>
 <li><a href='#cauchy_complete_real_numbers'>Cauchy complete real numbers</a></li>
 <li><a href='#permutable_trees'>Permutable trees</a></li>
@@ -667,6 +668,35 @@ margin-left: 0em;
 | relate : forall (x y : A), R x y -&gt; proj x == proj y
 | contr1 : forall (x y : quotient A R) (p q : x == y), p == q.</code></pre>
 
+<h3 id="sierpinski_space">Sierpinski space</h3>
+
+<p>A definition of <a class="existingWikiWord" href="/nlab/show/Sierpinski+space">Sierpinski space</a>:</p>
+
+<pre><code>Inductive sierpinski : Type :=
+| top : sierpinski
+| meet : sierpinski -&gt; sierpinski -&gt; sierpinski
+| meet-left-unital : forall (a : sierpinski) meet top a = a
+| meet-right-unital : forall (a : sierpinski) meet a top = a
+| meet-associative : forall (a b c : sierpinski) meet meet a b c = meet a meet b c
+| meet-commutative : forall (a b : sierpinski) meet a b = meet b a
+| meet-idempotent : forall (a : sierpinski) meet a a = a
+| bottom : sierpinski
+| join : sierpinski -&gt; sierpinski -&gt; sierpinski
+| join-left-unital : forall (a : sierpinski) join bottom a = a
+| join-right-unital : forall (a : sierpinski) join a bottom = a
+| join-associative : forall (a b c : sierpinski) join join a b c = join a join b c
+| join-commutative : forall (a b : sierpinski) join a b = join b a
+| join-idempotent : forall (a : sierpinski) join a a = a
+| meet-join-absorption : forall (a b : sierpinski) meet a join a b = a
+| join-meet-absorption : forall (a b : sierpinski) join a meet a b = a
+| sequence-join : (nat -&gt; sierpinski) -&gt; sierpinski
+| sequence-bounded-above : forall (n : nat) (s : nat -&gt; sierpinski) meet s n sequence-join s = s n
+| sequence-least-upper-bound : forall (a : sierpinski) (s : nat -&gt; sierpinski) (forall (n : nat) meet s n a = s n) -&gt; (meet sequence-join s x = sequence-join s)
+| element-sequence-meet : (sierpinski) -&gt; (nat -&gt; sierpinski) -&gt; (nat -&gt; sierpinski)
+| p : forall (a : sierpinski) (s : nat -&gt; sierpinski) element-sequence-meet a s n = meet a s n
+| distributive : forall (a : sierpinski) (s : nat -&gt; sierpinski) meet a sequence-join s = sequence-join element-sequence-meet a s 
+| contr1 : forall (x y : int) (p q : x == y), p == q.</code></pre>
+
 <h3 id="cumulative_hierarchy">Cumulative hierarchy</h3>
 
 <p>According to <a class="existingWikiWord" href="/nlab/show/Homotopy+Type+Theory+--+Univalent+Foundations+of+Mathematics">Homotopy Type Theory – Univalent Foundations of Mathematics</a> the <a class="existingWikiWord" href="/nlab/show/cumulative+hierarchy">cumulative hierarchy</a> of material sets could be constructed from a type universe as a quotient inductive type.</p>
@@ -759,14 +789,14 @@ Inductive \leq {omegacpo A}: omegacpo A -&gt; omegacpo A -&gt; Type :=
 
 <div class="revisedby">
     <p>
-    Last revised on June 13, 2021 at 11:11:09.
+    Last revised on May  8, 2022 at 16:57:01.
     See the <a href="https://ncatlab.org/nlab/history/quotient inductive type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/quotient+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13023/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/quotient+inductive+type/9" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quotient+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quotient+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (9 revisions)</a>
+  <a href="/nlab/edit/quotient+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13023/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/quotient+inductive+type/10" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quotient+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quotient+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (10 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/quotient inductive type/cite" style="color: black">Cite</a>
   <a href="/nlab/print/quotient+inductive+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/quotient+inductive+type" id="view_source" rel="nofollow">Source</a>
