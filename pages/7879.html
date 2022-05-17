@@ -526,17 +526,29 @@ margin-left: 0em;
 
 <p>Expanding on the caveat above about <code>undefined</code>, the built-in products in Haskell are “lifted”, they are not exactly categorical products. For example, if we define</p>
 
-<pre><code>undefined = undefined </code></pre>
+<pre><code>loop = loop </code></pre>
 
-<p>then the element <code>undefined :: ((),())</code> is observably different from <code>(undefined,undefined) :: ((),())</code>. For example,</p>
+<p>then the element <code>loop :: ((),())</code> is observably different from <code>(loop,loop) :: ((),())</code>. To see this, note that</p>
 
-<pre><code>(uncurry . curry) (\(_,_)-&gt;()) undefined</code></pre>
+<pre><code>(\(_,_)-&gt;()) (loop,loop)</code></pre>
 
 <p>terminates but</p>
 
-<pre><code>(\(_,_)-&gt;()) undefined</code></pre>
+<pre><code>(\(_,_)-&gt;()) loop</code></pre>
 
-<p>does not terminate, so the built-in <a class="existingWikiWord" href="/nlab/show/currying">currying</a> is not strictly speaking a bijection in Haskell.</p>
+<p>does not terminate.</p>
+
+<p>As a result, the built-in <a class="existingWikiWord" href="/nlab/show/currying">currying</a> is not strictly speaking a bijection in Haskell. For example,</p>
+
+<pre><code>(uncurry . curry) (\(_,_)-&gt;()) loop</code></pre>
+
+<p>terminates but</p>
+
+<pre><code>(\(_,_)-&gt;()) loop</code></pre>
+
+<p>does not terminate.</p>
+
+<p>It <em>is</em> consistent to have a cartesian closed category with a recursion operator, and indeed most semantic models of recursion in a call-by-name setting do actually form cartesian closed categories. In fact Haskell does provide “unboxed tuple” types, which are more like categorical products, but these are not so widely used.</p>
 
 <h3 id="similar_and_related_software">Similar and related software</h3>
 
@@ -676,14 +688,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on May 17, 2022 at 03:08:19.
+    Last revised on May 17, 2022 at 04:09:06.
     See the <a href="https://ncatlab.org/nlab/history/Haskell" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Haskell" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10240/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/Haskell/17" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Haskell" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Haskell" accesskey="S" class="navlink" id="history" rel="nofollow">History (17 revisions)</a>
+  <a href="/nlab/edit/Haskell" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10240/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/Haskell/18" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Haskell" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Haskell" accesskey="S" class="navlink" id="history" rel="nofollow">History (18 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/Haskell/cite" style="color: black">Cite</a>
   <a href="/nlab/print/Haskell" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/Haskell" id="view_source" rel="nofollow">Source</a>
