@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>
-      persistent homology in nLab
+      stability of persistence diagrams in nLab
   </title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -284,7 +284,7 @@ margin-left: 0em;
       </svg>
     </span>
       <span class="webName">nLab</span><br />
-      persistent homology
+      stability of persistence diagrams
   </h1>
 
 
@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/11084/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/14270/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -753,282 +753,42 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#properties'>Properties</a></li>
-<ul>
-<li><a href='#stability_of_persistence_diagrams'>Stability of persistence diagrams</a></li>
-</ul>
-<li><a href='#software'>Software</a></li>
-<li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
-<ul>
-<li><a href='#general'>General</a></li>
-<li><a href='#CohomotopyInTopologicalDataAnalysisReferences'>Cohomotopy in topological data analysis</a></li>
-<li><a href='#further_variants'>Further variants</a></li>
-</ul>
 </ul>
 </div>
 
 <h2 id="idea">Idea</h2>
 
-<p>Persistent homology is a <a class="existingWikiWord" href="/nlab/show/homology+theory">homology theory</a> adapted to a <a class="existingWikiWord" href="/nlab/show/computation">computational</a> context, for instance, in analysis of large data sets in <a class="existingWikiWord" href="/nlab/show/topological+data+analysis">topological data analysis</a>. It keeps track of homology classes which stay ‘persistent’ when the approximate image of a space gets refined to higher resolutions.</p>
-
-<p>More in detail, suppose given a ‘data cloud of samples’, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo>⊂</mo><msup><mi>ℝ</mi> <mi>m</mi></msup></mrow><annotation encoding="application/x-tex">P\subset \mathbb{R}^m</annotation></semantics></math>, from some space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, yielding a <a class="existingWikiWord" href="/nlab/show/simplicial+complex">simplicial complex</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>ρ</mi></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S_\rho(X)</annotation></semantics></math> for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\rho \gt 0</annotation></semantics></math> via one of the family of simplicial complex approximation methods that are listed below (TO BE ADDED). For these, the important idea to retain is that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi><mo>&lt;</mo><msup><mi>ρ</mi> <mstyle scriptlevel="0"><mo>′</mo></mstyle></msup></mrow><annotation encoding="application/x-tex">\rho \lt \rho^\prime</annotation></semantics></math>, then</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>ρ</mi></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>↪</mo><msub><mi>S</mi> <mrow><mi>ρ</mi><mo>′</mo></mrow></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">S_\rho(X) \hookrightarrow S_{\rho'}(X),</annotation></semantics></math></div>
-<p>so we get a ‘filtration structure’ on the complex.</p>
-
-<p>The idea of <em>persistent homology</em> is to look for features that persist for some range of parameter values. Typically a feature, such as a hole, will initially not be observed, then will appear, and after a range of values of the parameter it will disappear again. A typical feature will be a <a class="existingWikiWord" href="/nlab/show/Betti+number">Betti number</a> of the complex, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>ρ</mi></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S_\rho(X)</annotation></semantics></math>, which then will vary with the parameter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho</annotation></semantics></math>.</p>
-
-<h2 id="properties">Properties</h2>
-
-<h3 id="stability_of_persistence_diagrams">Stability of persistence diagrams</h3>
-
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/stability+of+persistence+diagrams">stability of persistence diagrams</a></li>
-</ul>
-
-<p>(<a href="#CohenSteinerEdelsbrunnerHarer07">Cohen-Steiner, Edelsbrunner &amp; Harer 2007</a>)</p>
-
-<h2 id="software">Software</h2>
-
-<p>One can compute intervals for homological features algorithmically over field coefficients and software packages are available for this purpose. See for instance <a href="http://www.sas.upenn.edu/~vnanda/perseus">Perseus</a>. The principal algorithm is based on bringing the filtered complex to its <strong>canonical form</strong> by upper-triangular matrices from (<a href="https://www.researchgate.net/profile/Serguei_Barannikov/publication/267672645_The_Framed_Morse_complex_and_its_invariants/links/5970e947458515fa8de6e724/The-Framed-Morse-complex-and-its-invariants.pdf">Barannikov1994, §2.1</a>)</p>
-
-<h2 id="related_concepts">Related concepts</h2>
-
-<ul>
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/persistence+module">persistence module</a></p>
-</li>
-
-<li>
-<p><span class="newWikiWord">persistence diagram<a href="/nlab/new/persistence+diagram">?</a></span></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/well+group">well group</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/topological+data+analysis">topological data analysis</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/computational+topology">computational topology</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/quiver+representation">quiver representation</a>, <a class="existingWikiWord" href="/nlab/show/Gabriel%27s+theorem">Gabriel's theorem</a></p>
-</li>
-</ul>
+<p>The central <a class="existingWikiWord" href="/nlab/show/theorem">theorem</a> in <a class="existingWikiWord" href="/nlab/show/persistent+homology">persistent homology</a> states how the data retained in <span class="newWikiWord">persistence diagrams<a href="/nlab/new/persistence+diagrams">?</a></span>/<span class="newWikiWord">barcodes<a href="/nlab/new/barcodes">?</a></span> is stable under small deformations of the initial data.</p>
 
 <h2 id="references">References</h2>
 
-<h3 id="general">General</h3>
-
-<p>Introduction and survey:</p>
-
-<ul>
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Robert+Ghrist">Robert Ghrist</a>, <em>Barcodes: The Persistent Topology of Data</em>, Bull. Amer. Math. Soc. 45 (2008), 61-75 (<a href="https://doi.org/10.1090/S0273-0979-07-01191-3">doi:10.1090/S0273-0979-07-01191-3</a>, <a href="https://www.math.upenn.edu/~ghrist/preprints/barcodes.pdf">pdf</a>)</p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Herbert+Edelsbrunner">Herbert Edelsbrunner</a>, <a class="existingWikiWord" href="/nlab/show/John+Harer">John Harer</a>, <em>Persistent homology – a survey</em>, in: <em>Surveys on Discrete and Computational Geometry: Twenty Years Later</em>, Contemporary Mathematics <em>453</em> (2008) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="http://dx.doi.org/10.1090/conm/453">doi:10.1090/conm/453</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Gunnar+Carlsson">Gunnar Carlsson</a>, <em>Topology and data</em>, Bull. Amer. Math. Soc. 46 (2009), no. 2, 255-308 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://doi.org/10.1090/S0273-0979-09-01249-X">doi:10.1090/S0273-0979-09-01249-X</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Herbert+Edelsbrunner">Herbert Edelsbrunner</a>, <a class="existingWikiWord" href="/nlab/show/Dmitriy+Morozov">Dmitriy Morozov</a>, <em>Persistent homology: theory and practice</em>, in: <em>European Congress of Mathematics Kraków, 2–7 July, 2012</em> EMS <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://www.ems-ph.org/books/show_abstract.php?proj_nr=170&amp;vol=1&amp;rank=3">doi:10.4171/120-1/3</a>, <a href="http://mrzv.org/publications/persistent-homology-theory-practice/ecm">pdf</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
-</li>
-</ul>
-
-<p>Review with emphasis of <a class="existingWikiWord" href="/nlab/show/zigzag+persistence">zigzag persistence</a> with relation to <a class="existingWikiWord" href="/nlab/show/quiver+representation+theory">quiver representation theory</a>:</p>
-
-<ul>
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Steve+Y.+Oudot">Steve Y. Oudot</a>, <em>Persistence Theory: From Quiver Representations to Data Analysis</em>, Mathematical Surveys and Monographs <strong>209</strong> AMS (2015) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://geometrica.saclay.inria.fr/team/Steve.Oudot/books/o-pt-fqrtda-15/surv-209.pdf">pdf</a>, <a href="https://bookstore.ams.org/surv-209/">ISBN:978-1-4704-3443-4</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Gunnar+Carlsson">Gunnar Carlsson</a>, <em>Persistent Homology and Applied Homotopy Theory</em>, in: <a class="existingWikiWord" href="/nlab/show/Handbook+of+Homotopy+Theory">Handbook of Homotopy Theory</a>, CRC Press (2019) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/2004.00738">arXiv:2004.00738</a>, <a href="https://doi.org/10.1201/9781351251624">doi:10.1201/9781351251624</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
-</li>
-</ul>
-
-<p>See also</p>
-
-<ul>
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Tim+Porter">Tim Porter</a>, <em>Observing Information: Applied Computational Topology</em> 2008 (<a class="existingWikiWord" href="/nlab/files/ACT-OIT.pdf" title="">Slides</a>)</p>
-</li>
-
-<li>
-<p>Bei Wang, <em>Topological Data Analysis</em>, Lecture 2010 (<a class="existingWikiWord" href="/nlab/files/WangTopologicalDataAnalysis.pdf" title="pdf">pdf</a>)</p>
-</li>
-
-<li>
-<p>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Persistent_homology">Persistent homology</a></em></p>
-</li>
-</ul>
-
-<p>The concept of persistent homology originates around:</p>
-
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/Herbert+Edelsbrunner">Herbert Edelsbrunner</a>, D. Letscher, and A. Zomorodian, <em>Topological persistence and simplification</em>, Discrete &amp; Computational Geometry, <strong>28</strong> (2002) 511–533 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://doi.org/10.1007/s00454-002-2885-2">doi:10.1007/s00454-002-2885-2</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></li>
-</ul>
-
-<p>The generalization to “<a class="existingWikiWord" href="/nlab/show/zigzag+persistence">zigzag persistence</a>” with relation to <a class="existingWikiWord" href="/nlab/show/ADE-classification">A-type</a> <a class="existingWikiWord" href="/nlab/show/quiver+representation">quiver representation</a>-theory is due to:</p>
-
-<ul>
-<li id="CarlssonDeSilva10"><a class="existingWikiWord" href="/nlab/show/Gunnar+Carlsson">Gunnar Carlsson</a>, <a class="existingWikiWord" href="/nlab/show/Vin+de+Silva">Vin de Silva</a>, <em>Zigzag Persistence</em>, Found Comput Math <strong>10</strong> (2010) 367–405 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/0812.0197">arXiv:0812.0197</a>, <a href="https://doi.org/10.1007/s10208-010-9066-0">doi:10.1007/s10208-010-9066-0</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></li>
-</ul>
-
-<p>and specifically for <a class="existingWikiWord" href="/nlab/show/level+sets">level sets</a>:</p>
-
-<ul>
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Gunnar+Carlsson">Gunnar Carlsson</a>, <a class="existingWikiWord" href="/nlab/show/Vin+de+Silva">Vin de Silva</a>, <a class="existingWikiWord" href="/nlab/show/Dmitriy+Morozov">Dmitriy Morozov</a>, <em>Zigzag persistent homology and real-valued functions</em>, in: <em>SCG ‘09: Proceedings of the twenty-fifth annual symposium on Computational geometry (2009) 247–256 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://doi.org/10.1145/1542362.1542408">doi:10.1145/1542362.1542408</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></em></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Gunnar+Carlsson">Gunnar Carlsson</a>, <a class="existingWikiWord" href="/nlab/show/Vin+de+Silva">Vin de Silva</a>, <a class="existingWikiWord" href="/nlab/show/Sara+Kali%C5%A1nik">Sara Kališnik</a>, <a class="existingWikiWord" href="/nlab/show/Dmitriy+Morozov">Dmitriy Morozov</a>, <em>Parametrized Homology via Zigzag Persistence</em>, Algebr. Geom. Topol. <strong>19</strong> (2019) 657-700 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/1604.03596">arXiv:1604.03596</a>, <a href="https://doi.org/10.2140/agt.2019.19.657">doi:10.2140/agt.2019.19.657</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
-</li>
-</ul>
-
-<p>The <a class="existingWikiWord" href="/nlab/show/stability+of+persistence+diagrams">stability result</a> is due to:</p>
+<p>The stability theorem originates in:</p>
 
 <ul>
 <li id="CohenSteinerEdelsbrunnerHarer07"><a class="existingWikiWord" href="/nlab/show/David+Cohen-Steiner">David Cohen-Steiner</a>, <a class="existingWikiWord" href="/nlab/show/Herbert+Edelsbrunner">Herbert Edelsbrunner</a>, <a class="existingWikiWord" href="/nlab/show/John+Harer">John Harer</a>, <em>Stability of Persistence Diagrams</em>, Discrete &amp; Computational Geometry <strong>37</strong> (2007) 103–120 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://doi.org/10.1007/s00454-006-1276-5">doi:10.1007/s00454-006-1276-5</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></li>
 </ul>
 
-<p>Bar-codes were introduced under the name of <em>canonical forms invariants of filtered complexes</em> in</p>
+<p>Further developments:</p>
 
-<ul>
-<li>Serguei Barannikov, <em>Framed Morse complex and its invariants</em>, <a href="https://www.researchgate.net/profile/Serguei_Barannikov/publication/267672645_The_Framed_Morse_complex_and_its_invariants/links/5970e947458515fa8de6e724/The-Framed-Morse-complex-and-its-invariants.pdf">pdf</a> Advances in Soviet Mathematics <strong>21</strong> 93–115 (1994)</li>
-</ul>
-
-<p>See also</p>
-
-<ul>
-<li>
-<p>A. Zomorodian, <a class="existingWikiWord" href="/nlab/show/Gunnar+Carlsson">Gunnar Carlsson</a>, <em>Computing persistent homology</em>, Discrete Comput. Geom. <strong>33</strong>, 249–274 (2005) (<a href="https://doi.org/10.1007/s00454-004-1146-y">doi:10.1007/s00454-004-1146-y</a>)</p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Gunnar+Carlsson">Gunnar Carlsson</a>, V. de Silva, <em>Zigzag persistence</em> (<a href="http://arxiv.org/abs/0812.0197">arXiv:0812.0197</a>)</p>
-</li>
-
-<li>
-<p>Robert J. Adler, Omer Bobrowski, Matthew S. Borman, Eliran Subag, Shmuel Weinberger, <em>Persistent homology for random fields and complexes</em> Institute of Mathematical Statistics Collections <strong>6</strong>:124–143, 2010 (<a href="http://arxiv.org/abs/1003.1001">arxiv/1003.1001</a>)</p>
-</li>
-
-<li>
-<p>Paweł Dłotko, Hubert Wagner, <em>Computing homology and persistent homology using iterated Morse decomposition</em> (<a href="http://arxiv.org/abs/1210.1429">arxiv/1210.1429</a>)</p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Robert+MacPherson">Robert MacPherson</a>, Benjamin Schweinhart, <em>Measuring shape with topology</em>, J. Math. Phys. <strong>53</strong>, 073516 (2012) (<a href="http://dx.doi.org/10.1063/1.4737391">doi:10.1063/1.4737391</a>)</p>
-</li>
-
-<li>
-<p>Robert J. Adler, Omer Bobrowski, Shmuel Weinberger, <em>Crackle: the persistent homology of noise</em>, <a href="http://arxiv.org/abs/1301.1466">arxiv/1301.1466</a></p>
-</li>
-
-<li>
-<p>D. Le Peutrec, N. Nier, C. Viterbo, <em>Precise Arrhenius Law for p-forms: The Witten Laplacian and Morse–Barannikov Complex</em>, Annales Henri Poincaré <strong>14</strong> (3): 567–610 (2013) <a href="https://10.1007/s00023-012-0193-9">doi</a></p>
-</li>
-
-<li>
-<p>Ulrich Bauer, Michael Kerber, Jan Reininghaus, <em>Clear and compress: computing persistent homology in chunks</em>, <a href="http://arxiv.org/abs/1303.0477">arxiv/1303.0477</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Sara+Kali%C5%A1nik">Sara Kališnik</a>, <em>Persistent homology and duality</em>, 2013 (<a href="http://www.matknjiz.si/doktorati/2013/Kalisnik-14521-4.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/KalisnikPersistent.pdf" title="pdf">pdf</a>)</p>
-</li>
-
-<li>
-<p>Francisco Belchí Guillamón, Aniceto Murillo Mas, <em>A-infinity persistence</em>, <a href="http://arxiv.org/abs/1403.2395">arxiv/1403.2395</a></p>
-</li>
-
-<li>
-<p>João Pita Costa, Mikael Vejdemo Johansson, Primož Škraba, <em>Variable sets over an algebra of lifetimes: a contribution of lattice theory to the study of computational topology</em>, <a href="http://arxiv.org/abs/1409.8613">arxiv/1409.8613</a></p>
-</li>
-
-<li>
-<p>Genki Kusano, Kenji Fukumizu, Yasuaki Hiraoka, <em>Persistence weighted Gaussian kernel for topological data analysis</em>, <a href="http://arxiv.org/abs/1601.01741">arxiv/1601.01741</a></p>
-</li>
-
-<li>
-<p>Heather A. Harrington, Nina Otter, Hal Schenck, <a class="existingWikiWord" href="/nlab/show/Ulrike+Tillmann">Ulrike Tillmann</a>, <em>Stratifying multiparameter persistent homology</em>, <a href="https://arxiv.org/abs/1708.07390">arxiv/1708.07390</a></p>
-</li>
-</ul>
-
-<p>The following paper uses persistent homology to single out features relevant for training <a class="existingWikiWord" href="/nlab/show/neural+networks">neural networks</a>:</p>
-
-<ul>
-<li>Jean-Baptiste Bardin, Gard Spreemann, <a class="existingWikiWord" href="/nlab/show/Kathryn+Hess">Kathryn Hess</a>, <em>Topological exploration of artificial neuronal network dynamics</em>, <a href="https://arxiv.org/abs/1810.01747">arxiv/1810.01747</a></li>
-</ul>
-
-<p>Application to <a class="existingWikiWord" href="/nlab/show/topological+data+analysis">topological data analysis</a> in <a class="existingWikiWord" href="/nlab/show/cosmological+structure+formation">cosmological structure formation</a>:</p>
-
-<ul>
-<li>Matteo Biagetti, <a class="existingWikiWord" href="/nlab/show/Alex+Cole">Alex Cole</a>, <a class="existingWikiWord" href="/nlab/show/Gary+Shiu">Gary Shiu</a>, <em>The Persistence of Large Scale Structures I: Primordial non-Gaussianity</em> (<a href="https://arxiv.org/abs/2009.04819">arXiv:2009.04819</a>)</li>
-</ul>
-
-<p>Application of <a class="existingWikiWord" href="/nlab/show/topological+data+analysis">topological data analysis</a> (<a class="existingWikiWord" href="/nlab/show/persistent+homology">persistent homology</a>) to analysis of <a class="existingWikiWord" href="/nlab/show/phase+transitions">phase transitions</a>:</p>
-
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/Alex+Cole">Alex Cole</a>, Gregory J. Loges, <a class="existingWikiWord" href="/nlab/show/Gary+Shiu">Gary Shiu</a>, <em>Quantitative and Interpretable Order Parameters for Phase Transitions from Persistent Homology</em> (<a href="https://arxiv.org/abs/2009.14231">arXiv:2009.14231</a>)</li>
-</ul>
-<div>
-
-<h3 id="CohomotopyInTopologicalDataAnalysisReferences">Cohomotopy in topological data analysis</h3>
-
-<p>The suggestion to regard <a class="existingWikiWord" href="/nlab/show/cobordism+theory">cobordism theory</a> of <a class="existingWikiWord" href="/nlab/show/iso-hypersurfaces">iso-hypersurfaces</a>, and thus <a class="existingWikiWord" href="/nlab/show/Pontryagin%27s+theorem">Pontryagin's theorem</a> in <a class="existingWikiWord" href="/nlab/show/Cohomotopy">Cohomotopy</a>, as a tool in (<a class="existingWikiWord" href="/nlab/show/persistent+homology">persistent</a>) <a class="existingWikiWord" href="/nlab/show/topological+data+analysis">topological data analysis</a> (improving on homologuical <a class="existingWikiWord" href="/nlab/show/well+groups">well groups</a>):</p>
-
-<ul>
-<li id="FranekKrcal16">
-<p><a class="existingWikiWord" href="/nlab/show/Peter+Franek">Peter Franek</a>, <a class="existingWikiWord" href="/nlab/show/Marek+Kr%C4%8D%C3%A1l">Marek Krčál</a>, <em>On Computability and Triviality of Well Groups</em>, Discrete Comput Geom (2016) 56: 126 (<a href="https://arxiv.org/abs/1501.03641">arXiv:1501.03641</a>, <a href="https://doi.org/10.1007/s00454-016-9794-2">doi:10.1007/s00454-016-9794-2</a>)</p>
-</li>
-
-<li id="FranekKrcal17">
-<p><a class="existingWikiWord" href="/nlab/show/Peter+Franek">Peter Franek</a>, <a class="existingWikiWord" href="/nlab/show/Marek+Kr%C4%8D%C3%A1l">Marek Krčál</a>, <em>Persistence of Zero Sets</em>, Homology, Homotopy and Applications, Volume 19 (2017) Number 2 (<a href="https://arxiv.org/abs/1507.04310">arXiv:1507.04310</a>, <a href="http://dx.doi.org/10.4310/HHA.2017.v19.n2.a16">doi:10.4310/HHA.2017.v19.n2.a16</a>)</p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Peter+Franek">Peter Franek</a>, <a class="existingWikiWord" href="/nlab/show/Marek+Kr%C4%8D%C3%A1l">Marek Krčál</a>, <em>Cohomotopy groups capture robust Properties of Zero Sets via Homotopy Theory</em>, talk at <a href="https://www2.ist.ac.at/acat">ACAT meeting 2015</a> (<a href="https://www2.ist.ac.at/fileadmin/user_upload/events_pages/acat/ACAT2015_Marek_Krcal.pdf">pfd slides</a>)</p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Peter+Franek">Peter Franek</a>, <a class="existingWikiWord" href="/nlab/show/Marek+Kr%C4%8D%C3%A1l">Marek Krčál</a>, Hubert Wagner, <em>Solving equations and optimization problems with uncertainty</em>, J Appl. and Comput. Topology (2018) 1: 297 (<a href="https://arxiv.org/abs/1607.06344">arxiv:1607.06344</a>, <a href="https://doi.org/10.1007/s41468-017-0009-6">doi:10.1007/s41468-017-0009-6</a>)</p>
-</li>
-</ul>
-</div>
-<h3 id="further_variants">Further variants</h3>
-
-<p>See also</p>
-
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/Robert+MacPherson">Robert MacPherson</a>, Amit Patel, <em>Persistent Local Systems</em> (<a href="https://arxiv.org/abs/1805.02539">arXiv:1805.02539</a>)</li>
-</ul>
-<div class="property">category: <a class="category_link" href="/nlab/all_pages/topology">topology</a>, <a class="category_link" href="/nlab/all_pages/applications">applications</a></div></body></html>
+<p>(…)</p>
+</body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on May 20, 2022 at 02:48:59.
-    See the <a href="https://ncatlab.org/nlab/history/persistent homology" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    Created on May 20, 2022 at 02:44:54.
+    See the <a href="https://ncatlab.org/nlab/history/stability of persistence diagrams" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/persistent+homology" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/11084/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/persistent+homology/31" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/persistent+homology" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/persistent+homology" accesskey="S" class="navlink" id="history" rel="nofollow">History (31 revisions)</a>
-  <a href="https://ncatlab.org/nlab/show/persistent homology/cite" style="color: black">Cite</a>
-  <a href="/nlab/print/persistent+homology" accesskey="p" id="view_print" rel="nofollow">Print</a>
-    <a href="/nlab/source/persistent+homology" id="view_source" rel="nofollow">Source</a>
+  <a href="/nlab/edit/stability+of+persistence+diagrams" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14270/#Item_1">Discuss</a>
+  <a href="https://ncatlab.org/nlab/show/stability of persistence diagrams/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/stability+of+persistence+diagrams" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/stability+of+persistence+diagrams" id="view_source" rel="nofollow">Source</a>
 
   
 
