@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1553353531" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/mathematics.css?1534319116" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/syntax.css?1531905161" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1592003439" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1653745287" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1653745287" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1653745287" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1653745287" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css"/>
 
   <style type="text/css">
@@ -213,13 +213,13 @@ margin-left: 0em;
     
     
   /*]]>*/--></style>
-  <script src="/javascripts/prototype.js?1532905251" type="text/javascript"></script>
-<script src="/javascripts/effects.js?1532905251" type="text/javascript"></script>
-<script src="/javascripts/dragdrop.js?1532905252" type="text/javascript"></script>
-<script src="/javascripts/controls.js?1532905250" type="text/javascript"></script>
-<script src="/javascripts/application.js?1532905250" type="text/javascript"></script>
-  <script src="/javascripts/page_helper.js?1533109147" type="text/javascript"></script>
-  <script src="/javascripts/thm_numbering.js?1533108238" type="text/javascript"></script>
+  <script src="/javascripts/prototype.js?1653745287" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1653745287" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1653745287" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1653745287" type="text/javascript"></script>
+<script src="/javascripts/application.js?1653745287" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1653745287" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1653745287" type="text/javascript"></script>
   
   <script type="text/x-mathjax-config">
   <!--//--><![CDATA[//><!--
@@ -295,7 +295,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/332/#Item_219" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/332/#Item_220" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -464,8 +464,15 @@ margin-left: 0em;
 <li><a href='#enriched_definition'>Enriched definition</a></li>
 <li><a href='#profunctors'>Profunctors</a></li>
 <li><a href='#higher_categorical_functors'>Higher categorical functors</a></li>
+<li><a href='#in_homotopy_type_theory'>In homotopy type theory</a></li>
 </ul>
-<li><a href='#special_properties_of_functors'>Special properties of functors</a></li>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#composition_of_functors'>Composition of functors</a></li>
+<li><a href='#lemma_929_in_hott_book'>Lemma 9.2.9 in HoTT book</a></li>
+<li><a href='#lemma_9210_in_hott_book'>Lemma 9.2.10 in HoTT book</a></li>
+</ul>
+<li><a href='#types_of_functors'>Types of functors</a></li>
 <li><a href='#examples'>Examples</a></li>
 <ul>
 <li><a href='#morphisms_of_monoids_and_groups'>Morphisms of monoids and groups</a></li>
@@ -736,9 +743,80 @@ C_1 &amp;\stackrel{f_1}{\to}&amp; D_1
 </li>
 </ul>
 
-<h2 id="special_properties_of_functors">Special properties of functors</h2>
+<h3 id="in_homotopy_type_theory">In homotopy type theory</h3>
 
-<p>Functors with special properties are important in applications. See for instance</p>
+<p>Note: the <a class="existingWikiWord" href="/nlab/show/HoTT+book">HoTT book</a> calls a <a class="existingWikiWord" href="/nlab/show/category">category</a> a “precategory” and a <a class="existingWikiWord" href="/nlab/show/univalent+category">univalent category</a> a “category”, but here we shall refer to the standard terminology of “category” and “univalent category” respectively.</p>
+
+<p>The definition of functor in homotopy type theory is a straightforward translation of the ordinary one. However, the notion of <a class="existingWikiWord" href="/nlab/show/univalent+category">univalent category</a> allows us to construct some such functors that in classical mathematics would require either the <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a> or the use of <a class="existingWikiWord" href="/nlab/show/anafunctors">anafunctors</a>.</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> be <a class="existingWikiWord" href="/nlab/show/categories">categories</a>. Informally, a <strong>functor</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F : A \to B</annotation></semantics></math> consists of</p>
+
+<ul>
+<li>A function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>F</mi> <mn>0</mn></msub><mo>:</mo><msub><mi>A</mi> <mn>0</mn></msub><mo>→</mo><msub><mi>B</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">F_0 : A_0 \to B_0</annotation></semantics></math></li>
+
+<li>For each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a,b:A</annotation></semantics></math>, a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>F</mi> <mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></msub><mo>:</mo><msub><mi>hom</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>hom</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>F</mi><mi>a</mi><mo>,</mo><mi>F</mi><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F_{a,b}:hom_A(a,b) \to hom_B(F a,F b)</annotation></semantics></math>, generally also denoted <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>.</li>
+
+<li>For each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a:A</annotation></semantics></math>, we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><msub><mn>1</mn> <mi>a</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mn>1</mn> <mrow><mi>F</mi><mi>a</mi></mrow></msub></mrow><annotation encoding="application/x-tex">F(1_a)=1_{F a}</annotation></semantics></math>.</li>
+
+<li>For each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a,b,c: A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><msub><mi>hom</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f:hom_A(a,b)</annotation></semantics></math> amd <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><msub><mi>hom</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g:hom_A(b,c)</annotation></semantics></math>, we have</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo>∘</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mi>g</mi><mo>∘</mo><mi>F</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">F(g \circ f) = F g \circ F f</annotation></semantics></math></div>
+<p>Formally, the type of functors from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Func</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><msub><mi>F</mi> <mn>0</mn></msub><mo>:</mo><msub><mi>A</mi> <mn>0</mn></msub><mo>→</mo><msub><mi>B</mi> <mn>0</mn></msub></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>F</mi><mo>:</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>:</mo><mi>A</mi></mrow></munder><msub><mi>hom</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>hom</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>F</mi><mi>a</mi><mo>,</mo><mi>F</mi><mi>b</mi><mo stretchy="false">)</mo></mrow></munder><mo maxsize="1.8em" minsize="1.8em">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>F</mi><mo stretchy="false">(</mo><msub><mn>1</mn> <mi>a</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mn>1</mn> <mrow><mi>F</mi><mi>a</mi></mrow></msub><mo maxsize="1.8em" minsize="1.8em">)</mo><mo>×</mo><mo maxsize="1.8em" minsize="1.8em">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>:</mo><mi>A</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>f</mi><mo>:</mo><msub><mi>hom</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>g</mi><mo>:</mo><msub><mi>hom</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></munder><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo>∘</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mi>g</mi><mo>∘</mo><mi>F</mi><mi>f</mi><mo maxsize="1.8em" minsize="1.8em">)</mo></mrow><annotation encoding="application/x-tex"> Func(A,B) \coloneqq
+\sum_{F_0:A_0\to B_0} \sum_{F:\prod_{a,b:A} hom_A(a,b) \to \hom_B(F a,F b)} \Big(\prod_{a:A} F(1_a) = 1_{F a}\Big) \times \Big( \prod_{a,b,c:A} \prod_{f:\hom_A(a,b)} \prod_{g:\hom_A(b,c)} F(g \circ f) = F g \circ F f\Big) 
+</annotation></semantics></math></div>
+<p>A formal definition in <a class="existingWikiWord" href="/nlab/show/Coq">Coq</a> can be found in <a href="#AhrensKapulkinShulman13">Ahrens-Kapulkin-Shulman 13</a>.</p>
+
+<h2 id="properties">Properties</h2>
+
+<p>These properties come from the <a class="existingWikiWord" href="/nlab/show/HoTT+book">HoTT book</a>.</p>
+
+<p>By induction on <a class="existingWikiWord" href="/nlab/show/identity">identity</a>, a functor also preserves <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>idtoiso</mi></mrow><annotation encoding="application/x-tex">idtoiso</annotation></semantics></math> (See <a class="existingWikiWord" href="/nlab/show/category">category</a>).</p>
+
+<h3 id="composition_of_functors">Composition of functors</h3>
+
+<p>For functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F:A\to B</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo>:</mo><mi>B</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">G:B \to C</annotation></semantics></math>, their composite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo>∘</mo><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">G \circ F : A \to C</annotation></semantics></math> is given by</p>
+
+<ul>
+<li>The composite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>G</mi> <mn>0</mn></msub><mo>∘</mo><msub><mi>F</mi> <mn>0</mn></msub><mo stretchy="false">)</mo><mo>:</mo><msub><mi>A</mi> <mn>0</mn></msub><mo>→</mo><msub><mi>C</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">(G_0 \circ F_0): A_0 \to C_0</annotation></semantics></math></li>
+
+<li>For each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a,b:A</annotation></semantics></math>, the composite<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>G</mi> <mrow><mi>F</mi><mi>a</mi><mo>,</mo><mi>F</mi><mi>b</mi></mrow></msub><mo>∘</mo><msub><mi>F</mi> <mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></msub><mo stretchy="false">)</mo><mo>:</mo><msub><mi>hom</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>hom</mi> <mi>C</mi></msub><mo stretchy="false">(</mo><mi>G</mi><mi>F</mi><mi>a</mi><mo>,</mo><mi>G</mi><mi>F</mi><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(G_{F a, F b} \circ F_{a,b}):hom_A(a,b)\to hom_C(G F a, G F b)</annotation></semantics></math></div></li>
+</ul>
+
+<h3 id="lemma_929_in_hott_book">Lemma 9.2.9 in HoTT book</h3>
+
+<p>Composition of functors is associative <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>G</mi><mi>F</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>H</mi><mi>G</mi><mo stretchy="false">)</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">H(G F)=(H G)F</annotation></semantics></math>.</p>
+
+<p><strong>Proof:</strong> Since composition of functions is associative, this follows immediately for the actions on objects and on homs. And since hom-sets are sets, the rest of the data is automatic. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>□</mo></mrow><annotation encoding="application/x-tex">\square</annotation></semantics></math></p>
+
+<h3 id="lemma_9210_in_hott_book">Lemma 9.2.10 in HoTT book</h3>
+
+<p>Lemma 9.2.9 is coherent, i.e. the following pentagon of equalities commutes:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mo stretchy="false">(</mo><mi>K</mi><mi>H</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>G</mi><mi>F</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↗</mo></mtd> <mtd></mtd> <mtd><mo>↘</mo></mtd></mtr> <mtr><mtd><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>K</mi><mi>H</mi><mo stretchy="false">)</mo><mi>G</mi><mo stretchy="false">)</mo><mi>F</mi></mtd> <mtd></mtd> <mtd></mtd> <mtd></mtd> <mtd><mi>K</mi><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">(</mo><mi>G</mi><mi>F</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd></mtd> <mtd></mtd> <mtd><mo stretchy="false">↑</mo></mtd></mtr> <mtr><mtd><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">(</mo><mi>H</mi><mi>G</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi>F</mi></mtd> <mtd></mtd> <mtd><mo>⟶</mo></mtd> <mtd></mtd> <mtd><mi>K</mi><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>H</mi><mi>G</mi><mo stretchy="false">)</mo><mi>F</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> 
+   \array{
+     &amp;&amp; (K H)(G F)
+     \\
+     &amp; \nearrow
+     &amp;&amp;
+     \searrow
+     \\
+     ((K H) G) F
+     &amp;&amp; &amp;&amp;
+     K (H (G F))
+     \\
+     \downarrow 
+     &amp;&amp; &amp;&amp; 
+     \uparrow
+     \\
+     (K(H G)) F
+     &amp;&amp; \longrightarrow &amp;&amp;
+     K( (H G) F)
+   }
+
+</annotation></semantics></math></div>
+<h2 id="types_of_functors">Types of functors</h2>
+
+<p>Specific types of functors are important in applications. See for instance</p>
 
 <ul>
 <li>
@@ -944,15 +1022,19 @@ C_1 &amp;\stackrel{f_1}{\to}&amp; D_1
 </li>
 
 <li>
+<p><a class="existingWikiWord" href="/nlab/show/injective-on-objects+functor">injective-on-objects functor</a></p>
+</li>
+
+<li>
 <p><a class="existingWikiWord" href="/nlab/show/essentially+surjective+functor">essentially surjective functor</a></p>
 
 <ul>
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/surjective+on+objects+functor">surjective on objects functor</a></p>
+<p><a class="existingWikiWord" href="/nlab/show/surjective-on-objects+functor">surjective-on-objects functor</a></p>
 </li>
 
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/bijective+on+objects+functor">bijective on objects functor</a></p>
+<p><a class="existingWikiWord" href="/nlab/show/bijective-on-objects+functor">bijective-on-objects functor</a></p>
 </li>
 </ul>
 </li>
@@ -1017,20 +1099,38 @@ C_1 &amp;\stackrel{f_1}{\to}&amp; D_1
 <p><a class="existingWikiWord" href="/nlab/show/Andr%C3%A9+Joyal">André Joyal</a>‘s CatLab: <em><a class="existingWikiWord" href="/joyalscatlab/published/Functors">Functors</a></em></p>
 </li>
 </ul>
+
+<p>For functors in homotopy type theory</p>
+
+<ul>
+<li id="AhrensKapulkinShulman13">
+<p><a class="existingWikiWord" href="/nlab/show/Benedikt+Ahrens">Benedikt Ahrens</a>, <a class="existingWikiWord" href="/nlab/show/Chris+Kapulkin">Chris Kapulkin</a>, <a class="existingWikiWord" href="/nlab/show/Michael+Shulman">Michael Shulman</a>, section 4 of <em>Univalent categories and the Rezk completion</em>, Mathematical Structures in Computer Science 25.5 (2015): 1010-1039 (<a href="http://arxiv.org/abs/1303.0584">arXiv:1303.0584</a>)</p>
+</li>
+
+<li id="HoTTBook">
+<p><a class="existingWikiWord" href="/nlab/show/UF-IAS-2012">Univalent Foundations Project</a>, section 9.2 of <em><a class="existingWikiWord" href="/nlab/show/HoTT+Book">Homotopy Type Theory – Univalent Foundations of Mathematics</a></em>, IAS 2013</p>
+</li>
+</ul>
+
+<p><a class="existingWikiWord" href="/nlab/show/Coq">Coq</a> code formalizing the concept of functors includes the following:</p>
+
+<ul>
+<li><em><a href="https://github.com/benediktahrens/rezk_completion/blob/master/functors_transformations.v">functors_transformations.v</a></em></li>
+</ul>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on July 12, 2021 at 13:03:49.
+    Last revised on June  7, 2022 at 12:23:38.
     See the <a href="https://ncatlab.org/nlab/history/functor" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/functor" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/332/#Item_219">Discuss</a><span class="backintime"><a href="/nlab/revision/functor/63" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/functor" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/functor" accesskey="S" class="navlink" id="history" rel="nofollow">History (63 revisions)</a>
+  <a href="/nlab/edit/functor" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/332/#Item_220">Discuss</a><span class="backintime"><a href="/nlab/revision/functor/64" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/functor" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/functor" accesskey="S" class="navlink" id="history" rel="nofollow">History (64 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/functor/cite" style="color: black">Cite</a>
   <a href="/nlab/print/functor" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/functor" id="view_source" rel="nofollow">Source</a>
