@@ -559,7 +559,6 @@ margin-left: 0em;
 <li><a href='#finset'>FinSet</a></li>
 <li><a href='#integers'>Integers</a></li>
 <li><a href='#localization'>Localization</a></li>
-<li><a href='#spectrification'>Spectrification</a></li>
 <li><a href='#other'>Other</a></li>
 </ul>
 <li><a href='#semantics'>Semantics</a></li>
@@ -773,56 +772,6 @@ Hypothesis f : forall i, S i -&gt; T i.</code></pre>
 
 <p>The first constructor gives a map from <code>X</code> to <code>localize X</code>, while the other four specify exactly that <code>localize X</code> is local (by giving adjoint equivalence data to the map that we want to become an equivalence). See <a href="http://homotopytypetheory.org/2011/12/06/inductive-localization/">this blog post</a> for details. This construction is also already interesting in extensional type theory.</p>
 
-<h3 id="spectrification">Spectrification</h3>
-
-<p>A <a class="existingWikiWord" href="/nlab/show/prespectrum">prespectrum</a> is a sequence of <a class="existingWikiWord" href="/nlab/show/pointed+object">pointed types</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">X_n</annotation></semantics></math> with pointed maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>n</mi></msub><mo>→</mo><mi>Ω</mi><msub><mi>X</mi> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">X_n \to \Omega X_{n+1}</annotation></semantics></math>:</p>
-
-<pre><code>Definition prespectrum :=
-  {X : nat -&gt; Type &amp; 
-   { pt : forall n, X n &amp;
-    { glue : forall n, X n -&gt; pt (S n) == pt (S n) &amp;
-      forall n, glue n (pt n) == idpath (pt (S n)) }}}.</code></pre>
-
-<p>A prespectrum is a <a class="existingWikiWord" href="/nlab/show/spectrum">spectrum</a> if each of these maps is an equivalence.</p>
-
-<pre><code>Definition is_spectrum (X : prespectrum) : Type :=
-  forall n, is_equiv (pr1 (pr2 (pr2 X)) n).</code></pre>
-
-<p>In classical <a class="existingWikiWord" href="/nlab/show/algebraic+topology">algebraic topology</a>, there is a <strong>spectrification</strong> functor which is <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> to the inclusion of spectra in prespectra. For instance, this is how a <a class="existingWikiWord" href="/nlab/show/suspension+spectrum">suspension spectrum</a> is constructed: by spectrifying the prespectrum <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>n</mi></msub><mo>≔</mo><msup><mi>Σ</mi> <mi>n</mi></msup><mi>A</mi></mrow><annotation encoding="application/x-tex">X_n \coloneqq \Sigma^n A</annotation></semantics></math>.</p>
-
-<p>The following HIT should construct spectrification in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a> (though this has not yet been verified formally). (There are some abuses of notation below, which can be made precise using Coq typeclasses and implicit arguments.)</p>
-
-<pre><code>Inductive spectrify (X : prespectrum) : nat -&gt; Type :=
-| to_spectrify : forall n, X n -&gt; spectrify X n
-| spectrify_glue : forall n, spectrify X n -&gt;
-    to_spectrify (S n) (pt (S n)) == to_spectrify (S n) (pt (S n))
-| to_spectrify_is_prespectrum_map : forall n (x : X n),
-    spectrify_glue n (to_spectrify n x)
-    == loop_functor (to_spectrify (S n)) (glue n x)
-| spectrify_glue_retraction : forall n
-    (p : to_spectrify (S n) (pt (S n)) == to_spectrify (S n) (pt (S n))),
-    spectrify X n
-| spectrify_glue_retraction_is_retraction : forall n (sx : spectrify X n),
-    spectrify_glue_retraction n (spectrify_glue n sx) == sx
-| spectrify_glue_section : forall n
-    (p : to_spectrify (S n) (pt (S n)) == to_spectrify (S n) (pt (S n))),
-    spectrify X n
-| spectrify_glue_section_is_section : forall n
-    (p : to_spectrify (S n) (pt (S n)) == to_spectrify (S n) (pt (S n))),
-    spectrify_glue n (spectrify_glue_section n p) == p.</code></pre>
-
-<p>We can unravel this as follows, using more traditional notation. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">L X</annotation></semantics></math> denote the spectrification being constructed. The first constructor says that each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">(L X)_n</annotation></semantics></math> comes with a map from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">X_n</annotation></semantics></math>, called <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℓ</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\ell_n</annotation></semantics></math> say (denoted <code>to_spectrify n</code> above). This induces a basepoint in each type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">(L X)_n</annotation></semantics></math>, namely the image <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℓ</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\ell_n(*)</annotation></semantics></math> of the basepoint of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">X_n</annotation></semantics></math>. The many occurrences of</p>
-
-<pre><code>to_spectrify (S n) (pt (S n)) == to_spectrify (S n) (pt (S n))</code></pre>
-
-<p>simply refer to the based <em>loop space</em> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Ω</mi> <mrow><msub><mi>ℓ</mi> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\Omega_{\ell_{n+1}(*)} (L X)_{n+1}</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">(L X)_{n+1}</annotation></semantics></math> at this base point.</p>
-
-<p>Thus, the second constructor <code>spectrify_glue</code> gives the structure maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mi>n</mi></msub><mo>→</mo><mi>Ω</mi><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">(L X)_n \to \Omega (L X)_{n+1}</annotation></semantics></math> to make <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">L X</annotation></semantics></math> into a prespectrum. Similarly, the third constructor says that the maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℓ</mi> <mi>n</mi></msub><mo lspace="verythinmathspace">:</mo><msub><mi>X</mi> <mi>n</mi></msub><mo>→</mo><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\ell_n\colon X_n \to (L X)_n</annotation></semantics></math> commute with the structure maps up to a specified homotopy.</p>
-
-<p>Since the basepoints of the types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">(L X)_n</annotation></semantics></math> are induced from those of each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">X_n</annotation></semantics></math>, this automatically implies that the maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mi>n</mi></msub><mo>→</mo><mi>Ω</mi><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">(L X)_n \to \Omega (L X)_{n+1}</annotation></semantics></math> are pointed maps (up to a specified homotopy) and that the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℓ</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\ell_n</annotation></semantics></math> commute with these pointings (up to a specified homotopy). This makes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℓ</mi></mrow><annotation encoding="application/x-tex">\ell</annotation></semantics></math> into a map of prespectra.</p>
-
-<p>Finally, the fourth through seventh constructors say that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">L X</annotation></semantics></math> is a spectrum, by giving <a class="existingWikiWord" href="/nlab/show/h-isomorphism">h-isomorphism</a> data: a retraction and a section for each glue map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mi>n</mi></msub><mo>→</mo><mi>Ω</mi><mo stretchy="false">(</mo><mi>L</mi><mi>X</mi><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">(L X)_n \to \Omega (L X)_{n+1}</annotation></semantics></math>. We could use adjoint equivalence data as we did for localization, but this approach avoids the presence of level-3 path constructors. (We could have used h-iso data in localization too, thereby avoiding even level-2 constructors there.) It is important, in general, to use a sort of equivalence data which forms an <a class="existingWikiWord" href="/nlab/show/h-prop">h-prop</a>; otherwise we would be adding <a class="existingWikiWord" href="/nlab/show/stuff%2C+structure%2C+property">structure</a> rather than merely the property of such-and-such map being an equivalence.</p>
-
 <h3 id="other">Other</h3>
 
 <ul>
@@ -844,6 +793,14 @@ Hypothesis f : forall i, S i -&gt; T i.</code></pre>
 
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/suspension+type">suspension type</a></p>
+</li>
+
+<li>
+<p><span class="newWikiWord">localization of a type at a family of functions<a href="/nlab/new/localization+of+a+type+at+a+family+of+functions">?</a></span></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/spectrification+of+a+sequential+spectrum+type">spectrification of a sequential spectrum type</a></p>
 </li>
 
 <li>
@@ -946,14 +903,14 @@ Hypothesis f : forall i, S i -&gt; T i.</code></pre>
 
 <div class="revisedby">
     <p>
-    Last revised on June  7, 2022 at 21:55:45.
+    Last revised on June  8, 2022 at 23:54:40.
     See the <a href="https://ncatlab.org/nlab/history/higher inductive type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/higher+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6691/#Item_77">Discuss</a><span class="backintime"><a href="/nlab/revision/higher+inductive+type/58" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/higher+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/higher+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (58 revisions)</a>
+  <a href="/nlab/edit/higher+inductive+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6691/#Item_77">Discuss</a><span class="backintime"><a href="/nlab/revision/higher+inductive+type/59" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/higher+inductive+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/higher+inductive+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (59 revisions)</a>
   <a href="https://ncatlab.org/nlab/show/higher inductive type/cite" style="color: black">Cite</a>
   <a href="/nlab/print/higher+inductive+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/higher+inductive+type" id="view_source" rel="nofollow">Source</a>
