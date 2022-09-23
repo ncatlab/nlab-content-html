@@ -494,6 +494,12 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#Idea'>Idea</a></li>
+<li><a href='#definitions'>Definitions</a></li>
+<ul>
+<li><a href='#martinlf_type_theory'>Martin-Löf type theory</a></li>
+<li><a href='#cubical_type_theory'>Cubical type theory</a></li>
+<li><a href='#higher_observational_type_theory'>Higher observational type theory</a></li>
+</ul>
 <li><a href='#examples_and_applications'>Examples and applications</a></li>
 <li><a href='#see_also'>See also</a></li>
 <li><a href='#references'>References</a></li>
@@ -501,6 +507,20 @@ margin-left: 0em;
 </div>
 
 <h2 id="Idea">Idea</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/Gottfried+Leibniz">Gottfried Leibniz</a> said (in translation from <a href="#Lewis18">Lewis 1918, p. 373</a> with original Latin terms in parenthesis; see also <a href="#Cartwright71">Cartwright 1971, p. 119</a> and <a href="#GriesSchneider98">Gries &amp; Schneider 1998</a>)</p>
+
+<blockquote>
+<p>Two terms are the same (eadem) if one can be substituted for the otherwithout altering the truth of any statement (salva veritate). If we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> enters into some true proposition, and the substitution of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> wherever it appears results in a new proposition that is likewise true, and if this can be done for every proposition, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> are said to be the same; conversely, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> are the same, they can be substituted for one another.</p>
+</blockquote>
+
+<p>The converse mentioned at the end of the last sentence is known as the <strong>principle of substitution</strong> or the <strong>indiscernibility of identicals</strong>. In any simply typed first-order theory, this principle is formalized as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>x</mi><msub><mo>=</mo> <mi>T</mi></msub><mi>y</mi><mo>⇒</mo><mo>∀</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">properties</mi><mspace width="thickmathspace"></mspace><mi>P</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>⇔</mo><mi>P</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x =_T y \implies \forall \; \mathrm{properties} \; P. P(x) \iff P(y)</annotation></semantics></math></div>
+<p>In the interpretation of <a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a> in <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>, propositions are interpreted as types, and the above statement has a generalization from the types which are propositions to all types: the <a class="existingWikiWord" href="/nlab/show/universal+quantifier">universal quantifier</a> becomes a <a class="existingWikiWord" href="/nlab/show/dependent+product+type">dependent product type</a>, the <a class="existingWikiWord" href="/nlab/show/predicate">predicate</a> becomes a <a class="existingWikiWord" href="/nlab/show/type+family">type family</a>, <a class="existingWikiWord" href="/nlab/show/implication">implication</a> becomes a <a class="existingWikiWord" href="/nlab/show/function">function</a>, and <a class="existingWikiWord" href="/nlab/show/logical+equivalence">logical equivalence</a> of <a class="existingWikiWord" href="/nlab/show/propositions">propositions</a> becomes <a class="existingWikiWord" href="/nlab/show/equivalence+in+homotopy+type+theory">equivalence of types</a>. This results in what is known as <em>transport</em> in type theory, the function</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">transport</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>:</mo><mi>x</mi><msub><mo>=</mo> <mi>T</mi></msub><mi>y</mi><mo>→</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>P</mi><mo>:</mo><mi>T</mi><mo>→</mo><mi>𝒰</mi></mrow></munder><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>≃</mo><mi>P</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{transport}(x, y): x =_T y \to \prod_{P:T \to \mathcal{U}} P(x) \simeq P(y)</annotation></semantics></math></div>
+<h2 id="definitions">Definitions</h2>
+
+<h3 id="martinlf_type_theory">Martin-Löf type theory</h3>
 
 <p>In <a class="existingWikiWord" href="/nlab/show/Martin-L%C3%B6f+type+theory">Martin-Löf type theory</a>, given</p>
 
@@ -537,6 +557,14 @@ margin-left: 0em;
 
 </annotation></semantics></math></div>
 <p>such that for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi><mo>:</mo><mi>B</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">v:B(y)</annotation></semantics></math>, the (<a class="existingWikiWord" href="/nlab/show/homotopy+fiber">homotopy</a>) <a class="existingWikiWord" href="/nlab/show/fiber">fiber</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mover><mi mathvariant="normal">tr</mi><mo>→</mo></mover> <mi>B</mi> <mi>p</mi></msubsup></mrow><annotation encoding="application/x-tex">\overrightarrow{\mathrm{tr}}_{B}^{p}</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/contractible">contractible</a>, and for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>u</mi><mo>:</mo><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">u:B(x)</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/fiber">fiber</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mover><mi mathvariant="normal">tr</mi><mo>←</mo></mover> <mi>B</mi> <mi>p</mi></msubsup></mrow><annotation encoding="application/x-tex">\overleftarrow{\mathrm{tr}}_{B}^{p}</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/contractible">contractible</a>.</p>
+
+<h3 id="cubical_type_theory">Cubical type theory</h3>
+
+<p>…</p>
+
+<h3 id="higher_observational_type_theory">Higher observational type theory</h3>
+
+<p>…</p>
 
 <h2 id="examples_and_applications">Examples and applications</h2>
 
@@ -605,6 +633,10 @@ margin-left: 0em;
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/dependent+identity+type">dependent identity type</a></p>
 </li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/identity+of+indiscernibles">identity of indiscernibles</a></p>
+</li>
 </ul>
 
 <h2 id="references">References</h2>
@@ -623,6 +655,30 @@ margin-left: 0em;
 
 <ul>
 <li><a class="existingWikiWord" href="/nlab/show/Mart%C3%ADn+H%C3%B6tzel+Escard%C3%B3">Martín Hötzel Escardó</a>, <em>Introduction to Univalent Foundations of Mathematics with Agda</em> &lbrack;<a href="https://arxiv.org/abs/1911.00580">arXiv:1911.00580</a>, <a href="https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/">webpage</a>&rbrack;</li>
+</ul>
+
+<p>Leibniz’s original paragraph (from an unpublished manuscript probably written after 1683) is reproduced in the Latin Original in</p>
+
+<ul>
+<li id="Gerhard1890">K. Gerhard (ed.), Section XIX, <a href="https://archive.org/details/diephilosophisc00gerhgoog/page/228/mode/2up">p. 228</a> in: <em>Die philosophischen Schriften von Gottfried Wilhelm Leibniz</em>, Siebenter Band, Weidmannsche Buchhandlung (1890) &lbrack;<a href="https://archive.org/details/diephilosophisc00gerhgoog/page/n7/mode/2up">archive.org</a>&rbrack;</li>
+</ul>
+
+<p>and in English translation in:</p>
+
+<ul>
+<li id="Lewis18"><a class="existingWikiWord" href="/nlab/show/Clarence+I.+Lewis">Clarence I. Lewis</a>, Appendix (p. 373) of: <em>A Survey of Symbolic Logic</em>, University of California (1918) &lbrack;<a class="existingWikiWord" href="/nlab/files/LewisAppendix-LeibnizIndiscernibles.pdf" title="pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>and further discussed in:</p>
+
+<ul>
+<li id="Cartwright71">
+<p><a class="existingWikiWord" href="/nlab/show/Richard+Cartwright">Richard Cartwright</a>, <em>Identity and Substitutivity</em>, p. 119-133 of: Milton Munitz (ed.) <em>Identity and Individuation</em>, New York University Press (1971) &lbrack;<a class="existingWikiWord" href="/nlab/files/Cartwright-IdentityAndSubstitutivity.pdf" title="pdf">pdf</a>&rbrack;</p>
+</li>
+
+<li id="GriesSchneider98">
+<p>David Gries, Fred Schneider, <em>Formalizations Of Substitution Of Equals For Equals</em> (1998) &lbrack;<a href="https://ecommons.cornell.edu/bitstream/handle/1813/7340/98-1686.pdf?sequence=1&amp;isAllowed=y">pdf</a>, <a href="https://ecommons.cornell.edu/handle/1813/7340">ecommons:1813/7340</a></p>
+</li>
 </ul>
 
 <p>The understanding of transport in HoTT as expressing <a class="existingWikiWord" href="/nlab/show/Leibniz">Leibniz</a>‘s principle of “<a class="existingWikiWord" href="/nlab/show/indiscernibility+of+identicals">indiscernibility of identicals</a>” (aka “substitution of equals”, “substitutivity”) has been made explicit in:</p>
@@ -654,14 +710,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on September 23, 2022 at 15:57:53.
+    Last revised on September 23, 2022 at 16:57:44.
     See the <a href="/nlab/history/transport" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/transport" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14292/#Item_7">Discuss</a><span class="backintime"><a href="/nlab/revision/transport/6" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/transport" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/transport" accesskey="S" class="navlink" id="history" rel="nofollow">History (6 revisions)</a>
+  <a href="/nlab/edit/transport" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14292/#Item_7">Discuss</a><span class="backintime"><a href="/nlab/revision/transport/7" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/transport" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/transport" accesskey="S" class="navlink" id="history" rel="nofollow">History (7 revisions)</a>
   <a href="/nlab/show/transport/cite" style="color: black">Cite</a>
   <a href="/nlab/print/transport" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/transport" id="view_source" rel="nofollow">Source</a>
