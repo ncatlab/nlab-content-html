@@ -311,102 +311,21 @@ margin-left: 0em;
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title></title></head>
 <body>
-<p>It occurs to me that there is the following interesting application of the dependent-type-theoretic formulation of the possibility/necessity modalities that, years ago, we wrote down in this entry (<a href="https://ncatlab.org/nlab/show/necessity+and+possibility#InFirstOrderLogicAndTypeTheory">here</a>).</p>
-
-<p>Namely, to point out that when applied to <em>linear dependent types</em>, then the counit of the necessity modality as defined <a href="https://ncatlab.org/nlab/show/necessity+and+possibility#eq:PossibilityNecessityAdjunctionViaBaseChange">here</a> embodies what in quantum information theory is a “measurement gate”.</p>
-
-<p>Like so:</p>
-
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">\mathscr{H}</annotation></semantics></math> be a linear type in the empty context, which is to be regarded as the Hlbert space of states that some quantum protocol is operating on. Think of the <a class="existingWikiWord" href="/nlab/show/quantum+teleportation">quantum teleportation</a>-protocol as a good illustration in the following.</p>
-
-<p>Now consider that in the process of the protocol, a measurement(-gate) is to be performed. Unwinding what the traditional song-and-dance boils down to, this means that</p>
-
-<ol>
-<li>
-<p>a set (a non-linear type) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> of measurement results is chosen.</p>
-</li>
-
-<li>
-<p>a direct sum-decomposition</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi><mo>≃</mo><munder><mo>⊕</mo><mrow><mi>r</mi><mo>:</mo><mi>R</mi></mrow></munder><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub></mrow><annotation encoding="application/x-tex">
-  \mathscr{H} \simeq \underset{r : R}{\oplus} \mathscr{H}_r
-
-</annotation></semantics></math></div>
-<p>for an indexed set of direct summands <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mo>=</mo><mo stretchy="false">(</mo><mi>r</mi><mo>↦</mo><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathscr{H}_\bullet = (r \mapsto \mathscr{H}_r)</annotation></semantics></math></p>
-
-<p>is chosen (with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub></mrow><annotation encoding="application/x-tex">\mathscr{H}_r</annotation></semantics></math> consisting of those quantum states that one may find the system to have “collapsed” to after the result <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math> has been measured)</p>
-</li>
-
-<li>
-<p>a quantum circuit is drawn whose gates may <em>depend</em> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>:</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">r : R</annotation></semantics></math> (in the quantum teleportation protocol as shown <a href="https://ncatlab.org/nlab/show/quantum%20teleportation#Statement">here</a>, this dependency is through the variable called <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math> there)</p>
-</li>
-</ol>
-
-<p>As a result, quantum circuits that include measurement gates are actually fiberwise morphisms in a category of bundles of Hilbert spaces over finite sets of (potential) classical outcomes.</p>
-
-<p>Traditional literature never puts it this way (some texts on <a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a> get close, but I haven’t seen it stated real clearly there, either), but it is clear from inspection that this is what happens.</p>
-
-<p>Now one should ask: In this dependent-linear-typed picture of quantum information protocols: What is a measurement gate itself?</p>
-
-<p>To see this, observe that for a finite index set of results <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>, the direct sum of result Hilbert space is equivalently their categorical product, hence their limit, hence their right base change along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mo>→</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">R \to \ast</annotation></semantics></math>:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>r</mi><mo>:</mo><mi>R</mi></mrow></munder><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
-  \mathscr{H} \;\simeq\; \underset{r : R}{\prod} \mathscr{H}_r
-  \,.
-
-</annotation></semantics></math></div>
-<p>To put this into the context of possible measurement results, context-extent it to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> (which I’ll denote by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>R</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">R^\ast</annotation></semantics></math>, if you allow) to get</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>R</mi> <mo>*</mo></msup><mi class="mathscript">ℋ</mi><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><msup><mi>R</mi> <mo>*</mo></msup><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>r</mi><mo>:</mo><mi>R</mi></mrow></munder><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
-  R^\ast \mathscr{H} \;\simeq\; R^\ast \underset{r : R}{\prod} \mathscr{H}_r
-  \,.
-
-</annotation></semantics></math></div>
-<p>Now the collapse postulate of quantum physics says that if we are in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math> then a measurement operates on quantum states as the linear projection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mi>r</mi></msub><mo lspace="verythinmathspace">:</mo><mi class="mathscript">ℋ</mi><mover><mo>→</mo><mspace width="thickmathspace"></mspace></mover><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub></mrow><annotation encoding="application/x-tex">p_{r} \colon \mathscr{H} \xrightarrow{\;} \mathscr{H}_r</annotation></semantics></math> on its <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math>th direct summand.</p>
-
-<p>But, as a linear map dependent on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math>, this is just the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>R</mi> <mo>*</mo></msup><mo>⊣</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>r</mi><mo>:</mo><mi>R</mi></mrow></munder><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(R^\ast \dashv \underset{r : R}{\prod})</annotation></semantics></math>-counit</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>R</mi> <mo>*</mo></msup><mi class="mathscript">ℋ</mi><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><msup><mi>R</mi> <mo>*</mo></msup><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>r</mi><mo>:</mo><mi>R</mi></mrow></munder><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub><mover><mo>→</mo><mrow><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo></mrow></mphantom><mi>ϵ</mi><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo></mrow></mphantom></mrow></mover><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">
-  R^\ast \mathscr{H} \;\simeq\; R^\ast \underset{r : R}{\prod} \mathscr{H}_r  
-  \xrightarrow{\phantom{--} \epsilon \phantom{--}}
-  \mathscr{H}_\bullet
-
-</annotation></semantics></math></div>
-<p>(!)</p>
-
-<p>So if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>□</mo><mspace width="thinmathspace"></mspace><mo>:</mo><mo>=</mo><mspace width="thinmathspace"></mspace><msup><mi>R</mi> <mo>*</mo></msup><mo>∘</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>r</mi><mo>:</mo><mi>R</mi></mrow></munder></mrow><annotation encoding="application/x-tex">\Box \,:=\, R^\ast \circ \underset{r : R}{\prod}</annotation></semantics></math> denotes the corresponding comonadic modility (“necessarily so in possible worlds <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>”), then we discover that a quantum measurement gate with possible outcomes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">\mathscr{H}_\bullet</annotation></semantics></math> indexed by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>, understood as an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-dependent linear map, is the necessity counit</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>meas</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mo>□</mo><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mover><mo>→</mo><mrow><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo></mrow></mphantom><mi>ϵ</mi><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo></mrow></mphantom></mrow></mover><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
-  meas \;\colon\; \Box \mathscr{H}_\bullet \xrightarrow{\phantom{--} \epsilon \phantom{--}} \mathscr{H}_\bullet
-  \,.
-
-</annotation></semantics></math></div>
-<p>That seems kind of cute.</p>
-
-<p>For example, in the quantum teleportation protocol, this would be Alice’s measurement, and then Bob would go and do <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>:</mo><mi>R</mi><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><msub><mi>σ</mi> <mi>r</mi></msub><mo>:</mo><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover><msub><mi class="mathscript">ℋ</mi> <mi>r</mi></msub></mrow><annotation encoding="application/x-tex">r : R \;\vdash\; \sigma_r : \mathscr{H}_r \xrightarrow{\;\;} \mathscr{H}_r</annotation></semantics></math> to get</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>□</mo><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mover><mo>→</mo><mrow><mphantom><mo lspace="verythinmathspace" rspace="0em">−</mo></mphantom><mi>meas</mi><mphantom><mo lspace="verythinmathspace" rspace="0em">−</mo></mphantom></mrow></mover><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mover><mo>→</mo><mrow><mphantom><mo lspace="verythinmathspace" rspace="0em">−</mo></mphantom><msub><mi>σ</mi> <mo>•</mo></msub><mphantom><mo lspace="verythinmathspace" rspace="0em">−</mo></mphantom></mrow></mover><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">
-  \Box \mathscr{H}_\bullet 
-    \xrightarrow{\phantom{-} meas \phantom{-}} 
-  \mathscr{H}_\bullet
-    \xrightarrow{\phantom{-} \sigma_\bullet \phantom{-}}
-  \mathscr{H}_\bullet
-
-</annotation></semantics></math></div>
-<p>As it goes with these Yoneda-like insights, it’s all locally trivial, but this looks like the right picture to make explicit:</p>
-
-<p>Q: What is a quantum measurement gate seen in dependent linearly typed quantum programming languages?</p>
-
-<p>A: The necessity counit on the dependent type of possible outcomes.</p>
+<p><span class="newWikiWord">DavidJazMyers-ObjectiveCohomology-220928.pdf<a href="/nlab/files/DavidJazMyers-ObjectiveCohomology-220928.pdf">?</a></span></p>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on September 28, 2022 at 08:00:28.
+    Last revised on September 29, 2022 at 05:37:36.
     See the <a href="/nlab/history/Sandbox" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Sandbox" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/Sandbox/2646" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Sandbox" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Sandbox" accesskey="S" class="navlink" id="history" rel="nofollow">History (2646 revisions)</a>
+  <a href="/nlab/edit/Sandbox" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/Sandbox/2647" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Sandbox" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Sandbox" accesskey="S" class="navlink" id="history" rel="nofollow">History (2647 revisions)</a>
   <a href="/nlab/show/Sandbox/cite" style="color: black">Cite</a>
   <a href="/nlab/print/Sandbox" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/Sandbox" id="view_source" rel="nofollow">Source</a>
