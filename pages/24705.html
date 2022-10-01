@@ -1,0 +1,572 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      quantum circuits via dependent linear types in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1655769146" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1653745287" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1653745287" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1655769146" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "\A(Hover to reveal, click to \"hold\")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "\A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+    padding: 0 10pt;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1653745287" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1653745287" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1653745287" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1653745287" type="text/javascript"></script>
+<script src="/javascripts/application.js?1653745287" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1653745287" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1653745287" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      quantum circuits via dependent linear types
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/15205/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Quantum circuits via dependent linear types</title></head>
+<body>
+<h2 id="quantum_circuits_via_dependent_linear_types">Quantum circuits via dependent linear types</h2>
+
+<p>The following discussion indicates<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> how a natural <a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a> for <a class="existingWikiWord" href="/nlab/show/quantum+information">quantum information</a>-processing protocols — hence for <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> consisting of general <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> with classical control, including <a class="existingWikiWord" href="/nlab/show/decoherence">de-coherent</a> <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>-gates and subsequent coherent quantum gates depending on these — is elegantly subsumed within any <a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent linearly typed</a> <a class="existingWikiWord" href="/nlab/show/programming+language">programming language</a> which expresses the “<a class="existingWikiWord" href="/nlab/show/yoga+of+six+operations">yoga of six operations</a>”, such as is the case in the <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a> of <a href="dependent+linear+type+theory#Riley22Thesis">Riley 2022</a>.</p>
+
+<p>This works by regarding classically controlled <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a> as having <a class="existingWikiWord" href="/nlab/show/linear+type">linear data types</a> <a class="existingWikiWord" href="/nlab/show/dependent+type">dependent</a> on classical control parameters and on measurement results, and then making the following key observations:</p>
+
+<ol>
+<li>
+<p>The “<a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>” <a class="existingWikiWord" href="/nlab/show/modality">modality</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub><mo>≔</mo><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>C</mi></msub><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>C</mi></msub><msub><mo stretchy="false">)</mo> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">\Box_C \coloneqq (p_C)^\ast (p_C)_\ast</annotation></semantics></math> on <a class="existingWikiWord" href="/nlab/show/linear+types">linear types</a> dependent on a given classical <a class="existingWikiWord" href="/nlab/show/context">context</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> (which includes classical control parameters as well as eventual <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>-outcomes on the same footing) knows all about controlled <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a>: These are identified just with the <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a> of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a>, where the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/counit+of+a+comonad">counit</a> (taking a linear type “out of the comonad”) reflects the <a class="existingWikiWord" href="/nlab/show/quantum+state+collapse">quantum state collapse</a> of <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>, and where the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/comultiplication">comultiplication</a> encodes the <a class="existingWikiWord" href="/nlab/show/superposition">superposition</a>-principle.</p>
+</li>
+
+<li>
+<p>The <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a> of dependent linear types gives the compilation of <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> into <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a>, essentially as familiar from the quantum <a class="existingWikiWord" href="/nlab/show/string+diagram">string diagram</a>-calculus of <a href="finite+quantum+mechanics+in+terms+of+dagger-compact+categories#AbramskyCoecke04">Abramsky &amp; Coecke 2004</a> with respect to the plain <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a>, but now taking into account dependency on classical control and potential measurement outcomes.</p>
+</li>
+</ol>
+
+<p>All constructions and proofs here flow readily from just the <a class="existingWikiWord" href="/nlab/show/six+operation+yoga">six operation yoga</a> and <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli theory</a>. One key point is <a class="maruku-eqref" href="#eq:NecessityRespectsExternalTensorProduct">(1)</a> that the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a> <a class="existingWikiWord" href="/nlab/show/modality">modality</a> respects the <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a> – so that these classically controlled quantum circuits are unambiguously defined –, under the assumption that it coincides with the <a class="existingWikiWord" href="/nlab/show/formal+duality">dual</a> <em><a class="existingWikiWord" href="/nlab/show/possibility">possibility</a></em> modality <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◯</mo> <mi>C</mi></msub><msub><mi class="mathscript">ℋ</mi> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\bigcirc_C \mathscr{H}_C</annotation></semantics></math> on the quantum data types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">\mathcal{H}_\bullet</annotation></semantics></math> involved – hence (in full generality) when the linear types are <a class="existingWikiWord" href="/nlab/show/dualizable+object">dualizable</a> in the sense of <a class="existingWikiWord" href="/nlab/show/ambidextrous+adjunction">ambidexterity</a> and specifically (in the traditional models) when <a class="existingWikiWord" href="/nlab/show/space+of+quantum+states">quantum state spaces</a> are <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+space">finite dimensional</a>, as is the case in <a class="existingWikiWord" href="/nlab/show/quantum+information+theory">quantum information theory</a>.</p>
+
+<p>Aspects of the following have a resemblance to some variants and categorical interpretations of the <a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a> “<a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a>” (see the references <a href="Quipper#ReferencesDependentLinearTypesAndCategoricalSemantics">there</a>), but avoids (see <a href="#NoticeTheTypingOfAQbit">below</a>) Quipper’s problem of needing “dynamical lifting” (see <a href="Quipper#ReferencesDynamicLifting">there</a>) of “measurement bits back into the context”: The linear <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-modality knows right away that measurement outcomes are recorded in the context.</p>
+
+<p><br /></p>
+
+<h3 id="general">General</h3>
+
+<p>We assume a <a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent linear type theory</a> which <a class="existingWikiWord" href="/nlab/show/functor">functorially</a> obtains (as anticipated in <a href="dependent+linear+type+theory#Schreiber14">Schreiber 2014</a>, <a href="https://arxiv.org/pdf/1402.7041.pdf#page=39">§3.2</a> and established in <a href="dependent+linear+type+theory#Riley22Thesis">Riley 2022</a>, <a href="https://digitalcollections.wesleyan.edu/islandora/object/ir:3269">§2.4</a>):</p>
+
+<ol>
+<li>
+<p>from a classical (“intuitionistic”) <a class="existingWikiWord" href="/nlab/show/type">type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>:</mo><mi>Type</mi></mrow><annotation encoding="application/x-tex">X : Type</annotation></semantics></math> a (large) type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>LinType</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">LinType_X</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/linear+types">linear types</a> <a class="existingWikiWord" href="/nlab/show/dependent+type">dependent</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, equipped with <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric</a> <a class="existingWikiWord" href="/nlab/show/closed+monoidal+category">closed monoidal structure</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>⊗</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-) \otimes (-)</annotation></semantics></math> (<a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a>) and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mspace width="thinmathspace"></mspace><mo>−</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-,\,-]</annotation></semantics></math> (<a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a>);</p>
+</li>
+
+<li>
+<p>from a <a class="existingWikiWord" href="/nlab/show/function">function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><msub><mi>X</mi> <mn>1</mn></msub><mover><mo>→</mo><mspace width="thickmathspace"></mspace></mover><msub><mi>X</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">f : X_1 \xrightarrow{\;} X_2</annotation></semantics></math> between classical types a <a class="existingWikiWord" href="/nlab/show/yoga+of+six+operations">yoga of six operations</a> (specifically: a “<a class="existingWikiWord" href="/nlab/show/Wirthm%C3%BCller+context">Wirthmüller context</a>”) between their types of dependent linear types, hence a <a class="existingWikiWord" href="/nlab/show/contravariant+functor">contravariant</a> <a class="existingWikiWord" href="/nlab/show/substitution">substitution</a>/<a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> operation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> which is <a class="existingWikiWord" href="/nlab/show/strong+monoidal+functor">strong monoidal</a>, <a class="existingWikiWord" href="/nlab/show/strong+closed+functor">strong closed</a> and extends to a <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> <a class="existingWikiWord" href="/nlab/show/adjoint+triple">adjoint triple</a> (with <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> a version of <a class="existingWikiWord" href="/nlab/show/dependent+sum">dependent sum</a> and <a class="existingWikiWord" href="/nlab/show/right+adjoint">right adjoint</a> a version of <a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a>):</p>
+</li>
+</ol>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-BaseChange-221001.jpg" width="730px" />
+</div>
+<p>First observe that (without imposing a further condition) also classical (“non-linear”) <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> provides an example of this <a class="existingWikiWord" href="/nlab/show/yoga+of+six+operations">yoga of six operations</a> (actually five distinct operations, in the present case of <a class="existingWikiWord" href="/nlab/show/Wirthm%C3%BCller+contexts">Wirthmüller contexts</a>), with:</p>
+
+<ol>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a> given by <a class="existingWikiWord" href="/nlab/show/product+types">product types</a>,</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a> given by <a class="existingWikiWord" href="/nlab/show/function+types">function types</a>,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> given by <a class="existingWikiWord" href="/nlab/show/context+extension">context extension</a>,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> given by <a class="existingWikiWord" href="/nlab/show/dependent+coproduct">dependent coproduct</a>,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">f_\ast</annotation></semantics></math> given by <a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a>.</p>
+</li>
+</ol>
+
+<p>In this classical situation, the (<a class="existingWikiWord" href="/nlab/show/comonad">co</a>-)<a class="existingWikiWord" href="/nlab/show/monad">monad</a> <a class="existingWikiWord" href="/nlab/show/adjoint+pair">adjoint pair</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub><mo>⊣</mo><msub><mo>◯</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C \dashv \bigcirc_C</annotation></semantics></math> induced by the <a class="existingWikiWord" href="/nlab/show/adjoint+triple">adjoint triple</a> is readily found (see <a href="necessity+and+possibility#InFirstOrderLogicAndTypeTheory">here</a>) to reflect the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> and the <a class="existingWikiWord" href="/nlab/show/possibility">possibility</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> of a kind of <a class="existingWikiWord" href="/nlab/show/modal+logic">modal logic</a> which regards the potential measurement outcomes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>:</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">c : C</annotation></semantics></math> as “<a class="existingWikiWord" href="/nlab/show/possible+worlds+semantics">possible worlds</a>”:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-ClassicalNecessity-221001.jpg" width="900px" />
+</div>
+<p>We will say that a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>-dependent linear type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mo>:</mo><msub><mi>LinType</mi> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\mathscr{H}_\bullet : LinType_C</annotation></semantics></math> is <em>finite dimensional</em> if its <a class="existingWikiWord" href="/nlab/show/possibility">possibility</a>-aspect agrees with is <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a> aspect, and we write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>FDLinTyp</mi> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">FDLinTyp_C</annotation></semantics></math> for the subtype of the dependent linear types which are finite-dimensional.</p>
+
+<p>The default <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> for this situation is that of <a class="existingWikiWord" href="/nlab/show/bundles">bundles</a> of <a class="existingWikiWord" href="/nlab/show/finite+dimensional+vector+spaces">finite dimensional vector spaces</a> (finite-dimensional complex <a class="existingWikiWord" href="/nlab/show/Hilbert+spaces">Hilbert spaces</a>) over <a class="existingWikiWord" href="/nlab/show/finite+sets">finite sets</a>: In this case both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>C</mi></msub><msub><mo stretchy="false">)</mo> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">(p_C)_!</annotation></semantics></math> as well as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>C</mi></msub><msub><mo stretchy="false">)</mo> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">(p_C)_\ast</annotation></semantics></math> yield the <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a> of the <a class="existingWikiWord" href="/nlab/show/fibers">fibers</a> (a <a class="existingWikiWord" href="/nlab/show/biproduct">biproduct</a>). Since this is the <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> under which the following type theory describes the traditional <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a>, we will adopt our notation to this case and denote the generic <a class="existingWikiWord" href="/nlab/show/dependent+linear+type">dependent linear type</a> by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℋ</mi> <mo>•</mo></msub><mo>:</mo><msub><mi>FDLinType</mi> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\mathcal{H}_\bullet : FDLinType_C</annotation></semantics></math> and its generic <a class="existingWikiWord" href="/nlab/show/term">term</a> by the usual notation for <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>:</mo><mi>C</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>c</mi></msub><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>ℋ</mi> <mi>c</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  c : C 
+  \;\;\;
+  \vdash
+  \;\;\; 
+  \vert \psi_c \rangle \;\colon\; \mathcal{H}_c
+  \,.
+
+</annotation></semantics></math></div>
+<p>Concretely, the <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a> of <a href="dependent+linear+type+theory#Riley22Thesis">Riley 2022</a> should have <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> in the <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-topos"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mn>∞</mn>
+    </mrow>
+    <annotation encoding="application/x-tex">\infty</annotation>
+  </semantics>
+</math>-topos</a> of <a class="existingWikiWord" href="/nlab/show/parameterized+spectrum">parameterized</a> <a class="existingWikiWord" href="/nlab/show/Eilenberg-MacLane+spectrum"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>H</mi>
+      <mi>ℂ</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">H\mathbb{C}</annotation>
+  </semantics>
+</math></a>-<a class="existingWikiWord" href="/nlab/show/module+spectra">module spectra</a> (<a class="existingWikiWord" href="/schreiber/show/Quantization+via+Linear+homotopy+types">S. 2014, Ex. 3.11</a>) and <a class="existingWikiWord" href="/nlab/show/complex+vector+spaces">complex vector spaces</a> embed into this <a class="existingWikiWord" href="/nlab/show/stable+homotopy+theory">stable homotopy theory</a> under passage to their <a class="existingWikiWord" href="/nlab/show/Eilenberg-MacLane+spectra">Eilenberg-MacLane spectra</a> (see the <a class="existingWikiWord" href="/nlab/show/stable+Dold-Kan+correspondence">stable Dold-Kan correspondence</a>).</p>
+
+<p>In terms of this <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a>, notice that on finite-dimensional linear types, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<strong>actualization is the measurement process</strong> – in that it implements exactly the rule for <a class="existingWikiWord" href="/nlab/show/wavefunction+collapse">wavefunction collapse</a> (due to <a href="wave+function+collapse#L&#xFC;ders51">Lüders 1951</a>, following <a href="wave+function+collapse#vonNeumann32">von Neumann 1932, §III.3 and §VI</a>) with regards to <a class="existingWikiWord" href="/nlab/show/quantum+measurements">quantum measurements</a> in the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>-indexed basis of the total Hilbert space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi><mo>≔</mo><msub><mo lspace="0em" rspace="thinmathspace">box</mo> <mi>C</mi></msub><msub><mi>ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">
+  \mathcal{H} \coloneqq \box_C \mathcal{H}_\bullet
+</annotation></semantics></math> which is encoded by its direct sum decomposition <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">\mathcal{H}_\bullet</annotation></semantics></math>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumNecessity-221001.jpg" width="900px" />
+</div>
+<p>Of course, in general there may be richer dependency on classical contexts. In the next simplest case the <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> is along the <a class="existingWikiWord" href="/nlab/show/projection">projection</a> map out of a <a class="existingWikiWord" href="/nlab/show/Cartesian+product">Cartesian product</a> of classical types, which makes one of them label potential upcoming measurement results as before, while the other encodes further dependency on classical parameters, such as on previous measurement results:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-RelativeBaseChange-221002.jpg" width="600px" />
+</div>
+<p>With this observation in hand, it is a straightforward matter to verify that the <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a> in the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math> represent general <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a>, as we will illustrate <a href="#QCwthLHT-QBits">below</a> for the case of traditional <a class="existingWikiWord" href="/nlab/show/qbit">qbit</a>-<a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumGates-221001.jpg" width="800px" />
+</div>
+<p>While quantum gates have <a class="existingWikiWord" href="/nlab/show/horizontal+composition">horizontal composition</a> in the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a>, they also have a <a class="existingWikiWord" href="/nlab/show/vertical+composition">vertical composition</a> given by <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-ExternalTensorProduct-221001.jpg" width="690px" />
+</div>
+<p>One checks that for ambidextrous/finite-dimensional dependent linear types, the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> respects the <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a>:</p>
+<div class="maruku-equation" id="eq:NecessityRespectsExternalTensorProduct"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mrow><mi>C</mi><mo>×</mo><mi>C</mi><mo>′</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mo>⊠</mo><mi class="mathscript">ℋ</mi><msub><mo>′</mo> <mo>•</mo></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mo maxsize="1.8em" minsize="1.8em">(</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mo>□</mo> <mi>C</mi></msub><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>⊠</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mo>□</mo> <mrow><mi>C</mi><mo>′</mo></mrow></msub><mi class="mathscript">ℋ</mi><msub><mo>′</mo> <mo>•</mo></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo></mrow><annotation encoding="application/x-tex">
+  
+  \Box_{C \times C'}
+  \big(
+    \mathscr{H}_\bullet
+    \boxtimes
+    \mathscr{H}'_\bullet
+  \big)
+  \;\simeq\;
+  \Big(
+    \big(
+      \Box_{C}
+      \mathscr{H}_\bullet
+    \big)
+    \boxtimes
+    \big(
+      \Box_{C '}
+      \mathscr{H}'_\bullet
+    \big)
+  \Big)
+
+</annotation></semantics></math></div>
+<p>This implies that well-defined <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> may be compiled from iterating between</p>
+
+<ol>
+<li>
+<p>horizontally composing morphisms in the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a> of a <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-modality applicable to given quantum types;</p>
+</li>
+
+<li>
+<p>vertically adjoining such morphisms via their <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a>.</p>
+</li>
+</ol>
+
+<p>We illustrate <a href="#QCwthLHT-QBits">below</a> how this provides a (programming) language for all tranditional quantum circuits compiled from <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a>.</p>
+
+<p>But the expressiveness of the ambient <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a> is considerably larger and allows to handle more general notions of <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> with the same language structures. For instance:</p>
+
+<ol>
+<li>
+<p>We may use (in fact: construct) quantum types as building blocks which are not just <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> but much richer spaces of <a class="existingWikiWord" href="/nlab/show/conformal+blocks">conformal blocks</a> (<a class="existingWikiWord" href="/schreiber/show/Topological+Quantum+Programming+in+TED-K">SS22</a>). This allows to natively compile quantum programs for <a class="existingWikiWord" href="/nlab/show/anyon">anyon</a> <a class="existingWikiWord" href="/nlab/show/braid+representation">braid gates</a> as used in <a class="existingWikiWord" href="/nlab/show/topological+quantum+computation">topological quantum computation</a>.</p>
+</li>
+
+<li>
+<p>Instead of just (parameterized) <a class="existingWikiWord" href="/nlab/show/complex+vector+spaces">complex vector spaces</a>, the language of <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a> in <a href="dependent+linear+type+theory#Riley22Thesis">Riley 2022</a> handles more general (<a class="existingWikiWord" href="/nlab/show/parameterized+spectra">parameterized</a>) <a class="existingWikiWord" href="/nlab/show/Eilenberg-MacLane+spectra"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>H</mi>
+      <mi>ℂ</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">H\mathbb{C}</annotation>
+  </semantics>
+</math></a>-<a class="existingWikiWord" href="/nlab/show/module+spectra">module spectra</a>, and in fact (<a class="existingWikiWord" href="/nlab/show/parameterized+spectra">parameterized</a>) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/module+spectra">module spectra</a> over any <a class="existingWikiWord" href="/nlab/show/E-infinity+ring"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <msub><mi>E</mi> <mn>∞</mn></msub>
+    </mrow>
+    <annotation encoding="application/x-tex">E_\infty</annotation>
+  </semantics>
+</math>-</a><a class="existingWikiWord" href="/nlab/show/ring+spectrum">ring spectrum</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>.</p>
+</li>
+</ol>
+
+<p>(A first example of <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> operating on <a class="existingWikiWord" href="/nlab/show/spectra">spectra</a> appears in the above-mentioned construction of <a class="existingWikiWord" href="/nlab/show/conformal+block">conformal block</a> if one just omits the fiberwise <a class="existingWikiWord" href="/nlab/show/0-truncation">0-truncation</a> in the last step.)</p>
+
+<p><br /></p>
+
+<h3 id="QCwthLHT-QBits">QBits</h3>
+
+<p>A moment of reflection reveals that the <a class="existingWikiWord" href="/nlab/show/linear+type">linear type</a> of a single (in-)coherent <em><a class="existingWikiWord" href="/nlab/show/qbit">qbit</a></em> is as follows, <a class="existingWikiWord" href="/nlab/show/dependent+linear+type">depending</a> on the classical <a class="existingWikiWord" href="/nlab/show/type">type</a> of <a class="existingWikiWord" href="/nlab/show/booleans">booleans</a> (which here we denote by “0” and “1” instead of “<a class="existingWikiWord" href="/nlab/show/false">false</a>” and “<a class="existingWikiWord" href="/nlab/show/true">true</a>”) .</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumBit-221001.jpg" width="840px" />
+</div>
+<p>The <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>-process on such a qbit type, as seen by the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-<a class="existingWikiWord" href="/nlab/show/counit+of+a+comonad">counit</a>, verifies the <a class="existingWikiWord" href="/nlab/show/wavefunction+collapse">projection postulate</a> of measurements in <a class="existingWikiWord" href="/nlab/show/quantum+mechanics">quantum mechanics</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitMeasurement-221001.jpg" width="500px" />
+</div>
+<p id="NoticeTheTypingOfAQbit"> Notice that one might be tempted<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to think of this formula as outputting the classical bit <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>:</mo><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">b : \mathrm{Bool}</annotation></semantics></math>, but that the dependent typing of the above expression is a little more subtle than that: The output bit is instead part of the <em>context</em> inside which the collapsed wavefunction qbit appears – which, being in the 1-dimensional Hilbert space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\mathbb{C}</annotation></semantics></math> in this case, may often be disregarded as a global phase, but is nevertheless the actual output of the measurement process.</p>
+
+<p>In particular, by retaining the quantum type of the measurement result, we retain the ability to speak about repeated quantum measurement, which leads to a <em>proof</em> that the second measurement necessarily gives the same result as the first (the experimental observation of this fact is what led <a class="existingWikiWord" href="/nlab/show/John+von+Neumann">John von Neumann</a> to formulate the projection postulate, in <a href="wave+function+collapse#vonNeumann32">von Neumann 1932, §III.3 and §VI</a>):</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitMeasurementRepeated-221001.jpg" width="400px" />
+</div>
+<p>In the other (vertical) direction, the dependent linear type of the measurement of a <a class="existingWikiWord" href="/nlab/show/pair">pair</a> of <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> comes out as expected, where the point to notice is how the <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a> keeps track of the fact that a pair of qbits has <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">2 \times 2 = 4</annotation></semantics></math> potential measurement outcomes:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitPairMeasurement-221001.jpg" width="770px" />
+</div>
+<p>Dually, the <a class="existingWikiWord" href="/nlab/show/possibility">possibility</a>-<a class="existingWikiWord" href="/nlab/show/unit+of+a+monad">unit</a> on <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> is their <em>conditional state preparation</em>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitStatePreparationCondt-221001.jpg" width="400px" />
+</div>
+<p>and we denote <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">const</mi> <mn>0</mn></msub><mo>:</mo><mo lspace="0em" rspace="thinmathspace">Bool</mo><mo>→</mo><mo lspace="0em" rspace="thinmathspace">Bool</mo></mrow><annotation encoding="application/x-tex">\mathrm{const}_0 : \Bool \to \Bool</annotation></semantics></math> the function constant on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math>, then the unconditional state preparation is the base change of the conditional state preparation along this map:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitStatePreparation-221001.jpg" width="400px" />
+</div>
+<p>The dependent linear type of the <span class="newWikiWord">Hadamard gate<a href="/nlab/new/Hadamard+gate">?</a></span>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-HadamardGate-221001.jpg" width="650px" />
+</div>
+<p>The dependent linear type of the <span class="newWikiWord">CNOT gate<a href="/nlab/new/CNOT+gate">?</a></span>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumCNOTGate-221001.jpg" width="850px" />
+</div>
+<p>The dependent linear type of a quantum gate controlled by a classical bit:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-BitControlledQGate-221001.jpg" width="930px" />
+</div>
+<p>This establishes all the ingredients of traditional <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a>. For instance, we obtain the measurement-controlled circuit that exhibits the <a class="existingWikiWord" href="/nlab/show/quantum+teleportation">quantum teleportation</a>-protocol:</p>
+
+<p>(…)</p>
+<div class="footnotes"><hr /><ol><li id="fn:1">
+<p>Full details to appear at: <em><a class="existingWikiWord" href="/schreiber/show/Topological+Quantum+Programming+in+Linear+Homotopy+Type+Theory">Topological Quantum Programming in Linear Homotopy Type Theory</a></em>. <a href="#fnref:1" rev="footnote">↩</a></p>
+</li><li id="fn:2">
+<p>Indeed, in <em><a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a></em> the measurement process on a qbit is originally typed as “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="0em" rspace="thinmathspace">QBit</mo><mo>→</mo><mo lspace="0em" rspace="thinmathspace">Bit</mo></mrow><annotation encoding="application/x-tex">\QBit \to \Bit</annotation></semantics></math>” and further language design is needed to “bring the output bit back into the context”, see references on “<a href="Quipper#ReferencesDynamicLifting">dynamic lifting</a>”. <a href="#fnref:2" rev="footnote">↩</a></p>
+</li></ol></div></body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Created on October  1, 2022 at 15:16:33.
+    See the <a href="/nlab/history/quantum+circuits+via+dependent+linear+types" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/quantum+circuits+via+dependent+linear+types" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15205/#Item_1">Discuss</a>
+  <a href="/nlab/show/quantum+circuits+via+dependent+linear+types/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/quantum+circuits+via+dependent+linear+types" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/quantum+circuits+via+dependent+linear+types" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>
