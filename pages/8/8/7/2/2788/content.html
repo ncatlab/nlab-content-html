@@ -1,0 +1,620 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      experimental alternative definition of functor in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      experimental alternative definition of functor
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussions/?CategoryID=0" title="Discuss this page on the nForum. It does not yet have a dedicated thread; feel free to create one, giving it the same name as the title of this page" style="color:black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="standout">
+<p>Good news! The twists and turns on this page have culminated in <a href="http://ncatlab.org/nlab/show/functor#OnGeneralizedElements">Functors and generalized elements</a>. From there, I drew the diagram</p>
+
+<p><img src="http://ncatlab.org/nlab/files/altfunctor.jpg" width="300" /></p>
+
+<p>Staring at this diagram resulted in the following:</p>
+<hr />
+<h2 id="definition">Definition</h2>
+
+<p>Given categories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>, a <strong>functor</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>C</mi><mo>→</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">F:C\to D</annotation></semantics></math> is a map that sends each object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> to an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(x)</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> and each morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>x</mi><mo>→</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f:x\to y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> to a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>:</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(f):F(x)\to F(y)</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> such that each commuting diagram in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> maps to a commuting diagram in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>.</p>
+<hr />
+<p>This has now been included in the definition of <a class="existingWikiWord" href="/nlab/show/functor">functor</a>.</p>
+
+<p>Note this is still essentially the same thing as conveyed in my earlier picture</p>
+
+<p><img src="http://ncatlab.org/nlab/files/alt_functor.jpg" width="250" /></p>
+
+<p>requiring the square commutes, but is done in a way that avoids introducing the non-standard morphism-like components <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub><mo>:</mo><mi>x</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_x:x\to F(x)</annotation></semantics></math>.</p>
+
+<p>In other words, if we stopped worrying about what <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub><mo>:</mo><mi>x</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_x:x\to F(x)</annotation></semantics></math> really was and simply accepted that the indicated square commutes, it implies automatically that any commuting diagram in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> maps to a commuting diagram in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
+</div>
+
+<h1 id="contents">Contents</h1>
+
+<div class="standout">
+<p>This page is an informal/speculative discussion of an alternative (yet hopefully equivalent) definition of <a class="existingWikiWord" href="/nlab/show/functor">functor</a>. It first appeared as a discussion at <a class="existingWikiWord" href="/nlab/show/functor">functor</a> itself, but was subsequently moved here.</p>
+</div>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#discussion_30'>Discussion 3.0</a></li>
+<li><a href='#definition_2'>Definition</a></li>
+<li><a href='#discussion_20'>Discussion 2.0</a></li>
+<li><a href='#discussion_10'>Discussion 1.0</a></li>
+<ul>
+<li><a href='#definition_3'>Definition</a></li>
+<li><a href='#definition_4'>Definition</a></li>
+<li><a href='#definition_5'>Definition</a></li>
+<li><a href='#discussion'>Discussion</a></li>
+<li><a href='#definition_6'>Definition</a></li>
+</ul>
+</ul>
+</div>
+
+<h2 id="discussion_30">Discussion 3.0</h2>
+
+<p>I think I may have found a way to express this idea without resorting to non-standard morphism-like maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x\to F(x)</annotation></semantics></math> or cographs.</p>
+
+<div class="standout">
+<h2 id="definition_2">Definition</h2>
+
+<p>Given categories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F:A\to B</annotation></semantics></math> is a functor if for every morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>x</mi><mo>→</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f:x\to y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">F(f) F(x) = F(f(x)).</annotation></semantics></math></div></div>
+
+<p>Let’s check…</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo>∘</mo><mi>f</mi><mo stretchy="false">)</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo>∘</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\array{
+F(g\circ f) F(x) 
+&amp;= F(g\circ f(x)) \\
+&amp;= F(g)\circ F(f(x)) \\
+&amp;= F(g)\circ F(f) F(x).}
+</annotation></semantics></math></div>
+<p>Since this is true for all morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>x</mi><mo>→</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f:x\to y</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>y</mi><mo>→</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">g:y\to z</annotation></semantics></math>, we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo>∘</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(g)\circ F(f) = F(g\circ f)</annotation></semantics></math></div>
+<p>as required.</p>
+
+<p>Next,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><msub><mn>1</mn> <mi>A</mi></msub><mo stretchy="false">)</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><msub><mn>1</mn> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(1_A) F(x) = F(1_A(x)) = F(x)</annotation></semantics></math></div>
+<p>as required.</p>
+
+<p>Therefore, it seems to work.</p>
+
+<p>Note this is still essentially the same thing as conveyed in my earlier picture</p>
+
+<p><img src="http://ncatlab.org/nlab/files/alt_functor.jpg" width="250" /></p>
+
+<p>requiring the square commutes, but is done in a way that avoids introducing the non-standard morphism-like components.</p>
+
+<h2 id="discussion_20">Discussion 2.0</h2>
+
+<p>After Discussion 1.0 below, it seems that the original intention of this page was to define a <a class="existingWikiWord" href="/nlab/show/functor">functor</a> in terms of a <a class="existingWikiWord" href="/nlab/show/cograph+of+a+functor">cograph</a>. Given a functor, it is straightforward to construct its cograph. However, it may be possible to do the reverse, i.e. start with a cograph and infer the functor that gives rise to that cograph.</p>
+
+<p>Is it possible to define a functor in terms of cograph? If so, how?</p>
+
+<h2 id="discussion_10">Discussion 1.0</h2>
+
+<h3 id="definition_3">Definition</h3>
+
+<p>Given small categories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> define their <strong>disjoint union</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\sqcup B</annotation></semantics></math> to be the category with</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Obj</mi><mo stretchy="false">(</mo><mi>A</mi><mo>⊔</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>⊔</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Obj(A\sqcup B) = Obj(A)\sqcup Obj(B)</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Hom</mi> <mrow><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow></msub><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo>{</mo><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><msub><mi>Hom</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mtd> <mtd><mi>if</mi><mi>x</mi><mo>,</mo><mi>y</mi><mo>∈</mo><mi>A</mi></mtd></mtr> <mtr><mtd><msub><mi>Hom</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mtd> <mtd><mi>if</mi><mi>x</mi><mo>,</mo><mi>y</mi><mo>∈</mo><mi>B</mi></mtd></mtr> <mtr><mtd><mi>∅</mi></mtd> <mtd><mi>otherwise</mi></mtd></mtr></mtable></mrow></mrow></mrow><annotation encoding="application/x-tex">Hom_{A\sqcup B}(x,y) = 
+  \left\{
+    \begin{aligned}
+      Hom_A(x,y) &amp; if x,y \in A \\
+      Hom_B(x,y) &amp; if x,y \in B \\
+      \emptyset &amp; otherwise
+    \end{aligned}
+  \right.
+
+</annotation></semantics></math></div>
+<p>There are two <strong>inclusion maps</strong></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo>:</mo><mi>A</mi><mo>→</mo><mi>A</mi><mo>⊔</mo><mi>B</mi><mspace width="1em"></mspace><mtext>and</mtext><mspace width="1em"></mspace><msub><mi>i</mi> <mi>B</mi></msub><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">i_A:A\to A\sqcup B\quad\text{and}\quad i_B:B\to A\sqcup B</annotation></semantics></math></div>
+<p>defined for any morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f:a\to b</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>c</mi><mo>→</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">g:c\to d</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo>⊔</mo><mi>∅</mi><mo>,</mo><mspace width="1em"></mspace><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mo>⊔</mo><mi>∅</mi><mo>,</mo><mspace width="1em"></mspace><mtext>and</mtext><mspace width="1em"></mspace><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo>⊔</mo><mi>∅</mi></mrow><annotation encoding="application/x-tex">i_A(a) = a\sqcup\emptyset,\quad i_A(b) = b\sqcup\emptyset,\quad\text{and}\quad i_A(f) = f\sqcup\emptyset</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>∅</mi><mo>⊔</mo><mo lspace="0em" rspace="thinmathspace">c</mo><mo>,</mo><mspace width="1em"></mspace><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo>=</mo><mi>∅</mi><mo>⊔</mo><mi>d</mi><mo>,</mo><mspace width="1em"></mspace><mtext>and</mtext><mspace width="1em"></mspace><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>=</mo><mi>∅</mi><mo>⊔</mo><mi>g</mi><mo>.</mo></mrow><annotation encoding="application/x-tex">i_B(c) = \emptyset\sqcup\c,\quad i_B(d) = \emptyset\sqcup d,\quad\text{and}\quad i_B(g) = \emptyset\sqcup g.</annotation></semantics></math></div>
+<h3 id="definition_4">Definition</h3>
+
+<p>Given categories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> and inclusion maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo>:</mo><mi>A</mi><mo>→</mo><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">i_A:A\to A\sqcup B</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>B</mi></msub><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">i_B:B\to A\sqcup B</annotation></semantics></math>, a <strong>functor</strong> is a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F:A\to B</annotation></semantics></math> together with component morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub><mo>:</mo><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_x:i_A(x)\to i_B\circ F(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>y</mi></msub><mo>:</mo><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_y:i_A(y)\to i_B\circ F(y)</annotation></semantics></math> for any morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>x</mi><mo>→</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f:x\to y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> such that the following diagram commutes:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mpadded width="0" lspace="-100%width"><mstyle scriptlevel="1"><mrow><msub><mi>α</mi> <mi>x</mi></msub></mrow></mstyle></mpadded><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo><mpadded width="0"><mstyle scriptlevel="1"><mrow><msub><mi>α</mi> <mi>y</mi></msub></mrow></mstyle></mpadded></mtd></mtr> <mtr><mtd><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> 
+  \array{ 
+    i_A(x)
+    &amp; 
+    \stackrel{i_A(f)}{\to} 
+    &amp; 
+    i_A(y) 
+    \\ 
+    \mathllap{\scriptsize{\alpha_x}}\downarrow 
+    &amp;&amp; 
+    \downarrow\mathrlap{\scriptsize{\alpha_y}} 
+    \\ i_B\circ F(x)
+    &amp; 
+    \stackrel{i_B\circ F(f)}{\to} &amp; i_B\circ F(y) 
+  }
+
+</annotation></semantics></math></div>
+<p><img src="http://ncatlab.org/nlab/files/alt_functor.jpg" width="250" /></p>
+<hr />
+<p><a class="existingWikiWord" href="/nlab/show/Todd+Trimble">Todd</a>: If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \sqcup B</annotation></semantics></math> means the disjoint union of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, then there are no morphisms of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">i_A(x) \to i_B(F(x))</annotation></semantics></math>.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: Hi Todd. I saw your comment after I added the figure above. I am probably not expressing myself clearly. I want to get <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Obj</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Obj(A)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Obj</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Obj(B)</annotation></semantics></math> into the same category while preserving all morphisms and then ADD components <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_x</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>y</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_y</annotation></semantics></math>. Is that kind of thing allowed?</p>
+
+<p>I think the picture expresses what I’m trying to do, but maybe I’m converting that into the wrong formulas.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: The idea is that by requiring every such square to commute, you automatically get <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo>∘</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(g\circ f) = F(g)\circ F(f)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><msub><mi>Id</mi> <mi>x</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mi>Id</mi> <mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">F(Id_x) = Id_{F(x)}</annotation></semantics></math>. Or so I think…</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: Not to mention, this <em>looks</em> more like a natural transformation, so a pattern is more apparent.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Todd+Trimble">Todd</a>: What I was saying is that wherever these <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_x</annotation></semantics></math> are supposed to live, it’s can’t be in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \sqcup B</annotation></semantics></math>, because in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \sqcup B</annotation></semantics></math>, there simply are no morphisms of that form.</p>
+
+<p>Your picture suggests that you have in mind some category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> into which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> embed; it can’t be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \sqcup B</annotation></semantics></math> since your <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_x</annotation></semantics></math> simply don’t exist there. But it’s some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> in which such morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_x</annotation></semantics></math> exist, let’s say. Then it looks like your notion of functor involves the following things:</p>
+
+<ul>
+<li>
+<p>Embeddings (full embeddings?) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">i_A: A \to C</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>B</mi></msub><mo>:</mo><mi>B</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">i_B: B \to C</annotation></semantics></math> into some category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>A rule which assigns to each object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(x)</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, and to each morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>x</mi><mo>→</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f: x \to y</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>:</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(f): F(x) \to F(y)</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>. In other words, a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F: A \to B</annotation></semantics></math> between the underlying directed graphs of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>A rule which assigns to each object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub><mo>:</mo><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_x: i_A(x) \to i_B(F(x)</annotation></semantics></math>, making that square commute.</p>
+</li>
+</ul>
+
+<p>Okay, so far these conditions don’t ensure functoriality: that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo>∘</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(g \circ f) = F(g) \circ F(f)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><msub><mn>1</mn> <mi>x</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mn>1</mn> <mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">F(1_x) = 1_{F(x)}</annotation></semantics></math>. You’re going to have to add more conditions to make that inference. For example, suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> has just one morphism from each object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">i_A(a)</annotation></semantics></math> to each object of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">i_B(b)</annotation></semantics></math>. Then commutativity of those squares is automatic, for any directed graph morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F: A \to B</annotation></semantics></math>. Insofar as not all graph morphisms are functorial, you can’t infer functoriality.</p>
+
+<p>You could ask that all the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_x</annotation></semantics></math> be isomorphisms. Then commutativity plus that condition would give functoriality, and your concept amounts to that of ordinary functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> together with an ordinary natural isomorphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mover><mo>→</mo><mo>∼</mo></mover><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">i_A \overset{\sim}{\to} i_B \circ F</annotation></semantics></math>.</p>
+
+<p>But the trouble with all this is that I have no idea what <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is supposed to be! It can’t be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \sqcup B</annotation></semantics></math>. Would it be something constructed in terms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> (and if so, what)? If it’s just <em>any</em> old category into which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> embed and for which such isos <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_x</annotation></semantics></math> exist (and compatible with the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(f)</annotation></semantics></math> via commutative diagrams), then I have problems with that too.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>; Hi Todd. I think I’m confused because with the standard definition of functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F:A\to B</annotation></semantics></math> no one ever complains about writing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F(x)\in B</annotation></semantics></math>, so in a way, isn’t <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> an <em>arrow</em> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">x\in A</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F(x)\in B</annotation></semantics></math>? We also write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F(f)\in B</annotation></semantics></math>, which makes me think <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is a bunch of 1-arrows and 2-arrows. I mean, doesn’t the picture make sense? Why is it so hard to convert the picture to a mathematical statement?</p>
+
+<p>: <em>Toby</em>: Eric, here you seem to be conflating these two arrows: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>↦</mo></mrow><annotation encoding="application/x-tex">\mapsto</annotation></semantics></math>. At the level of functions between sets, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> are sets and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is a function from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, then I write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f\colon A \to B</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mover><mo>→</mo><mi>f</mi></mover><mi>B</mi></mrow><annotation encoding="application/x-tex">A \overset{f}\to B</annotation></semantics></math>. Then if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is an element of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math> is an (the) element of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">y = f(x)</annotation></semantics></math>, then I write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>x</mi><mo>↦</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f\colon x \mapsto y</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mover><mo>↦</mo><mi>f</mi></mover><mi>y</mi></mrow><annotation encoding="application/x-tex">x \overset{f}\mapsto y</annotation></semantics></math>. Or without bothering with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math>, I write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>x</mi><mo>↦</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f\colon x \mapsto f(x)</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mover><mo>↦</mo><mi>f</mi></mover><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x \overset{f}\mapsto f(x)</annotation></semantics></math>. (Actually, this is best when ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>’ is a variable and ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x)</annotation></semantics></math>’ is a formula in terms of that variable; for example, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is the squaring function, then I write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>x</mi><mo>↦</mo><msup><mi>x</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">f\colon x \mapsto x^2</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mover><mo>↦</mo><mi>f</mi></mover><msup><mi>x</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x \overset{f}\mapsto x^2</annotation></semantics></math>, and this serves to <em>define</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>.)</p>
+
+<p>: Actually, you can find a lot of literature where the same symbol ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>’ is used for both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>↦</mo></mrow><annotation encoding="application/x-tex">\mapsto</annotation></semantics></math>, but they are still different concepts.</p>
+
+<p>: Of course, what the <a class="existingWikiWord" href="/nlab/show/cograph">cograph</a> gets you is that it turns <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>↦</mo></mrow><annotation encoding="application/x-tex">\mapsto</annotation></semantics></math> into a special case of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math>. But they are still different; <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f\colon A \to B</annotation></semantics></math> is an arrow in the category of sets or (in the categorified case) in the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>-category of categories, while <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mover><mo>↦</mo><mi>f</mi></mover><mi>y</mi></mrow><annotation encoding="application/x-tex">x \overset{f}\mapsto y</annotation></semantics></math> is (only in the categorified case) an arrow in the cograph of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>.</p>
+
+<blockquote>
+<blockquote>
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: Hmm.. but we ARE talking about cographs :) At least I was accidentally :)</p>
+</blockquote>
+</blockquote>
+
+<p><a class="existingWikiWord" href="/nlab/show/Urs+Schreiber">Urs Schreiber</a>: concerning the nature of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>: as I suggested before, it does make sense to take this to be the <a class="existingWikiWord" href="/nlab/show/cograph+of+a+functor">cograph of a functor</a>. And indeed, in some situations it is useful to <em>define</em> the notion of functor in terms of the notion of cograph. In <a class="existingWikiWord" href="/nlab/show/Higher+Topos+Theory">Higher Topos Theory</a> the notion of <a class="existingWikiWord" href="/nlab/show/adjoint+%28infinity%2C1%29-functor">adjoint (infinity,1)-functor</a> is defined entirely in terms of cographs of functors.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: Thanks Urs. Now I just need to parse what you say into something I can understand, but it is encouraging. In fact, quoting myself from earlier in the discussion:</p>
+
+<blockquote>
+<p>It seems like maybe I am trying to work backwards, i.e. define a functor via a cograph.</p>
+</blockquote>
+
+<p>When I tried to grok “cograph” on my personal web <a class="existingWikiWord" href="/ericforgy/published/Natural+Transformation">Natural Transformation</a>, I stripped out the line including the functor and with Toby’s help, realized what I (think I) was talking about was the disjoint union of categories.</p>
+
+<p>I guess, my plan of attack now is to see how we can define functor via cograph. For some reason, that makes sense to me.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Todd+Trimble">Todd</a>: Yes, that’s true, the cograph is fine. I thought that Eric had wanted a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> which would uniformly work, independently of which functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> was being considered. Instead, we construct the cograph <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> in terms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>, and everything is for the best in this best of all possible worlds. And we get the picture Eric was aiming for.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: Neat. Now, if we (I’ll try, but I’m not confident and wouldn’t mind if someone else did it!) can write down a succinct definition of functor in terms of cographs with a picture like the one above (if not that one), we could add it to <a class="existingWikiWord" href="/nlab/show/functor">functor</a>.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: By the way, here is something I wrote on my personal web <a class="existingWikiWord" href="/ericforgy/published/Natural+Transformation">Natural Transformation</a>:</p>
+
+<blockquote>
+<p><a class="existingWikiWord" href="/nlab/show/Urs+Schreiber">Urs Schreiber</a>: at <a class="existingWikiWord" href="/nlab/show/cograph">cograph</a> it is indicated how that concept encodes the notion of <a class="existingWikiWord" href="/nlab/show/profunctor">profunctor</a> which is a bit more general than that of <a class="existingWikiWord" href="/nlab/show/functor">functor</a>.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: Oh! That is pretty! Thanks. I like this diagram</p>
+<div class="maruku-equation"><code class="maruku-mathml">
+  \array{
+</code></div></blockquote>
+
+<pre><code>R &amp;\to&amp; {*}
+\\
+\downarrow &amp;&amp; \downarrow
+\\
+X \times Y &amp;\stackrel{\chi_R}{\to}&amp; \{0,1\}</code></pre>
+
+<p>}</p>
+<div class="maruku-equation"><code class="maruku-mathml">
+&gt;I need to think about it, but a vale of fog has been lifted. More fog remains, but thanks!
+
+***
+
+###Definition###
+Given small categories $A$ and $B$ define their **disjoint union** $A\sqcup B$ to be the category with
+$$Obj(A\sqcup B) = Obj(A)\sqcup Obj(B)
+</code></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>&gt;</mi><mi>I</mi><mi>need</mi><mi>to</mi><mi>think</mi><mi>about</mi><mi>it</mi><mo>,</mo><mi>but</mi><mi>a</mi><mi>vale</mi><mi>of</mi><mi>fog</mi><mi>has</mi><mi>been</mi><mi>lifted</mi><mo>.</mo><mi>More</mi><mi>fog</mi><mi>remains</mi><mo>,</mo><mi>but</mi><mi>thanks</mi><mo>!</mo><mo>*</mo><mo>*</mo><mo>*</mo><mo>#</mo><mo>#</mo><mo>#</mo><mi>Definition</mi><mo>#</mo><mo>#</mo><mo>#</mo><mi>Given</mi><mi>small</mi><mi>categories</mi></mrow><annotation encoding="application/x-tex">
+&gt;I need to think about it, but a vale of fog has been lifted. More fog remains, but thanks!
+
+***
+
+###Definition###
+Given small categories </annotation></semantics></math></div>
+<p>There are two <strong>inclusion maps</strong></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo>:</mo><mi>A</mi><mo>→</mo><mi>A</mi><mo>⊔</mo><mi>B</mi><mspace width="1em"></mspace><mtext>and</mtext><mspace width="1em"></mspace><msub><mi>i</mi> <mi>B</mi></msub><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">i_A:A\to A\sqcup B\quad\text{and}\quad i_B:B\to A\sqcup B</annotation></semantics></math></div>
+<p>defined for any morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f:a\to b</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>c</mi><mo>→</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">g:c\to d</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo>⊔</mo><mi>∅</mi><mo>,</mo><mspace width="1em"></mspace><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mo>⊔</mo><mi>∅</mi><mo>,</mo><mspace width="1em"></mspace><mtext>and</mtext><mspace width="1em"></mspace><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo>⊔</mo><mi>∅</mi></mrow><annotation encoding="application/x-tex">i_A(a) = a\sqcup\emptyset,\quad i_A(b) = b\sqcup\emptyset,\quad\text{and}\quad i_A(f) = f\sqcup\emptyset</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>∅</mi><mo>⊔</mo><mo lspace="0em" rspace="thinmathspace">c</mo><mo>,</mo><mspace width="1em"></mspace><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo>=</mo><mi>∅</mi><mo>⊔</mo><mi>d</mi><mo>,</mo><mspace width="1em"></mspace><mtext>and</mtext><mspace width="1em"></mspace><msub><mi>i</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>=</mo><mi>∅</mi><mo>⊔</mo><mi>g</mi><mo>.</mo></mrow><annotation encoding="application/x-tex">i_B(c) = \emptyset\sqcup\c,\quad i_B(d) = \emptyset\sqcup d,\quad\text{and}\quad i_B(g) = \emptyset\sqcup g.</annotation></semantics></math></div><hr />
+<p>I intentionally did not use the word “functor” above even though that is really the <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a> in <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a>. The reason is that I want to use this disjoint union to <em>define</em> a functor. The following is a possible starting point:</p>
+
+<h3 id="definition_5">Definition</h3>
+
+<p>Given categories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> and inclusion maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo>:</mo><mi>A</mi><mo>→</mo><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">i_A:A\to A\sqcup B</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>B</mi></msub><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi><mo>⊔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">i_B:B\to A\sqcup B</annotation></semantics></math>, a <strong>functor</strong> is a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F:A\to B</annotation></semantics></math> that assigns morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub><mo>:</mo><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_x:i_A(x)\to i_B\circ F(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>y</mi></msub><mo>:</mo><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_y:i_A(y)\to i_B\circ F(y)</annotation></semantics></math> for any morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>x</mi><mo>→</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f:x\to y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> such that the following diagram commutes:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd><msub><mi>i</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mpadded width="0" lspace="-100%width"><mstyle scriptlevel="1"><mrow><msub><mi>α</mi> <mi>x</mi></msub></mrow></mstyle></mpadded><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo><mpadded width="0"><mstyle scriptlevel="1"><mrow><msub><mi>α</mi> <mi>y</mi></msub></mrow></mstyle></mpadded></mtd></mtr> <mtr><mtd><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd><msub><mi>i</mi> <mi>B</mi></msub><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> 
+  \array{ 
+    i_A(x)
+    &amp; 
+    \stackrel{i_A(f)}{\to} 
+    &amp; 
+    i_A(y) 
+    \\ 
+    \mathllap{\scriptsize{\alpha_x}}\downarrow 
+    &amp;&amp; 
+    \downarrow\mathrlap{\scriptsize{\alpha_y}} 
+    \\ i_B\circ F(x)
+    &amp; 
+    \stackrel{i_B\circ F(f)}{\to} &amp; i_B\circ F(y) 
+  }
+
+</annotation></semantics></math></div>
+<p><img src="http://ncatlab.org/nlab/files/alt_functor.jpg" width="250" /></p>
+<hr />
+<h3 id="discussion">Discussion</h3>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eric">Eric</a>: Motivated by some discussion over at <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a>, I was wondering if the following alternative definition of functor holds water:</p>
+
+<blockquote>
+<h3 id="definition_6">Definition</h3>
+
+<p>Given categories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, a <strong>functor</strong> is a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">F:A\to B</annotation></semantics></math> that assigns maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>x</mi></msub><mo>:</mo><mi>x</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_x:x\to F(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>y</mi></msub><mo>:</mo><mi>y</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha_y:y\to F(y)</annotation></semantics></math> for any morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>x</mi><mo>→</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f:x\to y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> such that the following diagram commutes:</p>
+<div class="maruku-equation"><code class="maruku-mathml"> 
+  \array{ 
+</code></div></blockquote>
+
+<pre><code>x
+&amp; 
+\stackrel{f}{\to} 
+&amp; 
+y 
+\\ 
+\mathllap{\scriptsize{\alpha_x}}\downarrow 
+&amp;&amp; 
+\downarrow\mathrlap{\scriptsize{\alpha_y}} 
+\\ F(x) 
+&amp; 
+\stackrel{F(f)}{\to} &amp; F(y) </code></pre>
+
+<p>}</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>If</mi><mi>so</mi><mo>,</mo><mi>it</mi><mi>has</mi><mi>a</mi><mi>certain</mi><mi>beauty</mi><mi>that</mi><mi>appeals</mi><mi>to</mi><mi>me</mi><mo>.</mo><mi>Thanks</mi><mo>!</mo><mi>Urs</mi><mo>:</mo><mi>that</mi><mi>diagram</mi><mi>seems</mi><mi>to</mi><mi>be</mi><mi>meaningful</mi><mi>only</mi><mi>if</mi></mrow><annotation encoding="application/x-tex">
+
+If so, it has a certain beauty that appeals to me. Thanks!
+
+Urs: that diagram seems to be meaningful only if </annotation></semantics></math></div>
+<p>\array{ i_A(x) &amp; \stackrel{i_A(f)}{\to} &amp; i_A(y) \ \mathllap{\scriptsize{\alpha_x}}\downarrow &amp;&amp; \downarrow\mathrlap{\scriptsize{\alpha_y}} \ i_B\circ F(x) &amp; \stackrel{i_B\circ F(f)}{\to} &amp; i_B\circ F(y) }</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>It</mi><mi>follows</mi><mi>that</mi></mrow><annotation encoding="application/x-tex">
+It follows that </annotation></semantics></math></div></body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on March 28, 2010 at 17:21:45.
+    See the <a href="/nlab/history/experimental+alternative+definition+of+functor" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/experimental+alternative+definition+of+functor" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/experimental+alternative+definition+of+functor/26" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/experimental+alternative+definition+of+functor" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/experimental+alternative+definition+of+functor" accesskey="S" class="navlink" id="history" rel="nofollow">History (26 revisions)</a>
+  <a href="/nlab/show/experimental+alternative+definition+of+functor/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/experimental+alternative+definition+of+functor" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/experimental+alternative+definition+of+functor" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

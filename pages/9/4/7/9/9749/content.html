@@ -1,0 +1,762 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Giry monad in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Giry monad
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/5482/#Item_62" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="measure_and_probability_theory">Measure and probability theory</h4>
+
+<div class="hide"><div>
+<p><strong><a class="existingWikiWord" href="/nlab/show/measure+theory">measure theory</a></strong></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/probability+theory">probability theory</a></strong></p>
+
+<h2 id="measure_theory">Measure theory</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a>, <a class="existingWikiWord" href="/nlab/show/measurable+locale">measurable locale</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/measure">measure</a>, <a class="existingWikiWord" href="/nlab/show/measure+space">measure space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/von+Neumann+algebra">von Neumann algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+measure+theory">geometric measure theory</a></p>
+</li>
+</ul>
+
+<h2 id="probability_theory">Probability theory</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/probability+space">probability space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/probability+distribution">probability distribution</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/state">state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/states+in+AQFT+and+operator+algebra">in AQFT and operator algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/GNS+construction">GNS construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Fell%27s+theorem">Fell's theorem</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entropy">entropy</a>, <a class="existingWikiWord" href="/nlab/show/relative+entropy">relative entropy</a></p>
+</li>
+</ul>
+
+<h2 id="information_geometry">Information geometry</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/information+geometry">information geometry</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/information+metric">information metric</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Wasserstein+metric">Wasserstein metric</a></p>
+</li>
+</ul>
+
+<h2 id="thermodynamics">Thermodynamics</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/thermodynamics">thermodynamics</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/second+law+of+thermodynamics">second law of thermodynamics</a>, <a class="existingWikiWord" href="/nlab/show/generalized+second+law+of+theormodynamics">generalized second law</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/ergodic+theory">ergodic theory</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Riesz+representation+theorem">Riesz representation theorem</a></li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/measure+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#definition'>Definition</a></li>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#algebras_over_the_giry_monad'>Algebras over the Giry monad</a></li>
+</ul>
+<li><a href='#related_constructions'>Related constructions</a></li>
+<ul>
+<li><a href='#voevodskys_work'>Voevodsky’s work</a></li>
+<li><a href='#panangadens_monad'>Panangaden’s monad</a></li>
+</ul>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#history'>History</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>The <em>Giry monad</em> (<a href="#Giry80">Giry 80</a>, following <a href="#Lawvere62">Lawvere 62</a>) is the <a class="existingWikiWord" href="/nlab/show/monad">monad</a> on a <a class="existingWikiWord" href="/nlab/show/category">category</a> of suitable <a class="existingWikiWord" href="/nlab/show/spaces">spaces</a> which sends each suitable space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to the space of suitable <a class="existingWikiWord" href="/nlab/show/probability+measures">probability measures</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>The Giry monad is defined on the category of <a class="existingWikiWord" href="/nlab/show/measurable+spaces">measurable spaces</a>, assigning to each measurable space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> the space of all probability measures on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G(X)</annotation></semantics></math>, endowed with the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-algebra generated by the set of all the evaluation maps</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>ev</mi> <mi>U</mi></msub><mo lspace="verythinmathspace">:</mo><mi>G</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">
+ev_U \colon G(X) \to [0,1]
+
+</annotation></semantics></math></div>
+<p>sending a probability measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(U)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> ranges over all the measurable sets of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. The unit of the monad sends a point <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">x \in X</annotation></semantics></math> to the <a class="existingWikiWord" href="/nlab/show/Dirac+measure">Dirac measure</a> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\delta_x</annotation></semantics></math>, while the multiplication of the monad is defined by the natural transformation</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>X</mi></msub><mo>:</mo><mi>G</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>→</mo><mi>G</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  \mu_{X}: G(G(X)) \to G(X)
+
+</annotation></semantics></math></div>
+<p>given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>X</mi></msub><mo stretchy="false">(</mo><mi>Q</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo><mo>:</mo><mo>=</mo><msub><mo>∫</mo> <mrow><mi>q</mi><mo>∈</mo><mi>G</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></msub><msub><mi>ev</mi> <mi>U</mi></msub><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo><mi>dQ</mi><mo>.</mo></mrow><annotation encoding="application/x-tex">
+ \mu_X (Q)(U) := \int_{q \in G(X)} ev_U(q) dQ.
+
+</annotation></semantics></math></div>
+<p>This makes the <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math> into a <a class="existingWikiWord" href="/nlab/show/monad">monad</a>, and this is the <em>Giry monad</em> on Measurable spaces, as originally given by Lawvere.</p>
+
+<p>An alternative choice, convenient for analysis purposes, and introduced by Giry, is obtained by restricting the category of <a class="existingWikiWord" href="/nlab/show/measurable+spaces">measurable spaces</a> to the (full) subcategory which are those measurable spaces generated by <a class="existingWikiWord" href="/nlab/show/Polish+spaces">Polish spaces</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Pol</mi></mrow><annotation encoding="application/x-tex">Pol</annotation></semantics></math>, which are separable <a class="existingWikiWord" href="/nlab/show/metric+spaces">metric spaces</a> for which a complete metric exists.</p>
+
+<p>Write</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo lspace="verythinmathspace">:</mo><mi>Pol</mi><mo>→</mo><mi>Pol</mi></mrow><annotation encoding="application/x-tex">
+  P \colon Pol \to Pol
+
+</annotation></semantics></math></div>
+<p>for the <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a> which sends a space, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, to the space of <a class="existingWikiWord" href="/nlab/show/probability+measures">probability measures</a> on the <a class="existingWikiWord" href="/nlab/show/Borel+subsets">Borel subsets</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(X)</annotation></semantics></math> is equipped with the weakest <a class="existingWikiWord" href="/nlab/show/topology">topology</a> which makes the <a class="existingWikiWord" href="/nlab/show/integration">integration</a> map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>τ</mi><mo>↦</mo><msub><mo>∫</mo> <mi>X</mi></msub><mi>f</mi><mi>d</mi><mi>τ</mi></mrow><annotation encoding="application/x-tex">\tau \mapsto \int_{X}f d\tau</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/continuous+function">continuous</a> for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>, a bounded, continuous, real function on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+
+<p>There is a <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>X</mi></msub><mo>:</mo><mi>P</mi><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>→</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  \mu_{X}: P(P(X)) \to P(X)
+
+</annotation></semantics></math></div>
+<p>given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>X</mi></msub><mo stretchy="false">(</mo><mi>M</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mo>=</mo><msub><mo>∫</mo> <mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></msub><mi>τ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mi>M</mi><mo stretchy="false">(</mo><mi>d</mi><mi>τ</mi><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+ \mu_X (M)(A) := \int_{P(X)} \tau(A) M(d\tau).
+
+</annotation></semantics></math></div>
+<p>This makes the <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> into a <a class="existingWikiWord" href="/nlab/show/monad">monad</a>, and this is the <em>Giry monad</em> on <a class="existingWikiWord" href="/nlab/show/Polish+spaces">Polish spaces</a>. The shortcoming of restricting the Giry monad to Polish spaces is that discrete spaces have no <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>-algebras (even though they do have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-algebras). For example, take the discrete (measurable) space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>, which we can also view as a topological discrete space. The measurable map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ϵ</mi> <mn>2</mn></msub><mo>:</mo><mi>G</mi><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mo>→</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\epsilon_{2}: G(2) \to 2</annotation></semantics></math> defined by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ϵ</mi> <mn>2</mn></msub><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><msub><mi>δ</mi> <mn>0</mn></msub><mo>+</mo><mi>α</mi><msub><mi>δ</mi> <mn>1</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\epsilon_{2}( (1-\alpha) \delta_0 + \alpha \delta_1) = 0</annotation></semantics></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha \in [0,1)</annotation></semantics></math>, and by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ϵ</mi> <mn>2</mn></msub><mo stretchy="false">(</mo><msub><mi>δ</mi> <mn>1</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\epsilon_{2}(\delta_1)=1</annotation></semantics></math> shows that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>2</mn><mo>,</mo><msub><mi>ϵ</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(2,\epsilon_2)</annotation></semantics></math> is a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-algebra, yet it is not a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>-algebra. (As Doberkat has noted, a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>-algebra must be connected, but that is impossible for discrete spaces.) The map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ϵ</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\epsilon_{2}</annotation></semantics></math> plays a critical role in the analysis of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-algebras, because it is the unique affine map from the geometric (convex) space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G(2)</annotation></semantics></math>, which is isomorphic to the unit interval <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math> with its natural convex structure, to the discrete (combinatorial) convex space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>.</p>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="algebras_over_the_giry_monad">Algebras over the Giry monad</h3>
+
+<p>(<a href="#Doberkat03">Doberkat 03</a>) works out the <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebras</a> for the Giry monad using the Giry monad defined on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Pol</mi></mrow><annotation encoding="application/x-tex">Pol</annotation></semantics></math>. We want measurable maps between <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(X)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, such that the ‘fibres’ are convex and closed, and such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\delta_{x}</annotation></semantics></math>, the delta distribution on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>, is in the fibre over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>. And there’s another condition which requires a compact subset of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(X)</annotation></semantics></math> to be sent to a compact subset of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+
+<p>Now, as ever, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(X)</annotation></semantics></math> will support an algebra, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>X</mi></msub><mo>:</mo><mi>P</mi><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>→</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu_{X}: P(P(X)) \to P(X)</annotation></semantics></math>. This is the analogue of a <a class="existingWikiWord" href="/nlab/show/free+construction">free</a> <a class="existingWikiWord" href="/nlab/show/group">group</a> being an algebra of the group monad. But just as there are many interesting groups which are not free, we should want to find algebras of Giry’s monad which are not of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">\mu_{X}</annotation></semantics></math> form. Doberkat shows that for such an algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> must be connected, and suggests this example</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo>:</mo><mi>P</mi><mo stretchy="false">(</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo>∋</mo><mi>τ</mi><mo>↦</mo><msubsup><mo>∫</mo> <mn>0</mn> <mn>1</mn></msubsup><mi>t</mi><mi>d</mi><mi>τ</mi><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+h: P([0, 1]) \ni \tau \mapsto \int_{0}^{1} t d\tau{(t)} \in [0, 1].
+
+</annotation></semantics></math></div>
+<p>which is the free algebrea <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow></msub></mrow><annotation encoding="application/x-tex">\mu_{\{0, 1\}}</annotation></semantics></math> using the fact that the probability measures on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{0, 1\}</annotation></semantics></math> are just binomial, parameterised by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">t \in [0, 1]</annotation></semantics></math>, i.e., every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>∈</mo><mi>P</mi><mo stretchy="false">(</mo><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p \in P(\{0,1\})</annotation></semantics></math> is represented by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo stretchy="false">)</mo><msub><mi>δ</mi> <mn>0</mn></msub><mo>+</mo><mi>t</mi><msub><mi>δ</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">p=(1-t) \delta_0 + t \delta_1</annotation></semantics></math>. The other example he gives has <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> a bounded, closed and convex subset of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>ℝ</mi> <mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^n</annotation></semantics></math>, and probability measures being sent to their barycentre. (This is an example of the Giry (probability) monad for compact Hausdorff spaces which was shown by Swirszcz (Monadic functors and convexity (1974).)</p>
+
+<p>Doberkat has a longer article on <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+algebra">Eilenberg-Moore algebra</a>s of the Giry monad as item 5 <a href="http://ls10-www.cs.uni-dortmund.de/index.php?id=18">here</a>. (Unfortunately, the monograph ‘Stochastic Relations: Foundations for Markov Transition Systems’ doesn’t appear to be available.) There are two monads being treated here, one which sends a Polish space to the space of all probability measures, the other to the space of all subprobability measures. The extra structure relating to these monads, is that of a (positive) convex structure. In the case of a convex structure, this intuitively captures the idea that a weighted sum of points in the space has barycentre within the space.</p>
+
+<p>The fundamental question concerning algebras is the existence of algebras which are not free. The Eilenberg-Moore category of algebras, for any monad, is descriptive in nature but not constructive, and says nothing about the existence of algebras which are not free. For this reason it is necessary to find a different representation of the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-algebras. (Recall that the full subcategory of the Eilenberg-Moore category whose objects are the free algebras is isomorphic to the Kleisi category.)</p>
+
+<p>(<a href="#VanBelle21">VanBelle 21</a>) shows, in effect, that the restricted Giry monad (viewed as just a functor) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo stretchy="false">|</mo><mo>:</mo><msub><mstyle mathvariant="bold"><mi>Meas</mi></mstyle> <mi>c</mi></msub><mo>→</mo><mstyle mathvariant="bold"><mi>Meas</mi></mstyle></mrow><annotation encoding="application/x-tex">G|: \mathbf{Meas}_c \rightarrow \mathbf{Meas}</annotation></semantics></math> has the codensity monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mstyle mathvariant="bold"><mi>Meas</mi></mstyle> <mi>c</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{Meas}_c</annotation></semantics></math> is the category of countable measurable spaces with the discrete <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-algebra (hence, in effect, one can view these simply as sets). This suggest that the natural numbers <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">\mathbb{N}</annotation></semantics></math> are sufficient in some sense. To make this more precise, we first make the observation that given any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo>:</mo><mi>G</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">h:G(X) \rightarrow X</annotation></semantics></math> on a (coseparated) measurable space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, the underlying set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> has the structure of a superconvex space, denoted <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>h</mi></msub></mrow><annotation encoding="application/x-tex">X_h</annotation></semantics></math>, defined by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow> <mn>∞</mn></msubsup><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>x</mi> <mi>i</mi></msub><mo>:</mo><mo>=</mo><mi>h</mi><mo stretchy="false">(</mo><msubsup><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow> <mn>∞</mn></msubsup><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>δ</mi> <mrow><msub><mi>x</mi> <mi>i</mi></msub></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{\infty} p_i x_i := h( \sum_{i=1}^{\infty} p_i \delta_{x_i})</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow> <mn>∞</mn></msubsup><msub><mi>p</mi> <mi>i</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{\infty} p_i = 1</annotation></semantics></math> and each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mi>i</mi></msub><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">p_i \ge 0</annotation></semantics></math>. The proof is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="right center left"><mtr><mtd><mo stretchy="false">(</mo><mi>h</mi><msub><mi>μ</mi> <mi>X</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>δ</mi> <mrow><msub><mi>P</mi> <mi>i</mi></msub></mrow></msub><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo></mtd> <mtd><mo stretchy="false">(</mo><mi>h</mi><mo>∘</mo><mo lspace="0em" rspace="thinmathspace">G</mo><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>δ</mi> <mrow><msub><mi>P</mi> <mi>i</mi></msub></mrow></msub><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mi>h</mi><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>P</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>h</mi><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>δ</mi> <mrow><mi>h</mi><mo stretchy="false">(</mo><msub><mi>P</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mi>h</mi><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>P</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><mi>h</mi><mo stretchy="false">(</mo><msub><mi>P</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mtd></mtr></mtable><mo>.</mo></mrow><annotation encoding="application/x-tex"> 
+\begin{array}{rcl}
+ (h \mu_X)(\sum_{i \in \mathbb{N}} p_i \delta_{P_i}) &amp;=&amp; (h \circ \G(h))(\sum_{i \in \mathbb{N}} p_i \delta_{P_i})   \\
+ h(\sum_{i \in \mathbb{N}} p_i P_i) &amp;=&amp; h(\sum_{i \in \mathbb{N}} p_i \delta_{h(P_i)})  \\
+ h(\sum_{i \in \mathbb{N}} p_i P_i) &amp;=&amp; \sum_{i \in \mathbb{N}} p_i h(P_i) 
+\end{array}.
+
+</annotation></semantics></math></div>
+<p>Moreover, given any map of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-algebras, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>h</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f: (X,h) \rightarrow (Y,k)</annotation></semantics></math> it follows that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is a countably affine map because</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="left center left"><mtr><mtd><mi>f</mi><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>x</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>f</mi><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>δ</mi> <mrow><msub><mi>x</mi> <mi>i</mi></msub></mrow></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>k</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>G</mi><mrow><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>δ</mi> <mrow><msub><mi>x</mi> <mi>i</mi></msub></mrow></msub><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>k</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><msub><mi>δ</mi> <mrow><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><mi>k</mi><mo stretchy="false">(</mo><msub><mi>δ</mi> <mrow><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi> <mi>i</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℕ</mi></mrow></munder><msub><mi>p</mi> <mi>i</mi></msub><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex"> 
+\begin{array}{lcl}
+f( \sum_{i \in \mathbb{N}} p_i x_i) &amp;=&amp; f(h( \sum_{i \in \mathbb{N}} p_i \delta_{x_i} ))  \\
+&amp;=&amp; k\big( G{(f)}( \sum_{i \in \mathbb{N}} p_i \delta_{x_i}  ) \big) \\
+&amp;=&amp; k\big(  \sum_{i \in \mathbb{N}} p_i \delta_{f(x_i)} \big) \\
+&amp;=&amp;  \sum_{i \in \mathbb{N}} p_i k(\delta_{f(x_i))}  \\
+&amp;=&amp;  \sum_{i \in \mathbb{N}} p_i f(x_i) 
+\end{array}
+
+</annotation></semantics></math></div>
+<p>For this reason we are naturally led to the category of <a class="existingWikiWord" href="/nlab/show/super+convex+spaces">super convex spaces</a>, denoted <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>SCvx</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{SCvx}</annotation></semantics></math>, which have been referred to as strongly convex spaces in the quantum mechanics literature, e.g., See Mackey - Math. Found. Q.M.. The morphisms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>SCvx</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{SCvx}</annotation></semantics></math> are countably affine map (barycenter maps) which generalizes (and is consistent with) the elementary examples of probability monads on compact Hausdorff spaces, etc.. These <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-algebras, with measurable maps, provide the connection between the continuous (geometric) spaces and discrete (combinatorial) spaces which are necessary for modeling non-determinism.</p>
+
+<p>Now we can describe the two ways in which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">\mathbb{N}</annotation></semantics></math> is ‘’sufficient’’. The full subcategory of super convex spaces consisting of the single object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>ℕ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G(\mathbb{N})</annotation></semantics></math> is dense in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>SCvx</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{SCvx}</annotation></semantics></math>. (This is almost immediate from the definition because if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is any super convex space then a countably affine map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>G</mi><mo stretchy="false">(</mo><mi>ℕ</mi><mo stretchy="false">)</mo><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">f: G(\mathbb{N}) \rightarrow A</annotation></semantics></math> is completely defined by where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> maps each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mi>i</mi></msub><mo>∈</mo><mi>G</mi><mo stretchy="false">(</mo><mi>ℕ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta_i \in G(\mathbb{N})</annotation></semantics></math>.) On the other hand, there exists a codense functor from the full subcategory of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>SCvx</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{SCvx}</annotation></semantics></math> consisting of the single object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">\mathbb{N}</annotation></semantics></math> to the category of separated standard measurable spaces. These two constructions are the content of the article (<a href="#Sturtz22">Sturtz 22</a>) which attempts to show the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-algebras on the subcategory (of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>Meas</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{Meas}</annotation></semantics></math>) given by the category of standard measurable spaces is isomorphic to the category of super convex space.</p>
+
+<h2 id="related_constructions">Related constructions</h2>
+
+<p>See also <a class="existingWikiWord" href="/nlab/show/monads+of+probability%2C+measures%2C+and+valuations">monads of probability, measures, and valuations</a>.</p>
+
+<h3 id="voevodskys_work">Voevodsky’s work</h3>
+
+<p><a class="existingWikiWord" href="/nlab/show/Vladimir+Voevodsky">Vladimir Voevodsky</a> has also worked on a category theoretic treatment of <a class="existingWikiWord" href="/nlab/show/probability+theory">probability theory</a>, and gave few talks on this at IHES, Miami, in Moscow etc. Voevodsky had in mind applications in <span class="newWikiWord">mathematical biology<a href="/nlab/new/mathematical+biology">?</a></span>, for example, population genetics:</p>
+
+<p>See <a href="http://www.math.miami.edu/anno/voevodsky.htm">Miami Talk abstract</a></p>
+
+<blockquote>
+<p>…a categorical study of probability theory where “categorical” is understood in the sense of category theory. Originally, I developed this approach to probability to get a better understanding of the constructions which I had to deal with in population genetics. Later it evolved into something which seems to be also interesting from a purely mathematical point of view. On the elementary level it gives a category which is useful for the work with probabilistic constructions involving complicated combinations of stochastic processes of different types. On a more advanced level, applying in this context the old idea of a functor as a generalized object one gets a better view of the relationship between probability and the theory of (pre-)ordered topological vector spaces.</p>
+</blockquote>
+
+<p>A talk in Moscow (20 Niv 2008, in Russian) can be viewed <a href="http://www.mi.ras.ru/index.php?c=obs_sem/&amp;l=1">here</a>, <a href="http://www.mi.ras.ru/media/335_full.wmv">wmv 223.6 Mb</a>. Abstract:</p>
+
+<blockquote>
+<p>In early 60-ies Bill Lawvere defined a category whose objects are measurable spaces and morphisms are Markov kernels. I will try to show how this category allows one to think about many of the notions of probability theory in categorical terms and to connect probabilistic objects to objects of other types through various functors.</p>
+</blockquote>
+
+<p>Voevodsky’s unfinished <a href="http://www.math.ias.edu/Voevodsky/voevodsky-publications_abstracts.html#markov">notes on categorical probability theory</a> have been released posthumously.</p>
+
+<h3 id="panangadens_monad">Panangaden’s monad</h3>
+
+<p><a class="existingWikiWord" href="/nlab/show/Prakash+Panangaden">Prakash Panangaden</a> in <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.52.4840">Probabilistic Relations</a> defines the <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>SRel</mi></mrow><annotation encoding="application/x-tex">SRel</annotation></semantics></math> (stochastic <a class="existingWikiWord" href="/nlab/show/relation">relation</a>s) to have as <a class="existingWikiWord" href="/nlab/show/object">object</a>s <a class="existingWikiWord" href="/nlab/show/set">set</a>s equipped with a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math><a class="existingWikiWord" href="/nlab/show/sigma-field">-field</a>. <a class="existingWikiWord" href="/nlab/show/morphism">Morphisms</a> are conditional probability densities or stochastic kernels. So, a morphism from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>Σ</mi> <mi>X</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">( X, \Sigma_X)</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><msub><mi>Σ</mi> <mi>Y</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">( Y, \Sigma_Y)</annotation></semantics></math> is a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo>:</mo><mi>X</mi><mo>×</mo><msub><mi>Σ</mi> <mi>Y</mi></msub><mo>→</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">h: X \times \Sigma_Y \to [0, 1]</annotation></semantics></math> such that</p>
+
+<ol>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∀</mo><mi>B</mi><mo>∈</mo><msub><mi>Σ</mi> <mi>Y</mi></msub><mo>.</mo><mi>λ</mi><mi>x</mi><mo>∈</mo><mi>X</mi><mo>.</mo><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall B \in \Sigma_Y . \lambda x \in X . h(x, B)</annotation></semantics></math> is a bounded measurable function,</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∀</mo><mi>x</mi><mo>∈</mo><mi>X</mi><mo>.</mo><mi>λ</mi><mi>B</mi><mo>∈</mo><msub><mi>Σ</mi> <mi>Y</mi></msub><mo>.</mo><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall x \in X . \lambda B \in \Sigma_Y . h(x, B)</annotation></semantics></math> is a subprobability measure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Σ</mi> <mi>Y</mi></msub></mrow><annotation encoding="application/x-tex">\Sigma_Y</annotation></semantics></math>.</li>
+</ol>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math> is a morphism from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>⋅</mo><mi>h</mi></mrow><annotation encoding="application/x-tex">k \cdot h</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math> is defined as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>⋅</mo><mi>h</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>C</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∫</mo> <mi>Y</mi></msub><mi>k</mi><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><mi>C</mi><mo stretchy="false">)</mo><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>d</mi><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(k \cdot h)(x, C) = \int_Y  k(y, C)h(x, d y)</annotation></semantics></math>.</p>
+
+<p>Panangaden’s definition differs from Giry’s in the second clause where subprobability measures are allowed, rather than ordinary probability measures.</p>
+
+<p>Panangaden emphasises that the mechanism is similar to the way that the category of relations can be constructed from the <a class="existingWikiWord" href="/nlab/show/power+set">power set</a> <a class="existingWikiWord" href="/nlab/show/functor">functor</a>. Just as the category of relations is the <a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli category</a> of the powerset functor over the category of sets <a class="existingWikiWord" href="/nlab/show/Set">Set</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>SRel</mi></mrow><annotation encoding="application/x-tex">SRel</annotation></semantics></math> is the Kleisli category of the functor over the category of <a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a>s and <a class="existingWikiWord" href="/nlab/show/measurable+function">measurable function</a>s which sends a measurable space, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, to the measurable space of sub<a class="existingWikiWord" href="/nlab/show/probability+measure">probability measure</a>s on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. This functor gives rise to a <a class="existingWikiWord" href="/nlab/show/monad">monad</a>.</p>
+
+<p>What is gained by the move from probability measures to subprobability measures? One motivation seems to be to model probabilistic processes from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to a <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>+</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X + Y</annotation></semantics></math>. This you can iterate to form a process which looks to see where in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> you eventually end up. This relates to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>SRel</mi></mrow><annotation encoding="application/x-tex">SRel</annotation></semantics></math> being traced.</p>
+
+<p>There is a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>MeasureSpaces</mi></mrow><annotation encoding="application/x-tex">MeasureSpaces</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>+</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>:</mo><mi>Meas</mi><mo>→</mo><mi>Meas</mi></mrow><annotation encoding="application/x-tex">1 + -: Meas \to Meas</annotation></semantics></math>. A probability measure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>+</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">1 + X</annotation></semantics></math> is a subprobability measure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. Panangaden’s monad is a composite of Giry’s and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>+</mo><mo lspace="verythinmathspace" rspace="0em">−</mo></mrow><annotation encoding="application/x-tex">1 + -</annotation></semantics></math>.</p>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monads+of+probability%2C+measures%2C+and+valuations">monads of probability, measures, and valuations</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/measure">measure</a>, <a class="existingWikiWord" href="/nlab/show/probability+measure">probability measure</a>, <a class="existingWikiWord" href="/nlab/show/pushforward+measure">pushforward measure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/measure+theory">measure theory</a>, <a class="existingWikiWord" href="/nlab/show/probability+theory">probability theory</a>, <a class="existingWikiWord" href="/nlab/show/random+variable">random variable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Radon+monad">Radon monad</a>, <a class="existingWikiWord" href="/nlab/show/distribution+monad">distribution monad</a>, <span class="newWikiWord">probabilistic powerdomain<a href="/nlab/new/probabilistic+powerdomain">?</a></span>, <a class="existingWikiWord" href="/nlab/show/extended+probabilistic+powerdomain">extended probabilistic powerdomain</a></p>
+</li>
+</ul>
+
+<h2 id="history">History</h2>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjunction</a> underlying the Giry monad was originally developed <a href="#Lawvere62">by Lawvere in 1962</a>, prior to the full recognition of the relationship between <a class="existingWikiWord" href="/nlab/show/monads">monads</a> and <a class="existingWikiWord" href="/nlab/show/adjunctions">adjunctions</a>. Although P. Huber had already shown in 1961 that every <a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjoint pair</a> gives rise to a <a class="existingWikiWord" href="/nlab/show/monad">monad</a>, it wasn’t until 1965 that the constructions of Eilenberg-Moore, and Kleisli, made the essential equivalence of both concepts manifest.</p>
+
+<p>Lawvere’s construction was written up as an <a href="#Lawvere62">appendix to a proposal</a> to the Arms Control and Disarmament Agency, set up by President Kennedy as part of the State Department to handle planning and execution of certain treaties with the Soviet Union. This appendix was intended to provide a reasonable framework for arms control verification protocols (<a href="#Lawvere20">Lawvere 20</a>).</p>
+
+<p>At that time, Lawvere was working for a “think tank” in California, and the purpose of the proposal was to provide a means for verifying compliance with limitations on nuclear weapons. In the 1980’s, <a class="existingWikiWord" href="/nlab/show/Mich%C3%A8le+Giry">Michèle Giry</a> was collaborating with another French mathematician at that time who was also working with the French intelligence agency, and was able to obtain a copy of the appendix. Giry then developed and extended some of the ideas in the appendix (<a href="#Giry80">Giry 80</a>)</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Gian-Carlo+Rota">Gian-Carlo Rota</a> had also (somehow) obtained a copy of <a href="#Lawvere62">the appendix</a>, which ended up in the library at The American Institute of Mathematics, and only became publicly available in 2012.</p>
+
+<p>From <a href="#Lawvere20">Lawvere 20</a>:</p>
+
+<blockquote>
+<p>I’d like to say that the idea of the category of probabilistic mappings, the document corresponding to that was not part of a seminar, as some of the circulations say, essentially it was the document submitted to the arms control and disarmament agency after suitable checking that the Pentagon didn’t disagree with it. Because of the fact that for arms control agencies as a side responsibility the forming of arms control agreements and part of these agreements must involve agreed upon protocols of verification. So the idea of that paper did not provide such protocols, but it purported to provide reasonable framework within which such protocol can be formulated.</p>
+</blockquote>
+
+<h2 id="references">References</h2>
+
+<p>The idea originates with</p>
+
+<ul>
+<li id="Lawvere62">
+<p><a class="existingWikiWord" href="/nlab/show/W.+Lawvere">W. Lawvere</a>, <em>The category of probabilistic mappings</em>, ms. 12 pages, 1962 (<a class="existingWikiWord" href="/nlab/files/lawvereprobability1962.pdf" title="Lawvere Probability 1962">Lawvere Probability 1962</a>)</p>
+
+<p>(notice that the statement of origin on p.1 is wrong)</p>
+</li>
+</ul>
+
+<p>and was picked up and published in:</p>
+
+<ul>
+<li id="Giry80">
+<p><a class="existingWikiWord" href="/nlab/show/Mich%C3%A8le+Giry">Michèle Giry</a>, <em>A categorical approach to probability theory</em>, Categorical aspects of topology and analysis (Ottawa, Ont., 1980), pp. 68–85, Lecture Notes in Math. <strong>915</strong> Springer 1982 (<a href="https://doi.org/10.1007/BFb0092872">doi:10.1007/BFb0092872</a>)</p>
+
+<p>(there are allegedly a few minor <a class="existingWikiWord" href="/nlab/show/analysis">analytically</a> incorrect points and gaps in proofs, observed by later authors).</p>
+</li>
+</ul>
+
+<p>Historical comments on the appearance of <a href="#Lawvere62">Lawvere 62</a> are made in</p>
+
+<ul>
+<li id="Lawvere20"><a class="existingWikiWord" href="/nlab/show/Bill+Lawvere">Bill Lawvere</a>, video discussion, 6 June 2020 (in the talk “The algebra of statistical theories and models” by Evan Patterson, at <a href="http://perimeterinstitute.ca/personal/tfritz/2019/cps_workshop/">Categorical Probability and Statistics</a>, 5–8 June 2020,
+<p>(<a href="http://www.youtube.com/watch?v=BhKaHAY8Ec8&amp;t=60m21s">YouTube video, timestamp 1:00:20</a>)</p>
+</li>
+</ul>
+
+<p>According to <a href="#Burroni09">E. Burroni (2009)</a>, the Giry monad appears also in</p>
+
+<ul>
+<li>O. de la Tullaye, <em>L’intégration considérée comme l’algèbre d’un triple</em>. Rapport de Stage de D.E.A. manuscrit 1971.</li>
+</ul>
+
+<p>The article</p>
+
+<ul>
+<li id="VanBelle21"><a class="existingWikiWord" href="/nlab/show/Ruben+Van+Belle">Ruben Van Belle</a>, <em>Probability monads as codensity monads</em> (2021) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/2111.01250">arXiv:2111.01250</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></li>
+</ul>
+
+<p>shows, in effect, that the Giry monad restricted to countable measurable spaces (with the discrete <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-algebra) yields the restricted Giry functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo stretchy="false">|</mo><mo>:</mo><msub><mstyle mathvariant="bold"><mi>Meas</mi></mstyle> <mi>c</mi></msub><mo>→</mo><mstyle mathvariant="bold"><mi>Meas</mi></mstyle></mrow><annotation encoding="application/x-tex">G|: \mathbf{Meas}_c \rightarrow \mathbf{Meas}</annotation></semantics></math> which has the codensity monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>. This suggest that the natural numbers <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">\mathbb{N}</annotation></semantics></math> are ‘’sufficient’‘ in the sense characterized above which suggest a factorization of the Giry monad, defined on the category of standard measurable spaces, through the category of super convex spaces, spelled out in</p>
+
+<ul>
+<li id="Sturtz22"><a class="existingWikiWord" href="/nlab/show/Kirk+Sturtz">Kirk Sturtz</a>, <em>Giry algebras for standard measurable spaces</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/2202.10819">arXiv:2202:10819</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></li>
+</ul>
+
+<p>which has evolved from the preliminary work</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Kirk+Sturtz">Kirk Sturtz</a>, <em>Categorical Probability Theory</em>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="http://arxiv.org/abs/1406.6030">arXiv:1406.6030</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></li>
+</ul>
+
+<p>which views probability measures via double dualization, restricted to weakly averaging affine maps which preserves limits. (A more satisfactory description of probability measures arises from recognizing the need for viewing them as weakly-averaging countably affine maps, rather than just finite affine maps, as discussed in that article.)</p>
+
+<p>Some corrections from an earlier version of the article, were pointed out in</p>
+
+<ul>
+<li>T. Avery, <em>Codensity and the Giry monad</em>, arXiv:<a href="http://arxiv.org/abs/1410.4432">1410.4432</a> (2014).</li>
+</ul>
+
+<p>Apart from these papers, there are similar developments in</p>
+
+<ul>
+<li>
+<p>Franck van Breugel, <em>The metric monad for probabilistic nondeterminism</em>, features both the Lawvere/Giry monad and Panangaden’s monad.</p>
+</li>
+
+<li id="Doberkat03">
+<p><a class="existingWikiWord" href="/nlab/show/Ernst-Erich+Doberkat">Ernst-Erich Doberkat</a>, <em>Characterizing the Eilenberg-Moore algebras for a monad of stochastic relations</em> (<a href="https://eldorado.tu-dortmund.de/bitstream/2003/2717/1/147.pdf">pdf</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Ernst-Erich+Doberkat">Ernst-Erich Doberkat</a>, <em>Kleisli morphisms and randomized congruences</em>, Journal of Pure and Applied Algebra Volume 211, Issue 3, December 2007, Pages 638-664 <a href="https://doi.org/10.1016/j.jpaa.2007.03.003">https://doi.org/10.1016/j.jpaa.2007.03.003</a></p>
+</li>
+
+<li>
+<p>N. N. Cencov, <em>Statistical decisions rules and optimal Inference</em>, Translations of Math. Monographs <strong>53</strong>, Amer. Math. Society 1982</p>
+</li>
+</ul>
+
+<p>(blog comment) Cencov’s “category of statistical decisions” coincides with Giry’s (Lawvere’s) category. I (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>←</mo></mrow><annotation encoding="application/x-tex">\leftarrow</annotation></semantics></math> somebody) have the sense that Cencov discovered this category independently of Lawvere although years later.</p>
+
+<ul>
+<li>
+<p>category cafe related to Giry monad: <a href="http://golem.ph.utexas.edu/category/2007/02/category_theoretic_probability.html">category theoretic probability</a>, <a href="http://golem.ph.utexas.edu/category/2009/09/coalgebraic_modal_logic.html">coalgebraic modal logic</a></p>
+</li>
+
+<li>
+<p>Samson Abramsky et al. <em>Nuclear and trace ideals in tensored ∗-Categories</em>,<a href="http://arxiv.org/abs/math/9805102">arxiv:math/9805102</a>, on the representation of probability theory through monads, which looks to work Giry’s monad into a context even more closely resembling the category of relations.</p>
+</li>
+</ul>
+
+<p>There is also relation with work of Jacobs et al.</p>
+
+<ul>
+<li>
+<p>Robert Furber, <a class="existingWikiWord" href="/nlab/show/Bart+Jacobs">Bart Jacobs</a>, <em>Towards a categorical account of conditional probability</em>, <a href="http://arxiv.org/abs/1306.0831">arxiv:1306.0831</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bart+Jacobs">Bart Jacobs</a>, <em>Probabilities, distribution monads and convex categories</em>, Theoretical</p>
+
+<p>Computer Science 412(28) (2011) pp.3323–3336. <a href="https://doi.org/10.1016/j.tcs.2011.04.005">https://doi.org/10.1016/j.tcs.2011.04.005</a>, (<a href="http://www.cs.ru.nl/B.Jacobs/PAPERS/triangle.pdf">preprint</a>)</p>
+</li>
+</ul>
+
+<p>J. Culbertson and K. Sturtz use the Giry monad in their categorical approach to <a class="existingWikiWord" href="/nlab/show/Bayesian+reasoning">Bayesian reasoning</a> and inference (both articles contain further references to the categorical approach to probability theory):</p>
+
+<ul>
+<li>
+<p>Jared Culbertson and <a class="existingWikiWord" href="/nlab/show/Kirk+Sturtz">Kirk Sturtz</a>, <em>A categorical foundation for Bayesian probability</em>, Applied Cat. Struc. 2013 (preprint as <a href="http://arxiv.org/abs/1205.1488">arXiv:1205.1488</a>)</p>
+</li>
+
+<li>
+<p>Jared Culbertson and <a class="existingWikiWord" href="/nlab/show/Kirk+Sturtz">Kirk Sturtz</a>, <em>Bayesian machine learning via category theory</em>, 2013 (<a href="http://arxiv.org/abs/1312.1445">arxiv:1312.1445</a>)</p>
+</li>
+
+<li id="Burroni09">
+<p>Elisabeth Burroni, <em>Lois distributives. Applications aux automates stochastiques</em>, TAC 22, 2009 pp.199-221 (<a href="http://www.tac.mta.ca/tac/volumes/22/7/22-07abs.html">journal page</a>)</p>
+</li>
+</ul>
+
+<p>where she derives stochastic <a class="existingWikiWord" href="/nlab/show/automata">automata</a> as algebras for a suitable <a class="existingWikiWord" href="/nlab/show/distributive+law">distributive law</a> on the monoid and Giry monads.</p>
+
+<p>B. Fong has a section on the Giry monad in his paper on Bayesian networks:</p>
+
+<ul>
+<li>Fong: <em>Causal Theories - A Categorical Perspective on Bayesian Networks</em>, (2013) arXiv:<a href="http://arxiv.org/abs/1301.6201">1301.6201</a></li>
+</ul>
+
+<p>To do:</p>
+
+<ul>
+<li>Bring in material from <a href="http://golem.ph.utexas.edu/category/2007/09/progic.html">Progic posts</a></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on July 19, 2022 at 06:17:26.
+    See the <a href="/nlab/history/Giry+monad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Giry+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/5482/#Item_62">Discuss</a><span class="backintime"><a href="/nlab/revision/Giry+monad/65" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Giry+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Giry+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (65 revisions)</a>
+  <a href="/nlab/show/Giry+monad/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Giry+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Giry+monad" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

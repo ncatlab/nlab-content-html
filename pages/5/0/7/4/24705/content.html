@@ -1,0 +1,1484 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      quantum circuits via dependent linear types in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      quantum circuits via dependent linear types
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/15205/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Quantum circuits via dependent linear types</title></head>
+<body>
+<blockquote>
+<p>under construction</p>
+</blockquote>
+
+<p><br /></p>
+
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="quantum_systems">Quantum systems</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+logic">quantum logic</a></strong></p>
+
+<ul>
+<li>
+<p>(<a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent</a>) <a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/string+diagrams">string diagrams</a> in <a class="existingWikiWord" href="/nlab/show/finite+quantum+mechanics+in+terms+of+dagger-compact+categories">†-compact categories</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/tensor+networks">tensor networks</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bohr+topos">Bohr topos</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/order-theoretic+structure+in+quantum+mechanics">order-theoretic structure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+probability">quantum probability</a></p>
+</li>
+</ul>
+
+<p><br /></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+physics">quantum physics</a></strong></p>
+
+<ul>
+<li>
+<p>(<a class="existingWikiWord" href="/nlab/show/parameterized+quantum+systems">parameterized</a>) <a class="existingWikiWord" href="/nlab/show/quantum+systems">quantum systems</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Dyson+formula">Dyson formula</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/quantum+adiabatic+theorem">quantum adiabatic theorem</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Berry+phases">Berry phases</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+many-body+physics">quantum many-body physics</a></p>
+</li>
+
+<li>
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+field+theory">quantum field theory</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/functorial+quantum+field+theory">functorial quantum field theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/algebraic+quantum+field+theory">algebraic quantum field theory</a></p>
+
+<p>(<a class="existingWikiWord" href="/nlab/show/non-perturbative+quantum+field+theory">non-</a>)<a class="existingWikiWord" href="/nlab/show/perturbative+quantum+field+theory">perturbative quantum field theory</a></p>
+</li>
+
+<li>
+<p><strong><a class="existingWikiWord" href="/nlab/show/solid+state+physics">solid state physics</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/quantum+material">quantum material</a></p>
+
+<p>(<a class="existingWikiWord" href="/nlab/show/topological+phases+of+matter">topological</a>) <a class="existingWikiWord" href="/nlab/show/phases+of+matter">phases of matter</a></p>
+</li>
+</ul>
+
+<p><br /></p>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+probability+theory">quantum probability theory</a> – <a class="existingWikiWord" href="/nlab/show/observables">observables</a> and <a class="existingWikiWord" href="/nlab/show/states">states</a></strong></p>
+
+<ul>
+<li>
+<p><strong><a class="existingWikiWord" href="/nlab/show/states">states</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/classical+state">classical state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+state">quantum state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/space+of+states+%28in+geometric+quantization%29">space of states (in geometric quantization)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/state+on+a+star-algebra">state on a star-algebra</a>, <a class="existingWikiWord" href="/nlab/show/quasi-state">quasi-state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/qbit">qbit</a>, <a class="existingWikiWord" href="/nlab/show/Bell+state">Bell state</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/dimer">dimer</a>, <a class="existingWikiWord" href="/nlab/show/tensor+network+state">tensor network state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+state+preparation">quantum state preparation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/probability+amplitude">probability amplitude</a>, <a class="existingWikiWord" href="/nlab/show/quantum+fluctuation">quantum fluctuation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pure+state">pure state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/wave+function">wave function</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bra-ket">bra-ket</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bell+state">Bell state</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+superposition">quantum superposition</a>, <a class="existingWikiWord" href="/nlab/show/quantum+interference">quantum interference</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+entanglement">quantum entanglement</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Born+rule">Born rule</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/wave+function+collapse">wave function collapse</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/measurement+problem">measurement problem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/superselection+sector">superselection sector</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mixed+state">mixed state</a>, <a class="existingWikiWord" href="/nlab/show/density+matrix">density matrix</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/entanglement+entropy">entanglement entropy</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/holographic+entanglement+entropy">holographic entanglement entropy</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/coherent+quantum+state">coherent quantum state</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/ground+state">ground state</a>, <a class="existingWikiWord" href="/nlab/show/excited+state">excited state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quasi-free+state">quasi-free state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Fock+space">Fock space</a>, <a class="existingWikiWord" href="/nlab/show/second+quantization">second quantization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum">vacuum</a>, <a class="existingWikiWord" href="/nlab/show/vacuum+state">vacuum state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Hadamard+state">Hadamard state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+diagram">vacuum diagram</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+expectation+value">vacuum expectation value</a>, <a class="existingWikiWord" href="/nlab/show/vacuum+amplitude">vacuum amplitude</a>, <a class="existingWikiWord" href="/nlab/show/vacuum+fluctuation">vacuum fluctuation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+energy">vacuum energy</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+polarization">vacuum polarization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/interacting+vacuum">interacting vacuum</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/thermal+vacuum">thermal vacuum</a>, <a class="existingWikiWord" href="/nlab/show/KMS+state">KMS state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+stability">vacuum stability</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/false+vacuum">false vacuum</a>, <a class="existingWikiWord" href="/nlab/show/tachyon">tachyon</a>, <a class="existingWikiWord" href="/nlab/show/Coleman-De+Luccia+instanton">Coleman-De Luccia instanton</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/theta+vacuum">theta vacuum</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/perturbative+string+theory+vacuum">perturbative string theory vacuum</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/non-geometric+string+theory+vacuum">non-geometric string theory vacuum</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/landscape+of+string+theory+vacua">landscape of string theory vacua</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entangled+state">entangled state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/tensor+network+state">tensor network state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/matrix+product+state">matrix product state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/tree+tensor+network+state">tree tensor network state</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><strong><a class="existingWikiWord" href="/nlab/show/observables">observables</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+observable">quantum observable</a>, <a class="existingWikiWord" href="/nlab/show/beable">beable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+of+observables">algebra of observables</a>, <a class="existingWikiWord" href="/nlab/show/star-algebra">star-algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bohr+topos">Bohr topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+operator+%28in+geometric+quantization%29">quantum operator (in geometric quantization)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+operation">quantum operation</a>, <a class="existingWikiWord" href="/nlab/show/quantum+effect">quantum effect</a>, <a class="existingWikiWord" href="/nlab/show/effect+algebra">effect algebra</a></p>
+</li>
+
+<li>
+<p>in <a class="existingWikiWord" href="/nlab/show/quantum+field+theory">quantum field theory</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/local+observable">local observable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/polynomial+observable">polynomial observable</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/linear+observable">linear observable</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/field+observable">field observable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/regular+observable">regular observable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/microcausal+observable">microcausal observable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/normal-ordered+product">normal-ordered product</a>, <a class="existingWikiWord" href="/nlab/show/time-ordered+products">time-ordered products</a>, <a class="existingWikiWord" href="/nlab/show/retarded+product">retarded product</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Wick+algebra">Wick algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/scattering+amplitude">scattering amplitude</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/interacting+field+algebra+of+observables">interacting field algebra of observables</a>, <a class="existingWikiWord" href="/nlab/show/Bogoliubov%27s+formula">Bogoliubov's formula</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/GNS+construction">GNS construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/theorems">theorems</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/order-theoretic+structure+in+quantum+mechanics">order-theoretic structure in quantum mechanics</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gleason%27s+theorem">Gleason's theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Alfsen-Shultz+theorem">Alfsen-Shultz theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Harding-D%C3%B6ring-Hamhalter+theorem">Harding-Döring-Hamhalter theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kochen-Specker+theorem">Kochen-Specker theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Nuiten%27s+lemma">Nuiten's lemma</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Wigner%27s+theorem">Wigner's theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/no-cloning+theorem">no-cloning theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bell%27s+theorem">Bell's theorem</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p><br /></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+information">quantum information</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+operation">quantum operation</a>, <a class="existingWikiWord" href="/nlab/show/quantum+channel">quantum channel</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entanglement">entanglement</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entanglement+entropy">entanglement entropy</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/holographic+entanglement+entropy">holographic entanglement entropy</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/topological+entanglement+entropy">topological entanglement entropy</a></p>
+</li>
+</ul>
+
+<p><br /></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/topological+quantum+computation">topological quantum computation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+error+correction">quantum error correction</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/HaPPY+code">HaPPY code</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Majorana+dimer+code">Majorana dimer code</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>quantum algorithms:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grover%27s+algorithm">Grover's algorithm</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Shor%27s+algorithm">Shor's algorithm</a></p>
+</li>
+</ul>
+</div></div>
+
+<h4 id="computing">Computing</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a></strong>, <strong><a class="existingWikiWord" href="/nlab/show/realizability">realizability</a></strong>, <strong><a class="existingWikiWord" href="/nlab/show/computability">computability</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/intuitionistic+mathematics">intuitionistic mathematics</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a>, <a class="existingWikiWord" href="/nlab/show/proofs+as+programs">proofs as programs</a>, <a class="existingWikiWord" href="/nlab/show/computational+trinitarianism">computational trinitarianism</a></p>
+
+<h3 id="constructive_mathematics">Constructive mathematics</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/topos">topos</a>, <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-topos">homotopy topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/canonical+form">canonical form</a>, <a class="existingWikiWord" href="/nlab/show/univalence">univalence</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bishop+set">Bishop set</a>, <a class="existingWikiWord" href="/nlab/show/h-set">h-set</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/decidable+equality">decidable equality</a>, <a class="existingWikiWord" href="/nlab/show/decidable+subset">decidable subset</a>, <a class="existingWikiWord" href="/nlab/show/inhabited+set">inhabited set</a>, <a class="existingWikiWord" href="/nlab/show/subsingleton">subsingleton</a></p>
+</li>
+</ul>
+
+<h3 id="realizability">Realizability</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/realizability+topos">realizability topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/realizability+model">realizability model</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/realizability+interpretation">realizability interpretation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/effective+topos">effective topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kleene%27s+first+algebra">Kleene's first algebra</a>, <a class="existingWikiWord" href="/nlab/show/Kleene%27s+second+algebra">Kleene's second algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/function+realizability">function realizability</a></p>
+</li>
+</ul>
+
+<h3 id="computability">Computability</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computability">computability</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computation">computation</a>, <a class="existingWikiWord" href="/nlab/show/computational+type+theory">computational type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+function">computable function</a>, <a class="existingWikiWord" href="/nlab/show/partial+recursive+function">partial recursive function</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+analysis">computable analysis</a>, <a class="existingWikiWord" href="/nlab/show/constructive+analysis">constructive analysis</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Type+Two+Theory+of+Effectivity">Type Two Theory of Effectivity</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+function+%28analysis%29">computable function (analysis)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/exact+real+computer+arithmetic">exact real computer arithmetic</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+set">computable set</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/persistent+homology">persistent homology</a>, <a class="existingWikiWord" href="/nlab/show/effective+homology">effective homology</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+physics">computable physics</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Church-Turing+thesis">Church-Turing thesis</a></p>
+</li>
+</ul>
+</div></div>
+</div>
+</div>
+
+<h1 id="quantum_circuits_via_dependent_linear_types">Quantum circuits via dependent linear types</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#introduction'>Introduction</a></li>
+<ul>
+<li><a href='#the_problem'>The problem</a></li>
+<li><a href='#a_solution'>A solution</a></li>
+</ul>
+<li><a href='#idea_modal_quantum_logic_via_linear_homotopy_types'>Idea: Modal quantum logic via linear homotopy types</a></li>
+<ul>
+<li><a href='#ClassicalModalLogic'>Classical modal logic</a></li>
+<li><a href='#QuantumModalLogic'>Quantum modal logic</a></li>
+<li><a href='#QuantumGates'>Quantum gates</a></li>
+<li><a href='#QuantumMeasurement'>Quantum measurement</a></li>
+<li><a href='#QuantumCircuits'>Quantum circuits</a></li>
+</ul>
+<li><a href='#QCwthLHT-QBits'>Example: Traditional QBit-based quantum circuits</a></li>
+</ul>
+</div>
+
+<h2 id="introduction">Introduction</h2>
+
+<h3 id="the_problem">The problem</h3>
+
+<p>In the context of <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a>, a <em><a class="existingWikiWord" href="/nlab/show/quantum+circuit+diagram">quantum circuit diagram</a></em> (originally: “quantum computational network”, <a href="quantum+circuit#Deutsch89">Deutsch 1989</a>) is a kind of <a class="existingWikiWord" href="/nlab/show/string+diagram">string diagram</a> (<a href="quantum+circuit#AbramskyCoecke04">Abramsky &amp; Coecke 2004</a>) in <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+spaces">finite-dimensional</a> <a class="existingWikiWord" href="/nlab/show/Hilbert+spaces">Hilbert spaces</a>, typically used to express a sequence of low-level <a class="existingWikiWord" href="/nlab/show/quantum+logic+gate">quantum gates</a> mapping between <a class="existingWikiWord" href="/nlab/show/space+of+quantum+states">spaces of</a> <a class="existingWikiWord" href="/nlab/show/pure+quantum+state">pure</a> <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a>.</p>
+
+<p>A generic quantum circuit might look as follows:</p>
+<div style="margin: -20px 0px 10px 10px">
+  <img src="/nlab/files/QuantumCircuitScheme-221025c.jpg" width="600px" />
+</div>
+<p>Here, for instance, the “<a class="existingWikiWord" href="/nlab/show/quantum+gate">quantum gate</a>” <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>34</mn></msub></mrow><annotation encoding="application/x-tex">U_{34}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/linear+operator">linear operator</a> on the <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a> <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi><mo>⊕</mo><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">\mathscr{H} \oplus \mathscr{H}</annotation></semantics></math>.</p>
+
+<p>Notice that the quantum circuit is understood to be the actual <a class="existingWikiWord" href="/nlab/show/string+diagram">string diagram</a>, up to the usual admissible topological deformations, not just the <a class="existingWikiWord" href="/nlab/show/composition">composite</a> <a class="existingWikiWord" href="/nlab/show/linear+transformation">linear transformation</a> which it encodes: The compositeness of the diagram encodes how (e.g. in which order) available <a class="existingWikiWord" href="/nlab/show/quantum+gate">quantum gate</a>-operations would be operated on an actual <a class="existingWikiWord" href="/nlab/show/quantum+computer">quantum computer</a>, and the composite linear map only encodes the inpute-to-output-specification of the resulting <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a>. In this sense, quantum circuits constitute a <a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a> and one also speaks of the “quantum circuit model of quantum computation” (e.g. <a href="#NielsenChuang00">Nielsen &amp; Chuang 2000, §II.4.6</a>; <a href="#Miszczak11">Miszczak 2011, §3</a>, <a href="#Miszczak12">2012, §4.3</a>; <a href="#BenetiCasati18">Beneti &amp; Casati 2018, §3.2</a>).</p>
+
+<p>Often the basic Hilbert space building block here is taken to be <a class="existingWikiWord" href="/nlab/show/complex+vector+space">complex</a> 2-<a class="existingWikiWord" href="/nlab/show/dimension+of+a+vector+space">dimensional</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi><mspace width="thinmathspace"></mspace><mo>≔</mo><mspace width="thinmathspace"></mspace><msup><mi>ℂ</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathscr{H} \,\coloneqq\, \mathbb{C}^2</annotation></semantics></math>, in which case one speaks of a quantum circuit on <em><a class="existingWikiWord" href="/nlab/show/q-bits">q-bits</a></em>.</p>
+
+<p>Sometimes all <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> involved, and hence also the resulting <a class="existingWikiWord" href="/nlab/show/composition">composite</a> <a class="existingWikiWord" href="/nlab/show/linear+maps">linear maps</a>, are assumed to be <a class="existingWikiWord" href="/nlab/show/invertible">invertible</a>, as befits <a class="existingWikiWord" href="/nlab/show/reversible+computation">reversible computation</a> by <a class="existingWikiWord" href="/nlab/show/unitary+operator">unitary</a> quantum state evolution in <a class="existingWikiWord" href="/nlab/show/quantum+mechanics">quantum mechanics</a>.</p>
+
+<p>But more generally and certainly in the broader context of <a class="existingWikiWord" href="/nlab/show/quantum+information+theory">quantum information theory</a> (such as in formulating the <a class="existingWikiWord" href="/nlab/show/quantum+teleportation+protocol">quantum teleportation protocol</a> and similar), quantum circuits are admitted to also contain:</p>
+
+<ol>
+<li>
+<p><em><a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>-gates</em>,</p>
+</li>
+
+<li>
+<p><em><a class="existingWikiWord" href="/nlab/show/quantum+state+preparation">quantum state preparation</a>-gates</em>,</p>
+</li>
+
+<li>
+<p><em>classically controlled quantum gates</em>.</p>
+</li>
+</ol>
+
+<p>Here <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>, in particular, is not only non-<a class="existingWikiWord" href="/nlab/show/reversible+computation">reversible</a> (due to the <a class="existingWikiWord" href="/nlab/show/quantum+state+collapse">quantum state collapse</a> involved) but also non-deterministic, meaning that it is not immediately represented by a fixed linear map at all – at least not between the original Hilbert spaces.</p>
+
+<p>Concretely, the “<a class="existingWikiWord" href="/nlab/show/projection+postulate">projection postulate</a>” of <a class="existingWikiWord" href="/nlab/show/quantum+physics">quantum physics</a> asserts (<a href="quantum+measurement#vonNeumann32">von Neumann 1932</a>; <a href="quantum+measurement#L&#xFC;ders51">Lüders 1951</a>) that:</p>
+
+<ol>
+<li>
+<p>measurement of <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a> is <em>with respect</em> to a choice of <a class="existingWikiWord" href="/nlab/show/orthonormal+linear+basis">orthonormal linear basis</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo maxsize="1.2em" minsize="1.2em">{</mo><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>b</mi></msub><mo stretchy="false">⟩</mo><msub><mo maxsize="1.2em" minsize="1.2em">}</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\big\{\vert \psi_b \rangle \big\}_{b : B}</annotation></semantics></math> of the given <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">\mathscr{H}</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/space+of+quantum+states">of</a> <a class="existingWikiWord" href="/nlab/show/pure+quantum+states">pure quantum states</a>;</p>
+</li>
+
+<li>
+<p>the result of measurement on <a class="existingWikiWord" href="/nlab/show/pure+quantum+states">pure quantum states</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>∈</mo><mspace width="thickmathspace"></mspace><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">\vert \psi \rangle \;\in\; \mathscr{H}</annotation></semantics></math> is</p>
+
+<ol>
+<li>
+<p>a random value <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b \in B</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>the “<a class="existingWikiWord" href="/nlab/show/collapse+of+the+wavefunction">collapse</a>” of the <a class="existingWikiWord" href="/nlab/show/quantum+state">quantum state</a> being measured by <a class="existingWikiWord" href="/nlab/show/orthogonal+linear+basis">orthogonal</a> <a class="existingWikiWord" href="/nlab/show/projection+operator">projection</a> to the the <a class="existingWikiWord" href="/nlab/show/linear+span">linear span</a> of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math>th basis state.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>P</mi> <mi>b</mi></msub></mtd> <mtd><mo lspace="verythinmathspace">:</mo></mtd> <mtd><mi class="mathscript">ℋ</mi></mtd> <mtd><mover><mo>→</mo><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo></mrow></mphantom></mover></mtd> <mtd><msub><mi class="mathscript">ℋ</mi> <mi>B</mi></msub><mo>↪</mo><mi class="mathscript">ℋ</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mtd> <mtd><mo>↦</mo></mtd> <mtd><msub><mi>P</mi> <mi>b</mi></msub><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mpadded width="0"><mrow><mo>=</mo><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>b</mi></msub><mo stretchy="false">⟩</mo><mo stretchy="false">⟨</mo><msub><mi>ψ</mi> <mi>b</mi></msub><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+ P_b 
+ &amp;\colon&amp;
+ \mathscr{H} 
+ &amp;\xrightarrow{\phantom{---}}&amp;
+ \mathscr{H}_B \hookrightarrow \mathscr{H}
+ \\
+ &amp;&amp;
+ \vert \psi \rangle
+ &amp;\mapsto&amp;
+ P_b \vert \psi \rangle
+ \mathrlap{
+ =
+ \vert \psi_b \rangle
+ \langle \psi_b \vert \psi \rangle
+ }
+  }
+
+</annotation></semantics></math></div></li>
+</ol>
+</li>
+</ol>
+
+<p>There are different ways to <em><a class="existingWikiWord" href="/nlab/show/type+theory">type</a></em> the quantum measurement, taking into account the non-deterministic nature of its outcome:</p>
+
+<ol>
+<li>
+<p>Regarding the <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">⨁</mo> <mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></msub><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">\bigoplus_{b \colon B} \mathscr{H}</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/Hilbert+spaces">Hilbert spaces</a> as the <a class="existingWikiWord" href="/nlab/show/logical+disjunction">logical disjunction</a> (“or”) of <a class="existingWikiWord" href="/nlab/show/quantum+logic">quantum logic</a>, one may regard measurement as being the <a class="existingWikiWord" href="/nlab/show/linear+map">linear map</a> into the direct sum whose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math>th component is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mi>b</mi></msub></mrow><annotation encoding="application/x-tex">P_b</annotation></semantics></math>.</p>
+
+<blockquote>
+<p>This choice of typing appears (briefly) in <a href="quantum+measurement#Selinger04">Selinger 2004</a>, <a href="https://www.mathstat.dal.ca/~selinger/papers/qpl.pdf#page=39">p. 39</a>, in a precursor discussion that led to the formulation of the <a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a> <em><a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a></em>.</p>
+</blockquote>
+</li>
+
+<li>
+<p>Regarding the measurement outcome <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b \in B</annotation></semantics></math> as the observed <a class="existingWikiWord" href="/nlab/show/context">context</a> of the actual quantum collapse, one may regard the collapse projection as <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependently typed</a>.</p>
+
+<blockquote>
+<p>Getting from previous option back to this one is known in the the <a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a>-community as <em><a href="Quipper#ReferencesDynamicLifting">dynamic lifting</a></em> (namely “of the measured bits back into the context”)</p>
+</blockquote>
+</li>
+</ol>
+<div style="margin: -20px 0px 20px 10px">
+  <img src="/nlab/files/PossibleTypingsOfQuantumMeasurement-221025.jpg" width="560px" />
+</div>
+<p>Both of these options naturally emerge and are naturally unified in the “<a href="necessity+and+possibility#ModalQuantumLogic">Quantum Modal Logic</a>” inherent to <a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent linear type theory</a>: This is what we now discuss.</p>
+
+<h3 id="a_solution">A solution</h3>
+
+<p>The following discussion indicates<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> how a natural <a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a> for <a class="existingWikiWord" href="/nlab/show/quantum+information">quantum information</a>-processing protocols — hence for <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> consisting of general <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> with classical control, including <a class="existingWikiWord" href="/nlab/show/decoherence">de-coherent</a> <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>-gates and subsequent coherent quantum gates depending on these — is elegantly subsumed within any <a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent linearly typed</a> <a class="existingWikiWord" href="/nlab/show/programming+language">programming language</a> which expresses the “<a class="existingWikiWord" href="/nlab/show/yoga+of+six+operations">yoga of six operations</a>”, such as is the case in the <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a> of <a href="dependent+linear+type+theory#Riley22Thesis">Riley 2022</a>.</p>
+
+<p>This works by regarding classically controlled <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a> as having <a class="existingWikiWord" href="/nlab/show/linear+type">linear data types</a> <a class="existingWikiWord" href="/nlab/show/dependent+type">dependent</a> on classical control parameters and on measurement results, and then making the following key observations on <strong><a href="necessity+and+possibility#ModalQuantumLogic">modal quantum logic</a></strong> with <a class="existingWikiWord" href="/nlab/show/dependent+linear+types">dependent linear types</a>:</p>
+
+<ol>
+<li>
+<p>The “<a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>” <a class="existingWikiWord" href="/nlab/show/modality">modality</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub><mo>≔</mo><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>C</mi></msub><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>C</mi></msub><msub><mo stretchy="false">)</mo> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">\Box_C \coloneqq (p_C)^\ast (p_C)_\ast</annotation></semantics></math> on <a class="existingWikiWord" href="/nlab/show/linear+types">linear types</a> dependent on a given classical <a class="existingWikiWord" href="/nlab/show/context">context</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> (which includes classical control parameters as well as eventual <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>-outcomes on the same footing) knows all about controlled <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a>: These are identified just with the <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a> of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a>, where the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/counit+of+a+comonad">counit</a> (taking a linear type “out of the comonad”) reflects the <a class="existingWikiWord" href="/nlab/show/quantum+state+collapse">quantum state collapse</a> of <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>, and where the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/comultiplication">comultiplication</a> encodes the <a class="existingWikiWord" href="/nlab/show/superposition">superposition</a>-principle.</p>
+</li>
+
+<li>
+<p>The <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a> of dependent linear types gives the compilation of <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> into <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a>, essentially as familiar from the quantum <a class="existingWikiWord" href="/nlab/show/string+diagram">string diagram</a>-calculus of <a href="finite+quantum+mechanics+in+terms+of+dagger-compact+categories#AbramskyCoecke04">Abramsky &amp; Coecke 2004</a> with respect to the plain <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a>, but now taking into account dependency on classical control and potential measurement outcomes.</p>
+</li>
+</ol>
+
+<p>All constructions and proofs here flow readily from just the <a class="existingWikiWord" href="/nlab/show/six+operation+yoga">six operation yoga</a> and (<a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-</a>)<a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli theory</a>. One key point is <a class="maruku-eqref" href="#eq:NecessityRespectsExternalTensorProduct">(4)</a> that the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a> <a class="existingWikiWord" href="/nlab/show/modality">modality</a> respects the <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a> – so that these classically controlled quantum circuits are unambiguously defined –, under the assumption that it coincides with the <a class="existingWikiWord" href="/nlab/show/formal+duality">dual</a> <em><a class="existingWikiWord" href="/nlab/show/possibility">possibility</a></em> modality <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◊</mo> <mi>C</mi></msub><msub><mi class="mathscript">ℋ</mi> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\lozenge_C \mathscr{H}_C</annotation></semantics></math> on the quantum data types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">\mathcal{H}_\bullet</annotation></semantics></math> involved – hence (in full generality) when the linear types are <a class="existingWikiWord" href="/nlab/show/dualizable+object">dualizable</a> in the sense of <a class="existingWikiWord" href="/nlab/show/ambidextrous+adjunction">ambidexterity</a> and specifically (in the traditional models) when <a class="existingWikiWord" href="/nlab/show/space+of+quantum+states">quantum state spaces</a> are <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+space">finite dimensional</a>, as is the case in <a class="existingWikiWord" href="/nlab/show/quantum+information+theory">quantum information theory</a>.</p>
+
+<p>Aspects of the following have a resemblance to some variants and categorical interpretations of the <a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a> “<a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a>” (see the references <a href="Quipper#ReferencesDependentLinearTypesAndCategoricalSemantics">there</a>), but avoids (see <a href="#NoticeTheTypingOfAQbit">below</a>) Quipper’s problem of needing “dynamic lifting” (see <a href="Quipper#ReferencesDynamicLifting">there</a>) of “measurement bits back into the context”: The linear <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-modality knows right away that measurement outcomes are recorded in the context.</p>
+
+<p><br /></p>
+
+<h2 id="idea_modal_quantum_logic_via_linear_homotopy_types">Idea: Modal quantum logic via linear homotopy types</h2>
+
+<p>We assume a <a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent linear type theory</a> which <a class="existingWikiWord" href="/nlab/show/functor">functorially</a> obtains (as anticipated in <a href="dependent+linear+type+theory#Schreiber14">Schreiber 2014</a>, <a href="https://arxiv.org/pdf/1402.7041.pdf#page=39">§3.2</a> and established in <a href="dependent+linear+type+theory#Riley22Thesis">Riley 2022</a>, <a href="https://digitalcollections.wesleyan.edu/islandora/object/ir:3269">§2.4</a>):</p>
+
+<ol>
+<li>
+<p>from a classical (“intuitionistic”) <a class="existingWikiWord" href="/nlab/show/type">type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>:</mo><mi>Type</mi></mrow><annotation encoding="application/x-tex">X : Type</annotation></semantics></math> a (large) type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>LinType</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">LinType_X</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/linear+types">linear types</a> <a class="existingWikiWord" href="/nlab/show/dependent+type">dependent</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, equipped with <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric</a> <a class="existingWikiWord" href="/nlab/show/closed+monoidal+category">closed monoidal structure</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>⊗</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-) \otimes (-)</annotation></semantics></math> (<a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a>) and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mspace width="thinmathspace"></mspace><mo>−</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-,\,-]</annotation></semantics></math> (<a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a>);</p>
+</li>
+
+<li>
+<p>from a <a class="existingWikiWord" href="/nlab/show/function">function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><msub><mi>X</mi> <mn>1</mn></msub><mover><mo>→</mo><mspace width="thickmathspace"></mspace></mover><msub><mi>X</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">f : X_1 \xrightarrow{\;} X_2</annotation></semantics></math> between classical types a <a class="existingWikiWord" href="/nlab/show/yoga+of+six+operations">yoga of six operations</a> (specifically: a “<a class="existingWikiWord" href="/nlab/show/Wirthm%C3%BCller+context">Wirthmüller context</a>”) between their types of dependent linear types, hence a <a class="existingWikiWord" href="/nlab/show/contravariant+functor">contravariant</a> <a class="existingWikiWord" href="/nlab/show/substitution">substitution</a>/<a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> operation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> which is <a class="existingWikiWord" href="/nlab/show/strong+monoidal+functor">strong monoidal</a>, <a class="existingWikiWord" href="/nlab/show/strong+closed+functor">strong closed</a> and extends to a <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> <a class="existingWikiWord" href="/nlab/show/adjoint+triple">adjoint triple</a> (with <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> a version of <a class="existingWikiWord" href="/nlab/show/dependent+sum">dependent sum</a> and <a class="existingWikiWord" href="/nlab/show/right+adjoint">right adjoint</a> a version of <a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a>):</p>
+</li>
+</ol>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-BaseChange-221001.jpg" width="730px" />
+</div>
+<h3 id="ClassicalModalLogic">Classical modal logic</h3>
+
+<p>First observe that (without imposing a further condition) also classical (“non-linear”) <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> provides an example of this <a class="existingWikiWord" href="/nlab/show/yoga+of+six+operations">yoga of six operations</a> (actually five distinct operations, in the present case of <a class="existingWikiWord" href="/nlab/show/Wirthm%C3%BCller+contexts">Wirthmüller contexts</a>), with:</p>
+
+<ol>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a> given by <a class="existingWikiWord" href="/nlab/show/product+types">product types</a>,</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a> given by <a class="existingWikiWord" href="/nlab/show/function+types">function types</a>,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> given by <a class="existingWikiWord" href="/nlab/show/context+extension">context extension</a>,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> given by <a class="existingWikiWord" href="/nlab/show/dependent+coproduct">dependent coproduct</a>,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">f_\ast</annotation></semantics></math> given by <a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a>.</p>
+</li>
+</ol>
+
+<p>In this classical situation, the (<a class="existingWikiWord" href="/nlab/show/comonad">co</a>-)<a class="existingWikiWord" href="/nlab/show/monad">monad</a> <a class="existingWikiWord" href="/nlab/show/adjoint+pair">adjoint pair</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◊</mo> <mi>C</mi></msub><mo>⊣</mo><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\lozenge_C \dashv \Box_C</annotation></semantics></math> induced by the <a class="existingWikiWord" href="/nlab/show/adjoint+triple">adjoint triple</a> is readily found (see <a href="necessity+and+possibility#InFirstOrderLogicAndTypeTheory">here</a>) to reflect the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> and the <a class="existingWikiWord" href="/nlab/show/possibility">possibility</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> of a kind of <a class="existingWikiWord" href="/nlab/show/modal+logic">modal logic</a> which regards the potential measurement outcomes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>:</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">c : C</annotation></semantics></math> as “<a class="existingWikiWord" href="/nlab/show/possible+worlds+semantics">possible worlds</a>”:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-ClassicalNecessity-221003.jpg" width="900px" />
+</div>
+<p>In fact there is (see <a href="necessity+and+possibility#RelationToContingency">here</a>) a quadruple of (<a class="existingWikiWord" href="/nlab/show/comonad">co-</a>)<a class="existingWikiWord" href="/nlab/show/monad">monadic</a> <a class="existingWikiWord" href="/nlab/show/modalities">modalities</a> associated with any <a class="existingWikiWord" href="/nlab/show/base+change">base change</a>:</p>
+<center>
+<img src="/nlab/files/TheFourModalitiesOfBaseChange-20221021.jpg" width="370" />
+</center>
+<p>Here</p>
+
+<ol>
+<li>
+<p>the definiteness-modality <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⋆</mo></mrow><annotation encoding="application/x-tex">\star</annotation></semantics></math> is also known as the <em><a class="existingWikiWord" href="/nlab/show/writer+comonad">writer comonad</a></em>;</p>
+</li>
+
+<li>
+<p>the randomness-modality <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>◯</mo></mrow><annotation encoding="application/x-tex">\bigcirc</annotation></semantics></math> is also known as the <em><a class="existingWikiWord" href="/nlab/show/reader+monad">reader monad</a></em>.</p>
+</li>
+</ol>
+
+<p>We recover the meaning of these expressions in terms of <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> and <a class="existingWikiWord" href="/nlab/show/quantum+state+preparation">quantum state preparation</a>, <a href="#QuantumMeasurement">below</a>.</p>
+
+<p>(In general there may be richer dependency on classical contexts. In the next simplest case the <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> is along the <a class="existingWikiWord" href="/nlab/show/projection">projection</a> map out of a <a class="existingWikiWord" href="/nlab/show/Cartesian+product">Cartesian product</a> of classical types, which makes one of them label potential upcoming measurement results as before, while the other encodes further dependency on classical parameters, such as on previous measurement results:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-RelativeBaseChange-221003.jpg" width="670px" />
+</div>
+<p>This plays a role for classically-controlled quantum gates, <a href="#ClassicallyControlledQuantumGate">below</a>).</p>
+
+<h3 id="QuantumModalLogic">Quantum modal logic</h3>
+
+<p>This general <a class="existingWikiWord" href="/nlab/show/modal+logic">modal logic</a> of <a class="existingWikiWord" href="/nlab/show/possible+worlds">possible worlds</a> <a href="necessity+and+possibility#InFirstOrderLogicAndTypeTheory">found inside</a> <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> becomes subject to one curious further rule as we pass to genuinely <a class="existingWikiWord" href="/nlab/show/linear+types">linear types</a>, such as in the sense of <a class="existingWikiWord" href="/nlab/show/stable+homotopy+types">stable homotopy types</a> in <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a>:</p>
+
+<p>Namely, assuming that the potential measurement outcomes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo lspace="verythinmathspace">:</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">c \colon C</annotation></semantics></math> form a <a class="existingWikiWord" href="/nlab/show/finite+set">finite set</a> — which is the case of relevance in <a class="existingWikiWord" href="/nlab/show/quantum+information+theory">quantum information theory</a> —, the linearity or <em><a class="existingWikiWord" href="/nlab/show/stable+%28infinity%2C1%29-category">stability</a></em> axiom implies that the <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> down from the context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> becomes <a class="existingWikiWord" href="/nlab/show/ambidextrous+adjunction">ambidextrous</a>, in that on dependent linear types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">\mathscr{H}_\bullet</annotation></semantics></math> the <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a> computed by the <a class="existingWikiWord" href="/nlab/show/possibility">possibility</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> and the <a class="existingWikiWord" href="/nlab/show/product">product</a> computed by the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> <em>agree</em> (the situation of a “<a class="existingWikiWord" href="/nlab/show/biproduct">biproduct</a>”):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>BC</mi><mo>:</mo><mi>FinSet</mi><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>LinType</mi> <mi>B</mi></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>◊</mo><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mo>□</mo><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  BC : FinSet
+  ,\;\;
+  \mathscr{H}_\bullet
+  \,\colon\,
+  LinType_B
+  \;\;\;\;\;
+  \vdash
+  \;\;\;\;\;
+  \lozenge \mathscr{H}_\bullet 
+    \;\simeq\; 
+  \Box \mathscr{H}_\bullet
+  \,.
+
+</annotation></semantics></math></div>
+<p>Curiously, in terms of <a class="existingWikiWord" href="/nlab/show/modal+logic">modal logic</a>, this is the <em><a class="existingWikiWord" href="/nlab/show/Gell-Mann+principle">Gell-Mann principle</a></em> of quantum physics:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mtext>The</mtext><mspace width="thickmathspace"></mspace><mtext>possible</mtext></mtd> <mtd><mtext>is</mtext></mtd> <mtd><mtext>necessary</mtext></mtd> <mtd><mtext>and hence</mtext></mtd> <mtd><mtext>actualized</mtext></mtd></mtr> <mtr><mtd><mo>◊</mo><msub><mi>ℋ</mi> <mo>•</mo></msub></mtd> <mtd><mo>≃</mo></mtd> <mtd><mo>□</mo><msub><mi>ℋ</mi> <mo>•</mo></msub></mtd> <mtd><mover><mo>→</mo><mrow><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo></mrow></mphantom><mi>ϵ</mi><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo></mrow></mphantom></mrow></mover></mtd> <mtd><msub><mi>ℋ</mi> <mrow><mo>•</mo><mspace width="thickmathspace"></mspace><mpadded width="0"><mtext>with some probability</mtext></mpadded></mrow></msub></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \llap{\text{The}}\;\text{possible}
+    &amp;
+    \text{is} 
+    &amp;
+    \text{necessary}
+    &amp;
+    \text{and hence} 
+    &amp;
+    \text{actualized}
+    \\
+    \lozenge \mathcal{H}_\bullet
+    &amp;
+    \simeq
+    &amp;
+    \Box \mathcal{H}_\bullet 
+    &amp;
+    \xrightarrow{\phantom{--} \epsilon \phantom{--}} 
+    &amp;
+    \mathcal{H}_{
+      \bullet   
+      \;
+      \mathrlap{\text{with some probability}}
+    }
+  }
+
+</annotation></semantics></math></div>
+<p>Concretely, the <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a> of <a href="dependent+linear+type+theory#Riley22Thesis">Riley 2022</a> should have <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> in the <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-topos"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mn>∞</mn>
+    </mrow>
+    <annotation encoding="application/x-tex">\infty</annotation>
+  </semantics>
+</math>-topos</a> of <a class="existingWikiWord" href="/nlab/show/parameterized+spectrum">parameterized</a> <a class="existingWikiWord" href="/nlab/show/Eilenberg-MacLane+spectrum"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>H</mi>
+      <mi>ℂ</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">H\mathbb{C}</annotation>
+  </semantics>
+</math></a>-<a class="existingWikiWord" href="/nlab/show/module+spectra">module spectra</a> (<a class="existingWikiWord" href="/schreiber/show/Quantization+via+Linear+homotopy+types">S. 2014, Ex. 3.11</a>) and <a class="existingWikiWord" href="/nlab/show/complex+vector+spaces">complex vector spaces</a> embed into this <a class="existingWikiWord" href="/nlab/show/stable+homotopy+theory">stable homotopy theory</a> under passage to their <a class="existingWikiWord" href="/nlab/show/Eilenberg-MacLane+spectra">Eilenberg-MacLane spectra</a> (see the <a class="existingWikiWord" href="/nlab/show/stable+Dold-Kan+correspondence">stable Dold-Kan correspondence</a>).</p>
+<div class="maruku-equation" id="eq:NotationalConvention"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtext>It is convenient and meaningful to declare the notational conventions to:</mtext><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo></mrow></mphantom></mrow><annotation encoding="application/x-tex">
+  
+\text{It is convenient and meaningful to declare the notational conventions to:}
+  \phantom{--------------------}
+
+</annotation></semantics></math></div>
+<ol>
+<li>
+<p>abbreviate <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi><mspace width="thinmathspace"></mspace><mo>≔</mo><mspace width="thinmathspace"></mspace><msub><mi>p</mi> <mo>!</mo></msub><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mspace width="thinmathspace"></mspace><mo>≃</mo><mspace width="thinmathspace"></mspace><msub><mi>p</mi> <mo>*</mo></msub><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">\mathscr{H} \,\coloneqq\, p_! \mathscr{H}_\bullet \,\simeq\, p_\ast \mathscr{H}_\bullet</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>notationally suppress any outer application of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo lspace="verythinmathspace">:</mo><mi>LinType</mi><mo>→</mo><msub><mi>LinType</mi> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">(p_B)^\ast \colon LinType \to LinType_B</annotation></semantics></math>;</p>
+</li>
+</ol>
+
+<p>Thereby, the definiteness/randomness modalities in relation to <a class="existingWikiWord" href="/nlab/show/necessity+and+possibility">necessity and possibility</a> of classical modal logic (<a href="#ClassicalModalLogic">above</a>) may be expressed in quantum modal logic by:</p>
+<div style="margin: -10px 0px 20px 10px">
+  <img src="/nlab/files/DefinitelyRandomlyViaPossiblyNecessarily.jpg" width="180px" />
+</div>
+<p>This way, the default <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> for modal quantum logic is that of <a class="existingWikiWord" href="/nlab/show/bundles">bundles</a> of <a class="existingWikiWord" href="/nlab/show/finite+dimensional+vector+spaces">finite dimensional vector spaces</a> (finite-dimensional complex <a class="existingWikiWord" href="/nlab/show/Hilbert+spaces">Hilbert spaces</a>) over <a class="existingWikiWord" href="/nlab/show/finite+sets">finite sets</a>: In this case both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>C</mi></msub><msub><mo stretchy="false">)</mo> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">(p_C)_!</annotation></semantics></math> as well as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>C</mi></msub><msub><mo stretchy="false">)</mo> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">(p_C)_\ast</annotation></semantics></math> yield the ordinary <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a> of the <a class="existingWikiWord" href="/nlab/show/fibers">fibers</a> (a <a class="existingWikiWord" href="/nlab/show/biproduct">biproduct</a>). Since this is the <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> under which the following type theory describes the traditional <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a>, we will adopt our notation to this case and denote the generic <a class="existingWikiWord" href="/nlab/show/dependent+linear+type">dependent linear type</a> by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℋ</mi> <mo>•</mo></msub><mo>:</mo><msub><mi>LinType</mi> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\mathcal{H}_\bullet : LinType_C</annotation></semantics></math> and its generic <a class="existingWikiWord" href="/nlab/show/term">term</a> by the usual notation for <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>:</mo><mi>C</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>c</mi></msub><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>ℋ</mi> <mi>c</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  c : C 
+  \;\;\;
+  \vdash
+  \;\;\; 
+  \vert \psi_c \rangle \;\colon\; \mathcal{H}_c
+  \,.
+
+</annotation></semantics></math></div>
+<p>one finds for the base change <a class="existingWikiWord" href="/nlab/show/adjoint+triple">adjoint triple</a> of <a class="existingWikiWord" href="/nlab/show/dependent+linear+types">dependent linear types</a> along <a class="existingWikiWord" href="/nlab/show/family+of+finite+types">finite fibers</a> <a class="maruku-eqref" href="#eq:FiniteBaseType">(?)</a> that the interpretation of their (<a class="existingWikiWord" href="/nlab/show/counit+of+a+comonad">co-</a>)<a class="existingWikiWord" href="/nlab/show/unit+of+a+monad">units</a> is as follows:</p>
+
+<p>By the assumption that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/finite+set">finite</a> and since <a class="existingWikiWord" href="/nlab/show/Vect">Vect</a> has <a class="existingWikiWord" href="/nlab/show/biproducts">biproducts</a>, the <a class="existingWikiWord" href="/nlab/show/colimit">colimit</a>/<a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msub><mo stretchy="false">)</mo> <mo>!</mo></msub><msub><mi class="mathscript">𝒱</mi> <mo>•</mo></msub><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></munder><msub><mi class="mathscript">𝒱</mi> <mi>b</mi></msub></mrow><annotation encoding="application/x-tex">
+  (p_B)_! \mathscr{V}_\bullet 
+  \;=\; 
+  \coprod_{b : B} \mathscr{V}_b
+
+</annotation></semantics></math></div>
+<p>and the <a class="existingWikiWord" href="/nlab/show/limit">limit</a>/<a class="existingWikiWord" href="/nlab/show/product">product</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msub><mo stretchy="false">)</mo> <mo>*</mo></msub><msub><mi class="mathscript">𝒱</mi> <mo>•</mo></msub><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></munder><msub><mi class="mathscript">𝒱</mi> <mi>b</mi></msub></mrow><annotation encoding="application/x-tex">
+  (p_B)_\ast \mathscr{V}_\bullet 
+  \;=\; 
+  \prod_{b : B} \mathscr{V}_b
+
+</annotation></semantics></math></div>
+<p>agree (we have an <a class="existingWikiWord" href="/nlab/show/ambidextrous+adjunction">ambidextrous adjunction</a>) and are both equivalent to the <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msub><mo stretchy="false">)</mo> <mo>!</mo></msub><msub><mi class="mathscript">𝒱</mi> <mo>•</mo></msub><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msub><mo stretchy="false">)</mo> <mo>*</mo></msub><msub><mi class="mathscript">𝒱</mi> <mo>•</mo></msub><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">⨁</mo><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></munder><msub><mi>𝒱</mi> <mi>b</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  (p_B)_! \mathscr{V}_\bullet 
+    \;\simeq\;
+  (p_B)_\ast \mathscr{V}_\bullet 
+  \;=\;
+    \underset{b \colon B}{\bigoplus}
+  \mathcal{V}_b
+  \,.
+
+</annotation></semantics></math></div>
+<p>Accordingly, the underlying <a class="existingWikiWord" href="/nlab/show/endofunctors">endofunctors</a> of the induced <a class="existingWikiWord" href="/nlab/show/monad">monad</a> and <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><msub><mi>Vec</mi> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">k Vec_B</annotation></semantics></math></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>B</mi></msub><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msub><mo stretchy="false">)</mo> <mo>*</mo></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mo>◊</mo> <mi>B</mi></msub><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msub><mo stretchy="false">)</mo> <mo>!</mo></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>k</mi><msub><mi>Vec</mi> <mi>B</mi></msub><mo>⟶</mo><mi>k</mi><msub><mi>Vec</mi> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">
+  \Box_B
+  \;\coloneqq\;
+  (p_B)^\ast (p_B)_\ast
+  \;\;\vdash\;\;
+  \lozenge_B
+  \;\coloneqq\;
+  (p_B)^\ast (p_B)_!
+  \;\;\colon\;\;
+  k Vec_B
+  \longrightarrow
+  k Vec_B
+
+</annotation></semantics></math></div>
+<p>agree, to make a <a class="existingWikiWord" href="/nlab/show/self-adjoint+functor">self-adjoint functor</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><msub><mo>⨂</mo> <mi>B</mi></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><msub><mo>⨂</mo> <mi>B</mi></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>k</mi><mi>Vec</mi><mo>⟶</mo><mi>k</mi><mi>Vec</mi></mrow><annotation encoding="application/x-tex">
+  (p_B)^\ast
+  \bigotimes_B 
+  \;\;\vdash\;\; 
+  (p_B)^\ast
+  \bigotimes_B
+  \;\;\;\colon\;\;\;
+  k Vec
+  \longrightarrow 
+  k Vec
+
+</annotation></semantics></math></div>
+<p>which carries the <a class="existingWikiWord" href="/nlab/show/structure">structure</a> both of a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> and of a <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a>.</p>
+
+<p>This way, one finds that the four (co)unit operations of quantum modal logic are given as follows:</p>
+<div class="maruku-equation" id="eq:QuantumModalUnits"><span class="maruku-eq-number">(2)</span><code class="maruku-mathml">
+  
+
+</code></div><div style="margin: -10px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumModalUnits-221021b.jpg" width="840px" />
+</div>
+<h3 id="QuantumGates">Quantum gates</h3>
+
+<p>The morphisms in the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">(co-)</a><a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli category</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>□</mo></mrow><annotation encoding="application/x-tex">\Box</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>◯</mo></mrow><annotation encoding="application/x-tex">\bigcirc</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/linear+maps">linear maps</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mo>□</mo><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mover><mo>→</mo><mspace width="thickmathspace"></mspace></mover><mo>◯</mo><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">
+  \mathscr{H}
+  \;=\;
+  \Box \mathscr{H}_\bullet
+  \xrightarrow{\;}
+  \bigcirc \mathscr{H}_\bullet
+  \;=\;
+  \mathscr{H}
+
+</annotation></semantics></math></div>
+<p>in the image of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>p</mi> <mi>B</mi> <mo>*</mo></msubsup></mrow><annotation encoding="application/x-tex">p_B^\ast</annotation></semantics></math> and as such are <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> (we show how to restrict these to <a class="existingWikiWord" href="/nlab/show/unitary+operators">unitary operators</a> below in …).</p>
+
+<p>Inspection shows that the four ways of relating these to <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">(co-)</a><a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli morphisms</a> correspond to composing quantum gates with:</p>
+
+<ol>
+<li>
+<p>quantum measurement</p>
+</li>
+
+<li>
+<p>quantum state preparation</p>
+</li>
+
+<li>
+<p>qauntum superposition</p>
+</li>
+
+<li>
+<p>qauntum parallelization:</p>
+</li>
+</ol>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumGates-221021.jpg" width="800px" />
+</div>
+<h3 id="QuantumMeasurement">Quantum measurement</h3>
+
+<p>Specifically, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<strong>actualization is the measurement process</strong> – in that the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">\Box_C</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/counit+of+a+comonad">counit</a> implements exactly the rule for <a class="existingWikiWord" href="/nlab/show/wavefunction+collapse">wavefunction collapse</a> (due to <a href="wave+function+collapse#L&#xFC;ders51">Lüders 1951</a>, following <a href="wave+function+collapse#vonNeumann32">von Neumann 1932, §III.3 and §VI</a>) with regards to <a class="existingWikiWord" href="/nlab/show/quantum+measurements">quantum measurements</a> in the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>-indexed basis of the total Hilbert space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi><mo>≔</mo><msub><mo>□</mo> <mi>C</mi></msub><msub><mi>ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">
+  \mathcal{H} \coloneqq \Box_C \mathcal{H}_\bullet
+</annotation></semantics></math> which is encoded by its direct sum decomposition <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℋ</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">\mathcal{H}_\bullet</annotation></semantics></math>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumNecessity-221021.jpg" width="900px" />
+</div>
+<p>Given this, the <a href="Kleisli+category#KleisliEquivalence">Kleisli equivalence</a> for the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a> <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\Box_B</annotation></semantics></math> is essentially the <a class="existingWikiWord" href="/nlab/show/deferred+measurement+principle">deferred measurement principle</a> for <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/DeferredMeasurementAsKleisliEquiv-221027b.jpg" width="800px" />
+</div>
+<p>There is another possible typing of quantum measurement, where a measurement lands in the random <a class="existingWikiWord" href="/nlab/show/reader+monad">reader monad</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/PossibleTypingsOfQuantumMeasurement-221028.jpg" width="600px" />
+</div>
+<p>These two are related by the following <a class="existingWikiWord" href="/nlab/show/commuting+diagram">diagram commutes</a> (being the <a class="existingWikiWord" href="/nlab/show/naturality+square">naturality square</a> of the necessity-counit on the possibility-unit):</p>
+<div class="maruku-equation" id="eq:MeasurementViaWritedComonad"><span class="maruku-eq-number">(3)</span><code class="maruku-mathml">
+  
+
+</code></div><div style="margin: -20px 0px 20px 10px">
+  <img src="/nlab/files/MeasurementViaRandomMonad-221028.jpg" width="540px" />
+</div>
+<p>In the bottom row are making use of the notation <a class="maruku-eqref" href="#eq:NotationalConvention">(1)</a>.</p>
+
+<h3 id="QuantumCircuits">Quantum circuits</h3>
+
+<p>While quantum gates have <a class="existingWikiWord" href="/nlab/show/horizontal+composition">horizontal composition</a> in the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a>, they also have a <a class="existingWikiWord" href="/nlab/show/vertical+composition">vertical composition</a> given by <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-ExternalTensorProduct-221001.jpg" width="690px" />
+</div>
+<p>The point here is that the <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a> records not just the <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a> on the given linear/quantum types, but also the fact that under combining two quantum gates/circuits, the types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">C'</annotation></semantics></math> of their potential classical measurement outcomes combine into the type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>×</mo><mi>C</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">C \times C'</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/pairs">pairs</a> of outcomes (the <a class="existingWikiWord" href="/nlab/show/Cartesian+product">Cartesian product</a>) — see the example of pairs of qbits, <a href="#CombinationOfAPairOfQBits">below</a>.</p>
+
+<p>One checks that for ambidextrous/finite-dimensional dependent linear types, the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> respects the <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a>:</p>
+<div class="maruku-equation" id="eq:NecessityRespectsExternalTensorProduct"><span class="maruku-eq-number">(4)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>□</mo> <mrow><mi>C</mi><mo>×</mo><mi>C</mi><mo>′</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mo>⊠</mo><mi class="mathscript">ℋ</mi><msub><mo>′</mo> <mo>•</mo></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mo maxsize="1.8em" minsize="1.8em">(</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mo>□</mo> <mi>C</mi></msub><msub><mi class="mathscript">ℋ</mi> <mo>•</mo></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>⊠</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mo>□</mo> <mrow><mi>C</mi><mo>′</mo></mrow></msub><mi class="mathscript">ℋ</mi><msub><mo>′</mo> <mo>•</mo></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo></mrow><annotation encoding="application/x-tex">
+  
+  \Box_{C \times C'}
+  \big(
+    \mathscr{H}_\bullet
+    \boxtimes
+    \mathscr{H}'_\bullet
+  \big)
+  \;\simeq\;
+  \Big(
+    \big(
+      \Box_{C}
+      \mathscr{H}_\bullet
+    \big)
+    \boxtimes
+    \big(
+      \Box_{C '}
+      \mathscr{H}'_\bullet
+    \big)
+  \Big)
+
+</annotation></semantics></math></div>
+<p>This implies that well-defined <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> may be compiled from iterating between</p>
+
+<ol>
+<li>
+<p>horizontally composing morphisms in the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a> of a <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-modality applicable to given quantum types;</p>
+</li>
+
+<li>
+<p>vertically adjoining such morphisms via their <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a>.</p>
+</li>
+</ol>
+
+<p>We illustrate <a href="#QCwthLHT-QBits">below</a> how this provides a (programming) language for all tranditional quantum circuits compiled from <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a>.</p>
+
+<p>But the expressiveness of the ambient <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a> is considerably larger and allows to handle more general notions of <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> with the same language structures. For instance:</p>
+
+<ol>
+<li>
+<p>We may use (in fact: construct) quantum types as building blocks which are not just <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> but much richer spaces of <a class="existingWikiWord" href="/nlab/show/conformal+blocks">conformal blocks</a> (<a class="existingWikiWord" href="/schreiber/show/Topological+Quantum+Programming+in+TED-K">SS22</a>). This allows to natively compile quantum programs for <a class="existingWikiWord" href="/nlab/show/anyon">anyon</a> <a class="existingWikiWord" href="/nlab/show/braid+representation">braid gates</a> as used in <a class="existingWikiWord" href="/nlab/show/topological+quantum+computation">topological quantum computation</a>.</p>
+</li>
+
+<li>
+<p>Instead of just (parameterized) <a class="existingWikiWord" href="/nlab/show/complex+vector+spaces">complex vector spaces</a>, the language of <a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a> in <a href="dependent+linear+type+theory#Riley22Thesis">Riley 2022</a> handles more general (<a class="existingWikiWord" href="/nlab/show/parameterized+spectra">parameterized</a>) <a class="existingWikiWord" href="/nlab/show/Eilenberg-MacLane+spectra"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>H</mi>
+      <mi>ℂ</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">H\mathbb{C}</annotation>
+  </semantics>
+</math></a>-<a class="existingWikiWord" href="/nlab/show/module+spectra">module spectra</a>, and in fact (<a class="existingWikiWord" href="/nlab/show/parameterized+spectra">parameterized</a>) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/module+spectra">module spectra</a> over any <a class="existingWikiWord" href="/nlab/show/E-infinity+ring"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <msub><mi>E</mi> <mn>∞</mn></msub>
+    </mrow>
+    <annotation encoding="application/x-tex">E_\infty</annotation>
+  </semantics>
+</math>-</a><a class="existingWikiWord" href="/nlab/show/ring+spectrum">ring spectrum</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>.</p>
+</li>
+</ol>
+
+<p>(A first example of <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> operating on <a class="existingWikiWord" href="/nlab/show/spectra">spectra</a> appears in the above-mentioned construction of <a class="existingWikiWord" href="/nlab/show/conformal+block">conformal block</a> if one just omits the fiberwise <a class="existingWikiWord" href="/nlab/show/0-truncation">0-truncation</a> in the last step.)</p>
+
+<p><br /></p>
+
+<h2 id="QCwthLHT-QBits">Example: Traditional QBit-based quantum circuits</h2>
+
+<p>We spell out in terms of the above <a class="existingWikiWord" href="/nlab/show/modal+type+theory">modal</a> <a class="existingWikiWord" href="/nlab/show/quantum+logic">quantum logic</a> found inside <a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent linear type theory</a> the traditional zoo of <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> and basic <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> acting on <a class="existingWikiWord" href="/nlab/show/tensor+products">tensor products</a> of <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a>. On the one hand this serves to show how all the expected constructions are naturally recovered, on the other hand it enhances these standard concepts by what is de-facto a <a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a> for their classically-controlled versions (as such somewhat akin to parts of <a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a>, but avoiding the issue of “dynamic lifting”, see <a href="#NoticeTheTypingOfAQbit">below</a>).</p>
+
+<p><br /></p>
+
+<p>To start with, a moment of reflection reveals that the <a class="existingWikiWord" href="/nlab/show/linear+type">linear type</a> of a single (in-)coherent <em><a class="existingWikiWord" href="/nlab/show/qbit">qbit</a></em> is as follows, <a class="existingWikiWord" href="/nlab/show/dependent+linear+type">depending</a> on the classical <a class="existingWikiWord" href="/nlab/show/type">type</a> of <a class="existingWikiWord" href="/nlab/show/booleans">booleans</a> (which here we denote by “0” and “1” instead of “<a class="existingWikiWord" href="/nlab/show/false">false</a>” and “<a class="existingWikiWord" href="/nlab/show/true">true</a>”) .</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumBit-221001.jpg" width="840px" />
+</div>
+<p><br /></p>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>-process on such a qbit type, as seen by the <a class="existingWikiWord" href="/nlab/show/necessity">necessity</a>-<a class="existingWikiWord" href="/nlab/show/counit+of+a+comonad">counit</a>, verifies the <a class="existingWikiWord" href="/nlab/show/wavefunction+collapse">projection postulate</a> of measurements in <a class="existingWikiWord" href="/nlab/show/quantum+mechanics">quantum mechanics</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitMeasurement-221001.jpg" width="500px" />
+</div>
+<p id="NoticeTheTypingOfAQbit"> Notice that one might be tempted<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to think of this formula as outputting the classical bit <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>:</mo><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">b : \mathrm{Bool}</annotation></semantics></math>, but that the dependent typing of the above expression is a little more subtle than that: The output bit is instead part of the <em><a class="existingWikiWord" href="/nlab/show/context">context</a></em> inside which the collapsed wavefunction qbit appears – which, being in the 1-dimensional Hilbert space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\mathbb{C}</annotation></semantics></math> in this case, may often be disregarded as a global phase, but is nevertheless the actual output of the measurement process.</p>
+
+<p>In particular, by retaining the quantum type of the measurement result, we retain the ability to speak about repeated quantum measurement, which leads to a <em>proof</em> that the second measurement necessarily gives the same result as the first (the experimental observation of this fact is what originally led to the formulation of the projection postulate, in <a href="wave+function+collapse#vonNeumann32">von Neumann 1932, §III.3</a>):</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitMeasurementRepeated-221001.jpg" width="400px" />
+</div>
+<p><br /></p>
+
+<p id="CombinationOfAPairOfQBits"> In the other (vertical) direction, the dependent linear type of the measurement of a <a class="existingWikiWord" href="/nlab/show/pair">pair</a> of <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> comes out as expected, where the point to notice is how the <a class="existingWikiWord" href="/nlab/show/external+tensor+product">external tensor product</a> keeps track of the fact that a pair of qbits has <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">2 \times 2 = 4</annotation></semantics></math> potential measurement outcomes:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitPairMeasurement-221001.jpg" width="770px" />
+</div>
+<p><br /></p>
+
+<p>Dually, the <a class="existingWikiWord" href="/nlab/show/possibility">possibility</a>-<a class="existingWikiWord" href="/nlab/show/unit+of+a+monad">unit</a> on <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> is their <em>conditional <a class="existingWikiWord" href="/nlab/show/state+preparation">state preparation</a></em> (this is the operation denoted “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mi>a</mi><mo>̲</mo></munder><mover><mo>←</mo><mspace width="thickmathspace"></mspace></mover><mi>a</mi></mrow><annotation encoding="application/x-tex">\underline{a} \xleftarrow{\;} a</annotation></semantics></math>” in <a href="quantum+programming+language#Knill96">Knill 1996</a>, <a href="https://www.ncatlab.org/nlab/files/Knill-QuantumPseudocode.pdf#page=8">p. 8</a>):</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitStatePreparationCondt-221021.jpg" width="500px" />
+</div>
+<p>From this, if we denote <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">const</mi> <mn>0</mn></msub><mo lspace="verythinmathspace">:</mo><mo lspace="0em" rspace="thinmathspace">Bool</mo><mo>→</mo><mo lspace="0em" rspace="thinmathspace">Bool</mo></mrow><annotation encoding="application/x-tex">\mathrm{const}_0 \colon \Bool \to \Bool</annotation></semantics></math> the function <a class="existingWikiWord" href="/nlab/show/constant+function">constant</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math>, then the <em>unconditional <a class="existingWikiWord" href="/nlab/show/state+preparation">state preparation</a></em> (the operation denoted “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mi>a</mi><mo>̲</mo></munder><mover><mo>←</mo><mspace width="thickmathspace"></mspace></mover><mn>0</mn></mrow><annotation encoding="application/x-tex">\underline{a} \xleftarrow{\;} 0</annotation></semantics></math>” in <a href="quantum+programming+language#Knill96">Knill 1996</a>, <a href="https://www.ncatlab.org/nlab/files/Knill-QuantumPseudocode.pdf#page=8">p. 8</a>) is the base change of the conditional <a class="existingWikiWord" href="/nlab/show/state+preparation">state preparation</a> along this map:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QBitStatePreparation-221021.jpg" width="500px" />
+</div>
+<p><br /></p>
+
+<p>The dependent linear type of the <a class="existingWikiWord" href="/nlab/show/Hadamard+gate">Hadamard gate</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-HadamardGate-221003.jpg" width="650px" />
+</div>
+<p><br /></p>
+
+<p>The dependent linear type of the <a class="existingWikiWord" href="/nlab/show/CNOT+gate">CNOT gate</a>:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-QuantumCNOTGate-221001.jpg" width="800px" />
+</div>
+<p><br /></p>
+
+<p>The dependent linear type of a <a class="existingWikiWord" href="/nlab/show/Bell+state">Bell state</a> preparation:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-BellStatePreparation-221021.jpg" width="800px" />
+</div>
+<p><br /></p>
+
+<p>The dependent linear type of a Bell state measurement:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-BellStateMeasurement-221003.jpg" width="800px" />
+</div>
+<p><br /></p>
+
+<p id="ClassicallyControlledQuantumGate"> The dependent linear type of a quantum gate controlled by a classical bit:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/QCwthLHT-BitControlledQGate-221001.jpg" width="850px" />
+</div>
+<p><br /></p>
+
+<p>This establishes all the ingredients of traditional <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a>. For instance, we obtain the measurement-controlled circuit that exhibits the <a class="existingWikiWord" href="/nlab/show/quantum+teleportation">quantum teleportation</a>-protocol:</p>
+
+<p>(…)</p>
+<div class="footnotes"><hr /><ol><li id="fn:1">
+<p>Full details to appear at: <em><a class="existingWikiWord" href="/schreiber/show/Topological+Quantum+Programming+in+Linear+Homotopy+Type+Theory">Topological Quantum Programming in Linear Homotopy Type Theory</a></em>. <a href="#fnref:1" rev="footnote">↩</a></p>
+</li><li id="fn:2">
+<p>Indeed, in <em><a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a></em> the measurement process on a qbit is originally typed as “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="0em" rspace="thinmathspace">QBit</mo><mo>→</mo><mo lspace="0em" rspace="thinmathspace">Bit</mo></mrow><annotation encoding="application/x-tex">\QBit \to \Bit</annotation></semantics></math>” and further language design is needed to “bring the output bit back into the context”, see references on “<a href="Quipper#ReferencesDynamicLifting">dynamic lifting</a>”. <a href="#fnref:2" rev="footnote">↩</a></p>
+</li></ol></div></body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on October 28, 2022 at 16:05:52.
+    See the <a href="/nlab/history/quantum+circuits+via+dependent+linear+types" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/quantum+circuits+via+dependent+linear+types" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15205/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/quantum+circuits+via+dependent+linear+types/25" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quantum+circuits+via+dependent+linear+types" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quantum+circuits+via+dependent+linear+types" accesskey="S" class="navlink" id="history" rel="nofollow">History (25 revisions)</a>
+  <a href="/nlab/show/quantum+circuits+via+dependent+linear+types/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/quantum+circuits+via+dependent+linear+types" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/quantum+circuits+via+dependent+linear+types" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

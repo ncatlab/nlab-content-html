@@ -1,0 +1,910 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      module over a monad in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      module over a monad
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/647/#Item_23" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="2category_theory">2-Category theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/2-category+theory">2-category theory</a></strong></p>
+
+<p><strong>Definitions</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-category">2-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/strict+2-category">strict 2-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bicategory">bicategory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/enriched+bicategory">enriched bicategory</a></p>
+</li>
+</ul>
+
+<p><strong>Transfors between 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-functor">2-functor</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lax+functor">lax functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/equivalence+of+2-categories">equivalence of 2-categories</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-natural+transformation">2-natural transformation</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lax+natural+transformation">lax natural transformation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/icon">icon</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/modification">modification</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Yoneda+lemma+for+bicategories">Yoneda lemma for bicategories</a></p>
+</li>
+</ul>
+
+<p><strong>Morphisms in 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fully+faithful+morphism">fully faithful morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/faithful+morphism">faithful morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/conservative+morphism">conservative morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pseudomonic+morphism">pseudomonic morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/discrete+morphism">discrete morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/eso+morphism">eso morphism</a></p>
+</li>
+</ul>
+
+<p><strong>Structures in 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mate">mate</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monad">monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cartesian+object">cartesian object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fibration+in+a+2-category">fibration in a 2-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/codiscrete+cofibration">codiscrete cofibration</a></p>
+</li>
+</ul>
+
+<p><strong>Limits in 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-limit">2-limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-pullback">2-pullback</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/comma+object">comma object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/inserter">inserter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/inverter">inverter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/equifier">equifier</a></p>
+</li>
+</ul>
+
+<p><strong>Structures on 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-monad">2-monad</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lax-idempotent+2-monad">lax-idempotent 2-monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pseudomonad">pseudomonad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pseudoalgebra+for+a+2-monad">pseudoalgebra for a 2-monad</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+2-category">monoidal 2-category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/cartesian+bicategory">cartesian bicategory</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gray+tensor+product">Gray tensor product</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/proarrow+equipment">proarrow equipment</a></p>
+</li>
+</ul>
+</div></div>
+
+<h4 id="higher_algebra">Higher algebra</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/higher+algebra">higher algebra</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/universal+algebra">universal algebra</a></p>
+
+<h2 id="algebraic_theories">Algebraic theories</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebraic+theory">algebraic theory</a> / <a class="existingWikiWord" href="/nlab/show/2-algebraic+theory">2-algebraic theory</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-algebraic+theory">(∞,1)-algebraic theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monad">monad</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-monad">(∞,1)-monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/operad">operad</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-operad">(∞,1)-operad</a></p>
+</li>
+</ul>
+
+<h2 id="algebras_and_modules">Algebras and modules</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebra over a monad</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-monad">∞-algebra over an (∞,1)-monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+an+algebraic+theory">algebra over an algebraic theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-algebraic+theory">∞-algebra over an (∞,1)-algebraic theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+an+operad">algebra over an operad</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-operad">∞-algebra over an (∞,1)-operad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/action">action</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-action">∞-action</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/representation">representation</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-representation">∞-representation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/module">module</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-module">∞-module</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/associated+bundle">associated bundle</a>, <a class="existingWikiWord" href="/nlab/show/associated+%E2%88%9E-bundle">associated ∞-bundle</a></p>
+</li>
+</ul>
+
+<h2 id="higher_algebras">Higher algebras</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+%28%E2%88%9E%2C1%29-category">monoidal (∞,1)-category</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+%28%E2%88%9E%2C1%29-category">symmetric monoidal (∞,1)-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoid+in+an+%28%E2%88%9E%2C1%29-category">monoid in an (∞,1)-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/commutative+monoid+in+an+%28%E2%88%9E%2C1%29-category">commutative monoid in an (∞,1)-category</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p>symmetric monoidal (∞,1)-category of spectra</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/smash+product+of+spectra">smash product of spectra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+smash+product+of+spectra">symmetric monoidal smash product of spectra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/ring+spectrum">ring spectrum</a>, <a class="existingWikiWord" href="/nlab/show/module+spectrum">module spectrum</a>, <a class="existingWikiWord" href="/nlab/show/algebra+spectrum">algebra spectrum</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+algebra">A-∞ algebra</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+ring">A-∞ ring</a>, <a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+space">A-∞ space</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/C-%E2%88%9E+algebra">C-∞ algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/E-%E2%88%9E+ring">E-∞ ring</a>, <a class="existingWikiWord" href="/nlab/show/E-%E2%88%9E+algebra">E-∞ algebra</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-module">∞-module</a>, <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-module+bundle">(∞,1)-module bundle</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/multiplicative+cohomology+theory">multiplicative cohomology theory</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/L-%E2%88%9E+algebra">L-∞ algebra</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/deformation+theory">deformation theory</a></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="model_category_presentations">Model category presentations</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+T-algebras">model structure on simplicial T-algebras</a> / <a class="existingWikiWord" href="/nlab/show/homotopy+T-algebra">homotopy T-algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+operads">model structure on operads</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebras+over+an+operad">model structure on algebras over an operad</a></p>
+</li>
+</ul>
+
+<h2 id="geometry_on_formal_duals_of_algebras">Geometry on formal duals of algebras</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Isbell+duality">Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/derived+geometry">derived geometry</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Deligne+conjecture">Deligne conjecture</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/delooping+hypothesis">delooping hypothesis</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+Dold-Kan+correspondence">monoidal Dold-Kan correspondence</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/higher+algebra+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#definition'>Definition</a></li>
+<ul>
+<li><a href='#modules'>Modules</a></li>
+<li><a href='#bimodules'>Bimodules</a></li>
+<li><a href='#AlgebrasForMonadsInCat'>Algebras for monads in Cat</a></li>
+</ul>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#colimits'>Colimits</a></li>
+<li><a href='#tensor_product'>Tensor product</a></li>
+</ul>
+<li><a href='#examples'>Examples</a></li>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>Just as the notion of a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> in a <a class="existingWikiWord" href="/nlab/show/bicategory">bicategory</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> generalizes that of a <a class="existingWikiWord" href="/nlab/show/monoid+in+a+monoidal+category">monoid in a monoidal category</a>, <a class="existingWikiWord" href="/nlab/show/module+over+a+monoid">modules over monoids</a> generalize easily to modules over monads.</p>
+
+<p>Beware that modules over monads in <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> are often called <em>algebras</em> for the monad, since they literally are algebras in the sense of <a class="existingWikiWord" href="/nlab/show/universal+algebra">universal algebra</a>, see <a href="#AlgebrasForMonadsInCat">below</a>. By extension, one might speak of modules over monads in any <a class="existingWikiWord" href="/nlab/show/2-category">2-category</a> as “algebras for the monad”.</p>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/formal+dual">formally dual</a> concept is that of <em><a class="existingWikiWord" href="/nlab/show/coalgebra+over+a+comonad">coalgebra over a comonad</a></em>.</p>
+
+<h2 id="definition">Definition</h2>
+
+<h3 id="modules">Modules</h3>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/bicategory">bicategory</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo lspace="verythinmathspace">:</mo><mi>a</mi><mo>→</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">t \colon a \to a</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> with structure 2-cells <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo lspace="verythinmathspace">:</mo><mi>t</mi><mi>t</mi><mo>⇒</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">\mu \colon t t \Rightarrow t</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>η</mi><mo lspace="verythinmathspace">:</mo><msub><mn>1</mn> <mi>a</mi></msub><mo>⇒</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">\eta \colon 1_a \Rightarrow t</annotation></semantics></math>. Then a <strong>left <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-module</strong> (or <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-algebra</strong>) is given by a 1-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo lspace="verythinmathspace">:</mo><mi>b</mi><mo>→</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">x \colon b \to a</annotation></semantics></math> and a 2-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo lspace="verythinmathspace">:</mo><mi>t</mi><mi>x</mi><mo>⇒</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\lambda \colon t x \Rightarrow x</annotation></semantics></math>, where</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>t</mi><mi>t</mi><mi>x</mi></mtd> <mtd><mover><mo>→</mo><mrow><mi>μ</mi><mi>x</mi></mrow></mover></mtd> <mtd><mi>t</mi><mi>x</mi></mtd></mtr> <mtr><mtd><mi>t</mi><mi>λ</mi><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo><mi>λ</mi></mtd></mtr> <mtr><mtd><mi>t</mi><mi>x</mi></mtd> <mtd><munder><mo>→</mo><mi>λ</mi></munder></mtd> <mtd><mi>x</mi></mtd></mtr></mtable></mrow><mspace width="2em"></mspace><mspace width="2em"></mspace><mrow><mtable><mtr><mtd><mi>x</mi></mtd> <mtd><mover><mo>→</mo><mrow><mi>η</mi><mi>x</mi></mrow></mover></mtd> <mtd><mi>t</mi><mi>x</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mn>1</mn><mo>↘</mo></mtd> <mtd><mo stretchy="false">↓</mo><mi>λ</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>x</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+\array{
+  t t x &amp; \overset{\mu x}{\to} &amp; t x \\
+  t\lambda\downarrow &amp; &amp; \downarrow \lambda \\
+  t x &amp; \underset{\lambda}{\to} &amp; x
+}
+\qquad \qquad
+\array{
+  x &amp; \overset{\eta x}{\to} &amp; t x \\
+  &amp; 1\searrow &amp; \downarrow \lambda \\
+  &amp; &amp; x
+}
+
+</annotation></semantics></math></div>
+<p>commute. Similarly, a <strong>right <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-module</strong> (or <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-opalgebra</strong>) is given by a 1-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi><mo lspace="verythinmathspace">:</mo><mi>a</mi><mo>→</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">y \colon a \to c</annotation></semantics></math> and a 2-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi><mo lspace="verythinmathspace">:</mo><mi>y</mi><mi>t</mi><mo>⇒</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">\rho \colon y t \Rightarrow y</annotation></semantics></math>, with commuting diagrams as above with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math> on the left instead of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> on the right.</p>
+
+<p>Clearly, a right <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-module in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> is the same thing as a left <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-module in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>K</mi> <mi mathvariant="normal">op</mi></msup></mrow><annotation encoding="application/x-tex">K^{\mathrm{op}}</annotation></semantics></math>. A <strong>left <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-comodule</strong> or <strong>coalgebra</strong> is then a left <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-module in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>K</mi> <mi mathvariant="normal">co</mi></msup></mrow><annotation encoding="application/x-tex">K^{\mathrm{co}}</annotation></semantics></math>, and a <strong>right <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-comodule</strong> is a left <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-module in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>K</mi> <mi mathvariant="normal">coop</mi></msup></mrow><annotation encoding="application/x-tex">K^{\mathrm{coop}}</annotation></semantics></math>.</p>
+
+<p>A <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-module of any of these sorts is <em>a fortiori</em> an <a class="existingWikiWord" href="/nlab/show/algebra+over+an+endomorphism">algebra over the underlying endomorphism</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>.</p>
+
+<h3 id="bimodules">Bimodules</h3>
+
+<p>Given monads <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>, an <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi><mo>,</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">s,t</annotation></semantics></math>-bimodule</strong> is given by a 1-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo lspace="verythinmathspace">:</mo><mi>b</mi><mo>→</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">x\colon b \to a</annotation></semantics></math>, together with the structures of a right <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math>-module <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi><mo lspace="verythinmathspace">:</mo><mi>x</mi><mi>s</mi><mo>⇒</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\rho \colon x s \Rightarrow x</annotation></semantics></math> and a left <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-module <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo lspace="verythinmathspace">:</mo><mi>t</mi><mi>x</mi><mo>⇒</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\lambda \colon t x \Rightarrow x</annotation></semantics></math> that are compatible in the sense that the diagram</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>t</mi><mi>x</mi><mi>s</mi></mtd> <mtd><mover><mo>→</mo><mrow><mi>t</mi><mi>ρ</mi></mrow></mover></mtd> <mtd><mi>t</mi><mi>x</mi></mtd></mtr> <mtr><mtd><mi>λ</mi><mi>s</mi><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo><mi>λ</mi></mtd></mtr> <mtr><mtd><mi>x</mi><mi>s</mi></mtd> <mtd><munder><mo>→</mo><mi>ρ</mi></munder></mtd> <mtd><mi>x</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+\array{
+  t x s &amp; \overset{t\rho}{\to} &amp; t x \\
+  \lambda s \downarrow &amp; &amp; \downarrow \lambda \\
+  x s &amp; \underset{\rho}{\to} &amp; x
+}
+
+</annotation></semantics></math></div>
+<p>commutes. Such a bimodule may be written as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo lspace="verythinmathspace">:</mo><mi>s</mi><mi>⇸</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">x \colon s &amp;#8696; t</annotation></semantics></math>.</p>
+
+<p>A <strong>morphism</strong> of left <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-modules <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>λ</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>x</mi><mo>′</mo><mo>,</mo><mi>λ</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x,\lambda) \to (x',\lambda')</annotation></semantics></math> is given by a 2-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo lspace="verythinmathspace">:</mo><mi>x</mi><mo>⇒</mo><mi>x</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\alpha \colon x \Rightarrow x'</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo>′</mo><mo>∘</mo><mi>t</mi><mi>α</mi><mo>=</mo><mi>α</mi><mo>∘</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda' \circ t\alpha = \alpha \circ \lambda</annotation></semantics></math>. Similarly, a morphism of right <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-modules <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><mi>ρ</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>y</mi><mo>′</mo><mo>,</mo><mi>ρ</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(y,\rho) \to (y',\rho')</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi><mo lspace="verythinmathspace">:</mo><mi>y</mi><mo>⇒</mo><mi>y</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\beta \colon y \Rightarrow y'</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi><mo>′</mo><mo>∘</mo><mi>α</mi><mi>s</mi><mo>=</mo><mi>α</mi><mo>∘</mo><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho' \circ \alpha s = \alpha \circ \rho</annotation></semantics></math>. A morphism of bimodules <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>λ</mi><mo>,</mo><mi>ρ</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>x</mi><mo>′</mo><mo>,</mo><mi>λ</mi><mo>′</mo><mo>,</mo><mi>ρ</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x,\lambda,\rho) \to (x',\lambda',\rho')</annotation></semantics></math> is given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo lspace="verythinmathspace">:</mo><mi>x</mi><mo>⇒</mo><mi>x</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\alpha \colon x \Rightarrow x'</annotation></semantics></math> that is a morphism of both left and right modules.</p>
+
+<p>More abstractly, the monads <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> give rise to ordinary monads <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>s</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">s^*</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>t</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">t_*</annotation></semantics></math> on the hom-category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">K(b,a)</annotation></semantics></math>, by pre- and post-composition. The associativity isomorphism of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> then gives rise to an invertible <a class="existingWikiWord" href="/nlab/show/distributive+law">distributive law</a> between these, so that the composite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>s</mi> <mo>*</mo></msup><msub><mi>t</mi> <mo>*</mo></msub><mo>≅</mo><msub><mi>t</mi> <mo>*</mo></msub><msup><mi>s</mi> <mo>*</mo></msup><mo lspace="verythinmathspace">:</mo><mi>x</mi><mo>↦</mo><mi>t</mi><mi>x</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">s^* t_* \cong t_* s^* \colon x \mapsto t x s</annotation></semantics></math> is again a monad. Then the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Mod</mi> <mi>K</mi></msub><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Mod_K(s,t)</annotation></semantics></math> of bimodules from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math> is the ordinary <a class="existingWikiWord" href="/nlab/show/Eilenberg--Moore+category">Eilenberg–Moore category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>a</mi><msup><mo stretchy="false">)</mo> <mrow><msup><mi>s</mi> <mo>*</mo></msup><msub><mi>t</mi> <mo>*</mo></msub></mrow></msup></mrow><annotation encoding="application/x-tex">K(b,a)^{s^* t_*}</annotation></semantics></math>.</p>
+
+<h3 id="AlgebrasForMonadsInCat">Algebras for monads in Cat</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">K =</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>η</mi><mo>,</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T,\eta,\mu)</annotation></semantics></math> is a monad on a <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, then a left <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-module <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo lspace="verythinmathspace">:</mo><mn>1</mn><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A \colon 1 \to C</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/terminal+category">terminal category</a>, is usually called an <strong><a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebra over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>T</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">T</annotation>
+  </semantics>
+</math></a></strong> or <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebra</strong> (see there): it is given by an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A \in C</annotation></semantics></math> together with a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo lspace="verythinmathspace">:</mo><mi>T</mi><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\alpha \colon T A \to A</annotation></semantics></math>, such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>T</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>μ</mi> <mi>A</mi></msub></mrow></mover></mtd> <mtd><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mi>T</mi><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo><mi>α</mi></mtd></mtr> <mtr><mtd><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mtd> <mtd><mover><mo>→</mo><mi>α</mi></mover></mtd> <mtd><mi>A</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array {
+  T(T(A))              &amp; \stackrel{\mu_A}\rightarrow  &amp; T(A) \\
+  T(\alpha) \downarrow &amp;                              &amp; \downarrow \alpha \\
+  T(A)                 &amp; \stackrel{\alpha}\rightarrow &amp; A
+}
+
+</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>A</mi></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>η</mi> <mi>A</mi></msub></mrow></mover></mtd> <mtd><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mi>id</mi> <mi>A</mi></msub><mo>↘</mo></mtd> <mtd><mo stretchy="false">↓</mo><mi>α</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>A</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array {
+  A &amp; \stackrel{\eta_A}\rightarrow  &amp; T(A) \\
+    &amp; id_A \searrow &amp; \downarrow \alpha \\
+    &amp;               &amp; A
+}
+
+</annotation></semantics></math></div>
+<p>commute.</p>
+
+<p>In particular, every algebra over a monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>η</mi><mo>,</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T,\eta,\mu)</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat</annotation></semantics></math> has the structure of an <a class="existingWikiWord" href="/nlab/show/algebra+over+an+endofunctor">algebra over the underlying endofunctor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>.</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras can also be defined as left <a class="existingWikiWord" href="/nlab/show/modules">modules</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> <em>qua</em> monoid in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>End</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">End(C)</annotation></semantics></math>. There the object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is represented by the constant endofunctor at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>.</p>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> is the category of these algebras. It has a universal property that allows the notion of <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+object">Eilenberg-Moore object</a> to be defined in any bicategory.</p>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="colimits">Colimits</h3>
+
+<p>see at <em><a class="existingWikiWord" href="/nlab/show/colimits+in+categories+of+algebras">colimits in categories of algebras</a></em></p>
+
+<h3 id="tensor_product">Tensor product</h3>
+
+<p>Given bimodules <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>′</mo><mo lspace="verythinmathspace">:</mo><mi>r</mi><mi>⇸</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">x' \colon r &amp;#8696; s</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo lspace="verythinmathspace">:</mo><mi>s</mi><mi>⇸</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">x \colon s &amp;#8696; t</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>,</mo><mi>s</mi><mo>,</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">r,s,t</annotation></semantics></math> are monads on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">c,b,a</annotation></semantics></math> respectively, we may be able to form the <strong>tensor product</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><msub><mo>⊗</mo> <mi>s</mi></msub><mi>x</mi><mo>′</mo><mo lspace="verythinmathspace">:</mo><mi>r</mi><mi>⇸</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">x \otimes_s x' \colon r &amp;#8696; t</annotation></semantics></math> just as in the case of bimodules over rings. If the hom-categories of the bicategory <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> have <a class="existingWikiWord" href="/nlab/show/reflexive+coequalizer">reflexive coequalizer</a>s that are preserved by composition on both sides, then the tensor product is given by the reflexive coequalizer in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">K(c,a)</annotation></semantics></math></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>x</mi><mi>s</mi><mi>x</mi><mo>′</mo></mtd> <mtd><mover><mo>→</mo><mo>→</mo></mover></mtd> <mtd><mi>x</mi><mi>x</mi><mo>′</mo></mtd> <mtd><mo>→</mo><mi>x</mi><msub><mo>⊗</mo> <mi>s</mi></msub><mi>x</mi><mo>′</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+\array{
+  x s x' &amp; \overset{\to}{\to} &amp; x x' &amp; \to x \otimes_s x'
+}
+
+</annotation></semantics></math></div>
+<p>where the parallel arrows are the two induced actions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi><mi>x</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\rho x'</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">x \lambda</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math>. Indeed, under the hypothesis on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> the forgetful functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Mod</mi> <mi>K</mi></msub><mo stretchy="false">(</mo><mi>r</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>K</mi><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>a</mi><msup><mo stretchy="false">)</mo> <mrow><msup><mi>r</mi> <mo>*</mo></msup><msub><mi>t</mi> <mo>*</mo></msub></mrow></msup><mo>→</mo><mi>K</mi><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Mod_K(r,t) = K(c,a)^{r^* t_*} \to K(c,a)</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/colimits+in+categories+of+algebras">reflects reflexive coequalizers</a>, because the monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>r</mi> <mo>*</mo></msup><msub><mi>t</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">r^* t_*</annotation></semantics></math> preserves them, and so <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><msub><mo>⊗</mo> <mi>s</mi></msub><mi>x</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">x \otimes_s x'</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>,</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">r,t</annotation></semantics></math>-bimodule.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> satisfies the above conditions then there is a bicategory <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mod</mi><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Mod(K)</annotation></semantics></math> consisting of monads, bimodules and bimodule morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math>. The identity module on a monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math> itself, and the unit and associativity conditions follow from the <a class="existingWikiWord" href="/nlab/show/universal+property">universal property</a> of the above coequalizer. There is a <a class="existingWikiWord" href="/nlab/show/lax+functor">lax</a> forgetful functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mod</mi><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo><mo>→</mo><mi>K</mi></mrow><annotation encoding="application/x-tex">Mod(K) \to K</annotation></semantics></math>, with comparison morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mn>1</mn> <mi>a</mi></msub><mo>→</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">1_a \to t</annotation></semantics></math> the unit of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>x</mi><mo>′</mo><mo>→</mo><mi>x</mi><msub><mo>⊗</mo> <mi>s</mi></msub><mi>x</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">x x' \to x \otimes_s x'</annotation></semantics></math> the coequalizer map.</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi><mo>=</mo><mi>Span</mi><mo stretchy="false">(</mo><mi>Set</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">K = Span(Set)</annotation></semantics></math>, the bicategory of <a class="existingWikiWord" href="/nlab/show/span">span</a>s of sets, then a monad in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> is precisely a small category. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mod</mi><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo><mo>=</mo><mi>Prof</mi></mrow><annotation encoding="application/x-tex">Mod(K) = Prof</annotation></semantics></math>, the category of small categories, <a class="existingWikiWord" href="/nlab/show/profunctor">profunctor</a>s and natural transformations.</p>
+
+<p>More generally, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mod</mi><mo stretchy="false">(</mo><mi>Span</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Mod(Span(C))</annotation></semantics></math>, for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> any category with coequalizers and pullbacks that preserve them, consists of <a class="existingWikiWord" href="/nlab/show/internal+category">internal categories</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, together with <a class="existingWikiWord" href="/nlab/show/internal+profunctor">internal profunctors</a> between them and transformations between those.</p>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><strong>algebra over a monad</strong>, <a class="existingWikiWord" href="/nlab/show/algebra+over+an+endofunctor">algebra over an endofunctor</a>, <a class="existingWikiWord" href="/nlab/show/coalgebra+over+an+endofunctor">coalgebra over an endofunctor</a>, <a class="existingWikiWord" href="/nlab/show/algebra+over+a+profunctor">algebra over a profunctor</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-monad">∞-algebra over an (∞,1)-monad</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebras+over+a+monad">model structure on algebras over a monad</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+an+algebraic+theory">algebra over an algebraic theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-algebraic+theory">∞-algebra over an (∞,1)-algebraic theory</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/homotopy+T-algebra">homotopy T-algebra</a> / <a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+T-algebras">model structure on simplicial T-algebras</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+an+operad">algebra over an operad</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-operad">∞-algebra over an (∞,1)-operad</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebras+over+an+operad">model structure on algebras over an operad</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a>, <a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli category</a>, <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+object">Eilenberg-Moore object</a>, <a class="existingWikiWord" href="/nlab/show/Kleisli+object">Kleisli object</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+Isbell">John Isbell</a>, <em>Generic algebras</em> Transactions of the AMS, vol 275, number 2 (<a href="http://www.ams.org/journals/tran/1983-275-02/S0002-9947-1983-0682715-8/S0002-9947-1983-0682715-8.pdf">pdf</a>)</p>
+</li>
+
+<li>
+<p>H. Lindner, <em>Commutative monads</em> in <em>Deuxiéme colloque sur l’algébre des catégories</em>. Amiens-1975. Résumés des conférences, pages 283-288. Cahiers de topologie et géométrie différentielle catégoriques, tome 16, nr. 3, 1975.</p>
+</li>
+
+<li>
+<p>R. Guitart, <em>Tenseurs et machines</em>, Cahiers de Topologie et Géométrie Différentielle Catégoriques, 21(1):5-62, 1980.</p>
+</li>
+
+<li>
+<p>A. Kock. <em>Closed categories generated by commutative monads</em>, Journal of the Australian Mathematical Society, 12(04):405-424, 1971.</p>
+</li>
+
+<li>
+<p>G. J. Seal. <em>Tensors, monads and actions</em>, Theory Appl. Categ., 28:No. 15, 403-433, 2013.</p>
+</li>
+</ul>
+
+<p>Discussion of <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> structures on categories of <a class="existingWikiWord" href="/nlab/show/coalgebras">coalgebras</a> over <a class="existingWikiWord" href="/nlab/show/comonads">comonads</a> is in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Kathryn+Hess">Kathryn Hess</a>, <a class="existingWikiWord" href="/nlab/show/Brooke+Shipley">Brooke Shipley</a>, <em>The homotopy theory of coalgebras over a comonad</em> (<a href="http://arxiv.org/abs/1205.3979">arXiv:1205.3979</a>)</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on October 30, 2021 at 18:30:15.
+    See the <a href="/nlab/history/module+over+a+monad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/module+over+a+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/647/#Item_23">Discuss</a><span class="backintime"><a href="/nlab/revision/module+over+a+monad/34" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/module+over+a+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/module+over+a+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (34 revisions)</a>
+  <a href="/nlab/show/module+over+a+monad/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/module+over+a+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/module+over+a+monad" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

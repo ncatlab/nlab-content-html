@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Kleisli category in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Kleisli category
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/4193/#Item_39" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Kleisli category</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="2category_theory">2-Category theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/2-category+theory">2-category theory</a></strong></p>
+
+<p><strong>Definitions</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-category">2-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/strict+2-category">strict 2-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bicategory">bicategory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/enriched+bicategory">enriched bicategory</a></p>
+</li>
+</ul>
+
+<p><strong>Transfors between 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-functor">2-functor</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lax+functor">lax functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/equivalence+of+2-categories">equivalence of 2-categories</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-natural+transformation">2-natural transformation</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lax+natural+transformation">lax natural transformation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/icon">icon</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/modification">modification</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Yoneda+lemma+for+bicategories">Yoneda lemma for bicategories</a></p>
+</li>
+</ul>
+
+<p><strong>Morphisms in 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fully+faithful+morphism">fully faithful morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/faithful+morphism">faithful morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/conservative+morphism">conservative morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pseudomonic+morphism">pseudomonic morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/discrete+morphism">discrete morphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/eso+morphism">eso morphism</a></p>
+</li>
+</ul>
+
+<p><strong>Structures in 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mate">mate</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monad">monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cartesian+object">cartesian object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fibration+in+a+2-category">fibration in a 2-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/codiscrete+cofibration">codiscrete cofibration</a></p>
+</li>
+</ul>
+
+<p><strong>Limits in 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-limit">2-limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-pullback">2-pullback</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/comma+object">comma object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/inserter">inserter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/inverter">inverter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/equifier">equifier</a></p>
+</li>
+</ul>
+
+<p><strong>Structures on 2-categories</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-monad">2-monad</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lax-idempotent+2-monad">lax-idempotent 2-monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pseudomonad">pseudomonad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pseudoalgebra+for+a+2-monad">pseudoalgebra for a 2-monad</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+2-category">monoidal 2-category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/cartesian+bicategory">cartesian bicategory</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gray+tensor+product">Gray tensor product</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/proarrow+equipment">proarrow equipment</a></p>
+</li>
+</ul>
+</div></div>
+
+<h4 id="higher_algebra">Higher algebra</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/higher+algebra">higher algebra</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/universal+algebra">universal algebra</a></p>
+
+<h2 id="algebraic_theories">Algebraic theories</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebraic+theory">algebraic theory</a> / <a class="existingWikiWord" href="/nlab/show/2-algebraic+theory">2-algebraic theory</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-algebraic+theory">(∞,1)-algebraic theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monad">monad</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-monad">(∞,1)-monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/operad">operad</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-operad">(∞,1)-operad</a></p>
+</li>
+</ul>
+
+<h2 id="algebras_and_modules">Algebras and modules</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebra over a monad</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-monad">∞-algebra over an (∞,1)-monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+an+algebraic+theory">algebra over an algebraic theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-algebraic+theory">∞-algebra over an (∞,1)-algebraic theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+an+operad">algebra over an operad</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-operad">∞-algebra over an (∞,1)-operad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/action">action</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-action">∞-action</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/representation">representation</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-representation">∞-representation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/module">module</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-module">∞-module</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/associated+bundle">associated bundle</a>, <a class="existingWikiWord" href="/nlab/show/associated+%E2%88%9E-bundle">associated ∞-bundle</a></p>
+</li>
+</ul>
+
+<h2 id="higher_algebras">Higher algebras</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+%28%E2%88%9E%2C1%29-category">monoidal (∞,1)-category</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+%28%E2%88%9E%2C1%29-category">symmetric monoidal (∞,1)-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoid+in+an+%28%E2%88%9E%2C1%29-category">monoid in an (∞,1)-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/commutative+monoid+in+an+%28%E2%88%9E%2C1%29-category">commutative monoid in an (∞,1)-category</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p>symmetric monoidal (∞,1)-category of spectra</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/smash+product+of+spectra">smash product of spectra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+smash+product+of+spectra">symmetric monoidal smash product of spectra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/ring+spectrum">ring spectrum</a>, <a class="existingWikiWord" href="/nlab/show/module+spectrum">module spectrum</a>, <a class="existingWikiWord" href="/nlab/show/algebra+spectrum">algebra spectrum</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+algebra">A-∞ algebra</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+ring">A-∞ ring</a>, <a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+space">A-∞ space</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/C-%E2%88%9E+algebra">C-∞ algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/E-%E2%88%9E+ring">E-∞ ring</a>, <a class="existingWikiWord" href="/nlab/show/E-%E2%88%9E+algebra">E-∞ algebra</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-module">∞-module</a>, <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-module+bundle">(∞,1)-module bundle</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/multiplicative+cohomology+theory">multiplicative cohomology theory</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/L-%E2%88%9E+algebra">L-∞ algebra</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/deformation+theory">deformation theory</a></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="model_category_presentations">Model category presentations</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+T-algebras">model structure on simplicial T-algebras</a> / <a class="existingWikiWord" href="/nlab/show/homotopy+T-algebra">homotopy T-algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+operads">model structure on operads</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebras+over+an+operad">model structure on algebras over an operad</a></p>
+</li>
+</ul>
+
+<h2 id="geometry_on_formal_duals_of_algebras">Geometry on formal duals of algebras</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Isbell+duality">Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/derived+geometry">derived geometry</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Deligne+conjecture">Deligne conjecture</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/delooping+hypothesis">delooping hypothesis</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+Dold-Kan+correspondence">monoidal Dold-Kan correspondence</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/higher+algebra+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="kleisli_category">Kleisli category</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#definition'>Definition</a></li>
+<ul>
+<li><a href='#in_terms_of_free_algebras'>In terms of free algebras</a></li>
+<li><a href='#InTermsOfKleisliMorphisms'>In terms of Kleisli morphisms</a></li>
+</ul>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#UniversalProperties'>Universal properties</a></li>
+</ul>
+<li><a href='#examples'>Examples</a></li>
+<ul>
+<li><a href='#general'>General</a></li>
+<li><a href='#specific'>Specific</a></li>
+</ul>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>Given a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> on some <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, then its <em>Kleisli category</em> is the <a class="existingWikiWord" href="/nlab/show/full+subcategory">full subcategory</a> of the <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>, hence the category of <a class="existingWikiWord" href="/nlab/show/algebras+over+a+monad">T-algebras</a>, on those that are <em><a href="algebra+over+a+monad#FreeAlgebras">free</a></em> <a class="existingWikiWord" href="/nlab/show/algebra+for+a+monad">T-algebras</a> (free <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/modules">modules</a>).</p>
+
+<p>Explicitly one may describe (Prop. <a class="maruku-ref" href="#KleisliEquivalence"></a> below) the <em>Kleisli category</em> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> (Def. <a class="maruku-ref" href="#KleisliCategory"></a>) to have as <a class="existingWikiWord" href="/nlab/show/objects">objects</a> the objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, and a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \to Y</annotation></semantics></math> in the Kleisli category is a morphism in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>→</mo><mi>T</mi><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">X \to T(Y)</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>. The monad structure induces a natural <a class="existingWikiWord" href="/nlab/show/composition">composition</a> of such “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-shifted” morphisms.</p>
+
+<p>The Kleisli category is also characterized by the following <a class="existingWikiWord" href="/nlab/show/universal+property">universal property</a>:</p>
+
+<p>Since every <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a> gives rise to a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> on the <a class="existingWikiWord" href="/nlab/show/domain">domain</a> of its <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a>, we might ask if every monad may be construed as arising from an adjunction. This is in fact true, and the <a class="existingWikiWord" href="/nlab/show/initial+object">initial</a> such adjunction in the <a class="existingWikiWord" href="/nlab/show/adjoint+functor#RelationToMonads">category of adjunctions</a> for the given monad has the Kleisli category as the codomain of its left adjoint.</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>T</mi></mstyle><mo>=</mo><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>μ</mi><mo>,</mo><mi>η</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{T} = (T,\mu,\eta)</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> in <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo lspace="verythinmathspace">:</mo><mi>𝒞</mi><mo>⟶</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">T \colon \mathcal{C} \longrightarrow \mathcal{C}</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a> with</p>
+
+<ul>
+<li>
+<p>multiplication <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo lspace="verythinmathspace">:</mo><mi>T</mi><mi>T</mi><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">\mu \colon T T \to T</annotation></semantics></math>,</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/unit+of+a+monad">unit</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>η</mi><mo lspace="verythinmathspace">:</mo><msub><mi>Id</mi> <mi>C</mi></msub><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">\eta \colon Id_C \to T</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<h3 id="in_terms_of_free_algebras">In terms of free algebras</h3>
+
+<p>
+<div class='num_defn' id='FreeTAlgebras'>
+<h6>Definition</h6>
+<p></p>
+
+<p>A <strong>free <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>T</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/algebra">algebra over a monad</a></strong> (or free <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>T</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>-module) is a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>T</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>-algebra (module) of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">(</mo><mi>M</mi><mo stretchy="false">)</mo><mo>,</mo><msub><mi>μ</mi> <mi>M</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T(M),\mu_M)</annotation></semantics></math>, where the <a class="existingWikiWord" href="/nlab/show/action">action</a> is the component of multiplication transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>M</mi></msub><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">(</mo><mi>M</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>→</mo><mi>T</mi><mo stretchy="false">(</mo><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu_M : T(T(M))\to T(M)</annotation></semantics></math>.</p>
+
+<p></p>
+</div>
+</p>
+
+<p>
+<div class='num_defn' id='KleisliCategory'>
+<h6>Definition</h6>
+<p></p>
+
+<p>The <strong>Kleisli category</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>C</mi> <mstyle mathvariant="bold"><mi>T</mi></mstyle></msub></mrow><annotation encoding="application/x-tex">C_{\mathbf{T}}</annotation></semantics></math> of the monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>T</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/full+subcategory">full subcategory</a> of the <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>C</mi> <mstyle mathvariant="bold"><mi>T</mi></mstyle></msup></mrow><annotation encoding="application/x-tex">C^{\mathbf{T}}</annotation></semantics></math> on the free <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>T</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>-algebras (Def. <a class="maruku-ref" href="#FreeTAlgebras"></a>).</p>
+
+<p></p>
+</div>
+</p>
+
+<div class="num_remark">
+<h6 id="remark">Remark</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>:</mo><msup><mi>C</mi> <mstyle mathvariant="bold"><mi>T</mi></mstyle></msup><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">U:C^{\mathbf{T}}\to C</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/forgetful+functor">forgetful functor</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>C</mi><mo>→</mo><msup><mi>C</mi> <mstyle mathvariant="bold"><mi>T</mi></mstyle></msup></mrow><annotation encoding="application/x-tex">F: C\to C^{\mathbf{T}}</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/free+functor">free algebra functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>M</mi><mo>↦</mo><mo stretchy="false">(</mo><mi>T</mi><mi>M</mi><mo>,</mo><msub><mi>μ</mi> <mi>M</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F: M\mapsto (T M,\mu_M)</annotation></semantics></math>, then the Kleisli category is simply the <a class="existingWikiWord" href="/nlab/show/full+subcategory">full subcategory</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>C</mi> <mstyle mathvariant="bold"><mi>T</mi></mstyle></msup></mrow><annotation encoding="application/x-tex">C^{\mathbf{T}}</annotation></semantics></math> containing those objects in the image of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>.</p>
+</div>
+
+<h3 id="InTermsOfKleisliMorphisms">In terms of Kleisli morphisms</h3>
+
+<p>As another way of looking at this, we can keep the same objects as in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> but redefine the morphisms. This was the original Kleisli construction:</p>
+
+<p>
+<div class='num_defn' id='KleisliCategory'>
+<h6>Definition</h6>
+<p></p>
+
+<p>The <strong>Kleisli category</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>C</mi> <mstyle mathvariant="bold"><mi>T</mi></mstyle></msub></mrow><annotation encoding="application/x-tex">C_{\mathbf{T}}</annotation></semantics></math> of a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> on a <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> has:</p>
+
+<ol>
+<li>
+<p>as <a class="existingWikiWord" href="/nlab/show/objects">objects</a> the objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>,</p>
+</li>
+
+<li>
+<p>as <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi><mo>→</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">M \to N</annotation></semantics></math> the <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a> of the form</p>
+<div class="maruku-equation" id="eq:KleisliMorphism"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>M</mi><mo>⟶</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><mi>T</mi><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  
+  M \longrightarrow{\;\;} T(N)
+
+</annotation></semantics></math></div>
+<p>in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, called <strong>Kleisli morphisms</strong>;</p>
+</li>
+</ol>
+
+<p>and</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/composition">composition</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi><mover><mo>→</mo><mi>f</mi></mover><mi>T</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">M \xrightarrow{f} T N</annotation></semantics></math> with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mover><mo>→</mo><mi>g</mi></mover><mi>T</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">N \xrightarrow{ g } T P</annotation></semantics></math> is given by the <strong>Kleisli composition</strong> rule</p>
+<div class="maruku-equation" id="eq:KleisliComposition"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>g</mi><msub><mo>∘</mo> <mi>Kleisli</mi></msub><mi>f</mi><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><msub><mi>μ</mi> <mi>P</mi></msub><mo>∘</mo><mi>T</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>f</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>M</mi><mover><mo>⟶</mo><mi>f</mi></mover><mi>T</mi><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo><mover><mo>⟶</mo><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo></mrow></mover><mi>T</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>T</mi><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mover><mo>⟶</mo><mrow><msub><mi>μ</mi> <mi>z</mi></msub></mrow></mover><mi>T</mi><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>;</mo></mrow><annotation encoding="application/x-tex">
+  
+  g \circ_{Kleisli} f 
+  \;\coloneqq\; 
+  \mu_P \circ T(g) \circ f
+  \;\colon\;
+  M 
+    \overset{f}{\longrightarrow} 
+  T (N) 
+    \overset{T (g)}{\longrightarrow}
+  T \big(T (P)\big) 
+    \overset{\mu_z}{\longrightarrow}
+  T (P)
+  \,;
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/identity+morphisms">identity morphisms</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> is the Kleisli morphism which is the <a class="existingWikiWord" href="/nlab/show/unit+of+a+monad"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>T</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">T</annotation>
+  </semantics>
+</math>-unit</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi><mover><mo>→</mo><mrow><msub><mi>η</mi> <mi>M</mi></msub></mrow></mover><mi>T</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">M \xrightarrow{ \eta_M } T M</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<p></p>
+</div>
+</p>
+
+<p>
+<div class='num_prop' id='KleisliEquivalence'>
+<h6>Proposition</h6>
+<p><strong>(<a class="existingWikiWord" href="/nlab/show/Kleisli+equivalence">Kleisli equivalence</a>)</strong> <br /> The construction which sends a Kleisli morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mover><mo>→</mo><mi>f</mi></mover><mi>T</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \xrightarrow{f} T Y</annotation></semantics></math> <a class="maruku-eqref" href="#eq:KleisliMorphism">(1)</a> to</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mover><mo>⟶</mo><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mover><msup><mi>T</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo><mover><mo>⟶</mo><mrow><msub><mi>μ</mi> <mi>Y</mi></msub></mrow></mover><mi>T</mi><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  T(X) 
+    \overset{T(f)}{\longrightarrow} 
+  T^2(Y) 
+    \overset{\mu_Y}{\longrightarrow} 
+  T(Y)
+
+</annotation></semantics></math></div>
+<p>constitutes a <a class="existingWikiWord" href="/nlab/show/full+and+faithful+functor">full and faithful functor</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mi>T</mi></msub><mo>⟶</mo><msup><mi>𝒞</mi> <mi>T</mi></msup></mrow><annotation encoding="application/x-tex">
+  \mathcal{C}_{T} \longrightarrow \mathcal{C}^{T}
+
+</annotation></semantics></math></div>
+<p>from the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-Kleisli category (Def. <a class="maruku-ref" href="#KleisliCategory"></a>) to the category of <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>T</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">T</annotation>
+  </semantics>
+</math>-algebras</a>, hence constitutes an <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalence of categories</a> onto its <a class="existingWikiWord" href="/nlab/show/essential+image">essential image</a> which is that of free <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras.</p>
+
+<p></p>
+</div>
+</p>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p><a class="existingWikiWord" href="/nlab/show/full+functor">Fullness</a> holds because any morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo lspace="verythinmathspace">:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>T</mi><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g \colon T(X) \to T(Y)</annotation></semantics></math> of algebras has</p>
+
+<p>as antecedent the composite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mover><mo>→</mo><mrow><msub><mi>η</mi> <mi>X</mi></msub></mrow></mover><mi>T</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mi>g</mi></mover><mi>T</mi><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">X \stackrel{\eta_X}{\to} T(X) \stackrel{g}{\to} T(Y)</annotation></semantics></math>. Indeed, the latter is mapped by the functor into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>Y</mi></msub><mo>∘</mo><mi>T</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>T</mi><mo stretchy="false">(</mo><msub><mi>η</mi> <mi>X</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu_Y \circ T(g) \circ T(\eta_X)</annotation></semantics></math>, which is seen to be equal to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>∘</mo><msub><mi>μ</mi> <mi>X</mi></msub><mo>∘</mo><mi>T</mi><mo stretchy="false">(</mo><msub><mi>η</mi> <mi>X</mi></msub><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>g</mi></mrow><annotation encoding="application/x-tex">g \circ \mu_X \circ T(\eta_X) \;=\;g</annotation></semantics></math>, using that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/homomorphism">homomorphism</a> of algebras.</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/faithful+functor">Faithfulness</a> holds as follows: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>Y</mi></msub><mo>∘</mo><mi>T</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>μ</mi> <mi>Y</mi></msub><mo>∘</mo><mi>T</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu_Y \circ T(f) = \mu_Y \circ T(g)</annotation></semantics></math>, then precomposing by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>η</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">\eta_X</annotation></semantics></math> yields <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mi>Y</mi></msub><mo>∘</mo><mi>T</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>∘</mo><msub><mi>η</mi> <mi>X</mi></msub><mo>=</mo><msub><mi>μ</mi> <mi>Y</mi></msub><mo>∘</mo><msub><mi>η</mi> <mrow><mi>T</mi><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow></msub><mo>∘</mo><mi>f</mi><mo>=</mo><mi>f</mi></mrow><annotation encoding="application/x-tex">\mu_Y \circ T(f) \circ \eta_X = \mu_Y \circ \eta_{T(Y)} \circ f = f</annotation></semantics></math> and similarly for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>, hence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>=</mo><mi>g</mi></mrow><annotation encoding="application/x-tex">f = g</annotation></semantics></math>.</p>
+</div>
+
+<div class="num_remark">
+<h6 id="remark_2">Remark</h6>
+
+<p>This Kleisli composition plays an important role in <a class="existingWikiWord" href="/nlab/show/computer+science">computer science</a>; for this, see the article at <a class="existingWikiWord" href="/nlab/show/monad+%28in+computer+science%29">monad (in computer science)</a>.</p>
+</div>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="UniversalProperties">Universal properties</h3>
+
+<p>In more general 2-categories the <a class="existingWikiWord" href="/nlab/show/universal+properties">universal properties</a> of <a class="existingWikiWord" href="/nlab/show/Kleisli+objects">Kleisli objects</a> are dual to the universal properties of <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category#Definition">Eilenberg-Moore objects</a>.</p>
+
+<p>In particular, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>C</mi> <mstyle mathvariant="bold"><mi>T</mi></mstyle></msub></mrow><annotation encoding="application/x-tex">C_{\mathbf{T}}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/initial+object">initial</a> in the <a class="existingWikiWord" href="/nlab/show/adjoint+functor#RelationToMonads">category of adjunctions</a> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>T</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math> (whereas <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>C</mi> <mstyle mathvariant="bold"><mi>T</mi></mstyle></msup></mrow><annotation encoding="application/x-tex">C^{\mathbf{T}}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/terminal+objects">terminal</a>). For a proof, see <em><a class="existingWikiWord" href="/nlab/show/Category+Theory+in+Context">Category Theory in Context</a></em> Proposition 5.2.12.</p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="general">General</h3>
+
+<p>
+<div class='num_remark' id='CallByValueProgramming'>
+<h6>Example</h6>
+<p>In <a class="existingWikiWord" href="/nlab/show/type+theory">typed</a> <a class="existingWikiWord" href="/nlab/show/functional+programming">functional programming</a>, the Kleisli category is used to model <span class="newWikiWord">call-by-value<a href="/nlab/new/call-by-value">?</a></span> functions with <a class="existingWikiWord" href="/nlab/show/side+effects">side effects</a> and <a class="existingWikiWord" href="/nlab/show/computation">computation</a>. Dually, the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a> of a <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> may be used to model <span class="newWikiWord">call-by-name<a href="/nlab/new/call-by-name">?</a></span> programming , see <a href="Kleisli+category+of+a+comonad#CallByNameProgramming">there</a>.</p>
+
+<p>Generally, see at <em><a class="existingWikiWord" href="/nlab/show/monad+%28in+computer+science%29">monad (in computer science)</a></em> for more on this.</p>
+</div>
+</p>
+
+<h3 id="specific">Specific</h3>
+
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p><strong>(<a class="existingWikiWord" href="/nlab/show/matrix+multiplication">matrix multiplication</a> as (co-)Kleisli composition)</strong> <br /> See <a href="Kleisli+category+of+a+comonad#MatrixmultiplicationAsCoKleisliComposition">here</a>.</p>
+</div>
+</p>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kleisli+object">Kleisli object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kleisli+2-category">Kleisli 2-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monad+%28in+computer+science%29">monad (in computer science)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<p>The original articles:</p>
+
+<ul>
+<li id="Kleisli65">
+<p><a class="existingWikiWord" href="/nlab/show/Heinrich+Kleisli">Heinrich Kleisli</a>, <em>Every standard construction is induced by a pair of adjoint functors</em>, Proc. Amer. Math. Soc. <strong>16</strong>, AMS (1965) 544-546 &lbrack;<a href="http://www.ams.org/journals/proc/1965-016-03/S0002-9939-1965-0177024-4/">ISSN0002-9939</a>, <a href="https://www.jstor.org/stable/2034693">jstor:2034693</a>&rbrack;</p>
+</li>
+
+<li>
+<p>Jenö Szigeti, <em>On limits and colimits in the Kleisli category</em>, Cahiers de Topologie et Géométrie Différentielle Catégoriques, 24 no. 4 (1983), p. 381-391 (<a href="http://www.numdam.org/item?id=CTGDC_1983__24_4_381_0">NUMDAM</a>)</p>
+</li>
+</ul>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalence of categories</a> between the <a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli category</a> over a given <a class="existingWikiWord" href="/nlab/show/monad">monad</a> with the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a> of an <a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjoint</a> <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> (if it exists):</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Mark+Kleiner">Mark Kleiner</a>, <em>Adjoint monads and an isomorphism of the Kleisli categories</em>, Journal of Algebra
+<p>Volume <strong>133</strong> 1 (1990) 79-82 &lbrack;<a href="https://doi.org/10.1016/0021-8693(90)90069-Z">doi:10.1016/0021-8693(90)90069-Z</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>Discussion of cases where the inclusion of the Kleisli category into the <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a> is a <a class="existingWikiWord" href="/nlab/show/reflective+subcategory">reflective subcategory</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Marcelo+Fiore">Marcelo Fiore</a>, <a class="existingWikiWord" href="/nlab/show/Matias+Menni">Matias Menni</a>, <em>Reflective Kleisli subcategories of the category of Eilenberg-Moore algebras for factorization monads</em>, Theory and Applications of Categories, Vol. 15, CT2004, No. 2, pp 40-65. (<a href="http://www.tac.mta.ca/tac/volumes/15/2/15-02abs.html">TAC</a>)</li>
+</ul>
+
+<p>Discussion of combined “double” or “two-sided” Kleisli categories, combining the Kleisli category of a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> with the <a class="existingWikiWord" href="/nlab/show/co-Kleisli+category">co-Kleisli category</a> of a <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> that <a class="existingWikiWord" href="/nlab/show/distributive+law">distributes</a> over it:</p>
+
+<ul>
+<li id="BrookesVanStone93"><a class="existingWikiWord" href="/nlab/show/Stephen+Brookes">Stephen Brookes</a>, <a class="existingWikiWord" href="/nlab/show/Kathryn+Van+Stone">Kathryn Van Stone</a>, <em>Monads and Comonads in Intensional Semantics</em> (1993) &lbrack;<a href="https://apps.dtic.mil/sti/citations/ADA266522">dtic:ADA266522</a>, <a href="https://www.cs.cmu.edu/~brookes/papers/MonadsComonads.pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>and generalization to <a class="existingWikiWord" href="/nlab/show/2-monads">2-monads</a>:</p>
+
+<ul>
+<li id="Garner08"><a class="existingWikiWord" href="/nlab/show/Richard+Garner">Richard Garner</a>, pp. 11 of: <em>Polycategories via pseudo-distributive laws</em>, Advances in Mathematics <strong>218</strong> 3 (2008) 781-827 &lbrack;<a href="https://arxiv.org/abs/math/0606735">arXiv:0606735</a>, <a href="https://doi.org/10.1016/j.aim.2008.02.001">doi:10.1016/j.aim.2008.02.001</a>
+<p>&rbrack;</p>
+</li>
+</ul>
+
+<p>Discussion in <a class="existingWikiWord" href="/nlab/show/internal+category">internal category</a> theory:</p>
+
+<ul>
+<li>Tomasz Brzeziński, Adrian Vazquez-Marquez, <em>Internal Kleisli categories</em>, Journal of Pure and Applied Algebra <strong>215</strong> 9 (2011) 213-147 &lbrack;<a href="http://arxiv.org/abs/0911.4048">arXiv:0911.4048</a>&rbrack;</li>
+</ul>
+
+<p>Discussion of Kleisli categories in <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a> is in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Alex+Simpson">Alex Simpson</a>, <em>Recursive types in Kleisli Categories</em> (<a href="https://www.research.ed.ac.uk/en/publications/recursive-types-in-kleisli-categories">pdf</a>)</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on October 30, 2022 at 16:13:33.
+    See the <a href="/nlab/history/Kleisli+category" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Kleisli+category" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4193/#Item_39">Discuss</a><span class="backintime"><a href="/nlab/revision/Kleisli+category/40" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Kleisli+category" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Kleisli+category" accesskey="S" class="navlink" id="history" rel="nofollow">History (40 revisions)</a>
+  <a href="/nlab/show/Kleisli+category/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Kleisli+category" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Kleisli+category" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

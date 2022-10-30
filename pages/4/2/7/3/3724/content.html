@@ -1,0 +1,688 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Dedekind cut in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Dedekind cut
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/5630/#Item_6" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Dedekind cuts</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="analysis">Analysis</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/analysis">analysis</a></strong> (<a class="existingWikiWord" href="/nlab/show/differential+calculus">differential</a>/<a class="existingWikiWord" href="/nlab/show/integral+calculus">integral</a> <a class="existingWikiWord" href="/nlab/show/calculus">calculus</a>, <a class="existingWikiWord" href="/nlab/show/functional+analysis">functional analysis</a>, <a class="existingWikiWord" href="/nlab/show/topology">topology</a>)</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/epsilontic+analysis">epsilontic analysis</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/infinitesimal+analysis">infinitesimal analysis</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/computable+analysis">computable analysis</a></p>
+
+<p><em><a class="existingWikiWord" href="/nlab/show/Introduction+to+Topology+--+1">Introduction</a></em></p>
+
+<h2 id="basic_concepts">Basic concepts</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/triangle+inequality">triangle inequality</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/metric+space">metric space</a>, <a class="existingWikiWord" href="/nlab/show/normed+vector+space">normed vector space</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/open+ball">open ball</a>, <a class="existingWikiWord" href="/nlab/show/open+subset">open subset</a>, <a class="existingWikiWord" href="/nlab/show/neighbourhood">neighbourhood</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/metric+topology">metric topology</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/sequence">sequence</a>, <a class="existingWikiWord" href="/nlab/show/net">net</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/convergence">convergence</a>, <a class="existingWikiWord" href="/nlab/show/limit+of+a+sequence">limit of a sequence</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/compact+space">compactness</a>, <a class="existingWikiWord" href="/nlab/show/sequentially+compact+space">sequential compactness</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/differentiation">differentiation</a>, <a class="existingWikiWord" href="/nlab/show/integration">integration</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/topological+vector+space">topological vector space</a></p>
+
+<h2 id="basic_facts">Basic facts</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/continuous+metric+space+valued+function+on+compact+metric+space+is+uniformly+continuous">continuous metric space valued function on compact metric space is uniformly continuous</a></p>
+
+<p>…</p>
+
+<h2 id="theorems">Theorems</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/intermediate+value+theorem">intermediate value theorem</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/extreme+value+theorem">extreme value theorem</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Heine-Borel+theorem">Heine-Borel theorem</a></p>
+
+<p>…</p>
+</div></div>
+</div>
+</div>
+
+<h1 id="dedekind_cuts">Dedekind cuts</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#Definitions'>Definitions</a></li>
+<ul>
+<li><a href='#using_open_intervals'>Using open intervals</a></li>
+</ul>
+<li><a href='#motivation'>Motivation</a></li>
+<li><a href='#properties'>Properties</a></li>
+<li><a href='#variations'>Variations</a></li>
+<ul>
+<li><a href='#overdetermined_cuts'>Overdetermined cuts</a></li>
+<li><a href='#covering_cuts'>Covering cuts</a></li>
+<li><a href='#onesided_cuts'>One-sided cuts</a></li>
+<li><a href='#unbounded_cuts'>Unbounded cuts</a></li>
+<li><a href='#intervals'>Interval cuts</a></li>
+<li><a href='#predicative_cuts'>Predicative cuts</a></li>
+<li><a href='#cuts_of_other_numbers'>Cuts of other numbers</a></li>
+</ul>
+<li><a href='#see_also'>See also</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>Dedekind cuts are a way to make precise the idea that a <a class="existingWikiWord" href="/nlab/show/real+number">real number</a> is that which can be approximated (in the <a class="existingWikiWord" href="/nlab/show/absolute+value">absolute value</a> metric) by <a class="existingWikiWord" href="/nlab/show/rational+numbers">rational numbers</a>.</p>
+
+<p>In 1872, <a class="existingWikiWord" href="/nlab/show/Richard+Dedekind">Richard Dedekind</a> published <em>Stetigkeit und irrationale Zahlen</em> (Continuity and irrational numbers), in which he pointed out that a real number may be uniquely determined its order relationships with rational numbers. That is, the real number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is determined by its <strong>lower set</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">L_x</annotation></semantics></math> and its <strong>upper set</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">U_x</annotation></semantics></math>:</p>
+<div class="maruku-equation" id="eq:cuts"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><msub><mi>L</mi> <mi>x</mi></msub><mo>≔</mo><mo stretchy="false">{</mo><mi>a</mi><mo lspace="verythinmathspace">:</mo><mi>ℚ</mi><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><mspace width="thickmathspace"></mspace><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo stretchy="false">}</mo><mo>,</mo></mtd></mtr> <mtr><mtd><msub><mi>U</mi> <mi>x</mi></msub><mo>≔</mo><mo stretchy="false">{</mo><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>ℚ</mi><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><mspace width="thickmathspace"></mspace><mi>x</mi><mo>&lt;</mo><mi>b</mi><mo stretchy="false">}</mo><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">  \begin {split}
+   L_x \coloneqq \{ a\colon \mathbb{Q} \;|\; a \lt x \} ,\\
+   U_x \coloneqq \{ b\colon \mathbb{Q} \;|\; x \lt b \}
+.\end {split} 
+</annotation></semantics></math></div>
+<p>Dedekind had found great success understanding the ‘ideal numbers’ of <a class="existingWikiWord" href="/nlab/show/ring+theory">ring theory</a> as certain sets, which are what we now understand as <a class="existingWikiWord" href="/nlab/show/ideal+of+a+ring">ideals</a>. So he defined a ‘real number’ as a pair of sets of rational numbers, the lower and upper sets shown above (actually a slight variation). Such a pair of sets of rational numbers he called a ‘Schnitt’ (English ‘cut’), nowadays called a ‘Dedekind cut’.</p>
+
+<h2 id="Definitions">Definitions</h2>
+
+<p>Exactly which pairs of sets of rational numbers can appear this way? We will define a <strong>Dedekind cut</strong> to be any pair <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(L,U)</annotation></semantics></math> of sets of rational numbers satisfying these conditions:</p>
+
+<ol>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/inhabited+set">inhabited</a>; that is, some rational number belongs to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>.</li>
+
+<li>Similarly, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is inhabited.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/lower+set">lower set</a>; that is, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">b \in L</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a \in L</annotation></semantics></math>.</li>
+
+<li>Similarly, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/upper+set">upper set</a>: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">a \in U</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">b \in U</annotation></semantics></math>.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is an upwards <a class="existingWikiWord" href="/nlab/show/open+set">open set</a>; that is, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a \in L</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">b \in L</annotation></semantics></math>.</li>
+
+<li>Similarly, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is a downwards <a class="existingWikiWord" href="/nlab/show/open+set">open set</a>: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">b \in U</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">a \in U</annotation></semantics></math>.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a \in L</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">b \in U</annotation></semantics></math>.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a \in L</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">b \in U</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math>.</li>
+</ol>
+
+<p>Actually, this definition is redundant; any pair <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(L,U)</annotation></semantics></math> that satisfies (7&amp;8) must also satisfy (3&amp;4). However, we state (3&amp;4) explicitly to simplify the description of the variations below.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>≔</mo><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x \coloneqq (L,U)</annotation></semantics></math> is a Dedekind cut, then we define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">a \lt x</annotation></semantics></math> to mean that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a \in L</annotation></semantics></math> and define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">x \lt b</annotation></semantics></math> to mean that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">b \in U</annotation></semantics></math>.</p>
+
+<h3 id="using_open_intervals">Using open intervals</h3>
+
+<p>This definition is due to <a href="#Vickers15">Vickers15</a>.</p>
+
+<p>Let us define the family of upwards unbounded <a class="existingWikiWord" href="/nlab/show/open+intervals">open intervals</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mrow><mo>(</mo><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo><mo>)</mo></mrow> <mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\left(]a,\infty[\right)_{a \in \mathbb{Q}}</annotation></semantics></math> and lower unbounded <a class="existingWikiWord" href="/nlab/show/open+intervals">open intervals</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mrow><mo>(</mo><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>a</mi><mo stretchy="false">[</mo><mo>)</mo></mrow> <mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\left(]-\infty, a[\right)_{a \in \mathbb{Q}}</annotation></semantics></math>. The set of <strong>Dedekind cuts</strong> is a <a class="existingWikiWord" href="/nlab/show/frame">frame</a> generated by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">]a,\infty[</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>a</mi><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">]-\infty, a[</annotation></semantics></math> such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ℚ</mi><mo>⊆</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow></munder><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">\mathbb{Q} \subseteq \bigcup_{a \in \mathbb{Q}} ]a,\infty[</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ℚ</mi><mo>⊆</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow></munder><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>a</mi><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">\mathbb{Q} \subseteq \bigcup_{a \in \mathbb{Q}} ]-\infty,a[</annotation></semantics></math></div>
+<ul>
+<li>
+<p>for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">a \in \mathbb{Q}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">b \in \mathbb{Q}</annotation></semantics></math>,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>&lt;</mo><mi>b</mi><mo stretchy="false">)</mo><mo>⇒</mo><mo stretchy="false">(</mo><mo stretchy="false">]</mo><mi>b</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo><mo>⊆</mo><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(a \lt b) \implies (]b,\infty[ \subseteq ]a,\infty[)</annotation></semantics></math></div></li>
+
+<li>
+<p>for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">a \in \mathbb{Q}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">b \in \mathbb{Q}</annotation></semantics></math>,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>b</mi><mo>&lt;</mo><mi>a</mi><mo stretchy="false">)</mo><mo>⇒</mo><mo stretchy="false">(</mo><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>b</mi><mo stretchy="false">[</mo><mo>⊆</mo><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>a</mi><mo stretchy="false">[</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(b \lt a) \implies (]-\infty,b[ \subseteq ]-\infty,a[)</annotation></semantics></math></div></li>
+
+<li>
+<p>for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">a \in \mathbb{Q}</annotation></semantics></math></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo><mo>⊆</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>b</mi><mo>∈</mo><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo></mrow></munder><mo stretchy="false">]</mo><mi>b</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">]a,\infty[ \subseteq \bigcup_{b \in ]a,\infty[} ]b,\infty[</annotation></semantics></math></div></li>
+
+<li>
+<p>for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">a \in \mathbb{Q}</annotation></semantics></math></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>a</mi><mo stretchy="false">[</mo><mo>⊆</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>b</mi><mo>∈</mo><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>a</mi><mo stretchy="false">[</mo></mrow></munder><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>b</mi><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">]-\infty,a[ \subseteq \bigcup_{b \in ]-\infty,a[} ]-\infty,b[</annotation></semantics></math></div></li>
+
+<li>
+<p>for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">a \in \mathbb{Q}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">b \in \mathbb{Q}</annotation></semantics></math>,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo><mi>a</mi><mo>&lt;</mo><mi>b</mi><mo stretchy="false">[</mo><mo>⇒</mo><mi>ℚ</mi><mo>⊆</mo><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo><mo>∪</mo><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>b</mi><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">]a \lt b[ \Rightarrow \mathbb{Q} \subseteq ]a, \infty[ \cup ]-\infty, b[</annotation></semantics></math></div></li>
+
+<li>
+<p>for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">a \in \mathbb{Q}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">b \in \mathbb{Q}</annotation></semantics></math>,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mn>∞</mn><mo stretchy="false">[</mo><mo>∩</mo><mo stretchy="false">]</mo><mo>−</mo><mn>∞</mn><mo>,</mo><mi>b</mi><mo stretchy="false">[</mo><mo>⊆</mo><mo stretchy="false">]</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">]a,\infty[ \cap ]-\infty,b[ \subseteq ]a,b[</annotation></semantics></math></div></li>
+</ul>
+
+<p>A <strong>Dedekind cut</strong> is an element of this frame.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>The point of condition (7) is that we can estimate <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> as closely as we like by choosing appropriate rational numbers.</p>
+
+<p>This is entirely <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive</a>. We have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>a</mi> <mn>0</mn></msub><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">a_0 \lt x</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>a</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">a_0</annotation></semantics></math> (by 1) and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><msub><mi>b</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">x \lt b_0</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>b</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">b_0</annotation></semantics></math> (by 2), so if we wish to estimate <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> to within a positive rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math>, then we simply let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⌈</mo><mrow><mn>2</mn><mo stretchy="false">/</mo><mi>ϵ</mi></mrow><mo stretchy="false">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil{2/\epsilon}\rceil</annotation></semantics></math> and apply (7) to each of the finitely many (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⌈</mo><mrow><mi>n</mi><mo stretchy="false">(</mo><msub><mi>b</mi> <mn>0</mn></msub><mo>−</mo><msub><mi>a</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><mo stretchy="false">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil{n(b_0-a_0)}\rceil</annotation></semantics></math>) rational numbers with denominator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> that lie between <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>a</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">a_0</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>b</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">b_0</annotation></semantics></math>. This will eventually give us a numerator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mi>n</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mo stretchy="false">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">(i-1)/n \lt x \lt (i+1)/n</annotation></semantics></math>, so we have estimated <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> within <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mo stretchy="false">/</mo><mi>n</mi><mo>≤</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">2/n \leq \epsilon</annotation></semantics></math>. Alternatively, to estimate <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> digits after a decimal point (with an uncertainty of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math> in the last digit), apply (7) to each of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⌈</mo><mrow><mo stretchy="false">(</mo><msub><mi>b</mi> <mn>0</mn></msub><mo>−</mo><msub><mi>a</mi> <mn>0</mn></msub><mo stretchy="false">)</mo><mo>×</mo><msup><mn>10</mn> <mi>n</mi></msup></mrow><mo stretchy="false">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil{(b_0-a_0) \times 10^n}\rceil</annotation></semantics></math> numbers between <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>a</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">a_0</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>b</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">b_0</annotation></semantics></math> that have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> digits after the decimal point. (We can never constructively determine the final digit with perfect certainty; for example, if we successively estimate <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0.5</mn><mo>,</mo><mn>0.50</mn><mo>,</mo><mn>0.500</mn><mo>,</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">0.5, 0.50, 0.500, \ldots</annotation></semantics></math>, no finite number of such estimates can ever ensure that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> won't come out to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0.4999</mn><mi>⋯</mi><mn>9998</mn></mrow><annotation encoding="application/x-tex">0.4999\cdots9998</annotation></semantics></math> when we go one digit farther.)</p>
+
+<p>Besides giving us a place to begin our estimation, (1&amp;2) ensure that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is finite. Condition (8) enforces the <a class="existingWikiWord" href="/nlab/show/transitive+relation">transitivity</a> law <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>b</mi><mo>⇒</mo><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt x \lt b \implies a \lt b</annotation></semantics></math>; (3&amp;4) are likewise forms of transitivity. (5&amp;6) ensure that, even if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> happens to be a rational number, we are using the sets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">L_x</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">U_x</annotation></semantics></math> given in <a class="maruku-eqref" href="#eq:cuts">(1)</a> instead of their closures (defined with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>≤</mo></mrow><annotation encoding="application/x-tex">\leq</annotation></semantics></math> instead of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>&lt;</mo></mrow><annotation encoding="application/x-tex">\lt</annotation></semantics></math>).</p>
+
+<h2 id="properties">Properties</h2>
+
+<p>We define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt y</annotation></semantics></math> to mean that there exists a rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>a</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt a \lt y</annotation></semantics></math>; that is, some rational number belongs to both the upper set of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> and the lower set of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math>. It is then straightforward to prove that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>&lt;</mo></mrow><annotation encoding="application/x-tex">\lt</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/linear+order">linear order</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/asymmetric+relation">Asymmetry</a>: If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt y</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y \lt x</annotation></semantics></math>, pick <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>a</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt a \lt y</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi><mo>&lt;</mo><mi>b</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y \lt b \lt x</annotation></semantics></math>. Applying (8) in two ways, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>&lt;</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">b \lt a</annotation></semantics></math>, which is impossible.</li>
+
+<li><a class="existingWikiWord" href="/nlab/show/comparison+relation">Comparison</a>: If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x \lt z</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math> is a Dedekind cut, then pick <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>a</mi><mo>&lt;</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x \lt a \lt z</annotation></semantics></math>. Using (5) or (6), we can generalise this to two rational numbers <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>a</mi><mo>&lt;</mo><mi>b</mi><mo>&lt;</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x \lt a \lt b \lt z</annotation></semantics></math>. Applying (7) to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math>, we get <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt y</annotation></semantics></math> (if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">a \lt y</annotation></semantics></math>) or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi><mo>&lt;</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">y \lt z</annotation></semantics></math> (if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">y \lt b</annotation></semantics></math>).</li>
+
+<li><a class="existingWikiWord" href="/nlab/show/connected+relation">Connectedness</a>: Suppose that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt y</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y \lt x</annotation></semantics></math> both fail, and suppose that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">a \lt y</annotation></semantics></math>. By (5), we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">a \lt b \lt y</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math>. Applying (7), we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">a \lt x</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">x \lt b</annotation></semantics></math>. Since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>b</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt b \lt y</annotation></semantics></math> contradicts our assumptions, we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">a \lt x</annotation></semantics></math>. In summary, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>y</mi><mo>⇒</mo><mi>a</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">a \lt y \implies a \lt x</annotation></semantics></math>. We can prove <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>x</mi><mo>⇒</mo><mi>a</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">a \lt x \implies a \lt y</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>&lt;</mo><mi>x</mi><mo>⇒</mo><mi>b</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">b \lt x \implies b \lt y</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>&lt;</mo><mi>y</mi><mo>⇒</mo><mi>b</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">b \lt y \implies b \lt x</annotation></semantics></math> similarly. Therefore, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math> are equal (as pairs of subsets).</li>
+</ul>
+
+<p>As usual with a linear order, we define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>≤</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \leq y</annotation></semantics></math> to mean that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y \lt x</annotation></semantics></math> is false. In particular, connectedness of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>&lt;</mo></mrow><annotation encoding="application/x-tex">\lt</annotation></semantics></math> corresponds to <a class="existingWikiWord" href="/nlab/show/antisymmetric+relation">antisymmetry</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>≤</mo></mrow><annotation encoding="application/x-tex">\leq</annotation></semantics></math>.</p>
+
+<p>We can also derive a Dedekind cut from any rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> by taking <a class="maruku-eqref" href="#eq:cuts">(1)</a> to be the definition of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> as a Dedekind cut. Thus every rational number is interpreted as a real number. This is a strict inclusion of linear orders:</p>
+
+<ul>
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt y</annotation></semantics></math> as rational numbers, then let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> be the rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">(x+y)/2</annotation></semantics></math>; we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>a</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt a \lt y</annotation></semantics></math>, so <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \lt y</annotation></semantics></math> as real numbers.</li>
+</ul>
+
+<p>In this way, the Dedekind cuts form an extension of the linearly ordered set of rational numbers. More than that, this extension is <a class="existingWikiWord" href="/nlab/show/Dedekind+completion">Dedekind-complete</a>, which basically means that you cannot extend further by taking Dedekind cuts of Dedekind cuts.</p>
+
+<p>To be explicit, suppose that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(L,U)</annotation></semantics></math> is a pair of sets of Dedekind cuts (rather than of rational numbers) that satisfies (1–8), using Dedekind cuts in place of rational numbers. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>sup</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">\sup L</annotation></semantics></math> be the union of the left halves of the cuts that appear in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>, and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>inf</mi><mi>U</mi></mrow><annotation encoding="application/x-tex">\inf U</annotation></semantics></math> be the union of the right halves of the cuts that appear in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>. Then one can prove that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>≔</mo><mo stretchy="false">(</mo><mi>sup</mi><mi>L</mi><mo>,</mo><mi>inf</mi><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x \coloneqq (\sup L, \inf U)</annotation></semantics></math> is a Dedekind cut (of rational numbers), and furthermore that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> may be recovered from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> as in <a class="maruku-eqref" href="#eq:cuts">(1)</a>, again using Dedekind cuts in place of rational numbers.</p>
+
+<p>We say that the Dedekind cuts form the <a class="existingWikiWord" href="/nlab/show/Dedekind+completion">Dedekind completion</a> of the linear order <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Q}</annotation></semantics></math>.</p>
+
+<div class="num_remark">
+<h6 id="remark">Remark</h6>
+
+<p>Being a member of the lower (resp. the upper) set of a Dedekind cut is almost <a class="existingWikiWord" href="/nlab/show/stable+proposition">stable</a> (under <a class="existingWikiWord" href="/nlab/show/double+negation">double negation</a>): For any rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> it holds that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a \in L</annotation></semantics></math> iff there exists a rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>&gt;</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">b \gt a</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><mo>¬</mo><mo stretchy="false">(</mo><mi>b</mi><mo>∈</mo><mi>L</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\neg\neg(b \in L)</annotation></semantics></math>. “Only if” is by condition (5). “If” is by condition (7): We have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a \in L</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">b \in U</annotation></semantics></math>. In the first case we’re done; in the second case it follows that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><mo stretchy="false">(</mo><mi>b</mi><mo>∈</mo><mi>L</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\neg(b \in L)</annotation></semantics></math> by (8), which is a contradiction to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><mo>¬</mo><mo stretchy="false">(</mo><mi>b</mi><mo>∈</mo><mi>L</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\neg\neg(b \in L)</annotation></semantics></math>.</p>
+</div>
+
+<div class="num_remark">
+<h6 id="remark_2">Remark</h6>
+
+<p>Equality of Dedekind cuts is <a class="existingWikiWord" href="/nlab/show/stable+proposition">stable</a> (under <a class="existingWikiWord" href="/nlab/show/double+negation">double negation</a>).</p>
+</div>
+
+<h2 id="variations">Variations</h2>
+
+<p>A Dedekind cut is, in full clarity, a <strong>bounded, open, rounded, located, two-sided Dedekind cut of rational numbers</strong>. But there are several simple variations on the definition above, many of which may be found in the literature.</p>
+
+<h3 id="overdetermined_cuts">Overdetermined cuts</h3>
+
+<p>The conditions (5&amp;6) are not really necessary. If you leave them out, then the result that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>&lt;</mo></mrow><annotation encoding="application/x-tex">\lt</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/connected+relation">connected relation</a> on Dedekind cuts fails; but instead we identify cuts <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math> whenever <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>≤</mo><mi>y</mi><mo>≤</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">x \leq y \leq x</annotation></semantics></math>. Then the linearly ordered set of real numbers becomes a <a class="existingWikiWord" href="/nlab/show/quotient+set">quotient set</a> of the set of cuts. In a similar vein, we can weaken (3,4,7) as follows:</p>
+
+<ul>
+<li>3′: If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">b \in L</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>′</mo><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a' \in L</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>′</mo><mo>&lt;</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a' \lt a</annotation></semantics></math>.</li>
+
+<li>4′: If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">a \in U</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>′</mo><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">b' \in U</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>′</mo><mo>&gt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">b' \gt b</annotation></semantics></math>.</li>
+
+<li>7′: If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>′</mo><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">a' \in L</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>′</mo><mo>&lt;</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a' \lt a</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>′</mo><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">b' \in U</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>′</mo><mo>&gt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">b' \gt b</annotation></semantics></math>.</li>
+</ul>
+
+<p>Just as (3,4) follow from (7,8), so (3′,4′) follow from (7′,8). Again, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>&lt;</mo></mrow><annotation encoding="application/x-tex">\lt</annotation></semantics></math> is no longer connected, but we still get a linear order on a quotient set. The weakest axiom system that will give the correct linear order on the quotient is (1,2,7′,8). Incidentally, you can also recover the original definition using (3,4,7′) in place of (7).</p>
+
+<p>To emphasise that one does require (5,6), one may speak of an <strong>open cut</strong>. To emphasise that one does require (3,4), one may speak of a <strong>rounded cut</strong>.</p>
+
+<p>Note that we may elegantly (although requiring a fancier <a class="existingWikiWord" href="/nlab/show/logic">logic</a>) combine (3,4,5,6) into two conditions as follows:</p>
+
+<ul>
+<li>(3&amp;5): A rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> belongs to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> if and only if there exists a rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">b \in L</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math>.</li>
+
+<li>(4&amp;6): A rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> belongs to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> if and only if there exists a rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">a \in U</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math>.</li>
+</ul>
+
+<h3 id="covering_cuts">Covering cuts</h3>
+
+<p>Another approach is to <em>strengthen</em> (7):</p>
+
+<ul>
+<li>7″: Every rational number belongs to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>.</li>
+</ul>
+
+<p>While (7″) alone does not imply (7), it does together with (8). Also note that, using (8), we can even change ‘or’ to ‘<a class="existingWikiWord" href="/nlab/show/xor">xor</a>’ in (7″).</p>
+
+<p>The cuts that satisfy (1–6, 7″, 8) are precisely the cuts that define <a class="existingWikiWord" href="/nlab/show/irrational+number">irrational number</a>s. If we remove either (5) or (6), then the resulting axioms define one cut for each rational number as well. If we remove <em>both</em> (5) and (6), then we get two cuts for each rational number and must (as in the previous section) pass to a quotient; this was actually Dedekind's original 1872 system. These versions are not acceptable <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructively</a> (and we cannot even prove that they are closed under addition), but they work fine if you use <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>. (Actually, the somewhat weaker <a class="existingWikiWord" href="/nlab/show/limited+principle+of+omniscience">limited principle of omniscience</a> seems to suffice.)</p>
+
+<h3 id="onesided_cuts">One-sided cuts</h3>
+
+<p>Suppose that we consider only <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> and demand (1,3,5), the axioms that refer only to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>. Any such set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> of rational numbers is a <strong>lower cut</strong>. Similarly, a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> that satisfies (2,4,6) is an <strong>upper cut</strong>. If we demand that the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/proper+subset">proper subset</a>, then we have a <strong>bounded</strong> lower/upper cut. If we wish to emphasise that we are discussing a cut as defined above, with both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>, we speak of a <strong>two-sided cut</strong>.</p>
+
+<p>Assuming <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>, every bounded lower or upper cut generates a two-sided cut, by whichever of these rules is needed:</p>
+<div class="maruku-equation" id="eq:twosiding"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mi>U</mi><mo>≔</mo><mo stretchy="false">{</mo><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>ℚ</mi><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><mspace width="thickmathspace"></mspace><mo>∀</mo><mi>a</mi><mo>∈</mo><mi>L</mi><mo>,</mo><mspace width="thickmathspace"></mspace><mi>a</mi><mo>&lt;</mo><mi>b</mi><mo stretchy="false">}</mo><mo>,</mo></mtd></mtr> <mtr><mtd><mi>L</mi><mo>≔</mo><mo stretchy="false">{</mo><mi>a</mi><mo lspace="verythinmathspace">:</mo><mi>ℚ</mi><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><mspace width="thickmathspace"></mspace><mo>∀</mo><mi>b</mi><mo>∈</mo><mi>U</mi><mo>,</mo><mspace width="thickmathspace"></mspace><mi>a</mi><mo>&lt;</mo><mi>b</mi><mo stretchy="false">}</mo><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">  \begin {split}
+   U \coloneqq \{ b\colon \mathbb{Q} \;|\; \forall a \in L,\; a \lt b \} ,\\
+   L \coloneqq \{ a\colon \mathbb{Q} \;|\; \forall b \in U,\; a \lt b \}
+.\end {split} 
+</annotation></semantics></math></div>
+<p>In addition, the unbounded lower cut <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo>≔</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">L \coloneqq \mathbb{Q}</annotation></semantics></math> represents <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>, while the unbounded upper cut <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>≔</mo><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">U \coloneqq \mathbb{Q}</annotation></semantics></math> represents <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math>.</p>
+
+<p>In <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a>, one-sided cuts define a potentially more general notion of real number, called a <a class="existingWikiWord" href="/nlab/show/lower+real">lower real</a> or <a class="existingWikiWord" href="/nlab/show/upper+real">upper real</a> (with the same direction as the cut). Unlike the covering cuts in the previous section, these are actually of interest constructively. If we wish to emphasise or clarify that we are discussing a two-sided cut as in our original definition, rather than a one-sided cut which has been made two-sided through <a class="maruku-eqref" href="#eq:twosiding">(2)</a> (which may not satisfy (7) constructively), then we may speak of a <strong>located cut</strong>.</p>
+
+<h3 id="unbounded_cuts">Unbounded cuts</h3>
+
+<p>If we drop conditions (1&amp;2), then the result is an <strong>extended cut</strong>; these represent <a class="existingWikiWord" href="/nlab/show/extended+real+number">extended real number</a>s. If we wish to emphasise or clarify that we are discussing a cut that satisfies (1,2), then we may speak of a <strong>bounded cut</strong>.</p>
+
+<p>By <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>, every extended cut is either a Dedekind cut, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>ℚ</mi><mo>,</mo><mi>∅</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\mathbb{Q},\empty)</annotation></semantics></math>, or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>∅</mi><mo>,</mo><mi>ℚ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\empty,\mathbb{Q})</annotation></semantics></math>. While the bounded cuts represent real numbers, the other two extended cuts represent <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>±</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">\pm\infty</annotation></semantics></math>.</p>
+
+<h3 id="intervals">Interval cuts</h3>
+
+<p>If we drop (7) (but keep 3&amp;4), then the result is an <strong><a class="existingWikiWord" href="/nlab/show/interval+cut">interval cut</a></strong>; these represent intervals of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[x,y]</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>≤</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \leq y</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is a lower real and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math> is an upper real. If we use only (1–6), then we allow for <strong>back-to-front intervals</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[x,y]</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>≤</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \leq y</annotation></semantics></math> is no longer required. Even classically, we cannot represent back-to-front intervals as subsets of the real line, but it is still possible to compute with them.</p>
+
+<p>Whereas a located Dedekind cut can be approximated as closely as we wish, an interval cut represents a number as we measure it in the real world, where we may not be technically able (or even theoretically able, as in <a class="existingWikiWord" href="/nlab/show/quantum+physics">quantum physics</a>) to make a more precise measurement. A back-to-front interval indicates that we have made contradictory measurements, perhaps as a result of experimental error.</p>
+
+<p>An article on <a class="existingWikiWord" href="/nlab/show/interval+arithmetic">interval arithmetic</a> is probably the right place to talk about these systems (although there are many varieties of interval arithmetic).</p>
+
+<h3 id="predicative_cuts">Predicative cuts</h3>
+
+<p>In predicative mathematics, subsets are large and therefore are proper classes. Instead, in the manner of <a class="existingWikiWord" href="/nlab/show/formal+topology">formal topology</a>, they typically use pairs of functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo>,</mo><mi>U</mi><mo>:</mo><mi>ℚ</mi><mi>to</mi><mi>Σ</mi></mrow><annotation encoding="application/x-tex">L, U: \mathbb{Q} to \Sigma</annotation></semantics></math> representing the open subsets of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Q}</annotation></semantics></math> to define <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>-Dedekind cuts</strong>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> is a small <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-locale, or small <a class="existingWikiWord" href="/nlab/show/sigma-frame"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>σ</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">\sigma</annotation>
+  </semantics>
+</math>-frame</a> with an <a class="existingWikiWord" href="/nlab/show/embedding">embedding</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>→</mo><msub><mi mathvariant="normal">Prop</mi> <mi>𝒰</mi></msub></mrow><annotation encoding="application/x-tex">\Sigma \to \mathrm{Prop}_\mathcal{U}</annotation></semantics></math> into the large set of propositions for a universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒰</mi></mrow><annotation encoding="application/x-tex">\mathcal{U}</annotation></semantics></math>. The definitions then become</p>
+
+<ol>
+<li>There is a rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">L(a) = \top</annotation></semantics></math>.</li>
+
+<li>There is a rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">U(b) = \top</annotation></semantics></math>.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">L(b) = \top</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">L(a) = \top</annotation></semantics></math>.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">U(a) = \top</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">U(b) = \top</annotation></semantics></math>.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">L(a) = \top</annotation></semantics></math>, then there is a rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">L(b) = \top</annotation></semantics></math>.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">U(b) = \top</annotation></semantics></math>, then there is a rational number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">U(a) = \top</annotation></semantics></math>.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math> are rational numbers, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">L(a) = \top</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">U(b) = \top</annotation></semantics></math>.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">L(a) = \top</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">U(b) = \top</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>&lt;</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \lt b</annotation></semantics></math>.</li>
+</ol>
+
+<p>For any two <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-frames <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Σ</mi> <mo>′</mo></msup></mrow><annotation encoding="application/x-tex">\Sigma^{'}</annotation></semantics></math> that embed into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">Prop</mi> <mi>𝒰</mi></msub></mrow><annotation encoding="application/x-tex">\mathrm{Prop}_\mathcal{U}</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>⊆</mo><msup><mi>Σ</mi> <mo>′</mo></msup></mrow><annotation encoding="application/x-tex">\Sigma \subseteq \Sigma^{'}</annotation></semantics></math>, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is the set of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>-Dedekind cuts of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> is the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Σ</mi> <mo>′</mo></msup></mrow><annotation encoding="application/x-tex">\Sigma^{'}</annotation></semantics></math>-Dedekind cuts of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊆</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \subseteq B</annotation></semantics></math>.</p>
+
+<h3 id="cuts_of_other_numbers">Cuts of other numbers</h3>
+
+<p>Instead of starting with rational numbers, we could use any <span class="newWikiWord">dense<a href="/nlab/new/dense+suborder">?</a></span> subset of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Q}</annotation></semantics></math>; the result would be equivalent. For example, we could start with the <a class="existingWikiWord" href="/nlab/show/dyadic+number">dyadic number</a>s to show more explicitly how real numbers are represented by rational numbers written in binary notation. Alternatively, we could start with something larger than (or incomparable with) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℚ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Q}</annotation></semantics></math> that is still a dense subset of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math> (although you have to know what <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math> is to state this). For example, we could start with the real <a class="existingWikiWord" href="/nlab/show/algebraic+number">algebraic number</a>s or the <a class="existingWikiWord" href="/nlab/show/computable+number">computable number</a>s.</p>
+
+<p>The basic theory also generalises immediately to any unbounded, <a class="existingWikiWord" href="/nlab/show/dense+linear+order">dense linear order</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>; again, the result is equivalent as long as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/countably+infinite+set">countably infinite set</a>. The theory may be generalised further even to orders which may not be unbounded, dense, or even linear, but this requires modifications; see <a class="existingWikiWord" href="/nlab/show/Dedekind+completion">Dedekind completion</a> for unbounded dense <a class="existingWikiWord" href="/nlab/show/quasiorders">quasiorders</a> or unbounded dense <a class="existingWikiWord" href="/nlab/show/irreflexive+comparisons">irreflexive comparisons</a> or Sections 4.31–39 of <em><a class="existingWikiWord" href="/nlab/show/HAF">HAF</a></em> for even more generality.</p>
+
+<h2 id="see_also">See also</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/locator">locator</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Dedekind+cut+structure">Dedekind cut structure</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/streak">streak</a></li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Richard+Dedekind">Richard Dedekind</a>; 1872; <em>Stetigkeit und irrationale Zahlen</em>:</p>
+
+<ul>
+<li><a href="http://books.google.com/books?id=AO4GAAAAYAAJ">Google Books</a> (in Fraktur font),</li>
+
+<li><a href="http://www.math.ru.nl/werkgroepen/gmfw/bronnen/dedekind2.html">retyped</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Richard+Dedekind">Richard Dedekind</a>, <em>Continuity and irrational numbers</em>, in Essays on the Theory of Numbers (trans. W. Beman), 1901 (<a href="http://www.gutenberg.org/ebooks/21016">Project Gutenberg</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Paul+Taylor">Paul Taylor</a>; 2007–2009(?); <a href="http://www.paultaylor.eu/ASD/dedras/classical">Dedekind cuts</a></p>
+</li>
+
+<li>
+<p><em><a class="existingWikiWord" href="/nlab/show/HAF">HAF</a></em>, 4.31–4.39</p>
+</li>
+
+<li id="Vickers15">
+<p>Steve Vickers, “Localic Completion Of Generalized Metric Spaces I”, <a href="http://www.tac.mta.ca/tac/volumes/14/15/14-15abs.html">TAC</a></p>
+</li>
+
+<li>
+<p>Univalent Foundations Project, <a class="existingWikiWord" href="/nlab/show/HoTT+book">Homotopy Type Theory – Univalent Foundations of Mathematics</a> (2013)</p>
+</li>
+
+<li>
+<p>Auke B. Booij, Extensional constructive real analysis via locators, (<a href="https://arxiv.org/abs/1805.06781">abs:1805.06781</a>)</p>
+</li>
+
+<li>
+<p>Davorin Lešnik, Synthetic Topology and Constructive Metric Spaces, (<a href="https://arxiv.org/abs/2104.10399">arxiv:2104.10399</a>)</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on June 10, 2022 at 15:19:38.
+    See the <a href="/nlab/history/Dedekind+cut" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Dedekind+cut" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/5630/#Item_6">Discuss</a><span class="backintime"><a href="/nlab/revision/Dedekind+cut/30" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Dedekind+cut" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Dedekind+cut" accesskey="S" class="navlink" id="history" rel="nofollow">History (30 revisions)</a>
+  <a href="/nlab/show/Dedekind+cut/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Dedekind+cut" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Dedekind+cut" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

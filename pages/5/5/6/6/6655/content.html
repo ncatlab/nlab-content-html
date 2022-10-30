@@ -1,0 +1,1148 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Martin-Löf dependent type theory in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Martin-Löf dependent type theory
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/3125/#Item_27" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Martin-Lf dependent type theory</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="type_theory">Type theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/natural+deduction">natural deduction</a></strong> <a class="existingWikiWord" href="/nlab/show/metalanguage">metalanguage</a>, <a class="existingWikiWord" href="/nlab/show/practical+foundations">practical foundations</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/judgement">judgement</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/hypothetical+judgement">hypothetical judgement</a>, <a class="existingWikiWord" href="/nlab/show/sequent">sequent</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/antecedents">antecedents</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊢</mo></mrow><annotation encoding="application/x-tex">\vdash</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/consequent">consequent</a>, <a class="existingWikiWord" href="/nlab/show/succedents">succedents</a></li>
+</ul>
+</li>
+</ul>
+
+<ol>
+<li><a class="existingWikiWord" href="/nlab/show/type+formation+rule">type formation rule</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/term+introduction+rule">term introduction rule</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/term+elimination+rule">term elimination rule</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/computation+rule">computation rule</a></li>
+</ol>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></strong> (<a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent</a>, <a class="existingWikiWord" href="/nlab/show/intensional+type+theory">intensional</a>, <a class="existingWikiWord" href="/nlab/show/observational+type+theory">observational type theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>)</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/calculus+of+constructions">calculus of constructions</a></li>
+</ul>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/syntax">syntax</a></strong> <a class="existingWikiWord" href="/nlab/show/object+language">object language</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/theory">theory</a>, <a class="existingWikiWord" href="/nlab/show/axiom">axiom</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/proposition">proposition</a>/<a class="existingWikiWord" href="/nlab/show/type">type</a> (<a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/definition">definition</a>/<a class="existingWikiWord" href="/nlab/show/proof">proof</a>/<a class="existingWikiWord" href="/nlab/show/program">program</a> (<a class="existingWikiWord" href="/nlab/show/proofs+as+programs">proofs as programs</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/theorem">theorem</a></p>
+</li>
+</ul>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/computational+trinitarianism">computational trinitarianism</a></strong> = <br /> <strong><a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a></strong> +<strong><a class="existingWikiWord" href="/nlab/show/programs+as+proofs">programs as proofs</a></strong> +<strong><a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">relation type theory/category theory</a></strong></p>
+
+<table><thead><tr><th><a class="existingWikiWord" href="/nlab/show/logic">logic</a></th><th><a class="existingWikiWord" href="/nlab/show/set+theory">set theory</a> (<a class="existingWikiWord" href="/nlab/show/internal+logic+of+set+theory">internal logic</a> of)</th><th><a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a></th><th><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></th></tr></thead><tbody><tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/proposition">proposition</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/object">object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type">type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/predicate">predicate</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/family+of+sets">family of sets</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/display+morphism">display morphism</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+type">dependent type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/proof">proof</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/element">element</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/generalized+element">generalized element</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/term">term</a>/<a class="existingWikiWord" href="/nlab/show/program">program</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/cut+rule">cut rule</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/composition">composition</a> of <a class="existingWikiWord" href="/nlab/show/classifying+morphisms">classifying morphisms</a> / <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> of <a class="existingWikiWord" href="/nlab/show/display+maps">display maps</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/substitution">substitution</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/cut+elimination">cut elimination</a> for <a class="existingWikiWord" href="/nlab/show/implication">implication</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/counit">counit</a> for hom-tensor adjunction</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/beta+reduction">beta reduction</a></td></tr>
+<tr><td style="text-align: left;">introduction rule for <a class="existingWikiWord" href="/nlab/show/implication">implication</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/unit">unit</a> for hom-tensor adjunction</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/eta+conversion">eta conversion</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/true">true</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/singleton">singleton</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a>/<a class="existingWikiWord" href="/nlab/show/%28-2%29-truncated+object">(-2)-truncated object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/h-level+0">h-level 0</a>-<a class="existingWikiWord" href="/nlab/show/type">type</a>/<a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/false">false</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/empty+set">empty set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/proposition">proposition</a>, <a class="existingWikiWord" href="/nlab/show/truth+value">truth value</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/subsingleton">subsingleton</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/subterminal+object">subterminal object</a>/<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncated+object">(-1)-truncated object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/h-proposition">h-proposition</a>, <a class="existingWikiWord" href="/nlab/show/mere+proposition">mere proposition</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/logical+conjunction">logical conjunction</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/cartesian+product">cartesian product</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/product">product</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/product+type">product type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/disjunction">disjunction</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/disjoint+union">disjoint union</a> (<a class="existingWikiWord" href="/nlab/show/support">support</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a> (<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncation">(-1)-truncation</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/sum+type">sum type</a> (<a class="existingWikiWord" href="/nlab/show/bracket+type">bracket type</a> of)</td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/implication">implication</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+set">function set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+type">function type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/negation">negation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+set">function set</a> into <a class="existingWikiWord" href="/nlab/show/empty+set">empty set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a> into <a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+type">function type</a> into <a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/universal+quantification">universal quantification</a></td><td style="text-align: left;">indexed <a class="existingWikiWord" href="/nlab/show/cartesian+product">cartesian product</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+product+type">dependent product type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/existential+quantification">existential quantification</a></td><td style="text-align: left;">indexed <a class="existingWikiWord" href="/nlab/show/disjoint+union">disjoint union</a> (<a class="existingWikiWord" href="/nlab/show/support">support</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+sum">dependent sum</a> (<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncation">(-1)-truncation</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a> (<a class="existingWikiWord" href="/nlab/show/bracket+type">bracket type</a> of)</td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/logical+equivalence">logical equivalence</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/bijection">bijection</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a>/<a class="existingWikiWord" href="/nlab/show/adjoint+equivalence">adjoint equivalence</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equivalence+of+types">equivalence of types</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/support+set">support set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/support+object">support object</a>/<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncation">(-1)-truncation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/propositional+truncation">propositional truncation</a>/<a class="existingWikiWord" href="/nlab/show/bracket+type">bracket type</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/n-image">n-image</a> of <a class="existingWikiWord" href="/nlab/show/morphism">morphism</a> into <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a>/<a class="existingWikiWord" href="/nlab/show/n-truncation">n-truncation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/n-truncation+modality">n-truncation modality</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equality">equality</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/diagonal+function">diagonal function</a>/<a class="existingWikiWord" href="/nlab/show/diagonal+subset">diagonal subset</a>/<a class="existingWikiWord" href="/nlab/show/diagonal+relation">diagonal relation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/path+space+object">path space object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/identity+type">identity type</a>/<a class="existingWikiWord" href="/nlab/show/path+type">path type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/completely+presented+set">completely presented set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/discrete+object">discrete object</a>/<a class="existingWikiWord" href="/nlab/show/0-truncated+object">0-truncated object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/h-level+2">h-level 2</a>-<a class="existingWikiWord" href="/nlab/show/type">type</a>/<a class="existingWikiWord" href="/nlab/show/set">set</a>/<a class="existingWikiWord" href="/nlab/show/h-set">h-set</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a> with <a class="existingWikiWord" href="/nlab/show/equivalence+relation">equivalence relation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/groupoid+object+in+an+%28infinity%2C1%29-category">internal 0-groupoid</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/Bishop+set">Bishop set</a>/<a class="existingWikiWord" href="/nlab/show/setoid">setoid</a> with its <a class="existingWikiWord" href="/nlab/show/pseudo-equivalence+relation">pseudo-equivalence relation</a> an actual <a class="existingWikiWord" href="/nlab/show/equivalence+relation">equivalence relation</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equivalence+class">equivalence class</a>/<a class="existingWikiWord" href="/nlab/show/quotient+set">quotient set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quotient">quotient</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quotient+type">quotient type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/induction">induction</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/colimit">colimit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/inductive+type">inductive type</a>, <a class="existingWikiWord" href="/nlab/show/W-type">W-type</a>, <a class="existingWikiWord" href="/nlab/show/M-type">M-type</a></td></tr>
+<tr><td style="text-align: left;">higher <a class="existingWikiWord" href="/nlab/show/induction">induction</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-colimit">higher colimit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/higher+inductive+type">higher inductive type</a></td></tr>
+<tr><td style="text-align: left;">-</td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/0-truncated">0-truncated</a> <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-colimit">higher colimit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quotient+inductive+type">quotient inductive type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/coinduction">coinduction</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/limit">limit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/coinductive+type">coinductive type</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/preset">preset</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type">type</a> without <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a> of <a class="existingWikiWord" href="/nlab/show/truth+values">truth values</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/subobject+classifier">subobject classifier</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type+of+propositions">type of propositions</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/domain+of+discourse">domain of discourse</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/universe">universe</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/object+classifier">object classifier</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type+universe">type universe</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/modality">modality</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/closure+operator">closure operator</a>, (<a class="existingWikiWord" href="/nlab/show/idempotent+monad">idempotent</a>) <a class="existingWikiWord" href="/nlab/show/monad">monad</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/modal+type+theory">modal type theory</a>, <a class="existingWikiWord" href="/nlab/show/monad+%28in+computer+science%29">monad (in computer science)</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a></td><td style="text-align: left;"></td><td style="text-align: left;">(<a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric</a>, <a class="existingWikiWord" href="/nlab/show/closed+monoidal+category">closed</a>) <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a>/<a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/proof+net">proof net</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/string+diagram">string diagram</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a></td></tr>
+<tr><td style="text-align: left;">(absence of) <a class="existingWikiWord" href="/nlab/show/contraction+rule">contraction rule</a></td><td style="text-align: left;"></td><td style="text-align: left;">(absence of) <a class="existingWikiWord" href="/nlab/show/diagonal">diagonal</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/no-cloning+theorem">no-cloning theorem</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/synthetic+mathematics">synthetic mathematics</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/domain+specific+embedded+programming+language">domain specific embedded programming language</a></td></tr>
+</tbody></table>
+
+</div>
+<p><strong><a class="existingWikiWord" href="/nlab/show/homotopy+levels">homotopy levels</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-type+theory">2-type theory</a>, <a class="existingWikiWord" href="/michaelshulman/show/2-categorical+logic">2-categorical logic</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory+-+contents">homotopy type theory - contents</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+type">homotopy type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/univalence">univalence</a>, <a class="existingWikiWord" href="/nlab/show/function+extensionality">function extensionality</a>, <a class="existingWikiWord" href="/nlab/show/internal+logic+of+an+%28%E2%88%9E%2C1%29-topos">internal logic of an (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cohesive+homotopy+type+theory">cohesive homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/directed+homotopy+type+theory">directed homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/HoTT+methods+for+homotopy+theorists">HoTT methods for homotopy theorists</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/semantics">semantics</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/internal+logic">internal logic</a>, <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/display+map">display map</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/internal+logic+of+a+topos">internal logic of a topos</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Mitchell-Benabou+language">Mitchell-Benabou language</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kripke-Joyal+semantics">Kripke-Joyal semantics</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/internal+logic+of+an+%28%E2%88%9E%2C1%29-topos">internal logic of an (∞,1)-topos</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/type-theoretic+model+category">type-theoretic model category</a></li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/type+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+
+<h4 id="foundations">Foundations</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/foundations">foundations</a></strong></p>
+
+<h2 id="the_basis_of_it_all">The basis of it all</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mathematical+logic">mathematical logic</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/first-order+logic">first-order logic</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/universe">universe</a></p>
+</li>
+</ul>
+
+<h2 id="set_theory"> Set theory</h2>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/set+theory">set theory</a></strong></p>
+
+<ul>
+<li>presentations of set theory
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/unsorted+set+theory">unsorted set theory</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/two-sorted+set+theory">two-sorted set theory</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/dependently+sorted+set+theory">dependently sorted set theory</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/structurally+presented+set+theory">structurally presented set theory</a></li>
+</ul>
+</li>
+
+<li>structuralism in set theory
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/material+set+theory">material set theory</a>
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/ZFC">ZFC</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/ZFA">ZFA</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/New+Foundations">New Foundations</a></li>
+</ul>
+</li>
+
+<li><a class="existingWikiWord" href="/nlab/show/structural+set+theory">structural set theory</a>
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/ETCS">ETCS</a>
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fully+formal+ETCS">fully formal ETCS</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/ETCS+with+elements">ETCS with elements</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Trimble+on+ETCS+I">Trimble on ETCS I</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Trimble+on+ETCS+II">Trimble on ETCS II</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Trimble+on+ETCS+III">Trimble on ETCS III</a></li>
+</ul>
+</li>
+
+<li><a class="existingWikiWord" href="/nlab/show/SEAR">SEAR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="foundational_axioms">Foundational axioms</h2>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/foundational+axiom">foundational axiom</a></strong></p>
+
+<ul>
+<li>
+<p>basic constructions:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+cartesian+products">axiom of cartesian products</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+disjoint+unions">axiom of disjoint unions</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+the+empty+set">axiom of the empty set</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+fullness">axiom of fullness</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+function+sets">axiom of function sets</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+power+sets">axiom of power sets</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+quotient+sets">axiom of quotient sets</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/material+set+theory">material axioms</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+extensionality">axiom of extensionality</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+foundation">axiom of foundation</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+anti-foundation">axiom of anti-foundation</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Mostowski%27s+axiom">Mostowski's axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+pairing">axiom of pairing</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+transitive+closure">axiom of transitive closure</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+union">axiom of union</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/structural+set+theory">structural axioms</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+materialization">axiom of materialization</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theoretic axioms</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+UIP">axiom UIP</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Whitehead%27s+principle">Whitehead's principle</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/axioms+of+choice">axioms of choice</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+countable+choice">axiom of countable choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+dependent+choice">axiom of dependent choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+excluded+middle">axiom of excluded middle</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+existence">axiom of existence</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+multiple+choice">axiom of multiple choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Markov%27s+axiom">Markov's axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/presentation+axiom">presentation axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/small+cardinality+selection+axiom">small cardinality selection axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+small+violations+of+choice">axiom of small violations of choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+weakly+initial+sets+of+covers">axiom of weakly initial sets of covers</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/large+cardinal+axioms">large cardinal axioms</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+infinity">axiom of infinity</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+universes">axiom of universes</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/regular+extension+axiom">regular extension axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/inaccessible+cardinal">inaccessible cardinal</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/measurable+cardinal">measurable cardinal</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/elementary+embedding">elementary embedding</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/supercompact+cardinal">supercompact cardinal</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Vop%C4%9Bnka%27s+principle">Vopěnka's principle</a></li>
+</ul>
+</li>
+
+<li>
+<p>strong axioms</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+separation">axiom of separation</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+replacement">axiom of replacement</a></li>
+</ul>
+</li>
+
+<li>
+<p>further</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/reflection+principle">reflection principle</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="removing_axioms">Removing axioms</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/predicative+mathematics">predicative mathematics</a></li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/foundations+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="martinlf_dependent_type_theory">Martin-Löf dependent type theory</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#syntax'>Syntax</a></li>
+<li><a href='#syntax_2'>Syntax</a></li>
+<ul>
+<li><a href='#binary_product_types'>Binary product types</a></li>
+<li><a href='#unit_type'>Unit type</a></li>
+<li><a href='#dependent_product_types'>Dependent product types</a></li>
+<li><a href='#function_types'>Function types</a></li>
+<li><a href='#binary_sum_types'>Binary sum types</a></li>
+<li><a href='#empty_type'>Empty type</a></li>
+<li><a href='#dependent_sum_types'>Dependent sum types</a></li>
+<li><a href='#finite_types'>Finite types</a></li>
+<li><a href='#propositions_as_types'>Propositions as types</a></li>
+<li><a href='#equality_types'>Equality types</a></li>
+<li><a href='#finite_product_types'>Finite product types</a></li>
+<li><a href='#unit_type_2'>Unit type</a></li>
+<li><a href='#dependent_product_types_2'>Dependent product types</a></li>
+<li><a href='#function_types_2'>Function types</a></li>
+<li><a href='#binary_sum_types_2'>Binary sum types</a></li>
+<li><a href='#dependent_sum_types_2'>Dependent sum types</a></li>
+</ul>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#models_and_categorical_semantics'>Models and categorical semantics</a></li>
+<li><a href='#AxiomOfChoice'>Axiom of choice</a></li>
+</ul>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/Per+Martin-Lof">Per Martin-Löf</a>‘s <strong><a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a></strong>, also known as <strong><a class="existingWikiWord" href="/nlab/show/intuitionistic+logic">intuitionistic</a> type theory</strong> (<a href="#MartinLof75">Martin-Löf 75</a>), or <strong>constructive type theory</strong> is a specific form of <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a> developed to support <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a>. (Note that both “dependent type theory” and “intuitionistic type theory” may refer more generally to <a class="existingWikiWord" href="/nlab/show/type+theories">type theories</a> that contain <a class="existingWikiWord" href="/nlab/show/dependent+types">dependent types</a> or are <a class="existingWikiWord" href="/nlab/show/intuitionistic+mathematics">intuitionistic</a>, respectively.)</p>
+
+<p>Martin-Löf’s dependent type theory is notable for several reasons:</p>
+
+<ul>
+<li>
+<p>One can construct an interpretation of first-order <a class="existingWikiWord" href="/nlab/show/intuitionistic+logic">intuitionistic logic</a> by interpreting <a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a> (this is true of most any dependent type theory).</p>
+</li>
+
+<li>
+<p>It has a version of a variant of the <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a> <em>as a theorem</em> (because of the properties of the above interpretation), see the discussion <a href="#AxiomOfChoice">below</a>.</p>
+</li>
+
+<li>
+<p>In its <a class="existingWikiWord" href="/nlab/show/intensional+type+theory">intensional</a> form, it has sufficient computational content to function as a programming language. At the same time, it then has <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a> whose presence shows that one is really dealing with a form of <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>.</p>
+</li>
+</ul>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>The syntax of Martin-Löf dependent type theory can be constructed in two stages. The first is the <em>raw</em> or <em>untyped</em> syntax of the theory consisting of expressions that are readable but not meaningful. The second stage consists of defining the <em>derivable judgements</em> of the type theory inductively which then pick out the meaningful contexts, types and terms.</p>
+
+<p>A context is a list of types. Variables can be defined as De Bruijn indices in which case the type of a variable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> is given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>th type in a context.</p>
+
+<p>One may also define contexts as coming with a variable name, in which case one needs a notion of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>-equivalence (syntactic identity modulo renaming of bound variables) and of capture-free substitution. De Bruijn indices avoid this step but can be more obfuscating.</p>
+
+<p>Types and terms are built inductively from various constructors. Types, terms and contexts are defined mutually.</p>
+
+<p>We have four basic judgement forms:</p>
+
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A\; \mathrm{type}</annotation></semantics></math> - <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a well-typed type in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>≅</mo><mi>A</mi><mo>′</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A \cong A' \; \mathrm{type}</annotation></semantics></math> - <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">A'</annotation></semantics></math> are judgementally equal well-typed types in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math> - <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> is a well-typed term of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>≅</mo><mi>a</mi><mo>′</mo><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a \cong a' : A</annotation></semantics></math> - <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">a'</annotation></semantics></math> are judgementally equal well-typed terms of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>.</li>
+</ul>
+
+<p>There is also a fifth judgement that a given context is well-formed. This can be defined from the other judgments as every type in a context is well-typed in the presence of the types that precede it.</p>
+
+<h2 id="syntax_2">Syntax</h2>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math> is a term, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> a type, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">t : A</annotation></semantics></math> is a <strong>typing declaration</strong> asserting that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math> is a term of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>. We will define the forms of valid terms and types below; to begin with, we assume we have a stock of variables, atomic types, and parametrised types.</p>
+
+<p>A <strong>context</strong> is a <a class="existingWikiWord" href="/nlab/show/finite+set">finite</a> ordered list of typing declarations, defined <a class="existingWikiWord" href="/nlab/show/inductive+definition">inductively</a> as follows:</p>
+
+<ul>
+<li>The empty list is a valid context.</li>
+
+<li>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> is a valid context, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is a variable not appearing in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a valid type in the context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>, then the context obtained by appending <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">x : A</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> is also valid.</li>
+</ul>
+
+<p>Note that this must be considered a <em>mutual</em> inductive definition along with the definition of when a type is valid in a given context, which is to be given below in terms of type constructors.</p>
+
+<p>We write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash t : A</annotation></semantics></math> to assert that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">t : A</annotation></semantics></math> is a valid typing declaration in the context of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>, and by abuse of notation we may write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A : \mathrm{Type}</annotation></semantics></math> to assert that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a valid type in the context of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>.</p>
+
+<p>For any context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is an atomic type, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A : \mathrm{Type}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">x : A</annotation></semantics></math> is a typing declaration in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>, then we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>x</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash x : A</annotation></semantics></math>.</p>
+
+<h3 id="binary_product_types">Binary product types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A : \mathrm{Type}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>⊢</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Delta \vdash B : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma, \Delta \vdash A \times B : \mathrm{Type}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>⊢</mo><mi>b</mi><mo>:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Delta \vdash b : B</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mo stretchy="false">⟨</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">⟩</mo><mo>:</mo><mi>A</mi><mo>×</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma, \Delta \vdash \langle a, b \rangle : A \times B</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>c</mi><mo>:</mo><mi>A</mi><mo>×</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash c : A \times B</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><msub><mi>π</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \pi_0(c) : A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \pi_1(c) : B</annotation></semantics></math>.</p>
+
+<h3 id="unit_type">Unit type</h3>
+
+<p>There is an atomic type called <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\top</annotation></semantics></math>.</p>
+
+<p>For any context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi mathvariant="normal">tt</mi><mo>:</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash \mathrm{tt} : \top</annotation></semantics></math>.</p>
+
+<h3 id="dependent_product_types">Dependent product types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>⊢</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma, x : X \vdash A(x) : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash (\Pi x : X) A(x) : \mathrm{Type}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>⊢</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma, x : X \vdash a(x) : A(x)</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mo stretchy="false">(</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash (\lambda x : X) a(x) : (\Pi x : X) A(x)</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>:</mo><mo stretchy="false">(</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash f : (\Pi x : X) A(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\Delta \vdash t : X</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi mathvariant="normal">apply</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma, \Delta \vdash \mathrm{apply}(f, t) : A(t)</annotation></semantics></math>.</p>
+
+<h3 id="function_types">Function types</h3>
+
+<p>Function types may be regarded as a special case of dependent product types, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A(x)</annotation></semantics></math> does not depend on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> at all. When we write out the rules for dependent products in this case, they become the following.</p>
+
+<p>Firstly, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>X</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash X : \mathrm{Type}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>X</mi><mo>→</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash X \to A : \mathrm{Type}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>⊢</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma, x : X \vdash a(x) : A</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi>X</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash (\lambda x : X) a(x) : X \to A</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash f : X \to A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\Delta \vdash t : X</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi mathvariant="normal">apply</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma, \Delta \vdash \mathrm{apply}(f, t) : A</annotation></semantics></math>.</p>
+
+<h3 id="binary_sum_types">Binary sum types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A : \mathrm{Type}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash B : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A + B : \mathrm{Type}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A + B : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><msub><mi>σ</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi><mo>+</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \sigma_0 (a) : A + B</annotation></semantics></math>; and if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>b</mi><mo>:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash b : B</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A + B : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><msub><mi>σ</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi><mo>+</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \sigma_1(b) : A + B</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>s</mi><mo>:</mo><mi>A</mi><mo>+</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash s : A + B</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><msub><mi>σ</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Delta, x : A \vdash c(x) : C(\sigma_0(x))</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi><mo>,</mo><mi>y</mi><mo>:</mo><mi>B</mi><mo>⊢</mo><mi>c</mi><mo>′</mo><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><msub><mi>σ</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E, y : B \vdash c'(y) : C(\sigma_1(y))</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>,</mo><mi>E</mi><mo>⊢</mo><mi mathvariant="normal">cases</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>,</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>y</mi><mo>:</mo><mi>B</mi><mo stretchy="false">)</mo><mi>c</mi><mo>′</mo><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma, \Delta, E \vdash \mathrm{cases}(s, (\lambda x : A) c(x), (\lambda y : B) c'(y)) : C(s)</annotation></semantics></math>.</p>
+
+<h3 id="empty_type">Empty type</h3>
+
+<p>There is an atomic type called <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo></mrow><annotation encoding="application/x-tex">\bot</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mo>⊥</mo><mo>⊢</mo><mi mathvariant="normal">abort</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma, x : \bot \vdash \mathrm{abort} : A</annotation></semantics></math>.</p>
+
+<h3 id="dependent_sum_types">Dependent sum types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>⊢</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma, x : X \vdash A(x) : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>Σ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash (\Sigma x : X) A(x) : \mathrm{Type}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash t : X</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A(t)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>Σ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash (\Sigma x : X) A(x) : \mathrm{Type}</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>t</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>:</mo><mo stretchy="false">(</mo><mi>Σ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash (t, a) : (\Sigma x : X) A(x)</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>s</mi><mo>:</mo><mo stretchy="false">(</mo><mi>Σ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash s : (\Sigma x : X) A(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>,</mo><mi>y</mi><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>⊢</mo><mi>b</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>:</mo><mi>B</mi><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Delta, x : X, y : A(x) \vdash b(x, y) : B((x, y))</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi mathvariant="normal">cases</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>y</mi><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi>b</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>:</mo><mi>B</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma, \Delta \vdash \mathrm{cases}(s, (\lambda x : X)(\lambda y : A(x)) b(x, y)) : B(s)</annotation></semantics></math>.</p>
+
+<p>Note that just as function types can be defined to be dependent products where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A(x)</annotation></semantics></math> does not depend on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>, binary product types (above) can be defined to be dependent sums where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A(x)</annotation></semantics></math> does not depend on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>.</p>
+
+<h3 id="finite_types">Finite types</h3>
+
+<p>Martin-Löf also includes in his type theory a type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℕ</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\mathbb{N}_n</annotation></semantics></math> with exactly <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> elements, for every <em>external</em> <a class="existingWikiWord" href="/nlab/show/natural+number">natural number</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>. The types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo></mrow><annotation encoding="application/x-tex">\bot</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\top</annotation></semantics></math> can then be defined as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℕ</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\mathbb{N}_0</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℕ</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\mathbb{N}_1</annotation></semantics></math>, respectively. On the other hand, with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo></mrow><annotation encoding="application/x-tex">\bot</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\top</annotation></semantics></math> given as above, one may define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℕ</mi> <mn>2</mn></msub><mo>=</mo><mo>⊤</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\mathbb{N}_2 = \top + \top</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℕ</mi> <mn>3</mn></msub><mo>=</mo><mo>⊤</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo>⊤</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\mathbb{N}_3 = \top+\top+\top</annotation></semantics></math>, and so on (by <a class="existingWikiWord" href="/nlab/show/recursion">recursion</a> on the external natural number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>).</p>
+
+<p>Note that we have not included any <a class="existingWikiWord" href="/nlab/show/axiom+of+infinity">axiom of infinity</a>, however.</p>
+
+<h3 id="propositions_as_types">Propositions as types</h3>
+
+<p>Under the <a class="existingWikiWord" href="/nlab/show/Curry-Howard+isomorphism">Curry-Howard isomorphism</a>, we may identify propositions with certain atomic types and predicates with certain parametrised types.</p>
+
+<p>An inhabitant of such a <a class="existingWikiWord" href="/nlab/show/propositions+as+types">proposition-as-a-type</a> is interpreted as a ‘proof’ of that proposition.</p>
+
+<p>We write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A : \mathrm{true}</annotation></semantics></math> for the judgement that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/inhabited+set">inhabited</a>: that is, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A : \mathrm{true}</annotation></semantics></math>. The type-formation rules above are then seen to be the rules of inference for (a fragment of) <a class="existingWikiWord" href="/nlab/show/intuitionistic+logic">intuitionistic</a> <a class="existingWikiWord" href="/nlab/show/first-order+logic">first-order logic</a>. Indeed, we have:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/logical+conjunction">Conjunction</a> introduction:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi><mo>;</mo><mi>Δ</mi><mo>⊢</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash A : \mathrm{true} ; \Delta \vdash B : \mathrm{true}}{\Gamma, \Delta \vdash A \times B : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li>Conjunction elimination:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac><mspace width="thinmathspace"></mspace><mspace width="thinmathspace"></mspace></mtd> <mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\begin{aligned}
+\frac{\Gamma \vdash A \times B : \mathrm{true}}{\Gamma \vdash A : \mathrm{true}} \,\, &amp;
+\frac{\Gamma \vdash A \times B : \mathrm{true}}{\Gamma \vdash B : \mathrm{true}} 
+\end{aligned}
+</annotation></semantics></math></div></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/truth">Truth</a> introduction<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mo>⊤</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{}{\Gamma \vdash \top : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/universal+quantifier">Universal</a> generalisation:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>⊢</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, x : X \vdash A(x) : \mathrm{true}}{\Gamma \vdash (\Pi x : X) A(x) : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li>Universal instantiation:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi><mo>;</mo><mi>Δ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>X</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash (\Pi x : X) A(x) : \mathrm{true} ; \Delta \vdash t : X}{\Gamma, \Delta \vdash A(t) : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li>Conditional proof (<a class="existingWikiWord" href="/nlab/show/implication">implication</a> introduction):<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mo>:</mo><mi mathvariant="normal">true</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>X</mi><mo>→</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X : \mathrm{true} \vdash A : \mathrm{true}}{\Gamma \vdash X \to A : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li>Modus ponens (<a class="existingWikiWord" href="/nlab/show/implication">implication</a> elimination):<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>X</mi><mo>→</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi><mo>;</mo><mi>Δ</mi><mo>⊢</mo><mi>X</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash X \to A : \mathrm{true} ; \Delta \vdash X : \mathrm{true}}{\Gamma, \Delta \vdash A : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/disjunction">Disjunction</a> introduction:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac><mspace width="thinmathspace"></mspace><mspace width="thinmathspace"></mspace></mtd> <mtd><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\begin{aligned}
+\frac{\Gamma \vdash A : \mathrm{true}}{\Gamma \vdash A + B : \mathrm{true}} \,\, &amp;
+\frac{\Gamma \vdash B : \mathrm{true}}{\Gamma \vdash A + B : \mathrm{true}}
+\end{aligned}
+</annotation></semantics></math></div></li>
+
+<li>Disjunction elimination:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi><mo>;</mo><mi>Δ</mi><mo>,</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi><mo>⊢</mo><mi>C</mi><mo>:</mo><mi mathvariant="normal">true</mi><mo>;</mo><mi>E</mi><mo>,</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi><mo>⊢</mo><mi>C</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>,</mo><mi>E</mi><mo>⊢</mo><mi>C</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash A + B : \mathrm{true} ; \Delta, A : \mathrm{true} \vdash C : \mathrm{true} ; E, B : \mathrm{true} \vdash C : \mathrm{true}}{\Gamma, \Delta, E \vdash C : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/false">False</a> elimination:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mo>⊥</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash \bot : \mathrm{true}}{\Gamma \vdash A : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/existential+quantifier">Existential</a> generalisation:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>X</mi><mo>;</mo><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>Σ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash t : X ; \Gamma \vdash A(t) : \mathrm{true}}{\Gamma \vdash (\Sigma x : X) A(x) : \mathrm{true}}</annotation></semantics></math></div></li>
+
+<li>Existential instantiation:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mo stretchy="false">(</mo><mi>Σ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi><mo>;</mo><mi>Δ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>,</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi><mo>⊢</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash (\Sigma x : X) A(x) : \mathrm{true} ; \Delta, x : X, A(x) : \mathrm{true} \vdash B : \mathrm{true}}{\Gamma, \Delta \vdash B : \mathrm{true}}</annotation></semantics></math></div></li>
+</ul>
+
+<p>The only traditional rule of inference we are missing is the rule of <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>, so this logic is <a class="existingWikiWord" href="/nlab/show/intuitionistic+logic">intuitionistic</a>.</p>
+
+<p>The above interpretation justifies the use of the symbols <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∀</mo></mrow><annotation encoding="application/x-tex">\forall</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∃</mo></mrow><annotation encoding="application/x-tex">\exists</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∧</mo></mrow><annotation encoding="application/x-tex">\wedge</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∨</mo></mrow><annotation encoding="application/x-tex">\vee</annotation></semantics></math> instead of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi></mrow><annotation encoding="application/x-tex">\Pi</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math>, when we are using types to represent propositions.</p>
+
+<h3 id="equality_types">Equality types</h3>
+
+<p>We may introduce a family of equality types for each type and each pair of terms of that type: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>⊢</mo><mi>a</mi><mo>′</mo><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Delta \vdash a' : A</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>=</mo><mi>a</mi><mo>′</mo><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a = a' : \mathrm{Type}</annotation></semantics></math>.</p>
+
+<p>These are not the intensional <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a> which Martin-Löf later introduced as a particular sort of <a class="existingWikiWord" href="/nlab/show/inductive+type">inductive family of types</a>, but instead an extensional notion of equality defined by <a class="existingWikiWord" href="/nlab/show/induction">induction</a> <em>over</em> the class of all types (regarded as inductively defined by the above type-formation clauses). Note that it is essential, for a purpose such as this, that the type-formation clauses be regarded as an inductive definition, rather than as “operations” defined on some pre-existing collection of types: in order to define equality in the way we are about to do, we have to be able to inspect a given type and decide uniquely which rule was used to construct it.</p>
+
+<p>The equality type is reflexive, symmetric, and transitive. That means, for example, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>b</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash b : A</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>c</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash c : A</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>=</mo><mi>b</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a = b : \mathrm{true}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>b</mi><mo>=</mo><mi>c</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash b = c : \mathrm{true}</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>=</mo><mi>c</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a = c : \mathrm{true}</annotation></semantics></math>.</p>
+
+<div class="query">
+<p><a class="existingWikiWord" href="/nlab/show/Mike+Shulman">Mike Shulman</a>: Is that (reflexivity, symmetry, and transitivity) a rule we are giving, or an assertion we are making about derivability? I’m a little unsure because the presentation here is slightly different from that in the reference: there Martin-Löf uses both a propositional equality and a judgmental one.</p>
+</div>
+
+<h3 id="finite_product_types">Finite product types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>b</mi><mo>:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash b : B</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>=</mo><msub><mi>π</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mo stretchy="false">⟨</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">⟩</mo><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a = \pi_0 (\langle a, b \rangle) : \mathrm{true}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mo stretchy="false">⟨</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">⟩</mo><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \pi_1 (\langle a, b \rangle) = b : \mathrm{true}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>c</mi><mo>:</mo><mi>A</mi><mo>×</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash c : A \times B</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>=</mo><mo stretchy="false">⟨</mo><msub><mi>π</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>,</mo><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo stretchy="false">⟩</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">c = \langle \pi_0 (c), \pi_1 (c) \rangle : \mathrm{true}</annotation></semantics></math>.</p>
+
+<h3 id="unit_type_2">Unit type</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mo>⊤</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : \top</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>=</mo><mi mathvariant="normal">tt</mi><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a = \mathrm{tt} : \mathrm{true}</annotation></semantics></math>.</p>
+
+<h3 id="dependent_product_types_2">Dependent product types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>⊢</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma, x : X \vdash a(x) : A(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\Delta \vdash t : X</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi mathvariant="normal">apply</mi><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma, \Delta \vdash \mathrm{apply}((\lambda x : X) a(x), t) = a(t) : \mathrm{true}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>:</mo><mo stretchy="false">(</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash f : (\Pi x : X) A(x)</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>=</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi mathvariant="normal">apply</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash f = (\lambda x : X) \mathrm{apply}(f, x) : \mathrm{true}</annotation></semantics></math>.</p>
+
+<h3 id="function_types_2">Function types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>⊢</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma, x : X \vdash a(x) : A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\Delta \vdash t : X</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi mathvariant="normal">apply</mi><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma, \Delta \vdash \mathrm{apply}((\lambda x : X) a(x), t) = a(t) : \mathrm{true}</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash f : X \to A</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>f</mi><mo>=</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mi mathvariant="normal">apply</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash f = (\lambda x : X) \mathrm{apply}(f, x) : \mathrm{true}</annotation></semantics></math>.</p>
+
+<h3 id="binary_sum_types_2">Binary sum types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo>:</mo><mi mathvariant="normal">Type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A + B : \mathrm{Type}</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><msub><mi>σ</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Delta, x : A \vdash c(x) : C(\sigma_0(x))</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi><mo>,</mo><mi>y</mi><mo>:</mo><mi>B</mi><mo>⊢</mo><mi>c</mi><mo>′</mo><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><msub><mi>σ</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E, y : B \vdash c'(y) : C(\sigma_1(y))</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>,</mo><mi>E</mi><mo>⊢</mo><mi mathvariant="normal">cases</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>,</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>y</mi><mo>:</mo><mi>B</mi><mo stretchy="false">)</mo><mi>c</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>c</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma, \Delta, E \vdash \mathrm{cases}(a, (\lambda x : A) c(x), (\lambda y : B) c(y)) = c(a) : \mathrm{true}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>,</mo><mi>E</mi><mo>⊢</mo><mi mathvariant="normal">cases</mi><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>,</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>y</mi><mo>:</mo><mi>B</mi><mo stretchy="false">)</mo><mi>c</mi><mo>′</mo><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>c</mi><mo>′</mo><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma, \Delta, E \vdash \mathrm{cases}(b, (\lambda x : A) c(x), (\lambda y : B) c'(y)) = c'(b) : \mathrm{true}</annotation></semantics></math></p>
+
+<h3 id="dependent_sum_types_2">Dependent sum types</h3>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash t : X</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A(t)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>X</mi><mo>,</mo><mi>y</mi><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>⊢</mo><mi>b</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>:</mo><mi>B</mi><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Delta, x : X, y : A(x) \vdash b(x, a) : B((x, a))</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi mathvariant="normal">cases</mi><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>t</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>,</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>λ</mi><mi>y</mi><mo>:</mo><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi>b</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mo stretchy="false">(</mo><mi>t</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">true</mi></mrow><annotation encoding="application/x-tex">\Gamma, \Delta \vdash \mathrm{cases}((t, a), (\lambda x : X)(\lambda y : A(x)) b(x, y)) = b(t, a) : \mathrm{true}</annotation></semantics></math>.</p>
+
+<p>The other equality rule for dependent sum types is derivable from the above.</p>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="models_and_categorical_semantics">Models and categorical semantics</h3>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/models">models</a> of ML type theory depend crucially on whether one considers the variant of <a class="existingWikiWord" href="/nlab/show/extensional+type+theory">extensional type theory</a> or that of <a class="existingWikiWord" href="/nlab/show/intensional+type+theory">intensional type theory</a>.</p>
+
+<p>The models of the extensional version are (just) <a class="existingWikiWord" href="/nlab/show/locally+cartesian+closed+categories">locally cartesian closed categories</a>.</p>
+
+<p>The faithful models of the intensional version with <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a> are however certain <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-categories">(∞,1)-categories</a>, notably <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-toposes">(∞,1)-toposes</a>, presented by <a class="existingWikiWord" href="/nlab/show/simplicial+model+categories">simplicial model categories</a> (<a href="#Warren">Warren</a>). For this reason one speaks of <em><a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a></em>.</p>
+
+<p>For a more detailed discussion of these matters see at <em><a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">relation between type theory and category theory</a></em>.</p>
+
+<h3 id="AxiomOfChoice">Axiom of choice</h3>
+
+<p>In dependent type theory we can verify the following “logical form of the <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a>” (<a href="#Bell">Bell</a>, <a href="#Tait">Tait</a>), see also (<a href="#Rijke">Rijke, section 2.5.1</a>).</p>
+
+<div class="num_theorem">
+<h6 id="theorem">Theorem</h6>
+
+<p><strong>(ACL)</strong></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>A</mi><mo>,</mo><mi>y</mi><mo>:</mo><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>⊢</mo><mi>C</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>:</mo><mi>Type</mi><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mi>acl</mi><mo>:</mo><mo stretchy="false">(</mo><mo>∀</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mo>∃</mo><mi>y</mi><mo>:</mo><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi>C</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mo>∃</mo><mi>f</mi><mo>:</mo><mo stretchy="false">(</mo><mi>Π</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mo>∀</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mi>C</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi mathvariant="normal">apply</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  x : A, y : B(x) \vdash C(x, y) : Type
+  \;
+  \vdash 
+  \;
+  acl
+  :
+  (\forall x : A) (\exists y : B(x)) C(x, y) \to (\exists f : (\Pi x : A)B(x) )(\forall x : A) C(x, \mathrm{apply}(f, x)) 
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<p>One should note carefully that this “is” only “the axiom of choice” under the above propositions-as-types interpretation of the quantifiers <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∀</mo></mrow><annotation encoding="application/x-tex">\forall</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∃</mo></mrow><annotation encoding="application/x-tex">\exists</annotation></semantics></math>.</p>
+
+<div class="num_remark">
+<h6 id="remark">Remark</h6>
+
+<p>In the <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> of this expression, using the <a class="existingWikiWord" href="/nlab/show/propositions-as-types">propositions-as-types</a> logic corresponds roughly to working with the <a class="existingWikiWord" href="/nlab/show/subobject+lattices">subobject lattices</a> in the <a class="existingWikiWord" href="/nlab/show/ex%2Flex+completion">ex/lex completion</a> of a <a class="existingWikiWord" href="/nlab/show/locally+cartesian+closed+category">locally cartesian closed category</a>; the ACL then follows since every object of the original category becomes <a class="existingWikiWord" href="/nlab/show/projective+object">projective</a> in its ex/lex completion.</p>
+</div>
+
+<div class="num_remark">
+<h6 id="remark_2">Remark</h6>
+
+<p>If we use instead a different logic over the same type theory, such as <a class="existingWikiWord" href="/nlab/show/bracket+types">bracket types</a> to model the actual subobject lattices in an arbitrary <a class="existingWikiWord" href="/nlab/show/locally+cartesian+closed+category">lccc</a> (not necessarily the ex/lex completion of anything), or the <a class="existingWikiWord" href="/nlab/show/hProp">hProp</a> logic in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>, then the ACL in that logic will not be derivable.</p>
+</div>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/initiality+conjecture">initiality conjecture</a></li>
+</ul>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/type">type</a></strong>, <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a>, <a class="existingWikiWord" href="/nlab/show/inductive+type">inductive type</a>, <a class="existingWikiWord" href="/nlab/show/W-type">W-type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a>, <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pointed+type">pointed type</a></p>
+</li>
+</ul>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/dependent+type">dependent type</a></strong>, <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a>, <a class="existingWikiWord" href="/nlab/show/Martin-L%C3%B6f+dependent+type+theory">Martin-Löf dependent type theory</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a>, <a class="existingWikiWord" href="/nlab/show/dependent+product+type">dependent product type</a></li>
+</ul>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/homotopy+type">homotopy type</a></strong>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/identity+type">identity type</a>, <a class="existingWikiWord" href="/nlab/show/dependent+identity+type">dependent identity type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+n-type">homotopy n-type</a>, <a class="existingWikiWord" href="/nlab/show/connected+type">connected type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/higher+inductive+type">higher inductive type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+homotopy+type">geometric homotopy type</a>, <a class="existingWikiWord" href="/nlab/show/cohesive+homotopy+type">cohesive homotopy type</a></p>
+</li>
+</ul>
+</div>
+<h2 id="references">References</h2>
+
+<p>See also the references at <em><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></em>.</p>
+
+<p>The original articles:</p>
+
+<ul>
+<li id="MartinLof75">
+<p><a class="existingWikiWord" href="/nlab/show/Per+Martin-L%C3%B6f">Per Martin-Löf</a>, <em>An intuitionistic theory of types: predicative part</em>, in: H. E. Rose, J. C. Shepherdson (eds.), <em>Logic Colloquium ‘73, Proceedings of the Logic Colloquium</em>, Studies in Logic and the Foundations of Mathematics <strong>80</strong> Pages 73-118, Elsevier 1975 (<a href="https://doi.org/10.1016/S0049-237X(08)71945-1">doi:10.1016/S0049-237X(08)71945-1</a>, <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.131.926">CiteSeer</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Per+Martin-L%C3%B6f">Per Martin-Löf</a> (notes by <a class="existingWikiWord" href="/nlab/show/Giovanni+Sambin">Giovanni Sambin</a>), <em>Intuitionistic type theory</em>, Lecture notes Padua 1984, Bibliopolis, Napoli (1984) (<a href="https://archive-pml.github.io/martin-lof/pdfs/Bibliopolis-Book-retypeset-1984.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/MartinLofIntuitionisticTypeTheory.pdf" title="pdf">pdf</a>)</p>
+</li>
+</ul>
+
+<p>As a <a class="existingWikiWord" href="/nlab/show/programming+language">programming language</a>:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Per+Martin-L%C3%B6f">Per Martin-Löf</a>, <em>Constructive Mathematics and Computer Programming</em>, Studies in Logic and the Foundations of Mathematics Volume 104, 1982, Pages 153-175 (<a href="https://doi.org/10.1016/S0049-237X(09)70189-2">doi:10.1016/S0049-237X(09)70189-2</a>)</p>
+</li>
+
+<li>
+<p>Bengt Nordström, Kent Petersson, Jan M. Smith, <em>Programming in Martin-Löf’s Type Theory</em>, Oxford University Press 1990 (<a href="http://www.cse.chalmers.se/research/group/logic/book/">webpage</a>, <a href="http://www.cse.chalmers.se/research/group/logic/book/book.pdf">pdf</a>)</p>
+</li>
+</ul>
+
+<p>A philosophical examination:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/G%C3%B6ran+Sundholm%E2%80%8B">Göran Sundholm​</a>, <em>Proof Theory and Meaning</em> (1986), (<a href="https://openaccess.leidenuniv.nl/bitstream/handle/1887/11978/9_05?sequence=1">pdf</a>)</li>
+</ul>
+
+<p>An introduction and survey (with an eye towards <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>) is in chapter 1 of</p>
+
+<ul>
+<li id="Warren"><a class="existingWikiWord" href="/nlab/show/Michael+Warren">Michael Warren</a>, <em>Homotopy theoretic aspects of constructive type theory</em>, PhD thesis (2008) (<a href="http://www.andrew.cmu.edu/user/awodey/students/warren.pdf">pdf</a>)</li>
+</ul>
+
+<p>as well as</p>
+
+<ul>
+<li id="Rijke">Egbert Rijke, <em>Homotopy type theory</em> (2012) (<a href="http://hottheory.files.wordpress.com/2012/08/hott2.pdf">pdf</a>)</li>
+</ul>
+
+<p>A discussion of ML dependent type theory as the <a class="existingWikiWord" href="/nlab/show/internal+language">internal language</a> of <a class="existingWikiWord" href="/nlab/show/locally+cartesian+closed+categories">locally cartesian closed categories</a> is in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/R.+A.+G.+Seely">R. A. G. Seely</a>, <em>Locally cartesian closed categories and type theory</em>, Math. Proc. Camb. Phil. Soc. (1984) 95 (<a href="http://www.math.mcgill.ca/rags/LCCC/LCCC.pdf">pdf</a>)</li>
+</ul>
+
+<p>Discussion of the logical <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a> in dependent type theory is in</p>
+
+<ul>
+<li id="Bell">
+<p>John Bell, <em>The Axiom of choice in type theory</em>, Stanford Encyclopedia of philosophy, 2008 (<a href="http://plato.stanford.edu/entries/axiom-choice/choice-and-type-theory.html">web</a>)</p>
+</li>
+
+<li id="Tait">
+<p>Tait (1994)</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on June  6, 2022 at 20:47:38.
+    See the <a href="/nlab/history/Martin-L%C3%B6f+dependent+type+theory" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Martin-L%C3%B6f+dependent+type+theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/3125/#Item_27">Discuss</a><span class="backintime"><a href="/nlab/revision/Martin-L%C3%B6f+dependent+type+theory/29" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Martin-L%C3%B6f+dependent+type+theory" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Martin-L%C3%B6f+dependent+type+theory" accesskey="S" class="navlink" id="history" rel="nofollow">History (29 revisions)</a>
+  <a href="/nlab/show/Martin-L%C3%B6f+dependent+type+theory/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Martin-L%C3%B6f+dependent+type+theory" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Martin-L%C3%B6f+dependent+type+theory" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      ultrafilter in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      ultrafilter
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/2196/#Item_7" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Ultrafilters</title></head>
+<body>
+<h1 id="ultrafilters">Ultrafilters</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#definitions'>Definitions</a></li>
+<li><a href='#categorytheoretic_interpretations'>Category-theoretic interpretations</a></li>
+<ul>
+<li><a href='#ultrafilters_form_a_monad'>Ultrafilters form a monad</a></li>
+<li><a href='#ultrafilters_and_coproducts'>Ultrafilters and coproducts</a></li>
+<ul>
+<li><a href='#theorem_r_brger'>Theorem (R. Börger)</a></li>
+</ul>
+<li><a href='#ultrafilters_and_presheaves'>Ultrafilters and presheaves</a></li>
+<li><a href='#ultrafilters_and_codensity'>Ultrafilters and codensity</a></li>
+<li><a href='#ultrafilters_and_unbiased_boolean_algebras'>Ultrafilters and unbiased Boolean algebras</a></li>
+<li><a href='#ultrafilters_via_other_algebraic_theories'>Ultrafilters via other algebraic theories</a></li>
+</ul>
+<li><a href='#comphaus'>Algebras of the ultrafilter monad</a></li>
+<li><a href='#number_of_ultrafilters'>Number of ultrafilters</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="definitions">Definitions</h2>
+
+<p>An <strong>ultrafilter</strong> on a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is a collection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/subset">subset</a>s of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> satisfying the axiom</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mi>F</mi><mspace width="thickmathspace"></mspace><mo>⇔</mo><mspace width="thickmathspace"></mspace><mo>∀</mo><mo stretchy="false">(</mo><msub><mi>B</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>B</mi> <mi>n</mi></msub><mo>∈</mo><mi>F</mi><mo stretchy="false">)</mo><mo>,</mo><mspace width="thickmathspace"></mspace><mo>∃</mo><mo stretchy="false">(</mo><mi>x</mi><mo>∈</mo><mi>A</mi><mo>∩</mo><msub><mi>B</mi> <mn>1</mn></msub><mo>∩</mo><mi>⋯</mi><mo>∩</mo><msub><mi>B</mi> <mi>n</mi></msub><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex"> A \in F \;\Leftrightarrow\; \forall (B_1, \ldots, B_n \in F),\; \exists (x \in A \cap B_1 \cap \cdots \cap B_n) .</annotation></semantics></math></div>
+<p>This is the only axiom necessary; from this, you can prove that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/filter">filter</a>. Alternatively, if we start by requiring <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> to be a filter, then we need add only the axiom</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mi>F</mi><mspace width="thickmathspace"></mspace><mo>⇔</mo><mspace width="thickmathspace"></mspace><mo>∀</mo><mi>B</mi><mo>∈</mo><mi>F</mi><mo>,</mo><mspace width="thickmathspace"></mspace><mo>∃</mo><mi>x</mi><mo>∈</mo><mi>A</mi><mo>∩</mo><mi>B</mi><mo>.</mo></mrow><annotation encoding="application/x-tex"> A \in F \;\Leftrightarrow\; \forall B \in F,\; \exists x \in A \cap B .</annotation></semantics></math></div>
+<p>Or if we start by requiring <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> to be a <a class="existingWikiWord" href="/nlab/show/proper+filter">proper filter</a>, then we need only the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⇐</mo></mrow><annotation encoding="application/x-tex">\Leftarrow</annotation></semantics></math> half of this latter axiom.</p>
+
+<p>We may also define an ultrafilter to be <a class="existingWikiWord" href="/nlab/show/maximal+element">maximal</a> among the proper filters. This definition generalises from the <a class="existingWikiWord" href="/nlab/show/power+set">power set</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> to any <a class="existingWikiWord" href="/nlab/show/poset">poset</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>; notice that we speak of an ultrafilter <em>on</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> but an ultrafilter <em>in</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>. In a distributive <a class="existingWikiWord" href="/nlab/show/lattice">lattice</a>, every ultrafilter is <a class="existingWikiWord" href="/nlab/show/prime+filter">prime</a>; the converse holds in a <a class="existingWikiWord" href="/nlab/show/Boolean+algebra">Boolean algebra</a>.</p>
+
+<p>Using <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>, it is equivalent to say that a filter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is an ultrafilter if, given any subset <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, either <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> or its complement belongs to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>; this version generalises to any <a class="existingWikiWord" href="/nlab/show/Boolean+algebra">Boolean algebra</a>. Another way to define an ultrafilter in a Boolean algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is as a Boolean-algebra homomorphism from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> to the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mo>⊥</mo><mo>,</mo><mo>⊤</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{\bot,\top\}</annotation></semantics></math> of Boolean <a class="existingWikiWord" href="/nlab/show/truth+value">truth value</a>s.</p>
+
+<p>Given an element <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> of a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, the <strong>principal ultrafilter</strong> (on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>) at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> consists of every <a class="existingWikiWord" href="/nlab/show/subset">subset</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> to which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> belongs. An ultrafilter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is <strong>fixed</strong> if the <a class="existingWikiWord" href="/nlab/show/intersection">intersection</a> of its elements is <a class="existingWikiWord" href="/nlab/show/inhabited+subset">inhabited</a>, in which case that intersection must be a <a class="existingWikiWord" href="/nlab/show/singleton">singleton</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mi>x</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{x\}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is the principal ultrafilter at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>.</p>
+
+<p>In contrast, if this intersection <a class="existingWikiWord" href="/nlab/show/empty+set">empty</a>, then we call <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> a <strong>free ultrafilter</strong>. It is possible, if one denies the <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a>, that every ultrafilter of subsets is fixed. In contrast, the <a class="existingWikiWord" href="/nlab/show/ultrafilter+principle">ultrafilter principle</a> (a weak form of the <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a>) states that any proper filter (in any Boolean lattice) may be extended to an ultrafilter. Then any <a class="existingWikiWord" href="/nlab/show/infinite+set">infinite set</a> has a free proper filter (such as the filter of <a class="existingWikiWord" href="/nlab/show/cofinite+subset">cofinite subset</a>s) and so a free ultrafilter.</p>
+
+<p>Free ultrafilters are important in <a class="existingWikiWord" href="/nlab/show/nonstandard+analysis">nonstandard analysis</a> and <a class="existingWikiWord" href="/nlab/show/model+theory">model theory</a>, where the ultrafilter principle seems to be a necessity.</p>
+
+<h2 id="categorytheoretic_interpretations">Category-theoretic interpretations</h2>
+
+<p>There are in fact many interrelated ways of defining ultrafilters. We present a few here.</p>
+
+<h3 id="ultrafilters_form_a_monad">Ultrafilters form a monad</h3>
+
+<p>For any set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">U X</annotation></semantics></math> be the set of ultrafilters on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. Principal ultrafilters provide an inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>η</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mi>U</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\eta\colon X\to U X</annotation></semantics></math>, which turns out to be the unit of a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math>, as briefly touched upon above. The multiplication can be described fairly explicitly. First of all, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">A\subseteq X</annotation></semantics></math>, define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo><mo>⊆</mo><mi>U</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">[A]\subseteq U X</annotation></semantics></math> to be the set of all ultrafilters containing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>. Then given <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℱ</mi><mo>∈</mo><mi>U</mi><mi>U</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{F} \in U U X</annotation></semantics></math>, i.e. an ultrafilter of ultrafilters, we let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>ℱ</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">{</mo><mi>A</mi><mo stretchy="false">|</mo><mo stretchy="false">[</mo><mi>A</mi><mo stretchy="false">]</mo><mo>∈</mo><mi>ℱ</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\mu(\mathcal{F}) = \{ A | [A] \in \mathcal{F} \}</annotation></semantics></math>; one can verify that this is an ultrafilter and makes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> into a monad. This monad is traditionally denoted <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math>.</p>
+
+<p>The ultrafilter monad can also be described as follows. The 2-element set carries a unique structure of <a class="existingWikiWord" href="/nlab/show/Boolean+algebra">Boolean algebra</a> internal to the category of sets. When thus cast in the role of <a class="existingWikiWord" href="/nlab/show/dualizing+object">dualizing object</a>, it induces an adjoint pair of functors</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Set</mi><mover><mo>→</mo><mrow><mi>P</mi><mo>=</mo><mi>Set</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mstyle mathvariant="bold"><mn>2</mn></mstyle><msup><mo stretchy="false">)</mo> <mi>op</mi></msup></mrow></mover><msup><mi>Bool</mi> <mi>op</mi></msup><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊣</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><msup><mi>Bool</mi> <mi>op</mi></msup><mover><mo>→</mo><mrow><mi>Bool</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mstyle mathvariant="bold"><mn>2</mn></mstyle><mo stretchy="false">)</mo></mrow></mover><mi>Set</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(Set \stackrel{P = Set(-, \mathbf{2})^{op}}{\to} Bool^{op}) \; \; \dashv \; \; (Bool^{op} \stackrel{Bool(-, \mathbf{2})}{\to} Set)</annotation></semantics></math></div>
+<p>whose corresponding monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Bool</mi><mo stretchy="false">(</mo><mi>P</mi><mo>−</mo><mo>,</mo><mstyle mathvariant="bold"><mn>2</mn></mstyle><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Bool(P -, \mathbf{2})</annotation></semantics></math> is canonically identified with the ultrafilter monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math>. Another description (due to Kennison and Gildenhuys) is that it is the <a class="existingWikiWord" href="/nlab/show/codensity+monad">codensity monad</a> induced from the full embedding <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Fin</mi><mo>↪</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">Fin \hookrightarrow Set</annotation></semantics></math> of finite sets into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math>. See <a href="http://www.tac.mta.ca/tac/volumes/28/13/28-13.pdf">Leinster</a> for a full account, and some extensions.</p>
+
+<h3 id="ultrafilters_and_coproducts">Ultrafilters and coproducts</h3>
+
+<p>Observe that the canonical map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>β</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>+</mo><mi>β</mi><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo><mo>→</mo><mi>β</mi><mo stretchy="false">(</mo><mi>X</mi><mo>+</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\beta(X) + \beta(Y) \to \beta(X + Y)</annotation></semantics></math></div>
+<p>is an isomorphism (for, each ultrafilter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>+</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X + Y</annotation></semantics></math> must contain exactly one of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X, Y</annotation></semantics></math>; if it contains <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, then it is generated by the ultrafilter on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mi>X</mi><mo>∩</mo><mi>A</mi><mo>:</mo><mi>A</mi><mo>∈</mo><mi>U</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{X \cap A: A \in U\}</annotation></semantics></math>).</p>
+
+<div class="un_theorem">
+<h6 id="theorem_r_brger">Theorem (R. Börger)</h6>
+
+<p>The endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math> is terminal among endofunctors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set \to Set</annotation></semantics></math> that preserve finite coproducts.</p>
+</div>
+
+<p>A topological proof of this fact has been given by Richter (see references).</p>
+
+<p>This gives one universal characterization of the ultrafilter endofunctor. This theorem implies that there is precisely one <a class="existingWikiWord" href="/nlab/show/monad">monad</a> structure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math>, and that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>Set</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">F\colon Set \to Set</annotation></semantics></math> is a monad which preserves finite coproducts, then the unique transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>→</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">F \to \beta</annotation></semantics></math> is a morphism of monads.</p>
+
+<h3 id="ultrafilters_and_presheaves">Ultrafilters and presheaves</h3>
+
+<p>
+<div class='num_theorem'>
+<h6>Theorem</h6>
+<p>(<a href="#Garner">Garner, 2018</a>.) The category of <a class="existingWikiWord" href="/nlab/show/endofunctors">endofunctors</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set \to Set</annotation></semantics></math> that preserve <a class="existingWikiWord" href="/nlab/show/finite+coproducts">finite coproducts</a> is equivalent to the category of <a class="existingWikiWord" href="/nlab/show/presheaves">presheaves</a> of sets on the Blass category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">U F</annotation></semantics></math> of ultrafilters. The ultrapower functor with respect to an ultrafilter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> corresponds to the representable functor of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>.</p>
+</div>
+</p>
+
+<p>The Blass category of ultrafilters has as objects, pairs of a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and an ultrafilter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒰</mi></mrow><annotation encoding="application/x-tex">\mathcal{U}</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\beta X</annotation></semantics></math>. Morphisms from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>𝒰</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X, \mathcal{U})</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(Y, \mathcal{V})</annotation></semantics></math> are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>=</mo> <mi>𝒰</mi></msub></mrow><annotation encoding="application/x-tex">=_{\mathcal{U}}</annotation></semantics></math>-equivalence classes of <a class="existingWikiWord" href="/nlab/show/partial+function">partial</a> continuous maps defined on a set in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒰</mi></mrow><annotation encoding="application/x-tex">\mathcal{U}</annotation></semantics></math>, continuity here meaning that for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>∈</mo><mi>𝒱</mi></mrow><annotation encoding="application/x-tex">V \in \mathcal{V}</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>𝒰</mi></mrow><annotation encoding="application/x-tex">f^{-1}(V) \in \mathcal{U}</annotation></semantics></math>.</p>
+
+<h3 id="ultrafilters_and_codensity">Ultrafilters and codensity</h3>
+
+<p>Another known universal characterization of the ultrafilter monad is via the concept of <a class="existingWikiWord" href="/nlab/show/codensity+monads">codensity monads</a>. (This fact was recently (June 2011) mentioned by <a class="existingWikiWord" href="/nlab/show/Tom+Leinster">Tom Leinster</a> at the categories list, but it also appears sparsely in the literature; see for instance <em>Algebraic Theories</em>, exercise 3.2.12(e).)</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>:</mo><mi>Fin</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">i: Fin \to Set</annotation></semantics></math> be the usual full inclusion of <a class="existingWikiWord" href="/nlab/show/finite+sets">finite sets</a> into sets. The restricted <a class="existingWikiWord" href="/nlab/show/Yoneda+embedding">Yoneda embedding</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mover><mo>→</mo><mrow><msup><mi>y</mi> <mi>op</mi></msup></mrow></mover><mo stretchy="false">(</mo><msup><mi>Set</mi> <mi>Set</mi></msup><msup><mo stretchy="false">)</mo> <mi>op</mi></msup><mover><mo>→</mo><mrow><mo stretchy="false">(</mo><msup><mi>Set</mi> <mi>i</mi></msup><msup><mo stretchy="false">)</mo> <mi>op</mi></msup></mrow></mover><mo stretchy="false">(</mo><msup><mi>Set</mi> <mi>Fin</mi></msup><msup><mo stretchy="false">)</mo> <mi>op</mi></msup><mo>,</mo></mrow><annotation encoding="application/x-tex">Set \stackrel{y^{op}}{\to} (Set^{Set})^{op} \stackrel{(Set^i)^{op}}{\to} (Set^{Fin})^{op},</annotation></semantics></math></div>
+<p>taking a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> contravariantly to the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>i</mi><mo>−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Set(X, i-)</annotation></semantics></math>, has a <a class="existingWikiWord" href="/nlab/show/right+adjoint">right adjoint</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mi>Fin</mi></msup><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo><mo>:</mo><mo stretchy="false">(</mo><msup><mi>Set</mi> <mi>Fin</mi></msup><msup><mo stretchy="false">)</mo> <mi>op</mi></msup><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set^{Fin}(-, i): (Set^{Fin})^{op} \to Set</annotation></semantics></math></div>
+<p>(Note: this construction is dual to the familiar <span class="newWikiWord">Kan construction<a href="/nlab/new/Kan+construction">?</a></span>, which takes as input a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F: A \to C</annotation></semantics></math> from a small category to a cocomplete category, and produces as output an adjoint pair whose right adjoint is a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>→</mo><msup><mi>Set</mi> <mrow><msup><mi>A</mi> <mi>op</mi></msup></mrow></msup></mrow><annotation encoding="application/x-tex">C \to Set^{A^{op}}</annotation></semantics></math>; see for instance <a class="existingWikiWord" href="/nlab/show/nerve+and+realization">nerve and realization</a>.)</p>
+
+<p>The composite of these functors gives a monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set \to Set</annotation></semantics></math> which in fact is just the ultrafilter monad:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>β</mi><mo>≅</mo><msup><mi>Set</mi> <mi>Fin</mi></msup><mo stretchy="false">(</mo><mi>Set</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>i</mi><mo>−</mo><mo stretchy="false">)</mo><mo>,</mo><mi>Set</mi><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mi>i</mi><mo>−</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\beta \cong Set^{Fin}(Set(X, i-), Set(1, i-))</annotation></semantics></math></div>
+<p>One way of considering the codensity monad formulation is that the ultrafilter functor is terminal among endofunctors whose restriction to the category of finite sets is the identity functor. This likewise gives the uniqueness of the monad structure, as well as the fact that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math> is the terminal monad that restricts to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mn>1</mn> <mi>Fin</mi></msub></mrow><annotation encoding="application/x-tex">1_{Fin}</annotation></semantics></math>.</p>
+
+<h3 id="ultrafilters_and_unbiased_boolean_algebras">Ultrafilters and unbiased Boolean algebras</h3>
+
+<p>The codensity monad description is related to the traditional description in terms of Boolean algebras; to see this more clearly, it helps to pass to <a class="existingWikiWord" href="/nlab/show/Boolean+algebra">unbiased Boolean algebras</a>, which are equivalent to Boolean algebras.</p>
+
+<p>Recall that an unbiased Boolean algebra is a product-preserving functor</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Fin</mi> <mo>+</mo></msub><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">Fin_+ \to Set</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Fin</mi> <mo>+</mo></msub></mrow><annotation encoding="application/x-tex">Fin_+</annotation></semantics></math> is the category of <a class="existingWikiWord" href="/nlab/show/inhabited+set">inhabited</a> <a class="existingWikiWord" href="/nlab/show/finite+set">finite</a> <a class="existingWikiWord" href="/nlab/show/sets">sets</a>. If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is any set, there is an unbiased Boolean algebra</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>i</mi> <mo>+</mo></msub><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>:</mo><msub><mi>Fin</mi> <mo>+</mo></msub><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set(X, i_+ -): Fin_+ \to Set</annotation></semantics></math></div>
+<p>which may be called the <em>unbiased power set</em>. (Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mo>+</mo></msub><mo>:</mo><msub><mi>Fin</mi> <mo>+</mo></msub><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">i_+: Fin_+ \to Set</annotation></semantics></math> denotes the standard inclusion.) We may denote this by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mi>X</mi></msup></mrow><annotation encoding="application/x-tex">(-)^X</annotation></semantics></math> for short. The inclusion functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mo>+</mo></msub></mrow><annotation encoding="application/x-tex">i_+</annotation></semantics></math> is identified with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mn>1</mn></msup></mrow><annotation encoding="application/x-tex">(-)^1</annotation></semantics></math>, and corresponds to the Boolean algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>.</p>
+
+<div class="num_defn">
+<h6 id="definition">Definition</h6>
+
+<p>An <em>ultrafilter on</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mi>X</mi></msup><mo>→</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mn>1</mn></msup></mrow><annotation encoding="application/x-tex">(-)^X \to (-)^1</annotation></semantics></math> in the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Prod</mi><mo stretchy="false">(</mo><msub><mi>Fin</mi> <mo>+</mo></msub><mo>,</mo><mi>Set</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Prod(Fin_+, Set)</annotation></semantics></math>.</p>
+</div>
+
+<p>Of course this is the same as a natural transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mi>X</mi></msup><mo>→</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mn>1</mn></msup></mrow><annotation encoding="application/x-tex">(-)^X \to (-)^1</annotation></semantics></math> in the usual <a class="existingWikiWord" href="/nlab/show/functor+category">functor category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mrow><msub><mi>Fin</mi> <mo>+</mo></msub></mrow></msup></mrow><annotation encoding="application/x-tex">Set^{Fin_+}</annotation></semantics></math>. Such transformations are in bijection with transformations</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>i</mi><mo>−</mo><mo stretchy="false">)</mo><mo>→</mo><mi>Set</mi><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mi>i</mi><mo>−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Set(X, i-) \to Set(1, i-)</annotation></semantics></math></div>
+<p>in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mi>Fin</mi></msup></mrow><annotation encoding="application/x-tex">Set^{Fin}</annotation></semantics></math> used in the codensity monad description of ultrafilters.</p>
+
+<h3 id="ultrafilters_via_other_algebraic_theories">Ultrafilters via other algebraic theories</h3>
+
+<p>There are other descriptions of ultrafilters, based on <a href="Boolean+algebra#PostAlg"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>-valued Post algebras</a>. Recall the proposition there:</p>
+
+<ul>
+<li>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>M</mi> <mi>k</mi></msub></mrow><annotation encoding="application/x-tex">M_k</annotation></semantics></math> be the monoid of <a class="existingWikiWord" href="/nlab/show/endofunctions">endofunctions</a> on a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>-element set, for a finite set of cardinality <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">k \geq 3</annotation></semantics></math>. The forgetful functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>k</mi></msub><mo>:</mo><mi>BoolAlg</mi><mo>→</mo><msub><mi>M</mi> <mi>k</mi></msub><mtext>-</mtext><mi>Set</mi></mrow><annotation encoding="application/x-tex">U_k: BoolAlg \to M_k\text{-}Set</annotation></semantics></math> is full and faithful.</li>
+</ul>
+
+<p>Let us take for example <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">k = 3</annotation></semantics></math>. Given a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">U_3</annotation></semantics></math> takes the unbiased Boolean algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>i</mi> <mo>+</mo></msub><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Set(X, i_+ -)</annotation></semantics></math> to the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><msup><mn>3</mn> <mi>X</mi></msup></mrow><annotation encoding="application/x-tex">Set(X, 3) = 3^X</annotation></semantics></math>, regarded as a set equipped with the canonical (pointwise) action of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo stretchy="false">(</mo><mn>3</mn><mo>,</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><msub><mi>M</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">Set(3, 3) = M_3</annotation></semantics></math>. It takes an ultrafilter on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, i.e., an unbiased Boolean algebra map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>i</mi> <mo>+</mo></msub><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>→</mo><mi>Set</mi><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><msub><mi>i</mi> <mo>+</mo></msub><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">Set(X, i_+ -) \to Set(1, i_+ -),</annotation></semantics></math></div>
+<p>to a morphism of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>M</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">M_3</annotation></semantics></math>-sets</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Set</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mn>3</mn><mo stretchy="false">)</mo><mo>→</mo><mn>3</mn><mo>.</mo></mrow><annotation encoding="application/x-tex">Set(X, 3) \to 3.</annotation></semantics></math></div>
+<p>The proposition implies that the mapping</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>β</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>M</mi> <mn>3</mn></msub><mtext>-</mtext><mi>Set</mi><mo stretchy="false">(</mo><msup><mn>3</mn> <mi>X</mi></msup><mo>,</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\beta(X) \to M_3\text{-}Set(3^X, 3)</annotation></semantics></math></div>
+<p>is a natural bijection, giving us another way of viewing ultrafilters on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, this time involving only <em>unary</em> operations.</p>
+
+<p>This is of course another codensity monad description in disguise; this time the codensity monad is induced by the full inclusion</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>B</mi><msub><mi>M</mi> <mn>3</mn></msub><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">B M_3 \to Set</annotation></semantics></math></div>
+<p>of the category of endofunctions on the 3-element set into the category of sets. The results of this section say that the ultrafilter monad is the codensity monad for this particular inclusion.</p>
+
+<p>In a post to the categories list (see references), <a class="existingWikiWord" href="/nlab/show/Bill+Lawvere">Bill Lawvere</a> remarks that large cardinal hypotheses can be formulated as obstructions to similar codensity monads being isomorphic to the identity. For example, the existence of <a class="existingWikiWord" href="/nlab/show/infinite+sets">infinite sets</a> is equivalent (assuming the <a class="existingWikiWord" href="/nlab/show/ultrafilter+principle">ultrafilter principle</a>) to the fact that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math> is not isomorphic to the identity. Or, for the full inclusion</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>M</mi> <mi>ℕ</mi></msub><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">M_{\mathbb{N}} \to Set</annotation></semantics></math></div>
+<p>the existence of an uncountable <a class="existingWikiWord" href="/nlab/show/measurable+cardinal">measurable cardinal</a> is equivalent (in ZFC) to the fact that the induced codensity monad is not isomorphic to the identity (i.e., the first uncountable measurable cardinal is where the first “jump” takes place). Lawvere gives a couple more examples of a more geometric nature.</p>
+
+<h2 id="comphaus">Algebras of the ultrafilter monad</h2>
+
+<p>A theorem due to <a class="existingWikiWord" href="/nlab/show/Ernest+Manes">Ernest Manes</a> is that the <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a> of ultrafilter monad is the category of <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+spaces">compact Hausdorff spaces</a> with its obvious forgetful functor to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math>.</p>
+
+<ul>
+<li>
+<p>In one direction, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is a compact Hausdorff space, then the corresponding algebra structure</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ξ</mi><mo>:</mo><mi>β</mi><mi>X</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\xi: \beta X \to X</annotation></semantics></math></div>
+<p>sends an ultrafilter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to the unique point in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> converges. (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> <strong>converges to</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> if the filter of neighborhoods of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is contained in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>; see <a class="existingWikiWord" href="/nlab/show/convergence+space">convergence space</a>.)</p>
+</li>
+
+<li>
+<p>In the other direction, given an algebra structure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ξ</mi><mo lspace="verythinmathspace">:</mo><mi>β</mi><mi>X</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\xi\colon \beta X \to X</annotation></semantics></math>, we define a topology by defining a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">U \subseteq X</annotation></semantics></math> to be <a class="existingWikiWord" href="/nlab/show/open+subset">open</a> if</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow></msub><msub><mo>∀</mo> <mrow><mi>F</mi><mo>∈</mo><mi>β</mi><mi>X</mi></mrow></msub><mo stretchy="false">(</mo><mi>x</mi><mo>∈</mo><mi>U</mi><mspace width="mediummathspace"></mspace><mi>and</mi><mspace width="mediummathspace"></mspace><mi>ξ</mi><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo stretchy="false">)</mo><mo>⇒</mo><mi>U</mi><mo>∈</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\forall_{x \in X} \forall_{F \in \beta X} (x \in U \: and \: \xi(F) = x) \Rightarrow U \in F</annotation></semantics></math></div>
+<p>The sense of this is that a set is open if it is a neighborhood of each of its points, and the neighborhood filter of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is the intersection of all ultrafilters that converge to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>. (The unit condition is that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ξ</mi><mo stretchy="false">(</mo><mi>prin</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\xi (prin(x)) = x</annotation></semantics></math></div>
+<p>so that the neighborhood filter of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is contained in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>prin</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">prin(x)</annotation></semantics></math>, i.e., each neighborhood of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> contains <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>.) It is not hard to verify that this condition indeed defines a topology. In fact, the topology is compact Hausdorff, essentially because <a class="existingWikiWord" href="/nlab/show/compact+space">compactness</a> is equivalent to having every ultrafilter converge to some point, and <a class="existingWikiWord" href="/nlab/show/Hausdorff+space">Hausdorffness</a> to having that point be unique.</p>
+</li>
+</ul>
+
+<p>In particular, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\beta X</annotation></semantics></math> can be equipped with a compact Hausdorff topology which is the <a class="existingWikiWord" href="/nlab/show/free+object">free</a> compact Hausdorff space generated by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, or equivalently the <span class="newWikiWord">Stone-∞ech compactification<a href="/nlab/new/Stone-%E2%88%9Eech+compactification">?</a></span> of the <a class="existingWikiWord" href="/nlab/show/discrete+topology">discrete topology</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+
+<p>The monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math> also extends to the <a class="existingWikiWord" href="/nlab/show/bicategory">bicategory</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Rel</mi></mrow><annotation encoding="application/x-tex">Rel</annotation></semantics></math> of sets and binary <a class="existingWikiWord" href="/nlab/show/relations">relations</a>. It was observed by Barr that the <a class="existingWikiWord" href="/nlab/show/generalized+multicategories">generalized multicategories</a> defined relative to this extension can be identified with arbitrary <a class="existingWikiWord" href="/nlab/show/topological+spaces">topological spaces</a>; see <a class="existingWikiWord" href="/nlab/show/relational+beta-module">relational beta-module</a>. Thus, compact Hausdorff spaces are to topological spaces as <a class="existingWikiWord" href="/nlab/show/monoidal+categories">monoidal categories</a> are to <a class="existingWikiWord" href="/nlab/show/multicategories">multicategories</a>.</p>
+
+<p>By exploiting the connection between monads and <a class="existingWikiWord" href="/nlab/show/algebraic+theory">algebraic theories</a>, it is possible to define a <strong>compact Hausdorff object</strong> in any category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> with small products, as a product-preserving functor</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Kl</mi><mo stretchy="false">(</mo><mi>β</mi><msup><mo stretchy="false">)</mo> <mi>op</mi></msup><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">Kl(\beta)^{op} \to C</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Kl</mi><mo stretchy="false">(</mo><mi>β</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Kl(\beta)</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli category</a> (or the full category of compact Hausdorff spaces whose objects are of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">\beta S</annotation></semantics></math>).</p>
+
+<h2 id="number_of_ultrafilters">Number of ultrafilters</h2>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/finite+set">finite set</a>, then all ultrafilters on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> are principal and the number of them is the cardinality of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/infinite+set">infinite set</a> of cardinality <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>, then the number of ultrafilters on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mn>2</mn> <mrow><msup><mn>2</mn> <mi>κ</mi></msup></mrow></msup></mrow><annotation encoding="application/x-tex">2^{2^\kappa}</annotation></semantics></math>. A proof may be found at <a class="existingWikiWord" href="/nlab/show/independent+family+of+sets">independent family of sets</a>.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>
+<p>R. Börger, <em>Coproducts and Ultrafilters</em>, JPAA <strong>46</strong> (1987) pp.35-47.</p>
+</li>
+
+<li>
+<p>E. Manes, <em>Algebraic Theories</em>, Graduate Texts in Mathematics <strong>26</strong>, Springer-Verlag, 1976.</p>
+</li>
+
+<li>
+<p>G. Richter, <em>Axiomatizing the Category of Compact Hausdorff Spaces</em>, Categories at Work (ed. Herrlich and Porst), Heldermann-Verlag (1991), 199-215. <a href="http://www.heldermann.de/R&amp;E/RAE18/ctw12.pdf">(link)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tom+Leinster">Tom Leinster</a>, <em>Post to the categories list</em>. <a href="http://permalink.gmane.org/gmane.science.mathematics.categories/6703">(link)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Todd+Trimble">Todd Trimble</a>, <em>Post to A Dialogue on Infinity</em>. <a href="http://dialinf.wordpress.com/2009/01/21/ultraproducts-the-category-theoretic-way/#comment-219">(link)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bill+Lawvere">Bill Lawvere</a>, <em>Post to the categories list</em>. <a href="http://facultypages.ecc.edu/alsani/ct99-00%288-12%29/msg00128.html">(link)</a> <a href="https://www.mta.ca/~cat-dist/archive/2000/00-3">archive, 21 Mar 2000</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tom+Leinster">Tom Leinster</a>, <em>Definition of ultrafilter</em>. <a href="http://golem.ph.utexas.edu/category/2011/07/definitions_of_ultrafilter.html">(blog post)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tom+Leinster">Tom Leinster</a>, <em>Where do ultrafilters come from?</em> <a href="https://golem.ph.utexas.edu/category/2012/09/where_do_ultrafilters_come_fro.html">(blog post)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tom+Leinster">Tom Leinster</a>, <em>Codensity and the ultrafilter monad</em>, TAC <strong>28</strong> (2013) pp.332-370. <a href="http://www.tac.mta.ca/tac/volumes/28/13/28-13.pdf">(TAC)</a> <a href="https://arxiv.org/abs/1209.3606">arXiv:1209.3606</a>.</p>
+</li>
+
+<li>
+<p>H. Volger, <em>Ultrafilters, ultrapowers and finiteness in a topos</em>, JPAA <strong>6</strong> (1975) pp.345-356.</p>
+</li>
+
+<li id="Garner">
+<p><a class="existingWikiWord" href="/nlab/show/Richard+Garner">Richard Garner</a>, <em>Ultrafilters, finite coproducts and locally connected classifying toposes</em>. <a href="https://arxiv.org/abs/1808.08687">arXiv:1808.08687</a>.</p>
+</li>
+
+<li>
+<p>Jirí Adámek, Lurdes Sousa, <em>D-Ultrafilters and their Monads</em>. <a href="https://arxiv.org/abs/1909.04950">arxiv:1909.04950</a>.</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on October 12, 2022 at 11:42:04.
+    See the <a href="/nlab/history/ultrafilter" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/ultrafilter" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/2196/#Item_7">Discuss</a><span class="backintime"><a href="/nlab/revision/ultrafilter/42" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/ultrafilter" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/ultrafilter" accesskey="S" class="navlink" id="history" rel="nofollow">History (42 revisions)</a>
+  <a href="/nlab/show/ultrafilter/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/ultrafilter" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/ultrafilter" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

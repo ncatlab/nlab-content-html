@@ -1,0 +1,786 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Petri net in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Petri net
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/2146/#Item_15" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#introduction'>Introduction</a></li>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#semantics'>Categorical Semantics of Petri Nets</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<p>See also the <a href="http://www.azimuthproject.org/azimuth/show/Petri+net">Petri net</a> in The Azimuth Project.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Petri nets are a well known model of concurrent computation, generalising <a class="existingWikiWord" href="/nlab/show/transition+systems">transition systems</a> by using a built in notion of resource. Their use is widespread in modelling manufacturing systems, optimising control systems and in resource critical aspects of operational research, as well as being a useful model of computation. Because of this they exist in many variants : colored, algebraic, probabilistic, timed, …, and hence there are many forms of the basic definition, each thought best of that particular application.</p>
+
+<p>The initial use, here, is for their links with <a class="existingWikiWord" href="/nlab/show/transition+systems">transition systems</a>, <a class="existingWikiWord" href="/nlab/show/event+structures">event structures</a>, <a class="existingWikiWord" href="/nlab/show/asynchronous+automata">asynchronous automata</a> etc., leading on to their comparison with <span class="newWikiWord">higher dimensional automata<a href="/nlab/new/higher+dimensional+automaton">?</a></span> and <a class="existingWikiWord" href="/nlab/show/higher+dimensional+transition+system">higher dimensional transition system</a>s, so the first definition we will use is that given by Winskel and Nielsen (see references below), but first we will attempt to give some idea of what a Petri net is and what is does.</p>
+
+<h2 id="idea">Idea</h2>
+
+<p>The idea of a simple Petri net is based on a simple manufacturing shop. You have various ‘transitions’ or manufacturing ‘events’ that form part of the various process occurring in the ‘shop’. These typically take parts (of the final object), do something to them, such as combining two or more different parts to make a more complicated one, (for instance, putting the wheels on a car).</p>
+
+<p>Parts, represented by ‘tokens’ are stored in ‘places’ and the assembly process are known, as above, as ‘events’ or ‘transitions’ (depending on the source being used for the theory). The relationships are typically represented graphically. For instance:</p>
+<svg xmlns:se="http://svg-edit.googlecode.com" width="294" height="253" se:nonce="60508" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <path fill="#ffffff" stroke="#000000" stroke-width="2" d="m23.007811,27c0,-14.36464 11.635359,-26 25.999998,-26c14.364643,0 26.000004,11.63536 26.000004,26c0,14.364639 -11.635361,26 -26.000004,26c-14.364639,0 -25.999998,-11.635361 -25.999998,-26z" id="svg_60508_1"></path>
+  <path fill="#ffffff" stroke="#000000" stroke-width="2" d="m222.007813,27c0,-14.36464 12.082886,-26 27,-26c14.917114,0 27,11.63536 27,26c0,14.364639 -12.082886,26 -27,26c-14.917114,0 -27,-11.635361 -27,-26z" id="svg_60508_2" transform="rotate(3.74069e-06, 320.272, -74)"></path>
+  <path fill="#ffffff" stroke="#000000" stroke-width="2" d="m120.007813,226c0,-14.364624 12.082886,-26 27,-26c14.917114,0 27,11.635376 27,26c0,14.364624 -12.082886,26 -27,26c-14.917114,0 -27,-11.635376 -27,-26z" transform="rotate(3.74069e-06, 320.272, -74)" id="svg_60508_3"></path>
+  <rect fill="#ffffff" stroke="#000000" stroke-width="2" x="100.007808" y="117" width="98" height="21" id="svg_60508_4"></rect>
+  <line fill="none" stroke="#000000" stroke-width="2" x1="68.00782" y1="46.999999" x2="148.00782" y2="118.000002" id="svg_60508_5"></line>
+  <line fill="none" stroke="#000000" stroke-width="2" x1="230.007808" y1="47.000002" x2="149.007807" y2="116.000003" id="svg_60508_6"></line>
+  <line fill="none" stroke="#000000" stroke-width="2" x1="147.007813" y1="139" x2="148.007813" y2="199" id="svg_60508_7"></line>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="105.008" y="65" id="svg_60508_8" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve">1</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="188.008" y="67" id="svg_60508_9" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve">1</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="157.008" y="170" id="svg_60508_10" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve">1</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="212.008" y="128" id="svg_60508_11" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve">e</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="8.00781" y="26" id="svg_60508_12" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve">A</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="286.008" y="27" id="svg_60508_13" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve">B</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="187.008" y="226" id="svg_60508_14" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve">C</text>
+  <ellipse fill="#000000" stroke="#000000" stroke-width="2" cx="36.007813" cy="23" id="svg_60508_15" rx="4" ry="4"></ellipse>
+  <ellipse fill="#000000" stroke="#000000" stroke-width="2" cx="60.007813" cy="24" rx="4" ry="4" id="svg_60508_16"></ellipse>
+  <ellipse fill="#000000" stroke="#000000" stroke-width="2" cx="247.007813" cy="23" rx="4" ry="4" id="svg_60508_17"></ellipse>
+ </g>
+</svg>
+<p>represents a system with three places (labelled <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>) and one event/ transition (labelled <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math>). Shown is a situation represented by an initial ‘marking’ where there are two tokens in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, one in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, and none in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>. (The convention is that places are shown as circles and events as rectangles.)</p>
+
+<p>Suppose that the ‘event’ takes one ‘part’ of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, one of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> and produces one of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>. (This is indicated on the diagram by the labels on the edges. Clearly with the available resources the even <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> is able to be performed. (The usual Petri net jargon for this is that ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> is enabled’.) In this case, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> can be ‘fired’ and the result will yield a marking of one token in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, none in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> and one in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>. This sort of structure gets abstracted as follows:</p>
+
+<div class="un_defn">
+<h6 id="definition">Definition</h6>
+
+<p>A <strong>Petri net</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math> consists of</p>
+
+<ul>
+<li>
+<p>a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> of <em>places</em>;</p>
+</li>
+
+<li>
+<p>an <em>initial marking</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>M</mi> <mn>0</mn></msub><mo>∈</mo><msup><mi>ℕ</mi> <mi>P</mi></msup></mrow><annotation encoding="application/x-tex">M_0 \in \mathbb{N}^P</annotation></semantics></math>, so <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>M</mi> <mn>0</mn></msub><mo>:</mo><mi>P</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">M_0 : P \to \mathbb{N}</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math> of <em>events</em>; and</p>
+</li>
+
+<li>
+<p>two functions</p>
+
+<ul>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>pre</mi><mo>:</mo><mi>P</mi><mo>×</mo><mi>E</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">pre: P\times E\to \mathbb{N}</annotation></semantics></math>, and</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>post</mi><mo>:</mo><mi>P</mi><mo>×</mo><mi>E</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">post:  P\times E\to \mathbb{N}</annotation></semantics></math>.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2 id="semantics">Categorical Semantics of Petri Nets</h2>
+
+<p>The functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>pre</mi></mrow><annotation encoding="application/x-tex">pre</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>post</mi></mrow><annotation encoding="application/x-tex">post</annotation></semantics></math> can be <a class="existingWikiWord" href="/nlab/show/curried">curried</a> to write a Petri net as a pair of functions</p>
+<div style="text-align: center">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="104.816pt" height="28.016pt" viewBox="0 0 104.816 28.016" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<g>
+<symbol overflow="visible" id="291349873-glyph0-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph0-1">
+<path style="stroke:none;" d="M 8.8125 -2.90625 C 8.84375 -2.96875 8.875 -3.046875 8.875 -3.078125 C 8.875 -3.09375 8.875 -3.21875 8.734375 -3.21875 C 8.625 -3.21875 8.59375 -3.140625 8.5625 -3.0625 C 7.765625 -1.21875 7.296875 -0.390625 5.171875 -0.390625 L 3.34375 -0.390625 C 3.171875 -0.390625 3.15625 -0.390625 3.078125 -0.40625 C 2.953125 -0.40625 2.90625 -0.421875 2.90625 -0.515625 C 2.90625 -0.5625 2.90625 -0.578125 2.96875 -0.8125 L 3.828125 -4.203125 L 5.0625 -4.203125 C 6.109375 -4.203125 6.109375 -3.953125 6.109375 -3.640625 C 6.109375 -3.546875 6.109375 -3.40625 6.03125 -3.03125 C 6 -2.96875 5.984375 -2.921875 5.984375 -2.890625 C 5.984375 -2.828125 6.046875 -2.75 6.15625 -2.75 C 6.25 -2.75 6.28125 -2.8125 6.34375 -3 L 7.046875 -5.921875 C 7.046875 -5.984375 6.984375 -6.046875 6.90625 -6.046875 C 6.78125 -6.046875 6.765625 -5.984375 6.71875 -5.828125 C 6.46875 -4.875 6.234375 -4.59375 5.09375 -4.59375 L 3.921875 -4.59375 L 4.671875 -7.59375 C 4.78125 -8.03125 4.796875 -8.078125 5.34375 -8.078125 L 7.09375 -8.078125 C 8.625 -8.078125 8.984375 -7.71875 8.984375 -6.703125 C 8.984375 -6.40625 8.984375 -6.375 8.9375 -6.046875 C 8.9375 -5.96875 8.921875 -5.875 8.921875 -5.8125 C 8.921875 -5.75 8.96875 -5.671875 9.078125 -5.671875 C 9.21875 -5.671875 9.234375 -5.734375 9.25 -5.984375 L 9.5 -8.125 C 9.53125 -8.46875 9.484375 -8.46875 9.171875 -8.46875 L 2.875 -8.46875 C 2.625 -8.46875 2.5 -8.46875 2.5 -8.21875 C 2.5 -8.078125 2.609375 -8.078125 2.859375 -8.078125 C 3.3125 -8.078125 3.65625 -8.078125 3.65625 -7.859375 C 3.65625 -7.8125 3.65625 -7.78125 3.59375 -7.5625 L 1.953125 -0.96875 C 1.828125 -0.484375 1.8125 -0.390625 0.828125 -0.390625 C 0.609375 -0.390625 0.46875 -0.390625 0.46875 -0.15625 C 0.46875 0 0.578125 0 0.828125 0 L 7.28125 0 C 7.578125 0 7.578125 -0.015625 7.671875 -0.21875 Z M 8.8125 -2.90625 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph0-2">
+<path style="stroke:none;" d="M 3.765625 -3.9375 L 5.890625 -3.9375 C 7.65625 -3.9375 9.390625 -5.234375 9.390625 -6.625 C 9.390625 -7.578125 8.5625 -8.5 6.9375 -8.5 L 2.90625 -8.5 C 2.671875 -8.5 2.53125 -8.5 2.53125 -8.265625 C 2.53125 -8.125 2.640625 -8.125 2.890625 -8.125 C 3.046875 -8.125 3.28125 -8.109375 3.421875 -8.09375 C 3.625 -8.0625 3.703125 -8.03125 3.703125 -7.890625 C 3.703125 -7.84375 3.6875 -7.8125 3.65625 -7.65625 L 1.984375 -0.96875 C 1.859375 -0.484375 1.828125 -0.390625 0.84375 -0.390625 C 0.640625 -0.390625 0.5 -0.390625 0.5 -0.15625 C 0.5 0 0.640625 0 0.6875 0 C 1.03125 0 1.921875 -0.03125 2.265625 -0.03125 C 2.53125 -0.03125 2.796875 -0.03125 3.0625 -0.03125 C 3.34375 -0.03125 3.609375 0 3.875 0 C 3.953125 0 4.125 0 4.125 -0.25 C 4.125 -0.390625 4.015625 -0.390625 3.765625 -0.390625 C 3.3125 -0.390625 2.96875 -0.390625 2.96875 -0.609375 C 2.96875 -0.6875 2.984375 -0.75 3 -0.828125 Z M 4.671875 -7.640625 C 4.78125 -8.078125 4.8125 -8.125 5.34375 -8.125 L 6.53125 -8.125 C 7.578125 -8.125 8.234375 -7.78125 8.234375 -6.921875 C 8.234375 -6.4375 7.984375 -5.375 7.5 -4.921875 C 6.875 -4.359375 6.125 -4.265625 5.578125 -4.265625 L 3.828125 -4.265625 Z M 4.671875 -7.640625 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph1-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph1-1">
+<path style="stroke:none;" d="M 1.390625 -7.40625 L 1.390625 -1.328125 C 1.390625 -0.671875 1.296875 -0.453125 0.65625 -0.4375 C 0.515625 -0.4375 0.3125 -0.421875 0.3125 -0.21875 C 0.3125 0 0.515625 0 0.734375 0 L 2.671875 0 C 2.890625 0 3.078125 0 3.078125 -0.21875 C 3.078125 -0.421875 2.875 -0.4375 2.703125 -0.4375 C 2.015625 -0.453125 1.921875 -0.703125 1.921875 -1.359375 L 1.921875 -7.0625 L 7.296875 0.046875 C 7.40625 0.203125 7.46875 0.234375 7.5625 0.234375 C 7.765625 0.234375 7.765625 0.03125 7.765625 -0.171875 L 7.765625 -7.203125 C 7.765625 -7.90625 7.875 -8.078125 8.453125 -8.09375 C 8.53125 -8.09375 8.734375 -8.109375 8.734375 -8.3125 C 8.734375 -8.53125 8.5625 -8.53125 8.328125 -8.53125 L 6.515625 -8.53125 C 6.28125 -8.53125 6.09375 -8.53125 6.09375 -8.3125 C 6.09375 -8.09375 6.3125 -8.09375 6.453125 -8.09375 C 7.140625 -8.078125 7.25 -7.828125 7.25 -7.171875 L 7.25 -3.28125 L 3.484375 -8.359375 C 3.359375 -8.53125 3.328125 -8.53125 3.03125 -8.53125 L 0.875 -8.53125 C 0.640625 -8.53125 0.453125 -8.53125 0.453125 -8.3125 C 0.453125 -8.125 0.640625 -8.09375 0.71875 -8.09375 C 1.0625 -8.0625 1.296875 -7.859375 1.421875 -7.703125 C 1.390625 -7.609375 1.390625 -7.578125 1.390625 -7.40625 Z M 7.328125 -0.640625 L 1.921875 -7.796875 C 1.796875 -7.9375 1.796875 -7.96875 1.65625 -8.09375 L 3.140625 -8.09375 L 7.328125 -2.421875 Z M 7.328125 -0.640625 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph2-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph2-1">
+<path style="stroke:none;" d="M 3.171875 3.109375 L 3.171875 2.609375 L 1.96875 2.609375 L 1.96875 -8.84375 L 3.171875 -8.84375 L 3.171875 -9.34375 L 1.46875 -9.34375 L 1.46875 3.109375 Z M 3.171875 3.109375 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph2-2">
+<path style="stroke:none;" d="M 1.984375 -9.34375 L 0.28125 -9.34375 L 0.28125 -8.84375 L 1.484375 -8.84375 L 1.484375 2.609375 L 0.28125 2.609375 L 0.28125 3.109375 L 1.984375 3.109375 Z M 1.984375 -9.34375 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph3-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph3-1">
+<path style="stroke:none;" d="M 2.421875 1.375 C 1.859375 1.375 1.765625 1.375 1.765625 1 L 1.765625 -0.421875 C 1.8125 -0.375 2.21875 0.09375 2.953125 0.09375 C 4.109375 0.09375 5.09375 -0.78125 5.09375 -1.890625 C 5.09375 -2.953125 4.203125 -3.84375 3.09375 -3.84375 C 2.59375 -3.84375 2.09375 -3.65625 1.734375 -3.3125 L 1.734375 -3.84375 L 0.421875 -3.75 L 0.421875 -3.4375 C 1.03125 -3.4375 1.078125 -3.390625 1.078125 -3.03125 L 1.078125 1 C 1.078125 1.375 1 1.375 0.421875 1.375 L 0.421875 1.6875 C 0.4375 1.6875 1.0625 1.65625 1.421875 1.65625 C 1.75 1.65625 2.34375 1.6875 2.421875 1.6875 Z M 1.765625 -2.90625 C 2.03125 -3.34375 2.53125 -3.5625 3 -3.5625 C 3.734375 -3.5625 4.296875 -2.796875 4.296875 -1.890625 C 4.296875 -0.890625 3.640625 -0.15625 2.90625 -0.15625 C 2.140625 -0.15625 1.796875 -0.828125 1.765625 -0.875 Z M 1.765625 -2.90625 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph3-2">
+<path style="stroke:none;" d="M 1.734375 -1.984375 C 1.734375 -2.71875 2.078125 -3.59375 2.90625 -3.59375 C 2.828125 -3.546875 2.75 -3.421875 2.75 -3.28125 C 2.75 -3 2.984375 -2.890625 3.140625 -2.890625 C 3.359375 -2.890625 3.546875 -3.03125 3.546875 -3.28125 C 3.546875 -3.578125 3.265625 -3.84375 2.859375 -3.84375 C 2.421875 -3.84375 1.9375 -3.578125 1.6875 -2.90625 L 1.671875 -2.90625 L 1.671875 -3.84375 L 0.421875 -3.75 L 0.421875 -3.4375 C 1.015625 -3.4375 1.078125 -3.375 1.078125 -2.953125 L 1.078125 -0.6875 C 1.078125 -0.3125 1 -0.3125 0.421875 -0.3125 L 0.421875 0 C 0.46875 0 1.0625 -0.03125 1.421875 -0.03125 C 1.796875 -0.03125 2.171875 -0.015625 2.546875 0 L 2.546875 -0.3125 L 2.375 -0.3125 C 1.734375 -0.3125 1.734375 -0.40625 1.734375 -0.703125 Z M 1.734375 -1.984375 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph3-3">
+<path style="stroke:none;" d="M 3.84375 -1.984375 C 4.015625 -1.984375 4.078125 -1.984375 4.078125 -2.171875 C 4.078125 -2.953125 3.65625 -3.890625 2.359375 -3.890625 C 1.21875 -3.890625 0.34375 -2.984375 0.34375 -1.90625 C 0.34375 -0.796875 1.3125 0.09375 2.46875 0.09375 C 3.640625 0.09375 4.078125 -0.859375 4.078125 -1.046875 C 4.078125 -1.078125 4.0625 -1.171875 3.9375 -1.171875 C 3.8125 -1.171875 3.796875 -1.109375 3.78125 -1.03125 C 3.5 -0.328125 2.84375 -0.1875 2.53125 -0.1875 C 2.125 -0.1875 1.71875 -0.375 1.46875 -0.703125 C 1.140625 -1.109375 1.140625 -1.640625 1.140625 -1.984375 Z M 1.140625 -2.21875 C 1.234375 -3.4375 2.015625 -3.640625 2.359375 -3.640625 C 3.421875 -3.640625 3.46875 -2.4375 3.46875 -2.21875 Z M 1.140625 -2.21875 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph3-4">
+<path style="stroke:none;" d="M 4.609375 -1.859375 C 4.609375 -2.953125 3.671875 -3.890625 2.46875 -3.890625 C 1.265625 -3.890625 0.34375 -2.953125 0.34375 -1.859375 C 0.34375 -0.78125 1.296875 0.09375 2.46875 0.09375 C 3.65625 0.09375 4.609375 -0.78125 4.609375 -1.859375 Z M 2.46875 -0.1875 C 2.15625 -0.1875 1.6875 -0.296875 1.390625 -0.71875 C 1.15625 -1.078125 1.140625 -1.53125 1.140625 -1.9375 C 1.140625 -2.3125 1.140625 -2.828125 1.453125 -3.203125 C 1.671875 -3.453125 2.03125 -3.640625 2.46875 -3.640625 C 2.984375 -3.640625 3.359375 -3.40625 3.546875 -3.125 C 3.796875 -2.796875 3.8125 -2.359375 3.8125 -1.9375 C 3.8125 -1.515625 3.796875 -1.0625 3.546875 -0.703125 C 3.296875 -0.359375 2.90625 -0.1875 2.46875 -0.1875 Z M 2.46875 -0.1875 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph3-5">
+<path style="stroke:none;" d="M 3.296875 -3.65625 C 3.296875 -3.8125 3.296875 -3.890625 3.1875 -3.890625 C 3.140625 -3.890625 3.125 -3.890625 3.015625 -3.78125 C 2.984375 -3.78125 2.90625 -3.703125 2.84375 -3.65625 C 2.59375 -3.84375 2.265625 -3.890625 1.9375 -3.890625 C 0.6875 -3.890625 0.390625 -3.234375 0.390625 -2.796875 C 0.390625 -2.515625 0.515625 -2.296875 0.71875 -2.125 C 1.0625 -1.828125 1.390625 -1.765625 1.921875 -1.6875 C 2.359375 -1.609375 3.0625 -1.484375 3.0625 -0.890625 C 3.0625 -0.5625 2.828125 -0.15625 2 -0.15625 C 1.15625 -0.15625 0.859375 -0.703125 0.703125 -1.296875 C 0.671875 -1.40625 0.65625 -1.453125 0.546875 -1.453125 C 0.390625 -1.453125 0.390625 -1.390625 0.390625 -1.21875 L 0.390625 -0.140625 C 0.390625 0.015625 0.390625 0.09375 0.515625 0.09375 C 0.59375 0.09375 0.765625 -0.09375 0.9375 -0.28125 C 1.3125 0.0625 1.78125 0.09375 2 0.09375 C 3.125 0.09375 3.546875 -0.515625 3.546875 -1.140625 C 3.546875 -1.46875 3.40625 -1.734375 3.171875 -1.9375 C 2.84375 -2.25 2.4375 -2.3125 2.140625 -2.375 C 1.4375 -2.5 0.875 -2.59375 0.875 -3.0625 C 0.875 -3.34375 1.109375 -3.671875 1.9375 -3.671875 C 2.953125 -3.671875 2.984375 -2.96875 3.015625 -2.71875 C 3.015625 -2.625 3.125 -2.625 3.15625 -2.625 C 3.296875 -2.625 3.296875 -2.6875 3.296875 -2.84375 Z M 3.296875 -3.65625 "></path>
+</symbol>
+<symbol overflow="visible" id="291349873-glyph3-6">
+<path style="stroke:none;" d="M 1.75 -3.4375 L 3.109375 -3.4375 L 3.109375 -3.75 L 1.75 -3.75 L 1.75 -5.359375 L 1.453125 -5.359375 C 1.453125 -4.578125 1.09375 -3.71875 0.25 -3.6875 L 0.25 -3.4375 L 1.0625 -3.4375 L 1.0625 -1.09375 C 1.0625 -0.109375 1.796875 0.09375 2.28125 0.09375 C 2.875 0.09375 3.265625 -0.40625 3.265625 -1.09375 L 3.265625 -1.578125 L 2.96875 -1.578125 L 2.96875 -1.109375 C 2.96875 -0.515625 2.6875 -0.1875 2.359375 -0.1875 C 1.75 -0.1875 1.75 -0.921875 1.75 -1.078125 Z M 1.75 -3.4375 "></path>
+</symbol>
+</g>
+</defs>
+<g id="surface1">
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#291349873-glyph0-1" x="5.362" y="16.317"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#291349873-glyph1-1" x="73.817" y="16.317"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#291349873-glyph2-1" x="82.81075" y="16.317"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#291349873-glyph0-2" x="86.27075" y="16.317"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#291349873-glyph2-2" x="95.9945" y="16.317"></use>
+</g>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -31.525188 2.145406 L 15.400594 2.145406 " transform="matrix(1,0,0,-1,52.408,13.204)"></path>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.073376 2.391291 C -1.69447 0.957698 -0.85072 0.27801 0.0008425 0.00066625 C -0.85072 -0.280584 -1.69447 -0.956365 -2.073376 -2.389959 " transform="matrix(1,0,0,-1,68.00697,11.05926)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#291349873-glyph3-1" x="37.635" y="6.434"></use>
+  <use xlink:href="#291349873-glyph3-2" x="43.135585" y="6.434"></use>
+  <use xlink:href="#291349873-glyph3-3" x="47.026965" y="6.434"></use>
+</g>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -31.525188 -2.143656 L 15.400594 -2.143656 " transform="matrix(1,0,0,-1,52.408,13.204)"></path>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.073376 2.391709 C -1.69447 0.958115 -0.85072 0.278428 0.0008425 0.00108375 C -0.85072 -0.280166 -1.69447 -0.955947 -2.073376 -2.389541 " transform="matrix(1,0,0,-1,68.00697,15.34874)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#291349873-glyph3-1" x="35.26" y="23.64"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#291349873-glyph3-4" x="41.03082" y="23.64"></use>
+  <use xlink:href="#291349873-glyph3-5" x="45.995293" y="23.64"></use>
+  <use xlink:href="#291349873-glyph3-6" x="49.940721" y="23.64"></use>
+</g>
+</g>
+</svg>
+
+</div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℕ</mi><mo stretchy="false">[</mo><mi>P</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathbb{N}[P]</annotation></semantics></math> denotes the <a class="existingWikiWord" href="/nlab/show/free+monoid">free commutative monoid</a> on the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> of places. Written this way, the analogy to <a class="existingWikiWord" href="/nlab/show/directed+graph">graphs</a> is clearer. The main difference is that now the source and target functions land in a <a class="existingWikiWord" href="/nlab/show/free+monoid">free commutative monoid</a> rather than just a set. Thus, Petri nets can be thought of as <em>symmetric monoidal graphs</em> because each edge is a multi-edge between a permutable sum of vertices. Just as <a class="existingWikiWord" href="/nlab/show/directed+graph">graphs</a> generate <a class="existingWikiWord" href="/nlab/show/free+categories">free categories</a>, Petri nets should generate free <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+categories">symmetric monoidal categories</a>. As Petri nets often model processes in various sciences, the free symmetric monoidal categories that they generate model the operational semantics of these processes. For a given Petri net <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>, the free symmetric monoidal <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>FP</mi></mrow><annotation encoding="application/x-tex">FP</annotation></semantics></math> that it generates should have objects given by possible markings of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> and morphisms given by ways of composing the events in sequence and in parallel.</p>
+
+<p>The first to explore this idea were <a href="#monoids">Meseguer and Montanari</a> who constructed an adjunction between Petri nets and a subcategory of the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>CMC</mi></mrow><annotation encoding="application/x-tex">CMC</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/commutative+monoidal+categories">commutative monoidal categories</a>. This adjunction was modified in <a href="#gen"><em>Petri nets based on Lawvere theories</em></a> to get</p>
+<div style="text-align: center">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="120.949pt" height="56.831pt" viewBox="0 0 120.949 56.831" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<g>
+<symbol overflow="visible" id="457623505-glyph0-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph0-1">
+<path style="stroke:none;" d="M 4.390625 -3.59375 C 5.921875 -3.59375 7.25 -4.734375 7.25 -6.125 C 7.25 -7.453125 6.015625 -8.640625 4.296875 -8.640625 L 1.203125 -8.640625 L 1.203125 0 L 2.296875 0 L 2.296875 -3.59375 Z M 4.015625 -7.9375 C 5.390625 -7.9375 6.234375 -7.1875 6.234375 -6.125 C 6.234375 -5.140625 5.453125 -4.328125 4.015625 -4.328125 L 2.265625 -4.328125 L 2.265625 -7.9375 Z M 4.015625 -7.9375 "></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph0-2">
+<path style="stroke:none;" d="M 5.15625 -2.734375 C 5.15625 -3.15625 5.140625 -4.078125 4.65625 -4.828125 C 4.140625 -5.609375 3.390625 -5.734375 2.9375 -5.734375 C 1.5625 -5.734375 0.4375 -4.421875 0.4375 -2.8125 C 0.4375 -1.171875 1.625 0.140625 3.125 0.140625 C 3.90625 0.140625 4.625 -0.15625 5.109375 -0.515625 L 5.03125 -1.3125 C 4.25 -0.671875 3.421875 -0.625 3.140625 -0.625 C 2.140625 -0.625 1.34375 -1.5 1.3125 -2.734375 Z M 1.375 -3.40625 C 1.5625 -4.359375 2.234375 -4.984375 2.9375 -4.984375 C 3.59375 -4.984375 4.28125 -4.5625 4.453125 -3.40625 Z M 1.375 -3.40625 "></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph0-3">
+<path style="stroke:none;" d="M 2.171875 -4.8125 L 3.9375 -4.8125 L 3.9375 -5.53125 L 2.171875 -5.53125 L 2.171875 -7.109375 L 1.3125 -7.109375 L 1.3125 -5.53125 L 0.234375 -5.53125 L 0.234375 -4.8125 L 1.28125 -4.8125 L 1.28125 -1.484375 C 1.28125 -0.734375 1.453125 0.140625 2.3125 0.140625 C 3.1875 0.140625 3.828125 -0.171875 4.140625 -0.34375 L 3.9375 -1.078125 C 3.609375 -0.8125 3.21875 -0.65625 2.8125 -0.65625 C 2.359375 -0.65625 2.171875 -1.03125 2.171875 -1.6875 Z M 2.171875 -4.8125 "></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph0-4">
+<path style="stroke:none;" d="M 1.953125 -2.671875 C 1.953125 -3.90625 2.859375 -4.8125 4.078125 -4.828125 L 4.078125 -5.671875 C 2.96875 -5.65625 2.28125 -5.046875 1.890625 -4.46875 L 1.890625 -5.609375 L 1.015625 -5.609375 L 1.015625 0 L 1.953125 0 Z M 1.953125 -2.671875 "></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph0-5">
+<path style="stroke:none;" d="M 2.03125 -8.46875 L 0.921875 -8.46875 L 0.921875 -7.359375 L 2.03125 -7.359375 Z M 1.9375 -5.53125 L 1.015625 -5.53125 L 1.015625 0 L 1.9375 0 Z M 1.9375 -5.53125 "></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph0-6">
+<path style="stroke:none;" d="M 7.25 -1.421875 C 6.515625 -0.9375 6.09375 -0.671875 4.859375 -0.671875 C 3.0625 -0.671875 1.9375 -2.546875 1.9375 -4.328125 C 1.9375 -6.03125 2.96875 -7.984375 4.875 -7.984375 C 5.765625 -7.984375 6.328125 -7.765625 7.015625 -7.328125 L 7.1875 -8.359375 C 6.65625 -8.625 5.6875 -8.78125 4.890625 -8.78125 C 2.59375 -8.78125 0.828125 -6.84375 0.828125 -4.21875 C 0.828125 -2.25 2.296875 0.140625 4.890625 0.140625 C 6.046875 0.140625 6.515625 -0.0625 7.328125 -0.5625 Z M 7.25 -1.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph0-7">
+<path style="stroke:none;" d="M 6.59375 -4.421875 C 6.171875 -3.28125 5.578125 -1.75 5.4375 -1.15625 L 5.421875 -1.15625 C 5.375 -1.421875 5.21875 -1.875 5.03125 -2.40625 L 3.078125 -7.5625 L 2.65625 -8.640625 L 1.25 -8.640625 L 1.25 0 L 2.21875 0 L 2.21875 -7.71875 L 2.234375 -7.71875 C 2.296875 -7.328125 2.796875 -5.96875 3.125 -5.125 L 4.96875 -0.28125 L 5.875 -0.28125 L 7.53125 -4.609375 C 7.9375 -5.625 8.046875 -5.9375 8.125 -6.1875 C 8.25 -6.546875 8.59375 -7.453125 8.65625 -7.734375 L 8.671875 -7.71875 L 8.671875 0 L 9.640625 0 L 9.640625 -8.640625 L 8.21875 -8.640625 Z M 6.59375 -4.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph1-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph1-1">
+<path style="stroke:none;" d="M 2.984375 -2.8125 L 3.921875 -2.8125 C 4.578125 -2.8125 4.6875 -2.703125 4.6875 -2.421875 C 4.6875 -2.28125 4.6875 -2.265625 4.625 -2.015625 C 4.609375 -1.96875 4.609375 -1.9375 4.609375 -1.921875 C 4.609375 -1.828125 4.671875 -1.78125 4.75 -1.78125 C 4.859375 -1.78125 4.875 -1.828125 4.921875 -1.984375 L 5.390625 -3.84375 C 5.390625 -3.859375 5.421875 -4 5.421875 -4.015625 C 5.421875 -4.09375 5.359375 -4.140625 5.28125 -4.140625 C 5.15625 -4.140625 5.140625 -4.09375 5.09375 -3.9375 C 4.921875 -3.25 4.671875 -3.125 3.9375 -3.125 L 3.0625 -3.125 L 3.609375 -5.3125 C 3.671875 -5.578125 3.6875 -5.609375 4.046875 -5.609375 L 5.390625 -5.609375 C 6.546875 -5.609375 6.765625 -5.328125 6.765625 -4.609375 C 6.765625 -4.3125 6.734375 -4.125 6.734375 -4.0625 C 6.734375 -4 6.75 -3.921875 6.875 -3.921875 C 7.015625 -3.921875 7.015625 -4 7.03125 -4.140625 L 7.1875 -5.65625 C 7.21875 -5.921875 7.15625 -5.921875 6.9375 -5.921875 L 2.28125 -5.921875 C 2.125 -5.921875 2 -5.921875 2 -5.734375 C 2 -5.609375 2.109375 -5.609375 2.28125 -5.609375 C 2.296875 -5.609375 2.453125 -5.609375 2.609375 -5.59375 C 2.796875 -5.578125 2.8125 -5.546875 2.8125 -5.46875 C 2.8125 -5.40625 2.796875 -5.3125 2.78125 -5.28125 L 1.640625 -0.71875 C 1.546875 -0.375 1.546875 -0.3125 0.859375 -0.3125 C 0.71875 -0.3125 0.609375 -0.3125 0.609375 -0.125 C 0.609375 -0.046875 0.65625 0 0.734375 0 C 1 0 1.640625 -0.03125 1.890625 -0.03125 L 2.5625 -0.03125 C 2.796875 -0.03125 3.03125 0 3.25 0 C 3.3125 0 3.4375 0 3.4375 -0.1875 C 3.4375 -0.3125 3.34375 -0.3125 3.140625 -0.3125 C 3.125 -0.3125 2.90625 -0.3125 2.6875 -0.328125 C 2.5 -0.34375 2.421875 -0.359375 2.421875 -0.484375 C 2.421875 -0.515625 2.421875 -0.546875 2.4375 -0.640625 Z M 2.984375 -2.8125 "></path>
+</symbol>
+<symbol overflow="visible" id="457623505-glyph1-2">
+<path style="stroke:none;" d="M 6.171875 -5 C 6.25 -5.34375 6.390625 -5.625 7.09375 -5.640625 C 7.125 -5.640625 7.265625 -5.65625 7.265625 -5.828125 C 7.265625 -5.890625 7.21875 -5.953125 7.125 -5.953125 C 6.859375 -5.953125 6.515625 -5.921875 6.234375 -5.921875 C 5.953125 -5.921875 5.578125 -5.953125 5.3125 -5.953125 C 5.28125 -5.953125 5.140625 -5.953125 5.140625 -5.765625 C 5.140625 -5.65625 5.25 -5.640625 5.328125 -5.640625 C 5.75 -5.625 5.890625 -5.5 5.890625 -5.28125 C 5.890625 -5.234375 5.890625 -5.203125 5.875 -5.15625 C 5.75 -4.59375 5.109375 -1.96875 5 -1.703125 C 4.5 -0.578125 3.484375 -0.140625 2.765625 -0.140625 C 2.1875 -0.140625 1.5625 -0.4375 1.5625 -1.296875 C 1.5625 -1.515625 1.59375 -1.71875 1.640625 -1.921875 L 2.5 -5.28125 C 2.578125 -5.578125 2.59375 -5.640625 3.265625 -5.640625 C 3.40625 -5.640625 3.515625 -5.640625 3.515625 -5.828125 C 3.515625 -5.875 3.5 -5.953125 3.390625 -5.953125 C 3.125 -5.953125 2.5 -5.921875 2.234375 -5.921875 C 2.09375 -5.921875 1.78125 -5.921875 1.640625 -5.921875 C 1.46875 -5.9375 1.25 -5.953125 1.09375 -5.953125 C 1.03125 -5.953125 0.90625 -5.953125 0.90625 -5.765625 C 0.90625 -5.640625 1.015625 -5.640625 1.1875 -5.640625 C 1.1875 -5.640625 1.359375 -5.640625 1.515625 -5.625 C 1.703125 -5.609375 1.71875 -5.59375 1.71875 -5.5 C 1.71875 -5.453125 1.625 -5.109375 1.578125 -4.921875 L 1.390625 -4.15625 L 0.890625 -2.15625 C 0.796875 -1.796875 0.796875 -1.71875 0.796875 -1.546875 C 0.796875 -0.46875 1.6875 0.171875 2.734375 0.171875 C 3.9375 0.171875 5.109375 -0.796875 5.390625 -1.9375 Z M 6.171875 -5 "></path>
+</symbol>
+</g>
+</defs>
+<g id="surface1">
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#457623505-glyph0-1" x="5.362" y="32.127"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#457623505-glyph0-2" x="12.96969" y="32.127"></use>
+  <use xlink:href="#457623505-glyph0-3" x="18.503915" y="32.127"></use>
+  <use xlink:href="#457623505-glyph0-4" x="23.000783" y="32.127"></use>
+  <use xlink:href="#457623505-glyph0-5" x="27.256059" y="32.127"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#457623505-glyph0-6" x="88.778" y="32.127"></use>
+  <use xlink:href="#457623505-glyph0-7" x="96.734381" y="32.127"></use>
+  <use xlink:href="#457623505-glyph0-6" x="107.630975" y="32.127"></use>
+</g>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -24.771875 9.131125 C -8.365625 18.603781 7.4 18.603781 23.458594 9.330344 " transform="matrix(1,0,0,-1,60.475,27.803)"></path>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.070441 2.390492 C -1.693146 0.958175 -0.851665 0.279449 0.00253684 -0.00075549 C -0.849677 -0.276945 -1.693335 -0.957357 -2.071434 -2.389647 " transform="matrix(0.86877,0.50157,0.50157,-0.86877,84.10755,18.57229)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#457623505-glyph1-1" x="56.163" y="8.638"></use>
+</g>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 27.997656 -9.130594 C 8.759375 -20.236063 -9.728906 -20.236063 -28.619531 -9.329813 " transform="matrix(1,0,0,-1,60.475,27.803)"></path>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.072257 2.388761 C -1.694942 0.956465 -0.850085 0.279707 -0.00120619 0.00094529 C -0.85146 -0.278628 -1.691725 -0.957102 -2.073168 -2.391331 " transform="matrix(-0.86877,-0.50159,-0.50159,0.86877,31.68302,37.03373)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#457623505-glyph1-2" x="56.132" y="54.15"></use>
+</g>
+</g>
+</svg>
+
+</div>
+<p>Although morally Petri nets generate free symmetric monoidal categories, it turns out that because they have a free <em>commutative</em> monoid of places, they more naturally generate <a class="existingWikiWord" href="/nlab/show/commutative+monoidal+categories">commutative monoidal categories</a>, symmetric monoidal categories of an unusually strict type. <a class="existingWikiWord" href="/nlab/show/Commutative+monoidal+categories">Commutative monoidal categories</a> don’t show up often in nature because they aren’t the result of a <a class="existingWikiWord" href="/nlab/show/coherence">coherence</a> theorem for symmetric monoidal categories. <a class="existingWikiWord" href="/nlab/show/Saunders+Mac+Lane">Mac Lane's</a> <a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+symmetric+monoidal+categories">coherence theorem for symmetric monoidal categories</a> says that every symmetric monoidal category is symmetric monoidally equivalent to a <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">strict symmetric monoidal category</a> which may have nontrivial symmetry morphisms. However, commutative monoidal categories have symmetry morphisms which are given by the identity so they aren’t the <a href="https://ncatlab.org/nlab/show/coherence+theorem#strictification">strictifications</a> of symmetric monoidal categories.</p>
+
+<p>Computer scientists also haven’t been satisfied with commutative monoidal categories as a categorical semantics for Petri nets. Commutative monoidal categories are said to exhibit the collective token philosophy (see e.g. <a href="#philosophy">Glabeek and Plotkin</a>), where tokens do not have individual idenities. On the other hand, symmetric monoidal categories are said to have the individual token philosophy where the individual identites of the tokens are retained. The easiest to see where an issue shows up is with a variation of the <a class="existingWikiWord" href="/nlab/show/Eckmann-Hilton+argument">Eckmann-Hilton argument</a>. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> be a commutative monoidal category and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>,</mo><mi>g</mi><mo lspace="verythinmathspace">:</mo><mi>a</mi><mo>→</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">f,g \colon a \to a</annotation></semantics></math> be morphisms from an object a to itself. Then,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mi>g</mi><mo>∘</mo><mi>f</mi><mo>+</mo><msub><mn>1</mn> <mi>a</mi></msub></mtd> <mtd><mo>=</mo><mi>g</mi><mo>∘</mo><mi>f</mi><mo>+</mo><msub><mn>1</mn> <mi>a</mi></msub><mo>∘</mo><msub><mn>1</mn> <mi>a</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mo stretchy="false">(</mo><mi>g</mi><mo>+</mo><msub><mn>1</mn> <mi>a</mi></msub><mo stretchy="false">)</mo><mo>∘</mo><mo stretchy="false">(</mo><mi>f</mi><mo>+</mo><msub><mn>1</mn> <mi>a</mi></msub><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mo stretchy="false">(</mo><mi>g</mi><mo>+</mo><msub><mn>1</mn> <mi>a</mi></msub><mo stretchy="false">)</mo><mo>∘</mo><mo stretchy="false">(</mo><msub><mn>1</mn> <mi>a</mi></msub><mo>+</mo><mi>f</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mi>g</mi><mo>∘</mo><msub><mn>1</mn> <mi>a</mi></msub><mo>+</mo><msub><mn>1</mn> <mi>a</mi></msub><mo>∘</mo><mi>f</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mi>g</mi><mo>+</mo><mi>f</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\begin{aligned}
+g \circ f + 1_a &amp; = g \circ f + 1_a \circ 1_a \\
+&amp;= (g+ 1_a)\circ (f + 1_a) \\
+&amp;= (g + 1_a) \circ (1_a + f) \\
+&amp; = g \circ 1_a + 1_a \circ f \\
+&amp;= g + f 
+\end{aligned}
+</annotation></semantics></math></div>
+<p>So in a commutative monoidal category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>∘</mo><mi>f</mi><mo>+</mo><msub><mn>1</mn> <mi>a</mi></msub><mo>=</mo><mi>g</mi><mo>+</mo><mi>f</mi></mrow><annotation encoding="application/x-tex">g \circ f + 1_a = g+ f</annotation></semantics></math> even though they have very different semantic interpretations: one represents sequential composition and the other represents parallel composition.</p>
+
+<p>One possible fix to this is to change the definition of Petri net. In <a href="#functorial"><em>Functorial Models for Petri Nets</em></a> the authors introduced <a class="existingWikiWord" href="/nlab/show/Pre-net">pre-nets</a>. A pre-net is a pair of functions from a set of events to the free monoid on a set of places. The key difference is that now every event is equipped with an ordering on the input and output of each transition. With pre-nets, there is a natural <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a> between the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>PreNet</mi></mrow><annotation encoding="application/x-tex">PreNet</annotation></semantics></math> of pre-nets and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>SMC</mi></mrow><annotation encoding="application/x-tex">SMC</annotation></semantics></math> the category of strict monoidal categories</p>
+<div style="text-align: center">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="131.638pt" height="58.393pt" viewBox="0 0 131.638 58.393" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<g>
+<symbol overflow="visible" id="884016287-glyph0-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph0-1">
+<path style="stroke:none;" d="M 4.390625 -3.59375 C 5.921875 -3.59375 7.25 -4.734375 7.25 -6.125 C 7.25 -7.453125 6.015625 -8.640625 4.296875 -8.640625 L 1.203125 -8.640625 L 1.203125 0 L 2.296875 0 L 2.296875 -3.59375 Z M 4.015625 -7.9375 C 5.390625 -7.9375 6.234375 -7.1875 6.234375 -6.125 C 6.234375 -5.140625 5.453125 -4.328125 4.015625 -4.328125 L 2.265625 -4.328125 L 2.265625 -7.9375 Z M 4.015625 -7.9375 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph0-2">
+<path style="stroke:none;" d="M 1.953125 -2.671875 C 1.953125 -3.90625 2.859375 -4.8125 4.078125 -4.828125 L 4.078125 -5.671875 C 2.96875 -5.65625 2.28125 -5.046875 1.890625 -4.46875 L 1.890625 -5.609375 L 1.015625 -5.609375 L 1.015625 0 L 1.953125 0 Z M 1.953125 -2.671875 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph0-3">
+<path style="stroke:none;" d="M 5.15625 -2.734375 C 5.15625 -3.15625 5.140625 -4.078125 4.65625 -4.828125 C 4.140625 -5.609375 3.390625 -5.734375 2.9375 -5.734375 C 1.5625 -5.734375 0.4375 -4.421875 0.4375 -2.8125 C 0.4375 -1.171875 1.625 0.140625 3.125 0.140625 C 3.90625 0.140625 4.625 -0.15625 5.109375 -0.515625 L 5.03125 -1.3125 C 4.25 -0.671875 3.421875 -0.625 3.140625 -0.625 C 2.140625 -0.625 1.34375 -1.5 1.3125 -2.734375 Z M 1.375 -3.40625 C 1.5625 -4.359375 2.234375 -4.984375 2.9375 -4.984375 C 3.59375 -4.984375 4.28125 -4.5625 4.453125 -3.40625 Z M 1.375 -3.40625 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph0-4">
+<path style="stroke:none;" d="M 2.734375 -8.640625 L 1.203125 -8.640625 L 1.203125 0 L 2.171875 0 L 2.171875 -7.765625 C 2.421875 -7.25 2.9375 -6.1875 3.015625 -6.046875 L 6.0625 0 L 7.609375 0 L 7.609375 -8.640625 L 6.640625 -8.640625 L 6.640625 -0.890625 L 6.625 -0.890625 C 6.390625 -1.390625 5.859375 -2.453125 5.796875 -2.59375 Z M 2.734375 -8.640625 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph0-5">
+<path style="stroke:none;" d="M 2.171875 -4.8125 L 3.9375 -4.8125 L 3.9375 -5.53125 L 2.171875 -5.53125 L 2.171875 -7.109375 L 1.3125 -7.109375 L 1.3125 -5.53125 L 0.234375 -5.53125 L 0.234375 -4.8125 L 1.28125 -4.8125 L 1.28125 -1.484375 C 1.28125 -0.734375 1.453125 0.140625 2.3125 0.140625 C 3.1875 0.140625 3.828125 -0.171875 4.140625 -0.34375 L 3.9375 -1.078125 C 3.609375 -0.8125 3.21875 -0.65625 2.8125 -0.65625 C 2.359375 -0.65625 2.171875 -1.03125 2.171875 -1.6875 Z M 2.171875 -4.8125 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph0-6">
+<path style="stroke:none;" d="M 5.796875 -8.296875 C 5.109375 -8.703125 4.421875 -8.921875 3.515625 -8.921875 C 1.78125 -8.921875 0.703125 -7.703125 0.703125 -6.46875 C 0.703125 -5.921875 0.875 -5.40625 1.375 -4.875 C 1.890625 -4.328125 2.4375 -4.171875 3.171875 -4 C 4.234375 -3.734375 4.359375 -3.703125 4.703125 -3.390625 C 4.953125 -3.171875 5.234375 -2.765625 5.234375 -2.234375 C 5.234375 -1.40625 4.546875 -0.578125 3.40625 -0.578125 C 2.90625 -0.578125 1.78125 -0.703125 0.734375 -1.59375 L 0.546875 -0.578125 C 1.640625 0.09375 2.640625 0.28125 3.421875 0.28125 C 5.0625 0.28125 6.21875 -0.984375 6.21875 -2.359375 C 6.21875 -3.15625 5.828125 -3.765625 5.546875 -4.0625 C 4.96875 -4.6875 4.5625 -4.796875 3.40625 -5.078125 C 2.6875 -5.25 2.484375 -5.3125 2.109375 -5.625 C 2.03125 -5.703125 1.6875 -6.0625 1.6875 -6.609375 C 1.6875 -7.34375 2.359375 -8.09375 3.5 -8.09375 C 4.546875 -8.09375 5.140625 -7.6875 5.609375 -7.296875 Z M 5.796875 -8.296875 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph0-7">
+<path style="stroke:none;" d="M 6.59375 -4.421875 C 6.171875 -3.28125 5.578125 -1.75 5.4375 -1.15625 L 5.421875 -1.15625 C 5.375 -1.421875 5.21875 -1.875 5.03125 -2.40625 L 3.078125 -7.5625 L 2.65625 -8.640625 L 1.25 -8.640625 L 1.25 0 L 2.21875 0 L 2.21875 -7.71875 L 2.234375 -7.71875 C 2.296875 -7.328125 2.796875 -5.96875 3.125 -5.125 L 4.96875 -0.28125 L 5.875 -0.28125 L 7.53125 -4.609375 C 7.9375 -5.625 8.046875 -5.9375 8.125 -6.1875 C 8.25 -6.546875 8.59375 -7.453125 8.65625 -7.734375 L 8.671875 -7.71875 L 8.671875 0 L 9.640625 0 L 9.640625 -8.640625 L 8.21875 -8.640625 Z M 6.59375 -4.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph0-8">
+<path style="stroke:none;" d="M 7.25 -1.421875 C 6.515625 -0.9375 6.09375 -0.671875 4.859375 -0.671875 C 3.0625 -0.671875 1.9375 -2.546875 1.9375 -4.328125 C 1.9375 -6.03125 2.96875 -7.984375 4.875 -7.984375 C 5.765625 -7.984375 6.328125 -7.765625 7.015625 -7.328125 L 7.1875 -8.359375 C 6.65625 -8.625 5.6875 -8.78125 4.890625 -8.78125 C 2.59375 -8.78125 0.828125 -6.84375 0.828125 -4.21875 C 0.828125 -2.25 2.296875 0.140625 4.890625 0.140625 C 6.046875 0.140625 6.515625 -0.0625 7.328125 -0.5625 Z M 7.25 -1.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph1-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph1-1">
+<path style="stroke:none;" d="M 1.796875 -1.046875 C 1.484375 -0.578125 1.21875 -0.34375 0.703125 -0.3125 C 0.609375 -0.3125 0.5 -0.3125 0.5 -0.125 C 0.5 -0.03125 0.578125 0 0.625 0 C 0.84375 0 1.140625 -0.03125 1.375 -0.03125 C 1.640625 -0.03125 2 0 2.265625 0 C 2.3125 0 2.4375 0 2.4375 -0.1875 C 2.4375 -0.3125 2.328125 -0.3125 2.296875 -0.3125 C 2.21875 -0.328125 1.90625 -0.34375 1.90625 -0.578125 C 1.90625 -0.6875 2 -0.828125 2.046875 -0.90625 L 2.734375 -1.984375 L 5.234375 -1.984375 L 5.4375 -0.546875 C 5.40625 -0.453125 5.359375 -0.3125 4.84375 -0.3125 C 4.734375 -0.3125 4.609375 -0.3125 4.609375 -0.125 C 4.609375 -0.09375 4.640625 0 4.75 0 C 5 0 5.625 -0.03125 5.875 -0.03125 C 6.03125 -0.03125 6.234375 -0.03125 6.390625 -0.03125 C 6.546875 -0.015625 6.734375 0 6.890625 0 C 7 0 7.0625 -0.0625 7.0625 -0.1875 C 7.0625 -0.3125 6.953125 -0.3125 6.8125 -0.3125 C 6.3125 -0.3125 6.296875 -0.390625 6.265625 -0.59375 L 5.5 -5.96875 C 5.46875 -6.15625 5.453125 -6.21875 5.296875 -6.21875 C 5.125 -6.21875 5.078125 -6.140625 5 -6.015625 Z M 2.953125 -2.296875 L 4.78125 -5.15625 L 5.1875 -2.296875 Z M 2.953125 -2.296875 "></path>
+</symbol>
+<symbol overflow="visible" id="884016287-glyph1-2">
+<path style="stroke:none;" d="M 1.65625 -0.6875 C 1.578125 -0.390625 1.5625 -0.3125 0.890625 -0.3125 C 0.734375 -0.3125 0.625 -0.3125 0.625 -0.125 C 0.625 0 0.734375 0 0.890625 0 L 4.265625 0 C 5.734375 0 6.859375 -1 6.859375 -1.859375 C 6.859375 -2.484375 6.28125 -3.015625 5.359375 -3.109375 C 6.421875 -3.296875 7.296875 -3.96875 7.296875 -4.71875 C 7.296875 -5.375 6.625 -5.953125 5.5 -5.953125 L 2.3125 -5.953125 C 2.15625 -5.953125 2.046875 -5.953125 2.046875 -5.765625 C 2.046875 -5.640625 2.140625 -5.640625 2.3125 -5.640625 C 2.328125 -5.640625 2.5 -5.640625 2.65625 -5.625 C 2.828125 -5.609375 2.84375 -5.59375 2.84375 -5.5 C 2.84375 -5.484375 2.84375 -5.4375 2.8125 -5.3125 Z M 3.046875 -3.21875 L 3.578125 -5.34375 C 3.65625 -5.609375 3.65625 -5.640625 4.03125 -5.640625 L 5.359375 -5.640625 C 6.25 -5.640625 6.4375 -5.0625 6.4375 -4.71875 C 6.4375 -4.015625 5.65625 -3.21875 4.484375 -3.21875 Z M 2.640625 -0.3125 C 2.359375 -0.3125 2.359375 -0.328125 2.359375 -0.40625 C 2.359375 -0.40625 2.359375 -0.453125 2.390625 -0.578125 L 2.984375 -2.96875 L 4.84375 -2.96875 C 5.65625 -2.96875 5.96875 -2.4375 5.96875 -1.921875 C 5.96875 -1.0625 5.09375 -0.3125 4.03125 -0.3125 Z M 2.640625 -0.3125 "></path>
+</symbol>
+</g>
+</defs>
+<g id="surface1">
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#884016287-glyph0-1" x="5.362" y="32.907"></use>
+  <use xlink:href="#884016287-glyph0-2" x="13.318381" y="32.907"></use>
+  <use xlink:href="#884016287-glyph0-3" x="17.573657" y="32.907"></use>
+  <use xlink:href="#884016287-glyph0-4" x="23.107881" y="32.907"></use>
+  <use xlink:href="#884016287-glyph0-3" x="31.928518" y="32.907"></use>
+  <use xlink:href="#884016287-glyph0-5" x="37.462743" y="32.907"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#884016287-glyph0-6" x="100.505" y="32.907"></use>
+  <use xlink:href="#884016287-glyph0-7" x="107.424026" y="32.907"></use>
+  <use xlink:href="#884016287-glyph0-8" x="118.320619" y="32.907"></use>
+</g>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -24.252594 9.129875 C -6.041656 19.6455 11.458344 19.6455 29.321625 9.329094 " transform="matrix(1,0,0,-1,65.819,28.583)"></path>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.074335 2.391231 C -1.695072 0.955562 -0.850215 0.278804 -0.00133678 0.0000425717 C -0.851591 -0.279531 -1.693803 -0.954632 -2.073299 -2.392234 " transform="matrix(0.86877,0.50159,0.50159,-0.86877,95.31364,19.35227)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#884016287-glyph1-1" x="64.782" y="8.638"></use>
+</g>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 33.860687 -9.131844 C 12.817719 -21.280281 -7.404938 -21.280281 -28.10025 -9.331063 " transform="matrix(1,0,0,-1,65.819,28.583)"></path>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.07217 2.390345 C -1.692939 0.954645 -0.848087 0.277855 0.000797319 -0.000932464 C -0.849476 -0.280488 -1.695091 -0.957524 -2.073204 -2.389818 " transform="matrix(-0.86877,-0.50156,-0.50156,0.86877,37.5471,37.81371)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#884016287-glyph1-2" x="64.552" y="55.712"></use>
+</g>
+</g>
+</svg>
+
+</div>
+<p>which can be composed with the adjunction which freely adds symmetries to a strict monoidal category to get an adjunction</p>
+<div style="text-align: center">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="138.557pt" height="59.402pt" viewBox="0 0 138.557 59.402" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<g>
+<symbol overflow="visible" id="847981416-glyph0-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph0-1">
+<path style="stroke:none;" d="M 4.390625 -3.59375 C 5.921875 -3.59375 7.25 -4.734375 7.25 -6.125 C 7.25 -7.453125 6.015625 -8.640625 4.296875 -8.640625 L 1.203125 -8.640625 L 1.203125 0 L 2.296875 0 L 2.296875 -3.59375 Z M 4.015625 -7.9375 C 5.390625 -7.9375 6.234375 -7.1875 6.234375 -6.125 C 6.234375 -5.140625 5.453125 -4.328125 4.015625 -4.328125 L 2.265625 -4.328125 L 2.265625 -7.9375 Z M 4.015625 -7.9375 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph0-2">
+<path style="stroke:none;" d="M 1.953125 -2.671875 C 1.953125 -3.90625 2.859375 -4.8125 4.078125 -4.828125 L 4.078125 -5.671875 C 2.96875 -5.65625 2.28125 -5.046875 1.890625 -4.46875 L 1.890625 -5.609375 L 1.015625 -5.609375 L 1.015625 0 L 1.953125 0 Z M 1.953125 -2.671875 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph0-3">
+<path style="stroke:none;" d="M 5.15625 -2.734375 C 5.15625 -3.15625 5.140625 -4.078125 4.65625 -4.828125 C 4.140625 -5.609375 3.390625 -5.734375 2.9375 -5.734375 C 1.5625 -5.734375 0.4375 -4.421875 0.4375 -2.8125 C 0.4375 -1.171875 1.625 0.140625 3.125 0.140625 C 3.90625 0.140625 4.625 -0.15625 5.109375 -0.515625 L 5.03125 -1.3125 C 4.25 -0.671875 3.421875 -0.625 3.140625 -0.625 C 2.140625 -0.625 1.34375 -1.5 1.3125 -2.734375 Z M 1.375 -3.40625 C 1.5625 -4.359375 2.234375 -4.984375 2.9375 -4.984375 C 3.59375 -4.984375 4.28125 -4.5625 4.453125 -3.40625 Z M 1.375 -3.40625 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph0-4">
+<path style="stroke:none;" d="M 2.734375 -8.640625 L 1.203125 -8.640625 L 1.203125 0 L 2.171875 0 L 2.171875 -7.765625 C 2.421875 -7.25 2.9375 -6.1875 3.015625 -6.046875 L 6.0625 0 L 7.609375 0 L 7.609375 -8.640625 L 6.640625 -8.640625 L 6.640625 -0.890625 L 6.625 -0.890625 C 6.390625 -1.390625 5.859375 -2.453125 5.796875 -2.59375 Z M 2.734375 -8.640625 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph0-5">
+<path style="stroke:none;" d="M 2.171875 -4.8125 L 3.9375 -4.8125 L 3.9375 -5.53125 L 2.171875 -5.53125 L 2.171875 -7.109375 L 1.3125 -7.109375 L 1.3125 -5.53125 L 0.234375 -5.53125 L 0.234375 -4.8125 L 1.28125 -4.8125 L 1.28125 -1.484375 C 1.28125 -0.734375 1.453125 0.140625 2.3125 0.140625 C 3.1875 0.140625 3.828125 -0.171875 4.140625 -0.34375 L 3.9375 -1.078125 C 3.609375 -0.8125 3.21875 -0.65625 2.8125 -0.65625 C 2.359375 -0.65625 2.171875 -1.03125 2.171875 -1.6875 Z M 2.171875 -4.8125 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph0-6">
+<path style="stroke:none;" d="M 5.796875 -8.296875 C 5.109375 -8.703125 4.421875 -8.921875 3.515625 -8.921875 C 1.78125 -8.921875 0.703125 -7.703125 0.703125 -6.46875 C 0.703125 -5.921875 0.875 -5.40625 1.375 -4.875 C 1.890625 -4.328125 2.4375 -4.171875 3.171875 -4 C 4.234375 -3.734375 4.359375 -3.703125 4.703125 -3.390625 C 4.953125 -3.171875 5.234375 -2.765625 5.234375 -2.234375 C 5.234375 -1.40625 4.546875 -0.578125 3.40625 -0.578125 C 2.90625 -0.578125 1.78125 -0.703125 0.734375 -1.59375 L 0.546875 -0.578125 C 1.640625 0.09375 2.640625 0.28125 3.421875 0.28125 C 5.0625 0.28125 6.21875 -0.984375 6.21875 -2.359375 C 6.21875 -3.15625 5.828125 -3.765625 5.546875 -4.0625 C 4.96875 -4.6875 4.5625 -4.796875 3.40625 -5.078125 C 2.6875 -5.25 2.484375 -5.3125 2.109375 -5.625 C 2.03125 -5.703125 1.6875 -6.0625 1.6875 -6.609375 C 1.6875 -7.34375 2.359375 -8.09375 3.5 -8.09375 C 4.546875 -8.09375 5.140625 -7.6875 5.609375 -7.296875 Z M 5.796875 -8.296875 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph0-7">
+<path style="stroke:none;" d="M 6.59375 -4.421875 C 6.171875 -3.28125 5.578125 -1.75 5.4375 -1.15625 L 5.421875 -1.15625 C 5.375 -1.421875 5.21875 -1.875 5.03125 -2.40625 L 3.078125 -7.5625 L 2.65625 -8.640625 L 1.25 -8.640625 L 1.25 0 L 2.21875 0 L 2.21875 -7.71875 L 2.234375 -7.71875 C 2.296875 -7.328125 2.796875 -5.96875 3.125 -5.125 L 4.96875 -0.28125 L 5.875 -0.28125 L 7.53125 -4.609375 C 7.9375 -5.625 8.046875 -5.9375 8.125 -6.1875 C 8.25 -6.546875 8.59375 -7.453125 8.65625 -7.734375 L 8.671875 -7.71875 L 8.671875 0 L 9.640625 0 L 9.640625 -8.640625 L 8.21875 -8.640625 Z M 6.59375 -4.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph0-8">
+<path style="stroke:none;" d="M 7.25 -1.421875 C 6.515625 -0.9375 6.09375 -0.671875 4.859375 -0.671875 C 3.0625 -0.671875 1.9375 -2.546875 1.9375 -4.328125 C 1.9375 -6.03125 2.96875 -7.984375 4.875 -7.984375 C 5.765625 -7.984375 6.328125 -7.765625 7.015625 -7.328125 L 7.1875 -8.359375 C 6.65625 -8.625 5.6875 -8.78125 4.890625 -8.78125 C 2.59375 -8.78125 0.828125 -6.84375 0.828125 -4.21875 C 0.828125 -2.25 2.296875 0.140625 4.890625 0.140625 C 6.046875 0.140625 6.515625 -0.0625 7.328125 -0.5625 Z M 7.25 -1.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph1-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph1-1">
+<path style="stroke:none;" d="M 3.59375 -5.234375 C 3.671875 -5.546875 3.703125 -5.640625 4.5 -5.640625 C 4.765625 -5.640625 4.859375 -5.640625 4.859375 -5.828125 C 4.859375 -5.84375 4.84375 -5.953125 4.703125 -5.953125 C 4.5 -5.953125 4.265625 -5.9375 4.0625 -5.921875 C 3.84375 -5.921875 3.578125 -5.921875 3.359375 -5.921875 C 3.1875 -5.921875 2.953125 -5.921875 2.765625 -5.921875 C 2.578125 -5.921875 2.375 -5.953125 2.203125 -5.953125 C 2.140625 -5.953125 2.015625 -5.953125 2.015625 -5.765625 C 2.015625 -5.640625 2.125 -5.640625 2.296875 -5.640625 C 2.296875 -5.640625 2.46875 -5.640625 2.625 -5.625 C 2.8125 -5.609375 2.828125 -5.59375 2.828125 -5.5 C 2.828125 -5.484375 2.828125 -5.4375 2.796875 -5.3125 L 1.625 -0.6875 C 1.546875 -0.390625 1.53125 -0.3125 0.859375 -0.3125 C 0.71875 -0.3125 0.609375 -0.3125 0.609375 -0.125 C 0.609375 0 0.703125 0 0.859375 0 L 5.25 0 C 5.46875 0 5.46875 -0.015625 5.546875 -0.171875 C 5.625 -0.40625 6.28125 -2.09375 6.28125 -2.171875 C 6.28125 -2.203125 6.265625 -2.296875 6.140625 -2.296875 C 6.03125 -2.296875 6.015625 -2.25 5.96875 -2.109375 C 5.625 -1.28125 5.25 -0.3125 3.65625 -0.3125 L 2.671875 -0.3125 C 2.390625 -0.3125 2.390625 -0.328125 2.390625 -0.40625 C 2.390625 -0.40625 2.390625 -0.453125 2.421875 -0.578125 Z M 3.59375 -5.234375 "></path>
+</symbol>
+<symbol overflow="visible" id="847981416-glyph1-2">
+<path style="stroke:none;" d="M 3.59375 -5.34375 C 3.65625 -5.59375 3.671875 -5.609375 3.875 -5.640625 L 4.421875 -5.640625 C 5.234375 -5.640625 6.25 -5.640625 6.25 -4.75 C 6.25 -4.390625 6.078125 -3.84375 5.671875 -3.515625 C 5.3125 -3.25 4.765625 -3.109375 4.171875 -3.109375 L 3.046875 -3.109375 Z M 5.171875 -2.96875 C 6.21875 -3.203125 7.140625 -3.84375 7.140625 -4.609375 C 7.140625 -5.359375 6.25 -5.953125 4.984375 -5.953125 L 2.3125 -5.953125 C 2.140625 -5.953125 2.03125 -5.953125 2.03125 -5.765625 C 2.03125 -5.640625 2.140625 -5.640625 2.3125 -5.640625 C 2.3125 -5.640625 2.484375 -5.640625 2.640625 -5.625 C 2.828125 -5.609375 2.84375 -5.59375 2.84375 -5.5 C 2.84375 -5.484375 2.84375 -5.4375 2.8125 -5.3125 L 1.640625 -0.6875 C 1.578125 -0.390625 1.5625 -0.3125 0.875 -0.3125 C 0.734375 -0.3125 0.625 -0.3125 0.625 -0.125 C 0.625 -0.046875 0.6875 0 0.765625 0 C 0.921875 0 1.125 -0.03125 1.296875 -0.03125 C 1.46875 -0.03125 1.71875 -0.03125 1.875 -0.03125 C 2.046875 -0.03125 2.25 -0.03125 2.4375 -0.03125 C 2.609375 -0.03125 2.828125 0 3.015625 0 C 3.0625 0 3.203125 0 3.203125 -0.1875 C 3.203125 -0.3125 3.109375 -0.3125 2.90625 -0.3125 C 2.765625 -0.3125 2.734375 -0.3125 2.578125 -0.328125 C 2.390625 -0.359375 2.390625 -0.375 2.390625 -0.46875 C 2.390625 -0.46875 2.390625 -0.515625 2.421875 -0.65625 L 2.96875 -2.859375 L 4.15625 -2.859375 C 4.90625 -2.859375 5.234375 -2.484375 5.234375 -2.078125 C 5.234375 -1.96875 5.15625 -1.671875 5.109375 -1.46875 C 5 -1.0625 4.96875 -0.9375 4.96875 -0.78125 C 4.96875 -0.09375 5.609375 0.171875 6.25 0.171875 C 7.046875 0.171875 7.40625 -0.6875 7.40625 -0.84375 C 7.40625 -0.859375 7.390625 -0.953125 7.25 -0.953125 C 7.140625 -0.953125 7.125 -0.890625 7.09375 -0.8125 C 6.96875 -0.421875 6.65625 -0.0625 6.28125 -0.0625 C 6.0625 -0.0625 5.890625 -0.171875 5.890625 -0.640625 C 5.890625 -0.859375 5.953125 -1.3125 5.984375 -1.546875 C 6.015625 -1.78125 6.015625 -1.859375 6.015625 -1.953125 C 6.015625 -2.0625 6.015625 -2.34375 5.765625 -2.59375 C 5.609375 -2.78125 5.375 -2.890625 5.171875 -2.96875 Z M 5.171875 -2.96875 "></path>
+</symbol>
+</g>
+</defs>
+<g id="surface1">
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#847981416-glyph0-1" x="5.362" y="33.412"></use>
+  <use xlink:href="#847981416-glyph0-2" x="13.318381" y="33.412"></use>
+  <use xlink:href="#847981416-glyph0-3" x="17.573657" y="33.412"></use>
+  <use xlink:href="#847981416-glyph0-4" x="23.107881" y="33.412"></use>
+  <use xlink:href="#847981416-glyph0-3" x="31.928518" y="33.412"></use>
+  <use xlink:href="#847981416-glyph0-5" x="37.462743" y="33.412"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#847981416-glyph0-6" x="100.505" y="33.412"></use>
+  <use xlink:href="#847981416-glyph0-6" x="107.424026" y="33.412"></use>
+  <use xlink:href="#847981416-glyph0-7" x="114.343051" y="33.412"></use>
+  <use xlink:href="#847981416-glyph0-8" x="125.239645" y="33.412"></use>
+</g>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -27.707687 9.130969 C -8.332687 20.318469 10.288406 20.318469 29.31575 9.330187 " transform="matrix(1,0,0,-1,69.278,29.088)"></path>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.070451 2.390164 C -1.693104 0.957899 -0.851614 0.279226 0.000631236 0.0024378 C -0.849603 -0.277154 -1.69321 -0.957585 -2.071238 -2.389856 " transform="matrix(0.86877,0.50162,0.50162,-0.86877,98.76776,19.85727)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#847981416-glyph1-1" x="66.841" y="8.637"></use>
+</g>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 33.854813 -9.13075 C 11.647781 -21.951063 -9.692062 -21.951063 -31.555344 -9.329969 " transform="matrix(1,0,0,-1,69.278,29.088)"></path>
+<path style="fill:none;stroke-width:0.39848;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.072022 2.389077 C -1.694707 0.95678 -0.84985 0.280022 -0.000971123 0.00126086 C -0.851225 -0.278313 -1.69149 -0.956786 -2.072933 -2.391015 " transform="matrix(-0.86877,-0.50159,-0.50159,0.86877,37.55057,38.31873)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#847981416-glyph1-2" x="66.483" y="56.721"></use>
+</g>
+</g>
+</svg>
+
+</div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>SSMC</mi></mrow><annotation encoding="application/x-tex">SSMC</annotation></semantics></math> is the category of <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">strict symmetric monoidal categories</a>. This gives a categorical operational semantics for pre-nets which obeys the individual token philosophy and avoids the pitfall of the above computation. Pre-nets can be turned into Petri nets via <a class="existingWikiWord" href="/nlab/show/abelianization">abelianization</a>. For a given Petri net <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>, it’s abelianization forgets about the ordering on the input and output of each event. Therefore, to obtain a categorical semantics for a Petri net <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> which obeys the individual token philosophy, a pre-net <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> can be chosen which abelianizes to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>. Then, the categorical semantics for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> can defined as the free strict symmetric monoidal category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>Q</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L(Q)</annotation></semantics></math>.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+Baez">John Baez</a>, Fabrizio Genovese, <a class="existingWikiWord" href="/nlab/show/Jade+Master">Jade Master</a>, <a class="existingWikiWord" href="/nlab/show/Michael+Shulman">Michael Shulman</a>, <em>Categories of Nets</em>, (<a href="https://arxiv.org/abs/2101.04238">arXiv:2101.04238</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/G.+Winskel">G. Winskel</a>, M. Nielsen, <em>Models for concurrency</em>, Handbook of Logic in Computer Science vol. 3, pp. 100 – 200, Oxford Univ. Press 1994. (see also <a href="http://www.daimi.au.dk/PB/463/PB-463.pdf">online technical report</a>).</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+C.+Baez">John C. Baez</a> and <a class="existingWikiWord" href="/nlab/show/Jacob+Biamonte">Jacob Biamonte</a>, <em>Quantum techniques in stochastic mechanics</em>, World Scientific, 2018. <a href="https://www.worldscientific.com/worldscibooks/10.1142/10623#t=suppl">World Scientific</a> <a href="http://math.ucr.edu/home/baez/stoch_stable.pdf">pdf</a></p>
+</li>
+
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Petri_net">wikipedia</a></p>
+</li>
+</ul>
+
+<p>For an introduction to Petri nets (en francais, which is very clear and accessible) look at</p>
+
+<ul>
+<li><span class="newWikiWord">Robert Valette<a href="/nlab/new/Robert+Valette">?</a></span>, <a href="http://homepages.laas.fr/robert/enseignement.d/cour01.pdf">Les Réseaux de Petri</a>.</li>
+</ul>
+
+<p>On the connection to linear logic:</p>
+
+<ul>
+<li><span class="newWikiWord">Uffe Engberg<a href="/nlab/new/Uffe+Engberg">?</a></span> and <a class="existingWikiWord" href="/nlab/show/Glynn+Winskel">Glynn Winskel</a>, <em>Petri nets as models of linear logic</em>. CAAP 1990. Lecture Notes in Computer Science, vol 431. Springer, Berlin, Heidelberg. <a href="https://link.springer.com/chapter/10.1007/3-540-52590-4_46">Springer</a>, <a href="https://www.researchgate.net/publication/318253097_Petri_Nets_as_Models_of_Linear_Logic">pdf on ResearchGate</a></li>
+</ul>
+
+<p>On the categorical semantics of Petri nets:</p>
+
+<ul>
+<li id="monoids">
+<p><a class="existingWikiWord" href="/nlab/show/Jos%C3%A9+Meseguer">José Meseguer</a> and <span class="newWikiWord">Ugo Montanari<a href="/nlab/new/Ugo+Montanari">?</a></span>, <em>Petri nets are monoids</em>, Information and Computation, Volume 88, Issue 2, Pages 105-155, 1990. <a href="https://www.sciencedirect.com/science/article/pii/0890540190900138">journal</a>, <a href="https://core.ac.uk/download/pdf/82342688.pdf">pdf</a></p>
+</li>
+
+<li id="gen">
+<p><a class="existingWikiWord" href="/nlab/show/Jade+Master">Jade Master</a>, <em>Petri nets based on Lawvere theories</em>, Mathematical Structures in Computer Science 30, no. 7 (2020): 833-864. Available at <a href="https://www.cambridge.org/core/journals/mathematical-structures-in-computer-science/article/petri-nets-based-on-lawvere-theories/9E0F011860A1285DDC498B740774FBDC">journal</a></p>
+</li>
+
+<li id="functorial">
+<p><span class="newWikiWord">Roberto Bruni<a href="/nlab/new/Roberto+Bruni">?</a></span>, <a class="existingWikiWord" href="/nlab/show/Jos%C3%A9+Meseguer">José Meseguer</a>, <span class="newWikiWord">Ugo Montanari<a href="/nlab/new/Ugo+Montanari">?</a></span>, and <a class="existingWikiWord" href="/nlab/show/Vladimiro+Sassone">Vladimiro Sassone</a>. <em>Functorial models for Petri nets</em> Information and Computation 170, no. 2 (2001): 207-236. <a href="https://eprints.soton.ac.uk/264742/1/prenetsIandCOff.pdf">pdf</a></p>
+</li>
+
+<li id="philosophy">
+<p><span class="newWikiWord">Rob J. van Glabbeek<a href="/nlab/new/Rob+J.+van+Glabbeek">?</a></span>, and <a class="existingWikiWord" href="/nlab/show/Gordon+Plotkin">Gordon Plotkin</a>. <em>Configuration structures, event structures and Petri nets</em> Theoretical Computer Science 410, no. 41 (2009): 4111-4159. Available at <a href="https://arxiv.org/abs/0912.4023">pdf</a></p>
+</li>
+</ul>
+<div class="property">category: <a class="category_link" href="/nlab/all_pages/computer+science">computer science</a></div></body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on March 14, 2021 at 22:33:19.
+    See the <a href="/nlab/history/Petri+net" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Petri+net" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/2146/#Item_15">Discuss</a><span class="backintime"><a href="/nlab/revision/Petri+net/15" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Petri+net" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Petri+net" accesskey="S" class="navlink" id="history" rel="nofollow">History (15 revisions)</a>
+  <a href="/nlab/show/Petri+net/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Petri+net" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Petri+net" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

@@ -1,0 +1,819 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      transfinite construction of free algebras in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      transfinite construction of free algebras
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/4595/#Item_5" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Transfinite constructions of free algebras, etc.</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="category_theory">Category theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a></strong></p>
+
+<h2 id="concepts">Concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/category">category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/functor">functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Cat">Cat</a></p>
+</li>
+</ul>
+
+<h2 id="universal_constructions">Universal constructions</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/universal+construction">universal construction</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/representable+functor">representable functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjoint functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/limit">limit</a>/<a class="existingWikiWord" href="/nlab/show/colimit">colimit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/weighted+limit">weighted limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/end">end</a>/<a class="existingWikiWord" href="/nlab/show/coend">coend</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kan+extension">Kan extension</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Yoneda+lemma">Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Isbell+duality">Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+construction">Grothendieck construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+functor+theorem">adjoint functor theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monadicity+theorem">monadicity theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+lifting+theorem">adjoint lifting theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tannaka+duality">Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gabriel-Ulmer+duality">Gabriel-Ulmer duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/small+object+argument">small object argument</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Freyd-Mitchell+embedding+theorem">Freyd-Mitchell embedding theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">relation between type theory and category theory</a></p>
+</li>
+</ul>
+
+<h2 id="extensions">Extensions</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/sheaf+and+topos+theory">sheaf and topos theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/enriched+category+theory">enriched category theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/higher+category+theory">higher category theory</a></p>
+</li>
+</ul>
+
+<h2 id="applications">Applications</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/applications+of+%28higher%29+category+theory">applications of (higher) category theory</a></li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/category+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="transfinite_constructions_of_free_algebras_etc">Transfinite constructions of free algebras, etc.</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#basic_concepts'>Basic concepts</a></li>
+<li><a href='#free_algebras_for_wellpointed_endofunctors'>Free algebras for well-pointed endofunctors</a></li>
+<li><a href='#free_algebras_for_pointed_endofunctors'>Free algebras for pointed endofunctors</a></li>
+<li><a href='#free_algebras_for_unpointed_endofunctors'>Free algebras for unpointed endofunctors</a></li>
+<li><a href='#colimits_of_algebras_for_a_monad'>Colimits of algebras for a monad</a></li>
+<li><a href='#ColimitsOfMonads'>Colimits of monads</a></li>
+<li><a href='#algebraic_small_object_argument'>Algebraic small object argument</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>In <a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a>, there is a common problem of the construction of <a class="existingWikiWord" href="/nlab/show/free+objects">free objects</a> in “algebraic” categories. The idea is that one has to start from some “<a class="existingWikiWord" href="/nlab/show/generators+and+relations">generators</a>” and repeatedly throw in the results of applying “operations”, subject to some “<a class="existingWikiWord" href="/nlab/show/generators+and+relations">relations</a>”, over and over again until the result “converges”. In general, this convergence will require a <a class="existingWikiWord" href="/nlab/show/ordinal+number">transfinite</a> iteration, and the fact that it converges at all requires some smallness/accessibility hypotheses.</p>
+
+<p>If this construction is performed in sufficient generality, then it includes a large number of important special cases, such as the following (not mutually exclusive):</p>
+
+<ul>
+<li>the <a class="existingWikiWord" href="/nlab/show/free+monad">free monad</a> generated by an <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a></li>
+
+<li>the <a class="existingWikiWord" href="/nlab/show/free+monad">free monad</a> generated by a <a class="existingWikiWord" href="/nlab/show/pointed+endofunctor">pointed endofunctor</a></li>
+
+<li>the free <a class="existingWikiWord" href="/nlab/show/monoid">monoid</a> generated by an object of a <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a></li>
+
+<li>the <a class="existingWikiWord" href="/nlab/show/orthogonal+factorization+system">orthogonal factorization system</a> generated by a set of morphisms</li>
+
+<li>the <a class="existingWikiWord" href="/nlab/show/reflective+subcategory">reflectiveness</a> of a <span class="newWikiWord">small-orthogonality class<a href="/nlab/new/orthogonality+class">?</a></span></li>
+
+<li>the reflectiveness of <a class="existingWikiWord" href="/nlab/show/enriched+category">enriched</a> <a class="existingWikiWord" href="/nlab/show/presheaves">presheaves</a> preserving certain <a class="existingWikiWord" href="/nlab/show/limits">limits</a></li>
+
+<li>the <a class="existingWikiWord" href="/nlab/show/cocomplete+category">cocompleteness</a> of the category of <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebras</a> for a <a class="existingWikiWord" href="/nlab/show/monad">monad</a></li>
+
+<li>the existence of <a class="existingWikiWord" href="/nlab/show/left+adjoints">left adjoints</a> to functors between categories of algebras for monads</li>
+
+<li>the existence of colimits for diagrams of monads</li>
+
+<li>the existence of colimits in categories of monoids</li>
+
+<li>the <a class="existingWikiWord" href="/nlab/show/algebraic+small+object+argument">algebraic small object argument</a> generating <a class="existingWikiWord" href="/nlab/show/algebraic+weak+factorization+systems">algebraic weak factorization systems</a></li>
+
+<li>the existence of <a class="existingWikiWord" href="/nlab/show/W-types">W-types</a> and <a class="existingWikiWord" href="/nlab/show/inductive+types">inductive types</a> in categories</li>
+
+<li>the existence of <a class="existingWikiWord" href="/nlab/show/higher+inductive+types">higher inductive types</a> in categories</li>
+</ul>
+
+<p>In 1980, <a class="existingWikiWord" href="/nlab/show/Max+Kelly">Max Kelly</a> <a href="#Kelly">(Kelly)</a> wrote a very long paper detailing very precise and general conditions under which such constructions can be performed, and showing how they can all be reduced to the case of free algebras for <em>well-pointed endofunctors</em>.</p>
+
+<p>In what follows we will summarize Kelly’s constructions, restricted to the special case of <a class="existingWikiWord" href="/nlab/show/accessible+functors">accessible functors</a> on <a class="existingWikiWord" href="/nlab/show/locally+presentable+categories">locally presentable categories</a>. Much of the technical apparatus of Kelly’s paper (including, among other things, two different ambient orthogonal factorization systems <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E,M)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>′</mo><mo>,</mo><mi>M</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E',M')</annotation></semantics></math>, and assumptions such as “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> preserves the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>-tightness of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>M</mi><mo>′</mo><mo>,</mo><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(M',K)</annotation></semantics></math>-cones”) becomes unnecessary in this case, which also includes many if not most of the important examples.</p>
+
+<h2 id="basic_concepts">Basic concepts</h2>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/locally+presentable+category">locally presentable category</a>. All endofunctors of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math> which we consider will be <a class="existingWikiWord" href="/nlab/show/accessible+functor">accessible</a>, that is, they preserve <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/filtered+colimits">filtered colimits</a> for some sufficiently large <a class="existingWikiWord" href="/nlab/show/cardinal+number">cardinal number</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>. In fact, we will only need to know that they preserve sufficiently long <a class="existingWikiWord" href="/nlab/show/transfinite+compositions">transfinite compositions</a>.</p>
+
+<div class="num_defn">
+<h6 id="definition">Definition</h6>
+
+<p>An endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>:</mo><mi>𝒜</mi><mo>→</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">S:\mathcal{A}\to \mathcal{A}</annotation></semantics></math> is called <strong><a class="existingWikiWord" href="/nlab/show/pointed+endofunctor">pointed</a></strong> if it is equipped with a natural transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi><mo>:</mo><msub><mi>Id</mi> <mi>𝒜</mi></msub><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">\sigma:Id_\mathcal{A} \to S</annotation></semantics></math>. It is called <strong>well-pointed</strong> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mi>σ</mi><mo>=</mo><mi>σ</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">S\sigma = \sigma S</annotation></semantics></math> (as natural transformations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>→</mo><msup><mi>S</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">S\to S^2</annotation></semantics></math>).</p>
+</div>
+
+<p>Of course, a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> can be regarded as a pointed endofunctor where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math> is its unit. Such an endofunctor is well-pointed precisely when the monad is <a class="existingWikiWord" href="/nlab/show/idempotent+monad">idempotent</a>.</p>
+
+<div class="num_defn">
+<h6 id="definition_2">Definition</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math> is an endofunctor, then an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/algebra+for+an+endofunctor">algebra</a> is an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> together with a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">H A\to A</annotation></semantics></math>. If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,\sigma)</annotation></semantics></math> is a pointed endofunctor, then an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-algebra is an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> with a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>:</mo><mi>S</mi><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a:S A \to A</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><msub><mi>σ</mi> <mi>A</mi></msub><mo>=</mo><msub><mn>1</mn> <mi>A</mi></msub></mrow><annotation encoding="application/x-tex">a \sigma_A = 1_A</annotation></semantics></math>.</p>
+</div>
+
+<p>We have obvious categories of algebras of both sorts. Of course, any <a class="existingWikiWord" href="/nlab/show/algebra+for+a+monad">algebra for a monad</a> is also an algebra for that monad <em>qua</em> pointed endofunctor. The converse holds in the well-pointed/idempotent case. In fact, we have:</p>
+
+<div class="num_lemma" id="WellPointedAlgebras">
+<h6 id="lemma">Lemma</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,\sigma)</annotation></semantics></math> is well-pointed, then an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> admits at most one <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-algebra structure. This happens exactly when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>σ</mi> <mi>A</mi></msub></mrow><annotation encoding="application/x-tex">\sigma_A</annotation></semantics></math> is an isomorphism, in which case its inverse is that unique algebra structure.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p>Commutativity of the diagram</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="center center center"><mtr><mtd><mi>S</mi><mi>S</mi><mi>A</mi></mtd> <mtd><mover><mo>→</mo><mrow><mi>S</mi><mi>a</mi></mrow></mover></mtd> <mtd><mi>S</mi><mi>A</mi></mtd></mtr> <mtr><mtd><mpadded width="0" lspace="-100%width"><mstyle scriptlevel="1"><mrow><msub><mi>σ</mi> <mrow><mi>S</mi><mi>A</mi></mrow></msub><mo>=</mo><mi>S</mi><msub><mi>σ</mi> <mi>A</mi></msub></mrow></mstyle></mpadded><mo stretchy="false">↑</mo></mtd> <mtd></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">↑</mo><mpadded width="0"><mstyle scriptlevel="1"><mrow><msub><mi>σ</mi> <mi>A</mi></msub></mrow></mstyle></mpadded></mtd></mtr> <mtr><mtd><mi>S</mi><mi>A</mi></mtd> <mtd><munder><mo>→</mo><mi>a</mi></munder></mtd> <mtd><mi>A</mi></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">
+\begin{array}{ccc} 
+S S A &amp; \overset{S a}\to &amp; S A \\
+\mathllap{\scriptsize{\sigma_{S A}=S\sigma_A}}\uparrow &amp;&amp; \;\;\;\;\uparrow\mathrlap{\scriptsize{\sigma_A}} \\
+S A &amp; \underset{a}\to &amp; A
+\end{array}
+
+</annotation></semantics></math></div>
+<p>gives that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>σ</mi> <mi>A</mi></msub><mo>∘</mo><mi>a</mi><mo>=</mo><msub><mn>1</mn> <mrow><mi>S</mi><mi>A</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\sigma_A\circ a= 1_{S A}</annotation></semantics></math>, which together with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><msub><mi>σ</mi> <mi>A</mi></msub><mo>=</mo><msub><mn>1</mn> <mi>A</mi></msub></mrow><annotation encoding="application/x-tex">a\sigma_A= 1_A</annotation></semantics></math> gives the invertibility of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo lspace="verythinmathspace">:</mo><mi>S</mi><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a\colon S A\to A</annotation></semantics></math> and the uniqueness of the algebra structure.</p>
+</div>
+
+<p>Thus, when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is well-pointed, the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-algebras is a <a class="existingWikiWord" href="/nlab/show/full+subcategory">full subcategory</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>. Well-pointed endofunctors are important, so we mention a few other ways to obtain them.</p>
+
+<div class="num_lemma" id="WellPointedQuotient">
+<h6 id="lemma_2">Lemma</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,\sigma)</annotation></semantics></math> is a well-pointed endofunctor and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo lspace="verythinmathspace">:</mo><mi>S</mi><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">\alpha\colon S\to T</annotation></semantics></math> is a natural transformation whose components are <a class="existingWikiWord" href="/nlab/show/epimorphisms">epimorphisms</a>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> is also well-pointed.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_2">Proof</h6>
+
+<p>The putative transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>η</mi><mo lspace="verythinmathspace">:</mo><mn>1</mn><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">\eta\colon 1\to T</annotation></semantics></math> is the composition <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>∘</mo><mi>σ</mi></mrow><annotation encoding="application/x-tex">\alpha\circ \sigma</annotation></semantics></math>. First of all notice that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi><mi>T</mi><mo>∘</mo><mi>α</mi><mo>=</mo><mi>S</mi><mi>η</mi></mrow><annotation encoding="application/x-tex">\sigma T\circ \alpha = S\eta</annotation></semantics></math>, since</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="center center"><mtr><mtd><mi>S</mi><msub><mi>η</mi> <mi>A</mi></msub></mtd> <mtd><mo>=</mo><mi>S</mi><msub><mi>α</mi> <mi>A</mi></msub><mo>∘</mo><mi>S</mi><msub><mi>σ</mi> <mi>A</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mi>S</mi><msub><mi>α</mi> <mi>A</mi></msub><mo>∘</mo><msub><mi>σ</mi> <mrow><mi>S</mi><mi>A</mi></mrow></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><msub><mi>σ</mi> <mrow><mi>T</mi><mi>A</mi></mrow></msub><mo>∘</mo><msub><mi>α</mi> <mi>A</mi></msub></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">\begin{array}{cc} 
+S\eta_A &amp;= S \alpha_A \circ  S\sigma_A \\
+&amp;= S\alpha_A \circ \sigma_{S A}\\
+&amp;= \sigma_{T A}\circ \alpha_A
+\end{array}
+</annotation></semantics></math></div>
+<p>by naturality of the transformations involved. Now, it suffices to show that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>η</mi><mi>T</mi><mo>∘</mo><mi>α</mi><mo>=</mo><mi>T</mi><mi>η</mi><mo>∘</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\eta T \circ \alpha = T\eta \circ \alpha</annotation></semantics></math>: this follows, again, from</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="center center center"><mtr><mtd><mo stretchy="false">(</mo><mi>η</mi><mi>T</mi><mo>∘</mo><mi>α</mi><msub><mo stretchy="false">)</mo> <mi>A</mi></msub></mtd> <mtd><mo>=</mo></mtd> <mtd><msub><mi>α</mi> <mrow><mi>T</mi><mi>A</mi></mrow></msub><mo>∘</mo><msub><mi>σ</mi> <mrow><mi>T</mi><mi>A</mi></mrow></msub><mo>∘</mo><msub><mi>α</mi> <mi>A</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><msub><mi>α</mi> <mrow><mi>T</mi><mi>A</mi></mrow></msub><mo>∘</mo><mi>S</mi><msub><mi>η</mi> <mi>A</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>T</mi><msub><mi>η</mi> <mi>A</mi></msub><mo>∘</mo><msub><mi>α</mi> <mi>A</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><mo stretchy="false">(</mo><mi>T</mi><mi>η</mi><mo>∘</mo><mi>α</mi><msub><mo stretchy="false">)</mo> <mi>A</mi></msub></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">\begin{array}{ccc} 
+(\eta T \circ \alpha)_A &amp;=&amp; \alpha_{T A}\circ \sigma_{T A}\circ \alpha_A \\
+&amp;=&amp; \alpha_{T A} \circ S \eta_A\\
+&amp;=&amp; T \eta_A \circ \alpha_A \\
+&amp;=&amp; (T\eta \circ\alpha)_A\end{array}
+</annotation></semantics></math></div>
+<p>Now since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> is an epimorphism, we can conclude.</p>
+</div>
+
+<div class="num_lemma" id="WellPointedCointersection">
+<h6 id="lemma_3">Lemma</h6>
+
+<p>Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>S</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>σ</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S_i,\sigma_i)</annotation></semantics></math> is a family of (accessible) well-pointed endofunctors and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi><mo>:</mo><mi>Id</mi><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">\sigma:Id \to S</annotation></semantics></math> be the <a class="existingWikiWord" href="/nlab/show/wide+pushout">wide pushout</a> of all the points <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>σ</mi> <mi>i</mi></msub><mo>:</mo><mi>Id</mi><mo>→</mo><msub><mi>S</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\sigma_i:Id \to S_i</annotation></semantics></math>. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,\sigma)</annotation></semantics></math> is (accessible and) well-pointed, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mi>Alg</mi><mo>=</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">⋂</mo> <mi>i</mi></msub><mo stretchy="false">(</mo><msub><mi>S</mi> <mi>i</mi></msub><mi>Alg</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S Alg = \bigcap_i (S_i Alg)</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_3">Proof</h6>
+
+<p>The last statement is almost obvious using Lemma <a class="maruku-ref" href="#WellPointedAlgebras"></a> above. Well-pointedness for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> follows adapting Lemma <a class="maruku-ref" href="#WellPointedQuotient"></a> to the case of a jointly epimorphic family of arrows <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>S</mi> <mi>i</mi></msub><mo>→</mo><mi>S</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{S_i\to S\}</annotation></semantics></math>, like the colimiting cocone for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>.</p>
+</div>
+
+<div class="num_lemma" id="WellPointedTransfer">
+<h6 id="lemma_4">Lemma</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>𝒜</mi><mo>⇄</mo><mi>ℬ</mi><mo>:</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F:\mathcal{A} \rightleftarrows \mathcal{B} :G</annotation></semantics></math> be an adjunction and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>′</mo><mo>,</mo><mi>σ</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S',\sigma')</annotation></semantics></math> an (accessible) well-pointed endofunctor on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,\sigma)</annotation></semantics></math> be the pushout</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>F</mi><mi>G</mi></mtd> <mtd><mover><mo>→</mo><mrow><mi>F</mi><mi>σ</mi><mo>′</mo><mi>G</mi></mrow></mover></mtd> <mtd><mi>F</mi><mi>S</mi><mo>′</mo><mi>G</mi></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>Id</mi></mtd> <mtd><mover><mo>→</mo><mi>σ</mi></mover></mtd> <mtd><mi>S</mi><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array{ F G &amp; \xrightarrow{F \sigma' G} &amp; F S' G \\
+  \downarrow &amp;&amp; \downarrow \\
+  Id &amp; \xrightarrow{\sigma} &amp; S. } 
+</annotation></semantics></math></div>
+<p>Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,\sigma)</annotation></semantics></math> is (accessible and) well-pointed, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>∈</mo><mi>ℬ</mi></mrow><annotation encoding="application/x-tex">B\in\mathcal{B}</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-algebra exactly when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">G B</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">S'</annotation></semantics></math>-algebra.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_4">Proof</h6>
+</div>
+
+<h2 id="free_algebras_for_wellpointed_endofunctors">Free algebras for well-pointed endofunctors</h2>
+
+<p>The basic theorem to which all others can be reduced is the following.</p>
+
+<div class="num_theorem" id="WellPointedFreeAlgebras">
+<h6 id="theorem">Theorem</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/locally+presentable+category">locally presentable</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is an accessible well-pointed endofunctor, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">S Alg</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/reflective+subcategory">reflective</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>. Therefore, the algebraically-free monad on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> exists (and is accessible).</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_5">Proof</h6>
+
+<p>Given <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">A\in\mathcal{A}</annotation></semantics></math>, define <a class="existingWikiWord" href="/nlab/show/induction">inductively</a> the following transfinite sequence in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>→</mo><mi>S</mi><mi>A</mi><mo>→</mo><msup><mi>S</mi> <mn>2</mn></msup><mi>A</mi><mo>→</mo><msup><mi>S</mi> <mn>3</mn></msup><mi>A</mi><mo>→</mo><mi>⋯</mi></mrow><annotation encoding="application/x-tex"> A \to S A \to S^2 A \to S^3 A \to \cdots </annotation></semantics></math></div>
+<p>in which each transition map is a component of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>, and we take colimits at limit stages. If we continue this out to some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-filtered ordinal <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-accessible, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> will preserve the relevant colimit, and hence we have an induced action <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><msup><mi>S</mi> <mi>α</mi></msup><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><msup><mi>S</mi> <mi>α</mi></msup><mi>A</mi></mrow><annotation encoding="application/x-tex">S(S^\alpha A) \to S^\alpha A</annotation></semantics></math>. It is easy to check that this makes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mi>α</mi></msup><mi>A</mi></mrow><annotation encoding="application/x-tex">S^\alpha A</annotation></semantics></math> into a reflection of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">S Alg</annotation></semantics></math>.</p>
+</div>
+
+<p>Some important constructions are directly examples of this theorem.</p>
+
+<div class="num_example">
+<h6 id="example">Example</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> be a set of morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>; recall that an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">A\in\mathcal{A}</annotation></semantics></math> is said to be <em>orthogonal</em> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi><mo stretchy="false">(</mo><mi>k</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{A}(k,A)</annotation></semantics></math> is a bijection for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>∈</mo><mi>K</mi></mrow><annotation encoding="application/x-tex">k\in K</annotation></semantics></math>, which is to say that each functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi><mo stretchy="false">(</mo><mi>k</mi><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>:</mo><mi>𝒜</mi><mo>→</mo><msup><mi>Set</mi> <mstyle mathvariant="bold"><mn>2</mn></mstyle></msup></mrow><annotation encoding="application/x-tex">\mathcal{A}(k,-):\mathcal{A}\to Set^{\mathbf{2}}</annotation></semantics></math> takes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> to an isomorphism, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mstyle mathvariant="bold"><mn>2</mn></mstyle></msup></mrow><annotation encoding="application/x-tex">Set^{\mathbf{2}}</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/arrow+category">arrow category</a> of <a class="existingWikiWord" href="/nlab/show/Set">Set</a>. Now the subcategory of isomorphisms is reflective in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mstyle mathvariant="bold"><mn>2</mn></mstyle></msup></mrow><annotation encoding="application/x-tex">Set^{\mathbf{2}}</annotation></semantics></math>, hence is the algebras for a well-pointed endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>R</mi> <mi>k</mi></msub></mrow><annotation encoding="application/x-tex">R_k</annotation></semantics></math>. By Lemma <a class="maruku-ref" href="#WellPointedTransfer"></a>, there is a well-pointed endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>k</mi></msub></mrow><annotation encoding="application/x-tex">S_k</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math> whose algebras are the objects orthogonal to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>. And by Lemma <a class="maruku-ref" href="#WellPointedCointersection"></a>, there is a well-pointed endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> whose algebras are those objects orthogonal to all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>∈</mo><mi>K</mi></mrow><annotation encoding="application/x-tex">k\in K</annotation></semantics></math>. Thus, by Theorem <a class="maruku-ref" href="#WellPointedFreeAlgebras"></a>, the category of objects orthogonal to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> is reflective in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>.</p>
+</div>
+
+<div class="num_example">
+<h6 id="example_2">Example</h6>
+
+<p>Applying the previous example on <a class="existingWikiWord" href="/nlab/show/slice+categories">slice categories</a>, we can construct <a class="existingWikiWord" href="/nlab/show/orthogonal+factorization+systems">orthogonal factorization systems</a>.</p>
+</div>
+
+<p>The rest of the constructions proceed by building, out of other data, a well-pointed endofunctor, and applying Theorem <a class="maruku-ref" href="#WellPointedFreeAlgebras"></a>.</p>
+
+<h2 id="free_algebras_for_pointed_endofunctors">Free algebras for pointed endofunctors</h2>
+
+<p>Now let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>τ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T,\tau)</annotation></semantics></math> be a general (accessible) pointed endofunctor, not necessarily well-pointed. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math> denote the <a class="existingWikiWord" href="/nlab/show/comma+category">comma category</a>, whose objects are triples <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,B,a)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>:</mo><mi>T</mi><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">a:T A \to B</annotation></semantics></math>. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math> is again locally presentable.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>:</mo><mi>T</mi><mo>′</mo><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">\alpha:T'\to T</annotation></semantics></math> is a natural transformation, we have an adjunction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mo>!</mo></msub><mo>:</mo><mi>T</mi><mo>′</mo><mo stretchy="false">/</mo><mi>𝒜</mi><mo>⇄</mo><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi><mo>:</mo><msup><mi>α</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\alpha_! : T'/\mathcal{A} \rightleftarrows T/\mathcal{A}: \alpha^*</annotation></semantics></math> in which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>α</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\alpha^*</annotation></semantics></math> sends <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,B,a)</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo>∘</mo><msub><mi>α</mi> <mi>A</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,B,a\circ \alpha_A)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">\alpha_!</annotation></semantics></math> is defined by a pushout.</p>
+
+<p>Note that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>τ</mi><mo>:</mo><mi>Id</mi><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">\tau:Id \to T</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>τ</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tau^*(A,B,a)</annotation></semantics></math> is the composite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mover><mo>→</mo><mrow><msub><mi>τ</mi> <mi>A</mi></msub></mrow></mover><mi>T</mi><mi>A</mi><mover><mo>→</mo><mi>a</mi></mover><mi>B</mi></mrow><annotation encoding="application/x-tex">A \xrightarrow{\tau_A} T A \xrightarrow{a} B</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒜</mi> <mstyle mathvariant="bold"><mn>2</mn></mstyle></msup><mo>=</mo><mi>Id</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}^{\mathbf{2}} = Id/\mathcal{A}</annotation></semantics></math>.</p>
+
+<div class="num_lemma" id="PointedAlgebrasInComma">
+<h6 id="lemma_5">Lemma</h6>
+
+<p>The category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras is a reflective full subcategory of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_6">Proof</h6>
+
+<p>It is easy to show that it is a full subcategory. Moreover, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,B,a)</annotation></semantics></math> lies in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math> just when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>τ</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tau^*(A,B,a)</annotation></semantics></math> is an isomorphism. The isomorphisms are a reflective subcategory of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒜</mi> <mstyle mathvariant="bold"><mn>2</mn></mstyle></msup></mrow><annotation encoding="application/x-tex">\mathcal{A}^{\mathbf{2}}</annotation></semantics></math>, hence the algebras for a well-pointed endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>. Now by Lemma <a class="maruku-ref" href="#WellPointedTransfer"></a>, there is a well-pointed endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math> whose algebras are precisely the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras. Now apply Theorem <a class="maruku-ref" href="#WellPointedFreeAlgebras"></a>.</p>
+</div>
+
+<div class="num_theorem" id="PointedAlgebras">
+<h6 id="theorem_2">Theorem</h6>
+
+<p>The category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math> is monadic over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>, and cocomplete. In particular, the <a class="existingWikiWord" href="/nlab/show/algebraically-free+monad">algebraically-free monad</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> exists and is accessible.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_7">Proof</h6>
+
+<p>A left adjoint to the forgetful functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi><mo>→</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T Alg \to \mathcal{A}</annotation></semantics></math> is supplied by reflecting the object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>T</mi><mi>A</mi><mo>,</mo><msub><mi>τ</mi> <mi>A</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,T A,\tau_A)</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math> into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math>. The <a class="existingWikiWord" href="/nlab/show/monadicity+theorem">monadicity theorem</a> then applies. Colimits can be constructed in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math> and then reflected into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math>.</p>
+</div>
+
+<p>It is possible to <a class="existingWikiWord" href="/nlab/show/beta-reduction">beta-reduce</a> this proof and describe the resulting transfinite construction more explicitly. Given <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,B,a)</annotation></semantics></math>, we define inductively a transfinite sequence</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mi>T</mi><msub><mi>X</mi> <mn>0</mn></msub></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>T</mi><msub><mi>X</mi> <mn>1</mn></msub></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>T</mi><msub><mi>X</mi> <mn>2</mn></msub></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>…</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><msup><mo stretchy="false">↓</mo> <mrow><msub><mi>x</mi> <mn>0</mn></msub></mrow></msup></mtd> <mtd></mtd> <mtd><msup><mo stretchy="false">↓</mo> <mrow><msub><mi>x</mi> <mn>1</mn></msub></mrow></msup></mtd> <mtd></mtd> <mtd><msup><mo stretchy="false">↓</mo> <mrow><msub><mi>x</mi> <mn>2</mn></msub></mrow></msup></mtd></mtr> <mtr><mtd><msub><mi>X</mi> <mn>0</mn></msub></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>X</mi> <mn>1</mn></msub></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>X</mi> <mn>2</mn></msub></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>X</mi> <mn>3</mn></msub></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>…</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\array{ &amp;&amp; T X_0 &amp; \to &amp; T X_1 &amp; \to &amp; T X_2 &amp; \to &amp; \dots \\
+&amp;&amp; \downarrow^{x_0} &amp;&amp; \downarrow^{x_1} &amp;&amp; \downarrow^{x_2} \\
+X_0 &amp; \to &amp; X_1 &amp; \to &amp; X_2 &amp; \to &amp; X_3 &amp; \to &amp; \dots }
+
+</annotation></semantics></math></div>
+<p>such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>β</mi></msub><mo>→</mo><msub><mi>X</mi> <mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">X_\beta \to X_{\beta+1}</annotation></semantics></math> is equal to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>x</mi> <mi>β</mi></msub><mo>∘</mo><msub><mi>τ</mi> <mrow><msub><mi>X</mi> <mi>β</mi></msub></mrow></msub></mrow><annotation encoding="application/x-tex">x_\beta \circ \tau_{X_\beta}</annotation></semantics></math>.</p>
+
+<p>We begin with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">X_0=A</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>1</mn></msub><mo>=</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">X_1=B</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>x</mi> <mn>0</mn></msub><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">x_0 = a</annotation></semantics></math>. Given <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>β</mi></msub></mrow><annotation encoding="application/x-tex">X_\beta</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">X_{\beta+1}</annotation></semantics></math>, we define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>x</mi> <mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>:</mo><mi>T</mi><msub><mi>X</mi> <mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>→</mo><msub><mi>X</mi> <mrow><mi>β</mi><mo>+</mo><mn>2</mn></mrow></msub></mrow><annotation encoding="application/x-tex">x_{\beta+1}:T X_{\beta+1}\to X_{\beta+2}</annotation></semantics></math> to be the coequalizer of the two composites</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>T</mi><msub><mi>X</mi> <mi>β</mi></msub><mspace width="thickmathspace"></mspace><munderover><mo>⇉</mo><mrow><mi>T</mi><mi>τ</mi></mrow><mrow><mi>τ</mi><mi>T</mi></mrow></munderover><mspace width="thickmathspace"></mspace><msup><mi>T</mi> <mn>2</mn></msup><msub><mi>X</mi> <mi>β</mi></msub><mover><mo>→</mo><mrow><mi>T</mi><msub><mi>x</mi> <mi>β</mi></msub></mrow></mover><mi>T</mi><msub><mi>X</mi> <mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>.</mo></mrow><annotation encoding="application/x-tex"> T X_\beta \;\underoverset{T \tau}{\tau T}{\rightrightarrows}\; T^2 X_\beta \xrightarrow{T x_\beta} T X_{\beta+1}.</annotation></semantics></math></div>
+<p>At limit ordinals <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> we take colimits, and at successors of limit ordinals we let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>x</mi> <mi>α</mi></msub><mo>:</mo><mi>T</mi><msub><mi>X</mi> <mi>α</mi></msub><mo>→</mo><msub><mi>X</mi> <mrow><mi>α</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">x_\alpha : T X_\alpha \to X_{\alpha+1}</annotation></semantics></math> be the coequalizer of the two maps</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><msub><mo lspace="0em" rspace="thinmathspace">colim</mo> <mrow><mi>β</mi><mo>&lt;</mo><mi>α</mi></mrow></msub><msub><mi>X</mi> <mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>X</mi> <mi>α</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↗</mo></mtd> <mtd></mtd> <mtd><msup><mo>↘</mo> <mi>τ</mi></msup></mtd></mtr> <mtr><mtd><msub><mo lspace="0em" rspace="thinmathspace">colim</mo> <mrow><mi>β</mi><mo>&lt;</mo><mi>α</mi></mrow></msub><mi>T</mi><msub><mi>X</mi> <mi>β</mi></msub></mtd> <mtd></mtd> <mtd><mo>→</mo></mtd> <mtd></mtd> <mtd><mi>T</mi><msub><mi>X</mi> <mi>α</mi></msub><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array{ &amp;&amp; \colim_{\beta\lt\alpha} X_{\beta+1} = X_\alpha \\
+  &amp; \nearrow &amp;&amp; \searrow^{\tau} \\
+  \colim_{\beta\lt\alpha} T X_\beta &amp;&amp; \to &amp;&amp; T X_\alpha.}
+
+</annotation></semantics></math></div>
+<div class="num_example">
+<h6 id="example_3">Example</h6>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/algebraic+weak+factorization+system">algebraic</a> <a class="existingWikiWord" href="/nlab/show/small+object+argument">small object argument</a> consists of building the free monad on a pointed endofunctor.</p>
+</div>
+
+<h2 id="free_algebras_for_unpointed_endofunctors">Free algebras for unpointed endofunctors</h2>
+
+<p>An algebra for an unpointed endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math> is the same as an algebra for the pointed endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>≔</mo><mi>Id</mi><mo>+</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">T \coloneqq Id + H</annotation></semantics></math>. Thus, Theorem <a class="maruku-ref" href="#PointedAlgebras"></a> can be applied to unpointed endofunctors as well.</p>
+
+<p>In this case, the transfinite sequence for the free <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>-algebra on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">A\in\mathcal{A}</annotation></semantics></math> is much simpler: we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">X_0 = A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>A</mi><mo>+</mo><mi>H</mi><msub><mi>X</mi> <mi>β</mi></msub></mrow><annotation encoding="application/x-tex">X_{\beta+1} = A + H X_\beta</annotation></semantics></math>.</p>
+
+<div class="num_example">
+<h6 id="example_4">Example</h6>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/W-type">W-type</a> in a category is an initial algebra for a <a class="existingWikiWord" href="/nlab/show/polynomial+functor">polynomial functor</a>. Equivalently, it is the free algebra on the initial object for that functor. Thus, we obtain the existence of W-types, and likewise of more general <a class="existingWikiWord" href="/nlab/show/inductive+types">inductive types</a>.</p>
+</div>
+
+<h2 id="colimits_of_algebras_for_a_monad">Colimits of algebras for a monad</h2>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> be a monad on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>, and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math> denote the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras <em>qua</em> monad.</p>
+
+<div class="num_theorem" id="MonadAlgebras">
+<h6 id="theorem_3">Theorem</h6>
+
+<p>The category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math> is a reflective subcategory of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_8">Proof</h6>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">(A,B,a)\in T/\mathcal{A}</annotation></semantics></math>, consider the pushout</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msup><mi>T</mi> <mn>2</mn></msup><mi>A</mi></mtd> <mtd><mover><mo>→</mo><mi>μ</mi></mover></mtd> <mtd><mi>T</mi><mi>A</mi></mtd></mtr> <mtr><mtd><msup><mo></mo><mrow><mi>T</mi><mi>a</mi></mrow></msup><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>T</mi><mi>B</mi></mtd> <mtd><mover><mo>→</mo><mi>c</mi></mover></mtd> <mtd><mi>D</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array{ T^2 A &amp; \xrightarrow{\mu} &amp; T A \\
+  ^{T a}\downarrow &amp;&amp; \downarrow\\
+  T B &amp; \xrightarrow{c} &amp; D }
+
+</annotation></semantics></math></div>
+<p>Define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo>:</mo><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi><mo>→</mo><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">L:T/\mathcal{A}\to T/\mathcal{A}</annotation></semantics></math> to take <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,B,a)</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>D</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(B,D,c)</annotation></semantics></math> in this pushout. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>-algebras (<em>qua</em> pointed endofunctor) are precisely <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras (<em>qua</em> monad), and we have a pointwise epimorphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>→</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">S\to L</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is the well-pointed endofunctor from the proof of Theorem <a class="maruku-ref" href="#PointedAlgebras"></a> whose algebras are the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras (<em>qua</em> pointed endofunctor). Thus, by Lemma <a class="maruku-ref" href="#WellPointedQuotient"></a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is well-pointed; now apply Theorem <a class="maruku-ref" href="#WellPointedFreeAlgebras"></a>.</p>
+</div>
+
+<div class="num_cor">
+<h6 id="corollary">Corollary</h6>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math> is locally presentable. Moreover, any functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi><mo>→</mo><mi>T</mi><mo>′</mo><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg \to T' Alg</annotation></semantics></math> induced by a monad morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>′</mo><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">T'\to T</annotation></semantics></math> has a left adjoint.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_9">Proof</h6>
+
+<p>Since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">T Alg</annotation></semantics></math> is reflective in the cocomplete <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math>, it is cocomplete. Since it is <a class="existingWikiWord" href="/nlab/show/accessible+category">accessible</a> by the <a href="/nlab/show/accessible+category#Limits">limit theorem</a>, it is locally presentable. For the second statement, the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi><mo>→</mo><mi>T</mi><mo>′</mo><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A} \to T'/\mathcal{A}</annotation></semantics></math> has an easily defined left adjoint; now compose it with the reflection into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math>.</p>
+</div>
+
+<h2 id="ColimitsOfMonads">Colimits of monads</h2>
+
+<p>When speaking of colimits of monads, we are not interested merely in colimits in the category of monads, but <em>algebraic colimits</em> in the following sense. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>:</mo><mi>K</mi><mo>→</mo><mi>Monad</mi><mo stretchy="false">(</mo><mi>𝒜</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">V:K\to Monad (\mathcal{A})</annotation></semantics></math> be a diagram in the category of monads on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>, and define a <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-algebra</strong> to be an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> together with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mi>k</mi></msub></mrow><annotation encoding="application/x-tex">V_k</annotation></semantics></math>-algebra structures which commute with the images of morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math>.</p>
+
+<div class="num_defn">
+<h6 id="definition_3">Definition</h6>
+
+<p>An <strong>algebraic colimit</strong> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> is a monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> whose usual <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">P Alg</annotation></semantics></math> is equivalent, over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>, to the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-algebras.</p>
+</div>
+
+<p>It follows, by arguments similar to those for <a class="existingWikiWord" href="/nlab/show/algebraically-free+monads">algebraically-free monads</a>, that an algebraic colimit is also a colimit in the category of monads.</p>
+
+<div class="num_theorem" id="ColimitsOfMonads">
+<h6 id="theorem_4">Theorem</h6>
+
+<p>Algebraic colimits of (accessible) monads exist (and are accessible).</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_10">Proof</h6>
+
+<p>WLOG we may assume <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> has an initial object; otherwise, give it a new initial object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math> and define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>0</mn></msub><mo>=</mo><mi>Id</mi></mrow><annotation encoding="application/x-tex">V_0 = Id</annotation></semantics></math>. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> be the (pointwise) colimit of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> in the category of endofunctors of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math>, with coprojections <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>r</mi> <mi>k</mi></msub><mo>:</mo><msub><mi>V</mi> <mi>k</mi></msub><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">r_k:V_k \to T</annotation></semantics></math>. Our assumption on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> gives <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> a unique point <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Id</mi><mo>→</mo><msub><mi>V</mi> <mn>0</mn></msub><mo>→</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">Id \to V_0 \to T</annotation></semantics></math> such that each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>r</mi> <mi>k</mi></msub></mrow><annotation encoding="application/x-tex">r_k</annotation></semantics></math> is a map of pointed endofunctors. Moreover, a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebra (<em>qua</em> pointed endofunctor) is an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> together with compatible pointed-endofunctor-algebra structures for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mi>k</mi></msub></mrow><annotation encoding="application/x-tex">V_k</annotation></semantics></math>. This clearly includes the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-algebras, as defined above, as a full subcategory.</p>
+
+<p>We will show the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-algebras to be reflective in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math>. Given <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,B,a)</annotation></semantics></math>, let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>:</mo><mi>T</mi><mi>B</mi><mo>→</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">c:T B \to D</annotation></semantics></math> be the joint coequalizer of all the parallel pairs</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><msub><mi>V</mi> <mi>k</mi></msub><mi>A</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><msup><mo></mo><mrow><msub><mi>μ</mi> <mi>k</mi></msub></mrow></msup><mo>↗</mo></mtd> <mtd></mtd> <mtd><msup><mo>↘</mo> <mrow><msub><mi>V</mi> <mi>k</mi></msub><msub><mi>τ</mi> <mi>k</mi></msub></mrow></msup></mtd></mtr> <mtr><mtd><msubsup><mi>V</mi> <mi>k</mi> <mn>2</mn></msubsup><mi>A</mi></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mi>id</mi></mover></mtd> <mtd></mtd> <mtd><msubsup><mi>V</mi> <mi>k</mi> <mn>2</mn></msubsup><mi>A</mi></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>V</mi> <mi>k</mi></msub><mo stretchy="false">(</mo><mi>a</mi><msub><mi>r</mi> <mi>k</mi></msub><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd><msub><mi>V</mi> <mi>k</mi></msub><mi>B</mi></mtd> <mtd><mover><mo>→</mo><mrow><msub><mi>r</mi> <mi>k</mi></msub></mrow></mover><mi>T</mi><mi>B</mi><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array{ &amp;&amp; V_k A \\
+  &amp; ^{\mu_k}\nearrow &amp;&amp; \searrow^{V_k \tau_k}\\
+  V_k^2 A &amp;&amp; \xrightarrow{id} &amp;&amp; V_k^2 A &amp;
+  \xrightarrow{V_k (a r_k)} &amp; V_k B &amp; \xrightarrow{r_k } T B. }
+
+</annotation></semantics></math></div>
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>≔</mo><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>D</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L(A,B,a) \coloneqq (B,D,c)</annotation></semantics></math>, defining an endofunctor of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">/</mo><mi>𝒜</mi></mrow><annotation encoding="application/x-tex">T/\mathcal{A}</annotation></semantics></math>. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is accessible, and an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>-algebra is precisely a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-algebra.</p>
+
+<p>Moreover, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> admits an epimorphic transformation from the well-pointed endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> defined as in Theorem <a class="maruku-ref" href="#PointedAlgebras"></a> whose algebras are the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras (<em>qua</em> pointed endofunctor). Thus, by Lemma <a class="maruku-ref" href="#WellPointedQuotient"></a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is well-pointed; now apply Theorem <a class="maruku-ref" href="#WellPointedFreeAlgebras"></a>.</p>
+</div>
+
+<div class="num_example">
+<h6 id="example_5">Example</h6>
+
+<p>The categorical semantics of <a class="existingWikiWord" href="/nlab/show/higher+inductive+types">higher inductive types</a> can be described using certain “presentations” of monads. See <a href="#LShits">Lumsdaine-Shulman</a>.</p>
+</div>
+
+<h2 id="algebraic_small_object_argument">Algebraic small object argument</h2>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/algebraic+small+object+argument">algebraic small object argument</a> is an enhancement of the <a class="existingWikiWord" href="/nlab/show/small+object+argument">small object argument</a>, based on a free monad construction, that produces <a class="existingWikiWord" href="/nlab/show/algebraic+weak+factorization+systems">algebraic weak factorization systems</a>.</p>
+<div>
+
+<p><strong>Algebraic model structures:</strong> <a class="existingWikiWord" href="/nlab/show/Quillen+model+structures">Quillen model structures</a>, mainly on <a class="existingWikiWord" href="/nlab/show/locally+presentable+categories">locally presentable categories</a>, and their constituent <a class="existingWikiWord" href="/nlab/show/categories+with+weak+equivalences">categories with weak equivalences</a> and <a class="existingWikiWord" href="/nlab/show/weak+factorization+systems">weak factorization systems</a>, that can be equipped with further algebraic structure and “freely generated” by small data.</p>
+
+<table><thead><tr><th>structure</th><th>small-set-generated</th><th>small-category-generated</th><th>algebraicized</th></tr></thead><tbody><tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/weak+factorization+system">weak factorization system</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/combinatorial+wfs">combinatorial wfs</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/accessible+wfs">accessible wfs</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/algebraic+wfs">algebraic wfs</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/model+category">model category</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/combinatorial+model+category">combinatorial model category</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/accessible+model+category">accessible model category</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/algebraic+model+category">algebraic model category</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/transfinite+construction+of+free+algebras">construction method</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/small+object+argument">small object argument</a></td><td style="text-align: left;">same as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/algebraic+small+object+argument">algebraic small object argument</a></td></tr>
+</tbody></table>
+
+</div>
+<h2 id="references">References</h2>
+
+<ul id="Kelly">
+<li><a class="existingWikiWord" href="/nlab/show/Max+Kelly">Max Kelly</a>, <em>A unified treatment of transfinite constructions for free algebras, free monoids, colimits, associated sheaves, and so on.</em> Bull. Austral. Math. Soc. 22 (1980), 1–83. doi:<a href="http://dx.doi.org/10.1017/S0004972700006353">10.1017/S0004972700006353</a></li>
+</ul>
+
+<ul>
+<li id="LShits"><a class="existingWikiWord" href="/nlab/show/Peter+LeFanu+Lumsdaine">Peter LeFanu Lumsdaine</a> and <a class="existingWikiWord" href="/nlab/show/Mike+Shulman">Mike Shulman</a>, <em>Semantics of higher inductive types</em>, <a href="https://arxiv.org/abs/1705.07088">arxiv</a></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on December  5, 2019 at 11:19:00.
+    See the <a href="/nlab/history/transfinite+construction+of+free+algebras" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/transfinite+construction+of+free+algebras" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4595/#Item_5">Discuss</a><span class="backintime"><a href="/nlab/revision/transfinite+construction+of+free+algebras/11" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/transfinite+construction+of+free+algebras" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/transfinite+construction+of+free+algebras" accesskey="S" class="navlink" id="history" rel="nofollow">History (11 revisions)</a>
+  <a href="/nlab/show/transfinite+construction+of+free+algebras/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/transfinite+construction+of+free+algebras" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/transfinite+construction+of+free+algebras" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

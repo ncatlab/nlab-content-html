@@ -1,0 +1,797 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      measure space in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      measure space
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/3412/#Item_25" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Measure spaces</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="measure_and_probability_theory">Measure and probability theory</h4>
+
+<div class="hide"><div>
+<p><strong><a class="existingWikiWord" href="/nlab/show/measure+theory">measure theory</a></strong></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/probability+theory">probability theory</a></strong></p>
+
+<h2 id="measure_theory">Measure theory</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a>, <a class="existingWikiWord" href="/nlab/show/measurable+locale">measurable locale</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/measure">measure</a>, <a class="existingWikiWord" href="/nlab/show/measure+space">measure space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/von+Neumann+algebra">von Neumann algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+measure+theory">geometric measure theory</a></p>
+</li>
+</ul>
+
+<h2 id="probability_theory">Probability theory</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/probability+space">probability space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/probability+distribution">probability distribution</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/state">state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/states+in+AQFT+and+operator+algebra">in AQFT and operator algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/GNS+construction">GNS construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Fell%27s+theorem">Fell's theorem</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entropy">entropy</a>, <a class="existingWikiWord" href="/nlab/show/relative+entropy">relative entropy</a></p>
+</li>
+</ul>
+
+<h2 id="information_geometry">Information geometry</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/information+geometry">information geometry</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/information+metric">information metric</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Wasserstein+metric">Wasserstein metric</a></p>
+</li>
+</ul>
+
+<h2 id="thermodynamics">Thermodynamics</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/thermodynamics">thermodynamics</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/second+law+of+thermodynamics">second law of thermodynamics</a>, <a class="existingWikiWord" href="/nlab/show/generalized+second+law+of+theormodynamics">generalized second law</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/ergodic+theory">ergodic theory</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Riesz+representation+theorem">Riesz representation theorem</a></li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/measure+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+
+<h4 id="integration_theory">Integration theory</h4>
+
+<div class="hide"><div>
+<p><strong><a class="existingWikiWord" href="/nlab/show/integration">integration</a></strong></p>
+
+<table><thead><tr><th>analytic integration</th><th>cohomological integration</th></tr></thead><tbody><tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/Poincar%C3%A9+duality">Poincaré duality</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/measure">measure</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/orientation+in+generalized+cohomology">orientation in generalized cohomology</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/volume+form">volume form</a></td><td style="text-align: left;">(<a class="existingWikiWord" href="/nlab/show/virtual+fundamental+class">virtual</a>) <a class="existingWikiWord" href="/nlab/show/fundamental+class">fundamental class</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/Riemann+integration">Riemann</a>/<a class="existingWikiWord" href="/nlab/show/Lebesgue+integration">Lebesgue integration</a> <a class="existingWikiWord" href="/nlab/show/integration+of+differential+forms">of differential forms</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/push-forward+in+generalized+cohomology">push-forward in generalized cohomology</a>/<a class="existingWikiWord" href="/nlab/show/fiber+integration+in+differential+cohomology">in differential cohomology</a></td></tr>
+</tbody></table>
+
+<h2 id="analytic_integration">Analytic integration</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/integral+calculus">integral calculus</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Riemann+integration">Riemann integration</a>, <a class="existingWikiWord" href="/nlab/show/Lebesgue+integration">Lebesgue integration</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/line+integral">line integral</a>/<a class="existingWikiWord" href="/nlab/show/contour+integration">contour integration</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/integration+of+differential+forms">integration of differential forms</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/integration+over+supermanifolds">integration over supermanifolds</a>, <a class="existingWikiWord" href="/nlab/show/Berezin+integral">Berezin integral</a>, <a class="existingWikiWord" href="/nlab/show/fermionic+path+integral">fermionic path integral</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Kontsevich+integral">Kontsevich integral</a>, <a class="existingWikiWord" href="/nlab/show/Selberg+integral">Selberg integral</a>, <a class="existingWikiWord" href="/nlab/show/elliptic+Selberg+integral">elliptic Selberg integral</a></p>
+
+<h2 id="cohomological_integration">Cohomological integration</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/integration+in+ordinary+differential+cohomology">integration in ordinary differential cohomology</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/integration+in+differential+K-theory">integration in differential K-theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Riemann-Roch+theorem">Riemann-Roch theorem</a></p>
+
+<h2 id="variants">Variants</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/Lie+integration">Lie integration</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/path+integral">path integral</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Batalin-Vilkovisky+integral">Batalin-Vilkovisky integral</a></p></div></div>
+</div>
+</div>
+
+<h1 id="measure_spaces">Measure spaces</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#notation'>Notation</a></li>
+<li><a href='#definitions'>Definitions</a></li>
+<ul>
+<li><a href='#probability_measures'>Probability measures</a></li>
+<li><a href='#generalizations'>Generalizations</a></li>
+<li><a href='#constructive_theory'>Constructive theory</a></li>
+<li><a href='#measures_on_a_frame'>Measures on a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-frame</a></li>
+<li><a href='#subsidiary_definitions'>Subsidiary definitions</a></li>
+<li><a href='#integration'>Integration</a></li>
+</ul>
+<li><a href='#the_algebra_of_measures'>The algebra of measures</a></li>
+<li><a href='#noncommutative_measure_theory'>Noncommutative measure theory</a></li>
+<li><a href='#examples'>Examples</a></li>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>In <a class="existingWikiWord" href="/nlab/show/measure+theory">measure theory</a>, measure spaces are used in the general theory of measure and <a class="existingWikiWord" href="/nlab/show/integration">integration</a>, somewhat analogous to the role played by <a class="existingWikiWord" href="/nlab/show/topological+spaces">topological spaces</a> in the study of continuity.</p>
+
+<p>For the general theory of measure spaces, we first need a <em><a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X, \Sigma)</annotation></semantics></math>, that is a <a class="existingWikiWord" href="/nlab/show/set">set</a> equipped with a collection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> of <strong>measurable sets</strong> complete under certain operations. Then this becomes a measure space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Σ</mi><mo>,</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X, \Sigma, \mu)</annotation></semantics></math> by throwing in a <a class="existingWikiWord" href="/nlab/show/function">function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> to a space of values (such as the <a class="existingWikiWord" href="/nlab/show/real+line">real line</a>) that gets along with the set-theoretic operations that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> has. If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math> is a measurable set, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(E)</annotation></semantics></math> is called the <strong>measure</strong> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>.</p>
+
+<h2 id="notation">Notation</h2>
+
+<p>The original notation for an <a class="existingWikiWord" href="/nlab/show/integral">integral</a> (going back to <a class="existingWikiWord" href="/nlab/show/Gottfried+Leibniz">Gottfried Leibniz</a>) was</p>
+<div class="maruku-equation" id="eq:Leibniz"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mo>∫</mo> <mi>a</mi> <mi>b</mi></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">  \int_a^b f(x) \,\mathrm{d}x </annotation></semantics></math></div>
+<p>(where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x)</annotation></semantics></math> would be replaced by some formula in the variable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>). In modern measure theory, we can now understand this as the integral of the <a class="existingWikiWord" href="/nlab/show/measurable+function">measurable function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> on the <a class="existingWikiWord" href="/nlab/show/interval">interval</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[a,b]</annotation></semantics></math> relative to <a class="existingWikiWord" href="/nlab/show/Lebesgue+measure">Lebesgue measure</a>. If we wish to generalise from Lebesgue measure to an arbitrary measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> and generalise from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[a,b]</annotation></semantics></math> to an arbitrary measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, then we can write</p>
+<div class="maruku-equation" id="eq:full"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∫</mo> <mrow><mi>x</mi><mo>∈</mo><mi>S</mi></mrow></msub><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>μ</mi><mo stretchy="false">(</mo><mi mathvariant="normal">d</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">  \int_{x\in{S}} f(x) \,\mu(\mathrm{d}x) </annotation></semantics></math></div>
+<p>instead. Now, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is not given by a formula but rather explicitly named, then there is no need for the dummy variable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>, so we should write</p>
+<div class="maruku-equation" id="eq:simple"><span class="maruku-eq-number">(3)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∫</mo> <mi>S</mi></msub><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>.</mo></mrow><annotation encoding="application/x-tex">  \int_S f \,\mu .</annotation></semantics></math></div>
+<p>However, it has been more common to keep the symbol ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">d</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}</annotation></semantics></math>’ and write</p>
+<div class="maruku-equation" id="eq:excessive"><span class="maruku-eq-number">(4)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∫</mo> <mi>S</mi></msub><mi>f</mi><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>μ</mi><mo>.</mo></mrow><annotation encoding="application/x-tex">  \int_S f \,\mathrm{d}\mu .</annotation></semantics></math></div>
+<p>(Note that ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">d</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}</annotation></semantics></math>’ can be read as ‘with respect to’ in both <a class="maruku-eqref" href="#eq:Leibniz">(1)</a> and <a class="maruku-eqref" href="#eq:excessive">(4)</a>, although meaning different things; in the former case, it indicates the dummy variable, while in the latter case, it indicates the measure.) This notation then leads to replacing <a class="maruku-eqref" href="#eq:full">(2)</a> with</p>
+<div class="maruku-equation" id="eq:switched"><span class="maruku-eq-number">(5)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∫</mo> <mrow><mi>x</mi><mo>∈</mo><mi>S</mi></mrow></msub><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>μ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">  \int_{x\in{S}} f(x) \,\mathrm{d}\mu(x) .</annotation></semantics></math></div>
+<p>This last notation, however, hides the fact that integrating a function with respect to a measure is a way of multiplying a function by a measure to get a new measure; the integral of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is simply the measure of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mi>μ</mi></mrow><annotation encoding="application/x-tex">f \mu</annotation></semantics></math>, as can be seen in <a class="maruku-eqref" href="#eq:simple">(3)</a>. Compare also notation for <a class="existingWikiWord" href="/nlab/show/Radon-Nikodym+derivatives">Radon-Nikodym derivatives</a>.</p>
+
+<p>It is also possible to take the entire expression ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">d</mi><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}\mu</annotation></semantics></math>’ as the name of the measure, writing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">d</mi><mi>μ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{d}\mu(A)</annotation></semantics></math> even where the common notation is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(A)</annotation></semantics></math>. In that case, the common expression <a class="maruku-eqref" href="#eq:excessive">(4)</a> is literally the same as (what would otherwise be) <a class="maruku-eqref" href="#eq:simple">(3)</a>, although <a class="maruku-eqref" href="#eq:switched">(5)</a> is not quite the same as (what would otherwise be) <a class="maruku-eqref" href="#eq:full">(2)</a>.</p>
+
+<p>We will use <a class="maruku-eqref" href="#eq:simple">(3)</a> below (although other forms may well be found on other pages).</p>
+
+<p>See <a href="http://groups.google.com/group/sci.math.research/browse_thread/thread/e28593bfd6b83aac/67a61d19e8f4d57f">Usenet discussion</a>, and contrast <a class="maruku-eqref" href="#eq:switched">(5)</a> with the <a href="https://en.wikipedia.org/wiki/Stieltjes_integral">Stieltjes integral</a>. (The point is that it is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}x</annotation></semantics></math>, not just <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>, that gives us the relevant measure in <a class="maruku-eqref" href="#eq:Leibniz">(1)</a>.) The notation <a class="maruku-eqref" href="#eq:simple">(3)</a> has also been used in an introductory graduate-level course by <a class="existingWikiWord" href="/nlab/show/John+Baez">John Baez</a>.</p>
+
+<p>There is also some variation in notation as to whether to use a roman ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">d</mi></mrow><annotation encoding="application/x-tex">\mathrm{d}</annotation></semantics></math>’ or an italic ‘<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="italic"><mi>d</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathit{d}</annotation></semantics></math>’; roman is more common in England and italic in America. But of course, that variation should not cause any difficulties!</p>
+
+<h2 id="definitions">Definitions</h2>
+
+<p>A <strong>measure space</strong> is a <a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a> equipped with a measure. There are many different kinds of measures; we start with the most specific and then consider generalisations. The motivating example is <a class="existingWikiWord" href="/nlab/show/Lebesgue+measure">Lebesgue measure</a> on the <a class="existingWikiWord" href="/nlab/show/unit+interval">unit interval</a>.</p>
+
+<h3 id="probability_measures">Probability measures</h3>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X, \Sigma)</annotation></semantics></math> be a measurable space. A <strong><a class="existingWikiWord" href="/nlab/show/probability+measure">probability measure</a></strong> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> (due to <a class="existingWikiWord" href="/nlab/show/Andrey+Kolmogorov">Andrey Kolmogorov</a>) is a <a class="existingWikiWord" href="/nlab/show/function">function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> from the collection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> of measurable sets to the <a class="existingWikiWord" href="/nlab/show/unit+interval">unit interval</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math> such that:</p>
+
+<ol>
+<li>The measure of the entire space is <a class="existingWikiWord" href="/nlab/show/one">one</a>: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\mu(X) = 1</annotation></semantics></math>;</li>
+
+<li>Countable additivity: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><msubsup><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow> <mn>∞</mn></msubsup><msub><mi>S</mi> <mi>i</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msubsup><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow> <mn>∞</mn></msubsup><mi>μ</mi><mo stretchy="false">(</mo><msub><mi>S</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(\bigcup_{i = 1}^{\infty} S_i) = \sum_{i=1}^{\infty} \mu(S_i)</annotation></semantics></math> whenever the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math> are mutually <a class="existingWikiWord" href="/nlab/show/disjoint+sets">disjoint</a>.</li>
+</ol>
+
+<p>(Part of the latter condition is the requirement that the sum on the right-hand side must converge.)</p>
+
+<p>It is sometimes stated (but in fact follows from the above) that:</p>
+
+<ul>
+<li>Finitary additivity: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo>∪</mo><mi>T</mi><mo stretchy="false">)</mo><mo>=</mo><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>+</mo><mi>μ</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(S \cup T) = \mu(S) + \mu(T)</annotation></semantics></math> whenever <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> are disjoint.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is increasing: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>μ</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(A) \leq \mu(B)</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊆</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \subseteq B</annotation></semantics></math>.</li>
+
+<li>The measure of the <a class="existingWikiWord" href="/nlab/show/empty+set">empty set</a> is <a class="existingWikiWord" href="/nlab/show/zero">zero</a>: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>∅</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mu(\emptyset) = 0</annotation></semantics></math>;</li>
+</ul>
+
+<p>The first of these conditions will follow for all of the generalised notions of measure below, but the second usually will not. Related query discussion is archived <a href="http://www.math.ntnu.no/~stacey/Mathforge/nForum/comments.php?DiscussionID=2829&amp;Focus=28141#Comment_28141">here</a>.</p>
+
+<h3 id="generalizations">Generalizations</h3>
+
+<p>From now on, we drop the condition <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\mu(X)=1</annotation></semantics></math>; the next step is to generalize the <a class="existingWikiWord" href="/nlab/show/target">target</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>, as follows:</p>
+
+<ul>
+<li>Use <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>∞</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[0,\infty)</annotation></semantics></math> (instead of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math>) for a (finite) <strong>positive measure</strong>.</li>
+
+<li>Use <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>R</mi></mstyle><mo>=</mo><mrow><mo stretchy="false">]</mo><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn><mo>,</mo><mn>∞</mn></mrow><mo stretchy="false">[</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{R} = {]{-\infty,\infty}[}</annotation></semantics></math> for a (finite) <strong>signed measure</strong> (alias <strong>charge</strong>).</li>
+
+<li>Use <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> for a (finite) <strong>complex-valued measure</strong>.</li>
+
+<li>Use an arbitrary <a class="existingWikiWord" href="/nlab/show/topological+vector+space">topological vector space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> for a <strong>vector-valued measure</strong>.</li>
+
+<li>In principle, one could go further yet; <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> just needs an analogue of addition with a notion of infinitary sum (such as a <a class="existingWikiWord" href="/nlab/show/topological+abelian+group">topological abelian group</a> has). But until someone suggests a useful example, we will leave this to the <a class="existingWikiWord" href="/nlab/show/centipede+mathematics">centipedes</a>.</li>
+</ul>
+
+<p>We define an <strong>infinite measure</strong> by replacing the domain of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> by an ideal <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Sigma'</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> such that the following saturation condition is satisfied: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>S</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\{S_i\}_{i\in I}</annotation></semantics></math> is a disjoint family of elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Sigma'</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mo stretchy="false">|</mo><mi>μ</mi><mo stretchy="false">|</mo><mo stretchy="false">(</mo><msub><mi>S</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum_{i\in I}|\mu|(S_i)</annotation></semantics></math> exists (and is finite), then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>S</mi> <mi>i</mi></msub><mo>∈</mo><mi>Σ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\bigcup_{i\in I}S_i\in\Sigma'</annotation></semantics></math>. The countable additivity condition should now be modified to require <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>S</mi> <mi>i</mi></msub><mo>∈</mo><mi>Σ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\bigcup_{i\in I}S_i\in\Sigma'</annotation></semantics></math>.</p>
+
+<p>An infinite measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is <strong>semifinite</strong> if for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>∈</mo><mi>Σ</mi><mo>∖</mo><mi>Σ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">S\in\Sigma\setminus\Sigma'</annotation></semantics></math> there is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>∈</mo><mi>Σ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">T\in\Sigma'</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>⊂</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">T\subset S</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mu(T)\gt0</annotation></semantics></math>. The <a class="existingWikiWord" href="/nlab/show/Radon-Nikodym+theorem">Radon-Nikodym theorem</a> shows that semifinite complex-valued measures that are absolutely continuous with respect to some fixed <a class="existingWikiWord" href="/nlab/show/localizable+measure">localizable measure</a> form a <a class="existingWikiWord" href="/nlab/show/free+module">free module</a> over the <a class="existingWikiWord" href="/nlab/show/algebra">algebra</a> of complex-valued measurable functions (not necessarily bounded).</p>
+
+<p>Some further terms:</p>
+
+<ul>
+<li>We can combine conditions; for example a <strong>finite positive measure</strong> takes values in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">[</mo><mrow><mn>0</mn><mo>,</mo><mn>∞</mn></mrow><mo stretchy="false">[</mo></mrow></mrow><annotation encoding="application/x-tex">{[{0,\infty}[}</annotation></semantics></math>.</li>
+
+<li>A measure is <strong>bounded</strong> if, for some (finite) real number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo stretchy="false">|</mo><mo>≤</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">|\mu(S)| \leq M</annotation></semantics></math> for every measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>. (This requires that the target of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> have a real-valued notion of absolute value or norm, so a vector-valued measure should be valued in a <a class="existingWikiWord" href="/nlab/show/Banach+space">Banach space</a> or something similar.)</li>
+
+<li>A measure is <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-finite</strong> if every measurable set is a union of countably many sets with finite measure.</li>
+</ul>
+
+<p>Remarks:</p>
+
+<ul>
+<li>The property that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is increasing holds for all positive measures but may fail for others.</li>
+
+<li>A positive measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> that satisfies <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\mu(X)=1</annotation></semantics></math> must be a probability measure as defined earlier; that is, it satisfies <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\mu(S) \leq 1</annotation></semantics></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>.</li>
+
+<li>When <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math> is allowed as a value of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>, then the requirement in (3) that the sum converges should be interpreted in this light; that is, the sum may diverge to infinity. (For a positive measure, therefore, the convergence criterion is vacuous in <a class="existingWikiWord" href="/nlab/show/classical+mathematics">classical mathematics</a>.)</li>
+
+<li>Notice that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math> is not allowed as a value for a signed measure. It would work just as well to allow <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math> and forbid <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>. It is even possible to allow both, but this is a little trickier (because of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn><mo>+</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">-\infty + \infty</annotation></semantics></math>), so we deal with it later (at the end of this subsection).</li>
+</ul>
+
+<p>Another possibility is to generalize the <a class="existingWikiWord" href="/nlab/show/source">source</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>; instead of using a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-algebra on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, we could use a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-ring or even a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math>-ring. These versions are mostly more about changing the definition of <a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a>, so refer there for details of the definitions; however, we note that (3), when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> is a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math>-ring, should state that the left-hand side exists (that is, the union is measurable) if the right-hand side converges. Generalizing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> in this way is complementary to generalizing the target above; in particular it may allow one to avoid dealing with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>. For example, while Lebesgue measure is only a positive measure on a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-algebra, it is a <em>finite</em> positive measure on the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math>-ring of bounded measurable sets. Indeed, every signed measure gives rise to finite measure on its <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math>-ring of finitely measurable sets (as defined below); conversely, every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-finite measure can be recovered from this by imposing (3) in all cases.</p>
+
+<p>Yet another possibility is to drop countable additivity, replacing it with finite additivity. The result is a <strong>finitely additive measure</strong>, sometimes called a <strong>charge</strong> to avoid the <a class="existingWikiWord" href="/nlab/show/red+herring+principle">red herring principle</a>; in contrast, the usual sort of measure may be called <strong>countably additive</strong>. For a charge, one could replace <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> with an algebra (or even a ring) of sets; again see <a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a> for these definitions.</p>
+
+<p>Finally, an <strong>extended measure</strong> takes values in the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn><mo>,</mo><mn>∞</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-\infty,\infty]</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/extended+real+numbers">extended real numbers</a>. Here we have the problem that, even when considering finite additivity, we might have to add <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math>. While we might simply require that this never happens (so that at least one of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(S)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(T)</annotation></semantics></math> must be finite if they have opposite signs and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>∩</mo><mi>T</mi><mo>=</mo><mi>∅</mi></mrow><annotation encoding="application/x-tex">S \cap T = \empty</annotation></semantics></math>), this does not include some examples that we want (and in fact it would follow that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math> cannot both be values of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> after all). To deal with this, we define an extended measure to be a formal difference <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>μ</mi> <mo>+</mo></msup><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mi>μ</mi> <mo>−</mo></msup></mrow><annotation encoding="application/x-tex">\mu^+ - \mu^-</annotation></semantics></math> of positive measures; <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>μ</mi> <mo>+</mo></msup><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>−</mo><msup><mi>μ</mi> <mo>−</mo></msup><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(S) = \mu^+(S) - \mu^-(S)</annotation></semantics></math> whenever this is not of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn><mo>−</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty - \infty</annotation></semantics></math> and is otherwise undefined. Note that the set of extended measures on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/quotient+set">quotient set</a> of the set of pairs of positive measures; we say that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo>=</mo><mi>ν</mi></mrow><annotation encoding="application/x-tex">\mu = \nu</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>=</mo><mi>ν</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(S) = \nu(S)</annotation></semantics></math> whenever either side is defined, that is if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ν</mi></mrow><annotation encoding="application/x-tex">\nu</annotation></semantics></math> are the same as <a class="existingWikiWord" href="/nlab/show/partial+functions">partial functions</a> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn><mo>,</mo><mn>∞</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-\infty,\infty]</annotation></semantics></math>.</p>
+
+<p>Any extended measure restricts to an infinite signed measure, taking <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo>′</mo><mo>⊂</mo><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma'\subset\Sigma</annotation></semantics></math> to be the set of elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> with a finite measure. Vice versa, an infinite signed measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> canonically extends to an extended measure: we can define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mo>+</mo></msub></mrow><annotation encoding="application/x-tex">\mu_+</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mo>−</mo></msub></mrow><annotation encoding="application/x-tex">\mu_-</annotation></semantics></math> as usual and then take the formal difference <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>μ</mi> <mo>+</mo></msub><mo lspace="verythinmathspace" rspace="0em">−</mo><msub><mi>μ</mi> <mo>−</mo></msub></mrow><annotation encoding="application/x-tex">\mu_+-\mu_-</annotation></semantics></math>.</p>
+
+<h3 id="constructive_theory">Constructive theory</h3>
+
+<p>In Henry Cheng's <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive</a> theory of measure, the definition of <a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a> becomes more complicated; the main point is that a single measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is replaced by a <em>complemented pair</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,T)</annotation></semantics></math>. Once that is understood, very little needs to be changed to define a measure space.</p>
+
+<p>In the requirements (1–3), the constants <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>∅</mi></mrow><annotation encoding="application/x-tex">\empty</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and the operation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∪</mo></mrow><annotation encoding="application/x-tex">\union</annotation></semantics></math> are interpreted by formal <a class="existingWikiWord" href="/nlab/show/de+Morgan+duality">de Morgan duality</a>, as explained at <a class="existingWikiWord" href="/nlab/show/Cheng+measurable+space">Cheng measurable space</a>. The convergence requirement in (3) should be interpreted in the strong sense of located convergence and is no longer trivial for positive measures. We must add a further requirement to enforce the idea that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(S,T)</annotation></semantics></math> is the measure of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> alone, as follows:</p>
+
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo><mo>=</mo><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(S,T) = \mu(S,U)</annotation></semantics></math> whenever <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,T)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,U)</annotation></semantics></math> are both complemented pairs.</li>
+</ul>
+
+<p>In general, a <em>measurable set</em> is any set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(S,T)</annotation></semantics></math> is a complemented pair for some set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>; the term ‘measurable set’ in the classical theory should be interpreted as either ‘mesurable set’ or ‘complemented pair’ in the constructive theory, depending on context. Usually both interpretations will actually work, but often only the first set of the pair will matter, thanks to the axiom above.</p>
+
+<p>We will mention other occasional fine points in the constructive theory when they occur; the main outline does not change.</p>
+
+<div class="query">
+<p>I need to check Bishop &amp; Bridges to see if there are any other changes, but I don't think so; that is, I went through the following, and it all seems correct as it is. —Toby</p>
+</div>
+
+<h3 id="measures_on_a_frame">Measures on a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-frame</h3>
+
+<p>In measure theory, a <strong>measure</strong> on a <a class="existingWikiWord" href="/nlab/show/sigma-frame"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>σ</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">\sigma</annotation>
+  </semantics>
+</math>-frame</a> or more generally a <a class="existingWikiWord" href="/nlab/show/sigma-complete+lattice"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>σ</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">\sigma</annotation>
+  </semantics>
+</math>-complete</a> <a class="existingWikiWord" href="/nlab/show/distributive+lattice">distributive lattice</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mo>≤</mo><mo>,</mo><mo>⊥</mo><mo>,</mo><mo>∨</mo><mo>,</mo><mo>⊤</mo><mo>,</mo><mo>∧</mo><mo>,</mo><mo lspace="thinmathspace" rspace="thinmathspace">⋁</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(L, \leq, \bot, \vee, \top, \wedge, \Vee)</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/valuation+%28measure+theory%29">valuation</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo>:</mo><mi>L</mi><mo>→</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>∞</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mu:L \to [0, \infty]</annotation></semantics></math> such that the elements are mutually disjoint and the probability valuation is denumerably/countably additive</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∀</mo><mi>s</mi><mo>∈</mo><msup><mi>L</mi> <mi>ℕ</mi></msup><mo>.</mo><mo>∀</mo><mi>m</mi><mo>∈</mo><mi>ℕ</mi><mo>.</mo><mo>∀</mo><mi>n</mi><mo>∈</mo><mi>ℕ</mi><mo>.</mo><mo stretchy="false">(</mo><mi>m</mi><mo>≠</mo><mi>n</mi><mo stretchy="false">)</mo><mo>∧</mo><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo><mo>∧</mo><mi>s</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall s\in L^\mathbb{N}. \forall m \in \mathbb{N}. \forall n \in \mathbb{N}. (m \neq n) \wedge (s(m) \wedge s(n) = \bot)</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∀</mo><mi>s</mi><mo>∈</mo><msup><mi>L</mi> <mi>ℕ</mi></msup><mo>.</mo><mi>μ</mi><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">⋁</mo> <mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi></mrow></munder><mi>s</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi></mrow></munder><mi>μ</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall s\in L^\mathbb{N}. \mu(\Vee_{n:\mathbb{N}} s(n)) = \sum_{n:\mathbb{N}} \mu(s(n))</annotation></semantics></math></div>
+<h3 id="subsidiary_definitions">Subsidiary definitions</h3>
+
+<p>Given a measure space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Σ</mi><mo>,</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X,\Sigma,\mu)</annotation></semantics></math>, a <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-null <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>-measurable set</strong> is a measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mu(S) = 0</annotation></semantics></math> whenever <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>⊆</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">S \subseteq N</annotation></semantics></math> is measurable; a <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/null+set">null set</a></strong> is any subset of a null measurable set. In a positive measure space, we don't have to bother with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>; <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math> will be a null measurable set as long as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mu(N) = 0</annotation></semantics></math>.</p>
+
+<p>A <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-full <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>-measurable set</strong> is a measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>=</mo><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo>∩</mo><mi>F</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(S) = \mu(S \cap F)</annotation></semantics></math> for every measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>; a <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/full+set">full set</a></strong> is any superset of a full measurable set. In a probability measure space, we don't have to bother with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>; <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> will be a full measurable set as long as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\mu(F) = 1</annotation></semantics></math>. Classically, a full set is precisely the <a class="existingWikiWord" href="/nlab/show/complement">complement</a> of a null set, but this doesn't hold in the constructive theory.</p>
+
+<p>A property of elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> holds <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-almost everywhere</strong> if the set of values where it holds is full.</p>
+
+<p>A measure is <strong>complete</strong> if every full set is measurable. We may form the <strong>completion</strong> of a measure space by accepting as a measurable set the intersection of any set and a full set; these <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable sets</strong> will automatically form a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-algebra (or whatever <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> originally was). Classically, a measure is complete if and only if every null set is measurable and a set is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable if and only if it is the <a class="existingWikiWord" href="/nlab/show/symmetric+difference">symmetric difference</a> between a measurable set and a null set.</p>
+
+<p>A <strong>finitely <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable set</strong> is a measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mu(S)</annotation></semantics></math> is finite whenever <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>⊆</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">S \subseteq M</annotation></semantics></math> is measurable; a <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-finitely <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable set</strong> is any union of countably many finitely measurable sets. Again, we don't have to bother with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> in a positive measure space. Note that a measure space is (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>)-finite if and only if every measurable set is (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>)-finitely measurable. The finitely measurable sets form a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math>-ring, and the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-finitely measurable sets form a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>-ring.</p>
+
+<p>Recall that a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/measurable+function">measurable function</a> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X,\Sigma)</annotation></semantics></math> to some other measurable space is any function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> such that the <a class="existingWikiWord" href="/nlab/show/preimage">preimage</a> under <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> of a measurable set is always measurable (or something more complicated in the constructive theory). Now that we have a measure space, let a <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable function</strong> be a <a class="existingWikiWord" href="/nlab/show/partial+function">partial function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to some other measurable space such that the domain of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is full and the preimage under <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> of a measurable set is always <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable (that is measurable in the completion of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>), and let two such functions be <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-equivalent</strong> if their <a class="existingWikiWord" href="/nlab/show/equaliser">equaliser</a> is a full set. We are really interested in the <a class="existingWikiWord" href="/nlab/show/quotient+set">quotient set</a> under this equivalence and so identify equivalent <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable functions. Classically, every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable function is equivalent to some (total) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>-measurable function, so the definition is simpler in that case; however, partial functions still come up naturally in the classical theory, so it can be convenient to allow them rather than (as is usually done in a rigorous treatment) systematically replacing them with total functions.</p>
+
+<p>A <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-integrable function</strong> is a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> such that the integral <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∫</mo> <mi>S</mi></msub><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi></mrow><annotation encoding="application/x-tex">\int_S f \,\mu</annotation></semantics></math> (as defined below) exists for every measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>; it is enough to check <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>=</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">S = X</annotation></semantics></math>. Equivalently, we may say that it is a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> such that the extended measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mi>μ</mi></mrow><annotation encoding="application/x-tex">f \mu</annotation></semantics></math> (also defined below) is actually a finite measure. (In any case, we get a finite measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mi>μ</mi></mrow><annotation encoding="application/x-tex">f \mu</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is integrable.)</p>
+
+<h3 id="integration">Integration</h3>
+
+<p>In the following, ‘measurable’ will mean <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-measurable. That is, we assume that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is complete and identify <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>-equivalent functions. We will also assume that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is a positive measure until I make sure of what must be done to generalise.</p>
+
+<p>Given a measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math>, a measurable set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, and a measurable function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>, we will define the integral</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∫</mo> <mi>S</mi></msub><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi></mrow><annotation encoding="application/x-tex"> \int_S f \,\mu </annotation></semantics></math></div>
+<p>(see <a href="#notation">above</a> for variations in notation) in stages, from the simplest form of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> to the most arbitrary.</p>
+
+<p>Each measurable subset <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">S \subseteq X</annotation></semantics></math> induces a measurable <a class="existingWikiWord" href="/nlab/show/characteristic+function">characteristic function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>χ</mi> <mi>S</mi></msub><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><msub><mi>ℝ</mi> <mo>+</mo></msub></mrow><annotation encoding="application/x-tex">\chi_S\colon X \to \mathbb{R}_+</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>χ</mi> <mi>S</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\chi_S(x) = 1</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">x \in S</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>χ</mi> <mi>S</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\chi_S(x) = 0</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mo>¬</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">x \in \neg{S}</annotation></semantics></math>. (In the constructive theory, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is a complemented pair, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>χ</mi> <mi>S</mi></msub></mrow><annotation encoding="application/x-tex">\chi_S</annotation></semantics></math> is a partial function with a full domain, so <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>χ</mi> <mi>S</mi></msub><mi>f</mi></mrow><annotation encoding="application/x-tex">\chi_S f</annotation></semantics></math> is still a measurable function as defined above.) In general, we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∫</mo> <mi>S</mi></msub><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>=</mo><msub><mo>∫</mo> <mi>X</mi></msub><msub><mi>χ</mi> <mi>S</mi></msub><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>,</mo></mrow><annotation encoding="application/x-tex"> \int_S f \,\mu = \int_X \chi_S f \,\mu ,</annotation></semantics></math></div>
+<p>so from now on we will assume that we are integrating over all of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> (and drop the subscript).</p>
+
+<p>A positive <strong><a class="existingWikiWord" href="/nlab/show/simple+function">simple function</a></strong> is a finite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℝ</mi> <mo>+</mo></msub></mrow><annotation encoding="application/x-tex">\mathbb{R}_+</annotation></semantics></math>-linear combination of measurable characteristic functions; the first form of integral that we define is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>n</mi></mrow></munder><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>χ</mi> <mrow><msub><mi>S</mi> <mi>i</mi></msub></mrow></msub><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>n</mi></mrow></munder><msub><mi>a</mi> <mi>i</mi></msub><mi>μ</mi><mo stretchy="false">(</mo><msub><mi>S</mi> <mi>i</mi></msub><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex"> \int \sum_{1 \leq i \leq n} a_i \chi_{S_i} \,\mu = \sum_{1 \leq i \leq n} a_i \mu(S_i) .</annotation></semantics></math></div>
+<p>The integral is extended to all measurable functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>∞</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">f\colon X \to [0, \infty]</annotation></semantics></math> by the rule</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>=</mo><mi>sup</mi><mo stretchy="false">{</mo><mo>∫</mo><mi>s</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><mspace width="thickmathspace"></mspace><mn>0</mn><mo>≤</mo><mi>s</mi><mo>≤</mo><mi>f</mi><mo>,</mo><mi>s</mi><mspace width="thickmathspace"></mspace><mi>simple</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex"> \int f \,\mu = \sup \{ \int s \,\mu \;|\; 0 \leq s \leq f, s\; simple \} </annotation></semantics></math></div>
+<p>if this <a class="existingWikiWord" href="/nlab/show/supremum">supremum</a> converges. Classically, the integral either converges or diverges to infinity, so <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi></mrow><annotation encoding="application/x-tex">\int f \,\mu</annotation></semantics></math> exists in some sense in any case; the possibilities are more complicated constructively.</p>
+
+<p>For any measurable function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn><mo>,</mo><mn>∞</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">f\colon X \to [-\infty, \infty]</annotation></semantics></math>, define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>+</mo></msub></mrow><annotation encoding="application/x-tex">f_+</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo lspace="verythinmathspace" rspace="0em">−</mo></msub></mrow><annotation encoding="application/x-tex">f_{-}</annotation></semantics></math> by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>+</mo></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>max</mi><mo stretchy="false">{</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>,</mo><mn>0</mn><mo stretchy="false">}</mo><mo>,</mo><mspace width="2em"></mspace><msub><mi>f</mi> <mo lspace="verythinmathspace" rspace="0em">−</mo></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>max</mi><mo stretchy="false">{</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>,</mo><mn>0</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex"> f_+(x) = \max\{f(x), 0\}, \qquad f_{-}(x) = \max\{-f(x), 0\} </annotation></semantics></math></div>
+<p>so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>=</mo><msub><mi>f</mi> <mo>+</mo></msub><mo lspace="verythinmathspace" rspace="0em">−</mo><msub><mi>f</mi> <mo lspace="verythinmathspace" rspace="0em">−</mo></msub></mrow><annotation encoding="application/x-tex">f = f_+ - f_{-}</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>f</mi><mo stretchy="false">|</mo></mrow><mo>=</mo><msub><mi>f</mi> <mo>+</mo></msub><mo lspace="verythinmathspace" rspace="0em">+</mo><msub><mi>f</mi> <mo lspace="verythinmathspace" rspace="0em">−</mo></msub></mrow><annotation encoding="application/x-tex">{|f|} = f_+ + f_{-}</annotation></semantics></math>. Then the final definition is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>=</mo><mo>∫</mo><msub><mi>f</mi> <mo lspace="verythinmathspace" rspace="0em">+</mo></msub><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>−</mo><mo>∫</mo><msub><mi>f</mi> <mo lspace="verythinmathspace" rspace="0em">−</mo></msub><mspace width="thinmathspace"></mspace><mi>μ</mi></mrow><annotation encoding="application/x-tex"> \int f \,\mu = \int f_{+} \,\mu - \int f_{-} \,\mu </annotation></semantics></math></div>
+<p>if both integrals on the right converge. Classically, the other possibilities are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn><mo>−</mo><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty - \infty</annotation></semantics></math>; not much can be done with the latter.</p>
+
+<p>A measurable function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is <strong>integrable</strong> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> if this integral converges. It can be proved that all of the definitions above are consistent; that is, if the final definition is applied to a simple function, then it agrees with the original definition.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> takes values in the field <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\mathbb{C}</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/complex+numbers">complex numbers</a> or in some more general <a class="existingWikiWord" href="/nlab/show/Banach+space">Banach space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>, then we can still ask whether <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>f</mi><mo stretchy="false">|</mo></mrow></mrow><annotation encoding="application/x-tex">{|f|}</annotation></semantics></math> is integrable. If it is, then we say that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is <strong>absolutely integrable</strong>. We can then define the integral of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>; we always have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">‖</mo><mo>∫</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo stretchy="false">‖</mo></mrow><mo>≤</mo><mo>∫</mo><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>.</mo></mrow><annotation encoding="application/x-tex"> {\|\int f \,\mu\|} \leq \int {\|f\|} \,\mu .</annotation></semantics></math></div>
+<p>This integral is easy to define if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> has a basis; for example, a measurable complex-valued function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">f\colon X \to \mathbb{C}</annotation></semantics></math> is integrable iff both its real and imaginary parts are integrable, and we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>=</mo><mo>∫</mo><mi>ℜ</mi><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>+</mo><mi mathvariant="normal">i</mi><mo>∫</mo><mi>ℑ</mi><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>.</mo></mrow><annotation encoding="application/x-tex"> \int f \,\mu = \int \Re{f} \,\mu + \mathrm{i} \int \Im{f} \,\mu .</annotation></semantics></math></div>
+<div class="query">
+<p>I need to check <a class="existingWikiWord" href="/nlab/show/HAF">HAF</a> for more details here in the general case. In particular, something can be integrable without being absolutely integrable (although not if it's complex-valued, of course) or indeed even without being valued in a (pseudo)normed space.</p>
+</div>
+
+<p>The vector space of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-valued integrable functions is itself a Banach space, using the norm</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">‖</mo><mi>f</mi><msub><mo stretchy="false">‖</mo> <mn>1</mn></msub></mrow><mo>≔</mo><mo>∫</mo><mrow><mo stretchy="false">‖</mo><mi>f</mi><mo stretchy="false">‖</mo></mrow><mspace width="thinmathspace"></mspace><mi>μ</mi><mo>.</mo></mrow><annotation encoding="application/x-tex"> {\|f\|_1} \coloneqq \int {\|f\|} \,\mu .</annotation></semantics></math></div>
+<p>Note that we must use the notion of measurable function as an equivalence class of functions to get a Banach space here; otherwise we have only a pre-Banach space (that is, a complete pseudonormed vector space).</p>
+
+<p>This Banach space is called a <strong><a class="existingWikiWord" href="/nlab/show/Lebesgue+space">Lebesgue space</a></strong> and is denoted <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>1</mn></msup><mo stretchy="false">(</mo><mi>μ</mi><mo>,</mo><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^1(\mu,V)</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>1</mn></msup><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^1(X,V)</annotation></semantics></math>, or just <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>1</mn></msup></mrow><annotation encoding="application/x-tex">L^1</annotation></semantics></math>, depending on context. The default value of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> is usually either <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\mathbb{C}</annotation></semantics></math>, depending on the author. More general Lebesgue spaces of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mi>p</mi></msup></mrow><annotation encoding="application/x-tex">L^p</annotation></semantics></math> also exist; <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mi>p</mi></msup></mrow><annotation encoding="application/x-tex">L^p</annotation></semantics></math> precisely when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>f</mi><msup><mo stretchy="false">|</mo> <mi>p</mi></msup></mrow></mrow><annotation encoding="application/x-tex">{|f|^p}</annotation></semantics></math> is integrable, and we use</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">‖</mo><mi>f</mi><msub><mo stretchy="false">‖</mo> <mi>p</mi></msub></mrow><mo>≔</mo><mroot><mrow><mo>∫</mo><mrow><mo stretchy="false">‖</mo><mi>f</mi><msup><mo stretchy="false">‖</mo> <mi>p</mi></msup></mrow><mspace width="thinmathspace"></mspace><mi>μ</mi></mrow><mi>p</mi></mroot></mrow><annotation encoding="application/x-tex"> {\|f\|_p} \coloneqq \root p {\int {\|f\|^p} \,\mu} </annotation></semantics></math></div>
+<p>as the norm. (At least, this is so for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>∈</mo><mrow><mo stretchy="false">]</mo><mrow><mn>0</mn><mo>,</mo><mn>∞</mn></mrow><mo stretchy="false">[</mo></mrow></mrow><annotation encoding="application/x-tex">p \in {]{0,\infty}[}</annotation></semantics></math>; see <a class="existingWikiWord" href="/nlab/show/Lebesgue+space">Lebesgue space</a> for generalizations to other values of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>.)</p>
+
+<h2 id="the_algebra_of_measures">The algebra of measures</h2>
+
+<p>Note that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mi>μ</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>=</mo><mo>∫</mo><msub><mi>χ</mi> <mi>S</mi></msub><mi>f</mi><mspace width="thinmathspace"></mspace><mi>μ</mi></mrow><annotation encoding="application/x-tex"> (f \mu) (S) = \int \chi_S f \,\mu </annotation></semantics></math></div>
+<p>makes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mi>μ</mi></mrow><annotation encoding="application/x-tex">f \mu</annotation></semantics></math> into a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-valued measure whenever <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is an integrable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-valued function. When <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>∞</mn><mo>,</mo><mn>∞</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-\infty,\infty]</annotation></semantics></math>-valued and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is a signed measure, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is an extended measure which is finite iff <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is integrable. We have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mi>g</mi><mo stretchy="false">)</mo><mi>μ</mi><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>g</mi><mi>μ</mi><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex"> (f g) \mu = f (g \mu) .</annotation></semantics></math></div>
+<p>Thus integration can be seen as a way of multiplying a function by a measure to get another measure.</p>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/Radon-Nikodym+derivative">Radon-Nikodym derivative</a> is about reversing this (dividing two measures to get a function).</p>
+
+<p>Other topics: absolute continuity, etc. (Refer to &lt;http://tobybartels.name/notes/#Radon&gt;.)</p>
+
+<h2 id="noncommutative_measure_theory">Noncommutative measure theory</h2>
+
+<p>Every commutative <a class="existingWikiWord" href="/nlab/show/von+Neumann+algebra">von Neumann algebra</a> is isomorphic to the <a class="existingWikiWord" href="/nlab/show/Lebesgue+space">Lebesgue space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>∞</mn></msup><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>μ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^\infty(X,\mu)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is some measure (which is irrelevant) on a <a class="existingWikiWord" href="/nlab/show/localisable+measurable+space">localisable measurable space</a>, and this extends to a <a class="existingWikiWord" href="/nlab/show/dual+category">duality</a> between localisable measurable spaces and commutative von Neumann algebras. This is similar to the correspondence between commutative <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>C</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">C^*</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/C-star+algebra">algebras</a> and <a class="existingWikiWord" href="/nlab/show/locally+compact+Hausdorff+space">locally compact Hausdorff space</a>s, which is the central approach to <a class="existingWikiWord" href="/nlab/show/noncommutative+geometry">noncommutative geometry</a>. It is useful to exploit the intuition that the theory of (noncommutative) von Neumann algebras is a noncommutative analogue of classical measure theory.</p>
+
+<h2 id="examples">Examples</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/counting+measure">counting measure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Haar+measure">Haar measure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Borel+measure">Borel measure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Radon+measure">Radon measure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gaussian+measure">Gaussian measure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/spectral+measure">spectral measure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Wiener+measure">Wiener measure</a></p>
+</li>
+</ul>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p>The pointless version of the notion of measurable space is the notion of <em><a class="existingWikiWord" href="/nlab/show/measurable+locale">measurable locale</a></em>.</p>
+</li>
+
+<li>
+<p>In the context of <a class="existingWikiWord" href="/nlab/show/fiber+integration">fiber integration</a> in <a class="existingWikiWord" href="/nlab/show/generalized+cohomology">generalized cohomology</a>, the analog of a measure is an <a class="existingWikiWord" href="/nlab/show/orientation+in+generalized+cohomology">orientation in generalized cohomology</a>.</p>
+</li>
+
+<li>
+<p>The <a class="existingWikiWord" href="/nlab/show/density+of+a+subset">density of a subset</a> can be considered as taking the measure of sets normally considered to be not well behaved in measure theory, such as infinite subsets of the natural numbers.</p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<p>See the references at <em><a class="existingWikiWord" href="/nlab/show/measure+theory">measure theory</a></em>.</p>
+
+<p>For measures on <a class="existingWikiWord" href="/nlab/show/sigma-frame"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>σ</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">\sigma</annotation>
+  </semantics>
+</math>-frames</a>, see</p>
+
+<ul>
+<li>Alex Simpson, <a href="https://www.sciencedirect.com/science/article/pii/S0168007211001874">Measure, randomness and sublocales</a>.</li>
+</ul>
+
+<p>Discussion via <a class="existingWikiWord" href="/nlab/show/Boolean+toposes">Boolean toposes</a> is in</p>
+
+<ul>
+<li id="Jackson06">
+<p>Matthew Jackson, <em>A sheaf-theoretic approach to measure theory</em>, 2006. (<a href="http://www.andrew.cmu.edu/~awodey/students/jackson.pdf">pdf</a>)</p>
+</li>
+
+<li id="Henry14">
+<p><a class="existingWikiWord" href="/nlab/show/Simon+Henry">Simon Henry</a>, <em>Measure theory over boolean toposes</em>, Mathematical Proceedings of the Cambirdge Philosophical Society, 2016 (<a href="https://arxiv.org/abs/1411.1605">arXiv:1411.1605</a>)</p>
+</li>
+</ul>
+<div class="property">category: <a class="category_link" href="/nlab/all_pages/analysis">analysis</a></div></body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on June  9, 2022 at 08:52:11.
+    See the <a href="/nlab/history/measure+space" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/measure+space" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/3412/#Item_25">Discuss</a><span class="backintime"><a href="/nlab/revision/measure+space/49" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/measure+space" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/measure+space" accesskey="S" class="navlink" id="history" rel="nofollow">History (49 revisions)</a>
+  <a href="/nlab/show/measure+space/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/measure+space" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/measure+space" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

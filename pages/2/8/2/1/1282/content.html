@@ -1,0 +1,1329 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      limits and colimits by example in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      limits and colimits by example
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/11423/#Item_4" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="limits_and_colimits">Limits and colimits</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/limit">limits and colimits</a></strong></p>
+
+<h2 id="1categorical">1-Categorical</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/limit">limit and colimit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/limits+and+colimits+by+example">limits and colimits by example</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/commutativity+of+limits+and+colimits">commutativity of limits and colimits</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/small+limit">small limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/filtered+colimit">filtered colimit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/directed+colimit">directed colimit</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/sequential+colimit">sequential colimit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/sifted+colimit">sifted colimit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/connected+limit">connected limit</a>, <a class="existingWikiWord" href="/nlab/show/wide+pullback">wide pullback</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/preserved+limit">preserved limit</a>, <a class="existingWikiWord" href="/nlab/show/reflected+limit">reflected limit</a>, <a class="existingWikiWord" href="/nlab/show/created+limit">created limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/product">product</a>, <a class="existingWikiWord" href="/nlab/show/fiber+product">fiber product</a>, <a class="existingWikiWord" href="/nlab/show/base+change">base change</a>, <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a>, <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a>, <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a>, <a class="existingWikiWord" href="/nlab/show/cobase+change">cobase change</a>, <a class="existingWikiWord" href="/nlab/show/equalizer">equalizer</a>, <a class="existingWikiWord" href="/nlab/show/coequalizer">coequalizer</a>, <a class="existingWikiWord" href="/nlab/show/join">join</a>, <a class="existingWikiWord" href="/nlab/show/meet">meet</a>, <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a>, <a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a>, <a class="existingWikiWord" href="/nlab/show/direct+product">direct product</a>, <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/finite+limit">finite limit</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/exact+functor">exact functor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kan+extension">Kan extension</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Yoneda+extension">Yoneda extension</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/weighted+limit">weighted limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/end">end and coend</a></p>
+</li>
+</ul>
+
+<h2 id="2categorical">2-Categorical</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-limit">2-limit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/inserter">inserter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/isoinserter">isoinserter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/equifier">equifier</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/inverter">inverter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/PIE-limit">PIE-limit</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-pullback">2-pullback</a>, <a class="existingWikiWord" href="/nlab/show/comma+object">comma object</a></p>
+</li>
+</ul>
+
+<h2 id="1categorical_2">(∞,1)-Categorical</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-limit">(∞,1)-limit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-pullback">(∞,1)-pullback</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fiber+sequence">fiber sequence</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3 id="modelcategorical">Model-categorical</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+Kan+extension">homotopy Kan extension</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+limit">homotopy limit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+product">homotopy product</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+equalizer">homotopy equalizer</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+fiber">homotopy fiber</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mapping+cone">mapping cone</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+pullback">homotopy pullback</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+totalization">homotopy totalization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+end">homotopy end</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+colimit">homotopy colimit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coproduct">homotopy coproduct</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coequalizer">homotopy coequalizer</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+cofiber">homotopy cofiber</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mapping+cocone">mapping cocone</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+pushout">homotopy pushout</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+realization">homotopy realization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coend">homotopy coend</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/infinity-limits+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<p>This entry lists and discusses examples and special types of the <a class="existingWikiWord" href="/nlab/show/universal+constructions">universal constructions</a> called <em><a class="existingWikiWord" href="/nlab/show/limits">limits</a></em> and <em><a class="existingWikiWord" href="/nlab/show/colimits">colimits</a></em>.</p>
+
+<p>It starts with very elementary and simple examples and eventually passes to more sophisticated ones.</p>
+
+<p>For examples of the other kinds of <a class="existingWikiWord" href="/nlab/show/universal+constructions">universal constructions</a> see</p>
+
+<ul>
+<li>
+<p><em><a class="existingWikiWord" href="/nlab/show/examples+of+adjoint+functors">examples of adjoint functors</a></em></p>
+</li>
+
+<li>
+<p><em><a class="existingWikiWord" href="/nlab/show/examples+of+Kan+extensions">examples of Kan extensions</a></em></p>
+</li>
+</ul>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#limcoliminset'>Limits and colimits of sets</a></li>
+<ul>
+<li><a href='#limits'>Limits</a></li>
+<ul>
+<li><a href='#terminal_object'>Terminal object</a></li>
+<li><a href='#product'>Product</a></li>
+<li><a href='#equalizer'>Equalizer</a></li>
+<li><a href='#pullback'>Pullback</a></li>
+<li><a href='#general_limits'>General limits</a></li>
+</ul>
+<li><a href='#colimits'>Colimits</a></li>
+<ul>
+<li><a href='#initial_object'>Initial object</a></li>
+<li><a href='#coproduct'>Coproduct</a></li>
+<li><a href='#coequalizer'>Coequalizer</a></li>
+<li><a href='#pushout'>Pushout</a></li>
+<li><a href='#general_colimits'>General colimits</a></li>
+</ul>
+</ul>
+<li><a href='#OfTopologicalSpaces'>Limits and colimits of topological spaces</a></li>
+<li><a href='#limits_and_colimits_in_a_preordered_set'>Limits and colimits in a preordered set</a></li>
+<li><a href='#limits_and_colimits_in_functor_categories'>Limits and colimits in functor categories</a></li>
+<ul>
+<li><a href='#ColimitOfARepresentablefunctor'>Colimit of a representable functor</a></li>
+</ul>
+<li><a href='#examplesoflimits'>Examples of limits</a></li>
+<ul>
+<li><a href='#limitssimplediagrams'>Simple diagrams</a></li>
+<li><a href='#filteredlimits'>Filtered limits</a></li>
+<li><a href='#limitsintermsofotherops'>In terms of other operations</a></li>
+<li><a href='#limitsinpresheafcat'>Limits in presheaf categories</a></li>
+<li><a href='#limitsinundercat'>Limits in under-categories</a></li>
+</ul>
+<li><a href='#further_resources'>Further resources</a></li>
+</ul>
+</div>
+
+<h2 id="limcoliminset">Limits and colimits of sets</h2>
+
+<p>In the <a class="existingWikiWord" href="/nlab/show/category">category</a> <a class="existingWikiWord" href="/nlab/show/Set">Set</a> of <a class="existingWikiWord" href="/nlab/show/sets">sets</a>, the concepts of <a class="existingWikiWord" href="/nlab/show/limits">limits</a> and <a class="existingWikiWord" href="/nlab/show/colimits">colimits</a> reduce to the familiar operations of</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/cartesian+product">cartesian product</a> of sets;</li>
+
+<li><a class="existingWikiWord" href="/nlab/show/disjoint+union">disjoint union</a> of sets;</li>
+
+<li><a class="existingWikiWord" href="/nlab/show/subsets">subsets</a> defined by <a class="existingWikiWord" href="/nlab/show/equations">equations</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/quotient+sets">quotient sets</a> of <a class="existingWikiWord" href="/nlab/show/equivalence+relations">equivalence relations</a>.</li>
+</ul>
+
+<h3 id="limits">Limits</h3>
+
+<h4 id="terminal_object">Terminal object</h4>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> is the limit of the empty functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>∅</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">F: \emptyset \to Set</annotation></semantics></math>. So a <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math> is a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> such that there is a unique function from any set to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. This is given by any <a class="existingWikiWord" href="/nlab/show/singleton">singleton</a> set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{a\}</annotation></semantics></math>, where the unique function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi><mo>→</mo><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">Y \to \{a\}</annotation></semantics></math> from any set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> is the function that sends every element in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>.</p>
+
+<h4 id="product">Product</h4>
+
+<p>Given two sets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A, B</annotation></semantics></math>, the categorical <a class="existingWikiWord" href="/nlab/show/product">product</a> is the limit of the diagram (with no non-trivial maps)</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>A</mi></mtd> <mtd><mi>B</mi></mtd></mtr></mtable></mrow><mo>.</mo></mrow><annotation encoding="application/x-tex">
+\array{
+  A &amp; B
+}.
+
+</annotation></semantics></math></div>
+<p>This is given by the usual product of sets, which can be constructed as the set of <a class="existingWikiWord" href="/nlab/show/Kuratowski+pairs">Kuratowski pairs</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>×</mo><mi>B</mi><mo>=</mo><mo stretchy="false">{</mo><mo stretchy="false">{</mo><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo><mo>,</mo><mo stretchy="false">{</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">}</mo><mo stretchy="false">}</mo><mo>:</mo><mi>a</mi><mo>∈</mo><mi>A</mi><mo>,</mo><mi>b</mi><mo>∈</mo><mi>B</mi><mo stretchy="false">}</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  A \times B = \{ \{\{a\}, \{a, b\}\}: a \in A, b \in B\}.
+
+</annotation></semantics></math></div>
+<p>We tend to write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(a, b)</annotation></semantics></math> instead of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo><mo>,</mo><mo stretchy="false">{</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">}</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{\{a\}, \{a, b\}\}</annotation></semantics></math>.</p>
+
+<p>The projection maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub><mo>:</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\pi_1: A \times B \to A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>2</mn></msub><mo>:</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\pi_2: A \times B \to B</annotation></semantics></math> are given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo>,</mo><msub><mi>π</mi> <mn>2</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \pi_1(a, b) = a, \pi_2(a, b) = b.
+
+</annotation></semantics></math></div>
+<p>To see this satisfies the universal property of products, given any pair of maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">f: X \to A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">g: X \to B</annotation></semantics></math>, we obtain a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo><mo>:</mo><mi>X</mi><mo>→</mo><mi>A</mi><mo>×</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">(f, g): X \to A \times B</annotation></semantics></math> given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>,</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  (f, g)(x) = (f(x), g(x)).
+
+</annotation></semantics></math></div>
+<p>More generally, given a (possibility infinite) collection of sets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>A</mi> <mi>α</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\{A_\alpha\}_{\alpha \in I}</annotation></semantics></math>, the product of the discrete diagram consisting of these sets is the usual product <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>A</mi> <mi>α</mi></msub></mrow><annotation encoding="application/x-tex">\prod_{\alpha \in I} A_\alpha</annotation></semantics></math>. This can be constructed as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>A</mi> <mi>α</mi></msub><mo>=</mo><mrow><mo>{</mo><mi>f</mi><mo>:</mo><mi>I</mi><mo>→</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>α</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>A</mi> <mi>α</mi></msub><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>f</mi><mo stretchy="false">(</mo><mi>α</mi><mo stretchy="false">)</mo><mo>∈</mo><msub><mi>A</mi> <mi>α</mi></msub><mspace width="thickmathspace"></mspace><mtext> for all </mtext><mspace width="thickmathspace"></mspace><mi>α</mi><mo>∈</mo><mi>I</mi><mo>}</mo></mrow><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \prod_{\alpha \in I} A_\alpha = \left\{f: I \to \bigcup_{\alpha \in I} A_\alpha \mid f(\alpha) \in A_\alpha\;\text{ for all }\;\alpha \in I\right\}.
+
+</annotation></semantics></math></div>
+<h4 id="equalizer">Equalizer</h4>
+
+<p>Given a pair of functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>,</mo><mi>g</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f, g: X \to Y</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/equalizer">equalizer</a> is the limit of the diagram</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>X</mi></mtd> <mtd><munder><mover><mo>⇉</mo><mi>f</mi></mover><mi>g</mi></munder></mtd> <mtd><mi>Y</mi></mtd></mtr></mtable></mrow><mo>.</mo></mrow><annotation encoding="application/x-tex">
+\array{
+X &amp; \underset{g}{\overset{f}{\rightrightarrows}} &amp; Y
+}.
+
+</annotation></semantics></math></div>
+<p>The limit is given by a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">e: A \to X</annotation></semantics></math> such that given any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>:</mo><mi>B</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">a: B \to X</annotation></semantics></math>, it factors through <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> if and only if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>∘</mo><mi>a</mi><mo>=</mo><mi>g</mi><mo>∘</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">f \circ a = g \circ a</annotation></semantics></math>. In other words, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> factors through <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> if and only if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="0em" rspace="thinmathspace">im</mo><mi>a</mi><mo>⊆</mo><mo stretchy="false">{</mo><mi>x</mi><mo>∈</mo><mi>X</mi><mo>:</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\im a \subseteq \{x \in X: f(x) = g(x)\}</annotation></semantics></math>. Thus the limit of the diagram is given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>=</mo><mo stretchy="false">{</mo><mi>x</mi><mo>∈</mo><mi>X</mi><mo>:</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  A = \{x \in X: f(x) = g(x)\},
+
+</annotation></semantics></math></div>
+<p>and the map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">e: A \to X</annotation></semantics></math> is given by the inclusion.</p>
+
+<h4 id="pullback">Pullback</h4>
+
+<p>Given two maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">f: A \to C</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>B</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">g: B \to C</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> is the limit of the diagram</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mi>A</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mi>f</mi></mpadded></msup></mtd></mtr> <mtr><mtd><mi>B</mi></mtd> <mtd><munder><mo>→</mo><mi>g</mi></munder></mtd> <mtd><mi>C</mi></mtd></mtr></mtable></mrow><mo>.</mo></mrow><annotation encoding="application/x-tex">
+\array{
+  &amp; &amp; A\\
+  &amp; &amp; \downarrow^\mathrlap{f}\\
+  B &amp; \underset{g}{\to} &amp; C
+}.
+
+</annotation></semantics></math></div>
+<p>This limit is given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo>:</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \{(a, b) \in A \times B: f(a) = g(b)\},
+
+</annotation></semantics></math></div>
+<p>with the maps to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> given by the projections.</p>
+
+<p>While the definition of a pullback is symmetric in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>, it is usually convenient to think of this as pulling back <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> (or the other way round). This has more natural interpretations in certain special cases.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>B</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">g: B \to C</annotation></semantics></math> is the inclusion of a subset (ie. is a <a class="existingWikiWord" href="/nlab/show/monomorphism">monomorphism</a>), then the pullback of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> is given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mi>a</mi><mo>∈</mo><mi>A</mi><mo>:</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>B</mi><mo stretchy="false">}</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \{a \in A: f(a) \in B\}.
+
+</annotation></semantics></math></div>
+<p>So this is given by restricting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> to the elements that are mapped into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
+
+<p>Further, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">f: A \to C</annotation></semantics></math> is <em>also</em> the inclusion fo a subset, so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> are both subobjects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, then the above formula tells us that the pullback is simply the intersection of the two subsets.</p>
+
+<p>Alternatively, we can view the map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">f: A \to C</annotation></semantics></math> as a collection of sets indexed by elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, where the set indexed by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">c \in C</annotation></semantics></math> is given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mi>c</mi></msub><mo>=</mo><msup><mi>f</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A_c = f^{-1}(c)</annotation></semantics></math>. Under this interpretation, pulling <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> back along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> gives a collection of sets indexed by elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, where the set indexed by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b \in B</annotation></semantics></math> is given b <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mrow><mi>g</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">A_{g(b)}</annotation></semantics></math>.</p>
+
+<h4 id="general_limits">General limits</h4>
+
+<p>Given a general <a class="existingWikiWord" href="/nlab/show/Set">Set</a>-valued functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">F : D \to Set</annotation></semantics></math>, if the limit <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">lim F</annotation></semantics></math> exists, then by definition, for any set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>lim</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">f: A \to lim F</annotation></semantics></math> is equivalent to a compatible family of maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mi>d</mi></msub><mo>:</mo><mi>A</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_d: A \to F(d)</annotation></semantics></math> for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>d</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">d \in Obj(D)</annotation></semantics></math>.</p>
+
+<p>In particular, since an element of a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> bijects with maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">1 \to X</annotation></semantics></math> from the singleton <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>=</mo><mo stretchy="false">{</mo><mi>∅</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">1 = \{\emptyset\}</annotation></semantics></math>, we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi><mo>≅</mo><mi>Set</mi><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mi>lim</mi><mi>F</mi><mo stretchy="false">)</mo><mo>≅</mo><mo stretchy="false">[</mo><mi>D</mi><mo>,</mo><mi>Set</mi><mo stretchy="false">]</mo><mo stretchy="false">(</mo><msub><mi>const</mi> <mn>1</mn></msub><mo>,</mo><mi>F</mi><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  lim F \cong Set (1, lim F) \cong [D, Set](const_1, F),
+
+</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>const</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">const_1</annotation></semantics></math> is the functor that constantly takes the value <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math>. Thus the limit is given by the set of <a class="existingWikiWord" href="/nlab/show/natural+transformations">natural transformations</a> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>const</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">const_1</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>.</p>
+
+<p>More concretely, a compatible family of maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">1 \to F(d)</annotation></semantics></math> is given by an element <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>s</mi> <mi>d</mi></msub><mo>∈</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">s_d \in F(d)</annotation></semantics></math> for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>d</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">d \in Obj(d)</annotation></semantics></math>, satisfying the appropriate compatibility conditions. Thus, the limit can be realized as a subset of the product <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>d</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></msub><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\prod_{d \in Obj(d)} F(d)</annotation></semantics></math> of all objects:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi><mo>=</mo><mrow><mo>{</mo><mo stretchy="false">(</mo><msub><mi>s</mi> <mi>d</mi></msub><msub><mo stretchy="false">)</mo> <mi>d</mi></msub><mo>∈</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mi>d</mi></munder><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo stretchy="false">|</mo><mo>∀</mo><mo stretchy="false">(</mo><mi>d</mi><mover><mo>→</mo><mi>f</mi></mover><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo><mo>:</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>s</mi> <mi>d</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mi>s</mi> <mrow><mi>d</mi><mo>′</mo></mrow></msub><mo>}</mo></mrow><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  lim F = \left\{ (s_d)_d \in \prod_d F(d) | \forall (d \stackrel{f}{\to} d') : F(f)(s_{d}) = s_{d'}  \right\}.
+
+</annotation></semantics></math></div>
+<h3 id="colimits">Colimits</h3>
+
+<h4 id="initial_object">Initial object</h4>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math> is a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> such that there is a unique map from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to any other set. This is given by the empty set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>∅</mi></mrow><annotation encoding="application/x-tex">\emptyset</annotation></semantics></math>.</p>
+
+<h4 id="coproduct">Coproduct</h4>
+
+<p>(…)</p>
+
+<h4 id="coequalizer">Coequalizer</h4>
+
+<p>(…)</p>
+
+<h4 id="pushout">Pushout</h4>
+
+<p>(…)</p>
+
+<h4 id="general_colimits">General colimits</h4>
+
+<p>The colimit over a <a class="existingWikiWord" href="/nlab/show/Set">Set</a>-valued functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">F : D \to Set</annotation></semantics></math> is a quotient set of the disjoint union <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mrow><mi>d</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></msub><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\coprod_{d \in Obj(D)} F(d)</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>colim</mi><mi>F</mi><mo>≃</mo><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mrow><mi>d</mi><mo>∈</mo><mi>D</mi></mrow></munder><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><msub><mo stretchy="false">/</mo> <mo>∼</mo></msub><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex"> 
+    colim F \simeq \left(\coprod_{d\in D} F(d)\right)/_\sim \,, 
+  
+</annotation></semantics></math></div>
+<p>where the equivalence relation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∼</mo></mrow><annotation encoding="application/x-tex">\sim</annotation></semantics></math> is that which is <em>generated</em> by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>x</mi><mo>∈</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>∼</mo><mo stretchy="false">(</mo><mi>x</mi><mo>′</mo><mo>∈</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mspace width="1em"></mspace><mi>if</mi><mspace width="1em"></mspace><mo stretchy="false">(</mo><mo>∃</mo><mo stretchy="false">(</mo><mi>f</mi><mo>:</mo><mi>d</mi><mo>→</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo><mspace width="1em"></mspace><mi>with</mi><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo>′</mo><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+    ((x \in F(d)) \sim (x' \in F(d')))\quad if \quad (\exists (f : d \to d') \quad with F(f)(x) = x')
+  \,.
+  
+</annotation></semantics></math></div>
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/filtered+category">filtered category</a> then the resulting equivalence relation can be described as follows:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>x</mi><mo>∈</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>∼</mo><mo stretchy="false">(</mo><mi>x</mi><mo>′</mo><mo>∈</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mspace width="1em"></mspace><mi>iff</mi><mspace width="1em"></mspace><mo stretchy="false">(</mo><mo>∃</mo><mi>d</mi><mo>″</mo><mo>,</mo><mo stretchy="false">(</mo><mi>f</mi><mo>:</mo><mi>d</mi><mo>→</mo><mi>d</mi><mo>″</mo><mo stretchy="false">)</mo><mo>,</mo><mo stretchy="false">(</mo><mi>g</mi><mo>:</mo><mi>d</mi><mo>′</mo><mo>→</mo><mi>d</mi><mo>″</mo><mo stretchy="false">)</mo><mspace width="1em"></mspace><mi>with</mi><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo>′</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+    ((x \in F(d)) \sim (x' \in F(d')))\quad iff \quad (\exists d'', (f : d \to d''), (g: d' \to d'') \quad with F(f)(x) = F(g)(x'))
+  \,.
+  
+</annotation></semantics></math></div>
+<p>(If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> is not filtered, then this description doesn’t yield an equivalence relation.)</p>
+
+<h2 id="OfTopologicalSpaces">Limits and colimits of topological spaces</h2>
+
+<p>We discuss limits and colimits in the category <a class="existingWikiWord" href="/nlab/show/Top">Top</a> of <a class="existingWikiWord" href="/nlab/show/topological+spaces">topological spaces</a>.</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></p>
+<div>
+<p><strong>examples of <a href="Top#UniversalConstructions">universal constructions of topological spaces</a>:</strong></p>
+
+<table><thead><tr><th><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_1"><semantics><mrow><mphantom><mi>AAAA</mi></mphantom></mrow><annotation encoding="application/x-tex">\phantom{AAAA}</annotation></semantics></math><a class="existingWikiWord" href="/nlab/show/limits">limits</a></th><th><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_2"><semantics><mrow><mphantom><mi>AAAA</mi></mphantom></mrow><annotation encoding="application/x-tex">\phantom{AAAA}</annotation></semantics></math><a class="existingWikiWord" href="/nlab/show/colimits">colimits</a></th></tr></thead><tbody><tr><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_3"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/point+space">point space</a><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_4"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_5"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/empty+space">empty space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_6"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td></tr>
+<tr><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_7"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/product+topological+space">product topological space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_8"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_9"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/disjoint+union+topological+space">disjoint union topological space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_10"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td></tr>
+<tr><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_11"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/topological+subspace">topological subspace</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_12"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_13"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/quotient+topological+space">quotient topological space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_14"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td></tr>
+<tr><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_15"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> fiber space <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_16"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_17"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/space+attachment">space attachment</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_18"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td></tr>
+<tr><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_19"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/mapping+cocylinder">mapping cocylinder</a>, <a class="existingWikiWord" href="/nlab/show/mapping+cocone">mapping cocone</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_20"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_21"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/mapping+cylinder">mapping cylinder</a>, <a class="existingWikiWord" href="/nlab/show/mapping+cone">mapping cone</a>, <a class="existingWikiWord" href="/nlab/show/mapping+telescope">mapping telescope</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_22"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_23"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/cell+complex">cell complex</a>, <a class="existingWikiWord" href="/nlab/show/CW-complex">CW-complex</a> <math xmlns="http://www.w3.org/1998/Math/MathML" class="maruku-mathml" display="inline" id="mathml_7ec4608812513a5e534c550385bc5d1ae5fa5eaf_24"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></td></tr>
+</tbody></table>
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></p>
+
+<div class="num_defn" id="InitialAndFinalTopologies">
+<h6 id="definition">Definition</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>X</mi> <mi>i</mi></msub><mo>=</mo><mo stretchy="false">(</mo><msub><mi>S</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>τ</mi> <mi>i</mi></msub><mo stretchy="false">)</mo><mo>∈</mo><mi>Top</mi><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\{X_i = (S_i,\tau_i) \in Top\}_{i \in I}</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/class">class</a> of <a class="existingWikiWord" href="/nlab/show/topological+spaces">topological spaces</a>, and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>∈</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">S \in Set</annotation></semantics></math> be a bare <a class="existingWikiWord" href="/nlab/show/set">set</a>. Then</p>
+
+<ul>
+<li>
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mi>S</mi><mover><mo>→</mo><mrow><msub><mi>f</mi> <mi>i</mi></msub></mrow></mover><msub><mi>S</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\{S \stackrel{f_i}{\to} S_i \}_{i \in I}</annotation></semantics></math> a set of <a class="existingWikiWord" href="/nlab/show/functions">functions</a> out of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, the <em><a class="existingWikiWord" href="/nlab/show/initial+topology">initial topology</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>τ</mi> <mi>initial</mi></msub><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>f</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tau_{initial}(\{f_i\}_{i \in I})</annotation></semantics></math> is the topology on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> with the <a class="existingWikiWord" href="/nlab/show/minimum">minimum</a> collection of <a class="existingWikiWord" href="/nlab/show/open+subsets">open subsets</a> such that all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mi>i</mi></msub><mo lspace="verythinmathspace">:</mo><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><msub><mi>τ</mi> <mi>initial</mi></msub><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>f</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>→</mo><msub><mi>X</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">f_i \colon (S,\tau_{initial}(\{f_i\}_{i \in I}))\to X_i</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/continuous+function">continuous</a>.</p>
+</li>
+
+<li>
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>S</mi> <mi>i</mi></msub><mover><mo>→</mo><mrow><msub><mi>f</mi> <mi>i</mi></msub></mrow></mover><mi>S</mi><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\{S_i \stackrel{f_i}{\to} S\}_{i \in I}</annotation></semantics></math> a set of <a class="existingWikiWord" href="/nlab/show/functions">functions</a> into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, the <em><a class="existingWikiWord" href="/nlab/show/final+topology">final topology</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>τ</mi> <mi>final</mi></msub><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>f</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tau_{final}(\{f_i\}_{i \in I})</annotation></semantics></math> is the topology on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> with the <a class="existingWikiWord" href="/nlab/show/maximum">maximum</a> collection of <a class="existingWikiWord" href="/nlab/show/open+subsets">open subsets</a> such that all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mi>i</mi></msub><mo lspace="verythinmathspace">:</mo><msub><mi>X</mi> <mi>i</mi></msub><mo>→</mo><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><msub><mi>τ</mi> <mi>final</mi></msub><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>f</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_i \colon X_i \to (S,\tau_{final}(\{f_i\}_{i \in I}))</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/continuous+function">continuous</a>.</p>
+</li>
+</ul>
+</div>
+
+<div class="num_example" id="TopologicalSubspace">
+<h6 id="example">Example</h6>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> a single topological space, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ι</mi> <mi>S</mi></msub><mo lspace="verythinmathspace">:</mo><mi>S</mi><mo>↪</mo><mi>U</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\iota_S \colon S \hookrightarrow U(X)</annotation></semantics></math> a subset of its underlying set, then the initial topology <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>τ</mi> <mi>intial</mi></msub><mo stretchy="false">(</mo><msub><mi>ι</mi> <mi>S</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tau_{intial}(\iota_S)</annotation></semantics></math>, def. <a class="maruku-ref" href="#InitialAndFinalTopologies"></a>, is the <a class="existingWikiWord" href="/nlab/show/subspace+topology">subspace topology</a>, making</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>ι</mi> <mi>S</mi></msub><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><msub><mi>τ</mi> <mi>initial</mi></msub><mo stretchy="false">(</mo><msub><mi>ι</mi> <mi>S</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>↪</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">
+  \iota_S
+  \;\colon\;
+  (S, \tau_{initial}(\iota_S))
+  \hookrightarrow
+  X
+
+</annotation></semantics></math></div>
+<p>a <a class="existingWikiWord" href="/nlab/show/topological+subspace">topological subspace</a> inclusion.</p>
+</div>
+
+<div class="num_example" id="QuotientTopology">
+<h6 id="example_2">Example</h6>
+
+<p>Conversely, for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mi>S</mi></msub><mo lspace="verythinmathspace">:</mo><mi>U</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>⟶</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">p_S \colon U(X) \longrightarrow S</annotation></semantics></math> an <a class="existingWikiWord" href="/nlab/show/epimorphism">epimorphism</a>, then the final topology <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>τ</mi> <mi>final</mi></msub><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>S</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tau_{final}(p_S)</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is the <em><a class="existingWikiWord" href="/nlab/show/quotient+topology">quotient topology</a></em>.</p>
+</div>
+
+<div class="num_prop" id="DescriptionOfLimitsAndColimitsInTop">
+<h6 id="proposition">Proposition</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/small+category">small category</a> and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mo>•</mo></msub><mo lspace="verythinmathspace">:</mo><mi>I</mi><mo>⟶</mo><mi>Top</mi></mrow><annotation encoding="application/x-tex">X_\bullet \colon I \longrightarrow Top</annotation></semantics></math> be an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/diagram">diagram</a> in <a class="existingWikiWord" href="/nlab/show/Top">Top</a> (a <a class="existingWikiWord" href="/nlab/show/functor">functor</a> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Top</mi></mrow><annotation encoding="application/x-tex">Top</annotation></semantics></math>), with components denoted <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mo>=</mo><mo stretchy="false">(</mo><msub><mi>S</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>τ</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">X_i = (S_i, \tau_i)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>i</mi></msub><mo>∈</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">S_i \in Set</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>τ</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\tau_i</annotation></semantics></math> a topology on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math>. Then:</p>
+
+<ol>
+<li>
+<p>The <a class="existingWikiWord" href="/nlab/show/limit">limit</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">X_\bullet</annotation></semantics></math> exists and is given by <a class="existingWikiWord" href="/nlab/show/generalized+the">the</a> topological space whose underlying set is <a class="existingWikiWord" href="/nlab/show/generalized+the">the</a> limit in <a class="existingWikiWord" href="/nlab/show/Set">Set</a> of the underlying sets in the diagram, and whose topology is the <a class="existingWikiWord" href="/nlab/show/initial+topology">initial topology</a>, def. <a class="maruku-ref" href="#InitialAndFinalTopologies"></a>, for the functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">p_i</annotation></semantics></math> which are the limiting <a class="existingWikiWord" href="/nlab/show/cone">cone</a> components:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><msub><munder><mi>lim</mi><mo>⟵</mo></munder> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>S</mi> <mi>i</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><msup><mrow></mrow> <mpadded width="0" lspace="-100%width"><mrow><msub><mi>p</mi> <mi>i</mi></msub></mrow></mpadded></msup><mo>↙</mo></mtd> <mtd></mtd> <mtd><msup><mo>↘</mo> <mpadded width="0"><mrow><msub><mi>p</mi> <mi>j</mi></msub></mrow></mpadded></msup></mtd></mtr> <mtr><mtd><msub><mi>S</mi> <mi>i</mi></msub></mtd> <mtd></mtd> <mtd><munder><mo>⟶</mo><mrow></mrow></munder></mtd> <mtd></mtd> <mtd><msub><mi>S</mi> <mi>j</mi></msub></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+    &amp;&amp; \underset{\longleftarrow}{\lim}_{i \in I} S_i
+    \\
+    &amp; {}^{\mathllap{p_i}}\swarrow &amp;&amp; \searrow^{\mathrlap{p_j}}
+    \\
+    S_i &amp;&amp; \underset{}{\longrightarrow} &amp;&amp; S_j
+  }
+  \,.
+
+</annotation></semantics></math></div>
+<p>Hence</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><munder><mi>lim</mi><mo>⟵</mo></munder> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>X</mi> <mi>i</mi></msub><mo>≃</mo><mrow><mo>(</mo><msub><munder><mi>lim</mi><mo>⟵</mo></munder> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>S</mi> <mi>i</mi></msub><mo>,</mo><mspace width="thickmathspace"></mspace><msub><mi>τ</mi> <mi>initial</mi></msub><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>p</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mo stretchy="false">)</mo><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">
+  \underset{\longleftarrow}{\lim}_{i \in I} X_i  
+  \simeq
+  \left(\underset{\longleftarrow}{\lim}_{i \in I} S_i,\; \tau_{initial}(\{p_i\}_{i \in I})\right)
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>The <a class="existingWikiWord" href="/nlab/show/colimit">colimit</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mo>•</mo></msub></mrow><annotation encoding="application/x-tex">X_\bullet</annotation></semantics></math> exists and is the topological space whose underlying set is the colimit in <a class="existingWikiWord" href="/nlab/show/Set">Set</a> of the underlying diagram of sets, and whose topology is the <a class="existingWikiWord" href="/nlab/show/final+topology">final topology</a>, def. <a class="maruku-ref" href="#InitialAndFinalTopologies"></a> for the component maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ι</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\iota_i</annotation></semantics></math> of the colimiting <a class="existingWikiWord" href="/nlab/show/cocone">cocone</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>S</mi> <mi>i</mi></msub></mtd> <mtd></mtd> <mtd><mo>⟶</mo></mtd> <mtd></mtd> <mtd><msub><mi>S</mi> <mi>j</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mrow></mrow> <mpadded width="0" lspace="-100%width"><mrow><msub><mi>ι</mi> <mi>i</mi></msub></mrow></mpadded></msub><mo>↘</mo></mtd> <mtd></mtd> <mtd><msub><mo>↙</mo> <mpadded width="0"><mrow><msub><mi>ι</mi> <mi>j</mi></msub></mrow></mpadded></msub></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><msub><munder><mi>lim</mi><mo>⟶</mo></munder> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>S</mi> <mi>i</mi></msub></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+    S_i &amp;&amp; \longrightarrow &amp;&amp; S_j
+    \\
+    &amp; {}_{\mathllap{\iota_i}}\searrow &amp;&amp; \swarrow_{\mathrlap{\iota_j}}
+    \\
+    &amp;&amp; \underset{\longrightarrow}{\lim}_{i \in I} S_i
+  }
+  \,.
+
+</annotation></semantics></math></div>
+<p>Hence</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><munder><mi>lim</mi><mo>⟶</mo></munder> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>X</mi> <mi>i</mi></msub><mo>≃</mo><mrow><mo>(</mo><msub><munder><mi>lim</mi><mo>⟶</mo></munder> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>S</mi> <mi>i</mi></msub><mo>,</mo><mspace width="thickmathspace"></mspace><msub><mi>τ</mi> <mi>final</mi></msub><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>ι</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mo stretchy="false">)</mo><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">
+  \underset{\longrightarrow}{\lim}_{i \in I} X_i  
+  \simeq
+  \left(\underset{\longrightarrow}{\lim}_{i \in I} S_i,\; \tau_{final}(\{\iota_i\}_{i \in I})\right)
+
+</annotation></semantics></math></div></li>
+</ol>
+</div>
+
+<p>(e.g. <a href="#Bourbaki71">Bourbaki 71, section I.4</a>)</p>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p>The required <a class="existingWikiWord" href="/nlab/show/universal+property">universal property</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo>(</mo><msub><munder><mi>lim</mi><mo>⟵</mo></munder> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>S</mi> <mi>i</mi></msub><mo>,</mo><mspace width="thickmathspace"></mspace><msub><mi>τ</mi> <mi>initial</mi></msub><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>p</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mo stretchy="false">)</mo><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\left(\underset{\longleftarrow}{\lim}_{i \in I} S_i,\; \tau_{initial}(\{p_i\}_{i \in I})\right)</annotation></semantics></math> is immediate: for</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>τ</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msup><mrow></mrow> <mpadded width="0" lspace="-100%width"><mrow><msub><mi>f</mi> <mi>i</mi></msub></mrow></mpadded></msup><mo>↙</mo></mtd> <mtd></mtd> <mtd><msup><mo>↘</mo> <mpadded width="0"><mrow><msub><mi>f</mi> <mi>j</mi></msub></mrow></mpadded></msup></mtd></mtr> <mtr><mtd><msub><mi>X</mi> <mi>i</mi></msub></mtd> <mtd></mtd> <mtd><munder><mo>⟶</mo><mrow></mrow></munder></mtd> <mtd></mtd> <mtd><msub><mi>X</mi> <mi>i</mi></msub></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    &amp;&amp; (S,\tau)
+    \\
+    &amp; {}^{\mathllap{f_i}}\swarrow &amp;&amp; \searrow^{\mathrlap{f_j}} 
+    \\
+    X_i &amp;&amp; \underset{}{\longrightarrow} &amp;&amp; X_i
+  }
+
+</annotation></semantics></math></div>
+<p>any <a class="existingWikiWord" href="/nlab/show/cone">cone</a> over the diagram, then by construction there is a unique function of underlying sets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>⟶</mo><msub><munder><mi>lim</mi><mo>⟵</mo></munder> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>S</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S \longrightarrow \underset{\longleftarrow}{\lim}_{i \in I} S_i</annotation></semantics></math> making the required diagrams commute, and so all that is required is that this unique function is always <a class="existingWikiWord" href="/nlab/show/continuous+function">continuous</a>. But this is precisely what the initial topology ensures.</p>
+
+<p>The case of the colimit is <a class="existingWikiWord" href="/nlab/show/formal+dual">formally dual</a>.</p>
+</div>
+
+<div class="num_example" id="PointTopologicalSpaceAsEmptyLimit">
+<h6 id="example_3">Example</h6>
+
+<p>The limit over the empty diagram in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Top</mi></mrow><annotation encoding="application/x-tex">Top</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/point">point</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math> with its unique topology.</p>
+</div>
+
+<div class="num_example" id="DisjointUnionOfTopologicalSpacesIsCoproduct">
+<h6 id="example_4">Example</h6>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>X</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\{X_i\}_{i \in I}</annotation></semantics></math> a set of topological spaces, their <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mo>⊔</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>X</mi> <mi>i</mi></msub><mo>∈</mo><mi>Top</mi></mrow><annotation encoding="application/x-tex">\underset{i \in I}{\sqcup} X_i \in Top</annotation></semantics></math> is their <em><a class="existingWikiWord" href="/nlab/show/disjoint+union">disjoint union</a></em>.</p>
+</div>
+
+<p>In particular:</p>
+
+<div class="num_example" id="DiscreteTopologicalSpaceAsCoproduct">
+<h6 id="example_5">Example</h6>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>∈</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">S \in Set</annotation></semantics></math>, the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-indexed <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a> of the point, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><mo>*</mo></mrow><annotation encoding="application/x-tex">\underset{s \in S}{\coprod}\ast </annotation></semantics></math>, is the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> itself equipped with the <a class="existingWikiWord" href="/nlab/show/final+topology">final topology</a>, hence is the <a class="existingWikiWord" href="/nlab/show/discrete+topological+space">discrete topological space</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>.</p>
+</div>
+
+<div class="num_example" id="ProductTopologicalSpace">
+<h6 id="example_6">Example</h6>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>X</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\{X_i\}_{i \in I}</annotation></semantics></math> a set of topological spaces, their <a class="existingWikiWord" href="/nlab/show/product">product</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>X</mi> <mi>i</mi></msub><mo>∈</mo><mi>Top</mi></mrow><annotation encoding="application/x-tex">\underset{i \in I}{\prod} X_i \in Top</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/Cartesian+product">Cartesian product</a> of the underlying sets equipped with the <em><a class="existingWikiWord" href="/nlab/show/product+topology">product topology</a></em>, also called the <em><a class="existingWikiWord" href="/nlab/show/Tychonoff+product">Tychonoff product</a></em>.</p>
+
+<p>In the case that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/finite+set">finite set</a>, such as for binary product spaces <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>×</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \times Y</annotation></semantics></math>, then a <a class="existingWikiWord" href="/nlab/show/basis+for+a+topology">sub-basis</a> for the product topology is given by the <a class="existingWikiWord" href="/nlab/show/Cartesian+products">Cartesian products</a> of the open subsets of (a basis for) each factor space.</p>
+</div>
+
+<div class="num_example" id="EqualizerInTop">
+<h6 id="example_7">Example</h6>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/equalizer">equalizer</a> of two <a class="existingWikiWord" href="/nlab/show/continuous+functions">continuous functions</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>,</mo><mi>g</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mover><mo>⟶</mo><mo>⟶</mo></mover><mi>Y</mi></mrow><annotation encoding="application/x-tex">f, g \colon X \stackrel{\longrightarrow}{\longrightarrow} Y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Top</mi></mrow><annotation encoding="application/x-tex">Top</annotation></semantics></math> is the equalizer of the underlying functions of sets</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>eq</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo><mo>↪</mo><msub><mi>S</mi> <mi>X</mi></msub><mover><munder><mo>⟶</mo><mi>g</mi></munder><mover><mo>⟶</mo><mi>f</mi></mover></mover><msub><mi>S</mi> <mi>Y</mi></msub></mrow><annotation encoding="application/x-tex">
+  eq(f,g) 
+   \hookrightarrow 
+  S_X 
+    \stackrel{\overset{f}{\longrightarrow}}{\underset{g}{\longrightarrow}} 
+  S_Y
+
+</annotation></semantics></math></div>
+<p>(hence the largets subset of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">S_X</annotation></semantics></math> on which both functions coincide) and equipped with the <a class="existingWikiWord" href="/nlab/show/subspace+topology">subspace topology</a>, example <a class="maruku-ref" href="#TopologicalSubspace"></a>.</p>
+</div>
+
+<div class="num_example" id="CoequalizerInTop">
+<h6 id="example_8">Example</h6>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/coequalizer">coequalizer</a> of two <a class="existingWikiWord" href="/nlab/show/continuous+functions">continuous functions</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>,</mo><mi>g</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mover><mo>⟶</mo><mo>⟶</mo></mover><mi>Y</mi></mrow><annotation encoding="application/x-tex">f, g \colon X \stackrel{\longrightarrow}{\longrightarrow} Y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Top</mi></mrow><annotation encoding="application/x-tex">Top</annotation></semantics></math> is the coequalizer of the underlying functions of sets</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>X</mi></msub><mover><munder><mo>⟶</mo><mi>g</mi></munder><mover><mo>⟶</mo><mi>f</mi></mover></mover><msub><mi>S</mi> <mi>Y</mi></msub><mo>⟶</mo><mi>coeq</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  S_X 
+    \stackrel{\overset{f}{\longrightarrow}}{\underset{g}{\longrightarrow}} 
+  S_Y
+    \longrightarrow 
+  coeq(f,g)
+
+</annotation></semantics></math></div>
+<p>(hence the <a class="existingWikiWord" href="/nlab/show/quotient+set">quotient set</a> by the <a class="existingWikiWord" href="/nlab/show/equivalence+relation">equivalence relation</a> generated by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∼</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x) \sim g(x)</annotation></semantics></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">x \in X</annotation></semantics></math>) and equipped with the <a class="existingWikiWord" href="/nlab/show/quotient+topology">quotient topology</a>, example <a class="maruku-ref" href="#QuotientTopology"></a>.</p>
+</div>
+
+<div class="num_example" id="PushoutInTop">
+<h6 id="example_9">Example</h6>
+
+<p>For</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>A</mi></mtd> <mtd><mover><mo>⟶</mo><mi>g</mi></mover></mtd> <mtd><mi>Y</mi></mtd></mtr> <mtr><mtd><msup><mrow></mrow> <mpadded width="0" lspace="-100%width"><mi>f</mi></mpadded></msup><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>X</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+     A &amp;\overset{g}{\longrightarrow}&amp; Y
+     \\
+     {}^{\mathllap{f}}\downarrow
+     \\
+     X
+  }
+
+</annotation></semantics></math></div>
+<p>two <a class="existingWikiWord" href="/nlab/show/continuous+functions">continuous functions</a> out of the same <a class="existingWikiWord" href="/nlab/show/domain">domain</a>, then the <a class="existingWikiWord" href="/nlab/show/colimit">colimit</a> under this diagram is also called the <em><a class="existingWikiWord" href="/nlab/show/pushout">pushout</a></em>, denoted</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>A</mi></mtd> <mtd><mover><mo>⟶</mo><mi>g</mi></mover></mtd> <mtd><mi>Y</mi></mtd></mtr> <mtr><mtd><msup><mrow></mrow> <mpadded width="0" lspace="-100%width"><mi>f</mi></mpadded></msup><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mrow><msub><mi>g</mi> <mo>*</mo></msub><mi>f</mi></mrow></mpadded></msup></mtd></mtr> <mtr><mtd><mi>X</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>X</mi><msub><mo>⊔</mo> <mi>A</mi></msub><mi>Y</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+     A &amp;\overset{g}{\longrightarrow}&amp; Y
+     \\
+     {}^{\mathllap{f}}\downarrow &amp;&amp; \downarrow^{\mathrlap{g_\ast f}}
+     \\
+     X &amp;\longrightarrow&amp; X \sqcup_A Y
+     \,.
+  }
+  \,.
+
+</annotation></semantics></math></div>
+<p>(Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>g</mi> <mo>*</mo></msub><mi>f</mi></mrow><annotation encoding="application/x-tex">g_\ast f</annotation></semantics></math> is also called the pushout of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>, or the <em><a class="existingWikiWord" href="/nlab/show/base+change">cobase change</a></em> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>.) If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> is an inclusion, one also write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><msub><mo>∪</mo> <mi>f</mi></msub><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \cup_f Y</annotation></semantics></math> and calls this the <em><a class="existingWikiWord" href="/nlab/show/attaching+space">attaching space</a></em>.</p>
+<div style="float:left;margin:0 10px 10px 0;"><img src="http://ncatlab.org/nlab/files/AttachingSpace.jpg" width="450" /></div>
+<p>By example <a class="maruku-ref" href="#CoequalizerInTop"></a> the <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a>/<a class="existingWikiWord" href="/nlab/show/attaching+space">attaching space</a> is the <a class="existingWikiWord" href="/nlab/show/quotient+topological+space">quotient topological space</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>X</mi><msub><mo>⊔</mo> <mi>A</mi></msub><mi>Y</mi><mo>≃</mo><mo stretchy="false">(</mo><mi>X</mi><mo>⊔</mo><mi>Y</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mo>∼</mo></mrow><annotation encoding="application/x-tex">
+  X \sqcup_A Y \simeq (X\sqcup Y)/\sim
+
+</annotation></semantics></math></div>
+<p>of the <a class="existingWikiWord" href="/nlab/show/disjoint+union">disjoint union</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> subject to the <a class="existingWikiWord" href="/nlab/show/equivalence+relation">equivalence relation</a> which identifies a point in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> with a point in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> if they have the same pre-image in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>.</p>
+
+<p>(graphics from <a href="#AguilarGitlerPrieto02">Aguilar-Gitler-Prieto 02</a>)</p>
+</div>
+
+<div class="num_example" id="TopologicalnSphereIsPushoutOfBoundaryOfnBallInclusionAlongItself">
+<h6 id="example_10">Example</h6>
+
+<p>As an important special case of example <a class="maruku-ref" href="#PushoutInTop"></a>, let</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>n</mi></msub><mo lspace="verythinmathspace">:</mo><msup><mi>S</mi> <mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⟶</mo><msup><mi>D</mi> <mi>n</mi></msup></mrow><annotation encoding="application/x-tex">
+  i_n \colon S^{n-1}\longrightarrow D^n
+
+</annotation></semantics></math></div>
+<p>be the canonical inclusion of the standard <a class="existingWikiWord" href="/nlab/show/n-sphere">(n-1)-sphere</a> as the <a class="existingWikiWord" href="/nlab/show/boundary">boundary</a> of the standard <a class="existingWikiWord" href="/nlab/show/n-disk">n-disk</a> (both regarded as <a class="existingWikiWord" href="/nlab/show/topological+spaces">topological spaces</a> with their <a class="existingWikiWord" href="/nlab/show/subspace+topology">subspace topology</a> as subspaces of the <a class="existingWikiWord" href="/nlab/show/Cartesian+space">Cartesian space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>ℝ</mi> <mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^n</annotation></semantics></math>).</p>
+<div style="float:left;margin:0 10px 10px 0;">
+<img src="http://ncatlab.org/nlab/files/GluingHemispheres.jpg" width="400" /></div>
+<p>Then the colimit in <a class="existingWikiWord" href="/nlab/show/Top">Top</a> under the diagram, i.e. the <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">i_n</annotation></semantics></math> along itself,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo>{</mo><msup><mi>D</mi> <mi>n</mi></msup><mover><mo>⟵</mo><mrow><msub><mi>i</mi> <mi>n</mi></msub></mrow></mover><msup><mi>S</mi> <mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mover><mo>⟶</mo><mrow><msub><mi>i</mi> <mi>n</mi></msub></mrow></mover><msup><mi>D</mi> <mi>n</mi></msup><mo>}</mo></mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \left\{
+     D^n \overset{i_n}{\longleftarrow} S^{n-1} \overset{i_n}{\longrightarrow}
+     D^n
+  \right\}
+  \,,
+
+</annotation></semantics></math></div>
+<p>is the <a class="existingWikiWord" href="/nlab/show/n-sphere">n-sphere</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mi>n</mi></msup></mrow><annotation encoding="application/x-tex">S^n</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msup><mi>S</mi> <mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msub><mi>i</mi> <mi>n</mi></msub></mrow></mover></mtd> <mtd><msup><mi>D</mi> <mi>n</mi></msup></mtd></mtr> <mtr><mtd><msup><mrow></mrow> <mpadded width="0" lspace="-100%width"><mrow><msub><mi>i</mi> <mi>n</mi></msub></mrow></mpadded></msup><mo stretchy="false">↓</mo></mtd> <mtd><mo stretchy="false">(</mo><mi>po</mi><mo stretchy="false">)</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><msup><mi>D</mi> <mi>n</mi></msup></mtd> <mtd><mo>⟶</mo></mtd> <mtd><msup><mi>S</mi> <mi>n</mi></msup></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+    S^{n-1} &amp;\overset{i_n}{\longrightarrow}&amp; D^n
+    \\
+    {}^{\mathllap{i_n}}\downarrow &amp;(po)&amp; \downarrow
+    \\
+    D^n &amp;\longrightarrow&amp; S^n
+  }
+  \,.
+
+</annotation></semantics></math></div>
+<p>(graphics from Ueno-Shiga-Morita 95)</p>
+</div>
+
+<p>W</p>
+
+<h2 id="limits_and_colimits_in_a_preordered_set">Limits and colimits in a preordered set</h2>
+
+<p>(..)</p>
+
+<h2 id="limits_and_colimits_in_functor_categories">Limits and colimits in functor categories</h2>
+
+<h3 id="ColimitOfARepresentablefunctor">Colimit of a representable functor</h3>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/colimit">colimit</a> over a <a class="existingWikiWord" href="/nlab/show/representable+functor">representable functor</a> (with values in <a class="existingWikiWord" href="/nlab/show/Set">Set</a>) is the <a class="existingWikiWord" href="/nlab/show/point">point</a>, i.e. the <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> in <a class="existingWikiWord" href="/nlab/show/Set">Set</a>.</p>
+
+<p>One can readily see this from a <a class="existingWikiWord" href="/nlab/show/universal+element">universal element</a>-style argument, by direct inspection of <a class="existingWikiWord" href="/nlab/show/cocones">cocones</a>.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>𝒞</mi><mo stretchy="false">(</mo><mi>D</mi><mo>,</mo><mi>C</mi><mo stretchy="false">)</mo></mtd> <mtd></mtd> <mtd><mover><mo>⟵</mo><mrow><mo stretchy="false">(</mo><mi>D</mi><mover><mo>→</mo><mi>f</mi></mover><mi>C</mi><msup><mo stretchy="false">)</mo> <mo>*</mo></msup></mrow></mover></mtd> <mtd></mtd> <mtd><mi>𝒞</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mi>C</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↘</mo></mtd> <mtd></mtd> <mtd><mo>↙</mo></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mrow><mo>{</mo><mi>C</mi><mover><mo>→</mo><mi>id</mi></mover><mi>C</mi><mo>}</mo></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+     \mathcal{C}(D,C) &amp;&amp; 
+       \overset{
+         (D \overset{f}{\to}C)^\ast
+       }{\longleftarrow}
+     &amp;&amp; \mathcal{C}(C,C)
+     \\
+     &amp; \searrow &amp;&amp; \swarrow
+     \\
+     &amp;&amp;
+     \left\{
+       C \overset{id}{\to}C
+     \right\}
+  }
+
+</annotation></semantics></math></div>
+<p>However, this style of reasoning does not easily generalize to <a class="existingWikiWord" href="/nlab/show/higher+category+theory">higher category theory</a>. The following gives a more abstract argument that is short and generalizes. We state it in <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category+theory">(∞,1)-category theory</a> just for definiteness of notation:</p>
+
+<div class="num_prop" id="HodgeStarFollowedByHodgeStar">
+<h6 id="proposition_2">Proposition</h6>
+
+<p><strong>(<a class="existingWikiWord" href="/nlab/show/homotopy+colimit">homotopy colimit</a> over a <a class="existingWikiWord" href="/nlab/show/representable+functor">representable functor</a> is <a class="existingWikiWord" href="/nlab/show/n-truncated+object+in+an+%28%E2%88%9E%2C1%29-category">contractible</a>)</strong></p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/small+%28%E2%88%9E%2C1%29-category">small (∞,1)-category</a> and consider an <a class="existingWikiWord" href="/nlab/show/%E2%88%9EGroupoids">∞-groupoid</a>-valued <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-functor">(∞,1)-functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><msup><mi>𝒞</mi> <mi>op</mi></msup><mo>→</mo><msub><mi>Groupoids</mi> <mn>∞</mn></msub></mrow><annotation encoding="application/x-tex">F \colon \mathcal{C}^{op} \to Groupoids_\infty</annotation></semantics></math> which is <a class="existingWikiWord" href="/nlab/show/representable+functor">representable</a>, i.e. in the <a class="existingWikiWord" href="/nlab/show/essential+image">image</a> of the <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-Yoneda+embedding">(∞,1)-Yoneda embedding</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>≃</mo><mi>y</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">F \simeq y C</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>𝒞</mi></mtd> <mtd><mover><mo>⟶</mo><mrow><mphantom><mi>AA</mi></mphantom><mi>y</mi><mphantom><mi>AA</mi></mphantom></mrow></mover></mtd> <mtd><mi>Func</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>𝒞</mi> <mi>op</mi></msup><mo>,</mo><msub><mi>Groupoids</mi> <mn>∞</mn></msub><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd><mi>C</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><mi>y</mi><mi>C</mi><mo>≔</mo><mi>𝒞</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mi>C</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathcal{C}
+    &amp;
+    \overset{
+      \phantom{AA}
+      y
+      \phantom{AA}
+    }{\longrightarrow}
+    &amp;
+    Func
+    \big(
+      \mathcal{C}^{op},
+      Groupoids_\infty
+    \big)
+    \\
+    C &amp;\mapsto&amp;
+    y C
+    \coloneqq
+    \mathcal{C}(-,C)
+  }
+
+</annotation></semantics></math></div>
+<p>Then the <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-colimit">(∞,1)-colimit</a> over this <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-functor">(∞,1)-functor</a> is contractible, i.e. is the point, the <a class="existingWikiWord" href="/nlab/show/terminal+object+in+an+%28%E2%88%9E%2C1%29-category">terminal object</a> in <a class="existingWikiWord" href="/nlab/show/%E2%88%9EGroupoids">∞Groupoids</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><munder><mo>⟶</mo><mi>𝒞</mi></munder></munder><mo stretchy="false">(</mo><mi>y</mi><mi>C</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mo>*</mo></mrow><annotation encoding="application/x-tex">
+  \underset{
+    \underset{\mathcal{C}}{\longrightarrow}
+  }{\lim}
+   (y C)
+   \;\simeq\;
+   \ast
+
+</annotation></semantics></math></div></div>
+
+<div class="proof">
+<h6 id="proof_2">Proof</h6>
+
+<p>The terminal <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoid <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math> is characterized by the fact that for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>∈</mo><msub><mi>Groupoids</mi> <mn>∞</mn></msub></mrow><annotation encoding="application/x-tex">S \in Groupoids_\infty</annotation></semantics></math> we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Groupoids</mi> <mn>∞</mn></msub><mo stretchy="false">(</mo><mo>*</mo><mo>,</mo><mi>S</mi><mo stretchy="false">)</mo><mo>≃</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">Groupoids_\infty(\ast, S) \simeq S</annotation></semantics></math>. Therefore it is sufficient to show that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><mo>⟶</mo></munder><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>y</mi><mi>C</mi><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">\underset{\longrightarrow}{\lim}\big(y C\big)</annotation></semantics></math> has the same property:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><msub><mi>Groupoids</mi> <mn>∞</mn></msub><mrow><mo>(</mo><munder><mi>lim</mi><mo>⟶</mo></munder><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>y</mi><mi>C</mi><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>,</mo><mi>S</mi><mo>)</mo></mrow></mtd> <mtd><mo>≃</mo><mspace width="thickmathspace"></mspace><mi>Func</mi><mo stretchy="false">(</mo><msup><mi>𝒞</mi> <mi>op</mi></msup><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>Groupoids</mi> <mn>∞</mn></msub><mo stretchy="false">)</mo><mrow><mo>(</mo><mi>y</mi><mi>C</mi><mo>,</mo><mi>const</mi><mi>S</mi><mo>)</mo></mrow></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>≃</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mi>const</mi><mi>S</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>≃</mo><mspace width="thickmathspace"></mspace><mi>S</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+  Groupoids_\infty
+  \left(
+    \underset{\longrightarrow}{\lim}
+    \big(
+      y C
+    \big)
+    ,
+    S
+  \right)
+  &amp; \simeq\;
+  Func(
+    \mathcal{C}^{op}
+    ,\,
+    Groupoids_\infty
+  )
+  \left(
+    y C
+    ,
+    const S
+  \right)
+  \\
+  &amp; \simeq\;
+  (const S)(C)
+  \\
+  &amp; \simeq\;
+  S
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>Here the first step is the <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-adjunction">(∞,1)-adjunction</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Func</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>𝒞</mi> <mi>op</mi></msup><mo>,</mo><msub><mi>Groupoids</mi> <mn>∞</mn></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><munderover><mrow><mphantom><mi>AA</mi></mphantom><mo>⊥</mo><mphantom><mi>AA</mi></mphantom></mrow><munder><mo>⟵</mo><mi>const</mi></munder><mover><mo>⟶</mo><munder><mi>lim</mi><mo>⟶</mo></munder></mover></munderover><msub><mo lspace="0em" rspace="thinmathspace">Groupoids</mo> <mn>∞</mn></msub></mrow><annotation encoding="application/x-tex">
+  Func
+  \big(
+    \mathcal{C}^{op},
+    Groupoids_\infty
+  \big)
+  \underoverset
+    {
+      \underset{const}{\longleftarrow}
+    }
+    {
+      \overset{ \underset{\longrightarrow}{\lim} }{\longrightarrow}
+    }
+    {\phantom{AA}\bot\phantom{AA}}
+  \Groupoids_\infty
+
+</annotation></semantics></math></div>
+<p>and the second step is the <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-Yoneda+lemma">(∞,1)-Yoneda lemma</a></p>
+</div>
+
+<h2 id="examplesoflimits">Examples of limits</h2>
+
+<p>In the following examples, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/small+category">small category</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is any category and the limit is taken over a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>D</mi> <mi>op</mi></msup><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F : D^{op} \to C</annotation></semantics></math>.</p>
+
+<h3 id="limitssimplediagrams">Simple diagrams</h3>
+
+<ul>
+<li>
+<p>the limit of the empty diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>=</mo><mi>∅</mi></mrow><annotation encoding="application/x-tex">D = \emptyset</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is, if it exists <a class="existingWikiWord" href="/nlab/show/generalized+the">the</a> <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a>;</p>
+</li>
+
+<li>
+<p>if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/discrete+category">discrete category</a>, i.e. a category with only identity morphisms, then a diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F : D \to C</annotation></semantics></math> is just a collection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">c_i</annotation></semantics></math> of objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>. Its limit is the <a class="existingWikiWord" href="/nlab/show/product">product</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mi>i</mi></msub><msub><mi>c</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\prod_i c_i</annotation></semantics></math> of these.</p>
+</li>
+
+<li>
+<p>if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>=</mo><mo stretchy="false">{</mo><mi>a</mi><mover><mo>→</mo><mo>→</mo></mover><mi>b</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">D = \{a \stackrel{\to}{\to} b\}</annotation></semantics></math> then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">lim F</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/equalizer">equalizer</a> of the two morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(b) \to F(a)</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> has an <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math> (so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>D</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">D^{op}</annotation></semantics></math>), then the limit of any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>D</mi> <mi>op</mi></msup><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F : D^{op} \to C</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>I</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(I)</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<h3 id="filteredlimits">Filtered limits</h3>
+
+<ul>
+<li>
+<p>if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/poset">poset</a>, then the limit over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>D</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">D^{op}</annotation></semantics></math> is the supremum over the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(d)</annotation></semantics></math> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>⇔</mo><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mover><mo>←</mo><mrow><mi>F</mi><mo stretchy="false">(</mo><mo>≤</mo><mo stretchy="false">)</mo></mrow></mover><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(F(d) \leq F(d')) \Leftrightarrow (F(d) \stackrel{F(\leq)}{\leftarrow} F(d'))</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>the generalization of this is where the term “limit” for categorical limit (probably) originates from: for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/filtered+category">filtered category</a>, hence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>D</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">D^{op}</annotation></semantics></math> a cofiltered category, one may think of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>d</mi><mover><mo>→</mo><mi>f</mi></mover><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo><mo>↦</mo><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mover><mo>←</mo><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mover><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(d \stackrel{f}{\to} d') \mapsto (F(d) \stackrel{F(f)}{\leftarrow} F(d')</annotation></semantics></math> as witnessing that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(d')</annotation></semantics></math> is “larger than” <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(d)</annotation></semantics></math> in some sense, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">lim F</annotation></semantics></math> is then the “largest” of all these objects, the limiting object. This interpretation is perhaps more evident for filtered <a class="existingWikiWord" href="/nlab/show/colimit">colimits</a>, where the codomain category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is thought of as being the <a class="existingWikiWord" href="/nlab/show/opposite+category">opposite</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>=</mo><msup><mi>E</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">C = E^{op}</annotation></semantics></math>. See the motivation at <a class="existingWikiWord" href="/nlab/show/ind-object">ind-object</a>.</p>
+</li>
+</ul>
+
+<h3 id="limitsintermsofotherops">In terms of other operations</h3>
+
+<p>If products and equalizers exist in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, then limit of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>D</mi> <mi>op</mi></msup><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F : D^{op} \to C</annotation></semantics></math> can be exhibited as a <a class="existingWikiWord" href="/nlab/show/subobject">subobject</a> of the <a class="existingWikiWord" href="/nlab/show/product">product</a> of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(d)</annotation></semantics></math>, namely the <a class="existingWikiWord" href="/nlab/show/equalizer">equalizer</a> of</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>d</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></munder><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mrow><mo stretchy="false">⟨</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>∘</mo><msub><mi>p</mi> <mrow><mi>F</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></msub><msub><mo stretchy="false">⟩</mo> <mrow><mi>f</mi><mo>∈</mo><mi>Mor</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></msub></mrow></mover><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>f</mi><mo>∈</mo><mi>Mor</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></munder><mi>F</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  \prod_{d \in Obj(D)}
+  F(d)
+  \stackrel{\langle F(f) \circ p_{F(t(f))} \rangle_{f \in Mor(D)} }{\to}  
+  \prod_{f \in Mor(D)}
+  F(s(f))
+
+</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>d</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></munder><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mrow><mo stretchy="false">⟨</mo><msub><mi>p</mi> <mrow><mi>F</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></msub><msub><mo stretchy="false">⟩</mo> <mrow><mi>f</mi><mo>∈</mo><mi>Mor</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></msub></mrow></mover><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>f</mi><mo>∈</mo><mi>Mor</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></munder><mi>F</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \prod_{d \in Obj(D)}
+  F(d)
+  \stackrel{\langle p_{F(s(f))} \rangle_{f \in Mor(D)} }{\to}  
+  \prod_{f \in Mor(D)}
+  F(s(f))  
+  \,.
+
+</annotation></semantics></math></div>
+<p>See the explicit formula for the limit in <a class="existingWikiWord" href="/nlab/show/Set">Set</a> in terms of a subset of a product set.</p>
+
+<p>In particular therefore, a category has all limits already if it has all products and equalizers.</p>
+
+<h3 id="limitsinpresheafcat">Limits in presheaf categories</h3>
+
+<p>Consider limits of functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>D</mi> <mi>op</mi></msup><mo>→</mo><mi>PSh</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F : D^{op} \to PSh(C)</annotation></semantics></math> with values in the <a class="existingWikiWord" href="/nlab/show/category+of+presheaves">category of presheaves</a> over a <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+
+<div class="num_prop" id="LimitsOfPresheaves">
+<h6 id="proposition_3">Proposition</h6>
+
+<p><strong>(<a class="existingWikiWord" href="/nlab/show/limits+of+presheaves+are+computed+objectwise">limits of presheaves are computed objectwise</a>)</strong></p>
+
+<p>Limits of presheaves are computed objectwise:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi><mo>:</mo><mi>c</mi><mo>↦</mo><mi>lim</mi><mi>F</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  lim F : c \mapsto lim F(-)(c)
+
+</annotation></semantics></math></div>
+<p>Here on the right the limit is over the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>:</mo><msup><mi>D</mi> <mi>op</mi></msup><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">F(-)(c) : D^{op} \to Set</annotation></semantics></math>.</p>
+
+<p>Similarly for colimits</p>
+</div>
+
+<p>Similarly <a class="existingWikiWord" href="/nlab/show/colimit">colimit</a>s of presheaves are computed objectwise.</p>
+
+<div class="num_prop">
+<h6 id="proposition_4">Proposition</h6>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/Yoneda+embedding">Yoneda embedding</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi><mo>:</mo><mi>C</mi><mo>→</mo><mi>PSh</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Y : C \to PSh(C)</annotation></semantics></math> commutes with small limits:</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>D</mi> <mi>op</mi></msup><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F : D^{op} \to C</annotation></semantics></math>, then we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Y</mi><mo stretchy="false">(</mo><mi>lim</mi><mi>F</mi><mo stretchy="false">)</mo><mo>≃</mo><mi>lim</mi><mo stretchy="false">(</mo><mi>Y</mi><mo>∘</mo><mi>F</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  Y(lim F) \simeq lim (Y\circ F)
+
+</annotation></semantics></math></div>
+<p>if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">lim F</annotation></semantics></math> exists.</p>
+</div>
+
+<p><strong>Warning</strong> The Yoneda embedding does <em>not</em> in general preserve colimits.</p>
+
+<h3 id="limitsinundercat">Limits in under-categories</h3>
+
+<p>Limits in <a class="existingWikiWord" href="/nlab/show/under+category">under categories</a> are a special case of limits in <a class="existingWikiWord" href="/nlab/show/comma+category">comma categories</a>. These are explained elsewhere. It may still be useful to spell out some details for the special case of under-categories. This is what the following does.</p>
+
+<div class="num_prop">
+<h6 id="proposition_5">Proposition</h6>
+
+<p>Limits in an <a class="existingWikiWord" href="/nlab/show/under+category">under category</a> are computed as limits in the underlying category.</p>
+
+<p>Precisely: let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/category">category</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">t \in C</annotation></semantics></math> an <a class="existingWikiWord" href="/nlab/show/object">object</a>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">t/C</annotation></semantics></math> the corresponding <a class="existingWikiWord" href="/nlab/show/under+category">under category</a>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>:</mo><mi>t</mi><mo stretchy="false">/</mo><mi>C</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">p : t/C \to C</annotation></semantics></math> the obvious projection.</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>D</mi><mo>→</mo><mi>t</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F : D \to t/C</annotation></semantics></math> be any <a class="existingWikiWord" href="/nlab/show/functor">functor</a>. Then, if it exists, the <a class="existingWikiWord" href="/nlab/show/limit">limit</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>∘</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">p \circ F</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is the image under <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> of the limit over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>lim</mi><mi>F</mi><mo stretchy="false">)</mo><mo>≃</mo><mi>lim</mi><mo stretchy="false">(</mo><mi>p</mi><mi>F</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  p(\lim F)  \simeq \lim (p F)
+
+</annotation></semantics></math></div>
+<p>and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">\lim F</annotation></semantics></math> is uniquely characterized by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mo stretchy="false">(</mo><mi>p</mi><mi>F</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lim (p F)</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_3">Proof</h6>
+
+<p>Over a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>γ</mi><mo>:</mo><mi>d</mi><mo>→</mo><mi>d</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\gamma : d \to d'</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> the limiting cone over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">p F</annotation></semantics></math> (which exists by assumption) looks like</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mi>lim</mi><mi>p</mi><mi>F</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↙</mo></mtd> <mtd></mtd> <mtd><mo>↘</mo></mtd></mtr> <mtr><mtd><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mrow><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>γ</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd></mtd> <mtd><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    &amp;&amp; \lim p F
+    \\
+    &amp; \swarrow &amp;&amp; \searrow
+    \\
+    p F(d) &amp;&amp;\stackrel{p F(\gamma)}{\to}&amp;&amp; p F(d') 
+  }
+
+</annotation></semantics></math></div>
+<p>By the universal property of the limit this has a unique lift to a cone in the <a class="existingWikiWord" href="/nlab/show/under+category">under category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">t/C</annotation></semantics></math> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mi>t</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↙</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd> <mtd><mo>↘</mo></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>lim</mi><mi>p</mi><mi>F</mi></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd><mo>↙</mo></mtd> <mtd></mtd> <mtd><mo>↘</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mrow><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>γ</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd></mtd> <mtd><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    &amp;&amp; t 
+    \\
+    &amp; \swarrow &amp;\downarrow &amp; \searrow
+    \\
+    &amp;&amp; \lim p F
+    \\
+    \downarrow &amp; \swarrow &amp;&amp; \searrow &amp; \downarrow
+    \\
+    p F(d) &amp;&amp;\stackrel{p F(\gamma)}{\to}&amp;&amp; p F(d') 
+  }
+
+</annotation></semantics></math></div>
+<p>It therefore remains to show that this is indeed a limiting cone over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>. Again, this is immediate from the universal property of the limit in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>. For let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>→</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">t \to Q</annotation></semantics></math> be another cone over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">t/C</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> is another cone over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">p F</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> and we get in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> a universal morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi><mo>→</mo><mi>lim</mi><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">Q \to \lim p F</annotation></semantics></math></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mi>t</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↙</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd> <mtd><mo>↘</mo></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>Q</mi></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd><mo>↙</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd> <mtd><mo>↘</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>lim</mi><mi>p</mi><mi>F</mi></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd><mo>↙</mo></mtd> <mtd></mtd> <mtd><mo>↘</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mrow><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>γ</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd></mtd> <mtd><mi>p</mi><mi>F</mi><mo stretchy="false">(</mo><mi>d</mi><mo>′</mo><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    &amp;&amp; t
+    \\
+    &amp; \swarrow &amp; \downarrow &amp; \searrow
+    \\
+    &amp;&amp; Q
+    \\
+    \downarrow &amp; \swarrow &amp;\downarrow &amp; \searrow &amp; \downarrow
+    \\
+    &amp;&amp; \lim p F
+    \\
+    \downarrow &amp; \swarrow &amp;&amp; \searrow &amp; \downarrow
+    \\
+    p F(d) &amp;&amp;\stackrel{p F(\gamma)}{\to}&amp;&amp; p F(d') 
+  }
+
+</annotation></semantics></math></div>
+<p>A glance at the diagram above shows that the composite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>→</mo><mi>Q</mi><mo>→</mo><mi>lim</mi><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">t \to Q \to \lim p F</annotation></semantics></math> constitutes a morphism of cones in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> into the limiting cone over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">p F</annotation></semantics></math>. Hence it must equal our morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>→</mo><mi>lim</mi><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">t \to \lim p F</annotation></semantics></math>, by the universal property of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">\lim p F</annotation></semantics></math>, and hence the above diagram does commute as indicated.</p>
+
+<p>This shows that the morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi><mo>→</mo><mi>lim</mi><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">Q \to \lim p F</annotation></semantics></math> which was the unique one giving a cone morphism on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> does lift to a cone morphism in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">t/C</annotation></semantics></math>, which is then necessarily unique, too. This demonstrates the required universal property of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi><mo>→</mo><mi>lim</mi><mi>p</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">t \to \lim p F</annotation></semantics></math> and thus identifies it with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lim</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">\lim F</annotation></semantics></math>.</p>
+</div>
+
+<ul>
+<li>Remark: One often says “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> reflects limits” to express the conclusion of this proposition. A conceptual way to consider this result is by appeal to a more general one: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">U: A \to C</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/monadic+functor">monadic</a> (i.e., has a left adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> such that the canonical comparison functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>→</mo><mo stretchy="false">(</mo><mi>U</mi><mi>F</mi><mo stretchy="false">)</mo><mo>−</mo><mi>Alg</mi></mrow><annotation encoding="application/x-tex">A \to (U F)-Alg</annotation></semantics></math> is an equivalence), then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> both reflects and preserves limits. In the present case, the projection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>t</mi><mo stretchy="false">/</mo><mi>C</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">p: A = t/C \to C</annotation></semantics></math> is monadic, is essentially the category of algebras for the monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>=</mo><mi>t</mi><mo>+</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(-) = t + (-)</annotation></semantics></math>, at least if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> admits binary coproducts. (Added later: the proof is even simpler: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">U: A \to C</annotation></semantics></math> is the underlying functor for the category of algebras of an <em>endofunctor</em> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> (as opposed to algebras of a monad), then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> reflects and preserves limits; then apply this to the endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> above.)</li>
+</ul>
+
+<h2 id="further_resources">Further resources</h2>
+
+<p>Pedagogical vidoes that explain limits and colimits are at</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/The+Catsters">The Catsters</a>, <a href="http://www.youtube.com/watch?v=g47V6qxKQNU">General Limits and Colimits</a></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on September 12, 2022 at 01:05:24.
+    See the <a href="/nlab/history/limits+and+colimits+by+example" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/limits+and+colimits+by+example" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/11423/#Item_4">Discuss</a><span class="backintime"><a href="/nlab/revision/limits+and+colimits+by+example/47" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/limits+and+colimits+by+example" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/limits+and+colimits+by+example" accesskey="S" class="navlink" id="history" rel="nofollow">History (47 revisions)</a>
+  <a href="/nlab/show/limits+and+colimits+by+example/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/limits+and+colimits+by+example" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/limits+and+colimits+by+example" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

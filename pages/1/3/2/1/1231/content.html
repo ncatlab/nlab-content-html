@@ -1,0 +1,843 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Koszul duality in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Koszul duality
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/10372/#Item_4" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Koszul duality</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="higher_algebra">Higher algebra</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/higher+algebra">higher algebra</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/universal+algebra">universal algebra</a></p>
+
+<h2 id="algebraic_theories">Algebraic theories</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebraic+theory">algebraic theory</a> / <a class="existingWikiWord" href="/nlab/show/2-algebraic+theory">2-algebraic theory</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-algebraic+theory">(∞,1)-algebraic theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monad">monad</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-monad">(∞,1)-monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/operad">operad</a> / <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-operad">(∞,1)-operad</a></p>
+</li>
+</ul>
+
+<h2 id="algebras_and_modules">Algebras and modules</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebra over a monad</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-monad">∞-algebra over an (∞,1)-monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+an+algebraic+theory">algebra over an algebraic theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-algebraic+theory">∞-algebra over an (∞,1)-algebraic theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+over+an+operad">algebra over an operad</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-algebra+over+an+%28%E2%88%9E%2C1%29-operad">∞-algebra over an (∞,1)-operad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/action">action</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-action">∞-action</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/representation">representation</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-representation">∞-representation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/module">module</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-module">∞-module</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/associated+bundle">associated bundle</a>, <a class="existingWikiWord" href="/nlab/show/associated+%E2%88%9E-bundle">associated ∞-bundle</a></p>
+</li>
+</ul>
+
+<h2 id="higher_algebras">Higher algebras</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+%28%E2%88%9E%2C1%29-category">monoidal (∞,1)-category</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+%28%E2%88%9E%2C1%29-category">symmetric monoidal (∞,1)-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoid+in+an+%28%E2%88%9E%2C1%29-category">monoid in an (∞,1)-category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/commutative+monoid+in+an+%28%E2%88%9E%2C1%29-category">commutative monoid in an (∞,1)-category</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p>symmetric monoidal (∞,1)-category of spectra</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/smash+product+of+spectra">smash product of spectra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+smash+product+of+spectra">symmetric monoidal smash product of spectra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/ring+spectrum">ring spectrum</a>, <a class="existingWikiWord" href="/nlab/show/module+spectrum">module spectrum</a>, <a class="existingWikiWord" href="/nlab/show/algebra+spectrum">algebra spectrum</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+algebra">A-∞ algebra</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+ring">A-∞ ring</a>, <a class="existingWikiWord" href="/nlab/show/A-%E2%88%9E+space">A-∞ space</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/C-%E2%88%9E+algebra">C-∞ algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/E-%E2%88%9E+ring">E-∞ ring</a>, <a class="existingWikiWord" href="/nlab/show/E-%E2%88%9E+algebra">E-∞ algebra</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-module">∞-module</a>, <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-module+bundle">(∞,1)-module bundle</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/multiplicative+cohomology+theory">multiplicative cohomology theory</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/L-%E2%88%9E+algebra">L-∞ algebra</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/deformation+theory">deformation theory</a></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="model_category_presentations">Model category presentations</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+T-algebras">model structure on simplicial T-algebras</a> / <a class="existingWikiWord" href="/nlab/show/homotopy+T-algebra">homotopy T-algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+operads">model structure on operads</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/model+structure+on+algebras+over+an+operad">model structure on algebras over an operad</a></p>
+</li>
+</ul>
+
+<h2 id="geometry_on_formal_duals_of_algebras">Geometry on formal duals of algebras</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Isbell+duality">Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/derived+geometry">derived geometry</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Deligne+conjecture">Deligne conjecture</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/delooping+hypothesis">delooping hypothesis</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monoidal+Dold-Kan+correspondence">monoidal Dold-Kan correspondence</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/higher+algebra+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+
+<h4 id="duality">Duality</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/duality">duality</a></strong></p>
+
+<ul>
+<li>
+<p>abstract duality: <a class="existingWikiWord" href="/nlab/show/opposite+category">opposite category</a>,</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eckmann-Hilton+duality">Eckmann-Hilton duality</a></p>
+</li>
+
+<li>
+<p>concrete duality: <a class="existingWikiWord" href="/nlab/show/dual+object">dual object</a>, <a class="existingWikiWord" href="/nlab/show/dualizable+object">dualizable object</a>, <a class="existingWikiWord" href="/nlab/show/fully+dualizable+object">fully dualizable object</a>, <a class="existingWikiWord" href="/nlab/show/dualizing+object">dualizing object</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/dual+vector+space">dual vector space</a></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<ul>
+<li>
+<p>between <a class="existingWikiWord" href="/nlab/show/higher+geometry">higher geometry</a>/<a class="existingWikiWord" href="/nlab/show/higher+algebra">higher algebra</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Isbell+duality">Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Stone+duality">Stone duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gelfand+duality">Gelfand duality</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tannaka+duality">Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Langlands+duality">Langlands duality</a>, <a class="existingWikiWord" href="/nlab/show/geometric+Langlands+duality">geometric Langlands duality</a>, <a class="existingWikiWord" href="/nlab/show/quantum+geometric+Langlands+duality">quantum geometric Langlands duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Pontryagin+duality">Pontryagin duality</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Cartier+duality">Cartier duality</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Poincar%C3%A9+duality">Poincaré duality</a> for <a class="existingWikiWord" href="/nlab/show/manifolds">manifolds</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Koszul+duality">Koszul duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Spanier-Whitehead+duality">Spanier-Whitehead duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+duality">Grothendieck duality</a></p>
+</li>
+</ul>
+
+<h2 id="in_qft_and_string_theory">In QFT and String theory</h2>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/duality+in+physics">duality in physics</a></strong>, <strong><a class="existingWikiWord" href="/nlab/show/duality+in+string+theory">duality in string theory</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Seiberg+duality">Seiberg duality</a>, <a class="existingWikiWord" href="/nlab/show/AGT+conjecture">AGT conjecture</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/S-duality">S-duality</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/electro-magnetic+duality">electro-magnetic duality</a>, <a class="existingWikiWord" href="/nlab/show/Montonen-Olive+duality">Montonen-Olive duality</a>, <a class="existingWikiWord" href="/nlab/show/geometric+Langlands+duality">geometric Langlands duality</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/T-duality">T-duality</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/mirror+symmetry">mirror symmetry</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/U-duality">U-duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/open%2Fclosed+string+duality">open/closed string duality</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/AdS%2FCFT">AdS/CFT duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/KLT+relations">KLT relations</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/duality+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="koszul_duality">Koszul duality</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#on_operads'>On operads</a></li>
+<li><a href='#for_associative_and_dgalgebras'>For associative and dg-algebras</a></li>
+<li><a href='#examples'>Examples</a></li>
+<li><a href='#koszul_duality_between_dmodules_and_modules'>Koszul duality between D-modules and Ω-modules</a></li>
+<li><a href='#categorical_koszul_duality'>Categorical Koszul duality</a></li>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p><strong>Koszul duality</strong> (named after <a class="existingWikiWord" href="/nlab/show/Jean-Louis+Koszul">Jean-Louis Koszul</a>) is a duality and phenomenon generalizing the duality between the symmetric and exterior algebra of a vector space to so-called quadratic <a class="existingWikiWord" href="/nlab/show/differential+graded+algebra">differential graded algebra</a>s (which can be obtained as a free dga module an ideal of relations which live in degree 2). For a pair of Koszul dual algebras, there is a correspondence between certain parts of their derived categories (precise formulation involves some finiteness conditions). In a setup in which one of the algebras is replaced by a cocomplete dg coalgebra, there is a formulation free of finiteness conditions, but involving <a class="existingWikiWord" href="/nlab/show/twisting+cochain">twisting cochain</a> (see that entry).</p>
+
+<h2 id="on_operads">On operads</h2>
+
+<p>Koszul duality is a duality between <span class="newWikiWord">quadratic operad<a href="/nlab/new/quadratic+operad">?</a></span>s, predicted in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Maxim+Kontsevich">M. Kontsevich</a>, <em>Formal (non)commutative symplectic geometry</em>, The Gelʹfand Mathematical Seminars, 1990–1992, 173–187, Birkhäuser, Boston, MA, 1993 (cf. <a class="existingWikiWord" href="/nlab/show/formal+noncommutative+symplectic+geometry">formal noncommutative symplectic geometry</a>).</li>
+</ul>
+
+<p>and developed in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Victor+Ginzburg">Victor Ginzburg</a>, <a class="existingWikiWord" href="/nlab/show/Mikhail+Kapranov">Mikhail Kapranov</a>, <em>Koszul duality for operads</em>, Duke Math. J. <strong>76</strong> (1994), no. 1, 203–272; reprint <a href="http://arxiv.org/abs/0709.1228">arxiv/0709.1228</a>; <em>Erratum to: Koszul duality for operads</em>, Duke Math. J. <strong>80</strong> (1995), no. 1, 293.</li>
+</ul>
+
+<h2 id="for_associative_and_dgalgebras">For associative and dg-algebras</h2>
+
+<p>From Ben Webster on <a href="https://mathoverflow.net/a/394/2362">mathoverflow</a>:</p>
+
+<p>There are a lot of algebras whose derived categories are equivalent in surprising ways. <a class="existingWikiWord" href="/nlab/show/Morita+equivalences">Morita equivalences</a> are pretty simple, especially for finite dimensional algebras; essentially the only free parameter is the dimension of the object.</p>
+
+<p>Namely, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mi>Mod</mi></mrow><annotation encoding="application/x-tex">A Mod</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mi>Mod</mi></mrow><annotation encoding="application/x-tex">B Mod</annotation></semantics></math> are equivalent, then the image of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> as a module over itself is a <a class="existingWikiWord" href="/nlab/show/projective+object">projective</a> <a class="existingWikiWord" href="/nlab/show/generator">generator</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mi>Mod</mi></mrow><annotation encoding="application/x-tex">B Mod</annotation></semantics></math>, and for a finite-dimensional algebra, essentially the only thing you can do is take several copies of the <a class="existingWikiWord" href="/nlab/show/indecomposable+object">indecomposible</a> projectives of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
+
+<p>On the other hand, if you take the derived category of <a class="existingWikiWord" href="/nlab/show/differential+graded+module">dg-modules</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> (the dg part of this is not a huge deal; it’s just that they’re very close to, but a bit better behaved than, actual derived/<a class="existingWikiWord" href="/nlab/show/triangulated+categories">triangulated categories</a>, which are just crude truncations of truly functorial dg/<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>∞</mn></msub></mrow><annotation encoding="application/x-tex">A_\infty</annotation></semantics></math> versions), this is equivalent to the category of dg-modules over the <a class="existingWikiWord" href="/nlab/show/endomorphism+algebra">endomorphism algebra</a> (this is in the dg sense, so it’s a dg-algebra whose cohomology is the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ext</mi></mrow><annotation encoding="application/x-tex">Ext</annotation></semantics></math> algebra) of <em>any</em> generating object. There are a <em>lot</em> more generating objects than projective generators, so there are a lot of derived equivalences.</p>
+
+<p>In particular, let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> be a finite dimensional algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, than an obvious not-very-projective generating object is the sum of all the <a class="existingWikiWord" href="/nlab/show/simple+modules">simple modules</a>, say <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>. As mentioned above, there’s an equivalence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mi>dg</mi><mi>Mod</mi><mo>=</mo><mi mathvariant="normal">Ext</mi><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>L</mi><mo stretchy="false">)</mo><mi>dg</mi><mi>Mod</mi></mrow><annotation encoding="application/x-tex">A dg Mod = \mathrm{Ext}(L,L) dg Mod</annotation></semantics></math>, just given by taking <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Ext</mi><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Ext}(L,-)</annotation></semantics></math>.</p>
+
+<p>In general, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Ext</mi><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>L</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Ext}(L,L)</annotation></semantics></math> is in a very complicated object (for example, often for <a class="existingWikiWord" href="/nlab/show/group+algebras">group algebras</a> over <a class="existingWikiWord" href="/nlab/show/finite+field">finite field</a>s), but sometimes it turns out to be nice. For example, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/exterior+algebra">exterior algebra</a>, you’ll get a <a class="existingWikiWord" href="/nlab/show/polynomial+ring">polynomial ring</a> on the dual vector space. Another (closely related) example is that the cohomology of a <a class="existingWikiWord" href="/nlab/show/reductive+group">reductive group</a> (over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\mathbb{C}</annotation></semantics></math>) is Koszul dual to the cohomology of its classifying space.</p>
+
+<p>One way to ensure that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Ext</mi><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>L</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Ext}(L,L)</annotation></semantics></math> is nice is if the algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/graded+algebra">graded</a>. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Ext</mi><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>L</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Ext}(L,L)</annotation></semantics></math> inherits an “internal” grading in addition to its homological one. If these coincide, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is called <em>Koszul</em>.</p>
+
+<p>In this case, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>=</mo><mi mathvariant="normal">Ext</mi><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>L</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">B=\mathrm{Ext}(L,L)</annotation></semantics></math> is forced to be formal (if it had any interesting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>∞</mn></msub></mrow><annotation encoding="application/x-tex">A_\infty</annotation></semantics></math> operations, they would break the grading), so you’re dealing with a derived equivalence between actual algebras, though you have to be a bit careful about the dg-issues. Thus the derived category of usual modules over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is equivalent to dg-modules over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> (with its unique grading) and vice versa. This can be fixed by taking graded modules on both sides.</p>
+
+<h2 id="examples">Examples</h2>
+
+<ul>
+<li>
+<p>The most famous example of Koszul dual algebras are the <a class="existingWikiWord" href="/nlab/show/exterior+algebra">exterior algebra</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Alt</mi> <mo>•</mo></msup><mi>V</mi><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">Alt^{\bullet}V[-1]</annotation></semantics></math> and the <a class="existingWikiWord" href="/nlab/show/polynomial+algebra">polynomial algebra</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Sym</mi> <mo>•</mo></msup><msup><mi>V</mi> <mo>*</mo></msup><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>2</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">Sym^\bullet V^*[-2]</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>A regular block of <span class="newWikiWord">category O<a href="/nlab/new/category+O">?</a></span> for any <a class="existingWikiWord" href="/nlab/show/semisimple+Lie+algebra">semisimple Lie algebra</a> is a self-Koszul dual.</p>
+
+<ul>
+<li>More generally, a singular block of <span class="newWikiWord">parabolic category O<a href="/nlab/new/parabolic+category+O">?</a></span> is dual to a different singular block of parabolic category O where the combinatorial data determining the central character and finiteness conditions switch.</li>
+</ul>
+</li>
+
+<li>
+<p>Braden, Licata, Proudfoot and Webster gave a combinatorial construction of a large family of Koszul dual algebras in <a href="http://arxiv.org/abs/0806.3256">Gale duality and Koszul duality</a>.</p>
+</li>
+</ul>
+
+<h2 id="koszul_duality_between_dmodules_and_modules">Koszul duality between D-modules and Ω-modules</h2>
+
+<p>An important special case of Koszul duality establishes a Quillen equivalence between model categories of D-modules and Ω-modules. This was first observed by Kapranov.</p>
+
+<p>Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> is the sheaf of differential operators on a smooth manifold or a smooth variety and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math> is the sheaf of differential forms on the same manifold or variety. Both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math> are equipped with their canonical filtrations (differential operators of order at most~<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math> respectively differential forms of degree at least~<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>) and all constructions below work with sheaves of filtered chain complexes.</p>
+
+<p>The equivalence is implemented by tensoring with a certain filtered <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>-<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>-bimodule <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>DR</mi></mrow><annotation encoding="application/x-tex">DR</annotation></semantics></math>. If we discard the differential, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>DR</mi><mo>=</mo><mi>Ω</mi><mo>⊗</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">DR=\Omega\otimes D</annotation></semantics></math> as a filtered graded bimodule. The differential is canonically determined by its degree 0 component, where we take the coevaluation map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>O</mi><mo>→</mo><msup><mi>Ω</mi> <mn>1</mn></msup><mo>⊗</mo><msubsup><mi>D</mi> <mn>0</mn> <mn>1</mn></msubsup></mrow><annotation encoding="application/x-tex">O\to \Omega^1\otimes D^1_0</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>D</mi> <mn>0</mn> <mn>1</mn></msubsup></mrow><annotation encoding="application/x-tex">D^1_0</annotation></semantics></math> denotes differential operators of order at most~1 with vanishing constant term, i.e., vector fields.</p>
+
+<p>This equivalence allows one to define <a class="existingWikiWord" href="/nlab/show/six+operations">six operations</a> on D-modules by transfering them from Ω-modules, where they can be defined in the usual manner, since differential forms can be pulled back along maps, unlike differential operators.</p>
+
+<p>This fully explains the somewhat unintuitive explicit formulas for the <a class="existingWikiWord" href="/nlab/show/six+operations">six operations</a> on D-modules.</p>
+
+<h2 id="categorical_koszul_duality">Categorical Koszul duality</h2>
+
+<p>A form of Koszul duality with dg algebras replaced by dg categories has been developed by Holstein and Lazarev. In this, the Koszul dual of a dg category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒟</mi></mrow><annotation encoding="application/x-tex">\mathcal{D}</annotation></semantics></math>, given by a bar construction, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mi>𝒟</mi></mrow><annotation encoding="application/x-tex">B\mathcal{D}</annotation></semantics></math> is a pointed curved coalgebra; see</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Julian+Holstein">Julian Holstein</a> and A. Lazarev, <em>Categorical Koszul duality</em> <a href="https://arxiv.org/pdf/2006.01705.pdf">Arxiv 2006.01706</a></li>
+</ul>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bar+and+cobar+construction">bar and cobar construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/holography+as+Koszul+duality">holography as Koszul duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/symplectic+duality">symplectic duality</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<p>Other historical references on Koszul duality include</p>
+
+<ul>
+<li>
+<p>A. A. Beilinson, V. A. Ginsburg, V. V. Schechtman, <em>Koszul duality</em>, J. Geom. Phys. 5 (1988), no. 3, 317–350 <a href="http://www.ams.org/mathscinet-getitem?mr=1048505">MR1048505</a> <a href="http://dx.doi.org/10.1016/0393-0440(88)90028-9">doi:10.1016/0393-0440(88)90028-9</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Alexander+Beilinson">Alexander Beilinson</a>, <a class="existingWikiWord" href="/nlab/show/Victor+Ginzburg">Victor Ginzburg</a>, <a class="existingWikiWord" href="/nlab/show/Wolfgang+Soergel">Wolfgang Soergel</a>, <em>Koszul duality patterns in representation theory</em>, J. Amer. Math. Soc. 9 (1996), no. 2, 473–527 <a href="http://home.mathematik.uni-freiburg.de/soergel/PReprints/KorrBGS.pdf">corrigenda</a></p>
+</li>
+</ul>
+
+<p>Koszul duality is also discussed in</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+Baez">John Baez</a>, <a href="http://math.ucr.edu/home/baez/week238.html">TWF Week 238</a>, <a href="http://math.ucr.edu/home/baez/week239.html">Week 239</a></p>
+</li>
+
+<li>
+<p><em>The Everything Seminar</em> , <em><a href="http://cornellmath.wordpress.com/2008/03/25/koszul-duality-and-lie-algebroids">koszul-duality-and-lie-algebroids</a></em></p>
+</li>
+
+<li>
+<p>MathOverflow: <a href="http://mathoverflow.net/questions/329/what-is-koszul-duality">What is Koszul duality?</a>, <a href="http://mathoverflow.net/questions/309/beilinson-bernstein-and-koszul-duality">Beilinson-Bernstein and Koszul duality</a>, <a href="http://mathoverflow.net/questions/67909/what-extra-conditions-are-necessary-for-the-following-version-of-koszul-duality">what-extra-conditions-are-necessary-for-the-following-version-of-koszul-duality</a></p>
+</li>
+
+<li>
+<p>David Eisenbud, Gunnar Fløystad, Frank-Olaf Schreyer, <em>Sheaf cohomology and free resolutions over exterior algebras</em>, Trans. Amer. Math. Soc. 355 (2003), 4397-4426 <a href="http://www.ams.org/mathscinet-getitem?mr=1990756">MR1990756</a> <a href="http://dx.doi.org/10.1090/S0002-9947-03-03291-4">doi</a></p>
+</li>
+
+<li>
+<p>Tyler Foster, Po Hu, Igor Kriz, <em>D-structures and derived Koszul duality for unital operad algebras</em>, <a href="http://arxiv.org/abs/1507.07151">arxiv./1507.07151</a></p>
+</li>
+</ul>
+
+<p>A “curved” generalization is discussed in</p>
+
+<ul>
+<li>Joseph Hirsh, Joan Millès, <em>Curved Koszul duality theory</em>, Max Planck preprint MPIM2010-104, <a href="http://www.mpim-bonn.mpg.de/preprints/send?bid=4217">pdf</a></li>
+
+<li>Gunnar Fløystad, <em>Koszul duality and equivalences of categories</em>, Trans. Amer. Math. Soc. <strong>358</strong> (2006), 2373-2398 <a href="http://arxiv.org/abs/math/0012264">math.AG/0012264</a> <a href="http://www.ams.org/mathscinet-getitem?mr=2204036">MR2204036</a> <a href="http://dx.doi.org/10.1090/S0002-9947-05-04035-3">doi</a></li>
+</ul>
+
+<p><a class="existingWikiWord" href="/nlab/show/Bernhard+Keller">Bernhard Keller</a> and his student Lefèvre-Hasegawa described rather general framework for Koszul duality using dg-(co)algebras and <a class="existingWikiWord" href="/nlab/show/twisting+cochain">twisting cochain</a>s:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Bernhard+Keller">Bernhard Keller</a>, <em>Koszul duality and coderived categories (after Lefèvre-Hasegawa)</em> (2003) <a href="http://www.math.jussieu.fr/~keller/publ/kdcabs.html">abstract</a> <a href="http://www.math.jussieu.fr/~keller/publ/kdc.dvi">dvi</a> <a href="http://www.math.jussieu.fr/~keller/publ/kdc.pdf">pdf</a> <a href="http://www.math.jussieu.fr/~keller/publ/kdc.ps">ps</a></li>
+</ul>
+
+<p>See also:</p>
+
+<ul>
+<li>
+<p>Kenji Lefèvre-Hasegawa, <em>Sur les A-infini catégories</em>, <a href="http://people.math.jussieu.fr/~keller/lefevre/TheseFinale/tel-00007761.pdf">pdf</a> <a href="http://arxiv.org/abs/math.CT/0310337">math/0310337</a></p>
+</li>
+
+<li>
+<p>Leonid Positselski, <em>Two kinds of derived categories, Koszul duality, and comodule-contramodule correspondence</em>, <a href="http://arxiv.org/abs/0905.2621">arxiv/0905.2621</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Dev+Sinha">Dev Sinha</a>, <em>Koszul duality in algebraic topology - an historical perspective</em>, J. Homotopy Relat. Struct. (2013) 8: 1 (<a href="https://arxiv.org/abs/1001.2032">arXiv:1001.2032</a>)</p>
+</li>
+
+<li>
+<p>Aaron M Royer, <em>Generalized string topology and derived Koszul duality</em>, <a href="http://arxiv.org/abs/1306.6708">arxiv/1306.6708</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Mikhail+Kapranov">Mikhail Kapranov</a>, <em>On DG-modules over the de Rham complex and the vanishing cycles functor</em>, Algebraic Geometry,</p>
+
+<p>Lecture Notes in Mathematics <strong>1479</strong>, 1991, pp 57-86</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Theo+Johnson-Freyd">Theo Johnson-Freyd</a>, <em>Exact triangles, Koszul duality, and coisotropic boundary conditions</em>, <a href="https://arxiv.org/abs/1608.08598">arxiv/1608.08598</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Jonathan+Beardsley">Jonathan Beardsley</a>, <a class="existingWikiWord" href="/nlab/show/Maximilien+P%C3%A9roux">Maximilien Péroux</a>, <em>Koszul Duality in Higher Topoi</em> (<a href="https://arxiv.org/abs/1909.11724">arXiv:1909.11724</a>)</p>
+</li>
+</ul>
+
+<p>A form of Koszul duality for dg-categories has been given by Holstein and Lazarev.</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Julian+Holstein">Julian Holstein</a> and A. Lazarev, <em>Categorical Koszul duality</em> <a href="https://arxiv.org/pdf/2006.01705.pdf">Arxiv 2006.01706</a></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on October 22, 2021 at 07:05:55.
+    See the <a href="/nlab/history/Koszul+duality" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Koszul+duality" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10372/#Item_4">Discuss</a><span class="backintime"><a href="/nlab/revision/Koszul+duality/34" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Koszul+duality" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Koszul+duality" accesskey="S" class="navlink" id="history" rel="nofollow">History (34 revisions)</a>
+  <a href="/nlab/show/Koszul+duality/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Koszul+duality" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Koszul+duality" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

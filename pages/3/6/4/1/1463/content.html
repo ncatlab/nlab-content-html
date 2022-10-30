@@ -1,0 +1,837 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      ultrafilter theorem in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      ultrafilter theorem
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/13078/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>The ultrafilter theorem</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="category_theory"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(0,1)</annotation></semantics></math>-Category theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/%280%2C1%29-category+theory">(0,1)-category theory</a></strong>: <a class="existingWikiWord" href="/nlab/show/logic">logic</a>, <a class="existingWikiWord" href="/nlab/show/order+theory">order theory</a></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/%280%2C1%29-category">(0,1)-category</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/relation+between+preorders+and+%280%2C1%29-categories">relation between preorders and (0,1)-categories</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/proset">proset</a>, <a class="existingWikiWord" href="/nlab/show/partially+ordered+set">partially ordered set</a> (<a class="existingWikiWord" href="/nlab/show/directed+set">directed set</a>, <a class="existingWikiWord" href="/nlab/show/total+order">total order</a>, <a class="existingWikiWord" href="/nlab/show/linear+order">linear order</a>)</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/top">top</a>, <a class="existingWikiWord" href="/nlab/show/true">true</a>,</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bottom">bottom</a>, <a class="existingWikiWord" href="/nlab/show/false">false</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monotone+function">monotone function</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/implication">implication</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/filter">filter</a>, <a class="existingWikiWord" href="/nlab/show/interval">interval</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lattice">lattice</a>, <a class="existingWikiWord" href="/nlab/show/semilattice">semilattice</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/meet">meet</a>, <a class="existingWikiWord" href="/nlab/show/logical+conjunction">logical conjunction</a>, <a class="existingWikiWord" href="/nlab/show/and">and</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/join">join</a>, <a class="existingWikiWord" href="/nlab/show/logical+disjunction">logical disjunction</a>, <a class="existingWikiWord" href="/nlab/show/or">or</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/compact+element">compact element</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lattice+of+subobjects">lattice of subobjects</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/complete+lattice">complete lattice</a>, <a class="existingWikiWord" href="/nlab/show/algebraic+lattice">algebraic lattice</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/distributive+lattice">distributive lattice</a>, <a class="existingWikiWord" href="/nlab/show/completely+distributive+lattice">completely distributive lattice</a>, <a class="existingWikiWord" href="/nlab/show/canonical+extension">canonical extension</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/hyperdoctrine">hyperdoctrine</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/first-order+hyperdoctrine">first-order</a>, <a class="existingWikiWord" href="/nlab/show/Boolean+hyperdoctrine">Boolean</a>, <a class="existingWikiWord" href="/nlab/show/coherent+hyperdoctrine">coherent</a>, <a class="existingWikiWord" href="/nlab/show/tripos">tripos</a></li>
+</ul>
+</li>
+</ul>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/%280%2C1%29-topos">(0,1)-topos</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Heyting+algebra">Heyting algebra</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/regular+element">regular element</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Boolean+algebra">Boolean algebra</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/frame">frame</a>, <a class="existingWikiWord" href="/nlab/show/locale">locale</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Stone+duality">Stone duality</a></li>
+</ul>
+</div></div>
+
+<h4 id="foundations">Foundations</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/foundations">foundations</a></strong></p>
+
+<h2 id="the_basis_of_it_all">The basis of it all</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mathematical+logic">mathematical logic</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/first-order+logic">first-order logic</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/universe">universe</a></p>
+</li>
+</ul>
+
+<h2 id="set_theory"> Set theory</h2>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/set+theory">set theory</a></strong></p>
+
+<ul>
+<li>presentations of set theory
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/unsorted+set+theory">unsorted set theory</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/two-sorted+set+theory">two-sorted set theory</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/dependently+sorted+set+theory">dependently sorted set theory</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/structurally+presented+set+theory">structurally presented set theory</a></li>
+</ul>
+</li>
+
+<li>structuralism in set theory
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/material+set+theory">material set theory</a>
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/ZFC">ZFC</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/ZFA">ZFA</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/New+Foundations">New Foundations</a></li>
+</ul>
+</li>
+
+<li><a class="existingWikiWord" href="/nlab/show/structural+set+theory">structural set theory</a>
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/ETCS">ETCS</a>
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fully+formal+ETCS">fully formal ETCS</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/ETCS+with+elements">ETCS with elements</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Trimble+on+ETCS+I">Trimble on ETCS I</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Trimble+on+ETCS+II">Trimble on ETCS II</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Trimble+on+ETCS+III">Trimble on ETCS III</a></li>
+</ul>
+</li>
+
+<li><a class="existingWikiWord" href="/nlab/show/SEAR">SEAR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="foundational_axioms">Foundational axioms</h2>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/foundational+axiom">foundational axiom</a></strong></p>
+
+<ul>
+<li>
+<p>basic constructions:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+cartesian+products">axiom of cartesian products</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+disjoint+unions">axiom of disjoint unions</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+the+empty+set">axiom of the empty set</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+fullness">axiom of fullness</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+function+sets">axiom of function sets</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+power+sets">axiom of power sets</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+quotient+sets">axiom of quotient sets</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/material+set+theory">material axioms</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+extensionality">axiom of extensionality</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+foundation">axiom of foundation</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+anti-foundation">axiom of anti-foundation</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Mostowski%27s+axiom">Mostowski's axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+pairing">axiom of pairing</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+transitive+closure">axiom of transitive closure</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+union">axiom of union</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/structural+set+theory">structural axioms</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+materialization">axiom of materialization</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theoretic axioms</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+UIP">axiom UIP</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Whitehead%27s+principle">Whitehead's principle</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/axioms+of+choice">axioms of choice</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+countable+choice">axiom of countable choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+dependent+choice">axiom of dependent choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+excluded+middle">axiom of excluded middle</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+existence">axiom of existence</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+multiple+choice">axiom of multiple choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Markov%27s+axiom">Markov's axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/presentation+axiom">presentation axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/small+cardinality+selection+axiom">small cardinality selection axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+small+violations+of+choice">axiom of small violations of choice</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+weakly+initial+sets+of+covers">axiom of weakly initial sets of covers</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/large+cardinal+axioms">large cardinal axioms</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+infinity">axiom of infinity</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+universes">axiom of universes</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/regular+extension+axiom">regular extension axiom</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/inaccessible+cardinal">inaccessible cardinal</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/measurable+cardinal">measurable cardinal</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/elementary+embedding">elementary embedding</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/supercompact+cardinal">supercompact cardinal</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Vop%C4%9Bnka%27s+principle">Vopěnka's principle</a></li>
+</ul>
+</li>
+
+<li>
+<p>strong axioms</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+separation">axiom of separation</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/axiom+of+replacement">axiom of replacement</a></li>
+</ul>
+</li>
+
+<li>
+<p>further</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/reflection+principle">reflection principle</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="removing_axioms">Removing axioms</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/predicative+mathematics">predicative mathematics</a></li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/foundations+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="the_ultrafilter_theorem">The ultrafilter theorem</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#statement_and_proof'>Statement and proof</a></li>
+<ul>
+<li><a href='#ultrafilter_theorem'>Ultrafilter theorem</a></li>
+<li><a href='#standard_proof'>Standard proof</a></li>
+</ul>
+<li><a href='#strength_and_weakness_as_a_choice_principle'>Strength and weakness as a “choice principle”</a></li>
+<li><a href='#other_formulations'>Other formulations</a></li>
+<li><a href='#failures'>Failures</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>In <a class="existingWikiWord" href="/nlab/show/classical+mathematics">classical mathematics</a>, the ultrafilter theorem is a theorem about ultrafilters, proved as a standard application of <a class="existingWikiWord" href="/nlab/show/Zorn%27s+lemma">Zorn's lemma</a>. In the <a class="existingWikiWord" href="/nlab/show/foundations">foundations</a> of mathematics, however, it is interesting to consider which results are implied by it or equivalent to it (very few imply it without being equivalent, other than those that imply the full axiom of choice itself).</p>
+
+<h2 id="statement_and_proof">Statement and proof</h2>
+
+<div class="un_theorem">
+<h6 id="ultrafilter_theorem">Ultrafilter theorem</h6>
+
+<p>Given a <a class="existingWikiWord" href="/nlab/show/set">set</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, every proper <a class="existingWikiWord" href="/nlab/show/filter">filter</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> may be extended to an <a class="existingWikiWord" href="/nlab/show/ultrafilter">ultrafilter</a> (that is, a <a class="existingWikiWord" href="/nlab/show/maximal+element">maximal</a> <a class="existingWikiWord" href="/nlab/show/proper+filter">proper filter</a>) on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="standard_proof">Standard proof</h6>
+
+<p>Given a proper filter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, consider the <a class="existingWikiWord" href="/nlab/show/partial+order">poset</a> of proper filters that refine (contain) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>, ordered by inclusion (reverse refinement). Of course, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is in this poset. Given a chain <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> of proper filters that refine <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/union">union</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>∪</mo><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">F \cup \bigcup \mathcal{C}</annotation></semantics></math> is a proper filter that refines <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> and is an upper bound of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>. By <a class="existingWikiWord" href="/nlab/show/Zorn%27s+lemma">Zorn's lemma</a>, there is a proper filter maximal among those that refines <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>, which is therefore maximal among all proper filters.</p>
+</div>
+
+<p>Although this proof uses Zorn’s lemma, the statement itself is weaker. In particular, it is weaker than the <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a> (even assuming the principle of <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>).</p>
+
+<h2 id="strength_and_weakness_as_a_choice_principle">Strength and weakness as a “choice principle”</h2>
+
+<p>Although the ultrafilter theorem is weaker than the axiom of choice, it can be used to prove quite a few results that are traditionally proved using <a class="existingWikiWord" href="/nlab/show/Zorn%27s+lemma">Zorn's lemma</a> (or some other thing equivalent to the axiom of choice). For example, it can be used to prove</p>
+
+<ul>
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/Hahn%E2%80%93Banach+theorem">Hahn–Banach theorem</a> (which in turn implies existence of Lebesgue non-measurable sets),</p>
+</li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/Banach-Tarski+paradox">Banach–Tarski paradox</a>,</p>
+</li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/prime+ideal+theorem">prime ideal theorem</a> for <a class="existingWikiWord" href="/nlab/show/rigs">rigs</a>, <a class="existingWikiWord" href="/nlab/show/rings">rings</a>, and <a class="existingWikiWord" href="/nlab/show/Boolean+algebras">Boolean algebras</a>,</p>
+</li>
+
+<li>
+<p>that every <a class="existingWikiWord" href="/nlab/show/formally+real+field">formally real field</a> can be <a class="existingWikiWord" href="/nlab/show/total+order">totally ordered</a>,</p>
+</li>
+
+<li>
+<p>existence and uniqueness of <a class="existingWikiWord" href="/nlab/show/algebraic+closures">algebraic closures</a> (see <a class="existingWikiWord" href="/nlab/show/splitting+field">splitting field</a>),</p>
+</li>
+
+<li>
+<p>existence of non-trivial <a class="existingWikiWord" href="/nlab/show/ultraproducts">ultraproducts</a>,</p>
+</li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/compactness+theorem">compactness theorem</a> and completeness theorem for <a class="existingWikiWord" href="/nlab/show/first-order+logic">first-order logic</a> (see below)</p>
+</li>
+</ul>
+
+<p>as a partial list. An enlightening discussion of the things one might expect to be able to prove using the ultrafilter theorem is given <a href="http://mathoverflow.net/questions/202458/how-do-i-apply-the-boolean-prime-ideal-theorem">here at MO</a>.</p>
+
+<p>However, in other respects, the ultrafilter theorem is very weak as a “choice principle”. For example, it is too weak to prove the axiom of <a class="existingWikiWord" href="/nlab/show/countable+choice">countable choice</a> (so for example, it cannot prove that a countable union of countable sets is countable), a fact exhibited in Cohen’s first model for the failure of the axiom of choice (where even countable choice fails but the ultrafilter theorem holds). It therefore cannot prove the <a class="existingWikiWord" href="/nlab/show/axiom+of+dependent+choice">axiom of dependent choice</a> either.</p>
+
+<p>It can prove <em>some</em> traditional applications of <a class="existingWikiWord" href="/nlab/show/dependent+choice">dependent choice</a>. For example, it can be used to <a class="existingWikiWord" href="/nlab/show/linear+order">linearly order</a> any set. From there it can be used to prove that a countable union of nonempty finite sets is countable, which in turn can be used to establish the weak König lemma; see <a href="/nlab/show/compactness+theorem#totalorder">here</a>.</p>
+
+<p>In <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a>, the ultrafilter principle also implies <a class="existingWikiWord" href="/nlab/show/De+Morgan%27s+law">De Morgan's law</a>, which means that the poset of <a class="existingWikiWord" href="/nlab/show/truth+values">truth values</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/De+Morgan+Heyting+algebra">De Morgan Heyting algebra</a>. Any <a class="existingWikiWord" href="/nlab/show/topos">topos</a> with an internal ultrafilter principle is thus a <a class="existingWikiWord" href="/nlab/show/De+Morgan+topos">De Morgan topos</a>.</p>
+
+<h2 id="other_formulations">Other formulations</h2>
+
+<p>Here are several statements equivalent (internal to an arbitrary <a class="existingWikiWord" href="/nlab/show/topos">topos</a>) to the ultrafilter theorem.</p>
+
+<p>The first three are, if you work through the definitions, almost direct rephrasings of the theorem above:</p>
+
+<ul>
+<li>
+<p>Every <a class="existingWikiWord" href="/nlab/show/net">net</a> has a universal subnet. (We must define ‘subnet’ and ‘universal net’ properly to make this work, at which point the equivalence is immediate.)</p>
+</li>
+
+<li>
+<p>The Boolean prime ideal theorem: every proper <a class="existingWikiWord" href="/nlab/show/ideal">ideal</a> in a <a class="existingWikiWord" href="/nlab/show/Boolean+ring">Boolean ring</a> is contained in a <a class="existingWikiWord" href="/nlab/show/prime+ideal">prime ideal</a>. (Stronger formulations of the Boolean prime ideal theorem also follow.)</p>
+</li>
+
+<li>
+<p>The <a class="existingWikiWord" href="/nlab/show/Stone+representation+theorem">Stone representation theorem</a>: every <a class="existingWikiWord" href="/nlab/show/Boolean+algebra">Boolean algebra</a> is a subalgebra of some <a class="existingWikiWord" href="/nlab/show/function+algebra">function algebra</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mn>2</mn> <mi>X</mi></msup></mrow><annotation encoding="application/x-tex">2^X</annotation></semantics></math> into the <a class="existingWikiWord" href="/nlab/show/initial+object">initial</a> Boolean algebra. (Stronger formulations of the Stone representation theorem also follow.)</p>
+</li>
+</ul>
+
+<p>These basic results in <a class="existingWikiWord" href="/nlab/show/logic">logic</a> are equivalent to the ultrafilter theorem:</p>
+
+<ul>
+<li>
+<p>Consistency: if a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> of formulas in propositional <a class="existingWikiWord" href="/nlab/show/classical+logic">classical logic</a> is syntactically consistent (proves no contradiction), then it is semantically consistent (has a model). (The converse is immediate; stronger formulations of the consistency theorem, including for predicate logic, also follow.)</p>
+</li>
+
+<li>
+<p>Compactness: if every finite subset of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> has a model, then so does <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>. (The converse is immediate; stronger formulations of the compactness theorem, including for predicate logic, also follow.)</p>
+</li>
+</ul>
+
+<p>Various characterisations of <a class="existingWikiWord" href="/nlab/show/compact+spaces">compact spaces</a> are equivalent to the ultrafilter theorem:</p>
+
+<ul>
+<li>
+<p>Given a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, the space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mn>2</mn> <mi>S</mi></msup></mrow><annotation encoding="application/x-tex">2^S</annotation></semantics></math> (in the product topology) is compact. (This can be seen as a very weak form of the Tychonoff theorem below.)</p>
+</li>
+
+<li>
+<p>More generally, if every ultrafilter on a <a class="existingWikiWord" href="/nlab/show/convergence+space">convergence space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is convergent, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is compact. (The converse is immediate.)</p>
+</li>
+
+<li>
+<p>A <a class="existingWikiWord" href="/nlab/show/uniform+space">uniform space</a> is compact if it is <a class="existingWikiWord" href="/nlab/show/complete+space">complete</a> and <a class="existingWikiWord" href="/nlab/show/totally+bounded+space">totally bounded</a> (i.e. it is <a class="existingWikiWord" href="/nlab/show/Bishop-compact">Bishop-compact</a>). (The converse is immediate.)</p>
+</li>
+</ul>
+
+<p>These classical results in analysis are equivalent to the ultrafilter theorem in a <a class="existingWikiWord" href="/nlab/show/Boolean+topos">Boolean topos</a> with <a class="existingWikiWord" href="/nlab/show/natural+numbers+object">natural numbers object</a>:</p>
+
+<ul>
+<li>
+<p>The <a class="existingWikiWord" href="/nlab/show/Tychonoff+theorem">Tychonoff theorem</a> for <a class="existingWikiWord" href="/nlab/show/Hausdorff+spaces">Hausdorff spaces</a>: any product of compact Hausdorff spaces is compact; equivalently, any product of compact Hausdorff spatial <a class="existingWikiWord" href="/nlab/show/locales">locales</a> is spatial. (If we drop the Hausdorff condition, then the result is equivalent to the full <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a>.)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Stone%E2%80%93%C4%8Cech+compactification">Stone–Čech compactification</a>: the <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+spaces">compact Hausdorff spaces</a> form a <a class="existingWikiWord" href="/nlab/show/reflective+subcategory">reflective subcategory</a> of <a class="existingWikiWord" href="/nlab/show/Top">Top</a>. (The classical result that they form a reflective subcategory of the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>T</mi> <mrow><mn>3</mn><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></msub></mrow><annotation encoding="application/x-tex">T_{3\frac{1}{2}}</annotation></semantics></math> of completely regular Hausdorff spaces is enough; the classical result that the reflection is a dense embedding on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>T</mi> <mrow><mn>3</mn><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></msub></mrow><annotation encoding="application/x-tex">T_{3\frac{1}{2}}</annotation></semantics></math> also follows.)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Banach%E2%80%93Alaoglu+theorem">Banach–Alaoglu theorem</a>: the closed unit ball of the double dual of a <a class="existingWikiWord" href="/nlab/show/Banach+space">Banach space</a> is weak* compact. (The result for <em>separable</em> spaces does not require the ultrafilter theorem.)</p>
+</li>
+</ul>
+
+<h2 id="failures">Failures</h2>
+
+<p>Of course, since the ultrafilter theorem is independent of <a class="existingWikiWord" href="/nlab/show/ZF">ZF</a>, there are models in which it fails. More strongly, however, there are apparently models of ZF in which <em>every ultrafilter (on every set) is principal</em>. See <a href="http://mathoverflow.net/questions/76495/existence-of-non-principal-ultrafilters-on-sets/76499#76499">this MO answer</a>.</p>
+
+<h2 id="references">References</h2>
+
+<p>Various equivalences with the ultrafilter theorem are stated and proved (in <b>ZF</b>) in</p>
+
+<ul>
+<li>Eric Schechter; <a class="existingWikiWord" href="/nlab/show/HAF">Handbook of Analysis and its Foundations</a>.</li>
+</ul>
+
+<p>See a summary (in GIF!): <a href="http://www.math.vanderbilt.edu/~schectex/ccc/excerpts/equivuf1.gif">page 1</a> and <a href="http://www.math.vanderbilt.edu/~schectex/ccc/excerpts/equivuf2.gif">page 2</a>.</p>
+
+<p>It's possible that I've made some mistakes above in deciding which of these use excluded middle or the existence of a natural numbers object. (I very much doubt that any of them use replacement.)</p>
+
+<p>For the ultrafilter principle in constructive mathematics:</p>
+
+<ul>
+<li>John Bell, “Boolean Algebras and Distributive Lattices Treated Constructively”, <em>Mathematical Logic Quarterly 45</em>, 1999. <a href="publish.uwo.ca/~jbell/BOOLCON.pdf">pdf</a></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on June 14, 2021 at 23:55:06.
+    See the <a href="/nlab/history/ultrafilter+theorem" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/ultrafilter+theorem" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13078/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/ultrafilter+theorem/24" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/ultrafilter+theorem" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/ultrafilter+theorem" accesskey="S" class="navlink" id="history" rel="nofollow">History (24 revisions)</a>
+  <a href="/nlab/show/ultrafilter+theorem/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/ultrafilter+theorem" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/ultrafilter+theorem" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

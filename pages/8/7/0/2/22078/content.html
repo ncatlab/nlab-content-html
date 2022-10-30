@@ -1,0 +1,689 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Model Categories and Their Localizations in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Model Categories and Their Localizations
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/12221/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<p>This page is about the textbook:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Philip+S.+Hirschhorn">Philip S. Hirschhorn</a></p>
+
+<p><br /></p>
+
+<p><strong>Model Categories and Their Localizations</strong></p>
+
+<p><br /></p>
+
+<p>American Mathematical Society</p>
+
+<p>Mathematical Surveys and Monographs <strong>99</strong></p>
+
+<p>(2002)</p>
+
+<p>ISBN 0-8218-3279-4</p>
+
+<p><a href="https://doi.org/10.1090/surv/099">doi:10.1090/surv/099</a></p>
+
+<p><a href="http://www.maths.ed.ac.uk/~aar/papers/hirschhornloc.pdf">pdf</a></p>
+</li>
+</ul>
+
+<p>on <a class="existingWikiWord" href="/nlab/show/model+categories">model categories</a> and their <a class="existingWikiWord" href="/nlab/show/Bousfield+localization+of+model+categories">localization</a>.</p>
+
+<h1 id="contents">Contents</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<h2 id="model_categories_and_their_homotopy_categories">Model categories and their homotopy categories</h2>
+
+<h2 id="localizing_model_category_structures">Localizing model category structures</h2>
+
+<h2 id="acknowledgments">Acknowledgments</h2>
+
+<h2 id="part_1_localization_of_model_category_structures">Part 1. Localization of Model Category Structures</h2>
+
+<h3 id="summary_of_part_1">Summary of Part 1</h3>
+
+<h3 id="chapter_1_local_spaces_and_localization">Chapter 1. Local Spaces and Localization</h3>
+
+<h4 id="11_definitions_of_spaces_and_mapping_spaces">1.1. Definitions of spaces and mapping spaces</h4>
+
+<h4 id="12_local_spaces_and_localization">1.2. Local spaces and localization</h4>
+
+<h4 id="13_constructing_an_localization_functor">1.3. Constructing an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>-localization functor</h4>
+
+<h4 id="14_concise_description_of_the_localization">1.4. Concise description of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>-localization</h4>
+
+<h4 id="15_postnikov_approximations">1.5. Postnikov approximations</h4>
+
+<h4 id="16_topological_spaces_and_simplicial_sets">1.6. Topological spaces and simplicial sets</h4>
+
+<h4 id="17_a_continuous_localization_functor">1.7. A continuous localization functor</h4>
+
+<h4 id="18_pointed_and_unpointed_localization">1.8. Pointed and unpointed localization</h4>
+
+<h3 id="chapter_2_the_localization_model_category_for_spaces">Chapter 2. The Localization Model Category for Spaces</h3>
+
+<h4 id="21_the_bousfield_localization_model_category_structure">2.1. The Bousfield localization model category structure</h4>
+
+<h4 id="22_subcomplexes_of_relative_cell_complexes">2.2. Subcomplexes of relative <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mrow><mi>Λ</mi><mo stretchy="false">{</mo><mi>f</mi><mo stretchy="false">}</mo></mrow><mo>¯</mo></mover></mrow><annotation encoding="application/x-tex">\overline{\Lambda\{f\}}</annotation></semantics></math>-cell complexes</h4>
+
+<h4 id="23_the_bousfieldsmith_cardinality_argument">2.3. The Bousfield-Smith cardinality argument</h4>
+
+<h3 id="chapter_3_localization_of_model_categories">Chapter 3. Localization of Model Categories</h3>
+
+<h4 id="31_left_localization_and_right_localization">3.1. Left localization and right localization</h4>
+
+<h4 id="32_clocal_objects_and_clocal_equivalences">3.2. C-local objects and C-local equivalences</h4>
+
+<h4 id="33_bousfield_localization">3.3. Bousfield localization</h4>
+
+<h4 id="34_bousfield_localization_and_properness">3.4. Bousfield localization and properness</h4>
+
+<h4 id="35_detecting_equivalences">3.5. Detecting equivalences</h4>
+
+<h3 id="chapter_4_existence_of_left_bousfield_localizations">Chapter 4. Existence of Left Bousfield Localizations</h3>
+
+<h4 id="41_existence_of_left_bousfield_localizations">4.1. Existence of left Bousfield localizations</h4>
+
+<h4 id="42_horns_on_s_and_slocal_equivalences">4.2. Horns on S and S-local equivalences</h4>
+
+<h4 id="43_a_functorial_localization">4.3. A functorial localization</h4>
+
+<h4 id="44_localization_of_subcomplexes">4.4. Localization of subcomplexes</h4>
+
+<h4 id="45_the_bousfieldsmith_cardinality_argument">4.5. The Bousfield-Smith cardinality argument</h4>
+
+<h4 id="46_proof_of_the_main_theorem">4.6. Proof of the main theorem</h4>
+
+<h3 id="chapter_5_existence_of_right_bousfield_localizations">Chapter 5. Existence of Right Bousfield Localizations</h3>
+
+<h4 id="51_right_bousfield_localization_cellularization">5.1. Right Bousfield localization: Cellularization</h4>
+
+<h4 id="52_horns_on_k_and_kcolocal_equivalences">5.2. Horns on K and K-colocal equivalences</h4>
+
+<h4 id="53_kcolocal_cofibrations">5.3. K-colocal cofibrations</h4>
+
+<h4 id="54_proof_of_the_main_theorem">5.4. Proof of the main theorem</h4>
+
+<h4 id="55_kcolocal_objects_and_kcellular_objects">5.5. K-colocal objects and K-cellular objects</h4>
+
+<h3 id="chapter_6_fiberwise_localization">Chapter 6. Fiberwise Localization</h3>
+
+<h4 id="61_fiberwise_localization">6.1. Fiberwise localization</h4>
+
+<h4 id="62_the_fiberwise_local_model_category_structure">6.2. The fiberwise local model category structure</h4>
+
+<h4 id="63_localizing_the_fiber">6.3. Localizing the fiber</h4>
+
+<h4 id="64_uniqueness_of_the_fiberwise_localization">6.4. Uniqueness of the fiberwise localization</h4>
+
+<h2 id="part_2_homotopy_theory_in_model_categories">Part 2. Homotopy Theory in Model Categories</h2>
+
+<h3 id="summary_of_part_2">Summary of Part 2</h3>
+
+<h3 id="chapter_7_model_categories">Chapter 7. Model Categories</h3>
+
+<h4 id="71_model_categories">7.1. Model categories</h4>
+
+<h4 id="72_lifting_and_the_retract_argument">7.2. Lifting and the retract argument</h4>
+
+<h4 id="73_homotopy">7.3. Homotopy</h4>
+
+<h4 id="74_homotopy_as_an_equivalence_relation">7.4. Homotopy as an equivalence relation</h4>
+
+<h4 id="75_the_classical_homotopy_category">7.5. The classical homotopy category</h4>
+
+<h4 id="76_relative_homotopy_and_fiberwise_homotopy">7.6. Relative homotopy and fiberwise homotopy</h4>
+
+<h4 id="77_weak_equivalences">7.7. Weak equivalences</h4>
+
+<h4 id="78_homotopy_equivalence">7.8. Homotopy equivalence</h4>
+
+<h4 id="79_the_equivalence_relation_generated_by_weak_equivalence">7.9. The equivalence relation generated by “weak equivalence”</h4>
+
+<h4 id="710_topological_spaces_and_simplicial_sets">7.10. Topological spaces and simplicial sets</h4>
+
+<h3 id="chapter_8_fibrant_and_cofibrant_approximations">Chapter 8. Fibrant and Cofibrant Approximations</h3>
+
+<h4 id="81_fibrant_and_cofibrant_approximations">8.1. Fibrant and cofibrant approximations</h4>
+
+<h4 id="82_approximations_and_homotopic_maps">8.2. Approximations and homotopic maps</h4>
+
+<h4 id="83_the_homotopy_category_of_a_model_category">8.3. The homotopy category of a model category</h4>
+
+<h4 id="84_derived_functors">8.4. Derived functors</h4>
+
+<h4 id="85_quillen_functors_and_total_derived_functors">8.5. Quillen functors and total derived functors</h4>
+
+<h3 id="chapter_9_simplicial_model_categories">Chapter 9. Simplicial Model Categories</h3>
+
+<h4 id="91_simplicial_model_categories">9.1. Simplicial model categories</h4>
+
+<h4 id="92_colimits_and_limits">9.2. Colimits and limits</h4>
+
+<h4 id="93_weak_equivalences_of_function_complexes">9.3. Weak equivalences of function complexes</h4>
+
+<h4 id="94_homotopy_lifting">9.4. Homotopy lifting</h4>
+
+<h4 id="95_simplicial_homotopy">9.5. Simplicial homotopy</h4>
+
+<h4 id="96_uniqueness_of_lifts">9.6. Uniqueness of lifts</h4>
+
+<h4 id="97_detecting_weak_equivalences">9.7. Detecting weak equivalences</h4>
+
+<h4 id="98_simplicial_functors">9.8. Simplicial functors</h4>
+
+<h3 id="chapter_10_ordinals_cardinals_and_transfinite_composition">Chapter 10. Ordinals, Cardinals, and Transfinite Composition</h3>
+
+<h4 id="101_ordinals_and_cardinals">10.1. Ordinals and cardinals</h4>
+
+<h4 id="102_transfinite_composition">10.2. Transfinite composition</h4>
+
+<h4 id="103_transfinite_composition_and_lifting_in_model_categories">10.3. Transfinite composition and lifting in model categories</h4>
+
+<h4 id="104_small_objects">10.4. Small objects</h4>
+
+<h4 id="105_the_small_object_argument">10.5. The small object argument</h4>
+
+<h4 id="106_subcomplexes_of_relative_icell_complexes">10.6. Subcomplexes of relative I-cell complexes</h4>
+
+<h4 id="107_cell_complexes_of_topological_spaces">10.7. Cell complexes of topological spaces</h4>
+
+<h4 id="108_compactness">10.8. Compactness</h4>
+
+<h4 id="109_effective_monomorphisms">10.9. Effective monomorphisms</h4>
+
+<h3 id="chapter_11_cofibrantly_generated_model_categories">Chapter 11. Cofibrantly Generated Model Categories</h3>
+
+<h4 id="111_cofibrantly_generated_model_categories">11.1. Cofibrantly generated model categories</h4>
+
+<h4 id="112_cofibrations_in_a_cofibrantly_generated_model_category">11.2. Cofibrations in a cofibrantly generated model category</h4>
+
+<h4 id="113_recognizing_cofibrantly_generated_model_categories">11.3. Recognizing cofibrantly generated model categories</h4>
+
+<h4 id="114_compactness">11.4. Compactness</h4>
+
+<h4 id="115_free_cell_complexes">11.5. Free cell complexes</h4>
+
+<h4 id="116_diagrams_in_a_cofibrantly_generated_model_category">11.6. Diagrams in a cofibrantly generated model category</h4>
+
+<h4 id="117_diagrams_in_a_simplicial_model_category">11.7. Diagrams in a simplicial model category</h4>
+
+<h4 id="118_overcategories_and_undercategories">11.8. Overcategories and undercategories</h4>
+
+<h4 id="119_extending_diagrams">11.9. Extending diagrams</h4>
+
+<h3 id="chapter_12_cellular_model_categories">Chapter 12. Cellular Model Categories</h3>
+
+<h4 id="121_cellular_model_categories">12.1. Cellular model categories</h4>
+
+<h4 id="122_subcomplexes_in_cellular_model_categories">12.2. Subcomplexes in cellular model categories</h4>
+
+<h4 id="123_compactness_in_cellular_model_categories">12.3. Compactness in cellular model categories</h4>
+
+<h4 id="124_smallness_in_cellular_model_categories">12.4. Smallness in cellular model categories</h4>
+
+<h4 id="125_bounding_the_size_of_cell_complexes">12.5. Bounding the size of cell complexes</h4>
+
+<h3 id="chapter_13_proper_model_categories">Chapter 13. Proper Model Categories</h3>
+
+<h4 id="131_properness">13.1. Properness</h4>
+
+<h4 id="132_properness_and_lifting">13.2. Properness and lifting</h4>
+
+<h4 id="133_homotopy_pullbacks_and_homotopy_fiber_squares">13.3. Homotopy pullbacks and homotopy fiber squares</h4>
+
+<h4 id="134_homotopy_fibers">13.4. Homotopy fibers</h4>
+
+<h4 id="135_homotopy_pushouts_and_homotopy_cofiber_squares">13.5. Homotopy pushouts and homotopy cofiber squares</h4>
+
+<h3 id="chapter_14_the_classifying_space_of_a_small_category">Chapter 14. The Classifying Space of a Small Category</h3>
+
+<h4 id="141_the_classifying_space_of_a_small_category">14.1. The classifying space of a small category</h4>
+
+<h4 id="142_cofinal_functors">14.2. Cofinal functors</h4>
+
+<h4 id="143_contractible_classifying_spaces">14.3. Contractible classifying spaces</h4>
+
+<h4 id="144_uniqueness_of_weak_equivalences">14.4. Uniqueness of weak equivalences</h4>
+
+<h4 id="145_categories_of_functors">14.5. Categories of functors</h4>
+
+<h4 id="146_cofibrant_approximations_and_fibrant_approximations">14.6. Cofibrant approximations and fibrant approximations</h4>
+
+<h4 id="147_diagrams_of_undercategories_and_overcategories">14.7. Diagrams of undercategories and overcategories</h4>
+
+<h4 id="148_free_cell_complexes_of_simplicial_sets">14.8. Free cell complexes of simplicial sets</h4>
+
+<h3 id="chapter_15_the_reedy_model_category_structure">Chapter 15. The Reedy Model Category Structure</h3>
+
+<h4 id="151_reedy_categories">15.1. Reedy categories</h4>
+
+<h4 id="152_diagrams_indexed_by_a_reedy_category">15.2. Diagrams indexed by a Reedy category</h4>
+
+<h4 id="153_the_reedy_model_category_structure">15.3. The Reedy model category structure</h4>
+
+<h4 id="154_quillen_functors">15.4. Quillen functors</h4>
+
+<h4 id="155_products_of_reedy_categories">15.5. Products of Reedy categories</h4>
+
+<h4 id="156_reedy_diagrams_in_a_cofibrantly_generated_model_category">15.6. Reedy diagrams in a cofibrantly generated model category</h4>
+
+<h4 id="157_reedy_diagrams_in_a_cellular_model_category">15.7. Reedy diagrams in a cellular model category</h4>
+
+<h4 id="158_bisimplicial_sets">15.8. Bisimplicial sets</h4>
+
+<h4 id="159_cosimplicial_simplicial_sets">15.9. Cosimplicial simplicial sets</h4>
+
+<h4 id="1510_cofibrant_constants_and_fibrant_constants">15.10. Cofibrant constants and fibrant constants</h4>
+
+<h4 id="1511_the_realization_of_a_bisimplicial_set">15.11. The realization of a bisimplicial set</h4>
+
+<h3 id="chapter_16_cosimplicial_and_simplicial_resolutions">Chapter 16. Cosimplicial and Simplicial Resolutions</h3>
+
+<h4 id="161_resolutions">16.1. Resolutions</h4>
+
+<h4 id="162_quillen_functors_and_resolutions">16.2. Quillen functors and resolutions</h4>
+
+<h4 id="163_realizations">16.3. Realizations</h4>
+
+<h4 id="164_adjointness">16.4. Adjointness</h4>
+
+<h4 id="165_homotopy_lifting_extension_theorems">16.5. Homotopy lifting extension theorems</h4>
+
+<h4 id="166_frames">16.6. Frames</h4>
+
+<h4 id="167_reedy_frames">16.7. Reedy frames</h4>
+
+<h3 id="chapter_17_homotopy_function_complexes">Chapter 17. Homotopy Function Complexes</h3>
+
+<h4 id="171_left_homotopy_function_complexes">17.1. Left homotopy function complexes</h4>
+
+<h4 id="172_right_homotopy_function_complexes">17.2. Right homotopy function complexes</h4>
+
+<h4 id="173_twosided_homotopy_function_complexes">17.3. Two-sided homotopy function complexes</h4>
+
+<h4 id="174_homotopy_function_complexes">17.4. Homotopy function complexes</h4>
+
+<h4 id="175_functorial_homotopy_function_complexes">17.5. Functorial homotopy function complexes</h4>
+
+<h4 id="176_homotopic_maps_of_homotopy_function_complexes">17.6. Homotopic maps of homotopy function complexes</h4>
+
+<h4 id="177_homotopy_classes_of_maps">17.7. Homotopy classes of maps</h4>
+
+<h4 id="178_homotopy_orthogonal_maps">17.8. Homotopy orthogonal maps</h4>
+
+<h4 id="179_sequential_colimits">17.9. Sequential colimits</h4>
+
+<h3 id="chapter_18_homotopy_limits_in_simplicial_model_categories">Chapter 18. Homotopy Limits in Simplicial Model Categories</h3>
+
+<h4 id="181_homotopy_colimits_and_homotopy_limits">18.1. Homotopy colimits and homotopy limits</h4>
+
+<h4 id="182_the_homotopy_limit_of_a_diagram_of_spaces">18.2. The homotopy limit of a diagram of spaces</h4>
+
+<h4 id="183_coends_and_ends">18.3. Coends and ends</h4>
+
+<h4 id="184_consequences_of_adjoint_ness">18.4. Consequences of adjoint ness</h4>
+
+<h4 id="185_homotopy_invariance">18.5. Homotopy invariance</h4>
+
+<h4 id="186_simplicial_objects_and_cosimplicial_objects">18.6. Simplicial objects and cosimplicial objects</h4>
+
+<h4 id="187_the_bousfieldkan_map">18.7. The Bousfield-Kan map</h4>
+
+<h4 id="188_diagrams_of_pointed_or_unpointed_spaces">18.8. Diagrams of pointed or unpointed spaces</h4>
+
+<h4 id="189_diagrams_of_simplicial_sets">18.9. Diagrams of simplicial sets</h4>
+
+<h3 id="chapter_19_homotopy_limits_in_general_model_categories">Chapter 19. Homotopy Limits in General Model Categories</h3>
+
+<h4 id="191_homotopy_colimits_and_homotopy_limits">19.1. Homotopy colimits and homotopy limits</h4>
+
+<h4 id="192_coends_and_ends">19.2. Coends and ends</h4>
+
+<h4 id="193_consequences_of_adjoint_ness">19.3. Consequences of adjoint ness</h4>
+
+<h4 id="194_homotopy_invariance">19.4. Homotopy invariance</h4>
+
+<h4 id="195_homotopy_pullbacks_and_homotopy_pushouts">19.5. Homotopy pullbacks and homotopy pushouts</h4>
+
+<h4 id="196_homotopy_cofinal_functors">19.6. Homotopy cofinal functors</h4>
+
+<h4 id="197_the_reedy_diagram_homotopy_lifting_extension_theorem">19.7. The Reedy diagram homotopy lifting extension theorem</h4>
+
+<h4 id="198_realizations_and_total_objects">19.8. Realizations and total objects</h4>
+
+<h4 id="199_reedy_cofibrant_diagrams_and_reedy_fibrant_diagrams">19.9. Reedy cofibrant diagrams and Reedy fibrant diagrams</h4>
+
+<h2 id="index">Index</h2>
+
+<h2 id="bibliography">Bibliography</h2>
+<div class="property">category: <a class="category_link" href="/nlab/all_pages/reference">reference</a></div></body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on August  8, 2022 at 17:18:55.
+    See the <a href="/nlab/history/Model+Categories+and+Their+Localizations" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Model+Categories+and+Their+Localizations" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/12221/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/Model+Categories+and+Their+Localizations/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Model+Categories+and+Their+Localizations" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Model+Categories+and+Their+Localizations" accesskey="S" class="navlink" id="history" rel="nofollow">History (1 revision)</a>
+  <a href="/nlab/show/Model+Categories+and+Their+Localizations/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Model+Categories+and+Their+Localizations" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Model+Categories+and+Their+Localizations" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

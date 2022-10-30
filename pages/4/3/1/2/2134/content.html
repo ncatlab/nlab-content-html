@@ -1,0 +1,742 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Schur&#39;s lemma in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Schur&#39;s lemma
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9038/#Item_6" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="representation_theory">Representation theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/representation+theory">representation theory</a></strong></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/geometric+representation+theory">geometric representation theory</a></strong></p>
+
+<h2 id="ingredients">Ingredients</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/linear+algebra">linear algebra</a>, <a class="existingWikiWord" href="/nlab/show/algebra">algebra</a>, <a class="existingWikiWord" href="/nlab/show/higher+algebra">higher algebra</a></li>
+</ul>
+
+<h2 id="definitions">Definitions</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/representation">representation</a>, <a class="existingWikiWord" href="/nlab/show/2-representation">2-representation</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-representation">∞-representation</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/group">group</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-group">∞-group</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/group+algebra">group algebra</a>, <a class="existingWikiWord" href="/nlab/show/algebraic+group">algebraic group</a>, <a class="existingWikiWord" href="/nlab/show/Lie+algebra">Lie algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vector+space">vector space</a>, <a class="existingWikiWord" href="/nlab/show/n-vector+space">n-vector space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/affine+space">affine space</a>, <a class="existingWikiWord" href="/nlab/show/symplectic+vector+space">symplectic vector space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/action">action</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-action">∞-action</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/module">module</a>, <a class="existingWikiWord" href="/nlab/show/equivariant+object">equivariant object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bimodule">bimodule</a>, <a class="existingWikiWord" href="/nlab/show/Morita+equivalence">Morita equivalence</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/induced+representation">induced representation</a>, <a class="existingWikiWord" href="/nlab/show/Frobenius+reciprocity">Frobenius reciprocity</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a>, <a class="existingWikiWord" href="/nlab/show/Banach+space">Banach space</a>, <a class="existingWikiWord" href="/nlab/show/Fourier+transform">Fourier transform</a>, <a class="existingWikiWord" href="/nlab/show/functional+analysis">functional analysis</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/orbit">orbit</a>, <a class="existingWikiWord" href="/nlab/show/coadjoint+orbit">coadjoint orbit</a>, <a class="existingWikiWord" href="/nlab/show/Killing+form">Killing form</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/unitary+representation">unitary representation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+quantization">geometric quantization</a>, <a class="existingWikiWord" href="/nlab/show/coherent+state">coherent state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/socle">socle</a>, <a class="existingWikiWord" href="/nlab/show/quiver">quiver</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/module+algebra">module algebra</a>, <a class="existingWikiWord" href="/nlab/show/comodule+algebra">comodule algebra</a>, <a class="existingWikiWord" href="/nlab/show/Hopf+action">Hopf action</a>, <a class="existingWikiWord" href="/nlab/show/measuring">measuring</a></p>
+</li>
+</ul>
+
+<h2 id="geometric_representation_theory">Geometric representation theory</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/D-module">D-module</a>, <a class="existingWikiWord" href="/nlab/show/perverse+sheaf">perverse sheaf</a>,</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+group">Grothendieck group</a>, <a class="existingWikiWord" href="/nlab/show/lambda-ring">lambda-ring</a>, <a class="existingWikiWord" href="/nlab/show/symmetric+function">symmetric function</a>, <a class="existingWikiWord" href="/nlab/show/formal+group">formal group</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/principal+bundle">principal bundle</a>, <a class="existingWikiWord" href="/nlab/show/torsor">torsor</a>, <a class="existingWikiWord" href="/nlab/show/vector+bundle">vector bundle</a>, <a class="existingWikiWord" href="/nlab/show/Atiyah+Lie+algebroid">Atiyah Lie algebroid</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+function+theory">geometric function theory</a>, <a class="existingWikiWord" href="/nlab/show/groupoidification">groupoidification</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a>, <a class="existingWikiWord" href="/nlab/show/algebra+over+an+operad">algebra over an operad</a>, <a class="existingWikiWord" href="/nlab/show/actegory">actegory</a>, <a class="existingWikiWord" href="/nlab/show/crossed+module">crossed module</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/reconstruction+theorems">reconstruction theorems</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Borel-Weil-Bott+theorem">Borel-Weil-Bott theorem</a></p>
+</li>
+
+<li>
+<p><span class="newWikiWord">Be?linson-Bernstein localization<a href="/nlab/new/Be%3Flinson-Bernstein+localization">?</a></span></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kazhdan-Lusztig+theory">Kazhdan-Lusztig theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/BBDG+decomposition+theorem">BBDG decomposition theorem</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/representation+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#statement'>Statement</a></li>
+<li><a href='#proof'>Proof</a></li>
+<li><a href='#InterpretationInCategoricalAlgebra'>Interpretation in categorical algebra</a></li>
+<li><a href='#GeneralizationsAndVariants'>Generalizations and variants</a></li>
+<ul>
+<li><a href='#for_simple_modules'>For simple modules</a></li>
+<li><a href='#for_simple_objects_in_an_abelian_category'>For simple objects in an abelian category</a></li>
+<li><a href='#for_bridgeland_stable_objects'>For Bridgeland stable objects</a></li>
+</ul>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>Schur’s lemma is one of the fundamental facts of <a class="existingWikiWord" href="/nlab/show/representation+theory">representation theory</a>. It concerns basic properties of the <a class="existingWikiWord" href="/nlab/show/hom-sets">hom-sets</a> between <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible</a> <a class="existingWikiWord" href="/nlab/show/linear+representations">linear representations</a> of <a class="existingWikiWord" href="/nlab/show/groups">groups</a>.</p>
+
+<p>The lemma consists of two parts that depend on different assumptions (a distinction often not highlighted in the literature):</p>
+
+<ol>
+<li>
+<p>The first statement applies over <em>every</em> <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a>:</p>
+
+<p>It says that there are no non-<a class="existingWikiWord" href="/nlab/show/zero+morphism">zero</a> <a class="existingWikiWord" href="/nlab/show/homomorphisms">homomorphisms</a> between distinct (i.e. non-<a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphic</a>) <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a></p>
+</li>
+
+<li>
+<p>The second statement applies only in the special case that the <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a> is an <a class="existingWikiWord" href="/nlab/show/algebraically+closed+field">algebraically closed field</a> (such as the <a class="existingWikiWord" href="/nlab/show/complex+numbers">complex numbers</a>) and that the <a class="existingWikiWord" href="/nlab/show/representations">representations</a> are <a class="existingWikiWord" href="/nlab/show/finite+dimensional+vector+space">finite-dimensional</a>:</p>
+
+<p>It says that, in this case, moreover the only non-trivial <a class="existingWikiWord" href="/nlab/show/endomorphisms">endomorphisms</a> of an <a class="existingWikiWord" href="/nlab/show/irreducible+representation">irreducible representation</a> are multiples of the <a class="existingWikiWord" href="/nlab/show/identity+morphism">identity morphism</a>.</p>
+</li>
+</ol>
+
+<h2 id="statement">Statement</h2>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/group">group</a>. In the following:</p>
+
+<ul>
+<li>
+<p><em>representation</em> means <em><a class="existingWikiWord" href="/nlab/show/linear+representation">linear representation</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></em>, linear over some <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a>.</p>
+</li>
+
+<li>
+<p><em>finite dimensional representation</em> means that the underlying <a class="existingWikiWord" href="/nlab/show/vector+space">vector space</a> is a <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+space">finite-dimensional vector space</a>.</p>
+</li>
+
+<li>
+<p>an <em><a class="existingWikiWord" href="/nlab/show/irreducible+representation">irreducible representation</a></em> is one whose only <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/invariant">invariant</a> <a class="existingWikiWord" href="/nlab/show/subspaces">subspaces</a> (<a class="existingWikiWord" href="/nlab/show/fixed+point+spaces">fixed point spaces</a>) are the trivial degenerate cases: the <a class="existingWikiWord" href="/nlab/show/zero+object">zero</a>-subspace and the full space itself.</p>
+</li>
+</ul>
+
+<p>
+<div class='num_prop' id='SchurLemma'>
+<h6>Proposition</h6>
+<p><strong>(Schur’s lemma)</strong> <br /> 1. A <a class="existingWikiWord" href="/nlab/show/homomorphism">homomorphism</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">\phi \;\colon\; V\to W</annotation></semantics></math> between <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a>, is either the <a class="existingWikiWord" href="/nlab/show/zero+morphism">zero morphism</a> or an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a>.</p>
+
+<p>It follows that the <a class="existingWikiWord" href="/nlab/show/endomorphism+ring">endomorphism ring</a> of an <a class="existingWikiWord" href="/nlab/show/irreducible+representation">irreducible representation</a> is a <a class="existingWikiWord" href="/nlab/show/division+ring">division ring</a>.</p>
+
+<ol>
+<li>
+<p>In the case that the <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a> is an <a class="existingWikiWord" href="/nlab/show/algebraically+closed+field">algebraically closed field</a>; <a class="existingWikiWord" href="/nlab/show/endomorphisms">endomorphisms</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>V</mi><mo>→</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">\phi \;\colon\; V \to V</annotation></semantics></math> of a <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+space">finite dimensional</a> <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> are a multiple <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>⋅</mo><mi>id</mi></mrow><annotation encoding="application/x-tex">c \cdot id</annotation></semantics></math> of the <a class="existingWikiWord" href="/nlab/show/identity+morphism">identity operator</a>.</p>
+
+<p>In other words, nontrivial automorphisms of irreducible representations, <em>a priori</em> possible by (1), are ruled out over algebraically closed fields.</p>
+</li>
+</ol>
+
+<p></p>
+</div>
+</p>
+
+<h2 id="proof">Proof</h2>
+
+<p>As it goes with very fundamental lemmas, the <a class="existingWikiWord" href="/nlab/show/proof">proof</a> of Schur’s lemma follows by elementary inspection.</p>
+
+<p>
+<div class='proof'>
+<h6>Proof</h6>
+<p>(of Prop. <a class="maruku-ref" href="#SchurLemma"></a>) <br /> For the first statement:</p>
+
+<p>It is immediate to see that both the <a class="existingWikiWord" href="/nlab/show/kernel">kernel</a> as well as <a class="existingWikiWord" href="/nlab/show/image">image</a> of a <a class="existingWikiWord" href="/nlab/show/homomorphism">homomorphism</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>V</mi><mover><mo>⟶</mo><mi>f</mi></mover><mi>W</mi></mrow><annotation encoding="application/x-tex">
+  V \overset{f}{\longrightarrow} W
+
+</annotation></semantics></math></div>
+<p>of any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/representations">representations</a> are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/invariant">invariant</a> <a class="existingWikiWord" href="/nlab/show/subspaces">subspaces</a> (<a class="existingWikiWord" href="/nlab/show/fixed+point+spaces">fixed point spaces</a>). But by the very definition of <a class="existingWikiWord" href="/nlab/show/irreducible+representation">irreducibility</a>, the only such subspaces of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math> are the degenerate ones: their zero subspaces and the full spaces themselves.</p>
+
+<p>Now if the <a class="existingWikiWord" href="/nlab/show/kernel">kernel</a> is all of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> or the <a class="existingWikiWord" href="/nlab/show/image">image</a> is <a class="existingWikiWord" href="/nlab/show/zero+object">zero</a>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/zero+morphism">zero morphism</a>. The only case left is that the <a class="existingWikiWord" href="/nlab/show/kernel">kernel</a> is <a class="existingWikiWord" href="/nlab/show/zero+object">zero</a> <em>and</em> the <a class="existingWikiWord" href="/nlab/show/image">image</a> is all of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math>, but this means that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/injective+map">injective</a> and <a class="existingWikiWord" href="/nlab/show/surjective+map">surjective</a> and is hence an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a>.</p>
+
+<p>For the second statement:</p>
+
+<p>Now we use that over an <a class="existingWikiWord" href="/nlab/show/algebraically+closed+field">algebraically closed field</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math> of every <a class="existingWikiWord" href="/nlab/show/linear+map">linear</a> <a class="existingWikiWord" href="/nlab/show/endomorphism">endomorphism</a> of a <a class="existingWikiWord" href="/nlab/show/finite+dimensional+vector+space">finite dimensional vector space</a> has an <a class="existingWikiWord" href="/nlab/show/eigenvalue">eigenvalue</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">c \in k</annotation></semantics></math> (which is, ultimately, due to the <a class="existingWikiWord" href="/nlab/show/fundamental+theorem+of+algebra">fundamental theorem of algebra</a> for <a class="existingWikiWord" href="/nlab/show/algebraically+closed+fields">algebraically closed fields</a>). Now, with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> also the linear combination</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>−</mo><mi>c</mi><mo>⋅</mo><mi mathvariant="normal">id</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>V</mi><mo>⟶</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">
+  (f - c \cdot \mathrm{id}) \;\colon\; V \longrightarrow V
+
+</annotation></semantics></math></div>
+<p>is a <a class="existingWikiWord" href="/nlab/show/homomorphism">homomorphism</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/representations">representations</a>. But then, by the first part, this must be an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> or <a class="existingWikiWord" href="/nlab/show/zero+morphism">zero</a>. But it is not an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a>, by construction, since now the <a class="existingWikiWord" href="/nlab/show/eigenvectors">eigenvectors</a> with <a class="existingWikiWord" href="/nlab/show/eigenvalue">eigenvalue</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> are in the <a class="existingWikiWord" href="/nlab/show/kernel">kernel</a>. Therefore, all of the linear combination must be <a class="existingWikiWord" href="/nlab/show/zero+morphism">zero</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>−</mo><mi>c</mi><mo>⋅</mo><mi>id</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">
+  f - c \cdot id = 0
+
+</annotation></semantics></math></div>
+<p>and hence</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>=</mo><mi>c</mi><mo>⋅</mo><mi>id</mi></mrow><annotation encoding="application/x-tex">
+  f = c \cdot id
+
+</annotation></semantics></math></div>
+<p>is a multiple of the identity.</p>
+</div>
+</p>
+
+<h2 id="InterpretationInCategoricalAlgebra">Interpretation in categorical algebra</h2>
+
+<p>The statement of <em>Schur’s lemma</em> is particularly suggestive in the language of <a class="existingWikiWord" href="/nlab/show/categorical+algebra">categorical algebra</a>.</p>
+
+<p>Here it says that <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a> form a <a class="existingWikiWord" href="/nlab/show/categorification">categorified</a> <em><a class="existingWikiWord" href="/nlab/show/orthogonal+basis">orthogonal basis</a></em> for the <a class="existingWikiWord" href="/nlab/show/2-Hilbert+space">2-Hilbert space</a> of <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+space">finite-dimensional</a> <a class="existingWikiWord" href="/nlab/show/representations">representations</a>, and even an <em><a class="existingWikiWord" href="/nlab/show/orthonormal+basis">orthonormal basis</a></em> if the <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a> is <a class="existingWikiWord" href="/nlab/show/algebraically+closed+field">algebraically closed</a>.</p>
+
+<p>After <a class="existingWikiWord" href="/nlab/show/decategorification">decategorification</a> this becomes equivalently the statement that the <a class="existingWikiWord" href="/nlab/show/isomorphism+classes">isomorphism classes</a> of <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a> form an <em><a class="existingWikiWord" href="/nlab/show/orthogonal+basis">orthogonal basis</a></em> for the <a class="existingWikiWord" href="/nlab/show/representation+ring">representation ring</a>, and even an <em><a class="existingWikiWord" href="/nlab/show/orthonormal+basis">orthonormal basis</a></em> if the <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a> is <a class="existingWikiWord" href="/nlab/show/algebraically+closed+field">algebraically closed</a>.</p>
+
+<p>For more on this perspective see also at <em><a class="existingWikiWord" href="/nlab/show/Gram-Schmidt+process">Gram-Schmidt process</a></em> the section <em><a href="Gram-Schmidt+process#CategorifiedGramSchmidtProcess">Categorified Gram-Schmidt process</a></em>.</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></p>
+
+<p>We now explain this perspective of in more detail:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></p>
+
+<p>Notice that the <a class="existingWikiWord" href="/nlab/show/hom-sets">hom-sets</a> in a <a class="existingWikiWord" href="/nlab/show/category+of+representations">category of representations</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mi>Rep</mi></mrow><annotation encoding="application/x-tex">G Rep</annotation></semantics></math> are canonically <a class="existingWikiWord" href="/nlab/show/vector+spaces">vector spaces</a>: given any two <a class="existingWikiWord" href="/nlab/show/homomorphisms">homomorphisms</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>,</mo><mi>g</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">f,g \;\colon\; V \to W</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/representations">representations</a>, also the (value-wise) <a class="existingWikiWord" href="/nlab/show/linear+combination">linear combination</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>1</mn></msub><mi>f</mi><mo>+</mo><msub><mi>c</mi> <mn>2</mn></msub><mi>g</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">c_1 f + c_2 g \;\colon\; V \to W</annotation></semantics></math> is a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-homomorphism. (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mi>Rep</mi></mrow><annotation encoding="application/x-tex">G Rep</annotation></semantics></math> is canonically <a class="existingWikiWord" href="/nlab/show/enriched+category">enriched</a> over <a class="existingWikiWord" href="/nlab/show/Vect">Vect</a>.)</p>
+
+<p>Now it makes sense to regard this <a class="existingWikiWord" href="/nlab/show/vector+space">vector space</a>-valued <a class="existingWikiWord" href="/nlab/show/hom-functor">hom-functor</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mi>Rep</mi></mrow><annotation encoding="application/x-tex">G Rep</annotation></semantics></math> as analogous</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>G</mi></msub><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>G</mi><msup><mi>Rep</mi> <mi>op</mi></msup><mo>×</mo><mi>G</mi><mi>Rep</mi><mo>⟶</mo><mi>Vect</mi></mrow><annotation encoding="application/x-tex">
+  hom_G(-,-) \;\colon\; G Rep^{op} \times G Rep \longrightarrow Vect
+
+</annotation></semantics></math></div>
+<p>as a <a class="existingWikiWord" href="/nlab/show/categorification">categorified</a> <a class="existingWikiWord" href="/nlab/show/inner+product">inner product</a> (see at <em><a class="existingWikiWord" href="/nlab/show/2-Hilbert+space">2-Hilbert space</a></em> for more on this).</p>
+
+<p>This is a useful perspective even after <a class="existingWikiWord" href="/nlab/show/decategorification">decategorification</a>:</p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>,</mo><mi>W</mi><mo>∈</mo><mi>G</mi><msup><mi>Rep</mi> <mi>fin</mi></msup></mrow><annotation encoding="application/x-tex">V, W \in G Rep^{fin}</annotation></semantics></math> two <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+space">finite-dimensional</a> <a class="existingWikiWord" href="/nlab/show/representations">representations</a>, write</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>V</mi><mo>,</mo><mi>W</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>dim</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>hom</mi> <mi>G</mi></msub><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>∈</mo><mspace width="thickmathspace"></mspace><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">
+  \langle V,W\rangle
+  \;\coloneqq\;
+  dim\big( hom_G(-,-) \big)
+  \;\in\;
+  \mathbb{N}
+
+</annotation></semantics></math></div>
+<p>for the <a class="existingWikiWord" href="/nlab/show/dimension">dimension</a> of the vector space of homomorphism between them (e.g. <a href="#tomDieck09">tom Dieck 09, p. 29</a>).</p>
+
+<p>This construction only depends on the <a class="existingWikiWord" href="/nlab/show/isomorphism+classes">isomorphism classes</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math>, and hence descends to a <a class="existingWikiWord" href="/nlab/show/function">function</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>G</mi><msubsup><mi>Rep</mi> <mrow><mo stretchy="false">/</mo><mo>∼</mo></mrow> <mi>fin</mi></msubsup><mo>×</mo><mi>G</mi><msubsup><mi>Rep</mi> <mrow><mo stretchy="false">/</mo><mo>∼</mo></mrow> <mi>fin</mi></msubsup><mo>⟶</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">  \langle -,-\rangle 
+  \;\colon\; 
+  G Rep^{fin}_{/\sim} \times G Rep^{fin}_{/\sim}
+  \longrightarrow
+  \mathbb{N}
+
+</annotation></semantics></math></div>
+<p>on <a class="existingWikiWord" href="/nlab/show/sets">sets</a> of <a class="existingWikiWord" href="/nlab/show/isomorphism+classes">isomorphism classes</a>. In fact, under <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a> and <a class="existingWikiWord" href="/nlab/show/tensor+product+of+representations">tensor product of representations</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><msubsup><mi>Rep</mi> <mrow><mo stretchy="false">/</mo><mo>∼</mo></mrow> <mi>fin</mi></msubsup></mrow><annotation encoding="application/x-tex">G Rep^{fin}_{/\sim}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/rig">rig</a>, and this pairing is <a class="existingWikiWord" href="/nlab/show/linear+map">linear</a> with respect to the underlying <a class="existingWikiWord" href="/nlab/show/commutative+monoid">additive monoid</a> structure:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo>⟨</mo><msub><mi>V</mi> <mn>1</mn></msub><mo>⊕</mo><msub><mi>V</mi> <mn>2</mn></msub><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thinmathspace"></mspace><mi>W</mi><mo>⟩</mo></mrow><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mrow><mo>⟨</mo><msub><mi>V</mi> <mn>1</mn></msub><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thinmathspace"></mspace><mi>W</mi><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>⟨</mo><msub><mi>V</mi> <mn>2</mn></msub><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thinmathspace"></mspace><mi>W</mi><mo>⟩</mo></mrow></mrow><annotation encoding="application/x-tex">
+  \left\langle
+    V_1 \oplus V_2
+    \,,\,
+    W
+  \right\rangle
+  \;=\;
+  \left\langle
+    V_1 
+    \,,\,
+    W
+  \right\rangle
+  +
+  \left\langle
+    V_2
+    \,,\,
+    W
+  \right\rangle
+
+</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo>⟨</mo><mi>V</mi><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>W</mi> <mn>1</mn></msub><mo>⊕</mo><msub><mi>W</mi> <mi>w</mi></msub><mo>⟩</mo></mrow><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mrow><mo>⟨</mo><mi>V</mi><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>W</mi> <mn>1</mn></msub><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>⟨</mo><mi>V</mi><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>W</mi> <mn>2</mn></msub><mo>⟩</mo></mrow></mrow><annotation encoding="application/x-tex">
+  \left\langle
+    V
+    \,,\,
+    W_1 \oplus W_w
+  \right\rangle
+  \;=\;
+  \left\langle
+    V
+    \,,\,
+    W_1
+  \right\rangle
+  +
+  \left\langle
+    V
+    \,,\,
+    W_2
+  \right\rangle
+
+</annotation></semantics></math></div>
+<p>(This is, ultimately, due to the <a class="existingWikiWord" href="/nlab/show/universal+property">universal property</a> of <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a> as a <a class="existingWikiWord" href="/nlab/show/biproduct">biproduct</a>.)</p>
+
+<p>To further strengthen the emerging picture, we may consider the <a class="existingWikiWord" href="/nlab/show/group+completion">group completion</a> of the <a class="existingWikiWord" href="/nlab/show/commutative+monoid">commutative monoid</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><msubsup><mi>Rep</mi> <mrow><mo stretchy="false">/</mo><mo>∼</mo></mrow> <mi>fin</mi></msubsup></mrow><annotation encoding="application/x-tex">G Rep^{fin}_{/\sim}</annotation></semantics></math> by passing to its <a class="existingWikiWord" href="/nlab/show/Grothendieck+group">Grothendieck group</a>, in fact its <a class="existingWikiWord" href="/nlab/show/Grothendieck+ring">Grothendieck ring</a> if we remember also the <a class="existingWikiWord" href="/nlab/show/tensor+product+of+representations">tensor product of representations</a>. This <a class="existingWikiWord" href="/nlab/show/commutative+ring">commutative ring</a> is called the <a class="existingWikiWord" href="/nlab/show/representation+ring">representation ring</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>K</mi><mrow><mo>(</mo><mi>G</mi><msubsup><mi>Rep</mi> <mrow><mo stretchy="false">/</mo><mo>∼</mo></mrow> <mi>fin</mi></msubsup><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">
+  R(G) \;\coloneqq\; K\left(  G Rep^{fin}_{/\sim} \right)
+
+</annotation></semantics></math></div>
+<p>of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>. By the evident <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℤ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math>-linear extension, the above pairing gives an actual symmetric <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℤ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/bilinear+map">bilinear</a> <a class="existingWikiWord" href="/nlab/show/inner+product">inner product</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(G)</annotation></semantics></math>:</p>
+<div class="maruku-equation" id="eq:DecategorifiedInnterProduct"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>R</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo><mo>×</mo><mi>R</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo><mo>⟶</mo><mi>ℤ</mi></mrow><annotation encoding="application/x-tex">
+  
+  \langle
+   -,- 
+  \rangle
+  \;\colon\;
+  R(G) \times R(G)
+  \longrightarrow 
+  \mathbb{Z}
+
+</annotation></semantics></math></div>
+<p>Now the underlying <a class="existingWikiWord" href="/nlab/show/abelian+group">abelian group</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(G)</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/free+abelian+group">free abelian group</a> whose canonical <a class="existingWikiWord" href="/nlab/show/generators+and+relations">generators</a> are nothing but the <a class="existingWikiWord" href="/nlab/show/isomorphism+classes">isomorphism classes</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V_i</annotation></semantics></math> of the <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+space">finite-dimensional</a> <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><msub><mo>≃</mo> <mi>ℤ</mi></msub><mspace width="thickmathspace"></mspace><mi>ℤ</mi><mo maxsize="1.2em" minsize="1.2em">[</mo><mo stretchy="false">{</mo><msub><mi>V</mi> <mi>i</mi></msub><msub><mo stretchy="false">}</mo> <mi>i</mi></msub><mo maxsize="1.2em" minsize="1.2em">]</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  R(G) \;\simeq_{\mathbb{Z}}\;  \mathbb{Z}\big[ \{V_i\}_i \big]
+  \,.
+
+</annotation></semantics></math></div>
+<p>In summary, in the language of <a class="existingWikiWord" href="/nlab/show/linear+algebra">linear algebra</a>, the <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><msub><mi>V</mi> <mi>i</mi></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[V_i]</annotation></semantics></math> constitute a canonical <em><a class="existingWikiWord" href="/nlab/show/linear+basis">linear basis</a></em> of the <a class="existingWikiWord" href="/nlab/show/representation+ring">representation ring</a>.</p>
+
+<p>In terms of this language, <strong>Schur’s lemma</strong> becomes the following statement:</p>
+
+<p>The canonical <a class="existingWikiWord" href="/nlab/show/linear+basis">linear basis</a> of the <a class="existingWikiWord" href="/nlab/show/representation+ring">representation ring</a> given by the <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a> is</p>
+
+<ol>
+<li>
+<p>generally: an <em><a class="existingWikiWord" href="/nlab/show/orthogonal+basis">ortho-gonal basis</a></em>;</p>
+</li>
+
+<li>
+<p>even an <em><a class="existingWikiWord" href="/nlab/show/orthonormal+basis">ortho-normal basis</a></em> if the <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a> is <a class="existingWikiWord" href="/nlab/show/algebraically+closed+field">algebraically closed field</a></p>
+</li>
+</ol>
+
+<p>with respect to the canonical <a class="existingWikiWord" href="/nlab/show/decategorification">decategorified</a> <a class="existingWikiWord" href="/nlab/show/inner+product">inner product</a> from <a class="maruku-eqref" href="#eq:DecategorifiedInnterProduct">(1)</a>.</p>
+
+<h2 id="GeneralizationsAndVariants">Generalizations and variants</h2>
+
+<h3 id="for_simple_modules">For simple modules</h3>
+
+<p>Part (1) is essentially <a class="existingWikiWord" href="/nlab/show/category+theory">category-theoretic</a> and can be generalized in many ways, for example, by replacing the <a class="existingWikiWord" href="/nlab/show/group">group</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math> by some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/associative+algebra">algebra</a> and taking the representations compatible with the action of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>.</p>
+
+<h3 id="for_simple_objects_in_an_abelian_category">For simple objects in an abelian category</h3>
+
+<p>More generally, given an <a class="existingWikiWord" href="/nlab/show/abelian+category">abelian category</a>, part (1) of Schur’s lemma applies to the <a class="existingWikiWord" href="/nlab/show/simple+objects">simple objects</a> (see <a href="simple+object#SchurLemma">there</a>) and the <a class="existingWikiWord" href="/nlab/show/endomorphism+ring">endomorphism ring</a> of a <a class="existingWikiWord" href="/nlab/show/simple+object">simple object</a> is a <a class="existingWikiWord" href="/nlab/show/division+ring">division ring</a>.</p>
+
+<p>For (2), if the <a class="existingWikiWord" href="/nlab/show/endomorphism+rings">endomorphism rings</a> of all objects in an <a class="existingWikiWord" href="/nlab/show/abelian+category">abelian category</a> are <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+space">finite-dimensional</a> over an <a class="existingWikiWord" href="/nlab/show/algebraically+closed+field">algebraically closed field</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math> (as is the case for group representations), then the endomorphism ring of a simple object is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math> itself.</p>
+
+<h3 id="for_bridgeland_stable_objects">For Bridgeland stable objects</h3>
+
+<p>The statement of Schur’s lemma applies also to objects which are stable with respect to a <a class="existingWikiWord" href="/nlab/show/Bridgeland+stability+condition">Bridgeland stability condition</a>, see <a href="Bridgeland+stability+condition#SchurLemma">there</a></p>
+
+<h2 id="references">References</h2>
+
+<p>Named after <em><a class="existingWikiWord" href="/nlab/show/Issai+Schur">Issai Schur</a></em>.</p>
+
+<p>Lecture notes include</p>
+
+<ul>
+<li id="tomDieck09"><a class="existingWikiWord" href="/nlab/show/Tammo+tom+Dieck">Tammo tom Dieck</a>, (1.1.2) in <em>Representation theory</em>, 2009 (<a href="http://www.uni-math.gwdg.de/tammo/rep.pdf">pdf</a>)</li>
+</ul>
+
+<p>See also</p>
+
+<ul>
+<li>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Schur%27s_lemma">Schur’s lemma</a></em></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on July  5, 2022 at 16:23:15.
+    See the <a href="/nlab/history/Schur%27s+lemma" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Schur%27s+lemma" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/9038/#Item_6">Discuss</a><span class="backintime"><a href="/nlab/revision/Schur%27s+lemma/13" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Schur%27s+lemma" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Schur%27s+lemma" accesskey="S" class="navlink" id="history" rel="nofollow">History (13 revisions)</a>
+  <a href="/nlab/show/Schur%27s+lemma/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Schur%27s+lemma" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Schur%27s+lemma" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

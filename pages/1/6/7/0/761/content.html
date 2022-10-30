@@ -1,0 +1,879 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      van Kampen theorem in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      van Kampen theorem
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/2029/#Item_7" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="homotopy_theory">Homotopy theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/homotopy+theory">homotopy theory</a>, <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category+theory">(∞,1)-category theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a></strong></p>
+
+<p>flavors: <a class="existingWikiWord" href="/nlab/show/stable+homotopy+theory">stable</a>, <a class="existingWikiWord" href="/nlab/show/equivariant+homotopy+theory">equivariant</a>, <a class="existingWikiWord" href="/nlab/show/rational+homotopy+theory">rational</a>, <a class="existingWikiWord" href="/nlab/show/p-adic+homotopy+theory">p-adic</a>, <a class="existingWikiWord" href="/nlab/show/proper+homotopy+theory">proper</a>, <a class="existingWikiWord" href="/nlab/show/geometric+homotopy+theory">geometric</a>, <a class="existingWikiWord" href="/nlab/show/cohesive+homotopy+theory">cohesive</a>, <a class="existingWikiWord" href="/nlab/show/directed+homotopy+theory">directed</a>…</p>
+
+<p>models: <a class="existingWikiWord" href="/nlab/show/topological+homotopy+theory">topological</a>, <a class="existingWikiWord" href="/nlab/show/simplicial+homotopy+theory">simplicial</a>, <a class="existingWikiWord" href="/nlab/show/localic+homotopy+theory">localic</a>, …</p>
+
+<p>see also <strong><a class="existingWikiWord" href="/nlab/show/algebraic+topology">algebraic topology</a></strong></p>
+
+<p><strong>Introductions</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Introduction+to+Topology+--+2">Introduction to Basic Homotopy Theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Introduction+to+Homotopy+Theory">Introduction to Abstract Homotopy Theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometry+of+physics+--+homotopy+types">geometry of physics – homotopy types</a></p>
+</li>
+</ul>
+
+<p><strong>Definitions</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy">homotopy</a>, <a class="existingWikiWord" href="/nlab/show/higher+homotopy">higher homotopy</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+type">homotopy type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Pi-algebra">Pi-algebra</a>, <a class="existingWikiWord" href="/nlab/show/spherical+object+and+Pi%28A%29-algebra">spherical object and Pi(A)-algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coherent+category+theory">homotopy coherent category theory</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopical+category">homotopical category</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+category">model category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/category+of+fibrant+objects">category of fibrant objects</a>, <a class="existingWikiWord" href="/nlab/show/cofibration+category">cofibration category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Waldhausen+category">Waldhausen category</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+category">homotopy category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Ho%28Top%29">Ho(Top)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category">(∞,1)-category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/homotopy+category+of+an+%28%E2%88%9E%2C1%29-category">homotopy category of an (∞,1)-category</a></li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Paths and cylinders</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/left+homotopy">left homotopy</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cylinder+object">cylinder object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mapping+cone">mapping cone</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/right+homotopy">right homotopy</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/path+object">path object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mapping+cocone">mapping cocone</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/generalized+universal+bundle">universal bundle</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/interval+object">interval object</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+localization">homotopy localization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/infinitesimal+interval+object">infinitesimal interval object</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Homotopy groups</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+group">homotopy group</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+group">fundamental group</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fundamental+group+of+a+topos">fundamental group of a topos</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Brown-Grossman+homotopy+group">Brown-Grossman homotopy group</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/categorical+homotopy+groups+in+an+%28%E2%88%9E%2C1%29-topos">categorical homotopy groups in an (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+homotopy+groups+in+an+%28%E2%88%9E%2C1%29-topos">geometric homotopy groups in an (∞,1)-topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+%E2%88%9E-groupoid">fundamental ∞-groupoid</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+groupoid">fundamental groupoid</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/path+groupoid">path groupoid</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+%E2%88%9E-groupoid+in+a+locally+%E2%88%9E-connected+%28%E2%88%9E%2C1%29-topos">fundamental ∞-groupoid in a locally ∞-connected (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+%E2%88%9E-groupoid+of+a+locally+%E2%88%9E-connected+%28%E2%88%9E%2C1%29-topos">fundamental ∞-groupoid of a locally ∞-connected (∞,1)-topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+%28%E2%88%9E%2C1%29-category">fundamental (∞,1)-category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fundamental+category">fundamental category</a></li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Basic facts</strong></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fundamental+group+of+the+circle+is+the+integers">fundamental group of the circle is the integers</a></li>
+</ul>
+
+<p><strong>Theorems</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+theorem+of+covering+spaces">fundamental theorem of covering spaces</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Freudenthal+suspension+theorem">Freudenthal suspension theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Blakers-Massey+theorem">Blakers-Massey theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/higher+homotopy+van+Kampen+theorem">higher homotopy van Kampen theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/nerve+theorem">nerve theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Whitehead%27s+theorem">Whitehead's theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Hurewicz+theorem">Hurewicz theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Galois+theory">Galois theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+hypothesis">homotopy hypothesis</a>-theorem</p>
+</li>
+</ul>
+</div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#statement'>Statement</a></li>
+<ul>
+<li><a href='#for_fundamental_groups'>For fundamental groups</a></li>
+<li><a href='#from_groups_to_groupoids'>From groups to groupoids</a></li>
+<li><a href='#strict_van_kampen_theorem_for_groupoids'>Strict van Kampen theorem for groupoids</a></li>
+<li><a href='#homotopy_van_kampen_theorem_for_groupoids'>Homotopy van Kampen theorem for groupoids</a></li>
+<li><a href='#examples'>Examples</a></li>
+<li><a href='#van_kampen_theorem_in_homotopy_type_theory'>van Kampen theorem in homotopy type theory</a></li>
+</ul>
+<li><a href='#generalizations'>Generalizations</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>The <em>Seifert-van Kampen theorem</em> is a classical theorem in <a class="existingWikiWord" href="/nlab/show/algebraic+topology">algebraic topology</a> which computes the <a class="existingWikiWord" href="/nlab/show/fundamental+group">fundamental group</a> of a pointed <a class="existingWikiWord" href="/nlab/show/topological+space">topological space</a> in terms of a decomposition into <a class="existingWikiWord" href="/nlab/show/open+subsets">open subsets</a>.</p>
+
+<p>It is most naturally expressed by saying that the <a class="existingWikiWord" href="/nlab/show/fundamental+groupoid">fundamental groupoid</a> <a class="existingWikiWord" href="/nlab/show/functor">functor</a> preserves certain <a class="existingWikiWord" href="/nlab/show/colimits">colimits</a>. Here there is a bifurcation in possible generalizations, however. The colimits of spaces we consider (covers by open subsets) are both strict colimits and <a class="existingWikiWord" href="/nlab/show/homotopy+colimits">homotopy colimits</a>. But we can ask the resulting colimit of groupoids to be either a <a class="existingWikiWord" href="/nlab/show/homotopy+colimit">homotopy colimit</a> (i.e. a <a class="existingWikiWord" href="/nlab/show/2-colimit">2-colimit</a>) or a <a class="existingWikiWord" href="/nlab/show/strict+2-colimit">strict colimit</a>. The first is more natural for formal work; the second is more useful for computation. Accordingly, we will speak of <em>homotopy van Kampen theorems</em> and <em>strict van Kampen theorems</em>.</p>
+
+<h2 id="statement">Statement</h2>
+
+<h3 id="for_fundamental_groups">For fundamental groups</h3>
+
+<p>The most classical version of the <strong>Seifert-van Kampen theorem</strong> for the <a class="existingWikiWord" href="/nlab/show/fundamental+group">fundamental group</a> is the following.</p>
+
+<div class="un_theorem">
+<h6 id="theorem">Theorem</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/topological+space">topological space</a> <a class="existingWikiWord" href="/nlab/show/covering">covered</a> by <a class="existingWikiWord" href="/nlab/show/open+subsets">open subsets</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>,</mo><mi>V</mi><mo>⊂</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">U,V \subset X</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">U \cap V</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/path-connected+space">path connected</a>. Then for every choice of basepoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">x \in U \cap V</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/diagram">diagram</a> of <a class="existingWikiWord" href="/nlab/show/homotopy+group">homotopy group</a>s</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>∩</mo><mi>V</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>V</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \pi_1(U \cap V, x) &amp;\to&amp; \pi_1(U,x)
+    \\
+    \downarrow &amp;&amp; \downarrow
+    \\
+    \pi_1(V,x) &amp;\to&amp; \pi_1(X,x)
+  }
+
+</annotation></semantics></math></div>
+<p>is a <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a> square in <a class="existingWikiWord" href="/nlab/show/Grp">Grp</a>.</p>
+</div>
+
+<h3 id="from_groups_to_groupoids">From groups to groupoids</h3>
+
+<p>We can regard the classical theorem as being a statement about fundamental groupoids as follows. Recall that any group <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math> can be considered as a 1-object groupoid <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>B</mi></mstyle><mi>G</mi></mrow><annotation encoding="application/x-tex">\mathbf{B}G</annotation></semantics></math> by <a class="existingWikiWord" href="/nlab/show/delooping">delooping</a>. It is easy to see that the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>B</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{B}</annotation></semantics></math> takes colimits of groups to strict colimits of groupoids. Moreover, a strict pushout of one-object groupoids is also a 2-pushout, because the maps we are pushing out are <a class="existingWikiWord" href="/nlab/show/bo+functor">bijective on objects</a>, hence <a class="existingWikiWord" href="/nlab/show/cofibrations">cofibrations</a> in the <a class="existingWikiWord" href="/nlab/show/canonical+model+structure">canonical model structure</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Gpd</mi></mrow><annotation encoding="application/x-tex">Gpd</annotation></semantics></math>. Thus, under the hypotheses of the classical van Kampen theorem, we have a square</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mstyle mathvariant="bold"><mi>B</mi></mstyle><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>∩</mo><mi>V</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mstyle mathvariant="bold"><mi>B</mi></mstyle><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mstyle mathvariant="bold"><mi>B</mi></mstyle><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>V</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mstyle mathvariant="bold"><mi>B</mi></mstyle><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathbf{B}\pi_1(U \cap V, x) &amp;\to&amp; \mathbf{B}\pi_1(U,x)
+    \\
+    \downarrow &amp;&amp; \downarrow
+    \\
+    \mathbf{B}\pi_1(V,x) &amp;\to&amp; \mathbf{B}\pi_1(X,x)
+  }
+
+</annotation></semantics></math></div>
+<p>which is both a strict pushout and a <a class="existingWikiWord" href="/nlab/show/2-colimit">2-pushout</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Gpd</mi></mrow><annotation encoding="application/x-tex">Gpd</annotation></semantics></math>.</p>
+
+<p>Now let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">X'</annotation></semantics></math> be the <a class="existingWikiWord" href="/nlab/show/path+component">path component</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> which contains <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">U\cap V</annotation></semantics></math> (there is exactly one such, because <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">U\cap V</annotation></semantics></math> is path-connected), and similarly <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">U'</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">V'</annotation></semantics></math>. Then the <a class="existingWikiWord" href="/nlab/show/fundamental+groupoid">fundamental groupoid</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X')</annotation></semantics></math> is equivalent to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>B</mi></mstyle><msub><mi>π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{B}\pi_1(X,x)</annotation></semantics></math>, and similarly in the other cases. Since 2-pushouts are invariant under equivalence of groupoids, we also have a 2-pushout square</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>∩</mo><mi>V</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>′</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>V</mi><mo>′</mo><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>′</mo><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \Pi_1(U \cap V) &amp;\to&amp; \Pi_1(U')
+    \\
+    \downarrow &amp;&amp; \downarrow
+    \\
+    \Pi_1(V') &amp;\to&amp; \Pi_1(X')
+  }
+
+</annotation></semantics></math></div>
+<p>This is an instance of what we referred to above as a <em>homotopy van Kampen theorem</em>. But we can easily make it a <em>strict van Kampen theorem</em> as well.</p>
+
+<p>Note that the functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>∩</mo><mi>V</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(U\cap V) \to \Pi_1(U')</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>∩</mo><mi>V</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(U\cap V) \to \Pi_1(U')</annotation></semantics></math> are injective on objects, hence cofibrations in the canonical model structure, and so their strict pushout is also a 2-pushout. This strict pushout is therefore equivalent to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X')</annotation></semantics></math>. (It need not be isomorphic to it, but this can be remedied by defining the <em>fundamental groupoid on a set of specified basepoints</em> as below.)</p>
+
+<p>We now consider more general versions of the van Kampen theorem which do not require <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">U\cap V</annotation></semantics></math> to be path-connected, and which compute all of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X)</annotation></semantics></math> rather than just <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X')</annotation></semantics></math>.</p>
+
+<h3 id="strict_van_kampen_theorem_for_groupoids">Strict van Kampen theorem for groupoids</h3>
+
+<p>Let us define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X,X_0)</annotation></semantics></math> of a space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and a subset <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">X_0 \subseteq X</annotation></semantics></math> to be the full subgroupoid of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X)</annotation></semantics></math> on the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">X_0</annotation></semantics></math>. More generally, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is given as a subspace of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">X_0 \subseteq X</annotation></semantics></math>, we write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(U,X_0)</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo>∩</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(U,X_0\cap U)</annotation></semantics></math>.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mo>*</mo></msub><mo>=</mo><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">X_* =(X,X_0)</annotation></semantics></math> is a pair consisting of a space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">X_0</annotation></semantics></math> of base points, we say <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">X_*</annotation></semantics></math> is <em>connected</em> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">X_0</annotation></semantics></math> meets each path component of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. This is clearly a necessary and sufficient condition for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X,X_0)</annotation></semantics></math> to be equivalent to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X)</annotation></semantics></math>.</p>
+
+<p>Now let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msup><mi>U</mi> <mi>i</mi></msup><mo>→</mo><mi>X</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{U^i \to X\}</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">i \in I</annotation></semantics></math> be an <a class="existingWikiWord" href="/nlab/show/open+cover">open cover</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>d</mi><mo>=</mo><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo><mo>∈</mo><msup><mi>I</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">d=(i,j) \in I^2</annotation></semantics></math> we write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>U</mi> <mi>d</mi></msup></mrow><annotation encoding="application/x-tex">U^d</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>U</mi> <mi>i</mi></msup><mo>∩</mo><msup><mi>U</mi> <mi>j</mi></msup></mrow><annotation encoding="application/x-tex">U^i \cap U^j</annotation></semantics></math>, and similarly for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-fold intersections. For any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-tuple <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>∈</mo><msup><mi>I</mi> <mi>n</mi></msup></mrow><annotation encoding="application/x-tex">e\in I^n</annotation></semantics></math>, let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>U</mi> <mo>*</mo> <mi>e</mi></msubsup></mrow><annotation encoding="application/x-tex">U^e_*</annotation></semantics></math> be the pair <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>U</mi> <mi>e</mi></msup><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo>∩</mo><msup><mi>U</mi> <mi>e</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U^e,X_0 \cap U^e)</annotation></semantics></math>. We then have a <a class="existingWikiWord" href="/nlab/show/coequaliser">coequaliser</a> diagram of pairs of spaces, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math> are determined by inclusions:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">⨆</mo> <mrow><mi>d</mi><mo>∈</mo><msup><mi>I</mi> <mn>2</mn></msup></mrow></munder><msubsup><mi>U</mi> <mo>*</mo> <mi>d</mi></msubsup><mover><munder><mo>→</mo><mi>b</mi></munder><mover><mo>→</mo><mi>a</mi></mover></mover><munder><mo lspace="thinmathspace" rspace="thinmathspace">⨆</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></munder><msubsup><mi>U</mi> <mo>*</mo> <mi>i</mi></msubsup><mover><mo>→</mo><mi>c</mi></mover><msub><mi>X</mi> <mo>*</mo></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \bigsqcup_{d \in I^2} U^d_* 
+    \stackrel{\overset{a}{\to}}{\underset{b}{\to}}
+  \bigsqcup _{i \in I} U^i_* \xrightarrow{c} X_*
+  \,.
+
+</annotation></semantics></math></div>
+<div class="un_theorem">
+<h6 id="theorem_2">Theorem</h6>
+
+<p>If the pairs of spaces <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>U</mi> <mo>*</mo> <mi>f</mi></msubsup></mrow><annotation encoding="application/x-tex">U^f_*</annotation></semantics></math> are connected for all 1-, 2-, or 3-fold intersections <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>U</mi> <mo>*</mo> <mi>f</mi></msubsup></mrow><annotation encoding="application/x-tex">U^f_*</annotation></semantics></math> of the pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>U</mi> <mo>*</mo> <mi>i</mi></msubsup></mrow><annotation encoding="application/x-tex">U^i_*</annotation></semantics></math>, then</p>
+
+<ol>
+<li>
+<p>(Conn) The pair <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">X_*</annotation></semantics></math> is connected; and</p>
+</li>
+
+<li>
+<p>(Iso) The <a class="existingWikiWord" href="/nlab/show/fundamental+groupoid">fundamental groupoid</a> functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\Pi_1</annotation></semantics></math> takes the above coequaliser diagram of pairs of spaces to a (strict) coequaliser diagram of groupoids.</p>
+</li>
+</ol>
+</div>
+
+<p>The limit “3” on the connectivity hypothesis may be analyzed as “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">1+2</annotation></semantics></math>”, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math> is the categorical dimension of the fundamental groupoids we are considering and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math> is a universal constant. This becomes evident when generalizing to <a class="existingWikiWord" href="/nlab/show/higher+homotopy+van+Kampen+theorems">higher homotopy van Kampen theorems</a>.</p>
+
+<p>In one proof of the theorem (due to Brown and Razak, see below), the number 3 arises from the Lebesgue covering dimension of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>ℝ</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^2</annotation></semantics></math>. This proof verifies the universal property for a coequaliser, using basic techniques: subdivide a path; deform a subdivision so that it is product of paths joining points of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">X_0</annotation></semantics></math>; subdivide a homotopy rel end points, and deform this subdivision so that <em>all</em> subpaths join points of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">X_0</annotation></semantics></math>; any composition of <a class="existingWikiWord" href="/nlab/show/commutative+square">commutative square</a>s in a groupoid is commutative.</p>
+
+<p>In another, more categorical proof explained in the next section, the number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math> arises from the fact that 2-colimits can be computed using coproducts and <a class="existingWikiWord" href="/nlab/show/descent+objects">descent objects</a> of 2-truncated <a class="existingWikiWord" href="/nlab/show/simplicial+objects">simplicial objects</a>.</p>
+
+<p>Note that the theorem about groupoids does <em>not</em> reduce to a theorem about groups. For example, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> may be a connected space which is the union of two open sets each with many components and whose intersection has many path components. Such examples arise commonly from applications to combinatorial group theory; consider for example a covering space of a wedge of spaces. Or the connected <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> may be the union of 23 open sets whose three fold intersections have 123 path components. In each case the fundamental group one might want to calculate is in the middle of this complicated combinatorial situation, but at least the theorem has turned a topological problem into a group theory and combinatorial problem, and the remarkable fact is that the fundamental groups are <em>completely</em> determined by the theorem. This is an “anomaly” for traditional algebraic topology, where invariants relating adjacent dimensions may be determined by exact sequences which do not give complete information. The reason for the success seems to be that groupoids have structure in dimensions 0 and 1, and so can model the gluing of spaces.</p>
+
+<p>This suggests that <a class="existingWikiWord" href="/nlab/show/higher+homotopy+van+Kampen+theorem">higher homotopy van Kampen theorem</a>s could give new kinds of homotopical information, i.e. colimit theorems for higher homotopy invariants, which has proved to be so.</p>
+
+<h3 id="homotopy_van_kampen_theorem_for_groupoids">Homotopy van Kampen theorem for groupoids</h3>
+
+<p>From a 2-categorical point of view, the strict van Kampen theorem above can be decomposed into the following parts:</p>
+
+<ol>
+<li>
+<p>When <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is the union of a family of open sets, then it is the homotopy colimit of a diagram involving these open sets.</p>
+</li>
+
+<li>
+<p>The fundamental groupoid functor preserves homotopy colimits (i.e. takes them to homotopy colimits, or equivalently 2-colimits, of groupoids).</p>
+</li>
+
+<li>
+<p>Certain 2-colimits of groupoids can be computed over “2-truncated” subdiagrams.</p>
+</li>
+
+<li>
+<p>In certain situations, strict colimits of groupoids are also 2-colimits.</p>
+</li>
+</ol>
+
+<p>We can then prove the theorem by proving each of these three parts separately. This is essentially accomplished in <a href="#Farjoun">Farjoun</a>.</p>
+
+<div class="num_theorem" id="Cechcover">
+<h6 id="theorem_3">Theorem</h6>
+
+<p>If a space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is the union of a family of open sets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>U</mi> <mi>i</mi></msup><msub><mo stretchy="false">)</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(U^i)_{i\in I}</annotation></semantics></math>, then we have a <a class="existingWikiWord" href="/nlab/show/weak+equivalence">weak equivalence</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>hocolim</mi><msub><mi>C</mi> <mo>•</mo></msub><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mo>∼</mo></mover><mi>X</mi><mo>,</mo></mrow><annotation encoding="application/x-tex"> hocolim C_\bullet(U) \xrightarrow{\sim} X, </annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>C</mi> <mo>•</mo></msub><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C_\bullet(U)</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/Cech+cover">Cech cover</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, a <a class="existingWikiWord" href="/nlab/show/simplicial+space">simplicial space</a> defined by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>C</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><mi>U</mi><mo stretchy="false">)</mo><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mrow><mi>J</mi><mo>⊆</mo><mi>I</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">|</mo><mi>J</mi><mo stretchy="false">|</mo><mo>=</mo><mi>n</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">⋂</mo> <mrow><mi>i</mi><mo>∈</mo><mi>J</mi></mrow></munder><msup><mi>U</mi> <mi>i</mi></msup><mo>.</mo></mrow><annotation encoding="application/x-tex">C_n(U) = \coprod_{J\subseteq I,\, |J|=n} \bigcap_{i\in J} U^i. </annotation></semantics></math></div></div>
+
+<p>See <a href="#DuggerIsaksen01">Dugger-Isaksen 01</a>.</p>
+
+<div class="num_theorem" id="Pi1Hocolim">
+<h6 id="theorem_4">Theorem</h6>
+
+<p>Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math> is a small category and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>X</mi> <mi>i</mi></msup><msub><mo stretchy="false">)</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(X^i)_{i\in I}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/diagram">diagram</a> of spaces. Then we have an equivalence of groupoids</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msub><mo lspace="0em" rspace="thinmathspace">hocolim</mo> <mi>i</mi></msub><msup><mi>X</mi> <mi>i</mi></msup><mo stretchy="false">)</mo><mo>≃</mo><msub><mo lspace="0em" rspace="thinmathspace">hocolim</mo> <mi>i</mi></msub><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msup><mi>X</mi> <mi>i</mi></msup><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex"> \Pi_1(\hocolim_i X^i) \simeq \hocolim_i \Pi_1(X^i). </annotation></semantics></math></div></div>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p>The functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\Pi_1</annotation></semantics></math> is, up to equivalence, the composite of itself with the 1st <a class="existingWikiWord" href="/nlab/show/Postnikov+approximation">Postnikov approximation</a> functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mn>1</mn></msub><mo>:</mo><mi>Top</mi><mo>→</mo><mi>Top</mi></mrow><annotation encoding="application/x-tex">P_1 : Top \to Top</annotation></semantics></math>. We can regard <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">P_1</annotation></semantics></math> as a <a class="existingWikiWord" href="/nlab/show/Bousfield+localization">Bousfield localization</a> functor for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Top</mi></mrow><annotation encoding="application/x-tex">Top</annotation></semantics></math> (for localizing at the map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mn>2</mn></msup><mo>→</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">S^2 \to \ast</annotation></semantics></math>), so it preserves homotopy colimits. And <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\Pi_1</annotation></semantics></math> is part of a <a class="existingWikiWord" href="/nlab/show/Quillen+equivalence">Quillen equivalence</a> between <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Gpd</mi></mrow><annotation encoding="application/x-tex">Gpd</annotation></semantics></math> and the 1-localized model structure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Top</mi></mrow><annotation encoding="application/x-tex">Top</annotation></semantics></math>, so it also preserves homotopy colimits.</p>
+</div>
+
+<div class="num_theorem" id="Codescent">
+<h6 id="theorem_5">Theorem</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is the union of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>U</mi> <mi>i</mi></msup><msub><mo stretchy="false">)</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(U^i)_{i\in I}</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">X_0\subseteq X</annotation></semantics></math> is a set of basepoints which intersects each 1-, 2-, and 3-fold intersection of opens <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>U</mi> <mi>i</mi></msup></mrow><annotation encoding="application/x-tex">U^i</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X,X_0)</annotation></semantics></math> is equivalent to the <a class="existingWikiWord" href="/nlab/show/2-colimit">2-colimit</a> (i.e. <a class="existingWikiWord" href="/nlab/show/codescent+object">codescent object</a>) of the following diagram</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mrow><mi>i</mi><mo>,</mo><mi>j</mi><mo>,</mo><mi>k</mi></mrow></munder><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msup><mi>U</mi> <mrow><mi>i</mi><mi>j</mi><mi>k</mi></mrow></msup><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><munderover><mo>→</mo><mo>→</mo><mo>→</mo></munderover><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mrow><mi>i</mi><mo>,</mo><mi>j</mi></mrow></munder><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msup><mi>U</mi> <mrow><mi>i</mi><mi>j</mi></mrow></msup><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>⇉</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mi>i</mi></munder><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msup><mi>U</mi> <mi>i</mi></msup><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex"> \coprod_{i,j,k} \Pi_1(U^{i j k},X_0) \;\underoverset{\to}{\to}{\to}\;
+\coprod_{i,j} \Pi_1(U^{i j},X_0) \;\rightrightarrows\;
+\coprod_i \Pi_1(U^i,X_0).
+
+</annotation></semantics></math></div></div>
+
+<div class="proof">
+<h6 id="proof_2">Proof</h6>
+
+<p>If we neglect the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">X_0</annotation></semantics></math>‘s, then what we have above is the 2-truncated part of the homotopy colimit of groupoids obtained by applying Theorem <a class="maruku-ref" href="#Pi1Hocolim"></a> to Theorem <a class="maruku-ref" href="#Cechcover"></a>. Since homotopy colimits of simplicial objects in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Gpd</mi></mrow><annotation encoding="application/x-tex">Gpd</annotation></semantics></math> are equivalent to codescent objects of their 2-truncations (essentially because groupoids are 1-groupoids), this has an equivalent homotopy colimit. Finally, the assumption on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">X_0</annotation></semantics></math> ensures that restricting to it as a set of basepoints does not change the equivalence type of any of the groupoids in the 2-truncated diagram.</p>
+</div>
+
+<div class="num_theorem" id="CodescentCoeq">
+<h6 id="theorem_6">Theorem</h6>
+
+<p>Under the hypotheses of Theorem <a class="maruku-ref" href="#Codescent"></a>, we have that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X,X_0)</annotation></semantics></math> is isomorphic to the strict coequalizer of</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mrow><mi>i</mi><mo>,</mo><mi>j</mi></mrow></munder><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msup><mi>U</mi> <mrow><mi>i</mi><mi>j</mi></mrow></msup><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>⇉</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mi>i</mi></munder><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msup><mi>U</mi> <mi>i</mi></msup><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+\coprod_{i,j} \Pi_1(U^{i j},X_0) \;\rightrightarrows\;
+\coprod_i \Pi_1(U^i,X_0).
+
+</annotation></semantics></math></div></div>
+
+<div class="proof">
+<h6 id="proof_3">Proof</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>=</mo><mi>P</mi><mo stretchy="false">(</mo><mi>I</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A = P(I)</annotation></semantics></math> be the power set of the indexing set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math>, regarded as a poset, and consider the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>Gpd</mi></mrow><annotation encoding="application/x-tex">F:A\to Gpd</annotation></semantics></math> defined by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>J</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">⋂</mo> <mrow><mi>i</mi><mo>∈</mo><mi>J</mi></mrow></msub><msup><mi>U</mi> <mi>i</mi></msup><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(J) = \Pi_1(\bigcap_{i\in J} U^i, X_0)</annotation></semantics></math>. We can verify that the 2-colimit of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is equivalent to the codescent object in Theorem <a class="maruku-ref" href="#Codescent"></a>, for essentially the same reasons cited there. (Formally, one can say that the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mrow><mo>≤</mo><mn>3</mn></mrow></msub><mo stretchy="false">(</mo><mi>I</mi><mo stretchy="false">)</mo><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">P_{\le 3}(I) \to A</annotation></semantics></math> is “2-final”.)</p>
+
+<p>However, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is cofibrant in the <a class="existingWikiWord" href="/nlab/show/projective+model+structure">projective model structure</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Gpd</mi> <mi>A</mi></msup></mrow><annotation encoding="application/x-tex">Gpd^A</annotation></semantics></math>, which is to say that the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mover><mo>→</mo><mi>F</mi></mover><mi>Gpd</mi><mover><mo>→</mo><mi>ob</mi></mover><mi>Set</mi></mrow><annotation encoding="application/x-tex">A\xrightarrow{F} Gpd \xrightarrow{ob} Set</annotation></semantics></math> is free (relative to the forgetful functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mi>A</mi></msup><mo>→</mo><msup><mi>Set</mi> <mrow><mi>ob</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">Set^A \to Set^{ob(A)}</annotation></semantics></math>): its generators are the points <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>F</mi><mo stretchy="false">(</mo><mi>J</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x\in F(J)</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>=</mo><mo stretchy="false">{</mo><mi>i</mi><mo>∈</mo><mi>I</mi><mspace width="thinmathspace"></mspace><mo stretchy="false">|</mo><mspace width="thinmathspace"></mspace><mi>x</mi><mo>∈</mo><msup><mi>U</mi> <mi>i</mi></msup><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">J = \{ i\in I \,|\, x\in U^i \}</annotation></semantics></math>. Thus, the 2-colimit of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is equivalent to its strict colimit, which in turn is easily seen to be the coequalizer shown above.</p>
+
+<p>This shows that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(X,X_0)</annotation></semantics></math> is equivalent to the strict coequalizer shown above. But this equivalence is clearly also bijective on objects, so it is an isomorphism of groupoids.</p>
+</div>
+
+<h3 id="examples">Examples</h3>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>=</mo><msup><mi>S</mi> <mn>1</mn></msup></mrow><annotation encoding="application/x-tex">X=S^1</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>=</mo><msup><mi>S</mi> <mn>1</mn></msup><mo>∖</mo><mo stretchy="false">{</mo><mi>N</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">U= S^1 \setminus \{N\}</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>=</mo><msup><mi>S</mi> <mn>1</mn></msup><mo>∖</mo><mo stretchy="false">{</mo><mi>S</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">V= S^1 \setminus \{S\}</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> are antipodal points. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>≅</mo><mi>V</mi><mo>≅</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">U\cong V\cong (0,1)</annotation></semantics></math> are contractible, while <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>∩</mo><mi>V</mi><mo>≅</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⊔</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">U\cap V \cong (0,1) \sqcup (0,1)</annotation></semantics></math>. Thus the homotopy van Kampen theorem gives a 2-pushout of groupoids that is equivalent to</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mo>*</mo><mo>⊔</mo><mo>*</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mo>*</mo></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mo>*</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msup><mi>S</mi> <mn>1</mn></msup><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array{ \ast\sqcup \ast &amp; \to &amp; \ast \\
+  \downarrow &amp;&amp; \downarrow \\
+  \ast &amp; \to &amp; \Pi_1(S^1) } 
+</annotation></semantics></math></div>
+<p>It’s not hard to compute that this 2-pushout must be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>B</mi></mstyle><mi>ℤ</mi></mrow><annotation encoding="application/x-tex">\mathbf{B}\mathbb{Z}</annotation></semantics></math>. But we can also obtain this directly from the strict van Kampen theorem with a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>=</mo><mo stretchy="false">{</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">X_0 = \{u,v\}</annotation></semantics></math> of two basepoints with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>u</mi><mo>∈</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">u\in U</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">v\in V</annotation></semantics></math>, which yields a strict pushout of groupoids</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mo>*</mo><mo>⊔</mo><mo>*</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>ℐ</mi></mtd></mtr> <mtr><mtd><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>ℐ</mi></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><msup><mi>S</mi> <mn>1</mn></msup><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array{ \ast\sqcup \ast &amp; \to &amp; \mathcal{I} \\
+  \downarrow &amp;&amp; \downarrow \\
+  \mathcal{I} &amp; \to &amp; \Pi_1(S^1,X_0) } 
+</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℐ</mi></mrow><annotation encoding="application/x-tex">\mathcal{I}</annotation></semantics></math> is the invertible <a class="existingWikiWord" href="/nlab/show/interval+category">interval category</a>, which is (literally) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(U,X_0)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>V</mi><mo>,</mo><msub><mi>X</mi> <mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1(V,X_0)</annotation></semantics></math>.</p>
+
+<p>Note that the version of the theorem for fundamental groups does not apply, since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>∩</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">U\cap V</annotation></semantics></math> is not path-connected.</p>
+
+<h3 id="van_kampen_theorem_in_homotopy_type_theory">van Kampen theorem in homotopy type theory</h3>
+
+<p>The van Kampen theorem can be expressed in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>, a type theory under which one could do <a class="existingWikiWord" href="/nlab/show/synthetic+homotopy+theory">synthetic homotopy theory</a>, as follows:</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A, B, C</annotation></semantics></math> be <a class="existingWikiWord" href="/nlab/show/types">types</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \to B</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">g : A \to C</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/functions">functions</a>. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo>≡</mo><mi>B</mi><msub><mo>⊔</mo> <mi>A</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">P\equiv B \sqcup_A C</annotation></semantics></math> be their <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a>.</p>
+
+<p>By defining a special <em>code</em> function using the <a class="existingWikiWord" href="/nlab/show/encode-decode+method">encode-decode method</a> the van Kampen theorem says that:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Π</mi> <mn>1</mn></msub><mi>P</mi><mo stretchy="false">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false">)</mo><mo>≃</mo><mi>code</mi><mo stretchy="false">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi_1 P(u, v) \simeq code(u,v)</annotation></semantics></math></div>
+<p>There are (at least) two code functions that can be given, which are listed in section 8.7 of the <a class="existingWikiWord" href="/nlab/show/HoTT+Book">HoTT Book</a>. (it would be good if somebody could transcribe the code functions over here). The first is a “naive” van Kampen theorem. The second version is the van Kampen at a set of basepoints.</p>
+
+<h2 id="generalizations">Generalizations</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/van+Kampen+theorem+for+toposes">van Kampen theorem for toposes</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/higher+homotopy+van+Kampen+theorem">higher homotopy van Kampen theorem</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<p>See also this <a href="http://mathoverflow.net/questions/40945/compelling-evidence-that-two-basepoints-are-better-than-one">mathoverflow discussion</a></p>
+
+<p>The use of a set of base points for a pushout theorem and so determining the fundamental group of the circle was published in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Ronnie+Brown">Ronnie Brown</a>, <em>Groupoids and van Kampen’s theorem</em>, Proc. London Math. Soc. (3) 17 (1967) 385-401.</li>
+</ul>
+
+<p>The more general theorem for the fundamental groupoid on a set of base points:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Ronnie+Brown">Ronnie Brown</a> and A. Razak, <em>A van Kampen theorem for unions of non-connected spaces</em>, Archiv. Math. 42 (1984) 85-88. <a href="http://pages.bangor.ac.uk/pdffiles/brown-razak.pdf">pdf</a></li>
+</ul>
+
+<p>The pushout theorem is among applications of groupoids to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math>-dimensional homotopy theory (e.g. gluing theorem, covering spaces, orbit spaces) and to the Jordan Curve Theorem in:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Ronnie+Brown">Ronnie Brown</a>, <em><a href="http://groupoids.org.uk/topgpds.html">Topology and Groupoids</a></em>, Booksurge (2006). pdf available; book available from amazon.</li>
+</ul>
+
+<p>The proof for pushouts is discussed in some detail in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Ronnie+Brown">Ronnie Brown</a>, <a class="existingWikiWord" href="/nlab/show/Philip+Higgins">Philip Higgins</a>, <a class="existingWikiWord" href="/nlab/show/Rafael+Sivera">Rafael Sivera</a>, <em><a class="existingWikiWord" href="/nlab/show/Nonabelian+Algebraic+Topology">Nonabelian Algebraic Topology</a></em></li>
+</ul>
+
+<p>as a background to the following chapters on versions for crossed modules and crossed complexes, i.e. for higher dimensional versions.</p>
+
+<p>The proof via homotopy colimits is roughly taken from</p>
+
+<ul>
+<li id="Farjoun"><a class="existingWikiWord" href="/nlab/show/Emmanuel+Dror+Farjoun">Emmanuel Dror Farjoun</a>, <em>Fundamental group of homotopy colimits</em>, Adv. in Math. 182 (2004), 1-27. (<a href="http://www.maths.ed.ac.uk/~aar/papers/farjoun.pdf">pdf</a>)</li>
+</ul>
+
+<p>Other references cited above:</p>
+
+<ul>
+<li id="DuggerIsaksen01"><a class="existingWikiWord" href="/nlab/show/Dan+Dugger">Dan Dugger</a>, <a class="existingWikiWord" href="/nlab/show/Daniel+Isaksen">Daniel Isaksen</a>, <em>Hypercovers in topology</em> (<a href="https://arxiv.org/abs/math/0111287">arxiv:math/0111287</a>)</li>
+</ul>
+
+<p>Discussion of <a class="existingWikiWord" href="/nlab/show/persistent+homotopy">persistent homotopy</a> with focus on the <a class="existingWikiWord" href="/nlab/show/van+Kampen+theorem">van Kampen theorem</a>, <a class="existingWikiWord" href="/nlab/show/excision">excision</a> and the <a class="existingWikiWord" href="/nlab/show/Hurewicz+theorem">Hurewicz theorem</a>:</p>
+
+<ul>
+<li>Mehmet Ali Batan, Mehmetcik Pamuk, Hanife Varli, <em>Persistent Homotopy</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/1909.08865">arXiv:1909.08865</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></li>
+</ul>
+
+<p>For the van Kampen theorem in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>:</p>
+
+<ul>
+<li>Univalent Foundations Project, <a class="existingWikiWord" href="/nlab/show/HoTT+book">Homotopy Type Theory – Univalent Foundations of Mathematics</a> (2013)</li>
+</ul>
+
+<p>Formalization of the van Kampen theorem in <a class="existingWikiWord" href="/nlab/show/proof+assistants">proof assistants</a>:</p>
+
+<ul>
+<li><a href="https://github.com/HoTT/HoTT-Agda/tree/e48a16bcd719e2fcb409d79e3f7df6c6b81223bb/theorems/homotopy/vankampen">In Agda</a></li>
+
+<li><a href="https://github.com/leanprover/lean2/blob/master/hott/homotopy/vankampen.hlean">In Lean</a></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on June 11, 2022 at 16:44:34.
+    See the <a href="/nlab/history/van+Kampen+theorem" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/van+Kampen+theorem" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/2029/#Item_7">Discuss</a><span class="backintime"><a href="/nlab/revision/van+Kampen+theorem/30" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/van+Kampen+theorem" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/van+Kampen+theorem" accesskey="S" class="navlink" id="history" rel="nofollow">History (30 revisions)</a>
+  <a href="/nlab/show/van+Kampen+theorem/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/van+Kampen+theorem" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/van+Kampen+theorem" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

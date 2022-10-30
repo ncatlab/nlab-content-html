@@ -1,0 +1,696 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      internal (co-)limit in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      internal (co-)limit
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/12494/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="category_theory"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\infty,1)</annotation></semantics></math>-Category theory</h4>
+
+<h4 id="limits_and_colimits">Limits and colimits</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/limit">limits and colimits</a></strong></p>
+
+<h2 id="1categorical">1-Categorical</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/limit">limit and colimit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/limits+and+colimits+by+example">limits and colimits by example</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/commutativity+of+limits+and+colimits">commutativity of limits and colimits</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/small+limit">small limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/filtered+colimit">filtered colimit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/directed+colimit">directed colimit</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/sequential+colimit">sequential colimit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/sifted+colimit">sifted colimit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/connected+limit">connected limit</a>, <a class="existingWikiWord" href="/nlab/show/wide+pullback">wide pullback</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/preserved+limit">preserved limit</a>, <a class="existingWikiWord" href="/nlab/show/reflected+limit">reflected limit</a>, <a class="existingWikiWord" href="/nlab/show/created+limit">created limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/product">product</a>, <a class="existingWikiWord" href="/nlab/show/fiber+product">fiber product</a>, <a class="existingWikiWord" href="/nlab/show/base+change">base change</a>, <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a>, <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a>, <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a>, <a class="existingWikiWord" href="/nlab/show/cobase+change">cobase change</a>, <a class="existingWikiWord" href="/nlab/show/equalizer">equalizer</a>, <a class="existingWikiWord" href="/nlab/show/coequalizer">coequalizer</a>, <a class="existingWikiWord" href="/nlab/show/join">join</a>, <a class="existingWikiWord" href="/nlab/show/meet">meet</a>, <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a>, <a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a>, <a class="existingWikiWord" href="/nlab/show/direct+product">direct product</a>, <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/finite+limit">finite limit</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/exact+functor">exact functor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kan+extension">Kan extension</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Yoneda+extension">Yoneda extension</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/weighted+limit">weighted limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/end">end and coend</a></p>
+</li>
+</ul>
+
+<h2 id="2categorical">2-Categorical</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-limit">2-limit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/inserter">inserter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/isoinserter">isoinserter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/equifier">equifier</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/inverter">inverter</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/PIE-limit">PIE-limit</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-pullback">2-pullback</a>, <a class="existingWikiWord" href="/nlab/show/comma+object">comma object</a></p>
+</li>
+</ul>
+
+<h2 id="1categorical_2">(∞,1)-Categorical</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-limit">(∞,1)-limit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-pullback">(∞,1)-pullback</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fiber+sequence">fiber sequence</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3 id="modelcategorical">Model-categorical</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+Kan+extension">homotopy Kan extension</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+limit">homotopy limit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+product">homotopy product</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+equalizer">homotopy equalizer</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+fiber">homotopy fiber</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mapping+cone">mapping cone</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+pullback">homotopy pullback</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+totalization">homotopy totalization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+end">homotopy end</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+colimit">homotopy colimit</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coproduct">homotopy coproduct</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coequalizer">homotopy coequalizer</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+cofiber">homotopy cofiber</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mapping+cocone">mapping cocone</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+pushout">homotopy pushout</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+realization">homotopy realization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coend">homotopy coend</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/infinity-limits+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#examples'>Examples</a></li>
+<ul>
+<li><a href='#ExamplesInfinityGroupoidal'><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-Groupoidal homotopy limits and colimits of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoids</a></li>
+<li><a href='#BorelConstructionHomotopyQuotients'>Borel construction and homotopy-quotients, -invariants, -coinvariants</a></li>
+</ul>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>Speaking in the <a class="existingWikiWord" href="/nlab/show/internal+language">internal language</a> of a given <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math>, one may try to formulate <a class="existingWikiWord" href="/nlab/show/universal+constructions">universal constructions</a> such as of <a class="existingWikiWord" href="/nlab/show/limits">limits</a>/<a class="existingWikiWord" href="/nlab/show/colimits">colimits</a> internally.</p>
+
+<p>Given the system of <a class="existingWikiWord" href="/nlab/show/slice+categories">slice categories</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf{H}_{/X}</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math> (or more generally any <a class="existingWikiWord" href="/nlab/show/indexed+category">indexed category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>↦</mo><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">X \mapsto \mathbf{H}_X</annotation></semantics></math>), then one may regard <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> as the shape of a discrete <a class="existingWikiWord" href="/nlab/show/internal+diagram">internal diagram</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math>, and regard the objects in the slice <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf{H}_{/X}</annotation></semantics></math> as discrete actual <a class="existingWikiWord" href="/nlab/show/internal+diagrams">internal diagrams</a> of this shape.</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math> happens to have a (small) <a class="existingWikiWord" href="/nlab/show/object+classifier">object classifier</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>h</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{h}</annotation></semantics></math>, then this is particularly evocative, as then (small) such slice objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mi>F</mi><mo stretchy="false">^</mo></mover></mrow><annotation encoding="application/x-tex">\hat F</annotation></semantics></math> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/equivalence">equivalent</a> to morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mstyle mathvariant="bold"><mi>h</mi></mstyle></mrow><annotation encoding="application/x-tex">F \colon X \to \mathbf{h}</annotation></semantics></math>, hence are directly analogous to external diagrams in the form of <a class="existingWikiWord" href="/nlab/show/functors">functors</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒳</mi><mo>→</mo><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathcal{X}\to \mathbf{H}</annotation></semantics></math>.</p>
+
+<p>Now if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math> has good enough properties as a (self-)<a class="existingWikiWord" href="/nlab/show/indexed+category">indexed category</a> in that it is a <a class="existingWikiWord" href="/nlab/show/hyperdoctrine">hyperdoctrine</a> with <a class="existingWikiWord" href="/nlab/show/dependent+sum">dependent sum</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mrow><mi>X</mi><mover><mo>→</mo><mi>f</mi></mover><mi>Y</mi></mrow></munder><mo lspace="verythinmathspace">:</mo><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub><mo>→</mo><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>Y</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\underset{X \stackrel{f}{\to} Y}{\sum} \colon \mathbf{H}_{/X} \to \mathbf{H}_{/Y}</annotation></semantics></math> and <a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>X</mi><mover><mo>→</mo><mi>f</mi></mover><mi>Y</mi></mrow></munder><mo lspace="verythinmathspace">:</mo><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub><mo>→</mo><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>Y</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\underset{X \stackrel{f}{\to} Y}{\prod} \colon \mathbf{H}_{/X} \to \mathbf{H}_{/Y}</annotation></semantics></math> operations, then it makes sense to define the <em>internal colimit</em> of a discrete diagram as above as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><mo>⟶</mo></munder><mi>F</mi><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mi>X</mi></munder><mover><mi>F</mi><mo stretchy="false">^</mo></mover></mrow><annotation encoding="application/x-tex">
+  \underset{\longrightarrow}{\lim} F \coloneqq \underset{X}{\sum} \hat F
+
+</annotation></semantics></math></div>
+<p>and the <em>internal limit</em> as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><mo>⟵</mo></munder><mi>F</mi><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mi>X</mi></munder><mover><mi>F</mi><mo stretchy="false">^</mo></mover><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \underset{\longleftarrow}{\lim} F \coloneqq \underset{X}{\prod} \hat F
+  \,.
+
+</annotation></semantics></math></div>
+<p>Of course with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> being, internally, a discrete diagram shape these are, so far, just internal <a class="existingWikiWord" href="/nlab/show/coproducts">coproducts</a> and internal <a class="existingWikiWord" href="/nlab/show/products">products</a>, respectively (which is of course the source of the terminology “dependent sum” and “dependent product”).</p>
+
+<p>It is more or less straightforward to extend the above from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi><mo stretchy="false">(</mo><mstyle mathvariant="bold"><mi>H</mi></mstyle><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Cat(\mathbf{H})</annotation></semantics></math>, the collection of <a class="existingWikiWord" href="/nlab/show/internal+categories">internal categories</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math>, then consider for a given internal category (hence <a class="existingWikiWord" href="/nlab/show/internal+diagram">internal diagram</a> shape) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>∈</mo><mi>Cat</mi><mo stretchy="false">(</mo><mstyle mathvariant="bold"><mi>H</mi></mstyle><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C \in Cat(\mathbf{H})</annotation></semantics></math> the objects in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi><mo stretchy="false">(</mo><mstyle mathvariant="bold"><mi>H</mi></mstyle><msub><mo stretchy="false">)</mo> <mrow><mo stretchy="false">/</mo><mi>C</mi></mrow></msub></mrow><annotation encoding="application/x-tex">Cat(\mathbf{H})_{/C}</annotation></semantics></math> as not-necessarily discrete diagrams, and proceed as before. For various specific choices of context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math>, this is considered in (<a href="#Johnstone">Johnstone, below prop. B2.3.20</a>, <a href="#Pisani09">Pisani 09, p.18, p. 23</a>, <a href="#HoTTBook">HoTTBook, section 6.12</a>).</p>
+
+<p>To see internally the expected <a class="existingWikiWord" href="/nlab/show/universal+property">universal property</a> of the above definition, consider the <a class="existingWikiWord" href="/nlab/show/internal+diagram">internal</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>-diagram constant on any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">A \in \mathbf{H}</annotation></semantics></math>, namely <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>X</mi> <mo>*</mo></msup><mi>A</mi><mo>∈</mo><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">X^\ast A \in \mathbf{H}_{/X}</annotation></semantics></math>. If there is an <a class="existingWikiWord" href="/nlab/show/object+classifier">object classifier</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>h</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{h}</annotation></semantics></math> then this corresponds indeed to the <a class="existingWikiWord" href="/nlab/show/constant+map">constant map</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>→</mo><mo>*</mo><mover><mo>→</mo><mrow><mo>⊢</mo><mi>A</mi></mrow></mover><mstyle mathvariant="bold"><mi>h</mi></mstyle></mrow><annotation encoding="application/x-tex">X \to \ast \stackrel{\vdash A}{\to} \mathbf{h}</annotation></semantics></math>. Accordingly an internal <a class="existingWikiWord" href="/nlab/show/cone">cone</a> with tip <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> over the diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> as above is a morphism of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>-diagrams (hence in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf{H}_{/X}</annotation></semantics></math>) of the fomr</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>X</mi> <mo>*</mo></msup><mi>A</mi><mo>⟶</mo><mover><mi>F</mi><mo stretchy="false">^</mo></mover><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  X^\ast A \longrightarrow \hat F
+  \,.
+
+</annotation></semantics></math></div>
+<p>Now by the defining <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>X</mi> <mo>*</mo></msup><mo>⊣</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mi>X</mi></munder><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X^\ast \dashv \underset{X}{\prod})</annotation></semantics></math> of the <a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a>, such morphisms are equivalent to morphisms</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⟶</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mi>X</mi></munder><mover><mi>F</mi><mo stretchy="false">^</mo></mover></mrow><annotation encoding="application/x-tex">
+  A \longrightarrow \underset{X}{\prod} \hat F
+
+</annotation></semantics></math></div>
+<p>in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math>, hence by the above definition to morphisms</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⟶</mo><munder><mi>lim</mi><mo>⟵</mo></munder><mi>F</mi></mrow><annotation encoding="application/x-tex">
+  A \longrightarrow \underset{\longleftarrow}{\lim} F
+
+</annotation></semantics></math></div>
+<p>from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> into the internal colimit.</p>
+
+<p>This is clearly the internal version of the statement that is extrernally true <a class="existingWikiWord" href="/nlab/show/Set">Set</a>, that the <a class="existingWikiWord" href="/nlab/show/limit">limit</a> of sets over a diagram is the set of all its <a class="existingWikiWord" href="/nlab/show/cones">cones</a>.</p>
+
+<p>Dually, an internal <a class="existingWikiWord" href="/nlab/show/cocone">cocone</a> is a morphism</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mover><mi>F</mi><mo stretchy="false">^</mo></mover><mo>⟶</mo><msup><mi>X</mi> <mo>*</mo></msup><mi>A</mi></mrow><annotation encoding="application/x-tex">
+  \hat F \longrightarrow X^\ast A
+
+</annotation></semantics></math></div>
+<p>in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf{H}_{/X}</annotation></semantics></math>, and by the defining <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mi>X</mi></munder><mo>⊣</mo><msup><mi>X</mi> <mo>*</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\underset{X}{\sum} \dashv X^\ast)</annotation></semantics></math> of the <a class="existingWikiWord" href="/nlab/show/dependent+sum">dependent sum</a> this is equivalently a morphism</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><mo>⟶</mo></munder><mi>F</mi><mo>⟶</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">
+  \underset{\longrightarrow}{\lim} F \longrightarrow A
+
+</annotation></semantics></math></div>
+<p>exhibiting internally the statement familiar externally from <a class="existingWikiWord" href="/nlab/show/Set">Set</a> that maps out of colimits of a diagram are equivalently cocones under that diagram.</p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="ExamplesInfinityGroupoidal"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-Groupoidal homotopy limits and colimits of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoids</h3>
+
+<p>The small <a class="existingWikiWord" href="/nlab/show/object+classifier">object classifier</a> of the <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-topos">(∞,1)-topos</a> <a class="existingWikiWord" href="/nlab/show/%E2%88%9EGrpd">∞Grpd</a> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Core</mi><mo stretchy="false">(</mo><mn>∞</mn><msub><mi>Grpd</mi> <mi>small</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Core(\infty Grpd_{small})</annotation></semantics></math> itself. Hence an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoidal-shaped diagram of <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-groupoids">∞-groupoids</a> is <em>internally</em> in <a class="existingWikiWord" href="/nlab/show/%E2%88%9EGrpd">∞Grpd</a> a discrete diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mi>Core</mi><mo stretchy="false">(</mo><mn>∞</mn><msub><mi>Grpd</mi> <mi>small</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> F \colon X\to Core(\infty Grpd_{small})</annotation></semantics></math>. The slice object classified by this is the pullback of the <a class="existingWikiWord" href="/nlab/show/universal+right+fibration">universal right fibration</a>, which is equivalently its <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-Grothendieck+construction">(∞,1)-Grothendieck construction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mi>F</mi><mo stretchy="false">^</mo></mover><mo>=</mo><msub><mo>∫</mo> <mi>X</mi></msub><mi>F</mi></mrow><annotation encoding="application/x-tex">\hat F = \int_X F</annotation></semantics></math>.</p>
+
+<p>Accordingly the above gives the internal limits and colimits</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><mo>⟵</mo></munder><mi>F</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mi>X</mi></munder><mover><mi>F</mi><mo stretchy="false">^</mo></mover></mrow><annotation encoding="application/x-tex">
+  \underset{\longleftarrow}{\lim} F = \underset{X}{\sum} \hat F
+
+</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><mo>⟶</mo></munder><mi>F</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mi>X</mi></munder><mover><mi>F</mi><mo stretchy="false">^</mo></mover><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \underset{\longrightarrow}{\lim} F = \underset{X}{\prod} \hat F
+  \,.
+
+</annotation></semantics></math></div>
+<p>There are indeed also the correct external <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-colimits">(∞,1)-colimits</a> and <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-limits">(∞,1)-limits</a>, by the discussion <a href="limit+in+a+quasi-category#WithValInooGrpd">here</a>.</p>
+
+<h3 id="BorelConstructionHomotopyQuotients">Borel construction and homotopy-quotients, -invariants, -coinvariants</h3>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math> an <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-topos">(∞,1)-topos</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math> an <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-group">∞-group</a> object, consider <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>=</mo><mstyle mathvariant="bold"><mi>B</mi></mstyle><mi>G</mi></mrow><annotation encoding="application/x-tex">X = \mathbf{B}G</annotation></semantics></math> its <a class="existingWikiWord" href="/nlab/show/delooping">delooping</a>. Externally this is in general highly non-discrete, but internally this, being <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoidal, is a disrete diagram shape.</p>
+
+<p>An <a class="existingWikiWord" href="/nlab/show/internal+diagram">internal diagram</a> of this shape</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ρ</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mstyle mathvariant="bold"><mi>B</mi></mstyle><mi>G</mi><mo>⟶</mo><mstyle mathvariant="bold"><mi>h</mi></mstyle></mrow><annotation encoding="application/x-tex">
+  \rho \;\colon\;  \mathbf{B}G \longrightarrow \mathbf{h}
+
+</annotation></semantics></math></div>
+<p>is equivalently an <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-action">∞-action</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math> on the object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> named by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>*</mo><mo>→</mo><mstyle mathvariant="bold"><mi>B</mi></mstyle><mi>G</mi><mo>⟶</mo><mstyle mathvariant="bold"><mi>h</mi></mstyle><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \ast \to\mathbf{B}G \longrightarrow \mathbf{h}
+  \,.
+
+</annotation></semantics></math></div>
+<p>Now the internal colimit</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><mo>⟶</mo></munder><mi>ρ</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mrow><mstyle mathvariant="bold"><mi>B</mi></mstyle><mi>G</mi></mrow></munder><mover><mi>ρ</mi><mo stretchy="false">^</mo></mover><mo>≃</mo><mi>V</mi><mo stretchy="false">/</mo><mspace width="negativethinmathspace"></mspace><mo stretchy="false">/</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">
+  \underset{\longrightarrow}{\lim} \rho = \underset{\mathbf{B}G}{\sum} \hat \rho
+  \simeq
+   V/\!/G
+
+</annotation></semantics></math></div>
+<p>is the <a class="existingWikiWord" href="/nlab/show/homotopy+quotient">homotopy quotient</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>, equivalently the object of <a class="existingWikiWord" href="/nlab/show/homotopy+coinvariants">homotopy coinvariants</a>. In <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle><mo>=</mo></mrow><annotation encoding="application/x-tex">\mathbf{H} = </annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/%E2%88%9EGrpd">∞Grpd</a> this is given by the <a class="existingWikiWord" href="/nlab/show/Borel+construction">Borel construction</a>.</p>
+
+<p>Similarly, the internal limit</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mi>lim</mi><mo>⟵</mo></munder><mi>ρ</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mstyle mathvariant="bold"><mi>B</mi></mstyle><mi>G</mi></mrow></munder><mover><mi>ρ</mi><mo stretchy="false">^</mo></mover><mo>≃</mo><msub><mi>Ext</mi> <mi>G</mi></msub><mo stretchy="false">(</mo><mo>*</mo><mo>,</mo><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  \underset{\longleftarrow}{\lim} \rho = \underset{\mathbf{B}G}{\prod} \hat\rho
+  \simeq
+   Ext_G(\ast, V)
+
+</annotation></semantics></math></div>
+<p>is the <a class="existingWikiWord" href="/nlab/show/homotopy+invariants">homotopy invariants</a> of the action.</p>
+
+<p>More generally, the internal left and right <a class="existingWikiWord" href="/nlab/show/Kan+extension">Kan extension</a> give the <a class="existingWikiWord" href="/nlab/show/induced+representation">induced representation</a> and <a class="existingWikiWord" href="/nlab/show/coinduced+representation">coinduced representation</a> constructions. See at <em><a class="existingWikiWord" href="/nlab/show/%E2%88%9E-action">∞-action</a></em> for more on this.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Francis+Borceux">Francis Borceux</a>, Chapter 8 in Vol 1 <em>Basic Category Theory</em> of: <em><a class="existingWikiWord" href="/nlab/show/Handbook+of+Categorical+Algebra">Handbook of Categorical Algebra</a></em>, Cambridge University Press (1994) (<a href="https://doi.org/10.1017/CBO9780511525858">doi:10.1017/CBO9780511525858</a>)</p>
+</li>
+
+<li id="Johnstone">
+<p><a class="existingWikiWord" href="/nlab/show/Peter+Johnstone">Peter Johnstone</a>, section B2 in <em><a class="existingWikiWord" href="/nlab/show/Sketches+of+an+Elephant">Sketches of an Elephant</a></em></p>
+</li>
+
+<li id="Pisani09">
+<p><a class="existingWikiWord" href="/nlab/show/Claudio+Pisani">Claudio Pisani</a>, <em>Balanced Category Theory II</em> (<a href="http://arxiv.org/abs/0904.1790">arXiv:0904.1790</a>)</p>
+</li>
+
+<li id="HoTTBook">
+<p><a class="existingWikiWord" href="/nlab/show/Univalent+Foundations+Project">Univalent Foundations Project</a>, section 6.12 of <em><a class="existingWikiWord" href="/nlab/show/Homotopy+Type+Theory+--+Univalent+Foundations+of+Mathematics">Homotopy Type Theory – Univalent Foundations of Mathematics</a></em></p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on March 23, 2021 at 05:54:27.
+    See the <a href="/nlab/history/internal+%28co-%29limit" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/internal+%28co-%29limit" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/12494/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/internal+%28co-%29limit/2" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/internal+%28co-%29limit" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/internal+%28co-%29limit" accesskey="S" class="navlink" id="history" rel="nofollow">History (2 revisions)</a>
+  <a href="/nlab/show/internal+%28co-%29limit/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/internal+%28co-%29limit" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/internal+%28co-%29limit" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

@@ -1,0 +1,635 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Grothendieck duality in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Grothendieck duality
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/3081/#Item_5" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Grothendieck duality</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="duality">Duality</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/duality">duality</a></strong></p>
+
+<ul>
+<li>
+<p>abstract duality: <a class="existingWikiWord" href="/nlab/show/opposite+category">opposite category</a>,</p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Eckmann-Hilton+duality">Eckmann-Hilton duality</a></p>
+</li>
+
+<li>
+<p>concrete duality: <a class="existingWikiWord" href="/nlab/show/dual+object">dual object</a>, <a class="existingWikiWord" href="/nlab/show/dualizable+object">dualizable object</a>, <a class="existingWikiWord" href="/nlab/show/fully+dualizable+object">fully dualizable object</a>, <a class="existingWikiWord" href="/nlab/show/dualizing+object">dualizing object</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/dual+vector+space">dual vector space</a></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<ul>
+<li>
+<p>between <a class="existingWikiWord" href="/nlab/show/higher+geometry">higher geometry</a>/<a class="existingWikiWord" href="/nlab/show/higher+algebra">higher algebra</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Isbell+duality">Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Stone+duality">Stone duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gelfand+duality">Gelfand duality</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tannaka+duality">Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Langlands+duality">Langlands duality</a>, <a class="existingWikiWord" href="/nlab/show/geometric+Langlands+duality">geometric Langlands duality</a>, <a class="existingWikiWord" href="/nlab/show/quantum+geometric+Langlands+duality">quantum geometric Langlands duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Pontryagin+duality">Pontryagin duality</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Cartier+duality">Cartier duality</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Poincar%C3%A9+duality">Poincaré duality</a> for <a class="existingWikiWord" href="/nlab/show/manifolds">manifolds</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Koszul+duality">Koszul duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Spanier-Whitehead+duality">Spanier-Whitehead duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+duality">Grothendieck duality</a></p>
+</li>
+</ul>
+
+<h2 id="in_qft_and_string_theory">In QFT and String theory</h2>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/duality+in+physics">duality in physics</a></strong>, <strong><a class="existingWikiWord" href="/nlab/show/duality+in+string+theory">duality in string theory</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Seiberg+duality">Seiberg duality</a>, <a class="existingWikiWord" href="/nlab/show/AGT+conjecture">AGT conjecture</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/S-duality">S-duality</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/electro-magnetic+duality">electro-magnetic duality</a>, <a class="existingWikiWord" href="/nlab/show/Montonen-Olive+duality">Montonen-Olive duality</a>, <a class="existingWikiWord" href="/nlab/show/geometric+Langlands+duality">geometric Langlands duality</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/T-duality">T-duality</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/mirror+symmetry">mirror symmetry</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/U-duality">U-duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/open%2Fclosed+string+duality">open/closed string duality</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/AdS%2FCFT">AdS/CFT duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/KLT+relations">KLT relations</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/duality+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="grothendieck_duality">Grothendieck duality</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#statement'>Statement</a></li>
+<li><a href='#dualizing_complexes'>Dualizing Complexes</a></li>
+<ul>
+<li><a href='#rigid_dualizing_complexes'>Rigid Dualizing Complexes</a></li>
+</ul>
+<li><a href='#noncommutative_grothendieck_duality'>Noncommutative Grothendieck Duality</a></li>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>Given a <a class="existingWikiWord" href="/nlab/show/homomorphism">homomorphism</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/schemes">schemes</a>, one says that it satisfies <em>Grothendieck duality</em> if the (<a class="existingWikiWord" href="/nlab/show/derived+functor">derived</a>) <a class="existingWikiWord" href="/nlab/show/direct+image">direct image</a> functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">f_\ast</annotation></semantics></math> on <a class="existingWikiWord" href="/nlab/show/quasicoherent+sheaves">quasicoherent sheaves</a> has a (derived) <a class="existingWikiWord" href="/nlab/show/right+adjoint">right adjoint</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>!</mo></msup></mrow><annotation encoding="application/x-tex">f^!</annotation></semantics></math>. This is <a class="existingWikiWord" href="/nlab/show/Verdier+duality">Verdier duality</a> in a “<a class="existingWikiWord" href="/nlab/show/Grothendieck+context">Grothendieck context</a>” of <a class="existingWikiWord" href="/nlab/show/six+operations">six operations</a>.</p>
+
+<p>Grothendieck duality is intimately connected to <strong>dualizing complexes</strong>. This was the original approach of Grothendieck in the book <em>Residues and Duality</em>.</p>
+
+<h2 id="statement">Statement</h2>
+
+<p>Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f\colon X \to Y</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/quasi-compact+map">quasi-compact</a> and <a class="existingWikiWord" href="/nlab/show/quasi-separated+map">quasi-separated</a> <a class="existingWikiWord" href="/nlab/show/morphism">morphism</a> of <a class="existingWikiWord" href="/nlab/show/schemes">schemes</a>; then the <a class="existingWikiWord" href="/nlab/show/triangulated+functor">triangulated functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>R</mi></mstyle><msub><mi>f</mi> <mo>*</mo></msub><mo lspace="verythinmathspace">:</mo><msub><mi>D</mi> <mi>qc</mi></msub><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>D</mi><mo stretchy="false">(</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{R}f_*\colon D_{qc}(X)\to D(Y)</annotation></semantics></math> has a bounded below <a class="existingWikiWord" href="/nlab/show/right+adjoint">right adjoint</a>. In other words, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>R</mi></mstyle><msub><mi>Hom</mi> <mi>X</mi></msub><mo stretchy="false">(</mo><mi>ℱ</mi><mo>,</mo><msup><mi>f</mi> <mo>×</mo></msup><mi>𝒢</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mo>∼</mo></mover><mstyle mathvariant="bold"><mi>R</mi></mstyle><msub><mi>Hom</mi> <mi>Y</mi></msub><mo stretchy="false">(</mo><mstyle mathvariant="bold"><mi>R</mi></mstyle><msub><mi>f</mi> <mo>*</mo></msub><mi>ℱ</mi><mo>,</mo><mi>𝒢</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{R}Hom_X(\mathcal{F}, f^\times \mathcal{G})\stackrel{\sim}{\to} \mathbf{R}Hom_Y(\mathbf{R}f_*\mathcal{F}, \mathcal{G})</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/natural+isomorphism">natural isomorphism</a>.</p>
+
+<h2 id="dualizing_complexes">Dualizing Complexes</h2>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> be a noetherian scheme. A dualizing complex on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is a complex <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℛ</mi><mo>∈</mo><mstyle mathvariant="sans-serif"><mi>D</mi></mstyle><mo stretchy="false">(</mo><mstyle mathvariant="sans-serif"><mi>Mod</mi></mstyle><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{R} \in \mathsf{D}(\mathsf{Mod} X)</annotation></semantics></math> that has these three properties:</p>
+
+<ul>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℛ</mi><mo>∈</mo><msubsup><mstyle mathvariant="sans-serif"><mi>D</mi></mstyle> <mi mathvariant="normal">c</mi> <mi mathvariant="normal">b</mi></msubsup><mo stretchy="false">(</mo><mstyle mathvariant="sans-serif"><mi>Mod</mi></mstyle><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{R} \in \mathsf{D}^{\mathrm{b}}_{\mathrm{c}}(\mathsf{Mod} X)</annotation></semantics></math> (i.e. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℛ</mi></mrow><annotation encoding="application/x-tex">\mathcal{R}</annotation></semantics></math> has bounded coherent cohomology sheaves).</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℛ</mi></mrow><annotation encoding="application/x-tex">\mathcal{R}</annotation></semantics></math> has finite injective dimension.</p>
+</li>
+
+<li>
+<p>The canonical morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒪</mi> <mi>X</mi></msub><mo>→</mo><mi mathvariant="normal">R</mi><msub><mi>ℋℴ𝓂</mi> <mi>X</mi></msub><mo stretchy="false">(</mo><mi>ℛ</mi><mo>,</mo><mi>ℛ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}_X \to \mathrm{R} \mathcal{Hom}_{X}(\mathcal{R}, \mathcal{R})</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="sans-serif"><mi>D</mi></mstyle><mo stretchy="false">(</mo><mstyle mathvariant="sans-serif"><mi>Mod</mi></mstyle><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathsf{D}(\mathsf{Mod} X)</annotation></semantics></math> is an isomorphism.</p>
+</li>
+</ul>
+
+<p>The following two structures are basically equivalent to each other, for a given category of noetherian schemes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="sans-serif"><mi>S</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathsf{S}</annotation></semantics></math>:</p>
+
+<ul>
+<li>
+<p>A psudofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>↦</mo><msup><mi>f</mi> <mo>!</mo></msup></mrow><annotation encoding="application/x-tex">f \mapsto f^!</annotation></semantics></math>, called the <strong>twisted inverse image</strong>, that assigns a functor</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>!</mo></msup><mo>:</mo><msubsup><mstyle mathvariant="sans-serif"><mi>D</mi></mstyle> <mi mathvariant="normal">c</mi> <mo lspace="verythinmathspace" rspace="0em">+</mo></msubsup><mo stretchy="false">(</mo><mstyle mathvariant="sans-serif"><mi>Mod</mi></mstyle><mi>Y</mi><mo stretchy="false">)</mo><mo>→</mo><msubsup><mstyle mathvariant="sans-serif"><mi>D</mi></mstyle> <mi mathvariant="normal">c</mi> <mo lspace="verythinmathspace" rspace="0em">+</mo></msubsup><mo stretchy="false">(</mo><mstyle mathvariant="sans-serif"><mi>Mod</mi></mstyle><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> f^! : \mathsf{D}^{+}_{\mathrm{c}}(\mathsf{Mod} Y)
+\to \mathsf{D}^{+}_{\mathrm{c}}(\mathsf{Mod} X) 
+</annotation></semantics></math></div>
+<p>to each map of schemes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f : X \to Y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="sans-serif"><mi>S</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathsf{S}</annotation></semantics></math>, and has several known properties.</p>
+</li>
+
+<li>
+<p>A dualizing complex <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℛ</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">\mathcal{R}_X</annotation></semantics></math> for every scheme <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> in the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="sans-serif"><mi>S</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathsf{S}</annotation></semantics></math>, with several known functorial properties.</p>
+</li>
+</ul>
+
+<p>The relation between these two structures is demonstrated in the following Example.</p>
+
+<p><strong>Example</strong>. Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> is a regular finite dimensional noetherian ring, and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="sans-serif"><mi>S</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathsf{S}</annotation></semantics></math> be the category of finite type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math>-schemes. Given a twisted inverse image psudofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>↦</mo><msup><mi>f</mi> <mo>!</mo></msup></mrow><annotation encoding="application/x-tex">f \mapsto f^!</annotation></semantics></math>, we define dualizing complexes as follows: on any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mstyle mathvariant="sans-serif"><mi>S</mi></mstyle></mrow><annotation encoding="application/x-tex">X \in \mathsf{S}</annotation></semantics></math> with structural morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mi>X</mi></msub><mo>:</mo><mi>X</mi><mo>→</mo><mo lspace="0em" rspace="thinmathspace">Spec</mo><mi>K</mi></mrow><annotation encoding="application/x-tex">\pi_X : X \to \operatorname{Spec} K</annotation></semantics></math>, we let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℛ</mi> <mi>X</mi></msub><mo>:</mo><mo>=</mo><msubsup><mi>π</mi> <mi>X</mi> <mo>!</mo></msubsup><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{R}_X := \pi_X^!(K)</annotation></semantics></math>.</p>
+
+<p>Conversely, suppose we are given a dualizing complex <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℛ</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">\mathcal{R}_X</annotation></semantics></math> on each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mstyle mathvariant="sans-serif"><mi>S</mi></mstyle></mrow><annotation encoding="application/x-tex">X \in \mathsf{S}</annotation></semantics></math>. This gives rise to a duality (contrvariant equivalence) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">D_X</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mstyle mathvariant="sans-serif"><mi>D</mi></mstyle> <mi mathvariant="normal">c</mi> <mrow></mrow></msubsup><mo stretchy="false">(</mo><mstyle mathvariant="sans-serif"><mi>Mod</mi></mstyle><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathsf{D}^{}_{\mathrm{c}}(\mathsf{Mod} X)</annotation></semantics></math>, exchanging <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mstyle mathvariant="sans-serif"><mi>D</mi></mstyle> <mi mathvariant="normal">c</mi> <mo lspace="verythinmathspace" rspace="0em">+</mo></msubsup><mo stretchy="false">(</mo><mstyle mathvariant="sans-serif"><mi>Mod</mi></mstyle><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathsf{D}^{+}_{\mathrm{c}}(\mathsf{Mod} X)</annotation></semantics></math> with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mstyle mathvariant="sans-serif"><mi>D</mi></mstyle> <mi mathvariant="normal">c</mi> <mo lspace="verythinmathspace" rspace="0em">−</mo></msubsup><mo stretchy="false">(</mo><mstyle mathvariant="sans-serif"><mi>Mod</mi></mstyle><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathsf{D}^{-}_{\mathrm{c}}(\mathsf{Mod} X)</annotation></semantics></math>, with formula</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>D</mi> <mi>X</mi></msub><mo stretchy="false">(</mo><mi>ℳ</mi><mo stretchy="false">)</mo><mo>:</mo><mo>=</mo><mi mathvariant="normal">R</mi><msub><mi>ℋℴ𝓂</mi> <mi>X</mi></msub><mo stretchy="false">(</mo><mi>ℳ</mi><mo>,</mo><msub><mi>ℛ</mi> <mi>X</mi></msub><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex"> D_X(\mathcal{M}) := \mathrm{R} \mathcal{Hom}_{X}(\mathcal{M}, \mathcal{R}_X) . </annotation></semantics></math></div>
+<p>We then define</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>!</mo></msup><mo stretchy="false">(</mo><mi>ℳ</mi><mo stretchy="false">)</mo><mo>:</mo><mo>=</mo><msub><mi>D</mi> <mi>Y</mi></msub><mo stretchy="false">(</mo><mi mathvariant="normal">L</mi><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><msub><mi>D</mi> <mi>X</mi></msub><mo stretchy="false">(</mo><mi>ℳ</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex"> f^!(\mathcal{M}) := D_Y( \mathrm{L} f^* ( D_X(\mathcal{M}) )) . </annotation></semantics></math></div>
+<h3 id="rigid_dualizing_complexes">Rigid Dualizing Complexes</h3>
+
+<p>The notion of <em>rigid dualizing complex</em> was introduced by Van den Bergh in 1997, for a <em>noncommutative ring</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> over a base field <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math>.</p>
+
+<p>Yekutieli and Zhang have shown how to define a rigid dualizing complex <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>R</mi> <mrow><mi>A</mi><mo stretchy="false">/</mo><mi>K</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{A/K}</annotation></semantics></math>, when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> is a regular finite dimensional noetherian ring, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is an essentially finite type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math>-ring (both commutative). A refined variant of the rigid dualizing complex, namely the <em>rigid residue complex</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒦</mi> <mrow><mi>A</mi><mo stretchy="false">/</mo><mi>K</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{K}_{A/K}</annotation></semantics></math>, was shown to exist, and to be unique (up to a unique isomorphism of complexes).</p>
+
+<p>These rigid residue complexes have all the good functorial properties alluded to above, and even more. Specifically, they are covariant for essentially etale ring homomorphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>→</mo><mi>A</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">A \to A'</annotation></semantics></math> (via the rigid localization homomorphism), and contravariant (as graded modules) for all ring homomorphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \to B</annotation></semantics></math> (via the ind-rigid trace homomorphism).</p>
+
+<p>The rigid localization homomorphism permits the gluing of the rigid residue complexes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒦</mi> <mrow><mi>A</mi><mo stretchy="false">/</mo><mi>K</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{K}_{A/K}</annotation></semantics></math> on affine open sets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>=</mo><mo lspace="0em" rspace="thinmathspace">Spec</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">U = \operatorname{Spec} A</annotation></semantics></math> of a scheme <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> into a rigid residue complex <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒦</mi> <mrow><mi>X</mi><mo stretchy="false">/</mo><mi>K</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{K}_{X/K}</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. In this way one obtains a collection of dualizing complexes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒦</mi> <mrow><mi>X</mi><mo stretchy="false">/</mo><mi>K</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{K}_{X/K}</annotation></semantics></math> on all essentially finite type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math>-schemes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, consisting of quasi-coherent injective sheaves. For any map of scheme <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f : X \to Y</annotation></semantics></math> there is the ind-rigid trace homomoprhism</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">Tr</mi> <mi>f</mi></msub><mo>:</mo><msub><mi>f</mi> <mo>*</mo></msub><mo stretchy="false">(</mo><msub><mi>𝒦</mi> <mrow><mi>Y</mi><mo stretchy="false">/</mo><mi>K</mi></mrow></msub><mo stretchy="false">)</mo><mo>→</mo><msub><mi>𝒦</mi> <mrow><mi>X</mi><mo stretchy="false">/</mo><mi>K</mi></mrow></msub><mo>,</mo></mrow><annotation encoding="application/x-tex"> \mathrm{Tr}_f : f_*(\mathcal{K}_{Y/K}) \to \mathcal{K}_{X/K} , </annotation></semantics></math></div>
+<p>which is a homomorphism of graded quasi-coherent sheaves. The <em>Residue Theorem</em> says that when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is proper, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">Tr</mi> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\mathrm{Tr}_f</annotation></semantics></math> is a homomorphism of complexes. The <em>Duality Theorem</em> says that when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is proper, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">Tr</mi> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\mathrm{Tr}_f</annotation></semantics></math> induces global duality. As explained above, there is a corresponding functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>!</mo></msup></mrow><annotation encoding="application/x-tex">f^!</annotation></semantics></math>; and the Duality Theorem says that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">R</mi><msub><mi>f</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">\mathrm{R} f_*</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>!</mo></msup></mrow><annotation encoding="application/x-tex">f^!</annotation></semantics></math> are adjoint functors.</p>
+
+<p>Moreover, the rigidity method works also for finite type <strong>Deligne-Mumford stacks</strong> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math>. The key observation is that the rigid residue complexes are complexes of quasi-coherent sheaves in the etale site over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math>. Details of this extension of the theory are still under preparation.</p>
+
+<h2 id="noncommutative_grothendieck_duality">Noncommutative Grothendieck Duality</h2>
+
+<p>(To be added later)</p>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/six+operations">six operations</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Poincare+duality">Poincare duality</a>, <a class="existingWikiWord" href="/nlab/show/Verdier+duality">Verdier duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Fourier-Mukai+transform">Fourier-Mukai transform</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Robin+Hartshorne">Robin Hartshorne</a>, <em>Residues and duality</em> (Lecture notes of a seminar on the work of A. Grothendieck, given at Harvard 1963/64. With an appendix by P. Deligne.) Springer LNM 20, 1966 <a href="http://www.ams.org/mathscinet-getitem?mr=222093">MR222093</a></p>
+</li>
+
+<li>
+<p>Domingo Toledo, Yue Lin L. Tong, <em>Duality and intersection theory in complex manifolds. I.</em>, Math. Ann. <strong>237</strong> (1978), no. 1, 41–77, <a href="http://www.ams.org/mathscinet-getitem?mr=506654">MR80d:32008</a>, <a href="http://dx.doi.org/10.1007/BF01351557">doi</a></p>
+</li>
+
+<li>
+<p>Mitya Boyarchenko, <a class="existingWikiWord" href="/nlab/show/Vladimir+Drinfeld">Vladimir Drinfeld</a>, <em>A duality formalism in the spirit of Grothendieck and Verdier</em>, <a href="http://arxiv.org/abs/1108.6020">arxiv/1108.6020</a></p>
+</li>
+
+<li>
+<p>Z. Mebkhout, <em>Le formalisme des six opérations de Grothendieck pour les <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒟</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">\mathcal{D}_X</annotation></semantics></math>-modules cohérents</em>, Travaux en Cours <strong>35</strong>. Hermann, Paris, 1989. x+254 pp. <a href="http://www.ams.org/mathscinet-getitem?mr=1008245">MR90m:32026</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Amnon+Neeman">Amnon Neeman</a>, <em>Derived categories and Grothendieck duality</em>, in: Triangulated categories, 290–350, London Math. Soc. Lecture Note Ser. <strong>375</strong>, Cambridge Univ. Press 2010</p>
+</li>
+
+<li>
+<p>Amnon Neeman, <em>The Grothendieck duality theorem via Bousfield’s techniques and Brown representability</em>, J. Amer. Math. Soc. <strong>9</strong> (1996), no. 1, 205–236, <a href="http://www.ams.org/mathscinet-getitem?mr=1308405">MR96c:18006</a>, <a href="http://dx.doi.org/10.1090/S0894-0347-96-00174-9">doi</a></p>
+</li>
+
+<li>
+<p>Brian Conrad, <em>Grothendieck duality and base change</em>, Springer Lec. Notes Math. <strong>1750</strong> (2000) vi+296 pp.</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Joseph+Lipman">Joseph Lipman</a>, <em>Notes on derived functors and Grothendieck duality</em>, in: Foundations of Grothendieck duality for diagrams of schemes, 1–259, Lecture Notes in Math. <strong>1960</strong>, Springer 2009, <a href="http://dx.doi.org/10.1007/978-3-540-85420-3">doi</a>, <a href="http://www.math.purdue.edu/~lipman/Duality.pdf">draft pdf</a></p>
+</li>
+
+<li>
+<p>J. Lipman, <em>Grothendieck operations and coherence in categories</em>, conference slides, 2009, <a href="http://www.math.purdue.edu/~lipman/Madrid.pdf">pdf</a></p>
+</li>
+
+<li>
+<p>Alonso Tarrío, Leovigildo; Jeremías López, Ana; Joseph Lipman, <em>Studies in duality on Noetherian formal schemes and non-Noetherian ordinary schemes</em>, Contemporary Mathematics <strong>244</strong> Amer. Math. Soc. 1999. x+126L. <a href="http://www.ams.org/mathscinet-getitem?mr=1716706">MR2000h:14017</a>; <em>Duality and flat base change on formal schemes</em>, Contemporary Math. <strong>244</strong> (1999), pp. 3–90.</p>
+</li>
+
+<li>
+<p>J. Ayoub, <em>Les six opérations de Grothendieck et le formalisme des cycles évanescents dans le monde motivique. I.</em>, Astérisque No. 314 (2007), x+466 pp. (2008) <a href="http://www.ams.org/mathscinet-getitem?mr=2423375">MR2009h:14032</a>; <em>II.</em> Astérisque No. 315 (2007), vi+364 pp. (2008) <a href="http://www.ams.org/mathscinet-getitem?mr=2438151">MR2009m:14007</a>; also a file at K-theory archive <a href="http://www.math.uiuc.edu/K-theory/0761/THESE.pdf">THESE.pdf</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Amnon+Yekutieli">Amnon Yekutieli</a>, James Zhang,</p>
+
+<p>Rings with Auslander Dualizing Complexes, J. Algebra 213 (1999), 1-51; <em>Rigid dualizing complexes over commutative rings</em>, Algebr. Represent. Theory <strong>12</strong> (2009), no. 1, 19–52, <a href="http://dx.doi.org/10.1007/s10468-008-9102-9">doi</a>; Dualizing Complexes and Perverse Sheaves on Noncommutative Ringed Schemes, Selecta Math. 12 (2006), 137-177; Dualizing Complexes and Perverse Modules over Differential Algebras, Compositio Mathematica 141 (2005), 620-654.</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Amnon+Yekutieli">Amnon Yekutieli</a>,</p>
+
+<p>An Explicit Construction of the Grothendieck Residue Complex, Astérisque <strong>208</strong> (1992); The residue complex of a noncommutative graded algebra, J. Algebra <strong>186</strong> (1996), no. 2, 522–543; <em>Smooth formal embeddings and the residue complex</em>, Canad. J. Math. <strong>50</strong> (1998), no. 4, 863–896, <a href="http://www.ams.org/mathscinet-getitem?mr=1638635">MR99i:14004</a>; <em>Rigid dualizing complexes via differential graded algebras (survey)</em>, in: Triangulated categories, 452–463, London Math. Soc. Lecture Note Ser. <strong>375</strong>, Cambridge Univ. Press 2010, <a href="http://www.ams.org/mathscinet-getitem?mr=2681716">MR2011h:18015</a>; Residues and Differential Operators on Schemes, Duke Math. J. 95 (1998), 305-341; Duality and Tilting for Commutative DG Rings, <a href="http://arxiv.org/abs/1312.6411">arXiv:1312.6411</a>; Residues and Duality for Schemes and Stacks (<a href="http://www.math.bgu.ac.il/~amyekut/lectures/resid-stacks/handout.pdf">lecture notes</a>).</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Roy+Joshua">Roy Joshua</a>, <em>Grothendieck-Verdier duality in enriched symmetric monoidal <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math>-categories</em> (<a class="existingWikiWord" href="/nlab/files/JoshuaDuality.pdf" title="pdf">pdf</a>)</p>
+</li>
+
+<li id="Belmans">
+<p><a class="existingWikiWord" href="/nlab/show/Pieter+Belmans">Pieter Belmans</a>, section 2.2 of <em>Grothendieck duality: lecture 3</em>, 2014 (<a class="existingWikiWord" href="/nlab/files/BelmansDuality.pdf" title="pdf">pdf</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Amnon+Neeman">Amnon Neeman</a>, <em>An improvement on the base-change theorem and the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>!</mo></msup></mrow><annotation encoding="application/x-tex">f^!</annotation></semantics></math></em>, <a href="http://arxiv.org/abs/1406.7599">arXiv</a>.</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on February 18, 2015 at 12:30:18.
+    See the <a href="/nlab/history/Grothendieck+duality" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Grothendieck+duality" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/3081/#Item_5">Discuss</a><span class="backintime"><a href="/nlab/revision/Grothendieck+duality/15" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Grothendieck+duality" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Grothendieck+duality" accesskey="S" class="navlink" id="history" rel="nofollow">History (15 revisions)</a>
+  <a href="/nlab/show/Grothendieck+duality/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Grothendieck+duality" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Grothendieck+duality" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

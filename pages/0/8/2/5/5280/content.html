@@ -1,0 +1,560 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Cantor-Schroeder-Bernstein theorem in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Cantor-Schroeder-Bernstein theorem
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9840/#Item_16" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#statement'>Statement</a></li>
+<li><a href='#proof'>Proof</a></li>
+<ul>
+<li><a href='#alt'>Alternative construction of a fixed point</a></li>
+<li><a href='#beta_reduced_proof'>Beta reduced proof</a></li>
+</ul>
+<li><a href='#failure_in_toposes_and_constructive_mathematics'>Failure in toposes and constructive mathematics</a></li>
+<li><a href='#in_other_categories'>In other categories</a></li>
+<ul>
+<li><a href='#counterexample'>Counterexample</a></li>
+</ul>
+<li><a href='#name'>Name</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="statement">Statement</h2>
+
+<p>The <em>Cantor–Schroeder–Bernstein</em> theorem says that the usual <a class="existingWikiWord" href="/nlab/show/order+relation">order relation</a> on <a class="existingWikiWord" href="/nlab/show/cardinalities">cardinalities</a> of <a class="existingWikiWord" href="/nlab/show/set">set</a>s is <a class="existingWikiWord" href="/nlab/show/antisymmetric+relation">antisymmetric</a>. In other words, define an order on sets by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>≤</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \leq Y</annotation></semantics></math> if there exists a <a class="existingWikiWord" href="/nlab/show/monomorphism">monomorphism</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f\colon X \to Y</annotation></semantics></math>. Then, if both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>≤</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \leq Y</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi><mo>≤</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y \leq X</annotation></semantics></math>, there exists an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> of sets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>≅</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \cong Y</annotation></semantics></math>.</p>
+
+<p>The result is really only interesting in the absence of the <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a> (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>AC</mi></mrow><annotation encoding="application/x-tex">AC</annotation></semantics></math>). With <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>AC</mi></mrow><annotation encoding="application/x-tex">AC</annotation></semantics></math>, it is a trivial corollary of the <a class="existingWikiWord" href="/nlab/show/well-ordering+theorem">well-ordering theorem</a>. However, the theorem actually requires only <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>, although it does not hold in <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a> — indeed, it is actually <em>equivalent</em> to excluded middle (at least assuming the <a class="existingWikiWord" href="/nlab/show/axiom+of+infinity">axiom of infinity</a>).</p>
+
+<h2 id="proof">Proof</h2>
+
+<p>We prove that the Cantor–Schroeder–Bernstein theorem holds in a <a class="existingWikiWord" href="/nlab/show/Boolean+topos">Boolean topos</a>. The theorem is not however <a class="existingWikiWord" href="/nlab/show/intuitionistic+logic">intuitionistically</a> valid, in that it fails in some <a class="existingWikiWord" href="/nlab/show/topos">topos</a>es, such as the topos <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mrow><mo>•</mo><mo>→</mo><mo>•</mo></mrow></msup></mrow><annotation encoding="application/x-tex">Set^{\bullet \to \bullet}</annotation></semantics></math> (the <a class="existingWikiWord" href="/nlab/show/arrow+category">arrow category</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math>); see Example <a class="maruku-ref" href="#counterexample"></a> below.</p>
+
+<p>Throughout we use ordinary <a class="existingWikiWord" href="/nlab/show/set+theory">set-theoretic</a> reasoning which can be translated into the formal theory of toposes. (This can be formalized via the <a class="existingWikiWord" href="/nlab/show/Mitchell%E2%80%93Benabou+language">Mitchell–Benabou language</a>, for instance.)</p>
+
+<p>First, let’s try a little pedagogy. Somehow functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi><mo>,</mo><msup><mi>h</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo>:</mo><mi>Y</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">h: X \to Y, h^{-1}: Y \to X</annotation></semantics></math> are to be cooked up from injections <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f: X \to Y</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>Y</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">g: Y \to X</annotation></semantics></math>, so we might guess <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math> is to be defined as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> at least part of the time, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>h</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">h^{-1}</annotation></semantics></math> as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> another part of the time. An ideal situation would be to have a set-up</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mover><mo>⟶</mo><mo>∼</mo></mover><mi>B</mi></mrow><annotation encoding="application/x-tex">f: A \stackrel{\sim}{\longrightarrow} B</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>C</mi><mover><mo>⟵</mo><mo>∼</mo></mover><mi>D</mi><mo>:</mo><mi>g</mi></mrow><annotation encoding="application/x-tex">C \stackrel{\sim}{\longleftarrow} D: g</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>,</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A, C</annotation></semantics></math> are complementary subsets in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>,</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">B, D</annotation></semantics></math> are complementary subsets in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math>; then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math> could be defined as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>g</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">g^{-1}</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, and everything works out fine. How can we achieve this?</p>
+
+<p>If we have this situation, then apparently <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">B = f(A)</annotation></semantics></math> (the direct image of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>), and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>=</mo><mo>¬</mo><mi>B</mi><mo>=</mo><mo>¬</mo><mi>f</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D = \neg B = \neg f(A)</annotation></semantics></math> (the complement of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(A)</annotation></semantics></math>), and then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mo>¬</mo><mi>f</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C = g(D) = g(\neg f(A))</annotation></semantics></math>, and finally <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>,</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A, C</annotation></semantics></math> are required to be complementary, so we would need</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>=</mo><mo>¬</mo><mi>g</mi><mo stretchy="false">(</mo><mo>¬</mo><mi>f</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">A = \neg g(\neg f(A)).</annotation></semantics></math></div>
+<p>In other words, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> would be a <a class="existingWikiWord" href="/nlab/show/fixed+point">fixed point</a> of a suitable operation built from direct image and complementation operators. In fact, if we find such a fixed point <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, then the plan above would work without a hitch.</p>
+
+<p>Perhaps the simplest fixed-point theorem for this purpose on the market is</p>
+
+<div class="num_lemma">
+<h6 id="lemma_knastertarski_fixedpoint_theorem">Lemma (Knaster–Tarski fixed-point theorem)</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo lspace="verythinmathspace">:</mo><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\phi\colon P X \to P X</annotation></semantics></math> be an order-preserving map. Then there exists <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> for which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\phi(A) = A</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_2">Proof</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> be the (internal) <a class="existingWikiWord" href="/nlab/show/intersection">intersection</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo>=</mo><mo stretchy="false">{</mo><mi>T</mi><mo>∈</mo><mi>P</mi><mi>X</mi><mo>:</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>T</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">U = \{T \in P X : \phi(T) \leq T\}</annotation></semantics></math>. Since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>≤</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">A \leq T</annotation></semantics></math> for every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>, we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">\phi(A) \leq \phi(T) \leq T</annotation></semantics></math> for every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>. Hence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\phi(A) \leq A</annotation></semantics></math> by definition of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>. Applying <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> again, we get <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mi>ϕ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi \phi(A) \leq \phi(A)</annotation></semantics></math>. Hence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi(A)</annotation></semantics></math> belongs to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>. But then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>≤</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A \leq \phi(A)</annotation></semantics></math> by definition of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>.</p>
+</div>
+
+<div class="num_remark" id="term">
+<h6 id="remark">Remark</h6>
+
+<p>The preceding proof is valid in <em>any</em> topos (and so holds for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math> even intuitionistically). It can be seen as a specialization to posets of a result of Lambek on the <a class="existingWikiWord" href="/nlab/show/initial+algebra">initial</a> <a class="existingWikiWord" href="/nlab/show/algebra+of+an+endofunctor">algebra of an endofunctor</a>, saying that the structure maps of such initial algebras are necessarily isomorphisms. Here the initial algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is (by construction) an initial fixed point.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_of_cantorschroederbernstein">Proof of Cantor–Schroeder–Bernstein</h6>
+
+<p>Suppose given two monos <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f: X \to Y</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>Y</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">g: Y \to X</annotation></semantics></math>. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>f</mi></msub><mo>:</mo><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">\exists_f: P X \to P Y</annotation></semantics></math> denote direct image or <a class="existingWikiWord" href="/nlab/show/existential+quantification">existential quantification</a> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>, and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>¬</mo> <mi>X</mi></msub><mo>:</mo><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\neg_X: P X \to P X</annotation></semantics></math> denote <a class="existingWikiWord" href="/nlab/show/negation">negation</a>. Then the composite</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo>=</mo><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub><mo>:</mo><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\phi = \neg_X \exists_g \neg_Y \exists_f: P X \to P X</annotation></semantics></math></div>
+<p>is order-preserving, and so has a fixed point <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> by the Knaster-Tarski lemma. Now define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">h: X \to Y</annotation></semantics></math> by the rule</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mtext> if </mtext><mspace width="thickmathspace"></mspace><mi>x</mi><mo>∈</mo><mi>A</mi></mtd></mtr> <mtr><mtd><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo></mtd> <mtd><msup><mi>g</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd> <mtd><mtext> if </mtext><mspace width="thickmathspace"></mspace><mi>x</mi><mo>∉</mo><mi>A</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\array{
+h(x) &amp; = &amp; f(x) &amp; \text{ if }\; x \in A \\
+h(x) &amp; = &amp; g^{-1}(x) &amp; \text{ if }\; x \notin A 
+}
+</annotation></semantics></math></div>
+<p>(the multi-line definition is where we use the Boolean condition). The second line makes sense because <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\neg A</annotation></semantics></math> is in the image of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>. The inverse of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math> is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>j</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo></mtd> <mtd><msup><mi>f</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mtext>if</mtext><mspace width="thickmathspace"></mspace><mi>y</mi><mo>∈</mo><msub><mo>∃</mo> <mi>f</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mi>j</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo></mtd> <mtd><mi>g</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mtext>if</mtext><mspace width="thickmathspace"></mspace><mi>y</mi><mo>∉</mo><msub><mo>∃</mo> <mi>f</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\array{
+j(y) &amp; = &amp; f^{-1}(y) &amp; \; \text{if} \; y \in \exists_f(A) \\
+j(y) &amp; = &amp; g(y) &amp; \; \text{if} \; y \notin \exists_f(A)
+}
+</annotation></semantics></math></div>
+<p>That <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math> is inverse to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math> uses the fact that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><mi>A</mi><mo>=</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\neg A = \exists_g \neg \exists_f(A)</annotation></semantics></math>. The rest is obvious.</p>
+</div>
+
+<p>This classic proof is substantially the proof given in Johnstone’s <a class="existingWikiWord" href="/nlab/show/Elephant">Elephant</a>, D4.1.11. The Boolean condition is not <em>strictly speaking</em> necessary, i.e., the <a class="existingWikiWord" href="/nlab/show/principle+of+excluded+middle">principle of excluded middle</a> (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>EM</mi></mrow><annotation encoding="application/x-tex">EM</annotation></semantics></math>) does not logically follow from the Cantor–Schroeder–Bernstein statement since, for example, using notation as above, monic endomorphisms like <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>∘</mo><mi>g</mi><mo>:</mo><mi>Y</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f \circ g: Y \to Y</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>∘</mo><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">g \circ f: X \to X</annotation></semantics></math> are isomorphisms in</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>FinSet</mi> <mi>C</mi></msup><mo>,</mo></mrow><annotation encoding="application/x-tex">FinSet^C,</annotation></semantics></math></div>
+<p>but this is a non-Boolean topos provided that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is any <a class="existingWikiWord" href="/nlab/show/finite+category">finite category</a> that is not a <a class="existingWikiWord" href="/nlab/show/groupoid">groupoid</a>, e.g., <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>=</mo><mstyle mathvariant="bold"><mn>2</mn></mstyle></mrow><annotation encoding="application/x-tex">C = \mathbf{2}</annotation></semantics></math>. But that being said, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>EM</mi></mrow><annotation encoding="application/x-tex">EM</annotation></semantics></math> is certainly the most natural supposition to make. In fact EM does constructively follow from the Cantor-Schroeder-Bernstein statement provided that a <a class="existingWikiWord" href="/nlab/show/natural+numbers+object">natural numbers object</a> exists; see <a href="#PB19">Pradic and Brown, 2019</a>. A proof that in a topos CSB+NNO implies Booleanness is outlined in <a href="#Freyd94">Freyd 1994</a>.</p>
+
+<h3 id="alt">Alternative construction of a fixed point</h3>
+
+<p>In some schools of thought, the proof using the Knaster-Tarski lemma would be criticized because that lemma makes use of an <a class="existingWikiWord" href="/nlab/show/impredicative">impredicative</a> construction. However, the application made of it in the proof of the CSB theorem is only to ensure that the operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub><mo>:</mo><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\neg_X \exists_g \neg_Y \exists_f: P X \to P X</annotation></semantics></math> has a fixed point. This objection can be countered by shopping around for a different fixed-point theorem, one which is predicatively and constructively valid.</p>
+
+<p>A time-honored way of constructing a fixed point of an operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> is by taking a limit of a sequence of iterates of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> that converges, provided that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> preserves the limit. To this end, we find that specializing Adámek’s theorem (see <a class="existingWikiWord" href="/nlab/show/initial+algebra+of+an+endofunctor">initial algebra of an endofunctor</a>) suits our purposes perfectly.</p>
+
+<div class="num_lemma" id="chain">
+<h6 id="lemma">Lemma</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>Y</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">g: Y \to X</annotation></semantics></math> is monic, then the operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>g</mi></msub><mo>:</mo><mi>P</mi><mi>Y</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\exists_g: P Y \to P X</annotation></semantics></math> preserves limits of inverse chains <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>ω</mi> <mi>op</mi></msup><mo>→</mo><mi>P</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">\omega^{op} \to P Y</annotation></semantics></math> (i.e. intersections of decreasing sequences).</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_3">Proof</h6>
+
+<p>More generally, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>g</mi></msub></mrow><annotation encoding="application/x-tex">\exists_g</annotation></semantics></math> preserves <a class="existingWikiWord" href="/nlab/show/connected+limits">connected limits</a>, because it lifts through the inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>:</mo><mi>P</mi><mi>X</mi><mo stretchy="false">↓</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>↪</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">i: P X \downarrow \exists_g(1) \hookrightarrow P X</annotation></semantics></math> to an isomorphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>Y</mi><mover><mo>→</mo><mo>∼</mo></mover><mi>P</mi><mi>X</mi><mo stretchy="false">↓</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P Y \stackrel{\sim}{\to} P X \downarrow \exists_g(1)</annotation></semantics></math> (here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math> denotes the top element of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">P Y</annotation></semantics></math>, aka <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math>), and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math> preserves connected limits.</p>
+
+<p>In more detail: by <a class="existingWikiWord" href="/nlab/show/Frobenius+reciprocity">Frobenius reciprocity</a>, we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>g</mi></msub><mi>T</mi><mo>∧</mo><mi>S</mi><mo>=</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo stretchy="false">(</mo><mi>T</mi><mo>∧</mo><msup><mi>g</mi> <mo>*</mo></msup><mi>S</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exists_g T \wedge S = \exists_g(T \wedge g^\ast S)</annotation></semantics></math> for elements <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">P Y</annotation></semantics></math>. Putting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">T = 1</annotation></semantics></math>, we get <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>g</mi></msub><mn>1</mn><mo>∧</mo><mi>S</mi><mo>=</mo><msub><mo>∃</mo> <mi>g</mi></msub><msup><mi>g</mi> <mo>*</mo></msup><mi>S</mi></mrow><annotation encoding="application/x-tex">\exists_g 1 \wedge S = \exists_g g^\ast S</annotation></semantics></math>, and so the composite</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi><mo stretchy="false">↓</mo><msub><mo>∃</mo> <mi>g</mi></msub><mn>1</mn><mover><mo>→</mo><mrow><msup><mi>g</mi> <mo>*</mo></msup></mrow></mover><mi>P</mi><mi>Y</mi><mover><mo>→</mo><mrow><msub><mo>∃</mo> <mi>g</mi></msub></mrow></mover><mi>P</mi><mi>X</mi><mo stretchy="false">↓</mo><msub><mo>∃</mo> <mi>g</mi></msub><mn>1</mn></mrow><annotation encoding="application/x-tex">P X \downarrow \exists_g 1 \stackrel{g^\ast}{\to} P Y \stackrel{\exists_g}{\to} P X \downarrow \exists_g 1</annotation></semantics></math></div>
+<p>is the identity. But since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> is monic, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>g</mi> <mo>*</mo></msup><msub><mo>∃</mo> <mi>g</mi></msub><mo>:</mo><mi>P</mi><mi>Y</mi><mo>→</mo><mi>P</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">g^\ast \exists_g: P Y \to P Y</annotation></semantics></math> is also the identity, which completes the proof.</p>
+</div>
+
+<div class="num_cor">
+<h6 id="corollary">Corollary</h6>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>g</mi></msub><mo>=</mo><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><mo>:</mo><mi>P</mi><mi>Y</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\forall_g = \neg_X \exists_g \neg_Y: P Y \to P X</annotation></semantics></math> preserves colimits of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math>-chains.</p>
+</div>
+
+<p>Naturally the left adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\exists_f</annotation></semantics></math> also preserves such colimits. So by the corollary, the composite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub><mo>:</mo><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\neg_X \exists_g \neg_Y \exists_f: P X \to P X</annotation></semantics></math> preserves colimits of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math>-chains.</p>
+
+<p>Putting now <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>0</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">A_0 = 0</annotation></semantics></math> (the bottom element of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math>), <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>1</mn></msub><mo>=</mo><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A_1 = \neg_X \exists_g \neg_Y \exists_f(0)</annotation></semantics></math>, and generally</p>
+<div class="maruku-equation" id="eq:An"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mi>n</mi></msub><mo>=</mo><mo stretchy="false">(</mo><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub><msup><mo stretchy="false">)</mo> <mi>n</mi></msup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex"> A_n = (\neg_X \exists_g \neg_Y \exists_f)^n(0),</annotation></semantics></math></div>
+<p>we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mi>n</mi></msub><mo>⊆</mo><msub><mi>A</mi> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">A_n \subseteq A_{n+1}</annotation></semantics></math> (apply the monotone operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub><msup><mo stretchy="false">)</mo> <mi>n</mi></msup></mrow><annotation encoding="application/x-tex">(\neg_X \exists_g \neg_Y \exists_f)^n</annotation></semantics></math> to the inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>0</mn></msub><mo>=</mo><mn>0</mn><mo>⊆</mo><msub><mi>A</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">A_0 = 0 \subseteq A_1</annotation></semantics></math>), and so <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\neg_X \exists_g \neg_Y \exists_f</annotation></semantics></math> preserves the union of the chain <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>0</mn></msub><mo>⊆</mo><msub><mi>A</mi> <mn>1</mn></msub><mo>⊆</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">A_0 \subseteq A_1 \subseteq \ldots</annotation></semantics></math>,</p>
+<div class="maruku-equation" id="eq:A"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">⋃</mo> <mrow><mi>n</mi><mo>≥</mo><mn>0</mn></mrow></munder><mo stretchy="false">(</mo><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub><msup><mo stretchy="false">)</mo> <mi>n</mi></msup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex"> A = \bigcup_{n \geq 0} (\neg_X \exists_g \neg_Y \exists_f)^n(0),</annotation></semantics></math></div>
+<p>which implies that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a fixed point of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>¬</mo> <mi>X</mi></msub><msub><mo>∃</mo> <mi>g</mi></msub><msub><mo>¬</mo> <mi>Y</mi></msub><msub><mo>∃</mo> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\neg_X \exists_g \neg_Y \exists_f</annotation></semantics></math>, as desired. In fact this <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is the minimal fixed point, just as in the conclusion of the Knaster-Tarski lemma. (Cf. <a class="existingWikiWord" href="/nlab/show/initial+algebra+of+an+endofunctor">initial algebra of an endofunctor</a>, especially Adámek’s theorem.)</p>
+
+<h3 id="beta_reduced_proof">Beta reduced proof</h3>
+
+<p>The preceding proofs are sometimes considered too abstract to easily visualize, but this is slightly misleading: the second proof, involving the construction of a minimal fixed point as a countable limit, can be “<a class="existingWikiWord" href="/nlab/show/beta-reduced">beta-reduced</a>” to produce one of the standard “concrete” proofs.</p>
+
+<p>In a nutshell, the minimal fixed point of the operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub><mo>:</mo><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\neg \exists_g \neg \exists_f: P X \to P X</annotation></semantics></math> can be expressed as an alternating series of iterated direct images:</p>
+<div class="maruku-equation" id="eq:series"><span class="maruku-eq-number">(3)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>X</mi><mo>−</mo><mi>g</mi><mi>f</mi><mi>g</mi><mi>Y</mi><mo>+</mo><mi>…</mi></mrow><annotation encoding="application/x-tex"> X - g Y + g f X - g f g Y + \ldots</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo></mrow><annotation encoding="application/x-tex">-</annotation></semantics></math> stands for set-theoretic difference <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∖</mo></mrow><annotation encoding="application/x-tex">\setminus</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math> stands for the union <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∪</mo></mrow><annotation encoding="application/x-tex">\cup</annotation></semantics></math>. The meaning of the infinite series is that we have a increasing sequence of those finite alternating sums with an even number of terms, starting with the empty sum (which is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math>, the empty set):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">X - g Y,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>X</mi><mo>−</mo><mi>g</mi><mi>f</mi><mi>g</mi><mi>Y</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">X - g Y + g f X - g f g Y,</annotation></semantics></math></div>
+<p>etc., and the infinite series is interpreted as the countable union of this increasing sequence. Note that we have to be careful about the order of the appearance of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo></mrow><annotation encoding="application/x-tex">-</annotation></semantics></math>, but alternatively, letting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊕</mo></mrow><annotation encoding="application/x-tex">\oplus</annotation></semantics></math> be the addition in the Boolean <em>ring</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> (symmetric difference), we could write also the series as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>⊕</mo><mi>g</mi><mi>Y</mi><mo>⊕</mo><mi>g</mi><mi>f</mi><mi>X</mi><mo>⊕</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">X \oplus g Y \oplus g f X \oplus \ldots</annotation></semantics></math> in the ring, where we do not need to be fussy about order.</p>
+
+<p>Most of this is a routine calculation, which for the most part boils down to the following observation:</p>
+
+<div class="num_lemma">
+<h6 id="lemma_2">Lemma</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>,</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">B, D</annotation></semantics></math> are elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">P Y</annotation></semantics></math>, with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>≤</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">D \leq B</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>g</mi></msub><mo stretchy="false">(</mo><mi>B</mi><mo>−</mo><mi>D</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∃</mo> <mi>g</mi></msub><mi>B</mi><mo>−</mo><msub><mo>∃</mo> <mi>g</mi></msub><mi>D</mi></mrow><annotation encoding="application/x-tex">\exists_g(B - D) = \exists_g B - \exists_g D</annotation></semantics></math>. (With a similar statement for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\exists_f</annotation></semantics></math>.)</p>
+</div>
+
+<p>The proof is left to the reader, but in brief, the injectivity of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> implies that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>g</mi></msub></mrow><annotation encoding="application/x-tex">\exists_g</annotation></semantics></math> preserves binary intersections and relative complements.</p>
+
+<p>From here, if we write</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mi>X</mi><mo>−</mo><mi>g</mi><mo stretchy="false">(</mo><mi>Y</mi><mo>−</mo><mi>f</mi><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>B</mi><mo>=</mo><mi>X</mi><mo>⊕</mo><mi>g</mi><mi>Y</mi><mo>⊕</mo><mi>g</mi><mi>f</mi><mi>B</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">\neg \exists_g \neg \exists_f(B) = X - g(Y - f B) = X - g Y + g f B = X \oplus g Y \oplus g f B,</annotation></semantics></math></div>
+<p>then it is easily verified by induction that, referring to equation <a class="maruku-eqref" href="#eq:An">(1)</a>,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mi>n</mi></msub><mo>=</mo><mo stretchy="false">(</mo><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub><msup><mo stretchy="false">)</mo> <mi>n</mi></msup><mn>0</mn><mo>=</mo><munderover><mo lspace="thinmathspace" rspace="thinmathspace">⨁</mo> <mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow> <mi>n</mi></munderover><mo stretchy="false">(</mo><mi>g</mi><mi>f</mi><msup><mo stretchy="false">)</mo> <mi>j</mi></msup><mi>X</mi><mo>⊕</mo><munderover><mo lspace="thinmathspace" rspace="thinmathspace">⨁</mo> <mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow> <mi>n</mi></munderover><mi>g</mi><mo stretchy="false">(</mo><mi>f</mi><mi>g</mi><msup><mo stretchy="false">)</mo> <mi>j</mi></msup><mi>Y</mi><mo>.</mo></mrow><annotation encoding="application/x-tex">A_n = (\neg \exists_g \neg \exists_f)^n 0 = \bigoplus_{j=0}^n (g f)^j X \oplus \bigoplus_{j=0}^n g(f g)^j Y.</annotation></semantics></math></div>
+<p>Thus, according to equation <a class="maruku-eqref" href="#eq:A">(2)</a>, the minimal fixed point <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is the union of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">A_n</annotation></semantics></math> which is how we are interpreting the series <a class="maruku-eqref" href="#eq:series">(3)</a>.</p>
+
+<p>Now we set up a comparison with one of the standard proofs involving a <a class="existingWikiWord" href="/nlab/show/back-and-forth+argument">back-and-forth argument</a>, say the one given in <a href="https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem#Proof">Wikipedia</a> that is attributed to Julius König. The minimal fixed point is a union of finitary approximations</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>1</mn></msub><mo>=</mo><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">A_1 = X - g Y,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>2</mn></msub><mo>=</mo><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>X</mi><mo>−</mo><mi>g</mi><mi>f</mi><mi>g</mi><mi>Y</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">A_2 = X - g Y + g f X - g f g Y,</annotation></semantics></math></div>
+<p>etc. Elements in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">A_1</annotation></semantics></math> are those which have no inverse images under <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>. Elements in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">A_2</annotation></semantics></math> are elements in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>g</mi><mi>f</mi><msup><mo stretchy="false">)</mo> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">(g f)^{-1}</annotation></semantics></math> can be applied at most once before we hit an element of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> with no inverse image under <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>g</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">g^{-1}</annotation></semantics></math>. Elements in the union <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>A</mi> <mn>1</mn></msub><mo>∪</mo><msub><mi>A</mi> <mn>2</mn></msub><mo>∪</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">A_1 \cup A_2 \cup \ldots</annotation></semantics></math> are those which survive at most finitely many applications of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>g</mi><mi>f</mi><msup><mo stretchy="false">)</mo> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">(g f)^{-1}</annotation></semantics></math> before hitting an element of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> with no inverse image under <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>. In the terminology of the Wikipedia article, such elements <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> are called “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>-stoppers”, and these are exactly the elements for which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h(x)</annotation></semantics></math> (where recall <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math> is the bijection under construction) is defined to be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x)</annotation></semantics></math> in the Wikipedia article. For elements <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> not in this fixed point <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> (the non-<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>-stoppers), our proof of CSB (via a minimal fixed point) defined <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h(x)</annotation></semantics></math> to be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>g</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g^{-1}(x)</annotation></semantics></math>, the same prescription that is used in the Wikipedia article.</p>
+
+<p>Other prescriptions are possible. For example, one could dually construct a <em>maximal</em> fixed point of the operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub><mo>:</mo><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\neg \exists_g \neg \exists_f: P X \to P X</annotation></semantics></math>, using Lemma <a class="maruku-ref" href="#chain"></a> to note that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\exists_f</annotation></semantics></math> and the right adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>g</mi></msub><mo>=</mo><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo></mrow><annotation encoding="application/x-tex">\forall_g = \neg \exists_g \neg</annotation></semantics></math> preserve limits of inverse <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math>-chains, so that the maximal fixed point or terminal algebra of the endofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\neg \exists_g \neg \exists_f</annotation></semantics></math> could be constructed as an intersection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">⋂</mo> <mrow><mi>n</mi><mo>≥</mo><mn>1</mn></mrow></msub><mo stretchy="false">(</mo><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub><msup><mo stretchy="false">)</mo> <mi>n</mi></msup><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\bigcap_{n \geq 1} (\neg \exists_g \neg \exists_f)^n(1)</annotation></semantics></math>. This could also be written as a series</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>X</mi><mo>−</mo><mi>g</mi><mi>f</mi><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>g</mi><mi>f</mi><mi>X</mi><mo>−</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">X - g Y + g f X - g f g Y + g f g f X - \ldots</annotation></semantics></math></div>
+<p>except this time the series is interpreted as an <em>intersection</em> of a <em>decreasing</em> sequence whose partial sums have an <em>odd</em> number of terms:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>=</mo><mi>X</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">1 = X,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>X</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">\neg \exists_g \neg \exists_f(1) = X - g Y + g f X,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mspace width="thinmathspace"></mspace></mrow><annotation encoding="application/x-tex">\,</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo>¬</mo><msub><mo>∃</mo> <mi>g</mi></msub><mo>¬</mo><msub><mo>∃</mo> <mi>f</mi></msub><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mi>X</mi><mo>−</mo><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>X</mi><mo>−</mo><mi>g</mi><mi>f</mi><mi>g</mi><mi>Y</mi><mo>+</mo><mi>g</mi><mi>f</mi><mi>g</mi><mi>f</mi><mi>X</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">(\neg \exists_g \neg \exists_f)^2(1) = X - g Y + g f X - g f g Y + g f g f X,</annotation></semantics></math></div>
+<p>etc. The difference between this and the minimal fixed point is the set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">⋂</mo> <mrow><mi>n</mi><mo>≥</mo><mn>1</mn></mrow></msub><mo stretchy="false">(</mo><mi>g</mi><mi>f</mi><msup><mo stretchy="false">)</mo> <mi>n</mi></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\bigcap_{n \geq 1} (g f)^n(X)</annotation></semantics></math>, consisting of elements <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> that belong to a doubly infinite sequence or a cyclic sequence (in the terminology of the Wikipedia article). As remarked in that article, for such <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> we have an option to define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h(x)</annotation></semantics></math> as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x)</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>g</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g^{-1}(x)</annotation></semantics></math>; in the present article we defined <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h(x) = f(x)</annotation></semantics></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> belonging to whichever fixed point <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is used, which includes points in doubly infinite sequences or cyclic sequences if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is the maximal fixed point. In that case the remaining <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> (belonging to the complement of the maximal fixed point) are mapped to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>g</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g^{-1}(x)</annotation></semantics></math>.</p>
+
+<h2 id="failure_in_toposes_and_constructive_mathematics">Failure in toposes and constructive mathematics</h2>
+
+<div class="num_example" id="Top">
+<h6 id="example">Example</h6>
+
+<p>Counterexample <a class="maruku-ref" href="#counterexample2"></a> below shows that the CSB theorem fails in Brouwer's <a class="existingWikiWord" href="/nlab/show/intuitionistic+mathematics">intuitionistic mathematics</a> even for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math> (since every function between the sets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0, 1]</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math> must be continuous by Brouwer's continuity principle!). See also the discussion in <a href="#MM">Mac Lane-Moerdijk</a>, VI.9, on toposes that realize Brouwer’s theorem.</p>
+</div>
+
+<div class="num_example" id="counterexample">
+<h6 id="example_2">Example</h6>
+
+<p>As mentioned above, the Cantor-Schroeder-Bernstein theorem fails in the arrow category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mo>→</mo></msup></mrow><annotation encoding="application/x-tex">Set^\to</annotation></semantics></math>, whose objects are functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>→</mo><msub><mi>X</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">X_0 \to X_1</annotation></semantics></math> between sets and whose morphisms are commutative squares. For example, let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> be the object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>ℕ</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">f: \mathbb{N} \to \mathbb{N}</annotation></semantics></math> that takes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">n \in \mathbb{N}</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">int</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">/</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{int}(n/2)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">int</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{int}(x)</annotation></semantics></math> is the greatest integer less than or equal to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>; let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> be the object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>ℕ</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">g: \mathbb{N} \to \mathbb{N}</annotation></semantics></math> that takes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Int</mi><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Int}((n+1)/2)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Int</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Int}(x)</annotation></semantics></math> is the least integer greater than or equal to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>. Pretty clearly <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> are non-isomorphic, because <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>g</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g^{-1}(0)</annotation></semantics></math> has cardinality <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math> whereas all fibers of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> have cardinality <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>. But, just by drawing pictures of these objects, it is easy to construct monomophisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">i: X \to Y</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>j</mi><mo>:</mo><mi>Y</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">j: Y \to X</annotation></semantics></math> (e.g., define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i_0(n) = n+1</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>i</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i_1(n) = n+1</annotation></semantics></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>, and define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>j</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">j_0(n) = n+1</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n \gt 0</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>j</mi> <mn>0</mn></msub><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">j_0(0) = 0</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>j</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">j_1(n) = n</annotation></semantics></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>).</p>
+</div>
+
+<p>Nor can one have internal existence of an isomorphism between <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> in this last example, since internal existence implies external existence as soon as the terminal object is (externally) projective.</p>
+
+<p>In fact, the CSB theorem is equivalent in <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a> (with the <a class="existingWikiWord" href="/nlab/show/axiom+of+infinity">axiom of infinity</a>) to the <a class="existingWikiWord" href="/nlab/show/law+of+excluded+middle">law of excluded middle</a>. This was shown in <a href="#PB19">Pradic and Brown, 2019</a> using the <a class="existingWikiWord" href="/nlab/show/principle+of+omniscience">principle of omniscience</a> for the <a class="existingWikiWord" href="/nlab/show/extended+natural+numbers">extended natural numbers</a>.</p>
+
+<h2 id="in_other_categories">In other categories</h2>
+
+<p>The CSB property holds in some other <a class="existingWikiWord" href="/nlab/show/categories">categories</a> of interest (but arguably fails in many more). Some examples follow:</p>
+
+<div class="num_example" id="model">
+<h6 id="example_3">Example</h6>
+
+<p>The CSB property holds in the category of <a class="existingWikiWord" href="/nlab/show/vector+spaces">vector spaces</a> and in the category of <a class="existingWikiWord" href="/nlab/show/algebraically+closed+field">algebraically closed field</a>s. See also this <a href="http://mathoverflow.net/questions/1058/when-does-cantor-bernstein-hold">MO post</a> by John Goodrick, where model-theoretic criteria come into play, sometimes under strengthenings of the notion of monomorphism (e.g., <a class="existingWikiWord" href="/nlab/show/elementary+embedding">elementary embedding</a>, <a class="existingWikiWord" href="/nlab/show/split+monomorphism">split monomorphism</a>) Some slides by Goodrick <a href="http://settheory.mathtalks.org/wp-content/uploads/2012/06/jonh_goodrick.pdf">here</a> go into more detail, giving connections between CSB and <a class="existingWikiWord" href="/nlab/show/stability+theory">stable theories</a> in the sense of <a class="existingWikiWord" href="/nlab/show/Shelah">Shelah</a>.</p>
+</div>
+
+<div class="num_example" id="counterexample2">
+<h6 id="counterexample">Counterexample</h6>
+
+<p>On the other hand, the CSB property obviously fails in <a class="existingWikiWord" href="/nlab/show/Top">Top</a>, since we have <a class="existingWikiWord" href="/nlab/show/embeddings">embeddings</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi><mo>≅</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo><mo>→</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\mathbb{R} \cong (0,1) \to [0,1] \to \mathbb{R}</annotation></semantics></math>, yet <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo><mo>≇</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">[0,1] \ncong \mathbb{R}</annotation></semantics></math>. It fails in <a class="existingWikiWord" href="/nlab/show/Grp">Grp</a> (e.g., the free group on countably many generators embeds in the free group on two generators).</p>
+</div>
+
+<p>More examples and discussion can be found at this Secret Blogging Seminar <a href="http://sbseminar.wordpress.com/2007/10/30/theme-and-variations-schroeder-bernstein/">post</a>.</p>
+
+<p>In a <a href="#Gowers">celebrated work</a>, <a class="existingWikiWord" href="/nlab/show/Timothy+Gowers">Timothy Gowers</a> gave a negative solution in the case of <a class="existingWikiWord" href="/nlab/show/Banach+spaces">Banach spaces</a>.</p>
+
+<p>Martin Escardó has announced a proof of CSB in the base theory of <a class="existingWikiWord" href="/nlab/show/Martin-L%C3%B6f+dependent+type+theory">Martin-Löf dependent type theory</a> with the added assumption of <a class="existingWikiWord" href="/nlab/show/function+extensionality">function extensionality</a> and <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>, and supplied an <a class="existingWikiWord" href="/nlab/show/Agda">Agda</a> proof (<a href="#Escardo20">Escardó 2020</a>). There is a slight subtlety in that “injection” is replaced by “embedding”, where the latter is defined to be a map whose fibres are <a class="existingWikiWord" href="/nlab/show/subsingletons">subsingletons</a>. This implies that CSB holds for <a class="existingWikiWord" href="/nlab/show/homotopy+types">homotopy types</a>/<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-groupoids.</p>
+
+<h2 id="name">Name</h2>
+
+<p>The CSB theorem was first stated by <a class="existingWikiWord" href="/nlab/show/Georg+Cantor">Georg Cantor</a>, but his proof relied on the <a class="existingWikiWord" href="/nlab/show/well-ordering+theorem">well-ordering theorem</a>. The modern (choice-free) theorem was proved (independently) by <span class="newWikiWord">Felix Bernstein<a href="/nlab/new/Felix+Bernstein">?</a></span> and <span class="newWikiWord">Ernst Schröder<a href="/nlab/new/Ernst+Schr%C3%B6der">?</a></span>. It has been variously named after two or three of these in almost every possible combination, although Cantor (when mentioned at all) seems always to be mentioned first.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Cantor%E2%80%93Bernstein%E2%80%93Schroeder_theorem#History">Wikipedia</a> reports that <a class="existingWikiWord" href="/nlab/show/Richard+Dedekind">Richard Dedekind</a> had an (unpublished) proof in 1887, well before any announced proofs by Cantor, Schroeder, or Bernstein in 1895, 1896, 1897 respectively.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Peter+Johnstone">Peter Johnstone</a>, <em><a class="existingWikiWord" href="/nlab/show/Sketches+of+an+Elephant">Sketches of an Elephant</a>: A Topos Theory Conpendium</em>, Vol. I, Clarendon Press, Oxford (2002)</p>
+</li>
+
+<li id="Gowers">
+<p><a class="existingWikiWord" href="/nlab/show/Timothy+Gowers">Timothy Gowers</a>, <em>A Solution to the Schroeder-Bernstein Problem for Banach Spaces</em>, Bulletin of the London Mathematical Society, Volume 28, Issue 3 (1996), 297-304 <a href="http://blms.oxfordjournals.org/content/28/3/297.abstract">(abstract)</a></p>
+</li>
+
+<li id="MM">
+<p><a class="existingWikiWord" href="/nlab/show/Saunders+Mac+Lane">Saunders Mac Lane</a>, <a class="existingWikiWord" href="/nlab/show/Ieke+Moerdijk">Ieke Moerdijk</a>, <em><a class="existingWikiWord" href="/nlab/show/Sheaves+in+Geometry+and+Logic">Sheaves in Geometry and Logic</a></em>, Springer-Verlag 1992.</p>
+</li>
+
+<li id="Freyd94">
+<p><a class="existingWikiWord" href="/nlab/show/Peter+Freyd">Peter Freyd</a>, <em>Cantor-Bernstein - message to the category theory mailing list</em>, February 1994. (<a href="https://www.mta.ca/~cat-dist/archive/1994/94-2">link</a>)</p>
+</li>
+
+<li id="PB19">
+<p>Pierre Pradic, Chad E. Brown, <em>Cantor-Bernstein implies Excluded Middle</em>, 2019 (<a href="https://arxiv.org/abs/1904.09193">arxiv:1904.09193</a>)</p>
+</li>
+
+<li id="Escardo20">
+<p>Martín Hötzel Escardó, <em>The Cantor-Schröder-Bernstein Theorem for ∞-groupoids</em>, 2020 (<a href="https://homotopytypetheory.org/2020/01/26/the-cantor-schroder-bernstein-theorem-for-%e2%88%9e-groupoids/">blog post</a>, <a href="https://www.cs.bham.ac.uk/~mhe/agda-new/CantorSchroederBernstein.html">Agda proof</a>, <a href="https://arxiv.org/abs/2002.07079">arXiv:2002.07079</a>)</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on February 18, 2021 at 13:06:18.
+    See the <a href="/nlab/history/Cantor-Schroeder-Bernstein+theorem" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Cantor-Schroeder-Bernstein+theorem" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/9840/#Item_16">Discuss</a><span class="backintime"><a href="/nlab/revision/Cantor-Schroeder-Bernstein+theorem/38" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Cantor-Schroeder-Bernstein+theorem" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Cantor-Schroeder-Bernstein+theorem" accesskey="S" class="navlink" id="history" rel="nofollow">History (38 revisions)</a>
+  <a href="/nlab/show/Cantor-Schroeder-Bernstein+theorem/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Cantor-Schroeder-Bernstein+theorem" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Cantor-Schroeder-Bernstein+theorem" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

@@ -1,0 +1,523 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Tychonoff theorem for locales in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Tychonoff theorem for locales
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussions/?CategoryID=0" title="Discuss this page on the nForum. It does not yet have a dedicated thread; feel free to create one, giving it the same name as the title of this page" style="color:black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <h1 id='contents'>Contents</h1>
+<div class='maruku_toc'><ul><li><a href='#statement_and_introduction'>Statement and introduction</a></li><li><a href='#frames_and_the_category_of_suplattices'>Frames and the category of sup-lattices</a></li><li><a href='#symmetric_monoidal_closed_structure_for_suplattices'>Symmetric monoidal closed structure for sup-lattices</a></li><li><a href='#preframe_representations'>Preframe representations</a></li><li><a href='#finitary_tychonoff_theorem'>Finitary Tychonoff theorem</a></li><li><a href='#references'>References</a></li></ul></div>
+<p>(This page is under construction… Will get back to this – Todd.)</p>
+
+<h2 id='statement_and_introduction'>Statement and introduction</h2>
+
+<p>The Tychonoff theorem for locales states that a small product of compact locales is compact. Remarkably, and in stark contrast to the Tychonoff theorem for compact spaces, this result requires only constructive reasoning for its proof; in particular, the axiom of choice (or some other choice principle) is not needed.</p>
+
+<p>Our account of this result is adapted from <a href='#JV91'>Johnstone and Vickers</a>, who provide a convenient conceptual niche for the Tychonoff theorem in terms of the closed category of preframes. Our plan here is to extract just enough from their account to give a relatively short proof of the Tychonoff theorem, without building up much of their theory of preframes – which is of interest in its own right of course and a source of conceptual explanation.</p>
+
+<p>The key result is the finitary case, that the product of <em>two</em> compact locales is compact, or equivalently that the coproduct of two compact frames is compact. For topological spaces the standard argument is well-known, and appears regularly in undergraduate courses, but crucially uses spatiality (existence of enough points) as a kind of “crutch”. The reader might like to try his or her own hand at proving this result for general locales where the crutch is no longer available, to appreciate that a somewhat different approach may be needed even for the finitary case.</p>
+
+<h2 id='frames_and_the_category_of_suplattices'>Frames and the category of sup-lattices</h2>
+
+<p>The category of locales is by definition opposite to the category of frames; following Joyal and Tierney, we consider frames as idempotent commutative monoids in the symmetric monoidal closed (smc) category <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_1' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Sup</mi></mrow><annotation encoding='application/x-tex'>Sup</annotation></semantics></math> consisting of sup-lattices.</p>
+
+<p>The category of frames is the full subcategory of the category of commutative <a class='existingWikiWord' href='/nlab/show/quantales'>quantales</a> <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_2' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>Q</mi><mo>,</mo><mo>⋅</mo><mo>,</mo><mn>1</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(Q, \cdot, 1)</annotation></semantics></math>, consisting of the <em>idempotent</em> commutative quantales, meaning that <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_3' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>x \leq 1</annotation></semantics></math> for all <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_4' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi><mo>∈</mo><mi>Q</mi></mrow><annotation encoding='application/x-tex'>x \in Q</annotation></semantics></math> (the quantale unit <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_5' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math> is the top element <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_6' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊤</mo></mrow><annotation encoding='application/x-tex'>\top</annotation></semantics></math>), and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_7' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi><mo>⋅</mo><mi>x</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding='application/x-tex'>x \cdot x = x</annotation></semantics></math> for all <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_8' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi><mo>∈</mo><mi>Q</mi></mrow><annotation encoding='application/x-tex'>x \in Q</annotation></semantics></math>.</p>
+
+<div class='num_prop'>
+<h6 id='proposition'>Proposition</h6>
+
+<p><strong>(Joyal-Tierney)</strong> The coproduct of a collection of frames coincides with their coproduct in the category of commutative quantales.</p>
+</div>
+
+<p>As commutative quantales are just commutative monoids in <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_9' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>Sup</mi><mo>,</mo><mo>⊗</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(Sup, \otimes)</annotation></semantics></math>, the coproduct of two commutative quantales <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_10' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>P</mi><mo>,</mo><mi>Q</mi></mrow><annotation encoding='application/x-tex'>P, Q</annotation></semantics></math> is given by the tensor product <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_11' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>P</mi><mo>⊗</mo><mi>Q</mi></mrow><annotation encoding='application/x-tex'>P \otimes Q</annotation></semantics></math> in <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_12' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Sup</mi></mrow><annotation encoding='application/x-tex'>Sup</annotation></semantics></math>. This is just the dual form of the general result recounted <a href='/nlab/show/cocommutative+coalgebra#relation_to_cartesian_monoidal_categories'>here</a>. Thus the binary coproduct of two frames <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_13' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X, Y</annotation></semantics></math> is their sup-lattice tensor product <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_14' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \otimes Y</annotation></semantics></math>. The nullary coproduct is the monoidal unit in <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_15' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Sup</mi></mrow><annotation encoding='application/x-tex'>Sup</annotation></semantics></math>. Furthermore,</p>
+
+<div class='num_theorem'>
+<h6 id='theorem'>Theorem</h6>
+
+<p><strong>(Joyal-Tierney)</strong> The forgetful functor <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_16' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Frame</mi><mo>→</mo><mi>Sup</mi></mrow><annotation encoding='application/x-tex'>Frame \to Sup</annotation></semantics></math> preserves and reflects filtered colimits. Thus the coproduct of a family of frames <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_17' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><msub><mi>F</mi> <mi>i</mi></msub><msub><mo stretchy='false'>}</mo> <mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></msub></mrow><annotation encoding='application/x-tex'>\{F_i\}_{i \in S}</annotation></semantics></math> may be computed as</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_18' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><munder><mo lspace='thinmathspace' rspace='thinmathspace'>∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>F</mi> <mi>i</mi></msub><mo>=</mo><msub><mi>colim</mi> <mrow><mi>finite</mi><mspace width='thickmathspace'></mspace><mi>F</mi><mo>⊆</mo><mi>S</mi></mrow></msub><msub><mo>⊗</mo> <mrow><mi>i</mi><mo>∈</mo><mi>F</mi></mrow></msub><msub><mi>F</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>\sum_{i \in S} F_i = colim_{finite\; F \subseteq S} \otimes_{i \in F} F_i</annotation></semantics></math></div>
+<p>where the colimit is over the filtered diagram of finite subsets and inclusions between them.</p>
+</div>
+
+<p>Much of the proof of the Tychonoff theorem will be concentrated in explicit manipulations with sup-lattice tensor products; we turn to this next.</p>
+
+<h2 id='symmetric_monoidal_closed_structure_for_suplattices'>Symmetric monoidal closed structure for sup-lattices</h2>
+
+<p>The closed structure of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_19' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Sup</mi></mrow><annotation encoding='application/x-tex'>Sup</annotation></semantics></math> has internal homs <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_20' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>[</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>[X, Y]</annotation></semantics></math>, the poset of sup-preserving maps between sup-lattices <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_21' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X, Y</annotation></semantics></math>, which are sup-lattices. As sup-preserving maps between sup-lattices are left adjoints (by an adjoint functor theorem), we may also denote the internal hom as <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_22' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ladj</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Ladj(X, Y)</annotation></semantics></math>. Note that sup-lattices are inf-lattices (a poset <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_23' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> is a sup-lattice iff <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_24' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>X</mi> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>X^{op}</annotation></semantics></math> is a sup-lattice), and it will be convenient also to consider <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_25' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Radj</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Radj(X, Y)</annotation></semantics></math>, the sup/inf-lattice of right adjoints <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_26' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \to Y</annotation></semantics></math>.</p>
+
+<p>We specially point out the sup-lattice <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_27' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>=</mo><mo stretchy='false'>{</mo><mn>0</mn><mo>≤</mo><mn>1</mn><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\mathbf{2} = \{0 \leq 1\}</annotation></semantics></math> (if we are generalizing from <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_28' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Set</mi></mrow><annotation encoding='application/x-tex'>Set</annotation></semantics></math> to a topos, we use instead the subobject clasifier <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_29' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ω</mi></mrow><annotation encoding='application/x-tex'>\Omega</annotation></semantics></math> which is an internal sup-lattice). This is the unit for the smc structure on <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_30' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Sup</mi></mrow><annotation encoding='application/x-tex'>Sup</annotation></semantics></math>: we have <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_31' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>[</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>,</mo><mi>X</mi><mo stretchy='false'>]</mo><mo>≅</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>[\mathbf{2}, X] \cong X</annotation></semantics></math>. Its opposite <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_32' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>\mathbf{2}^{op}</annotation></semantics></math> or <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_33' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>Ω</mi> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>\Omega^{op}</annotation></semantics></math> plays the role of dualizing object: homming into it, we calculate</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_34' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Ladj</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup><mo stretchy='false'>)</mo><mo>≅</mo><mi>Radj</mi><mo stretchy='false'>(</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup><mo>,</mo><mi>X</mi><msup><mo stretchy='false'>)</mo> <mi>op</mi></msup><mo>≅</mo><mi>Ladj</mi><mo stretchy='false'>(</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>,</mo><msup><mi>X</mi> <mi>op</mi></msup><mo stretchy='false'>)</mo><mo>≅</mo><msup><mi>X</mi> <mi>op</mi></msup><mo>.</mo></mrow><annotation encoding='application/x-tex'>Ladj(X, \mathbf{2}^{op}) \cong Radj(\mathbf{2}^{op}, X)^{op} \cong Ladj(\mathbf{2}, X^{op}) \cong X^{op}.</annotation></semantics></math></div>
+<p>Here the first isomorphism takes a left adjoint <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_35' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>f: X \to \mathbf{2}^{op}</annotation></semantics></math> to its right adjoint <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_36' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mo>:</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup><mo>→</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>g: \mathbf{2}^{op} \to X</annotation></semantics></math> in the opposite direction, and it also reverses 2-cells, i.e., takes an inequality <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_37' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>f</mi><mo>≤</mo><mi>f</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>f \leq f&#39;</annotation></semantics></math> of left adjoints to a mated inequality <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_38' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mo>′</mo><mo>≤</mo><mi>g</mi></mrow><annotation encoding='application/x-tex'>g&#39; \leq g</annotation></semantics></math> of right adjoints. The second isomorphism is a case of taking a functor <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_39' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>g</mi><mo>:</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup><mo>→</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>g: \mathbf{2}^{op} \to X</annotation></semantics></math> to its opposite <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_40' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mi>g</mi> <mi>op</mi></msup><mo>:</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>→</mo><msup><mi>X</mi> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>g^{op}: \mathbf{2} \to X^{op}</annotation></semantics></math>; this reverses direction of 2-cells. The double dual embedding</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_41' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>→</mo><mi>Ladj</mi><mo stretchy='false'>(</mo><mi>Ladj</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup><mo stretchy='false'>)</mo><mo>,</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>X \to Ladj(Ladj(X, \mathbf{2}^{op}), \mathbf{2}^{op})</annotation></semantics></math></div>
+<p>is thus identified (up to canonical isomorphism) with</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_42' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mover><mo>→</mo><mi>id</mi></mover><msup><mi>X</mi> <mrow><mi>op</mi><mspace width='thickmathspace'></mspace><mi>op</mi></mrow></msup><mo>=</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>X \stackrel{id}{\to} X^{op\; op} = X</annotation></semantics></math></div>
+<p>making <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_43' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>\mathbf{2}^{op}</annotation></semantics></math> a dualizing object: the smc category <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_44' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Sup</mi></mrow><annotation encoding='application/x-tex'>Sup</annotation></semantics></math> is a <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_45' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>*</mo></mrow><annotation encoding='application/x-tex'>\ast</annotation></semantics></math>-autonomous category, with <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_46' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><msup><mo stretchy='false'>)</mo> <mo>*</mo></msup><mo>=</mo><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><msup><mo stretchy='false'>)</mo> <mi>op</mi></msup><mo>:</mo><msup><mi>Sup</mi> <mi>op</mi></msup><mo>→</mo><mi>Sup</mi></mrow><annotation encoding='application/x-tex'>(-)^\ast = (-)^{op}: Sup^{op} \to Sup</annotation></semantics></math>.</p>
+
+<p>Being a <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_47' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>*</mo></mrow><annotation encoding='application/x-tex'>\ast</annotation></semantics></math>-autonomous category, we have an isomorphism <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_48' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi><mo>≅</mo><mo stretchy='false'>[</mo><mi>X</mi><mo>,</mo><msup><mi>Y</mi> <mi>op</mi></msup><msup><mo stretchy='false'>]</mo> <mi>op</mi></msup></mrow><annotation encoding='application/x-tex'>X \otimes Y \cong [X, Y^{op}]^{op}</annotation></semantics></math>. This results from the isomorphisms</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_49' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi><msup><mo stretchy='false'>)</mo> <mi>op</mi></msup><mo>≅</mo><mi>Ladj</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi><mo>,</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup><mo stretchy='false'>)</mo><mo>≅</mo><mi>Ladj</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>Ladj</mi><mo stretchy='false'>(</mo><mi>Y</mi><mo>,</mo><msup><mstyle mathvariant='bold'><mn>2</mn></mstyle> <mi>op</mi></msup><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>≅</mo><mi>Ladj</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><msup><mi>Y</mi> <mi>op</mi></msup><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>(X \otimes Y)^{op} \cong Ladj(X \otimes Y, \mathbf{2}^{op}) \cong Ladj(X, Ladj(Y, \mathbf{2}^{op})) \cong Ladj(X, Y^{op}).</annotation></semantics></math></div>
+<p>This observation saves us from having to construct <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_50' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \otimes Y</annotation></semantics></math> explicitly as a coequalizer of a free sup-lattice <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_51' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>P</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>×</mo><mi>Y</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>P(X \times Y)</annotation></semantics></math> (of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_52' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow><annotation encoding='application/x-tex'>\mathbf{2}</annotation></semantics></math>-valued presheaves on the poset <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_53' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>×</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \times Y</annotation></semantics></math>). We may thus write</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_54' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi><mo>≅</mo><mi>Radj</mi><mo stretchy='false'>(</mo><msup><mi>X</mi> <mi>op</mi></msup><mo>,</mo><mi>Y</mi><mo stretchy='false'>)</mo><mo>;</mo></mrow><annotation encoding='application/x-tex'>X \otimes Y \cong Radj(X^{op}, Y);</annotation></semantics></math></div>
+<p>this isomorphism takes <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_55' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>∈</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>w \in X \otimes Y</annotation></semantics></math> to the right adjoint <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_56' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>w</mi></msub><mo>:</mo><msup><mi>X</mi> <mi>op</mi></msup><mo>→</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>\phi_w: X^{op} \to Y</annotation></semantics></math> defined by <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_57' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mi>w</mi></msub><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo><mo>=</mo><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>v</mi><mo>:</mo><mi>u</mi><mo>⊗</mo><mi>v</mi><mo>≤</mo><mi>w</mi></mrow></msub><mi>v</mi></mrow><annotation encoding='application/x-tex'>\phi_w(u) = \bigvee_{v: u \otimes v \leq w} v</annotation></semantics></math>. Equally well, there is a canonical isomorphism <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_58' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi><mo>≅</mo><mi>Radj</mi><mo stretchy='false'>(</mo><msup><mi>Y</mi> <mi>op</mi></msup><mo>,</mo><mi>X</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>X \otimes Y \cong Radj(Y^{op}, X)</annotation></semantics></math> taking <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_59' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>∈</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>w \in X \otimes Y</annotation></semantics></math> to a right adjoint <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_60' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ψ</mi> <mi>w</mi></msub><mo>:</mo><msup><mi>Y</mi> <mi>op</mi></msup><mo>→</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>\psi_w: Y^{op} \to X</annotation></semantics></math>, and the pair <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_61' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><msub><mi>ϕ</mi> <mi>w</mi></msub><mo>,</mo><msub><mi>ψ</mi> <mi>w</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\phi_w, \psi_w)</annotation></semantics></math> forms a contravariant Galois connection with <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_62' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msubsup><mi>ψ</mi> <mi>w</mi> <mi>op</mi></msubsup><mo>⊣</mo><msub><mi>ϕ</mi> <mi>w</mi></msub></mrow><annotation encoding='application/x-tex'>\psi_w^{op} \dashv \phi_w</annotation></semantics></math>.</p>
+
+<div class='num_example'>
+<h6 id='example'>Example</h6>
+
+<p>Recall the classical proof that a product of two compact topological spaces <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_63' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X, Y</annotation></semantics></math> is compact. A standard lemma, sometimes called the <em>tube lemma</em>, is that for any open cover <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_64' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_65' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>×</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \times Y</annotation></semantics></math> and any <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_66' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>x \in X</annotation></semantics></math>, there is an open neighborhood <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_67' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_68' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi></mrow><annotation encoding='application/x-tex'>x</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_69' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>×</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>U \times Y</annotation></semantics></math> is finitely covered by <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_70' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>A</mi></mrow><annotation encoding='application/x-tex'>A</annotation></semantics></math>. Proof: Some finite subset <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_71' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>F</mi><mo>⊆</mo><mi>A</mi></mrow><annotation encoding='application/x-tex'>F \subseteq A</annotation></semantics></math> covers <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_72' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><mi>x</mi><mo stretchy='false'>}</mo><mo>×</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>\{x\} \times Y</annotation></semantics></math>; put <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_73' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>W</mi><mo>=</mo><mo lspace='thinmathspace' rspace='thinmathspace'>⋃</mo><mi>F</mi></mrow><annotation encoding='application/x-tex'>W = \bigcup F</annotation></semantics></math>. For each <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_74' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>y</mi><mo>∈</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>y \in Y</annotation></semantics></math> there are neighborhoods <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_75' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi></mrow><annotation encoding='application/x-tex'>U</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_76' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>x</mi></mrow><annotation encoding='application/x-tex'>x</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_77' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>V</mi></mrow><annotation encoding='application/x-tex'>V</annotation></semantics></math> of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_78' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>y</mi></mrow><annotation encoding='application/x-tex'>y</annotation></semantics></math> such that <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_79' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>⊗</mo><mi>V</mi><mo>≤</mo><mi>W</mi></mrow><annotation encoding='application/x-tex'>U \otimes V \leq W</annotation></semantics></math>. The collection <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_80' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>{</mo><mi>V</mi><mo>:</mo><mi>x</mi><mo>∈</mo><msub><mi>ψ</mi> <mi>W</mi></msub><mo stretchy='false'>(</mo><mi>V</mi><mo stretchy='false'>)</mo><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{V: x \in \psi_W(V)\}</annotation></semantics></math> thus covers <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_81' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math>, hence there is a finite subcover <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_82' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>V</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>V</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>V_1, \ldots, V_n</annotation></semantics></math>. Putting <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_83' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>=</mo><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋀</mo> <mi>i</mi></msub><msub><mi>ψ</mi> <mi>W</mi></msub><mo stretchy='false'>(</mo><msub><mi>V</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>U = \bigwedge_i \psi_W(V_i)</annotation></semantics></math>, we have for all <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_84' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>i</mi></mrow><annotation encoding='application/x-tex'>i</annotation></semantics></math> that <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_85' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>V</mi> <mi>i</mi></msub><mo>≤</mo><msub><mi>ϕ</mi> <mi>W</mi></msub><mo stretchy='false'>(</mo><msub><mi>ψ</mi> <mi>W</mi></msub><mo stretchy='false'>(</mo><msub><mi>V</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>≤</mo><msub><mi>ϕ</mi> <mi>W</mi></msub><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>V_i \leq \phi_W(\psi_W(V_i)) \leq \phi_W(U)</annotation></semantics></math> (the last inequality is by contravariance), hence <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_86' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi><mo>=</mo><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mi>i</mi></msub><msub><mi>V</mi> <mi>i</mi></msub><mo>≤</mo><msub><mi>ϕ</mi> <mi>W</mi></msub><mo stretchy='false'>(</mo><mi>U</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Y = \bigvee_i V_i \leq \phi_W(U)</annotation></semantics></math>, i.e., <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_87' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>U</mi><mo>×</mo><mi>Y</mi><mo>≤</mo><mi>W</mi></mrow><annotation encoding='application/x-tex'>U \times Y \leq W</annotation></semantics></math>.</p>
+</div>
+
+<p>Any <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_88' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>∈</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>w \in X \otimes Y</annotation></semantics></math> can be represented as a supremum of elements of the form <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_89' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>⊗</mo><mi>v</mi></mrow><annotation encoding='application/x-tex'>u \otimes v</annotation></semantics></math>, but one virtue of the identification <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_90' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi><mo>≅</mo><mo stretchy='false'>[</mo><mi>X</mi><mo>,</mo><msup><mi>Y</mi> <mi>op</mi></msup><msup><mo stretchy='false'>]</mo> <mi>op</mi></msup><mo>:</mo><mi>w</mi><mo>↦</mo><msub><mi>ϕ</mi> <mi>w</mi></msub></mrow><annotation encoding='application/x-tex'>X \otimes Y \cong [X, Y^{op}]^{op}: w \mapsto \phi_w</annotation></semantics></math> is that it allows one to give a canonical such representation:</p>
+
+<div class='num_defn'>
+<h6 id='definition'>Definition</h6>
+
+<p>For sup-lattices <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_91' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X, Y</annotation></semantics></math>, the <em>canonical representation</em> of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_92' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>∈</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>w \in X \otimes Y</annotation></semantics></math> (as a sup of tensors <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_93' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>⊗</mo><mi>v</mi></mrow><annotation encoding='application/x-tex'>u \otimes v</annotation></semantics></math> with <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_94' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>u \in X</annotation></semantics></math>, <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_95' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>∈</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>v \in Y</annotation></semantics></math>) is <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_96' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>=</mo><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∈</mo><mi>X</mi></mrow></msub><mi>u</mi><mo>⊗</mo><msub><mi>ϕ</mi> <mi>w</mi></msub><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>w = \bigvee_{u \in X} u \otimes \phi_w(u)</annotation></semantics></math>.</p>
+</div>
+
+<h2 id='preframe_representations'>Preframe representations</h2>
+
+<div class='num_defn'>
+<h6 id='definition_2'>Definition</h6>
+
+<p>A <em>preframe</em> is a poset with directed joins and finite meets that distribute over directed joins. A <em>preframe map</em> is a poset map that preserves finite meets and directed joins.</p>
+</div>
+
+<p>A frame is <em>a fortiori</em> a preframe. As far as the Tychonoff theorem is concerned, the decisive advantage of preframes is that the notion of compactness of frames can be described categorically in terms of preframe maps.</p>
+
+<p>Recall that a frame <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_97' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> is <em>compact</em> if whenever its top element <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_98' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊤</mo></mrow><annotation encoding='application/x-tex'>\top</annotation></semantics></math> is the join of a directed subset <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_99' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>J</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>J \subseteq X</annotation></semantics></math>, then <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_100' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊤</mo><mo>∈</mo><mi>J</mi></mrow><annotation encoding='application/x-tex'>\top \in J</annotation></semantics></math>. Equivalently,</p>
+
+<div class='num_prop' id='char'>
+<h6 id='proposition_2'>Proposition</h6>
+
+<p>Let <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_101' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> be a frame, and let <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_102' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>χ</mi> <mo>⊤</mo></msub><mo>:</mo><mi>X</mi><mo>→</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow><annotation encoding='application/x-tex'>\chi_\top: X \to \mathbf{2}</annotation></semantics></math> be the characteristic map of the poset inclusion <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_103' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⊤</mo><mo>:</mo><mn>1</mn><mo>↪</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>\top: 1 \hookrightarrow X</annotation></semantics></math>. Then <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_104' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> is <em>compact</em> iff <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_105' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>χ</mi> <mo>⊤</mo></msub></mrow><annotation encoding='application/x-tex'>\chi_\top</annotation></semantics></math> is a preframe map. (Of course <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_106' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>ϕ</mi> <mo>⊤</mo></msub></mrow><annotation encoding='application/x-tex'>\phi_\top</annotation></semantics></math> preserves finite meets for any frame, so the essential condition is preservation of directed joins.)</p>
+</div>
+
+<p>An essential insight of Johnstone and Vickers is that since directed joins commute with finite meets, the theory of preframes is essentially a commutative theory, and thus the category of preframes forms a symmetric monoidal closed category; moreover, frames are exactly those preframes <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_107' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> such that the binary join operation <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_108' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>∨</mo><mo>:</mo><mi>X</mi><mo>×</mo><mi>X</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>\vee: X \times X \to X</annotation></semantics></math> is a preframe map in each separate variable. Thus, frames can be described either as commutative monoids <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_109' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mo>∧</mo><mo>,</mo><mo>⊤</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(X, \wedge, \top)</annotation></semantics></math> in the smc category of sup-lattices, or as commutative monoids <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_110' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mo>∨</mo><mo>,</mo><mo>⊥</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(X, \vee, \bot)</annotation></semantics></math> in the smc category of preframes. In either case, coproducts of frames can be described as tensor products in either of these smc categories, with preframe tensors offering a description that is, roughly speaking, “De Morgan dual” to the sup-lattice tensor description.</p>
+
+<p>This motivates a construction that is “De Morgan dual” to tensor products <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_111' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>⊗</mo><mi>v</mi></mrow><annotation encoding='application/x-tex'>u \otimes v</annotation></semantics></math> for elements <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_112' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>∈</mo><mi>X</mi><mo>,</mo><mi>v</mi><mo>∈</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>u \in X, v \in Y</annotation></semantics></math>.</p>
+
+<div class='num_defn'>
+<h6 id='definition_3'>Definition</h6>
+
+<p>For elements <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_113' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>u \in X</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_114' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>∈</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>v \in Y</annotation></semantics></math> in frames <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_115' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X, Y</annotation></semantics></math>, define their <em>par</em> <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_116' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>⅋</mo><mi>v</mi></mrow><annotation encoding='application/x-tex'>u \parr v</annotation></semantics></math> in the sup-lattice <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_117' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \otimes Y</annotation></semantics></math> by the formula <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_118' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>⅋</mo><mi>v</mi><mo>=</mo><mo stretchy='false'>(</mo><mi>u</mi><mo>⊗</mo><msub><mo>⊤</mo> <mi>Y</mi></msub><mo stretchy='false'>)</mo><mo>∨</mo><mo stretchy='false'>(</mo><msub><mo>⊤</mo> <mi>X</mi></msub><mo>⊗</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>u \parr v = (u \otimes \top_Y) \vee (\top_X \otimes v)</annotation></semantics></math>.</p>
+</div>
+
+<p>The following proposition is easily checked.</p>
+
+<div class='num_prop' id='prop'>
+<h6 id='proposition_3'>Proposition</h6>
+
+<p><strong>(Johnstone-Vickers)</strong> If <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_119' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X, Y</annotation></semantics></math> are frames, then</p>
+
+<ol>
+<li>
+<p>For each <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_120' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>u \in X</annotation></semantics></math>, the map <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_121' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>⅋</mo><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>:</mo><mi>Y</mi><mo>→</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>u \parr -: Y \to X \otimes Y</annotation></semantics></math> is a preframe map, and similarly for each <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_122' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>v</mi><mo>∈</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>v \in Y</annotation></semantics></math> the map <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_123' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mo>⅋</mo><mi>v</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>- \parr v: X \to X \otimes Y</annotation></semantics></math> is a preframe map.</p>
+</li>
+
+<li>
+<p>The map <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_124' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⅋</mo><mo>:</mo><mi>X</mi><mo>×</mo><mi>Y</mi><mo>→</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>\parr: X \times Y \to X \otimes Y</annotation></semantics></math> preserves arbitrary sups (jointly in the two arguments).</p>
+</li>
+
+<li>
+<p><math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_125' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>⊗</mo><mi>v</mi><mo>=</mo><mo stretchy='false'>(</mo><mi>u</mi><mo>⅋</mo><msub><mo>⊥</mo> <mi>Y</mi></msub><mo stretchy='false'>)</mo><mo>∧</mo><mo stretchy='false'>(</mo><msub><mo>⊥</mo> <mi>X</mi></msub><mo>⅋</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>u \otimes v = (u \parr \bot_Y) \wedge (\bot_X \parr v)</annotation></semantics></math>.</p>
+</li>
+</ol>
+</div>
+
+<div class='num_prop'>
+<h6 id='proposition_4'>Proposition</h6>
+
+<p>Given frames <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_126' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X, Y</annotation></semantics></math>, any finite join of tensors <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_127' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>i</mi><mo>∈</mo><mi>F</mi></mrow></msub><msub><mi>u</mi> <mi>i</mi></msub><mo>⊗</mo><msub><mi>v</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>\bigvee_{i \in F} u_i \otimes v_i</annotation></semantics></math> can be expressed as a finite meet of pars.</p>
+</div>
+
+<div class='proof'>
+<h6 id='proof'>Proof</h6>
+
+<p>For each subset <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_128' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo>⊆</mo><mi>F</mi></mrow><annotation encoding='application/x-tex'>S \subseteq F</annotation></semantics></math>, put <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_129' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>u</mi> <mi>S</mi></msub><mo>≔</mo><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></msub><msub><mi>u</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>u_S \coloneqq \bigvee_{i \in S} u_i</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_130' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>v</mi> <mi>S</mi></msub><mo>=</mo><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></msub><msub><mi>v</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>v_S = \bigvee_{i \in S} v_i</annotation></semantics></math>, and let <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_131' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>¬</mo><mi>S</mi></mrow><annotation encoding='application/x-tex'>\neg S</annotation></semantics></math> denote the complement <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_132' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>F</mi><mo>∖</mo><mi>S</mi></mrow><annotation encoding='application/x-tex'>F \setminus S</annotation></semantics></math>.</p>
+
+<p>Exploiting Proposition <a class='maruku-ref' href='#prop'></a> and finite distributivity in the frame <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_133' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \otimes Y</annotation></semantics></math>, we have</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_134' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>i</mi><mo>∈</mo><mi>F</mi></mrow></munder><msub><mi>u</mi> <mi>i</mi></msub><mo>⊗</mo><msub><mi>v</mi> <mi>i</mi></msub></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>i</mi><mo>∈</mo><mi>F</mi></mrow></munder><mo stretchy='false'>(</mo><msub><mi>u</mi> <mi>i</mi></msub><mo>⅋</mo><msub><mo>⊥</mo> <mi>Y</mi></msub><mo stretchy='false'>)</mo><mo>∧</mo><mo stretchy='false'>(</mo><msub><mo>⊥</mo> <mi>X</mi></msub><mo>⅋</mo><msub><mi>v</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋀</mo> <mrow><mi>f</mi><mo>:</mo><mi>F</mi><mo>→</mo><mo stretchy='false'>{</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy='false'>}</mo></mrow></munder><mrow><mo>[</mo><mo stretchy='false'>(</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>i</mi><mo>∈</mo><msup><mi>f</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msup><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo></mrow></munder><msub><mi>u</mi> <mi>i</mi></msub><mo>⅋</mo><msub><mo>⊥</mo> <mi>Y</mi></msub><mo stretchy='false'>)</mo><mo>∨</mo><mo stretchy='false'>(</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>i</mi><mo>∈</mo><msup><mi>f</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>−</mo><mn>1</mn></mrow></msup><mo stretchy='false'>(</mo><mi>v</mi><mo stretchy='false'>)</mo></mrow></munder><msub><mo>⊥</mo> <mi>X</mi></msub><mo>⅋</mo><msub><mi>v</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo><mo>]</mo></mrow></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋀</mo> <mrow><mi>S</mi><mo>⊆</mo><mi>F</mi></mrow></munder><msub><mi>u</mi> <mi>S</mi></msub><mo>⅋</mo><msub><mi>v</mi> <mrow><mo>¬</mo><mi>S</mi></mrow></msub></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>\array{
+\bigvee_{i \in F} u_i \otimes v_i &amp; = &amp; \bigvee_{i \in F} (u_i \parr \bot_Y) \wedge (\bot_X \parr v_i) \\ 
+ &amp; = &amp; \bigwedge_{f: F \to \{u, v\}} \left[(\bigvee_{i \in f^{-1}(u)} u_i \parr \bot_Y) \vee (\bigvee_{i \in f^{-1}(v)} \bot_X \parr v_i)\right] \\ 
+ &amp; = &amp; \bigwedge_{S \subseteq F} u_S \parr v_{\neg S}
+}
+</annotation></semantics></math></div>
+<p>which proves the proposition.</p>
+</div>
+
+<p>This leads to a canonical preframe representation of elements <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_135' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>∈</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>w \in X \otimes Y</annotation></semantics></math> in a frame coproduct, where <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_136' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi></mrow><annotation encoding='application/x-tex'>w</annotation></semantics></math> is expressed as a directed join of finite meets of par expressions. We have</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_137' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><mi>w</mi></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∈</mo><mi>X</mi></mrow></munder><mi>u</mi><mo>⊗</mo><msub><mi>ϕ</mi> <mi>w</mi></msub><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>finite</mi><mspace width='thickmathspace'></mspace><mi>F</mi><mo>⊆</mo><mi>X</mi></mrow></munder><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∈</mo><mi>F</mi></mrow></munder><mi>u</mi><mo>⊗</mo><msub><mi>ϕ</mi> <mi>w</mi></msub><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>fin</mi><mo>.</mo><mspace width='thickmathspace'></mspace><mi>F</mi><mo>⊆</mo><mi>X</mi></mrow></munder><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋀</mo> <mrow><mi>S</mi><mo>⊆</mo><mi>F</mi></mrow></munder><mrow><mo>[</mo><mo stretchy='false'>(</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>u</mi><mo stretchy='false'>)</mo><mo>⅋</mo><mo stretchy='false'>(</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∉</mo><mi>S</mi></mrow></munder><msub><mi>ϕ</mi> <mi>w</mi></msub><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>]</mo></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>\array{
+w &amp; = &amp; \bigvee_{u \in X} u \otimes \phi_w(u) \\ 
+ &amp; = &amp; \bigvee_{finite\; F \subseteq X} \bigvee_{u \in F} u \otimes \phi_w(u) \\ 
+ &amp; = &amp; \bigvee_{fin.\; F \subseteq X} \bigwedge_{S \subseteq F} \left[(\bigvee_{u \in S} u) \parr (\bigvee_{u \notin S} \phi_w(u))\right]
+}
+</annotation></semantics></math></div>
+<h2 id='finitary_tychonoff_theorem'>Finitary Tychonoff theorem</h2>
+
+<p>Now suppose <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_138' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X, Y</annotation></semantics></math> are compact frames, which by Proposition <a class='maruku-ref' href='#char'></a> means precisely that the characteristic maps <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_139' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mi>X</mi></msub></mrow></msub><mo>:</mo><mi>X</mi><mo>→</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow><annotation encoding='application/x-tex'>\chi_{\top_X}: X \to \mathbf{2}</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_140' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mi>Y</mi></msub></mrow></msub><mo>:</mo><mi>Y</mi><mo>→</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow><annotation encoding='application/x-tex'>\chi_{\top_Y}: Y \to \mathbf{2}</annotation></semantics></math> preserve directed joins and finite meets.</p>
+
+<div class='num_theorem'>
+<h6 id='theorem_2'>Theorem</h6>
+
+<p><strong>(Finitary Tychonoff theorem)</strong> The frame <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_141' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \otimes Y</annotation></semantics></math> is compact.</p>
+</div>
+
+<p>Before giving the proof, we might as well say where it comes from. We have remarked earlier that the category of preframes is symmetric monoidal closed; let <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_142' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>⅋</mo></mrow><annotation encoding='application/x-tex'>\parr</annotation></semantics></math> denote its monoidal product. Then, as <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_143' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow><annotation encoding='application/x-tex'>\mathbf{2}</annotation></semantics></math> is a frame, the map <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_144' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>∨</mo><mo>:</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>×</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>→</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow><annotation encoding='application/x-tex'>\vee: \mathbf{2} \times \mathbf{2} \to \mathbf{2}</annotation></semantics></math> is a preframe map in each separate variable, and thus induces a canonical preframe map (which we again denote by <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_145' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>∨</mo></mrow><annotation encoding='application/x-tex'>\vee</annotation></semantics></math>): <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_146' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>⅋</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>→</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow><annotation encoding='application/x-tex'>\mathbf{2} \parr \mathbf{2} \to \mathbf{2}</annotation></semantics></math>. Since <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_147' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mi>X</mi></msub></mrow></msub></mrow><annotation encoding='application/x-tex'>\chi_{\top_X}</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_148' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mi>Y</mi></msub></mrow></msub></mrow><annotation encoding='application/x-tex'>\chi_{\top_Y}</annotation></semantics></math> are preframe maps by assumption, we may form a composite of preframe maps</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_149' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⅋</mo><mi>Y</mi><mover><mo>→</mo><mrow><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mi>X</mi></msub></mrow></msub><mo>⅋</mo><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mi>Y</mi></msub></mrow></msub></mrow></mover><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>⅋</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle><mover><mo>→</mo><mo>∨</mo></mover><mstyle mathvariant='bold'><mn>2</mn></mstyle><mo>.</mo></mrow><annotation encoding='application/x-tex'>X \parr Y \stackrel{\chi_{\top_X} \parr \chi_{\top_Y}}{\to} \mathbf{2} \parr \mathbf{2} \stackrel{\vee}{\to} \mathbf{2}.</annotation></semantics></math></div>
+<p>Call this preframe map <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_150' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi></mrow><annotation encoding='application/x-tex'>h</annotation></semantics></math>. Now, as remarked earlier, the preframe tensor <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_151' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi><mo>⅋</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>X \parr Y</annotation></semantics></math> gives the coproduct of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_152' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_153' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math>. Then one proves that <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_154' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>h(w) = 1</annotation></semantics></math> implies <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_155' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>=</mo><msub><mo>⊤</mo> <mrow><mi>X</mi><mo>⅋</mo><mi>Y</mi></mrow></msub></mrow><annotation encoding='application/x-tex'>w = \top_{X \parr Y}</annotation></semantics></math>; that is to say, <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_156' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo>=</mo><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mrow><mi>X</mi><mo>⅋</mo><mi>Y</mi></mrow></msub></mrow></msub></mrow><annotation encoding='application/x-tex'>h = \chi_{\top_{X \parr Y}}</annotation></semantics></math>, meaning that the coproduct of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_157' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_158' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> is compact.</p>
+
+<p>Or so this is how Johnstone and Vickers proceed; our account circumvents the building up of the closed category infrastructure of preframes which lies in the conceptual background.</p>
+
+<div class='proof'>
+<h6 id='proof_2'>Proof</h6>
+
+<p>Exploiting the canonical preframe representation of elements <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_159' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>∈</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>w \in X \otimes Y</annotation></semantics></math> from the previous section, define <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_160' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo>:</mo><mi>X</mi><mo>⊗</mo><mi>Y</mi><mo>→</mo><mstyle mathvariant='bold'><mn>2</mn></mstyle></mrow><annotation encoding='application/x-tex'>h: X \otimes Y \to \mathbf{2}</annotation></semantics></math> by the formula</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_161' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>=</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>fin</mi><mo>.</mo><mspace width='thickmathspace'></mspace><mi>F</mi><mo>⊆</mo><mi>X</mi></mrow></munder><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋀</mo> <mrow><mi>S</mi><mo>⊆</mo><mi>F</mi></mrow></munder><mrow><mo>[</mo><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mi>X</mi></msub></mrow></msub><mo stretchy='false'>(</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>u</mi><mo stretchy='false'>)</mo><mo>∨</mo><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mi>Y</mi></msub></mrow></msub><mo stretchy='false'>(</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∉</mo><mi>S</mi></mrow></munder><msub><mi>ϕ</mi> <mi>w</mi></msub><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>]</mo></mrow></mrow><annotation encoding='application/x-tex'>h(w) = \bigvee_{fin.\; F \subseteq X} \bigwedge_{S \subseteq F} \left[\chi_{\top_X}(\bigvee_{u \in S} u) \vee \chi_{\top_Y}(\bigvee_{u \notin S} \phi_w(u))\right]</annotation></semantics></math></div>
+<p>Now <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_162' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi></mrow><annotation encoding='application/x-tex'>h</annotation></semantics></math> preserves directed joins and finite meets, due to the fact that directed joins and finite meets commute with directed joins and finite meets, and that <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_163' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mo>∨</mo></mrow><annotation encoding='application/x-tex'>\vee</annotation></semantics></math> preserves directed joins and finite meets in separate variables, and that <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_164' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>w</mi><mo>↦</mo><msub><mi>ϕ</mi> <mi>w</mi></msub></mrow><annotation encoding='application/x-tex'>w \mapsto \phi_w</annotation></semantics></math> is a poset isomorphism (so preserves directed joins and finite meets).</p>
+
+<p>Now suppose <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_165' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo stretchy='false'>(</mo><mi>w</mi><mo stretchy='false'>)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>h(w) = 1</annotation></semantics></math>. Then for some finite subset <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_166' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>F</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding='application/x-tex'>F \subseteq X</annotation></semantics></math> we have, for every subset <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_167' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>S</mi><mo>⊆</mo><mi>F</mi></mrow><annotation encoding='application/x-tex'>S \subseteq F</annotation></semantics></math>, that either <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_168' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∈</mo><mi>S</mi></mrow></msub><mi>u</mi><mo>=</mo><msub><mo>⊤</mo> <mi>X</mi></msub></mrow><annotation encoding='application/x-tex'>\bigvee_{u \in S} u = \top_X</annotation></semantics></math> or <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_169' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∉</mo><mi>S</mi></mrow></msub><msub><mi>ϕ</mi> <mi>w</mi></msub><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo><mo>=</mo><msub><mo>⊤</mo> <mi>Y</mi></msub></mrow><annotation encoding='application/x-tex'>\bigvee_{u \notin S} \phi_w(u) = \top_Y</annotation></semantics></math>. But since <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_170' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mo>⊤</mo> <mi>X</mi></msub><mo>⅋</mo><mi>v</mi><mo>=</mo><msub><mo>⊤</mo> <mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow></msub><mo>=</mo><mi>u</mi><mo>⅋</mo><msub><mo>⊤</mo> <mi>Y</mi></msub></mrow><annotation encoding='application/x-tex'>\top_X \parr v = \top_{X \otimes Y} = u \parr \top_Y</annotation></semantics></math> for any <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_171' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>u</mi><mo>∈</mo><mi>X</mi><mo>,</mo><mi>v</mi><mo>∈</mo><mi>Y</mi></mrow><annotation encoding='application/x-tex'>u \in X, v \in Y</annotation></semantics></math>, we conclude</p>
+<div class='maruku-equation'><math class='maruku-mathml' display='block' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_172' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mrow><mtable><mtr><mtd><mi>w</mi></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>fin</mi><mo>.</mo><mspace width='thickmathspace'></mspace><mi>F</mi><mo>⊆</mo><mi>X</mi></mrow></munder><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋀</mo> <mrow><mi>S</mi><mo>⊆</mo><mi>F</mi></mrow></munder><mo stretchy='false'>(</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>u</mi><mo stretchy='false'>)</mo><mo>⅋</mo><mo stretchy='false'>(</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>u</mi><mo>∉</mo><mi>S</mi></mrow></munder><msub><mi>ϕ</mi> <mi>w</mi></msub><mo stretchy='false'>(</mo><mi>u</mi><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋁</mo> <mrow><mi>fin</mi><mo>.</mo><mspace width='thickmathspace'></mspace><mi>F</mi><mo>⊆</mo><mi>X</mi></mrow></munder><munder><mo lspace='thinmathspace' rspace='thinmathspace'>⋀</mo> <mrow><mi>S</mi><mo>⊆</mo><mi>F</mi></mrow></munder><msub><mo>⊤</mo> <mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo></mtd> <mtd><msub><mo>⊤</mo> <mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow></msub></mtd></mtr></mtable></mrow></mrow><annotation encoding='application/x-tex'>\array{
+w &amp; = &amp; \bigvee_{fin.\; F \subseteq X} \bigwedge_{S \subseteq F} (\bigvee_{u \in S} u) \parr (\bigvee_{u \notin S} \phi_w(u)) \\ 
+ &amp; = &amp; \bigvee_{fin.\; F \subseteq X} \bigwedge_{S \subseteq F} \top_{X \otimes Y} \\ 
+ &amp; = &amp; \top_{X \otimes Y}
+}
+</annotation></semantics></math></div>
+<p>Thus we have shown <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_173' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>h</mi><mo>=</mo><msub><mi>χ</mi> <mrow><msub><mo>⊤</mo> <mrow><mi>X</mi><mo>⊗</mo><mi>Y</mi></mrow></msub></mrow></msub></mrow><annotation encoding='application/x-tex'>h = \chi_{\top_{X \otimes Y}}</annotation></semantics></math> is a preframe map.</p>
+</div>
+
+<div class='num_theorem'>
+<h6 id='theorem_3'>Theorem</h6>
+
+<p><strong>(Tychonoff theorem)</strong> An arbitrary coproduct of compact frames <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_174' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mo lspace='thinmathspace' rspace='thinmathspace'>∑</mo> <mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>X</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>\sum_{i \in I} X_i</annotation></semantics></math> is compact.</p>
+</div>
+
+<div class='proof'>
+<h6 id='proof_3'>Proof</h6>
+
+<p>We may assume all the frames <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_175' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>X_i</annotation></semantics></math> are non-trivial, i.e. non-terminal. Then each coproduct inclusion <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_176' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><msub><mo>⊗</mo> <mrow><mi>i</mi><mo>∈</mo><mi>F</mi></mrow></msub><msub><mi>X</mi> <mi>i</mi></msub><mo>↪</mo><msub><mo>⊗</mo> <mrow><mi>j</mi><mo>∈</mo><mi>F</mi><mo>′</mo></mrow></msub><msub><mi>X</mi> <mi>j</mi></msub></mrow><annotation encoding='application/x-tex'>\otimes_{i \in F} X_i \hookrightarrow \otimes_{j \in F&#39;} X_j</annotation></semantics></math>, where <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_177' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>F</mi><mo>,</mo><mi>F</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>F, F&#39;</annotation></semantics></math> are finite subsets of <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_178' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>I</mi></mrow><annotation encoding='application/x-tex'>I</annotation></semantics></math> and <math class='maruku-mathml' display='inline' id='mathml_8dc3bb6751048ae95b7ef38684e83fcda1a759e8_179' xmlns='http://www.w3.org/1998/Math/MathML'><semantics><mrow><mi>F</mi><mo>⊆</mo><mi>F</mi><mo>′</mo></mrow><annotation encoding='application/x-tex'>F \subseteq F&#39;</annotation></semantics></math>, is an embedding. (…)</p>
+</div>
+
+<h2 id='references'>References</h2>
+
+<p id='JV91'>Peter Johnstone and Steven Vickers, <em>Preframe presentation present</em>, in A. Carboni, M.C. Pedicchio, G. Rosolini (eds.) <em>Category Theory</em> (Proceedings, Como 1990), Springer Lectures Notes in Mathematics 1488 (1991), 193-212. (<a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.438.8880&amp;rep=rep1&amp;type=pdf'>online pdf</a>)</p>
+
+<p>Citation to this <a href='http://dml.cz/bitstream/handle/10338.dmlcz/106680/CommentatMathUnivCarol_029-1988-4_3.pdf'>link</a> to be added…</p>
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on January 14, 2018 at 20:42:34.
+    See the <a href="/nlab/history/Tychonoff+theorem+for+locales" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Tychonoff+theorem+for+locales" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/Tychonoff+theorem+for+locales/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Tychonoff+theorem+for+locales" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Tychonoff+theorem+for+locales" accesskey="S" class="navlink" id="history" rel="nofollow">History (1 revision)</a>
+  <a href="/nlab/show/Tychonoff+theorem+for+locales/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Tychonoff+theorem+for+locales" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Tychonoff+theorem+for+locales" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

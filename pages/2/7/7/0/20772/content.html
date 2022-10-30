@@ -1,0 +1,723 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Radon monad in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Radon monad
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/10441/#Item_3" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="measure_and_probability_theory">Measure and probability theory</h4>
+
+<div class="hide"><div>
+<p><strong><a class="existingWikiWord" href="/nlab/show/measure+theory">measure theory</a></strong></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/probability+theory">probability theory</a></strong></p>
+
+<h2 id="measure_theory">Measure theory</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/measurable+space">measurable space</a>, <a class="existingWikiWord" href="/nlab/show/measurable+locale">measurable locale</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/measure">measure</a>, <a class="existingWikiWord" href="/nlab/show/measure+space">measure space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/von+Neumann+algebra">von Neumann algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+measure+theory">geometric measure theory</a></p>
+</li>
+</ul>
+
+<h2 id="probability_theory">Probability theory</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/probability+space">probability space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/probability+distribution">probability distribution</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/state">state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/states+in+AQFT+and+operator+algebra">in AQFT and operator algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/GNS+construction">GNS construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Fell%27s+theorem">Fell's theorem</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entropy">entropy</a>, <a class="existingWikiWord" href="/nlab/show/relative+entropy">relative entropy</a></p>
+</li>
+</ul>
+
+<h2 id="information_geometry">Information geometry</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/information+geometry">information geometry</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/information+metric">information metric</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Wasserstein+metric">Wasserstein metric</a></p>
+</li>
+</ul>
+
+<h2 id="thermodynamics">Thermodynamics</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/thermodynamics">thermodynamics</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/second+law+of+thermodynamics">second law of thermodynamics</a>, <a class="existingWikiWord" href="/nlab/show/generalized+second+law+of+theormodynamics">generalized second law</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/ergodic+theory">ergodic theory</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Riesz+representation+theorem">Riesz representation theorem</a></li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/measure+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+
+<h4 id="category_theory"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(0,1)</annotation></semantics></math>-Category theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/%280%2C1%29-category+theory">(0,1)-category theory</a></strong>: <a class="existingWikiWord" href="/nlab/show/logic">logic</a>, <a class="existingWikiWord" href="/nlab/show/order+theory">order theory</a></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/%280%2C1%29-category">(0,1)-category</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/relation+between+preorders+and+%280%2C1%29-categories">relation between preorders and (0,1)-categories</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/proset">proset</a>, <a class="existingWikiWord" href="/nlab/show/partially+ordered+set">partially ordered set</a> (<a class="existingWikiWord" href="/nlab/show/directed+set">directed set</a>, <a class="existingWikiWord" href="/nlab/show/total+order">total order</a>, <a class="existingWikiWord" href="/nlab/show/linear+order">linear order</a>)</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/top">top</a>, <a class="existingWikiWord" href="/nlab/show/true">true</a>,</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bottom">bottom</a>, <a class="existingWikiWord" href="/nlab/show/false">false</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monotone+function">monotone function</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/implication">implication</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/filter">filter</a>, <a class="existingWikiWord" href="/nlab/show/interval">interval</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lattice">lattice</a>, <a class="existingWikiWord" href="/nlab/show/semilattice">semilattice</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/meet">meet</a>, <a class="existingWikiWord" href="/nlab/show/logical+conjunction">logical conjunction</a>, <a class="existingWikiWord" href="/nlab/show/and">and</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/join">join</a>, <a class="existingWikiWord" href="/nlab/show/logical+disjunction">logical disjunction</a>, <a class="existingWikiWord" href="/nlab/show/or">or</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/compact+element">compact element</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/lattice+of+subobjects">lattice of subobjects</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/complete+lattice">complete lattice</a>, <a class="existingWikiWord" href="/nlab/show/algebraic+lattice">algebraic lattice</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/distributive+lattice">distributive lattice</a>, <a class="existingWikiWord" href="/nlab/show/completely+distributive+lattice">completely distributive lattice</a>, <a class="existingWikiWord" href="/nlab/show/canonical+extension">canonical extension</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/hyperdoctrine">hyperdoctrine</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/first-order+hyperdoctrine">first-order</a>, <a class="existingWikiWord" href="/nlab/show/Boolean+hyperdoctrine">Boolean</a>, <a class="existingWikiWord" href="/nlab/show/coherent+hyperdoctrine">coherent</a>, <a class="existingWikiWord" href="/nlab/show/tripos">tripos</a></li>
+</ul>
+</li>
+</ul>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/%280%2C1%29-topos">(0,1)-topos</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Heyting+algebra">Heyting algebra</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/regular+element">regular element</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Boolean+algebra">Boolean algebra</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/frame">frame</a>, <a class="existingWikiWord" href="/nlab/show/locale">locale</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Stone+duality">Stone duality</a></li>
+</ul>
+</div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#spaces_of_radon_measures'>Spaces of Radon measures</a></li>
+<ul>
+<li><a href='#in_terms_of_additive_measures'>In terms of τ-additive measures</a></li>
+<li><a href='#in_terms_of_valuations'>In terms of valuations</a></li>
+</ul>
+<li><a href='#functoriality_unit_and_multiplication'>Functoriality, unit and multiplication</a></li>
+<li><a href='#algebras'>Algebras</a></li>
+<li><a href='#the_ordered_case'>The ordered case</a></li>
+<ul>
+<li><a href='#construction_of_the_spaces'>Construction of the spaces</a></li>
+<li><a href='#algebras_2'>Algebras</a></li>
+<li><a href='#lax_morphisms_are_concave_maps'>Lax morphisms are concave maps</a></li>
+</ul>
+<li><a href='#see_also'>See also</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>The Radon monad is a <a class="existingWikiWord" href="/nlab/show/measure+monad">measure monad</a> on the <a class="existingWikiWord" href="/nlab/show/category">category</a> of <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+spaces">compact Hausdorff spaces</a>. Its functor assigns to each space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> the space of <a class="existingWikiWord" href="/nlab/show/Radon+measure">Radon</a> <a class="existingWikiWord" href="/nlab/show/probability+measure">probability</a> or subprobability <a class="existingWikiWord" href="/nlab/show/measures">measures</a>, equipped with the <a class="existingWikiWord" href="/nlab/show/weak+topology">weak topology</a>.</p>
+
+<p>There is also an <a class="existingWikiWord" href="/nlab/show/order+theory">ordered</a> version of the Radon monad on the category of <a class="existingWikiWord" href="/nlab/show/compact+ordered+spaces">compact ordered spaces</a> (see <a href="#the_ordered_case">below</a>).</p>
+
+<h2 id="spaces_of_radon_measures">Spaces of Radon measures</h2>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+space">compact Hausdorff space</a>. Denote by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">R X</annotation></semantics></math> the set of those <a class="existingWikiWord" href="/nlab/show/Radon+measures">Radon measures</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> which are <em>subnormalized</em>, i.e. those measures <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> for which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\mu(X)\le 1</annotation></semantics></math>. Denote by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> its subset of Radon <a class="existingWikiWord" href="/nlab/show/probability+measures">probability measures</a>.</p>
+
+<p>Equip both sets with the <a class="existingWikiWord" href="/nlab/show/weak+topology">topology of weak convergence</a> with respect to <a class="existingWikiWord" href="/nlab/show/continuous+functions">continuous functions</a>. It is well known that the resulting spaces <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">R X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> are themselves <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+spaces">compact Hausdorff spaces</a>.</p>
+
+<h3 id="in_terms_of_additive_measures">In terms of τ-additive measures</h3>
+
+<p>Since <a class="existingWikiWord" href="/nlab/show/tau-additive+measure#relationship_with_other_measuretheoretical_notions">on compact Hausdorff spaces Radon and τ-additive measures coincide</a>, we can equivalently define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">R X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> as the sets of subnormalized and normalized <a class="existingWikiWord" href="/nlab/show/%CF%84-additive+measures">τ-additive measures</a>.</p>
+
+<p>For probability measures, the <a class="existingWikiWord" href="/nlab/show/weak+topology">weak topology</a> and the <a class="existingWikiWord" href="/nlab/show/extended+probabilistic+powerdomain#the_measure_monad_on_top">A-topology</a> coincide, so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> an be extended to the <a class="existingWikiWord" href="/nlab/show/extended+probabilistic+powerdomain#the_probability_monad_on_top">probability monad on Top</a>.</p>
+
+<p>The same cannot be said for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>, since the weak topology and the A-topology do not coincide for <em>subnormalized</em> measures: given <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo>∈</mo><mi>R</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\mu\in R X</annotation></semantics></math>, the measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mi>μ</mi></mrow><annotation encoding="application/x-tex">r \mu</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>r</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0 \le r \le 1</annotation></semantics></math> is in the <a class="existingWikiWord" href="/nlab/show/closure">closure</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> for the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>-topology, while the weak topology is <a class="existingWikiWord" href="/nlab/show/Hausdorff">Hausdorff</a>.</p>
+
+<h3 id="in_terms_of_valuations">In terms of valuations</h3>
+
+<p>Note that, since every <a class="existingWikiWord" href="/nlab/show/continuous+valuation">continuous valuation</a> on a <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+space">compact Hausdorff space</a> can be <a class="existingWikiWord" href="/nlab/show/continuous+valuation#extending_valuations_to_measures">extended to a τ-additive measure</a>, we could equivalently defined the Radon monad as a monad of <a class="existingWikiWord" href="/nlab/show/continuous+valuations">continuous valuations</a>.</p>
+
+<p>Just as above, for probability measures, the <a class="existingWikiWord" href="/nlab/show/weak+topology">weak topology</a> and the <a class="existingWikiWord" href="/nlab/show/extended+probabilistic+powerdomain#spaces_of_valuations">pointwise topology of valuations</a> coincide, so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> an be extended to a submonad of the <a class="existingWikiWord" href="/nlab/show/extended+probabilistic+powerdomain">extended probabilistic powerdomain</a> on <a class="existingWikiWord" href="/nlab/show/Top">Top</a>. Again, the same cannot be said for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>.</p>
+
+<h2 id="functoriality_unit_and_multiplication">Functoriality, unit and multiplication</h2>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f:X\to Y</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/continuous+map">continuous map</a> between <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+spaces">compact Hausdorff spaces</a>. The <a class="existingWikiWord" href="/nlab/show/pushforward+of+measures">pushforward of measures</a> (or equivalently of <a class="existingWikiWord" href="/nlab/show/continuous+valuation#pushforward">valuations</a>) gives a well-defined, continuous map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>X</mi><mo>→</mo><mi>R</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">R X\to R Y</annotation></semantics></math> which restricts to the map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">P X \to P Y</annotation></semantics></math>. This makes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/endofunctors">endofunctors</a> of <a class="existingWikiWord" href="/nlab/show/Top">Top</a>.</p>
+
+<p>As it is usual for <a class="existingWikiWord" href="/nlab/show/measure+monads">measure monads</a>, the unit is given by the <a class="existingWikiWord" href="/nlab/show/Dirac+measures">Dirac measures</a> and the multiplication is given by <a class="existingWikiWord" href="/nlab/show/integration">integration</a>.</p>
+
+<p>More in detail, given a <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+space">compact Hausdorff space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, we can assign to each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">x\in X</annotation></semantics></math> its <a class="existingWikiWord" href="/nlab/show/Dirac+measure">Dirac measure</a> (equivalently, <a class="existingWikiWord" href="/nlab/show/continuous+valuation#dirac_valuations">Dirac valuation</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\delta_x</annotation></semantics></math>. The assignment <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>δ</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\delta:X\to P X</annotation></semantics></math>, or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>→</mo><mi>R</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">X\to R X</annotation></semantics></math> is continuous, and <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+
+<p>Just as well, given a measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi><mo>∈</mo><mi>P</mi><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\mu\in P P X</annotation></semantics></math>, we can define the measure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi><mi>μ</mi><mo>∈</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">E\mu\in P X</annotation></semantics></math> as the one assigning to a measurable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>⊆</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">A\subseteq X</annotation></semantics></math> the number</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>E</mi><mi>μ</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>≔</mo><msub><mo>∫</mo> <mrow><mi>P</mi><mi>X</mi></mrow></msub><mi>p</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>d</mi><mi>μ</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+E\mu(A) \coloneqq \int_{P X} p(A) \,d\mu(p).
+
+</annotation></semantics></math></div>
+<p>(In terms of valuations, the same is given for <a class="existingWikiWord" href="/nlab/show/open+sets">open sets</a> instead of <a class="existingWikiWord" href="/nlab/show/measurable+sets">measurable sets</a>.) Again, the assignment <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi><mo>:</mo><mi>P</mi><mi>P</mi><mi>X</mi><mo>→</mo><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">E: P P X \to P X</annotation></semantics></math> is continuous and <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. The multiplication for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> is defined analogously.</p>
+
+<p>The unit and multiplication thus defined satisfy the usual <a class="existingWikiWord" href="/nlab/show/axioms">axioms</a> of a <a class="existingWikiWord" href="/nlab/show/monad">monad</a>. The monads <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> are both known in the literature as the <strong>Radon monad</strong>.</p>
+
+<p>The monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> is the restriction to <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+spaces">compact Hausdorff spaces</a> of the <a class="existingWikiWord" href="/nlab/show/extended+probabilistic+powerdomain#the_probability_monad_on_top">probability monad on Top</a>, which is itself a submonad of the <a class="existingWikiWord" href="/nlab/show/extended+probabilistic+powerdomain">extended probabilistic powerdomain</a>. (See also <a class="existingWikiWord" href="/nlab/show/monads+of+probability%2C+measures%2C+and+valuations">monads of probability, measures, and valuations</a>.)</p>
+
+<h2 id="algebras">Algebras</h2>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebras</a> of the Radon monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/compact">compact</a> <a class="existingWikiWord" href="/nlab/show/convex+subsets">convex subsets</a> of <a class="existingWikiWord" href="/nlab/show/locally+convex+topological+vector+spaces">locally convex topological vector spaces</a>.</p>
+
+<p>More in detail, a compact convex subset <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> of a locally convex topological vector space is a <a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+space">compact Hausdorff space</a>, and it admits a canonical <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>-algebra structure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>:</mo><mi>P</mi><mi>C</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">e:P C\to C</annotation></semantics></math> via (vector-valued) <a class="existingWikiWord" href="/nlab/show/integration">integration</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>↦</mo><msub><mo>∫</mo> <mi>C</mi></msub><mi>c</mi><mspace width="thinmathspace"></mspace><mi>dp</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+p \mapsto \int_{C} c \,dp(c) .
+
+</annotation></semantics></math></div>
+<p>Since the space is <a class="existingWikiWord" href="/nlab/show/compact">compact</a>, the integral above is well-defined, and it returns an element of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> which we can view as the “center of mass” of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>.</p>
+
+<p>Conversely, it can be proven that every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>-algebra is of this form.</p>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">morphisms of algebras</a> are the continuous maps between algebras which commute with the operation of taking integrals. It can be shown that these coincide with the <em>affine</em> maps, i.e. those maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f:A\to B</annotation></semantics></math> which satisfy</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>λ</mi><mspace width="thinmathspace"></mspace><mi>a</mi><mo>+</mo><mi>μ</mi><mspace width="thinmathspace"></mspace><mi>b</mi><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>λ</mi><mspace width="thinmathspace"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>+</mo><mi>μ</mi><mspace width="thinmathspace"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+f\big( \lambda\, a + \mu\, b  \big) \;=\; \lambda\,f(a) + \mu\,f(b)
+
+</annotation></semantics></math></div>
+<p>for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>∈</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a,b\in A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>λ</mi><mo>,</mo><mi>μ</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0\le\lambda,\mu\le 1</annotation></semantics></math> (with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo>+</mo><mi>μ</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\lambda+\mu=1</annotation></semantics></math> for the normalized case).</p>
+
+<p>For more information, see <a href="#swirszcz">Swirszcz ‘74</a> and the later <a href="#radonkeimel">Keimel ‘08</a>.</p>
+
+<h2 id="the_ordered_case">The ordered case</h2>
+
+<p>The Radon monad can be lifted to the <a class="existingWikiWord" href="/nlab/show/CompOrd#categories_of_compact_ordered_spaces">category of compact ordered spaces</a> (and <a class="existingWikiWord" href="/nlab/show/continuous+map">continuous</a> <a class="existingWikiWord" href="/nlab/show/monotone+maps">monotone maps</a>). This is done by means of the <a class="existingWikiWord" href="/nlab/show/stochastic+order">stochastic order</a>.</p>
+
+<p>Here we sketch the construction. For more details, see <a href="#radonkeimel">Keimel ‘08</a>.</p>
+
+<h3 id="construction_of_the_spaces">Construction of the spaces</h3>
+
+<p>Given a <a class="existingWikiWord" href="/nlab/show/compact+ordered+space">compact ordered space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, we can form the spaces <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">R X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> as for the unordered case, and then equip them with the <a class="existingWikiWord" href="/nlab/show/stochastic+order">stochastic order</a>. Over compact ordered spaces, the stochastic order is antisymmetric (i.e. it is a partial order), and it has <span class="newWikiWord">closed graph<a href="/nlab/new/closed+graph">?</a></span>, so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">R X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> are again compact ordered spaces.</p>
+
+<p>Given a monotone map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f:X\to Y</annotation></semantics></math>, the maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">R f</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">P f</annotation></semantics></math> are monotone for the stochastic order, and so are the monad structure maps. This way, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> lift to a monad on <a class="existingWikiWord" href="/nlab/show/CompOrd#categories_of_compact_ordered_spaces">CompOrd</a>.</p>
+
+<p>For the canonical <a class="existingWikiWord" href="/nlab/show/locally+posetal+2-category">locally posetal 2-category</a> structure of <a class="existingWikiWord" href="/nlab/show/CompOrd#categories_of_compact_ordered_spaces">CompOrd</a> given by the <a class="existingWikiWord" href="/nlab/show/pointwise+order">pointwise order</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> are even <a class="existingWikiWord" href="/nlab/show/2-monads">2-monads</a>, since whenever <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>≤</mo><mi>g</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f\le g:X\to Y</annotation></semantics></math>, we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>f</mi><mo>≤</mo><mi>R</mi><mi>g</mi></mrow><annotation encoding="application/x-tex">R f\le R g</annotation></semantics></math> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>f</mi><mo>≤</mo><mi>P</mi><mi>g</mi></mrow><annotation encoding="application/x-tex">P f\le P g</annotation></semantics></math>.</p>
+
+<p>Both the resulting monads are known in the literature as <strong>ordered Radon monad</strong>.</p>
+
+<h3 id="algebras_2">Algebras</h3>
+
+<p>The algebras of the ordered Radon monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> are known to be <a class="existingWikiWord" href="/nlab/show/compact">compact</a> <a class="existingWikiWord" href="/nlab/show/convex+space">convex</a> subsets of <a class="existingWikiWord" href="/nlab/show/locally+convex+topological+vector+space">locally convex</a> <span class="newWikiWord">ordered topological vector spaces<a href="/nlab/new/ordered+topological+vector+spaces">?</a></span>. This can be seen as the ordered equivalent of the characterization <a href="#algebras">above</a>.</p>
+
+<p>The algebras of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>, similarly, can be seen as the ordered equivalent of <span class="newWikiWord">Kegelspitze<a href="/nlab/new/Kegelspitze">?</a></span>.</p>
+
+<p>See <a href="#radonkeimel">Keimel ‘08</a> for more.</p>
+
+<p>Just as for the unordered case, the <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">algebra morphisms</a> are the continuous affine maps, which here are also required to be monotone.</p>
+
+<h3 id="lax_morphisms_are_concave_maps">Lax morphisms are concave maps</h3>
+
+<p>Differently from the unordered case, in the ordered setting we have a <a class="existingWikiWord" href="/nlab/show/2-category">2-category</a>, and so it makes sense to talk about <a class="existingWikiWord" href="/nlab/show/lax+morphisms">lax morphisms</a> of algebras. By definition, these amount to maps between algebras <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f:A\to B</annotation></semantics></math> with the <a class="existingWikiWord" href="/nlab/show/stuff%2C+structure%2C+property">property</a> that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mrow><mo>(</mo><mo>∫</mo><mi>a</mi><mspace width="thinmathspace"></mspace><mi>dp</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mspace width="thickmathspace"></mspace><mo>≤</mo><mspace width="thickmathspace"></mspace><mo>∫</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>dp</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+f \left( \int a \, dp(a) \right) \;\le\; \int f(a) \, dp(a)
+
+</annotation></semantics></math></div>
+<p>for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>∈</mo><mi>P</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">p\in P A</annotation></semantics></math> (resp. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">R A</annotation></semantics></math>).</p>
+
+<p>By the generalized <span class="newWikiWord">Jensen's inequality<a href="/nlab/new/Jensen%27s+inequality">?</a></span>, these are precisely the (continuous, monotone) <a class="existingWikiWord" href="/nlab/show/concave+maps">concave maps</a>, i.e. the maps that satisfy</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>λ</mi><mspace width="thinmathspace"></mspace><mi>a</mi><mo>+</mo><mi>μ</mi><mspace width="thinmathspace"></mspace><mi>b</mi><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>≤</mo><mspace width="thickmathspace"></mspace><mi>λ</mi><mspace width="thinmathspace"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>+</mo><mi>μ</mi><mspace width="thinmathspace"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">
+f\big( \lambda\, a + \mu\, b  \big) \;\le\; \lambda\,f(a) + \mu\,f(b) .
+
+</annotation></semantics></math></div>
+<p>(Compare with the strict case by replacing the order with equalities.)</p>
+
+<p>Just as well, the oplax morphisms are the (continuous, monotone) <a class="existingWikiWord" href="/nlab/show/convex+maps">convex maps</a>.</p>
+
+<p>(For more information see the analogous discussion for the <a class="existingWikiWord" href="/nlab/show/Kantorovich+monad">Kantorovich monad</a> in <a href="#orderedkantorovich">F-P ‘18</a>.)</p>
+
+<h2 id="see_also">See also</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monads+of+probability%2C+measures%2C+and+valuations">monads of probability, measures, and valuations</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Giry+monad">Giry monad</a>, <a class="existingWikiWord" href="/nlab/show/extended+probabilistic+powerdomain">extended probabilistic powerdomain</a>, <a class="existingWikiWord" href="/nlab/show/Kantorovich+monad">Kantorovich monad</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/locally+convex+topological+vector+space">locally convex topological vector space</a>, <span class="newWikiWord">ordered vector space<a href="/nlab/new/ordered+vector+space">?</a></span>, <a class="existingWikiWord" href="/nlab/show/convex+space">convex space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/compact+Hausdorff+space">compact Hausdorff space</a>, <a class="existingWikiWord" href="/nlab/show/compact+ordered+space">compact ordered space</a>, <a class="existingWikiWord" href="/nlab/show/stably+compact+space">stably compact space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Borel+measure">Borel measure</a>, <a class="existingWikiWord" href="/nlab/show/Radon+measure">Radon measure</a>, <a class="existingWikiWord" href="/nlab/show/%CF%84-additive+measure">τ-additive measure</a>, <a class="existingWikiWord" href="/nlab/show/continuous+valuation">continuous valuation</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li id="swirszcz">
+<p>T. Swirszcz, <em>Monadic functors and convexity</em>, Bulletin de l’Academie Polonais des Sciences 22, 1974 (<a href="https://www.fuw.edu.pl/~kostecki/scans/swirszcz1974.pdf">pdf</a>)</p>
+</li>
+
+<li id="radonkeimel">
+<p><span class="newWikiWord">Klaus Keimel<a href="/nlab/new/Klaus+Keimel">?</a></span>, <em>The monad of probability measures over compact ordered spaces and its Eilenberg-Moore algebras</em>, Topology and its Applications, 2008 (<a href="https://doi.org/10.1016/j.topol.2008.07.002">doi:10.1016/j.topol.2008.07.002</a>)</p>
+</li>
+
+<li id="orderedkantorovich">
+<p><a class="existingWikiWord" href="/nlab/show/Tobias+Fritz">Tobias Fritz</a> and <a class="existingWikiWord" href="/nlab/show/Paolo+Perrone">Paolo Perrone</a>, <em>Stochastic order on metric spaces and the ordered Kantorovich monad</em>, Advances in Mathematics 366, 2020. (<a href="https://arxiv.org/abs/1808.09898">arXiv:1808.09898</a>)</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on February 26, 2020 at 14:37:06.
+    See the <a href="/nlab/history/Radon+monad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Radon+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10441/#Item_3">Discuss</a><span class="backintime"><a href="/nlab/revision/Radon+monad/6" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Radon+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Radon+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (6 revisions)</a>
+  <a href="/nlab/show/Radon+monad/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Radon+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Radon+monad" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

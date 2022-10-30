@@ -1,0 +1,1255 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Grothendieck construction in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Grothendieck construction
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/783/#Item_49" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="category_theory">Category theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a></strong></p>
+
+<h2 id="concepts">Concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/category">category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/functor">functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Cat">Cat</a></p>
+</li>
+</ul>
+
+<h2 id="universal_constructions">Universal constructions</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/universal+construction">universal construction</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/representable+functor">representable functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjoint functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/limit">limit</a>/<a class="existingWikiWord" href="/nlab/show/colimit">colimit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/weighted+limit">weighted limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/end">end</a>/<a class="existingWikiWord" href="/nlab/show/coend">coend</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kan+extension">Kan extension</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Yoneda+lemma">Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Isbell+duality">Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+construction">Grothendieck construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+functor+theorem">adjoint functor theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monadicity+theorem">monadicity theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+lifting+theorem">adjoint lifting theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tannaka+duality">Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gabriel-Ulmer+duality">Gabriel-Ulmer duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/small+object+argument">small object argument</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Freyd-Mitchell+embedding+theorem">Freyd-Mitchell embedding theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">relation between type theory and category theory</a></p>
+</li>
+</ul>
+
+<h2 id="extensions">Extensions</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/sheaf+and+topos+theory">sheaf and topos theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/enriched+category+theory">enriched category theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/higher+category+theory">higher category theory</a></p>
+</li>
+</ul>
+
+<h2 id="applications">Applications</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/applications+of+%28higher%29+category+theory">applications of (higher) category theory</a></li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/category+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#definition'>Definition</a></li>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#limits_and_colimits'>Limits and colimits</a></li>
+<li><a href='#AsALaxColimit'>As an oplax colimit</a></li>
+<li><a href='#local_smallness'>Local smallness</a></li>
+<li><a href='#the_equivalence_between_fibrations_and_pseudofunctors'>The equivalence between fibrations and pseudofunctors</a></li>
+<ul>
+<li><a href='#the_bicategory_of_pseudofunctors'>The bicategory of pseudofunctors</a></li>
+<li><a href='#the_bicategory_of_fibrations'>The bicategory of fibrations</a></li>
+<li><a href='#statement_of_the_equivalence'>Statement of the equivalence</a></li>
+<li><a href='#model_category_version'>Model category version</a></li>
+</ul>
+<li><a href='#adjunction'>Adjoints to the Grothendieck construction</a></li>
+<ul>
+<li><a href='#the_left_adjoint'>The left adjoint</a></li>
+<ul>
+<li><a href='#Cone'>In terms of a cone construction</a></li>
+<ul>
+<li><a href='#claim'>Claim</a></li>
+</ul>
+</ul>
+<li><a href='#the_right_adjoint'>The right adjoint</a></li>
+</ul>
+<li><a href='#behaviour_under_simplicial_nerve'>Behaviour under simplicial nerve</a></li>
+</ul>
+<li><a href='#generalizations'>Generalizations</a></li>
+<ul>
+<li><a href='#'><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n = 0</annotation></semantics></math></a></li>
+<li><a href='#ForInfinityGroupoids'><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n = (\infty,0)</annotation></semantics></math></a></li>
+<li><a href='#(oo1)case'><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n = (\infty,1)</annotation></semantics></math></a></li>
+<li><a href='#normal_lax_functors_into_'>Normal lax functors into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Prof</mi></mrow><annotation encoding="application/x-tex">Prof</annotation></semantics></math></a></li>
+</ul>
+<li><a href='#warning_on_terminology'>Warning on terminology</a></li>
+<li><a href='#examples'>Examples</a></li>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>In any context it is of interest to ask which kind of <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>E</mi></mtd></mtr> <mtr><mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mi>p</mi></mpadded></msup></mtd></mtr> <mtr><mtd><mi>C</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    E
+    \\
+    \downarrow^{\mathrlap{p}}
+    \\
+    C
+  }
+
+</annotation></semantics></math></div>
+<p>arise as <a class="existingWikiWord" href="/nlab/show/pullbacks">pullbacks</a> along a classifying morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>p</mi></msub><mo>:</mo><mi>C</mi><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">S_p : C \to U</annotation></semantics></math> to some universal object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> of some universal morphism</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mover><mi>U</mi><mo stretchy="false">^</mo></mover></mtd></mtr> <mtr><mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mrow><msub><mi>p</mi> <mi>univ</mi></msub></mrow></mpadded></msup></mtd></mtr> <mtr><mtd><mi>U</mi></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+    \hat U
+    \\
+    \downarrow^{\mathrlap{p_{univ}}}
+    \\
+    U
+  }
+  \,.
+
+</annotation></semantics></math></div>
+<p>The <strong>Grothendieck construction</strong> describes this in the context of <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a>: a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">p : E \to C</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/category">categories</a> – i.e. a <a class="existingWikiWord" href="/nlab/show/functor">functor</a> – is called a <a class="existingWikiWord" href="/nlab/show/fibered+category">fibered category</a> or <a class="existingWikiWord" href="/nlab/show/Grothendieck+fibration">Grothendieck fibration</a> if it is encoded in a <a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a>/<a class="existingWikiWord" href="/nlab/show/2-functor">2-functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>p</mi></msub><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">S_p : C^{op} \to Cat</annotation></semantics></math>.</p>
+
+<p>The reconstruction of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> from the pseudofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>p</mi></msub></mrow><annotation encoding="application/x-tex">S_p</annotation></semantics></math> is the <strong>Grothendieck construction</strong></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>:</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>Func</mi><mo stretchy="false">(</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Cat</mi><mo stretchy="false">)</mo><mo>→</mo><mi>Cat</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">
+  \int \;\; : \;\; Func(C^{op}, Cat) \to Cat/C
+
+</annotation></semantics></math></div>
+<p>which is a <a class="existingWikiWord" href="/nlab/show/2-functor">2-functor</a> from the <a class="existingWikiWord" href="/nlab/show/2-category">2-category</a> of pseudofunctors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">C^{op} \to Cat</annotation></semantics></math> to the <a class="existingWikiWord" href="/nlab/show/overcategory">overcategory</a> of <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+
+<p>The essential image of this functor consists of <a class="existingWikiWord" href="/nlab/show/Grothendieck+fibration">Grothendieck fibration</a>s and this establishes an <a class="existingWikiWord" href="/nlab/show/equivalence+of+2-categories">equivalence of 2-categories</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mo>:</mo><mi>Func</mi><mo stretchy="false">(</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Cat</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mo>≃</mo></mover><mi>Fib</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  \int : Func(C^{op}, Cat) \stackrel{\simeq}{\to} Fib(C) 
+
+</annotation></semantics></math></div>
+<p>between 2-functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">C^{op} \to Cat</annotation></semantics></math> and <a class="existingWikiWord" href="/nlab/show/Grothendieck+fibration">Grothendieck fibration</a>s over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+
+<p>When restricted to pseudofunctors with values in <a class="existingWikiWord" href="/nlab/show/Grpd">Grpd</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊂</mo></mrow><annotation encoding="application/x-tex">\subset</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> this identifies the <a class="existingWikiWord" href="/nlab/show/fibration+fibered+in+groupoids">Grothendieck fibrations in groupoids</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>:</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>Func</mi><mo stretchy="false">(</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Grpd</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mo>≃</mo></mover><mi>FibGrpd</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \int \;\;:\;\; Func(C^{op}, Grpd) \stackrel{\simeq}{\to} FibGrpd(C) 
+  \,.
+
+</annotation></semantics></math></div>
+<p>This equivalence notably allows one to discuss <a class="existingWikiWord" href="/nlab/show/stack">stack</a>s equivalently as pseudofunctors or as groupoid fibrations (in each case satisfying a <a class="existingWikiWord" href="/nlab/show/descent">descent</a> condition with respect to a <a class="existingWikiWord" href="/nlab/show/Grothendieck+topology">Grothendieck topology</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>).</p>
+
+<p>The Grothendieck construction is one of the central aspects of <a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a>, together with the notions of universal constructions such as <a class="existingWikiWord" href="/nlab/show/limit">limit</a>, <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a> and <a class="existingWikiWord" href="/nlab/show/Kan+extension">Kan extension</a>. It is expected to have suitable analogs in all sufficiently good contexts of <a class="existingWikiWord" href="/nlab/show/higher+category+theory">higher category theory</a>. Notably there is an <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-Grothendieck+construction">(∞,1)-Grothendieck construction</a> in <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category">(∞,1)-category</a> theory.</p>
+
+<p>The Grothendieck construction can also be generalized beyond fibrations, to the correspondence between <a class="existingWikiWord" href="/nlab/show/displayed+categories">displayed categories</a> and arbitrary categories over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>Let <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> be the <a class="existingWikiWord" href="/nlab/show/2-category">2-category</a> of <a class="existingWikiWord" href="/nlab/show/categories">categories</a>, <a class="existingWikiWord" href="/nlab/show/functor">functor</a>s and <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a>s. In line with the philosophy of <a class="existingWikiWord" href="/nlab/show/generalized+universal+bundles">generalized universal bundles</a>, the “universal <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a>-<a class="existingWikiWord" href="/nlab/show/bundle">bundle</a>” is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Cat</mi> <mrow><mo>*</mo><mo>,</mo><mi>ℓ</mi></mrow></msub><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat_{*,\ell} \to Cat</annotation></semantics></math>. Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Cat</mi> <mrow><mo>*</mo><mo>,</mo><mi>ℓ</mi></mrow></msub></mrow><annotation encoding="application/x-tex">Cat_{*,\ell}</annotation></semantics></math> denotes the (2-)category of “lax-<a class="existingWikiWord" href="/nlab/show/pointed+object">pointed</a>” <a class="existingWikiWord" href="/nlab/show/categories">categories</a>, also known as the “lax slice” of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat</annotation></semantics></math> under the <a class="existingWikiWord" href="/nlab/show/terminal+category">terminal category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo><mo>∈</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">*\in Cat</annotation></semantics></math>. Its objects are pointed categories, i.e. pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,a)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a category and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> is an object of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, and its morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,a) \to (B,b)</annotation></semantics></math> are pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>γ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(f,\gamma)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f\colon A\to B</annotation></semantics></math> is a functor and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>γ</mi><mo lspace="verythinmathspace">:</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">\gamma\colon f(a)\to b</annotation></semantics></math> is a morphism in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>. The projection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Cat</mi> <mrow><mo>*</mo><mo>,</mo><mi>ℓ</mi></mrow></msub><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat_{*,\ell} \to Cat</annotation></semantics></math> is just the forgetful functor.</p>
+
+<p>Then if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>C</mi><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">F\colon C \to Cat</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a> from a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat</annotation></semantics></math>, the <strong>Grothendieck construction</strong> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is the (strict) <a class="existingWikiWord" href="/nlab/show/2-pullback">2-pullback</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>:</mo><mo>∫</mo><mi>F</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex"> p : \int F \to C</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Cat</mi> <mrow><mo>*</mo><mo>,</mo><mi>ℓ</mi></mrow></msub><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat_{*,\ell} \to Cat</annotation></semantics></math> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mo>∫</mo><mi>F</mi></mtd> <mtd><mo>→</mo></mtd> <mtd><msub><mi>Cat</mi> <mrow><mo>*</mo><mo>,</mo><mi>ℓ</mi></mrow></msub></mtd></mtr> <mtr><mtd><msup><mrow></mrow> <mi>p</mi></msup><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>C</mi></mtd> <mtd><mover><mo>→</mo><mi>F</mi></mover></mtd> <mtd><mi>Cat</mi></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+    \int F &amp;\to&amp; Cat_{*,\ell}
+    \\
+    {}^{p}\downarrow &amp;&amp; \downarrow
+    \\
+    C &amp;\overset{F}{\to}&amp; Cat
+  }
+  \,.
+
+</annotation></semantics></math></div>
+<p>This means that</p>
+
+<ul>
+<li>
+<p>the objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> are pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c,a)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c \in Obj(C)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">a \in Obj(F(c))</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>and morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> are given by pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mover><mo>→</mo><mi>f</mi></mover><mi>c</mi><mo>′</mo><mo>,</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mi>α</mi></mover><mi>a</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c \overset{f}{\to} c', F(f)(a) \overset{\alpha}{\to} a')</annotation></semantics></math>. This may be visualized as</p>
+</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi><mo>=</mo><mrow><mo>{</mo><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mo>*</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msup><mrow></mrow> <mi>a</mi></msup><mo>↙</mo></mtd> <mtd><msup><mo>⇘</mo> <mi>α</mi></msup></mtd> <mtd><msup><mo>↘</mo> <mrow><mi>a</mi><mo>′</mo></mrow></msup></mtd></mtr> <mtr><mtd><mi>F</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd></mtd> <mtd><mi>F</mi><mo stretchy="false">(</mo><mi>c</mi><mo>′</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd></mtd></mtr> <mtr><mtd><mi>c</mi></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mi>f</mi></mover></mtd> <mtd></mtd> <mtd><mi>c</mi><mo>′</mo></mtd></mtr></mtable></mrow><mo>}</mo></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \int F = 
+  \left\{
+  \array{
+    &amp;&amp; {*}
+    \\
+    &amp; {}^a\swarrow &amp;\seArrow^{\alpha}&amp; \searrow^{a'}
+    \\
+    F(c) &amp;&amp; \stackrel{F(f)}{\to} &amp;&amp; F(c')
+    \\
+    \\
+    c &amp;&amp;\stackrel{f}{\to}&amp;&amp; c'
+  }
+  \right\}
+  \,.
+
+</annotation></semantics></math></div>
+<p>This extends to a 2-functor between <a class="existingWikiWord" href="/nlab/show/bicategories">bicategories</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>:</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">[</mo><mi>C</mi><mo>,</mo><mi>Cat</mi><mo stretchy="false">]</mo><mo>→</mo><mi>Cat</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">
+  \int \;\; : \;\; [C, Cat] \to Cat/C
+
+</annotation></semantics></math></div>
+<p>from <a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a>s on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> to the <a class="existingWikiWord" href="/nlab/show/overcategory">overcategory</a> of <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+
+<p>The more commonly described version of this construction works instead on contravariant pseudofunctors, i.e. pseudofunctors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">C^{op}\to Cat</annotation></semantics></math>. In this case we use instead the “universal <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat</annotation></semantics></math>-cobundle” <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>Cat</mi> <mrow><mo>*</mo><mo>,</mo><mi>c</mi></mrow></msub><msup><mo stretchy="false">)</mo> <mi>op</mi></msup><mo>→</mo><msup><mi>Cat</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">(Cat_{*,c})^{op} \to Cat^{op}</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>Cat</mi> <mrow><mo>*</mo><mo>,</mo><mi>c</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(Cat_{*,c})</annotation></semantics></math> is the colax slice, whose objects are again pointed categories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,a)</annotation></semantics></math>, but whose morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A,a) \to (B,b)</annotation></semantics></math> are pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>γ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(f,\gamma)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f\colon A\to B</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>γ</mi><mo lspace="verythinmathspace">:</mo><mi>b</mi><mo>→</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\gamma\colon b \to f(a)</annotation></semantics></math>. Now the 2-pullback</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mo>∫</mo><mi>F</mi></mtd> <mtd><mo>→</mo></mtd> <mtd><mo stretchy="false">(</mo><msub><mi>Cat</mi> <mrow><mo>*</mo><mo>,</mo><mi>c</mi></mrow></msub><msup><mo stretchy="false">)</mo> <mi>op</mi></msup></mtd></mtr> <mtr><mtd><msup><mrow></mrow> <mpadded width="0" lspace="-100%width"><mi>p</mi></mpadded></msup><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>C</mi></mtd> <mtd><mover><mo>→</mo><mi>F</mi></mover></mtd> <mtd><msup><mi>Cat</mi> <mi>op</mi></msup></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+    \int F &amp;\to&amp; (Cat_{*,c})^{op}
+    \\
+    {}^{\mathllap{p}}\downarrow &amp;&amp; \downarrow
+    \\
+    C &amp;\stackrel{F}{\to}&amp; Cat^{op}
+  }
+  \,.
+
+</annotation></semantics></math></div>
+<p>describes a 2-functor</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mspace width="1em"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="1em"></mspace><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Cat</mi><mo stretchy="false">]</mo><mo>→</mo><mi>Cat</mi><mo stretchy="false">/</mo><mi>C</mi><mo>.</mo></mrow><annotation encoding="application/x-tex"> \int \quad\colon\quad [C^{op},Cat] \to Cat/C. </annotation></semantics></math></div>
+<p>In this case,</p>
+
+<ul>
+<li>
+<p>the objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> are again pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c,a)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c \in Obj(C)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">a \in Obj(F(c))</annotation></semantics></math>, but</p>
+</li>
+
+<li>
+<p>the morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c,a)</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>′</mo><mo>,</mo><mi>a</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c',a')</annotation></semantics></math> are pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mover><mo>→</mo><mi>f</mi></mover><mi>c</mi><mo>′</mo><mo>,</mo><mi>a</mi><mover><mo>→</mo><mi>α</mi></mover><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>a</mi><mo>′</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c \overset{f}{\to} c', a \overset{\alpha}{\to} F(f)(a'))</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="limits_and_colimits">Limits and colimits</h3>
+
+<p>The following results are due to (<a href="#TBG91">Tarlecki, Burstall, Goguen 91</a>).</p>
+
+<div class="num_prop">
+<h6 id="proposition">Proposition</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">F : C^{op} \to Cat</annotation></semantics></math> be such that the following conditions hold.</p>
+
+<ol>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is complete.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>J</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(J)</annotation></semantics></math> is complete for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">J \in C</annotation></semantics></math>.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>:</mo><mi>F</mi><mo stretchy="false">(</mo><mi>J</mi><mo stretchy="false">)</mo><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(f) : F(J) \to F(K)</annotation></semantics></math> preserves limits for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>K</mi><mo>→</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">f : K \to J</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</li>
+</ol>
+
+<p>Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> is complete.</p>
+</div>
+
+<div class="num_prop">
+<h6 id="proposition_2">Proposition</h6>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">F : C^{op} \to Cat</annotation></semantics></math> be such that the following conditions hold.</p>
+
+<ol>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is cocomplete.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>J</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(J)</annotation></semantics></math> is cocomplete for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">J \in C</annotation></semantics></math>.</li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>:</mo><mi>F</mi><mo stretchy="false">(</mo><mi>J</mi><mo stretchy="false">)</mo><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(f) : F(J) \to F(K)</annotation></semantics></math> has a left adjoint for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>K</mi><mo>→</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">f : K \to J</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</li>
+</ol>
+
+<p>Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> is cocomplete.</p>
+</div>
+
+<h3 id="AsALaxColimit">As an oplax colimit</h3>
+
+<p>The Grothendieck construction on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>C</mi><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">F : C \to Cat</annotation></semantics></math> is equivalently the <a class="existingWikiWord" href="/nlab/show/oplax+colimit">oplax colimit</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> (e.g <a href="#GepnerHaugsengNikolaus15">Gepner-Haugseng-Nikolaus 15</a>). That means that for each category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> there is an <a class="existingWikiWord" href="/nlab/show/equivalence">equivalence of categories</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Lax</mi><mo stretchy="false">(</mo><mi>F</mi><mo>,</mo><mi>Δ</mi><mi>X</mi><mo stretchy="false">)</mo><mo>≃</mo><mo stretchy="false">[</mo><mstyle displaystyle="false"><mo>∫</mo></mstyle><mi>F</mi><mo>,</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">
+  Lax(F, \Delta X) \simeq [{\textstyle \int} F, X]
+
+</annotation></semantics></math></div>
+<p>that is natural in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\Delta X</annotation></semantics></math> is the constant functor with value <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>. (See <a class="existingWikiWord" href="/nlab/show/oplax+colimit">oplax colimit</a> for an explanation of why <em>lax</em> natural transformations appear in the definition of an <em>oplax</em> colimit.)</p>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/lax+natural+transformation">lax natural transformation</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\Delta X</annotation></semantics></math> is given by</p>
+
+<ul>
+<li>for each object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>c</mi></msub><mo lspace="verythinmathspace">:</mo><mi>F</mi><mi>c</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\alpha_c \colon F c \to X</annotation></semantics></math>, and</li>
+
+<li>for each morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi><mo lspace="verythinmathspace">:</mo><mi>c</mi><mo>→</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">m \colon c \to d</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, a <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>m</mi></msub><mo lspace="verythinmathspace">:</mo><msub><mi>α</mi> <mi>c</mi></msub><mo>⇒</mo><msub><mi>α</mi> <mi>d</mi></msub><mo>∘</mo><msub><mi>m</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">\alpha_m \colon \alpha_c \Rightarrow \alpha_d \circ m_*</annotation></semantics></math> (writing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>m</mi> <mo>*</mo></msub><mo>=</mo><mi>F</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">m_* = F m</annotation></semantics></math>),</li>
+</ul>
+
+<p>such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mrow><msub><mn>1</mn> <mi>c</mi></msub></mrow></msub></mrow><annotation encoding="application/x-tex">\alpha_{1_c}</annotation></semantics></math> is the isomorphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><msub><mn>1</mn> <mi>c</mi></msub><mo>≅</mo><msub><mn>1</mn> <mrow><mi>F</mi><mi>c</mi></mrow></msub></mrow><annotation encoding="application/x-tex">F 1_c \cong 1_{F c}</annotation></semantics></math> given by <a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctoriality</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>, and that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi><mo lspace="verythinmathspace">:</mo><mi>c</mi><mo>→</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">m \colon c \to d</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo lspace="verythinmathspace">:</mo><mi>d</mi><mo>→</mo><mi>e</mi></mrow><annotation encoding="application/x-tex">n \colon d \to e</annotation></semantics></math> is a composable pair in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mrow><mi>n</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\alpha_{n m}</annotation></semantics></math> is equal to the obvious <a class="existingWikiWord" href="/nlab/show/pasting">pasting</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>m</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_m</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_n</annotation></semantics></math>.</p>
+
+<p>We want to show that to each such lax transformation there corresponds an essentially unique functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\int F \to X</annotation></semantics></math>. So firstly, given <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> as above, let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> be the functor that sends <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>F</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">x \in F c</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>c</mi></msub><mi>x</mi></mrow><annotation encoding="application/x-tex">\alpha_c x</annotation></semantics></math>, and acts on arrows as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>m</mi><mo lspace="verythinmathspace">:</mo><mi>c</mi><mo>→</mo><mi>d</mi><mo>,</mo><mi>f</mi><mo lspace="verythinmathspace">:</mo><msub><mi>m</mi> <mo>*</mo></msub><mi>x</mi><mo>→</mo><mi>y</mi><mo stretchy="false">)</mo><mspace width="1em"></mspace><mo>↦</mo><mspace width="1em"></mspace><msub><mi>α</mi> <mi>c</mi></msub><mi>x</mi><mover><mo>→</mo><mrow><msub><mi>α</mi> <mi>m</mi></msub><mi>x</mi></mrow></mover><msub><mi>α</mi> <mi>d</mi></msub><msub><mi>m</mi> <mo>*</mo></msub><mi>x</mi><mover><mo>→</mo><mrow><msub><mi>α</mi> <mi>d</mi></msub><mi>f</mi></mrow></mover><msub><mi>α</mi> <mi>d</mi></msub><mi>y</mi></mrow><annotation encoding="application/x-tex">
+  (m \colon c \to d, f \colon m_* x \to y)
+  \quad \mapsto \quad
+  \alpha_c x \overset{\alpha_m x}{\to}
+  \alpha_d m_* x \overset{\alpha_d f}{\to} \alpha_d y
+
+</annotation></semantics></math></div>
+<p>That <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a functor follows from the coherence properties of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> with respect to identities and composition in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+
+<p>Conversely, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo lspace="verythinmathspace">:</mo><mo>∫</mo><mi>F</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">A \colon \int F \to X</annotation></semantics></math> is a functor, we get a lax transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> as follows:</p>
+
+<ul>
+<li>For each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">c \in C</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>c</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_c</annotation></semantics></math> is the restriction of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> to the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">F c</annotation></semantics></math>, which is the subcategory of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> whose objects are those of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">F c</annotation></semantics></math> and whose morphisms are those with first component an identity morphism. This clearly makes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>c</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_c</annotation></semantics></math> a functor.</li>
+
+<li>For each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi><mo lspace="verythinmathspace">:</mo><mi>c</mi><mo>→</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">m \colon c \to d</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>m</mi></msub></mrow><annotation encoding="application/x-tex">\alpha_m</annotation></semantics></math> has components <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>α</mi> <mi>c</mi></msub><mi>x</mi><mo>→</mo><msub><mi>α</mi> <mi>d</mi></msub><msub><mi>m</mi> <mo>*</mo></msub><mi>x</mi></mrow><annotation encoding="application/x-tex">\alpha_c x \to \alpha_d m_* x</annotation></semantics></math> given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>‘s value at the morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>m</mi><mo>,</mo><msub><mn>1</mn> <mrow><msub><mi>m</mi> <mo>*</mo></msub><mi>x</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(m,1_{m_* x})</annotation></semantics></math>. This is a natural transformation because, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo lspace="verythinmathspace">:</mo><mi>x</mi><mo>→</mo><mi>x</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">k \colon x \to x'</annotation></semantics></math> is a morphism in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">F c</annotation></semantics></math>, then both sides of the naturality square are the value of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> at the morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>m</mi><mo>,</mo><msub><mi>m</mi> <mo>*</mo></msub><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(m, m_*k)</annotation></semantics></math>.</li>
+</ul>
+
+<p>As one might expect, the coherence conditions on the resulting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> follow from the functoriality of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>.</p>
+
+<p>It is then easy to check that these two mappings form a bijection between the objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Lax</mi><mo stretchy="false">(</mo><mi>F</mi><mo>,</mo><mi>Δ</mi><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Lax(F, \Delta X)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mo>∫</mo><mi>F</mi><mo>,</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\int F, X]</annotation></semantics></math>.</p>
+
+<p>As for the morphisms involved, the <a class="existingWikiWord" href="/nlab/show/modifications">modifications</a> between lax transformations and the <a class="existingWikiWord" href="/nlab/show/natural+transformations">natural transformations</a> between functors, it is straightforward to show that these are in bijective correspondence too. Hence we have shown that the above equivalence holds.</p>
+
+<p>By inspecting the above proof, it is easy to see that the lax transformation associated to a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\int F \to X</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/pseudonatural+transformation">pseudonatural transformation</a> if and only if the functor inverts (i.e. sends to an isomorphism) each member of the class <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> of morphisms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> whose second component is an identity. (These are in fact the <a class="existingWikiWord" href="/nlab/show/cartesian+morphism">opcartesian</a> morphisms with respect to the projection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">\int F \to C</annotation></semantics></math>.) The <a class="existingWikiWord" href="/nlab/show/localization">localization</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi><mo stretchy="false">[</mo><msup><mi>S</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\int F[S^{-1}]</annotation></semantics></math> is therefore the (weak) <a class="existingWikiWord" href="/nlab/show/2-colimit">2-colimit</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Ps</mi><mo stretchy="false">(</mo><mi>F</mi><mo>,</mo><mi>Δ</mi><mi>X</mi><mo stretchy="false">)</mo><mo>≃</mo><mo stretchy="false">[</mo><mstyle displaystyle="false"><mo>∫</mo></mstyle><mi>F</mi><mo>,</mo><mi>X</mi><msub><mo stretchy="false">]</mo> <mrow><msup><mi>S</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup></mrow></msub><mo>≃</mo><mo stretchy="false">[</mo><mstyle displaystyle="false"><mo>∫</mo></mstyle><mi>F</mi><mo stretchy="false">[</mo><msup><mi>S</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">]</mo><mo>,</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">
+  Ps(F, \Delta X) \simeq [{\textstyle \int} F, X]_{S^{-1}}
+   \simeq [{\textstyle \int} F[S^{-1}], X]
+
+</annotation></semantics></math></div>
+<p>This last result appears in <a class="existingWikiWord" href="/nlab/show/SGA4">SGA4</a> Exposé VI, Section 6.</p>
+
+<h3 id="local_smallness">Local smallness</h3>
+
+<p>In general, a <a class="existingWikiWord" href="/nlab/show/weighted+colimit">(weighted)</a> colimit of a <a class="existingWikiWord" href="/nlab/show/large+category">large</a> diagram of <a class="existingWikiWord" href="/nlab/show/locally+small+categories">locally small categories</a> need no longer be locally small. However, in the case of the oplax colimit, i.e. the Grothendieck construction, we have:</p>
+
+<div class="un_theorem">
+<h6 id="theorem">Theorem</h6>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">F:C^{op}\to Cat</annotation></semantics></math> is a pseudofunctor, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is locally small, and each category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(c)</annotation></semantics></math> is locally small, then the Grothendieck construction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> is also locally small.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p>Recall that the morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c,a)</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>′</mo><mo>,</mo><mi>a</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c',a')</annotation></semantics></math> are pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mover><mo>→</mo><mi>f</mi></mover><mi>c</mi><mo>′</mo><mo>,</mo><mi>a</mi><mover><mo>→</mo><mi>α</mi></mover><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>a</mi><mo>′</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c \overset{f}{\to} c', a \overset{\alpha}{\to} F(f)(a'))</annotation></semantics></math>. Local smallness of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> means that there is only a set of such <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>‘s, and local smallness of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F(c)</annotation></semantics></math> means that for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> there is only a set of such <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>’s.</p>
+</div>
+
+<p>For example, consider the <span class="newWikiWord">canonical indexing<a href="/nlab/new/canonical+indexing">?</a></span> of a locally small category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, i.e. the pseudofunctor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Set</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Set^{op}\to Cat</annotation></semantics></math> sending each set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> to the category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>A</mi> <mi>X</mi></msup></mrow><annotation encoding="application/x-tex">A^X</annotation></semantics></math>. This satisfies the conditions of the above theorem, so its Grothendieck construction, which is the category of <a class="existingWikiWord" href="/nlab/show/families">families</a> of objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, is locally small.</p>
+
+<h3 id="the_equivalence_between_fibrations_and_pseudofunctors">The equivalence between fibrations and pseudofunctors</h3>
+
+<p>One can characterize the <em>image</em> of the Grothendieck construction as consisting precisely of those objects in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">Cat/C</annotation></semantics></math> that are <a class="existingWikiWord" href="/nlab/show/Grothendieck+fibration">Grothendieck fibration</a>s.</p>
+
+<p>We recall the definition of the <a class="existingWikiWord" href="/nlab/show/bicategory">bicategory</a> of Grothendieck fibrations and <a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a>s and then state the main equivalence theorem.</p>
+
+<h4 id="the_bicategory_of_pseudofunctors">The bicategory of pseudofunctors</h4>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a> from a 1-<a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> to a <a class="existingWikiWord" href="/nlab/show/2-category">2-category</a> (<a class="existingWikiWord" href="/nlab/show/bicategory">bicategory</a>) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is nothing but a (non-strict) <a class="existingWikiWord" href="/nlab/show/2-functor">2-functor</a> between bicategories, with the ordinary category regarded as a special bicategory.</p>
+
+<p>We write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>A</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[C^{op}, A]</annotation></semantics></math> for the <a class="existingWikiWord" href="/nlab/show/2-functor">2-functor</a> 2-category from the <a class="existingWikiWord" href="/nlab/show/opposite+category">opposite category</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> (the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>op</mi></mrow><annotation encoding="application/x-tex">op</annotation></semantics></math> here is just convention):</p>
+
+<ul>
+<li>
+<p>objects are pseudofunctors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">F : C^{op} \to A</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>morphisms are <a class="existingWikiWord" href="/nlab/show/lax+natural+transformation">pseudonatural transformations</a>;</p>
+</li>
+
+<li>
+<p>2-morphism are <a class="existingWikiWord" href="/nlab/show/modification">modification</a>s.</p>
+</li>
+</ul>
+
+<h4 id="the_bicategory_of_fibrations">The bicategory of fibrations</h4>
+
+<div class="un_defn">
+<h6 id="definition_2">Definition</h6>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/functor">functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">p : E \to C</annotation></semantics></math> is a <strong><a class="existingWikiWord" href="/nlab/show/Grothendieck+fibration">Grothendieck fibration</a></strong> if for every object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">e \in E</annotation></semantics></math> and every morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>c</mi><mo>→</mo><mi>p</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f : c \to p(e)</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> there is a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mi>f</mi><mo stretchy="false">^</mo></mover><mo>:</mo><mover><mi>c</mi><mo stretchy="false">^</mo></mover><mo>→</mo><mi>e</mi></mrow><annotation encoding="application/x-tex">\hat f : \hat c \to e</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math> that lifts <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> in that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mover><mi>f</mi><mo stretchy="false">^</mo></mover><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi></mrow><annotation encoding="application/x-tex">p(\hat f) = f</annotation></semantics></math> and which is a <a class="existingWikiWord" href="/nlab/show/Cartesian+morphism">Cartesian morphism</a>.</p>
+
+<p>A <strong>morphism of Grothendieck fibrations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mo stretchy="false">(</mo><mi>p</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>C</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>p</mi><mo>′</mo><mo>:</mo><mi>E</mi><mo>′</mo><mo>→</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F : (p : E \to C) \to (p' : E' \to C)</annotation></semantics></math> is</strong></p>
+
+<ul>
+<li>
+<p>a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>E</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">F : E \to E'</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>such that</p>
+
+<ul>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> sends <a class="existingWikiWord" href="/nlab/show/Cartesian+morphism">Cartesian morphism</a>s to Cartesian morphisms;</p>
+</li>
+
+<li>
+<p>the diagram</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>E</mi></mtd> <mtd></mtd> <mtd><mover><mo>→</mo><mi>F</mi></mover></mtd> <mtd></mtd> <mtd><mi>E</mi><mo>′</mo></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mrow></mrow> <mpadded width="0" lspace="-100%width"><mi>p</mi></mpadded></msub><mo>↘</mo></mtd> <mtd></mtd> <mtd><msub><mo>↙</mo> <mpadded width="0"><mrow><mi>p</mi><mo>′</mo></mrow></mpadded></msub></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>C</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    E &amp;&amp;\stackrel{F}{\to}&amp;&amp; E'
+    \\
+    &amp; {}_{\mathllap{p}}\searrow &amp;&amp; \swarrow_{\mathrlap{p'}}
+    \\
+    &amp;&amp; C
+  }
+
+</annotation></semantics></math></div>
+<p>in <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> commutes (strictly).</p>
+</li>
+</ul>
+</li>
+
+<li>
+<p>a <strong>2-morphism</strong> between morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>η</mi><mo>:</mo><mi>F</mi><mo>→</mo><mi>F</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\eta : F \to F'</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a> of the underlying functors, that also makes the obvious diagram 2-commute, i.e. such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>′</mo><mo>⋅</mo><mi>η</mi></mrow><annotation encoding="application/x-tex">p' \cdot \eta</annotation></semantics></math> is trivial.</p>
+</li>
+</ul>
+
+<p>Compositions are those induced from the underlying functors and natural transformations.</p>
+
+<p>This defines the <strong><a class="existingWikiWord" href="/nlab/show/2-category">2-category</a> of Grothendieck fibrations</strong></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Fib</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>↪</mo><mi>Cat</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">
+  Fib(C) \hookrightarrow Cat/C
+
+</annotation></semantics></math></div>
+<p>over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, being a 2-<a class="existingWikiWord" href="/nlab/show/subcategory">subcategory</a> of the <a class="existingWikiWord" href="/nlab/show/overcategory">overcategory</a> of <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+</div>
+
+<div class="un_remark">
+<h6 id="remark">Remark</h6>
+
+<p>Cartesian lifts are not required to be unique, but are automatically unique up to a unique vertical <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> connecting their domains.</p>
+</div>
+
+<h4 id="statement_of_the_equivalence">Statement of the equivalence</h4>
+
+<p>
+<div class='num_prop'>
+<h6>Proposition</h6>
+<p></p>
+
+<p>The Grothendieck construction factors through <a class="existingWikiWord" href="/nlab/show/Grothendieck+fibrations">Grothendieck fibrations</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mo lspace="verythinmathspace">:</mo><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Cat</mi><mo stretchy="false">]</mo><mo>→</mo><mi>Fib</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>↪</mo><mi>Cat</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">
+  \int \colon [C^{op}, Cat] \to Fib(C) \hookrightarrow Cat/C
+
+</annotation></semantics></math></div>
+<p>and establishes an <a class="existingWikiWord" href="/nlab/show/equivalence+of+bicategories">equivalence of bicategories</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mo lspace="verythinmathspace">:</mo><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Cat</mi><mo stretchy="false">]</mo><mover><mo>→</mo><mo>≃</mo></mover><mi>Fib</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \int \colon [C^{op}, Cat] \stackrel{\simeq}{\to} Fib(C)
+  \,.
+
+</annotation></semantics></math></div>
+<p>In fact, it is more than that: it is an equivalence of <a class="existingWikiWord" href="/nlab/show/strict+2-categories">strict 2-categories</a>, in the sense of strict 2-category theory, i.e. an equivalence of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/enriched+categories">enriched categories</a>.</p>
+
+<p>When restricted to pseudofunctors that factor through <a class="existingWikiWord" href="/nlab/show/Grpd">Grpd</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>↪</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">\hookrightarrow Cat</annotation></semantics></math> it factors through <a class="existingWikiWord" href="/nlab/show/fibrations+in+groupoids">fibrations in groupoids</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mo>:</mo><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Grpd</mi><mo stretchy="false">]</mo><mo>→</mo><msub><mi>Fib</mi> <mi>Grpd</mi></msub><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>↪</mo><mi>Cat</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">
+  \int : [C^{op}, Grpd] \to Fib_{Grpd}(C)\hookrightarrow Cat/C
+
+</annotation></semantics></math></div>
+<p>and establishes a similar equivalence</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Grpd</mi><mo stretchy="false">]</mo><mo>≃</mo><msub><mi>Fib</mi> <mi>Grpd</mi></msub><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  [C^{op}, Grpd] \simeq Fib_{Grpd}(C)
+  \,.
+
+</annotation></semantics></math></div>
+<p></p>
+</div>
+</p>
+
+<div class="proof">
+<h6 id="proof_2">Proof</h6>
+
+<p>This can be verified by straightforward albeit somewhat tedious checking. Details are spelled out in section B1.3 of</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Peter+Johnstone">Peter Johnstone</a>, <em>Sketches of an Elephant</em></li>
+</ul>
+
+<p>The statement itself is theorem B1.3.6 there, all definitions and lemmas are on the pages before that.</p>
+</div>
+
+<h4 id="model_category_version">Model category version</h4>
+
+<p>There is refinement of the Grothendieck construction to <a class="existingWikiWord" href="/nlab/show/model+categories">model categories</a>. S</p>
+
+<p>See at <em><a class="existingWikiWord" href="/nlab/show/Grothendieck+construction+for+model+categories">Grothendieck construction for model categories</a></em>.</p>
+
+<p>This model category incarnation of the Grothendieck construction generalizes to a model category presentation of the <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-Grothendieck+construction">(∞,1)-Grothendieck construction</a>.</p>
+
+<h3 id="adjunction">Adjoints to the Grothendieck construction</h3>
+
+<p>The Grothendieck construction functor</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mo>:</mo><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Cat</mi><mo stretchy="false">]</mo><mo>→</mo><mi>Cat</mi><mo stretchy="false">/</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">
+  \int : [C^{op}, Cat] \to Cat/C
+
+</annotation></semantics></math></div>
+<p>has a <a class="existingWikiWord" href="/nlab/show/left+adjoint">left</a> and a <a class="existingWikiWord" href="/nlab/show/right+adjoint">right</a> <a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjoint functor</a>.</p>
+
+<p>Restricted to <a class="existingWikiWord" href="/nlab/show/groupoid">groupoid</a>-valued functors and <a class="existingWikiWord" href="/nlab/show/fibrations+in+groupoids">fibrations in groupoids</a>, both of these exhibit the above equivalences as <a class="existingWikiWord" href="/nlab/show/adjoint+equivalence">adjoint equivalence</a>s. Notice that much of the traditional literature discusses (just) the right adjoint.</p>
+
+<h4 id="the_left_adjoint">The left adjoint</h4>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> is the functor</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo>:</mo><mo stretchy="false">(</mo><mi>p</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>C</mi><mo stretchy="false">)</mo><mo>↦</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mi>p</mi><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  L : (p : E \to C) \mapsto ( (-)/p : C^{op} \to Cat) 
+
+</annotation></semantics></math></div>
+<p>that assigns to a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> the presheaf which sends <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">c \in C</annotation></semantics></math> to the <a class="existingWikiWord" href="/nlab/show/comma+category">comma category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo stretchy="false">/</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">c/p</annotation></semantics></math> with objects given by pairs <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>e</mi><mo>,</mo><mi>c</mi><mo>→</mo><mi>p</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(e, c \to p(e))</annotation></semantics></math> and morphisms by commutative triangles</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mi>c</mi></mtd> <mtd></mtd> <mtd></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↙</mo></mtd> <mtd></mtd> <mtd><mo>↘</mo></mtd> <mtd></mtd></mtr> <mtr><mtd><mi>p</mi><mo stretchy="false">(</mo><msub><mi>e</mi> <mn>1</mn></msub><mo stretchy="false">)</mo></mtd> <mtd></mtd> <mtd><mo>→</mo></mtd> <mtd></mtd> <mtd><mi>p</mi><mo stretchy="false">(</mo><msub><mi>e</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+      &amp;&amp; c &amp;&amp;
+      \\
+      &amp; \swarrow &amp;&amp; \searrow &amp;
+      \\
+      p(e_1) &amp;&amp;\to&amp;&amp; p(e_2)
+  }
+
+</annotation></semantics></math></div>
+<p>i.e.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>E</mi><mover><mo>→</mo><mi>p</mi></mover><mi>C</mi><mo stretchy="false">)</mo><mo>:</mo><mi>c</mi><mo>↦</mo><mi>c</mi><mo stretchy="false">/</mo><mi>p</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  L(E \stackrel{p}{\to}C) : c \mapsto c/p
+  \,.
+
+</annotation></semantics></math></div>
+<p>This functor may equivalently be expressed as follows.</p>
+
+<h5 id="Cone">In terms of a cone construction</h5>
+
+<p>For given <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mover><mo>→</mo><mi>p</mi></mover><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E \stackrel{p}{\to} C)</annotation></semantics></math> consider the <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-limit">(3,1)-pushout</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>E</mi></mtd> <mtd><mo>↪</mo></mtd> <mtd><msup><mi>E</mi> <mo>▹</mo></msup></mtd></mtr> <mtr><mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mi>p</mi></mpadded></msup></mtd> <mtd><mo>⇙</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>C</mi></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>K</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    E &amp;\hookrightarrow&amp; E^{\triangleright}
+    \\
+    \downarrow^{\mathrlap{p}} &amp;\swArrow&amp; \downarrow
+    \\
+    C &amp;\to&amp; K(p)
+  }
+
+</annotation></semantics></math></div>
+<p>of <em><a class="existingWikiWord" href="/nlab/show/%282%2C1%29-categories">(2,1)-categories</a></em> , where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>K</mi> <mo>▹</mo></msup></mrow><annotation encoding="application/x-tex">K^{\triangleright}</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math> with one <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math> adjoined (a <a class="existingWikiWord" href="/nlab/show/join+of+quasi-categories">join</a> of categories). (Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>E</mi> <mo>▹</mo></msup></mrow><annotation encoding="application/x-tex">E^{\triangleright}</annotation></semantics></math> are 1-catgeories regarded trivially as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>2</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(2,1)</annotation></semantics></math>-categories and where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">K(p)</annotation></semantics></math> will in general be a <a class="existingWikiWord" href="/nlab/show/%282%2C1%29-category">(2,1)-category</a> with nontrivial <a class="existingWikiWord" href="/nlab/show/2-morphism">2-morphism</a>s).</p>
+
+<div class="un_lemma">
+<h6 id="claim">Claim</h6>
+
+<p>We have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo stretchy="false">/</mo><mi>p</mi><mo>≃</mo><msub><mi>Hom</mi> <mrow><mi>K</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>v</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  c/p \simeq Hom_{K(p)}(c,v)
+  \,.
+
+</annotation></semantics></math></div>
+<p>And hence the left adjoint to the Grothendieck construction may be realized as the assignment that sends <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">p : E \to C</annotation></semantics></math> to the pseudofunctor</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo><mo>:</mo><mo>=</mo><msub><mi>Hom</mi> <mrow><mi>K</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mi>v</mi><mo stretchy="false">)</mo><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  L(p) := Hom_{K(p)}(-, v) : C^{op} \to Cat
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<div class="proof">
+<h6 id="proof_3">Proof</h6>
+
+<p>It is convenient to compute the weak pushout by embedding the situation from <a class="existingWikiWord" href="/nlab/show/Cat">Cat</a> into the bigger context of <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-categories">(∞,1)-categories</a> and using the <a class="existingWikiWord" href="/nlab/show/model+category">model</a> of that provided by <a class="existingWikiWord" href="/nlab/show/sSet">sSet</a>: the <a class="existingWikiWord" href="/nlab/show/model+structure+for+quasi-categories">model structure for quasi-categories</a>. This also facilitates the generalization of the argument from 1-categories to higher categories.</p>
+
+<p>So consider equivalently the weak pushout diagram</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>↪</mo></mtd> <mtd><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><msup><mo stretchy="false">)</mo> <mo>▹</mo></msup></mtd></mtr> <mtr><mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mpadded></msup></mtd> <mtd><mo>⇙</mo></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>N</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>N</mi><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    N(E) &amp;\hookrightarrow&amp; N(E)^{\triangleright}
+    \\
+    \downarrow^{\mathrlap{N(p)}} &amp;\swArrow&amp; \downarrow
+    \\
+    N(C) &amp;\to&amp; N(K(p))
+  }
+
+</annotation></semantics></math></div>
+<p>of <a class="existingWikiWord" href="/nlab/show/quasi-categories">quasi-categories</a>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N(-)</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/nerve">nerve</a> operation and where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><msup><mo stretchy="false">)</mo> <mo>▹</mo></msup><mo>=</mo><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo><mo>⋆</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">N(E)^{\triangleright} = N(E) \star *</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/join+of+simplicial+sets">join of simplicial sets</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N(E)</annotation></semantics></math> with the <a class="existingWikiWord" href="/nlab/show/point">point</a>.</p>
+
+<p>By the general yoga of <a class="existingWikiWord" href="/nlab/show/homotopy+colimit">homotopy colimit</a>s (see there for details) we know that this <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-pushout here may be computed as an ordinary <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a> in the 1-category <a class="existingWikiWord" href="/nlab/show/sSet">sSet</a> if the pushout diagram <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>←</mo><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo><mo>→</mo><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><msup><mo stretchy="false">)</mo> <mo>▹</mo></msup></mrow><annotation encoding="application/x-tex">N(C) \leftarrow N(E) \to N(E)^{\triangleright} </annotation></semantics></math> has the property that</p>
+
+<ul>
+<li>
+<p>all three objects are cofibrant;</p>
+</li>
+
+<li>
+<p>at least one of the two morphisms is a cofibration</p>
+</li>
+</ul>
+
+<p>in the <a class="existingWikiWord" href="/nlab/show/model+structure+for+quasi-categories">model structure for quasi-categories</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>sSet</mi> <mi>Joyal</mi></msub></mrow><annotation encoding="application/x-tex">sSet_{Joyal}</annotation></semantics></math>.</p>
+
+<p>But this is trivially verified since the cofibrations in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>sSet</mi> <mi>Joyal</mi></msub></mrow><annotation encoding="application/x-tex">sSet_{Joyal}</annotation></semantics></math> are just the <a class="existingWikiWord" href="/nlab/show/monomorphism">monomorphism</a>s in <a class="existingWikiWord" href="/nlab/show/sSet">sSet</a>: the degreewise injective maps of simplicial sets. So every object in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>sSet</mi> <mi>Joyal</mi></msub></mrow><annotation encoding="application/x-tex">sSet_{Joyal}</annotation></semantics></math> is cofibrant and the inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo><mo>↪</mo><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><msup><mo stretchy="false">)</mo> <mo>▹</mo></msup></mrow><annotation encoding="application/x-tex">N(E) \hookrightarrow N(E)^{\triangleright}</annotation></semantics></math> is a cofibration.</p>
+
+<p>(The same conclusion would hold for the same simple reasons in the standard <a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+sets">model structure on simplicial sets</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>sSet</mi> <mi>Quillen</mi></msub></mrow><annotation encoding="application/x-tex">sSet_{Quillen}</annotation></semantics></math>.)</p>
+
+<p>From this it follows that simply because we passed from categories to their <a class="existingWikiWord" href="/nlab/show/nerve">nerve</a>s, the computation of the weak pushout reduces to the computation of an ordinary pushout (one may think of passing to nerves as providing a cofibrant replacement: since in the nerve all composition of <a class="existingWikiWord" href="/nlab/show/k-morphism">k-morphism</a>s is “freed”, the nerve is a suitably “puffed up” version of a category that is suitable for computing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-pushouts).</p>
+
+<p>So we are reduced to computing the ordinary <a class="existingWikiWord" href="/nlab/show/pushout">pushout</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>↪</mo></mtd> <mtd><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><msup><mo stretchy="false">)</mo> <mo>▹</mo></msup></mtd></mtr> <mtr><mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mpadded></msup></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo></mtd></mtr> <mtr><mtd><mi>N</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>Q</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    N(E) &amp;\hookrightarrow&amp; N(E)^{\triangleright}
+    \\
+    \downarrow^{\mathrlap{N(p)}} &amp;&amp; \downarrow
+    \\
+    N(C) &amp;\to&amp; Q
+  }
+
+</annotation></semantics></math></div>
+<p>in <a class="existingWikiWord" href="/nlab/show/sSet">sSet</a>. The fibrant replacement of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> is then the <a class="existingWikiWord" href="/nlab/show/nerve">nerve</a> of <a class="existingWikiWord" href="/nlab/show/generalized+the">the</a> <a class="existingWikiWord" href="/nlab/show/bicategory">bicategory</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>K</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">K(p)</annotation></semantics></math> that we are after.</p>
+
+<p>As recalled at <a class="existingWikiWord" href="/nlab/show/limits+and+colimits+by+example">limits and colimits by example</a> in the section <a href="http://ncatlab.org/nlab/show/limits+and+colimits+by+example#limitsinpresheafcat">limits in presheaf categories</a>, <a class="existingWikiWord" href="/nlab/show/colimit">colimit</a>s (and hence pushouts) in the <a class="existingWikiWord" href="/nlab/show/presheaf">presheaf</a>-category <a class="existingWikiWord" href="/nlab/show/sSet">sSet</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>=</mo><mi>Func</mi><mo stretchy="false">(</mo><msup><mi>Δ</mi> <mi>op</mi></msup><mo>,</mo><mi>Set</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">= Func(\Delta^{op}, Set)</annotation></semantics></math> are computed for each object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mo>∈</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">[n] \in \Delta</annotation></semantics></math> as ordinary colimits in <a class="existingWikiWord" href="/nlab/show/Set">Set</a>.</p>
+
+<p>For <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n=0</annotation></semantics></math></strong> we see that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Q</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">Q_0</annotation></semantics></math> is the collection of objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> and one additional vertex <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Q</mi> <mn>0</mn></msub><mo>=</mo><mi>N</mi><mo stretchy="false">(</mo><mi>C</mi><msub><mo stretchy="false">)</mo> <mn>0</mn></msub><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mo stretchy="false">{</mo><mi>v</mi><mo stretchy="false">}</mo><mo>=</mo><mi>p</mi><mo stretchy="false">(</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mo stretchy="false">{</mo><mi>v</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">
+ Q_0 = N(C)_0  \coprod \{ v\} = p(Obj(E)) \coprod \{v \}
+
+</annotation></semantics></math></div>
+<p>For <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=1</annotation></semantics></math></strong> similarly we find that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Q</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">Q_1</annotation></semantics></math> consists of the 1-cells in in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> and in addition of one 1-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>:</mo><mi>c</mi><mo>→</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">e : c \to v</annotation></semantics></math> for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>Obj</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">e \in Obj(E)</annotation></semantics></math> with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo>=</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">p(e) = c</annotation></semantics></math> (this 1-cell is really the terminal 1-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>→</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">e \to v</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>E</mi> <mo>▹</mo></msup></mrow><annotation encoding="application/x-tex">E^{\triangleright}</annotation></semantics></math> but with its source re-interpreted as being <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>e</mi><mo stretchy="false">)</mo><mo>=</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">p(e) = c</annotation></semantics></math> according to the identification of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Q</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">Q_0</annotation></semantics></math> as above). In the fibrant replacement of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> the composite of original 1-cells <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>c</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">c_1 \to c_2</annotation></semantics></math> and the new 1-cells <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>:</mo><msub><mi>c</mi> <mn>2</mn></msub><mo>→</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">e : c_2 \to v</annotation></semantics></math> will be freely added, so that the general 1-morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>1</mn></msub><mo>→</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">c_1 \to v</annotation></semantics></math> will consist of a 1-morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>c</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">c_1 \to c_2</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> together with a lift of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">c_2</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>. This is just as in the <a class="existingWikiWord" href="/nlab/show/comma+category">comma category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo stretchy="false">/</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">c/p</annotation></semantics></math>.</p>
+
+<p>For <strong><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n=2</annotation></semantics></math></strong> we have in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Q</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">Q_2</annotation></semantics></math> the 2-cells in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> as well as one 2-cell</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>c</mi> <mn>1</mn></msub></mtd> <mtd></mtd> <mtd><mo>→</mo></mtd> <mtd></mtd> <mtd><msub><mi>c</mi> <mn>2</mn></msub></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>↘</mo></mtd> <mtd><msup><mrow></mrow> <mrow><mo stretchy="false">(</mo><msub><mi>e</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>e</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow></msup><mo>⇙</mo></mtd> <mtd><mo>↙</mo></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>v</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    c_1 &amp;&amp;\to&amp;&amp; c_2
+    \\
+    &amp; \searrow &amp;{}^{(e_1 \to e_2)}\swArrow&amp; \swarrow
+    \\
+    &amp;&amp; v
+  }
+
+</annotation></semantics></math></div>
+<p>for each 1-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>e</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>e</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(e_1 \to e_2)</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N(E)</annotation></semantics></math> with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><msub><mi>e</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>e</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p(e_1 \to e_2)</annotation></semantics></math> = <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>c</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>c</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c_1 \to c_2)</annotation></semantics></math>.</p>
+
+<p>In particular this means that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>e</mi> <mn>2</mn></msub><mo>:</mo><msub><mi>c</mi> <mn>2</mn></msub><mo>→</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">e_2: c_2 \to v</annotation></semantics></math> is a morphism in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>c</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">c_1 \to c_2</annotation></semantics></math> is a morphism in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, then the composite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>c</mi> <mn>2</mn></msub><mo>→</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">c_1 \to c_2 \to v</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> is homotopic to any compatible direct morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>1</mn></msub><mo>→</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">c_1 \to v</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math>.</p>
+
+<p>This means that forming the fibrant replacement of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>sSet</mi> <mi>Joyal</mi></msub></mrow><annotation encoding="application/x-tex">sSet_{Joyal}</annotation></semantics></math> will not throw in superfluous 1-morphisms on top of those we already discussed in the previous paragraph…</p>
+
+<p>Now furthermore…</p>
+</div>
+
+<p>This formulation of the Grothendieck construction as an adjunction</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>L</mi><mo>⊣</mo><mo>∫</mo><mo stretchy="false">)</mo><mo>:</mo><mi>Fib</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mo>←</mo></mover><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Cat</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">
+  (L \dashv \int) : Fib(C) \stackrel{\leftarrow}{\to} [C^{op}, Cat]
+
+</annotation></semantics></math></div>
+<p>with the left adjoint given by hom-objects in a pushout object as above is the starting point for the <a class="existingWikiWord" href="/nlab/show/vertical+categorification">vertical categorification</a> described at <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-Grothendieck+construction">(∞,1)-Grothendieck construction</a>.</p>
+
+<h4 id="the_right_adjoint">The right adjoint</h4>
+
+<p>We also have an adjunction</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>R</mi><mo>⊢</mo><mo>∫</mo><mo stretchy="false">)</mo><mo>:</mo><mi>Fib</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mo>←</mo></mover><mo stretchy="false">[</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>,</mo><mi>Cat</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">(R \vdash \int) : Fib(C) \stackrel{\leftarrow}{\to} [C^{op}, Cat]</annotation></semantics></math></div>
+<p>where the right adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> sends a <a class="existingWikiWord" href="/nlab/show/Grothendieck+fibration">Grothendieck fibration</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> to the presheaf</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>↦</mo><mi>Hom</mi><mo stretchy="false">(</mo><mo>∫</mo><mi>y</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>,</mo><mi>F</mi><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">c\mapsto Hom(\int y(c), F),</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>y</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\int y(c)</annotation></semantics></math> is the Grothendieck construction applied to the representable presheaf of sets (hence <a class="existingWikiWord" href="/nlab/show/discrete+categories">discrete categories</a>) on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Hom</mi></mrow><annotation encoding="application/x-tex">Hom</annotation></semantics></math> denotes the category of morphisms between two Grothendieck fibrations.</p>
+
+<p>Informally, an object of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(F)(c)</annotation></semantics></math> is given by a choice of a pullback along each morphism with codomain <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math>, and these pullbacks must be functorial.</p>
+
+<h3 id="behaviour_under_simplicial_nerve">Behaviour under simplicial nerve</h3>
+
+<div class="num_prop">
+<h6 id="proposition_3">Proposition</h6>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>𝒟</mi><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">F \colon \mathcal{D} \to Cat</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/functor">functor</a>, let</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>N</mi><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>𝒟</mi><mover><mo>⟶</mo><mi>F</mi></mover><mi>Cat</mi><mover><mo>→</mo><mrow><mo stretchy="false">|</mo><mi>N</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow></mover><mi>Top</mi></mrow><annotation encoding="application/x-tex">
+  {\vert N(F(-))\vert} 
+   \;\colon\; 
+  \mathcal{D} 
+    \overset{F}{\longrightarrow} 
+  Cat 
+   \stackrel{\vert N(-) \vert}{\to}
+  Top
+
+</annotation></semantics></math></div>
+<p>be its postcomposition with <a class="existingWikiWord" href="/nlab/show/geometric+realization+of+categories">geometric realization of categories</a></p>
+
+<p>Then we have a <a class="existingWikiWord" href="/nlab/show/weak+homotopy+equivalence">weak homotopy equivalence</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo>|</mo><mi>N</mi><mrow><mo>(</mo><mo>∫</mo><mi>F</mi><mo>)</mo></mrow><mo>|</mo></mrow><mo>≃</mo><mi>hocolim</mi><mrow><mo stretchy="false">|</mo><mi>N</mi><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow></mrow><annotation encoding="application/x-tex">
+  {\left\vert N\left(\int F \right) \right\vert}
+    \simeq
+  hocolim {\vert N(F(-)) \vert}
+
+</annotation></semantics></math></div>
+<p>exhibiting the <a class="existingWikiWord" href="/nlab/show/homotopy+colimit">homotopy colimit</a> in <a class="existingWikiWord" href="/nlab/show/Top">Top</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>N</mi><mo stretchy="false">(</mo><mi>F</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><annotation encoding="application/x-tex">\vert N(F (-)) \vert</annotation></semantics></math> as the geometric realization of the <a class="existingWikiWord" href="/nlab/show/Grothendieck+construction">Grothendieck construction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\int F</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>.</p>
+</div>
+
+<p>This is due to (<a href="#Thomason79">Thomason 79</a>).</p>
+
+<h2 id="generalizations">Generalizations</h2>
+
+<h3 id=""><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n = 0</annotation></semantics></math></h3>
+
+<p>The analog of the Grothendieck construction one categorical dimension down is the <a class="existingWikiWord" href="/nlab/show/category+of+elements">category of elements</a> of a <a class="existingWikiWord" href="/nlab/show/presheaf">presheaf</a>.</p>
+
+<h3 id="ForInfinityGroupoids"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n = (\infty,0)</annotation></semantics></math></h3>
+
+<p>The analog of the Grothendieck construction for <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-groupoids">∞-groupoids</a> is examined in detail in <a href="#HeutsMoerdijk13">Heuts-Moerdijk 13</a>.</p>
+
+<p>The category of presheaves in groupoids is replaced by the <a class="existingWikiWord" href="/nlab/show/model+category+of+simplicial+presheaves">model category of simplicial presheaves</a> equipped with the <a class="existingWikiWord" href="/nlab/show/projective+model+structure">projective model structure</a> and the category of Grothendieck fibrations in groupoids is replaced by the model category of simplicial sets over the <a class="existingWikiWord" href="/nlab/show/nerve+of+a+category">nerve</a> of the source category, equipped with the <a class="existingWikiWord" href="/nlab/show/contravariant+model+structure">contravariant model structure</a>.</p>
+
+<p>In this case there is not one, but two different functors that generalize the Grothendieck construction.</p>
+
+<p>The first functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>h</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">h_!</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a>, it implements the <a class="existingWikiWord" href="/nlab/show/homotopy+colimit">homotopy colimit</a> using the <a class="existingWikiWord" href="/nlab/show/diagonal+of+a+bisimplicial+set">diagonal of a bisimplicial set</a>, and the second functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>r</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">r^*</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/right+adjoint">right adjoint</a>, it uses the <a class="existingWikiWord" href="/nlab/show/codiagonal">codiagonal</a> (also known as the <a class="existingWikiWord" href="/nlab/show/totalization">totalization</a>) of a bisimplicial set. Both functors fit into <a class="existingWikiWord" href="/nlab/show/adjunctions">adjunctions</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>h</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>h</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">h_!\dashv h^*</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>r</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>r</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">r_!\dashv r^*</annotation></semantics></math>, where the other two adjoints can be seen as rectification functors: the right adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>h</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">h^*</annotation></semantics></math> generalizes the cleavage construction, whereas the left adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>r</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">r_!</annotation></semantics></math> generalizes the comma category construction above.</p>
+
+<p>The two functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>h</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">h_!</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>r</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">r^*</annotation></semantics></math> become naturally weakly equivalent once we <a class="existingWikiWord" href="/nlab/show/derived+functor">derive</a> them, but they are not isomorphic. The functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>r</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">r^*</annotation></semantics></math> restricted to the full subcategory of presheaves of groupoids recovers the nerve of the classical Grothendieck construction described above. The functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>h</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">h_!</annotation></semantics></math> restricted to the same full subcategory does not even land in quasicategories, so it doesn’t give rise to a new construction in the classical case.</p>
+
+<h3 id="(oo1)case"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n = (\infty,1)</annotation></semantics></math></h3>
+
+<p>The analog of the Grothendieck construction for <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-category">(∞,1)-categories</a> is described at <a class="existingWikiWord" href="/nlab/show/Cartesian+fibration">Cartesian fibration</a> and at <a class="existingWikiWord" href="/nlab/show/universal+fibration+of+%28%E2%88%9E%2C1%29-categories">universal fibration of (∞,1)-categories</a>.</p>
+
+<p>The correspondence between <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\infty,1)</annotation></semantics></math>-categorical <a class="existingWikiWord" href="/nlab/show/cartesian+fibrations">cartesian fibrations</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">E \to C</annotation></semantics></math> and <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-presheaf">(∞,1)-presheaves</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>→</mo><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo><msup><mi>Cat</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">C \to (\infty,1)Cat^{op}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/model+category">modeled</a> by the <a class="existingWikiWord" href="/nlab/show/Quillen+equivalence">Quillen equivalence</a> between the <a class="existingWikiWord" href="/nlab/show/model+structure+on+marked+simplicial+over-sets">model structure on marked simplicial over-sets</a> and the projective <a class="existingWikiWord" href="/nlab/show/global+model+structure+on+simplicial+presheaves">global model structure on simplicial presheaves</a>.</p>
+
+<p>For more details see</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-Grothendieck+construction">(∞,1)-Grothendieck construction</a></li>
+</ul>
+
+<h3 id="normal_lax_functors_into_">Normal lax functors into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Prof</mi></mrow><annotation encoding="application/x-tex">Prof</annotation></semantics></math></h3>
+
+<p>The Grothendieck construction can be generalized from pseudofunctors into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Cat</mi></mrow><annotation encoding="application/x-tex">Cat</annotation></semantics></math> to normal lax functors into <a class="existingWikiWord" href="/nlab/show/Prof">Prof</a>. Instead of fibrations over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, such normal lax functors correspond to arbitrary functors into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>. See <a class="existingWikiWord" href="/nlab/show/displayed+category">displayed category</a> for more.</p>
+
+<h2 id="warning_on_terminology">Warning on terminology</h2>
+
+<p>The term ‘Grothendieck Construction’ is applied in the literature to at least two very different constructions (and as <a class="existingWikiWord" href="/nlab/show/Alexander+Grothendieck">Grothendieck</a> introduced so many new ideas and constructions to mathematics, perhaps there are others!). One concerns the construction of a <a class="existingWikiWord" href="/nlab/show/fibered+category">fibered category</a> from a <a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a> and will be treated in more detail in the entry on <a class="existingWikiWord" href="/nlab/show/Grothendieck+fibration">Grothendieck fibration</a>. The other refers to constructing the <a class="existingWikiWord" href="/nlab/show/Grothendieck+group">Grothendieck group</a> is in the context of <a class="existingWikiWord" href="/nlab/show/K-theory">K-theory</a> from isomorphism classes of vector bundles on a space by the introduction of formal inverses, ‘virtual bundles’. This constructs an Abelian group from the semi-group of isomorphism classes.</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/representable+functor">representable functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><msup><mi>C</mi> <mi>op</mi></msup><mo>→</mo><mi>Set</mi><mo>↪</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">C(-,X) :  C^{op} \to Set \hookrightarrow Cat</annotation></semantics></math> maps under the Grothendieck construction to the <a class="existingWikiWord" href="/nlab/show/slice+category">slice category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">/</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">C/X</annotation></semantics></math>. The corresponding fibrations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">/</mo><mi>X</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">C/X \to C</annotation></semantics></math> are also called <a class="existingWikiWord" href="/nlab/show/representable+fibered+categories">representable fibered categories</a>.</p>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/category+of+elements">category of elements</a></p>
+</li>
+
+<li>
+<p><strong>Grothendieck construction</strong></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-Grothendieck+construction">(infinity,1)-Grothendieck construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+construction+for+monoidal+categories">Grothendieck construction for monoidal categories</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<p>Textbook accounts:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Francis+Borceux">Francis Borceux</a>, Section 8.3 of: <em><a class="existingWikiWord" href="/nlab/show/Handbook+of+Categorical+Algebra">Handbook of Categorical Algebra</a></em>, Vol. 2: <em>Categories and Structures</em> Encyclopedia of Mathematics and its Applications <strong>50</strong>, Cambridge University Press (1994) (<a href="https://doi.org/10.1017/CBO9780511525865">doi:10.1017/CBO9780511525865</a>)</p>
+</li>
+
+<li id="Johnstone">
+<p><a class="existingWikiWord" href="/nlab/show/Peter+Johnstone">Peter Johnstone</a>, sections A1.1.7, B1.3.1 of: <em><a class="existingWikiWord" href="/nlab/show/Sketches+of+an+Elephant">Sketches of an Elephant</a></em> (2002)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Angelo+Vistoli">Angelo Vistoli</a>, <em>Grothendieck topologies, fibered categories and descent theory</em>, pp. 1–104 of <a class="existingWikiWord" href="/nlab/show/FGA+explained">FGA explained</a>; <a href="http://www.ams.org/mathscinet-getitem?mr=2223406">MR2223406</a>; <a href="http://arxiv.org/abs/math/0412512">math.AG/0412512</a>.</p>
+</li>
+
+<li id="JohnsonYau20">
+<p><a class="existingWikiWord" href="/nlab/show/Niles+Johnson">Niles Johnson</a>, <a class="existingWikiWord" href="/nlab/show/Donald+Yau">Donald Yau</a>, Chapter 10 of: <em>2-Dimensional Categories</em>, Oxford University Press 2021 (<a href="http://arxiv.org/abs/2002.06055">arXiv:2002.06055</a>, <a href="https://oxford.universitypressscholarship.com/view/10.1093/oso/9780198871378.001.0001/oso-9780198871378">doi:10.1093/oso/9780198871378.001.0001</a>)</p>
+</li>
+</ul>
+
+<p>Survey in the generality of <a class="existingWikiWord" href="/nlab/show/enriched+category+theory">enriched-</a>, <a class="existingWikiWord" href="/nlab/show/internal+category">internal-</a> and <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-category+theory"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mn>∞</mn>
+    </mrow>
+    <annotation encoding="application/x-tex">\infty</annotation>
+  </semantics>
+</math>-category theory</a> (see also the <em><a class="existingWikiWord" href="/nlab/show/enriched+Grothendieck+construction">enriched-</a> and <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-Grothendieck+construction"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mn>∞</mn>
+    </mrow>
+    <annotation encoding="application/x-tex">\infty</annotation>
+  </semantics>
+</math>-Grothendieck construction</a>):</em></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Liang+Ze+Wong">Liang Ze Wong</a>, <em>The Grothendieck Construction in Enriched, Internal and ∞-Category Theory</em>, PhD thesis, Univ. Washington (2019) &lbrack;<a href="http://sheaves.github.io/slides/thesis.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Wong-GrothendieckConstruction.pdf" title="pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/geometric+realization+of+categories">geometric realization</a> of Grothendieck constructions has been analyzed in</p>
+
+<ul>
+<li id="Thomason79"><a class="existingWikiWord" href="/nlab/show/R.+W.+Thomason">R. W. Thomason</a>, <em>Homotopy colimits in the category of small categories</em> , Math. Proc. Cambridge Philos. Soc. 85 (1979), no. 1, 91109.</li>
+</ul>
+
+<p>The left adjoint to the Grothendieck construction is discussed in §3.1.1 of</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Georges+Maltsiniotis">Georges Maltsiniotis</a>, <em>La théorie de l’homotopie de Grothendieck</em></li>
+</ul>
+
+<p>Limits and colimits are analysed in</p>
+
+<ul>
+<li id="TBG91">Andrzej Tarlecki, <a class="existingWikiWord" href="/nlab/show/Rod+M.+Burstall">Rod M. Burstall</a> <a class="existingWikiWord" href="/nlab/show/Joseph+A.+Goguen">Joseph A. Goguen</a>, <em>Some fundamental algebraic tools for the semantics of computation: Part 3. indexed categories</em> , (<a href="https://www.sciencedirect.com/science/article/pii/030439759190085G">Theoretical Computer Science vol. 91 (1991)</a>)</li>
+</ul>
+
+<p>The analog for simplicial sets instead of groupoids is discussed in</p>
+
+<ul>
+<li id="HeutsMoerdijk13"><a class="existingWikiWord" href="/nlab/show/Gijs+Heuts">Gijs Heuts</a>, <a class="existingWikiWord" href="/nlab/show/Ieke+Moerdijk">Ieke Moerdijk</a>, <em>Left fibrations and homotopy colimits</em> (<a href="https://arxiv.org/abs/1308.0704">arXiv:1308.0704</a>).</li>
+</ul>
+
+<p>See also</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Grothendieck_construction">Grothendieck construction</a> (Wikipedia)</li>
+
+<li><a href="http://www-personal.umd.umich.edu/~tmfiore/1/ThomasonNFoldBeamerSlides.pdf">The Homotopy Theory of n-Fold Categories</a></li>
+
+<li><a href="http://www.kestrel.edu/home/projects/logicware/slides-9806/sld001.htm">Inference System Integration via Logic Morphisms</a></li>
+
+<li><a href="http://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf">Category Theory for Computing Science</a></li>
+</ul>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> presentation of the Grothendieck construction see at <em><a class="existingWikiWord" href="/nlab/show/Grothendieck+construction+for+model+categories">Grothendieck construction for model categories</a></em>.</p>
+
+<p>Discussion of the Grothendieck construction as a <a class="existingWikiWord" href="/nlab/show/lax+colimit">lax colimit</a> includes (see also at <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-Grothendieck+construction">(infinity,1)-Grothendieck construction</a>)</p>
+
+<ul>
+<li id="GepnerHaugsengNikolaus15"><a class="existingWikiWord" href="/nlab/show/David+Gepner">David Gepner</a>, <a class="existingWikiWord" href="/nlab/show/Rune+Haugseng">Rune Haugseng</a>, <a class="existingWikiWord" href="/nlab/show/Thomas+Nikolaus">Thomas Nikolaus</a>, <em>Lax colimits and free fibrations in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>∞</mn></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math>-categories</em> (<a href="http://arxiv.org/abs/1501.02161">arXiv:1501.02161</a>)</li>
+</ul>
+
+<p>On the <a class="existingWikiWord" href="/nlab/show/enriched+Grothendieck+construction">enriched Grothendieck construction</a>:</p>
+
+<ul>
+<li id="BeardsleyWong18">
+<p><a class="existingWikiWord" href="/nlab/show/Jonathan+Beardsley">Jonathan Beardsley</a>, <a class="existingWikiWord" href="/nlab/show/Liang+Ze+Wong">Liang Ze Wong</a>, <em>The Enriched Grothendieck Construction</em>, Advances in Mathematics, <strong>344</strong> (2019) 234-261 &lbrack;<a href="https://arxiv.org/abs/1804.03829">arXiv:1804.03829</a>, <a href="https://doi.org/10.1016/j.aim.2018.12.009">doi:10.1016/j.aim.2018.12.009</a>&rbrack;</p>
+</li>
+
+<li id="BeardsleyWong19">
+<p><a class="existingWikiWord" href="/nlab/show/Jonathan+Beardsley">Jonathan Beardsley</a>, <a class="existingWikiWord" href="/nlab/show/Liang+Ze+Wong">Liang Ze Wong</a>, <em>The operadic nerve, relative nerve and the Grothendieck construction</em>, Theory and Applications of Categories, <strong>34</strong> 13 (2019) 349-374 &lbrack;<a href="http://www.tac.mta.ca/tac/volumes/34/13/34-13abs.html">tac:34-13</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal</a> version:</p>
+
+<ul>
+<li id="MoellerVasilakopoulou19"><a class="existingWikiWord" href="/nlab/show/Joe+Moeller">Joe Moeller</a>, <a class="existingWikiWord" href="/nlab/show/Christina+Vasilakopoulou">Christina Vasilakopoulou</a>, <em>Monoidal Grothendieck Construction</em>, 2019 (<a href="https://arxiv.org/abs/1809.00727">arXiv:1809.00727</a>)</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on August 19, 2022 at 16:52:42.
+    See the <a href="/nlab/history/Grothendieck+construction" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Grothendieck+construction" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/783/#Item_49">Discuss</a><span class="backintime"><a href="/nlab/revision/Grothendieck+construction/71" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Grothendieck+construction" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Grothendieck+construction" accesskey="S" class="navlink" id="history" rel="nofollow">History (71 revisions)</a>
+  <a href="/nlab/show/Grothendieck+construction/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Grothendieck+construction" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Grothendieck+construction" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

@@ -1,0 +1,832 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Gram-Schmidt process in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Gram-Schmidt process
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/8388/#Item_23" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="linear_algebra">Linear algebra</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/homotopy+theory">homotopy theory</a>, <a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category+theory">(∞,1)-category theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a></strong></p>
+
+<p>flavors: <a class="existingWikiWord" href="/nlab/show/stable+homotopy+theory">stable</a>, <a class="existingWikiWord" href="/nlab/show/equivariant+homotopy+theory">equivariant</a>, <a class="existingWikiWord" href="/nlab/show/rational+homotopy+theory">rational</a>, <a class="existingWikiWord" href="/nlab/show/p-adic+homotopy+theory">p-adic</a>, <a class="existingWikiWord" href="/nlab/show/proper+homotopy+theory">proper</a>, <a class="existingWikiWord" href="/nlab/show/geometric+homotopy+theory">geometric</a>, <a class="existingWikiWord" href="/nlab/show/cohesive+homotopy+theory">cohesive</a>, <a class="existingWikiWord" href="/nlab/show/directed+homotopy+theory">directed</a>…</p>
+
+<p>models: <a class="existingWikiWord" href="/nlab/show/topological+homotopy+theory">topological</a>, <a class="existingWikiWord" href="/nlab/show/simplicial+homotopy+theory">simplicial</a>, <a class="existingWikiWord" href="/nlab/show/localic+homotopy+theory">localic</a>, …</p>
+
+<p>see also <strong><a class="existingWikiWord" href="/nlab/show/algebraic+topology">algebraic topology</a></strong></p>
+
+<p><strong>Introductions</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Introduction+to+Topology+--+2">Introduction to Basic Homotopy Theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Introduction+to+Homotopy+Theory">Introduction to Abstract Homotopy Theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometry+of+physics+--+homotopy+types">geometry of physics – homotopy types</a></p>
+</li>
+</ul>
+
+<p><strong>Definitions</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy">homotopy</a>, <a class="existingWikiWord" href="/nlab/show/higher+homotopy">higher homotopy</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+type">homotopy type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Pi-algebra">Pi-algebra</a>, <a class="existingWikiWord" href="/nlab/show/spherical+object+and+Pi%28A%29-algebra">spherical object and Pi(A)-algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+coherent+category+theory">homotopy coherent category theory</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopical+category">homotopical category</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/model+category">model category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/category+of+fibrant+objects">category of fibrant objects</a>, <a class="existingWikiWord" href="/nlab/show/cofibration+category">cofibration category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Waldhausen+category">Waldhausen category</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+category">homotopy category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Ho%28Top%29">Ho(Top)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/%28%E2%88%9E%2C1%29-category">(∞,1)-category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/homotopy+category+of+an+%28%E2%88%9E%2C1%29-category">homotopy category of an (∞,1)-category</a></li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Paths and cylinders</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/left+homotopy">left homotopy</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cylinder+object">cylinder object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mapping+cone">mapping cone</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/right+homotopy">right homotopy</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/path+object">path object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mapping+cocone">mapping cocone</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/generalized+universal+bundle">universal bundle</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/interval+object">interval object</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+localization">homotopy localization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/infinitesimal+interval+object">infinitesimal interval object</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Homotopy groups</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+group">homotopy group</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+group">fundamental group</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fundamental+group+of+a+topos">fundamental group of a topos</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Brown-Grossman+homotopy+group">Brown-Grossman homotopy group</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/categorical+homotopy+groups+in+an+%28%E2%88%9E%2C1%29-topos">categorical homotopy groups in an (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+homotopy+groups+in+an+%28%E2%88%9E%2C1%29-topos">geometric homotopy groups in an (∞,1)-topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+%E2%88%9E-groupoid">fundamental ∞-groupoid</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+groupoid">fundamental groupoid</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/path+groupoid">path groupoid</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+%E2%88%9E-groupoid+in+a+locally+%E2%88%9E-connected+%28%E2%88%9E%2C1%29-topos">fundamental ∞-groupoid in a locally ∞-connected (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+%E2%88%9E-groupoid+of+a+locally+%E2%88%9E-connected+%28%E2%88%9E%2C1%29-topos">fundamental ∞-groupoid of a locally ∞-connected (∞,1)-topos</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+%28%E2%88%9E%2C1%29-category">fundamental (∞,1)-category</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fundamental+category">fundamental category</a></li>
+</ul>
+</li>
+</ul>
+
+<p><strong>Basic facts</strong></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/fundamental+group+of+the+circle+is+the+integers">fundamental group of the circle is the integers</a></li>
+</ul>
+
+<p><strong>Theorems</strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fundamental+theorem+of+covering+spaces">fundamental theorem of covering spaces</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Freudenthal+suspension+theorem">Freudenthal suspension theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Blakers-Massey+theorem">Blakers-Massey theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/higher+homotopy+van+Kampen+theorem">higher homotopy van Kampen theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/nerve+theorem">nerve theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Whitehead%27s+theorem">Whitehead's theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Hurewicz+theorem">Hurewicz theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Galois+theory">Galois theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+hypothesis">homotopy hypothesis</a>-theorem</p>
+</li>
+</ul>
+</div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#GramSchmidtOnHilbertSpaces'>Gram–Schmidt process on Hilbert spaces</a></li>
+<li><a href='#ViaGaussianElimination'>Via Gaussian elimination</a></li>
+<li><a href='#examples'>Examples</a></li>
+<ul>
+<li><a href='#legendre_polynomials'>Legendre polynomials</a></li>
+</ul>
+<li><a href='#CategorifiedGramSchmidtProcess'>Categorified Gram–Schmidt process</a></li>
+<li><a href='#related_entries'>Related entries</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>The Gram–Schmidt process is an <a class="existingWikiWord" href="/nlab/show/algorithm">algorithm</a> which takes as input an ordered <a class="existingWikiWord" href="/nlab/show/basis">basis</a> of an <a class="existingWikiWord" href="/nlab/show/inner+product+space">inner product space</a> and produces as output an ordered <a class="existingWikiWord" href="/nlab/show/orthonormal+basis">orthonormal basis</a>.</p>
+
+<p>In terms of <a class="existingWikiWord" href="/nlab/show/matrix">matrices</a>, the Gram–Schmidt process is a procedure of factorization of a invertible matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> in the <a class="existingWikiWord" href="/nlab/show/general+linear+group">general linear group</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>GL</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">GL_n(\mathbb{R})</annotation></semantics></math> (or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>GL</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">GL_n(\mathbb{C})</annotation></semantics></math>) as a <a class="existingWikiWord" href="/nlab/show/matrix+product">product</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi><mo>=</mo><mi>U</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">M = U T</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> is an upper triangular matrix and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is an orthonormal (or unitary) matrix; as such it is a special case of the more general <a class="existingWikiWord" href="/nlab/show/Iwasawa+decomposition">Iwasawa decomposition</a> for a (connected) semisimple <a class="existingWikiWord" href="/nlab/show/Lie+group">Lie group</a>.</p>
+
+<p>Since the factorization depends smoothly on the parameters, the Gram–Schmidt procedure enables the reduction of the structure group of an inner product <a class="existingWikiWord" href="/nlab/show/vector+bundle">vector bundle</a> (e.g., the <a class="existingWikiWord" href="/nlab/show/tangent+bundle">tangent bundle</a> of a <a class="existingWikiWord" href="/nlab/show/Riemannian+manifold">Riemannian manifold</a> or a <a class="existingWikiWord" href="/nlab/show/K%C3%A4hler+manifold">Kähler manifold</a>) from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>GL</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">GL_n</annotation></semantics></math> to the <a class="existingWikiWord" href="/nlab/show/orthogonal+group">orthogonal group</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>O</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">O_n</annotation></semantics></math> (or the <a class="existingWikiWord" href="/nlab/show/unitary+group">unitary group</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">U_n</annotation></semantics></math>).</p>
+
+<h2 id="GramSchmidtOnHilbertSpaces">Gram–Schmidt process on Hilbert spaces</h2>
+
+<p>In this section, “basis” is understood to signify an ordered independent set whose <a class="existingWikiWord" href="/nlab/show/linear+span">linear span</a> is <a class="existingWikiWord" href="/nlab/show/dense+subspace">dense</a> in a <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math> seen as a <a class="existingWikiWord" href="/nlab/show/metric+space">metric space</a>. We will describe the Gram–Schmidt process as applied to a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional Hilbert space for some <a class="existingWikiWord" href="/nlab/show/cardinal">cardinal</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math> with a basis <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>v</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>v</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">v_0, v_1, \ldots</annotation></semantics></math> consisting of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math> vectors.</p>
+
+<p>The orthonormal basis <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>u</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">u_0, u_1, \ldots</annotation></semantics></math> produced as output is defined recursively by a) subtracting the orthogonal projection to the closed subspace generated by all previous vectors and b) normalizing. We denote the orthogonal projection onto a closed subspace <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mi>A</mi></msub><mo lspace="verythinmathspace">:</mo><mi>H</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\pi_A\colon H\to A</annotation></semantics></math> and the normalization <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi><mo stretchy="false">/</mo><mo stretchy="false">‖</mo><mi>v</mi><mo stretchy="false">‖</mo></mrow><annotation encoding="application/x-tex">v/\|v\|</annotation></semantics></math> of a vector <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi><mo>∈</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">v \in H</annotation></semantics></math> by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N(v)</annotation></semantics></math>. For <a class="existingWikiWord" href="/nlab/show/ordinal">ordinal</a>s <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>&lt;</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">\alpha \lt d</annotation></semantics></math> define</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mi>α</mi></msub><mo>≔</mo><mi>N</mi><mrow><mo>(</mo><msub><mi>v</mi> <mi>α</mi></msub><mo>−</mo><msub><mi>π</mi> <mrow><msub><mi>S</mi> <mi>α</mi></msub></mrow></msub><mo stretchy="false">(</mo><msub><mi>v</mi> <mi>α</mi></msub><mo stretchy="false">)</mo><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">u_\alpha \coloneqq N\left(v_\alpha - \pi_{S_\alpha}(v_\alpha)\right)</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>α</mi></msub></mrow><annotation encoding="application/x-tex">S_\alpha</annotation></semantics></math> is the closure of the span of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>v</mi> <mi>β</mi></msub><mo>:</mo><mi>β</mi><mo>&lt;</mo><mi>α</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{v_\beta: \beta \lt \alpha\}</annotation></semantics></math>, noting that the projection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mrow><msub><mi>S</mi> <mi>α</mi></msub></mrow></msub></mrow><annotation encoding="application/x-tex">\pi_{S_\alpha}</annotation></semantics></math> is known to exist, since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math> is complete. This can be rewritten more explicitly using transfinite recursion as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mi>α</mi></msub><mo>=</mo><mi>N</mi><mrow><mo>(</mo><msub><mi>v</mi> <mi>α</mi></msub><mo>−</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>β</mi><mo>&lt;</mo><mi>α</mi></mrow></munder><mo stretchy="false">⟨</mo><msub><mi>v</mi> <mi>α</mi></msub><mo>,</mo><msub><mi>u</mi> <mi>β</mi></msub><mo stretchy="false">⟩</mo><msub><mi>u</mi> <mi>β</mi></msub><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">u_\alpha =  N\left(v_\alpha - \sum_{\beta \lt \alpha} \langle v_\alpha, u_\beta\rangle u_\beta\right)</annotation></semantics></math></div>
+<p>where the sum on the right is well defined by the Bessel inequality, i.e. only countably many coefficients are non-zero and they are square-summable. A simple (transfinite) inductive argument shows that the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mi>α</mi></msub></mrow><annotation encoding="application/x-tex">u_\alpha</annotation></semantics></math> are unit vectors orthogonal to each other, and that the span of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo>{</mo><msub><mi>u</mi> <mi>β</mi></msub><mo lspace="verythinmathspace">:</mo><mi>β</mi><mo>&lt;</mo><mi>α</mi><mo>}</mo></mrow></mrow><annotation encoding="application/x-tex">\left\{u_\beta \colon \beta \lt \alpha\right\}</annotation></semantics></math> is equal to the span of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo>{</mo><msub><mi>v</mi> <mi>β</mi></msub><mo lspace="verythinmathspace">:</mo><mi>β</mi><mo>&lt;</mo><mi>α</mi><mo>}</mo></mrow></mrow><annotation encoding="application/x-tex">\left\{v_\beta \colon \beta \lt \alpha\right\}</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>≤</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">\alpha \leq d</annotation></semantics></math>. Therefore <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>u</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">u_0, u_1, \ldots</annotation></semantics></math> is an orthonormal basis of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>.</p>
+
+<div class="num_remark">
+<h6 id="remark">Remark</h6>
+
+<p><strong>(Application to non-bases)</strong></p>
+
+<p>If we apply the Gram–Schmidt process to a well-ordered independent set whose closed linear span <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is <em>not</em> all of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>, we still get an orthonormal basis of the subspace <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>. If we apply the Gram–Schmidt process to a dependent set, then we will eventually run into a vector <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math> whose norm is zero, so we will not be able to take <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N(v)</annotation></semantics></math>. In that case, however, we can simply remove <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math> from the set and continue; then we will still get an orthonormal basis of the closed linear span. (This conclusion is not generally valid in <a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a>, since it relies on <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a> applied to the statement that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">‖</mo><mi>v</mi><mo stretchy="false">‖</mo><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\|v\| \neq 0</annotation></semantics></math>. However, it does work to <a class="existingWikiWord" href="/nlab/show/discrete+fields">discrete fields</a>, such as the algebraic closure of the rationals, as seen in elementary undergraduate linear algebra.)</p>
+</div>
+
+<h2 id="ViaGaussianElimination">Via Gaussian elimination</h2>
+
+<p>There is an alternative algorithm via <a class="existingWikiWord" href="/nlab/show/Gaussian+elimination">Gaussian elimination</a> which for a set of vectors produces an orthogonal basis for its linear span (<a href="#PursellTrimble91">Pursell-Trimble 91</a>).</p>
+
+<p>In the special case that the original vectors are linearly independent and after normalizing the resulting orthogonal basis to an orthonormal basis, the output of this algorithm is an orthonormal basis as produced also by the Gram-Schmidt process.</p>
+
+<div class="num_lemma" id="LUDecompositionOfPositiveSemidefiniteMatrices">
+<h6 id="lemma">Lemma</h6>
+
+<p><strong>(LU-decomposition of <a class="existingWikiWord" href="/nlab/show/positive+semidefinite+matrices">positive semidefinite matrices</a>)</strong></p>
+
+<p>Every <a class="existingWikiWord" href="/nlab/show/positive+semidefinite+matrix">positive semidefinite matrix</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> has a <a class="existingWikiWord" href="/nlab/show/matrix+product">matrix product</a>-decomposition</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>M</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>L</mi><mo>⋅</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">
+  M \;=\; L \cdot U
+
+</annotation></semantics></math></div>
+<p>where</p>
+
+<ol>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is</p>
+
+<ol>
+<li>
+<p>a <a class="existingWikiWord" href="/nlab/show/lower+triangular+matrix">lower triangular matrix</a></p>
+</li>
+
+<li>
+<p>an <a class="existingWikiWord" href="/nlab/show/invertible+matrix">invertible matrix</a></p>
+</li>
+</ol>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/upper+triangular+matrix">upper triangular matrix</a>.</p>
+</li>
+</ol>
+</div>
+
+<p>(<a href="#PursellTrimble91">Pursell-Trimble 91, p. 4</a>)</p>
+
+<div class="num_prop" id="OrthogonalBasisOfLinearSpanByLUDecomposition">
+<h6 id="proposition">Proposition</h6>
+
+<p><strong>(orthogonal basis of linear span via LU-decomposition)</strong></p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>a</mi> <mi>j</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(a_j)</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/tuple">tuple</a> of <a class="existingWikiWord" href="/nlab/show/vectors">vectors</a> of the same length, hence let</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi>A</mi> <mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">)</mo><mo>≔</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><msub><mi>a</mi> <mi>j</mi></msub><msub><mo stretchy="false">)</mo> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  A = (A_{i j}) \coloneqq ((a_j)_i)
+
+</annotation></semantics></math></div>
+<p>be the <a class="existingWikiWord" href="/nlab/show/matrix">matrix</a> whose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math>th column is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>a</mi> <mi>j</mi></msub></mrow><annotation encoding="application/x-tex">a_j</annotation></semantics></math>.</p>
+
+<p>Since the <a class="existingWikiWord" href="/nlab/show/matrix+product">matrix product</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi><mo>≔</mo><msup><mi>A</mi> <mi>T</mi></msup><mo>⋅</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">M \coloneqq A^T \cdot A</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> with its <a class="existingWikiWord" href="/nlab/show/transpose+matrix">transpose matrix</a> is necessarily a <a class="existingWikiWord" href="/nlab/show/positive+semidefinite+symmetric+matrix">positive semidefinite symmetric matrix</a> it has an LU-decomposition according to Lemma <a class="maruku-ref" href="#LUDecompositionOfPositiveSemidefiniteMatrices"></a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>A</mi> <mi>T</mi></msup><mo>⋅</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>L</mi><mo>⋅</mo><mi>U</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  A^T \cdot A \;=\; L \cdot U
+  \,.
+
+</annotation></semantics></math></div>
+<p>Then the column vectors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mover><mi>q</mi><mo stretchy="false">^</mo></mover> <mi>j</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\hat q_j)</annotation></semantics></math> of the matrix</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mover><mi>Q</mi><mo>^</mo></mover><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>A</mi><mo>⋅</mo><mo stretchy="false">(</mo><msup><mi>L</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><msup><mo stretchy="false">)</mo> <mi>T</mi></msup></mrow><annotation encoding="application/x-tex">
+  \widehat Q \;\coloneqq\; A \cdot (L^{-1})^T
+
+</annotation></semantics></math></div>
+<p>constitute an orthogonalization of the original tuple of vectors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>a</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(a_i)</annotation></semantics></math> in that the non-zero <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mover><mi>q</mi><mo stretchy="false">^</mo></mover> <mi>j</mi></msub></mrow><annotation encoding="application/x-tex">\hat q_j</annotation></semantics></math> form an orthogonal <a class="existingWikiWord" href="/nlab/show/linear+basis">linear basis</a> of the <a class="existingWikiWord" href="/nlab/show/linear+span">linear span</a> of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>a</mi> <mi>j</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(a_j)</annotation></semantics></math>.</p>
+</div>
+
+<p>(<a href="#PursellTrimble91">Pursell-Trimble 91, top of p. 5</a>)</p>
+
+<div class="num_remark">
+<h6 id="remark_2">Remark</h6>
+
+<p>That the matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> in Prop. <a class="maruku-ref" href="#OrthogonalBasisOfLinearSpanByLUDecomposition"></a> is <a class="existingWikiWord" href="/nlab/show/lower+triangular+matrix">lower triangular</a> and <a class="existingWikiWord" href="/nlab/show/invertible+matrix">invertible</a> (by Lemma <a class="maruku-ref" href="#LUDecompositionOfPositiveSemidefiniteMatrices"></a>) means that its <a class="existingWikiWord" href="/nlab/show/inverse+matrix">inverse matrix</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">L^{-1}</annotation></semantics></math> is also a <a class="existingWikiWord" href="/nlab/show/lower+triangular+matrix">lower triangular matrix</a> which reflects a process of <a class="existingWikiWord" href="/nlab/show/row+reduction">row reduction</a> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>A</mi> <mi>T</mi></msup><mo>⋅</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">A^T \cdot A</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>.</p>
+
+<p>Accordingly, the orthogonalization in Prop. <a class="maruku-ref" href="#OrthogonalBasisOfLinearSpanByLUDecomposition"></a> may be understood as applying <a class="existingWikiWord" href="/nlab/show/Gauss+elimination">Gauss elimination</a> to</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo maxsize="1.2em" minsize="1.2em">[</mo><msup><mi>A</mi> <mi>T</mi></msup><mo>⋅</mo><mi>A</mi><mo stretchy="false">|</mo><msup><mi>A</mi> <mi>T</mi></msup><mo maxsize="1.2em" minsize="1.2em">]</mo><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">[</mo><msup><mover><mi>Q</mi><mo>^</mo></mover> <mi>T</mi></msup><mo maxsize="1.2em" minsize="1.2em">]</mo></mrow><annotation encoding="application/x-tex">
+  \big[A^T \cdot A \vert A^T \big]
+  \;\mapsto\;
+  \big[ \widehat Q^T\big]
+
+</annotation></semantics></math></div></div>
+
+<p>(<a href="#PursellTrimble91">Pursell-Trimble 91, p. 3</a>)</p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="legendre_polynomials">Legendre polynomials</h3>
+
+<p>A classic illustration of Gram–Schmidt is the production of the <a class="existingWikiWord" href="/nlab/show/Legendre+polynomials">Legendre polynomials</a>.</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math> be the <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi><mo>=</mo><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">H = L^2([-1, 1])</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/square+integrable+functions">square integrable functions</a> in the <a class="existingWikiWord" href="/nlab/show/closed+interval">closed interval</a>, equipped with the standard <a class="existingWikiWord" href="/nlab/show/inner+product">inner product</a> defined by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>f</mi><mo>,</mo><mi>g</mi><mo stretchy="false">⟩</mo><mo>=</mo><msubsup><mo>∫</mo> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow> <mn>1</mn></msubsup><mover><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\langle f, g\rangle = \int_{-1}^1 \widebar{f(x)} g(x) d x</annotation></semantics></math></div>
+<p>By the <a class="existingWikiWord" href="/nlab/show/Stone-Weierstrass+theorem">Stone-Weierstrass theorem</a>, the space of <a class="existingWikiWord" href="/nlab/show/polynomials">polynomials</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathbb{C}[x]</annotation></semantics></math> is dense in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math> according to its standard inclusion, and so the polynomials <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>,</mo><mi>x</mi><mo>,</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>,</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">1, x, x^2, \ldots</annotation></semantics></math> form an ordered basis of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>.</p>
+
+<p>Applying the Gram–Schmidt process as <a href="#GramSchmidtOnHilbertSpaces">above</a>, one readily computes the first few orthonormal functions:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>N</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo stretchy="false">/</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">u_1(x) = N(1) = 1/2</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mn>2</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>N</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><msqrt><mrow><mn>3</mn><mo stretchy="false">/</mo><mn>2</mn></mrow></msqrt><mi>x</mi></mrow><annotation encoding="application/x-tex">u_2(x) = N(x - 0) = \sqrt{3/2} x</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mn>3</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>N</mi><mo stretchy="false">(</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>−</mo><mo stretchy="false">⟨</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>,</mo><mn>1</mn><mo stretchy="false">/</mo><mn>2</mn><mo stretchy="false">⟩</mo><mn>1</mn><mo stretchy="false">/</mo><mn>2</mn><mo>−</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mi>N</mi><mo stretchy="false">(</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>−</mo><mn>1</mn><mo stretchy="false">/</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mn>3</mn><msqrt><mrow><mn>5</mn><mo stretchy="false">/</mo><mn>2</mn></mrow></msqrt><mo stretchy="false">/</mo><mn>2</mn><mo stretchy="false">(</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>−</mo><mn>1</mn><mo stretchy="false">/</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">u_3(x) = N(x^2 - \langle x^2, 1/2\rangle 1/2 - 0) = N(x^2 - 1/3) = 3\sqrt{5/2}/2(x^2 - 1/3)</annotation></semantics></math></div>
+<p>The classical Legendre polynomials <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P_n(x)</annotation></semantics></math> are scalar multiplies of the functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>u</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">u_n</annotation></semantics></math>, adjusted so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mi>n</mi></msub><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">P_n(1) = 1</annotation></semantics></math>; they satisfy the orthogonality relations</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><msub><mi>P</mi> <mi>n</mi></msub><mo>,</mo><msub><mi>P</mi> <mi>m</mi></msub><mo stretchy="false">⟩</mo><mo>=</mo><mfrac><mn>2</mn><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><msub><mi>δ</mi> <mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\langle P_n, P_m\rangle = \frac{2}{2n + 1}\delta_{m, n}</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\delta_{m, n}</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/Kronecker+delta">Kronecker delta</a>.</p>
+
+<h2 id="CategorifiedGramSchmidtProcess">Categorified Gram–Schmidt process</h2>
+
+<p>Many aspects of the Gram–Schmidt process can be <a class="existingWikiWord" href="/nlab/show/categorification">categorified</a> so as to apply to <a class="existingWikiWord" href="/nlab/show/2-Hilbert+spaces">2-Hilbert spaces</a> as indicated at <em><a class="existingWikiWord" href="/nlab/show/Schur%27s+lemma">Schur's lemma</a></em> in the section <em><a href="Schur's+lemma#InterpretationInCategoricalAlgebra">In terms of categorical algebra</a></em>;</p>
+
+<p>We will illustrate the basic idea with an example that was suggested to us by <a class="existingWikiWord" href="/nlab/show/James+Dolan">James Dolan</a>. (See also at <em><a class="existingWikiWord" href="/nlab/show/permutation+representation">permutation representation</a></em> the sections <em><a href="permutation+representation#ExamplesVirtualPermutationRepresentations">Examples – Virtual permutation representations</a></em>.)</p>
+
+<p>Consider the <a class="existingWikiWord" href="/nlab/show/category+of+representations">category of representations</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>n</mi></msub><mi>Rep</mi></mrow><annotation encoding="application/x-tex">S_n Rep</annotation></semantics></math> over the <a class="existingWikiWord" href="/nlab/show/complex+numbers">complex numbers</a> of the <a class="existingWikiWord" href="/nlab/show/symmetric+group">symmetric group</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo>≔</mo><msub><mi>S</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">G \coloneqq S_n</annotation></semantics></math>. (As a running example, we consider <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mn>4</mn></msub></mrow><annotation encoding="application/x-tex">S_4</annotation></semantics></math>; up to <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a>, there are five <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mrow><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo></mrow></msub><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>U</mi> <mrow><mo stretchy="false">(</mo><mn>3</mn><mn>1</mn><mo stretchy="false">)</mo></mrow></msub><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>U</mi> <mrow><mo stretchy="false">(</mo><mn>2</mn><mn>2</mn><mo stretchy="false">)</mo></mrow></msub><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>U</mi> <mrow><mo stretchy="false">(</mo><mn>2</mn><mn>1</mn><mn>1</mn><mo stretchy="false">)</mo></mrow></msub><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>U</mi> <mrow><mo stretchy="false">(</mo><mn>1</mn><mn>1</mn><mn>1</mn><mn>1</mn><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">U_{(4)}, \, U_{(3 1)}, \, U_{(2 2)}, \, U_{(2 1 1)}, \, U_{(1 1 1 1)}</annotation></semantics></math></div>
+<p>classified by the five <a class="existingWikiWord" href="/nlab/show/Young+diagrams">Young diagrams</a> of size 4. To save space, we denote these as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">U_1</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">U_2</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">U_3</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>4</mn></msub></mrow><annotation encoding="application/x-tex">U_4</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>5</mn></msub></mrow><annotation encoding="application/x-tex">U_5</annotation></semantics></math>.)</p>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/irreducible+representations">irreducible representations</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">U_i</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">S_n</annotation></semantics></math> form a <em><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>-orthonormal basis</em> in the sense that any two of them <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>U</mi> <mi>j</mi></msub></mrow><annotation encoding="application/x-tex">U_i, U_j</annotation></semantics></math> satisfy the relation</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>G</mi></msub><mo stretchy="false">(</mo><msub><mi>U</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>U</mi> <mi>j</mi></msub><mo stretchy="false">)</mo><mo>≅</mo><msub><mi>δ</mi> <mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>⋅</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">hom_G(U_i, U_j) \cong \delta_{i j} \cdot \mathbb{C}</annotation></semantics></math></div>
+<p>(where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>G</mi></msub></mrow><annotation encoding="application/x-tex">hom_G</annotation></semantics></math> denotes the <a class="existingWikiWord" href="/nlab/show/hom-object">hom vector space</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>n</mi></msub><mi>Rep</mi></mrow><annotation encoding="application/x-tex">S_n Rep</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>⋅</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">n \cdot \mathbb{C}</annotation></semantics></math> indicates a <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> copies of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\mathbb{C}</annotation></semantics></math>). In fact, the irreducible representations are uniquely determined up to isomorphism by these relations.</p>
+
+<p>There is however another way of associating representations to <a class="existingWikiWord" href="/nlab/show/partitions">partitions</a> or <a class="existingWikiWord" href="/nlab/show/Young+diagrams">Young diagrams</a>. Namely, consider the <a class="existingWikiWord" href="/nlab/show/subgroup">subgroup</a> of permutations which take each row of a Young diagram or Young tableau of size <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> to itself; this forms a <a class="existingWikiWord" href="/nlab/show/parabolic+subgroup">parabolic subgroup</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">S_n</annotation></semantics></math>, <a class="existingWikiWord" href="/nlab/show/conjugation">conjugate</a> to one of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mrow><mo stretchy="false">(</mo><msub><mi>n</mi> <mn>1</mn></msub><mi>…</mi><msub><mi>n</mi> <mi>k</mi></msub><mo stretchy="false">)</mo></mrow></msub><mo>=</mo><msub><mi>S</mi> <mrow><msub><mi>n</mi> <mn>1</mn></msub></mrow></msub><mo>×</mo><mi>…</mi><mo>×</mo><msub><mi>S</mi> <mrow><msub><mi>n</mi> <mi>k</mi></msub></mrow></msub></mrow><annotation encoding="application/x-tex">P_{(n_1 \ldots n_k)} = S_{n_1} \times \ldots \times S_{n_k}</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>n</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">n_i</annotation></semantics></math> is the length of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>i</mi> <mi>th</mi></msup></mrow><annotation encoding="application/x-tex">i^{th}</annotation></semantics></math> row of the Young diagram. The group <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">S_n</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/transitive+action">acts transitively</a> on the <a class="existingWikiWord" href="/nlab/show/orbit+space">orbit space</a> of <a class="existingWikiWord" href="/nlab/show/cosets">cosets</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>n</mi></msub><mo stretchy="false">/</mo><msub><mi>P</mi> <mrow><mo stretchy="false">(</mo><msub><mi>n</mi> <mn>1</mn></msub><mi>…</mi><msub><mi>n</mi> <mi>k</mi></msub><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">S_n/P_{(n_1 \ldots n_k)}</annotation></semantics></math></div>
+<p>and these actions give linear <a class="existingWikiWord" href="/nlab/show/permutation+representations">permutation representations</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi><mo maxsize="1.2em" minsize="1.2em">[</mo><msub><mi>S</mi> <mi>n</mi></msub><mo stretchy="false">/</mo><msub><mi>P</mi> <mrow><mo stretchy="false">(</mo><msub><mi>n</mi> <mn>1</mn></msub><mi>…</mi><msub><mi>n</mi> <mi>k</mi></msub><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">]</mo></mrow><annotation encoding="application/x-tex">\mathbb{C}\big[S_n/P_{(n_1 \ldots n_k)}\big]</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">S_n</annotation></semantics></math>. Equivalently, these are <a class="existingWikiWord" href="/nlab/show/linear+representations">linear representations</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V_i</annotation></semantics></math> which are <a class="existingWikiWord" href="/nlab/show/induced+representation">induced</a> from the <a class="existingWikiWord" href="/nlab/show/trivial+representation">trivial representation</a> along inclusions of parabolic subgroups.</p>
+
+<p>We claim that</p>
+
+<ol>
+<li>
+<p>these representations form a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℤ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/linear+basis">linear basis</a> of the <a class="existingWikiWord" href="/nlab/show/representation+ring">representation ring</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><msub><mi>S</mi> <mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(S_n)</annotation></semantics></math>,</p>
+</li>
+
+<li>
+<p>we may calculate their characters using a categorified Gram–Schmidt process.</p>
+</li>
+</ol>
+
+<p>We indicate the proof:</p>
+
+<p>Given two such <a class="existingWikiWord" href="/nlab/show/parabolic+subgroups">parabolic subgroups</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo>=</mo><msub><mi>S</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">G = S_n</annotation></semantics></math>, the <em><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>-inner product</em></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>G</mi></msub><mo stretchy="false">(</mo><mi>ℂ</mi><mo stretchy="false">[</mo><mi>G</mi><mo stretchy="false">/</mo><mi>P</mi><mo stretchy="false">]</mo><mo>,</mo><mi>ℂ</mi><mo stretchy="false">[</mo><mi>G</mi><mo stretchy="false">/</mo><mi>Q</mi><mo stretchy="false">]</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">hom_G(\mathbb{C}[G/P], \mathbb{C}[G/Q])</annotation></semantics></math></div>
+<p>may be identified with the <a class="existingWikiWord" href="/nlab/show/linear+span">free vector space</a> on the set of <a class="existingWikiWord" href="/nlab/show/double+cosets">double cosets</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo>\</mo><mi>G</mi><mo stretchy="false">/</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P\backslash G/Q</annotation></semantics></math>.</p>
+
+<p>One may count the number of double cosets by hand in a simple case like <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo>=</mo><msub><mi>S</mi> <mn>4</mn></msub></mrow><annotation encoding="application/x-tex">G = S_4</annotation></semantics></math>. That is, for the 5 representations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>V</mi> <mn>5</mn></msub></mrow><annotation encoding="application/x-tex">V_1, \ldots, V_5</annotation></semantics></math> induced from the 5 parabolic subgroups <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">P_i</annotation></semantics></math> corresponding to the 5 Young diagrams listed above, the dimensions of the 2-inner products <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>hom</mi><mo stretchy="false">(</mo><msub><mi>V</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>V</mi> <mi>j</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">hom(V_i, V_j)</annotation></semantics></math> are the sizes of the corresponding double coset spaces <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mi>i</mi></msub><mo>\</mo><msub><mi>S</mi> <mn>4</mn></msub><mo stretchy="false">/</mo><msub><mi>P</mi> <mi>j</mi></msub></mrow><annotation encoding="application/x-tex">P_i\backslash S_4 /P_j</annotation></semantics></math>. These numbers form a <a class="existingWikiWord" href="/nlab/show/matrix">matrix</a> as follows (following the order of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>5</mn></mrow><annotation encoding="application/x-tex">5</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/partitions">partitions</a> listed above):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo>(</mo><mrow><mtable><mtr><mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd></mtr> <mtr><mtd><mn>1</mn></mtd> <mtd><mn>2</mn></mtd> <mtd><mn>2</mn></mtd> <mtd><mn>3</mn></mtd> <mtd><mn>4</mn></mtd></mtr> <mtr><mtd><mn>1</mn></mtd> <mtd><mn>2</mn></mtd> <mtd><mn>3</mn></mtd> <mtd><mn>4</mn></mtd> <mtd><mn>6</mn></mtd></mtr> <mtr><mtd><mn>1</mn></mtd> <mtd><mn>3</mn></mtd> <mtd><mn>4</mn></mtd> <mtd><mn>7</mn></mtd> <mtd><mn>12</mn></mtd></mtr> <mtr><mtd><mn>1</mn></mtd> <mtd><mn>4</mn></mtd> <mtd><mn>6</mn></mtd> <mtd><mn>12</mn></mtd> <mtd><mn>24</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\left( \array 
+{1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+1 &amp; 2 &amp; 2 &amp; 3 &amp; 4 \\
+1 &amp; 2 &amp; 3 &amp; 4 &amp; 6 \\
+1 &amp; 3 &amp; 4 &amp; 7 &amp; 12 \\
+1 &amp; 4 &amp; 6 &amp; 12 &amp; 24
+}\right)
+
+</annotation></semantics></math></div>
+<p>To reiterate: this matrix is the <a class="existingWikiWord" href="/nlab/show/decategorification">decategorification</a> (a matrix of <a class="existingWikiWord" href="/nlab/show/dimensions">dimensions</a>) of a matrix of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>-inner products where the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>i</mi><mi>j</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(i j)</annotation></semantics></math>-entry is of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>G</mi></msub><mo stretchy="false">(</mo><msub><mi>V</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>V</mi> <mi>j</mi></msub><mo stretchy="false">)</mo><mo>≅</mo><msubsup><mi>V</mi> <mi>i</mi> <mo>*</mo></msubsup><msub><mo>⊗</mo> <mi>G</mi></msub><msub><mi>V</mi> <mi>j</mi></msub></mrow><annotation encoding="application/x-tex">hom_G(V_i, V_j) \cong V_i^* \otimes_G V_j</annotation></semantics></math></div>
+<p>where the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V_i</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/induced+representation">induced</a> from inclusions of <a class="existingWikiWord" href="/nlab/show/parabolic+subgroups">parabolic subgroups</a>. The <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V_i</annotation></semantics></math> are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">\mathbb{N}</annotation></semantics></math>-linear combinations of irreducible representations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">U_i</annotation></semantics></math> which form a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>-orthonormal basis, and we may perform a series of elementary row operations which convert this matrix into an <a class="existingWikiWord" href="/nlab/show/upper+triangular+matrix">upper triangular matrix</a>, and which will turn out to be the <a class="existingWikiWord" href="/nlab/show/decategorification">decategorified</a> form of the 2-matrix with entries</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>G</mi></msub><mo stretchy="false">(</mo><msub><mi>U</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>V</mi> <mi>j</mi></msub><mo stretchy="false">)</mo><mo>≅</mo><msubsup><mi>U</mi> <mi>i</mi> <mo>*</mo></msubsup><msub><mo>⊗</mo> <mi>G</mi></msub><msub><mi>V</mi> <mi>j</mi></msub></mrow><annotation encoding="application/x-tex">hom_G(U_i, V_j) \cong U_i^* \otimes_G V_j</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">U_i</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/irrep">irrep</a> corresponding to the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math><sup>th</sup> Young diagram (as listed above). The <a class="existingWikiWord" href="/nlab/show/upper+triangular+matrix">upper triangular matrix</a> is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo>(</mo><mrow><mtable><mtr><mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>2</mn></mtd> <mtd><mn>3</mn></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>2</mn></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>3</mn></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\left( \array 
+{1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 2 &amp; 3 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 3 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1} \right)
+
+</annotation></semantics></math></div>
+<p>and we read off from the columns the following decompositions into irreducible components:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>1</mn></msub><mo>≅</mo><msub><mi>U</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">V_1 \cong U_1</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>2</mn></msub><mo>≅</mo><msub><mi>U</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>U</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">V_2 \cong U_1 + U_2</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>3</mn></msub><mo>≅</mo><msub><mi>U</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>U</mi> <mn>2</mn></msub><mo>+</mo><msub><mi>U</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">V_3 \cong U_1 + U_2 + U_3</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>4</mn></msub><mo>≅</mo><msub><mi>U</mi> <mn>1</mn></msub><mo>+</mo><mn>2</mn><msub><mi>U</mi> <mn>2</mn></msub><mo>+</mo><msub><mi>U</mi> <mn>3</mn></msub><mo>+</mo><msub><mi>U</mi> <mn>4</mn></msub></mrow><annotation encoding="application/x-tex">V_4 \cong U_1 + 2 U_2 + U_3 + U_4</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>5</mn></msub><mo>≅</mo><msub><mi>U</mi> <mn>1</mn></msub><mo>+</mo><mn>3</mn><msub><mi>U</mi> <mn>2</mn></msub><mo>+</mo><mn>2</mn><msub><mi>U</mi> <mn>3</mn></msub><mo>+</mo><mn>3</mn><msub><mi>U</mi> <mn>4</mn></msub><mo>+</mo><msub><mi>U</mi> <mn>5</mn></msub></mrow><annotation encoding="application/x-tex">V_5 \cong U_1 + 3 U_2 + 2 U_3 + 3 U_4 + U_5</annotation></semantics></math></div>
+<p>The last representation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>5</mn></msub></mrow><annotation encoding="application/x-tex">V_5</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/regular+representation">regular representation</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mn>4</mn></msub></mrow><annotation encoding="application/x-tex">S_4</annotation></semantics></math> (because the <a class="existingWikiWord" href="/nlab/show/parabolic+subgroup">parabolic subgroup</a> is <a class="existingWikiWord" href="/nlab/show/trivial+group">trivial</a>). Since we know from general theory that the multiplicity of the irreducible <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">U_i</annotation></semantics></math> in the <a class="existingWikiWord" href="/nlab/show/regular+representation">regular representation</a> is its <a class="existingWikiWord" href="/nlab/show/dimension">dimension</a>, we get as a by-product the dimensions of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">U_i</annotation></semantics></math> from the expression for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mn>5</mn></msub></mrow><annotation encoding="application/x-tex">V_5</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>dim</mi><mo stretchy="false">(</mo><msub><mi>U</mi> <mn>1</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>,</mo><mspace width="thinmathspace"></mspace><mi>dim</mi><mo stretchy="false">(</mo><msub><mi>U</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>3</mn><mo>,</mo><mspace width="thinmathspace"></mspace><mi>dim</mi><mo stretchy="false">(</mo><msub><mi>U</mi> <mn>3</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mo>,</mo><mspace width="thinmathspace"></mspace><mi>dim</mi><mo stretchy="false">(</mo><msub><mi>U</mi> <mn>4</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>3</mn><mo>,</mo><mspace width="thinmathspace"></mspace><mi>dim</mi><mo stretchy="false">(</mo><msub><mi>U</mi> <mn>5</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">dim(U_1) = 1, \, dim(U_2) = 3, \, dim(U_3) = 2, \, dim(U_4) = 3, \, dim(U_5) = 1</annotation></semantics></math></div>
+<p>(the first of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">U_i</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/trivial+representation">trivial representation</a>, and the last <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>5</mn></msub></mrow><annotation encoding="application/x-tex">U_5</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/alternating+representation">alternating representation</a>).</p>
+
+<p>The row operations themselves can be assembled as the lower triangular matrix</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo>(</mo><mrow><mtable><mtr><mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd></mtr> <mtr><mtd><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd></mtr> <mtr><mtd><mn>1</mn></mtd> <mtd><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mtd> <mtd><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd></mtr> <mtr><mtd><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mtd> <mtd><mn>2</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>3</mn></mtd> <mtd><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex"> \left( \array
+{1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+-1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; -1 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; -1 &amp; -1 &amp; 1 &amp; 0 \\
+-1 &amp; 2 &amp; 1 &amp; -3 &amp; 1 }
+\right)
+</annotation></semantics></math></div>
+<p>and from the rows we read off the irreducible representations as “virtual” (i.e., <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℤ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math>-linear) combinations of the parabolically induced representations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V_i</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>1</mn></msub><mo>≅</mo><msub><mi>V</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">U_1 \cong V_1</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>2</mn></msub><mo>≅</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msub><mi>V</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>V</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">U_2 \cong -V_1 + V_2</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>3</mn></msub><mo>≅</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msub><mi>V</mi> <mn>2</mn></msub><mo>+</mo><msub><mi>V</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">U_3 \cong -V_2 + V_3</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>4</mn></msub><mo>≅</mo><msub><mi>V</mi> <mn>1</mn></msub><mo>−</mo><msub><mi>V</mi> <mn>2</mn></msub><mo>−</mo><msub><mi>V</mi> <mn>3</mn></msub><mo>+</mo><msub><mi>V</mi> <mn>4</mn></msub></mrow><annotation encoding="application/x-tex">U_4 \cong V_1 - V_2 - V_3 + V_4</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>5</mn></msub><mo>≅</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msub><mi>V</mi> <mn>1</mn></msub><mo>+</mo><mn>2</mn><msub><mi>V</mi> <mn>2</mn></msub><mo>+</mo><msub><mi>V</mi> <mn>3</mn></msub><mo>−</mo><mn>3</mn><msub><mi>V</mi> <mn>4</mn></msub><mo>+</mo><msub><mi>V</mi> <mn>5</mn></msub></mrow><annotation encoding="application/x-tex">U_5 \cong -V_1 + 2V_2 + V_3 - 3 V_4 + V_5</annotation></semantics></math></div>
+<p>which can be considered the result of the categorified Gram–Schmidt process.</p>
+
+<p>It follows from these representations that the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>V</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V_i</annotation></semantics></math> form a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℤ</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/linear+basis">linear basis</a> of the representation ring <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Rep</mi><mo stretchy="false">(</mo><msub><mi>S</mi> <mn>4</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Rep(S_4)</annotation></semantics></math>.</p>
+
+<p>Analogous statements hold for each symmetric group <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>S</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">S_n</annotation></semantics></math>.</p>
+
+<h2 id="related_entries">Related entries</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Hermite+normal+form">Hermite normal form</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Smith+normal+form">Smith normal form</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/matrix+analysis">matrix analysis</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<p>See also</p>
+
+<ul>
+<li>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram-Schmidt process</a></em></li>
+</ul>
+
+<p>The formulation via Gaussian elimination is due to</p>
+
+<ul>
+<li id="PursellTrimble91">Lyle Pursell, S. Y. Trimble, <em>Gram-Schmidt orthogonalization by Gauss Elimination</em>, The American Mathematical Monthly Vol. 98, No. 6 (1991), pp. 544-549 (<a href="https://www.jstor.org/stable/2324877">jstor:2324877</a>)</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on October 19, 2022 at 07:30:11.
+    See the <a href="/nlab/history/Gram-Schmidt+process" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Gram-Schmidt+process" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/8388/#Item_23">Discuss</a><span class="backintime"><a href="/nlab/revision/Gram-Schmidt+process/26" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Gram-Schmidt+process" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Gram-Schmidt+process" accesskey="S" class="navlink" id="history" rel="nofollow">History (26 revisions)</a>
+  <a href="/nlab/show/Gram-Schmidt+process/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Gram-Schmidt+process" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Gram-Schmidt+process" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

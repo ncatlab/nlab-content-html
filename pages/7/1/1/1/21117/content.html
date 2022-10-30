@@ -1,0 +1,1753 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      quantum error correction in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      quantum error correction
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/10901/#Item_37" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="quantum_systems">Quantum systems</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+logic">quantum logic</a></strong></p>
+
+<ul>
+<li>
+<p>(<a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent</a>) <a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/string+diagrams">string diagrams</a> in <a class="existingWikiWord" href="/nlab/show/finite+quantum+mechanics+in+terms+of+dagger-compact+categories">†-compact categories</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/tensor+networks">tensor networks</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bohr+topos">Bohr topos</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/order-theoretic+structure+in+quantum+mechanics">order-theoretic structure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+probability">quantum probability</a></p>
+</li>
+</ul>
+
+<p><br /></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+physics">quantum physics</a></strong></p>
+
+<ul>
+<li>
+<p>(<a class="existingWikiWord" href="/nlab/show/parameterized+quantum+systems">parameterized</a>) <a class="existingWikiWord" href="/nlab/show/quantum+systems">quantum systems</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Dyson+formula">Dyson formula</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/quantum+adiabatic+theorem">quantum adiabatic theorem</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Berry+phases">Berry phases</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+many-body+physics">quantum many-body physics</a></p>
+</li>
+
+<li>
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+field+theory">quantum field theory</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/functorial+quantum+field+theory">functorial quantum field theory</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/algebraic+quantum+field+theory">algebraic quantum field theory</a></p>
+
+<p>(<a class="existingWikiWord" href="/nlab/show/non-perturbative+quantum+field+theory">non-</a>)<a class="existingWikiWord" href="/nlab/show/perturbative+quantum+field+theory">perturbative quantum field theory</a></p>
+</li>
+
+<li>
+<p><strong><a class="existingWikiWord" href="/nlab/show/solid+state+physics">solid state physics</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/quantum+material">quantum material</a></p>
+
+<p>(<a class="existingWikiWord" href="/nlab/show/topological+phases+of+matter">topological</a>) <a class="existingWikiWord" href="/nlab/show/phases+of+matter">phases of matter</a></p>
+</li>
+</ul>
+
+<p><br /></p>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+probability+theory">quantum probability theory</a> – <a class="existingWikiWord" href="/nlab/show/observables">observables</a> and <a class="existingWikiWord" href="/nlab/show/states">states</a></strong></p>
+
+<ul>
+<li>
+<p><strong><a class="existingWikiWord" href="/nlab/show/states">states</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/classical+state">classical state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+state">quantum state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/space+of+states+%28in+geometric+quantization%29">space of states (in geometric quantization)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/state+on+a+star-algebra">state on a star-algebra</a>, <a class="existingWikiWord" href="/nlab/show/quasi-state">quasi-state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/qbit">qbit</a>, <a class="existingWikiWord" href="/nlab/show/Bell+state">Bell state</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/dimer">dimer</a>, <a class="existingWikiWord" href="/nlab/show/tensor+network+state">tensor network state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+state+preparation">quantum state preparation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/probability+amplitude">probability amplitude</a>, <a class="existingWikiWord" href="/nlab/show/quantum+fluctuation">quantum fluctuation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/pure+state">pure state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/wave+function">wave function</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bra-ket">bra-ket</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bell+state">Bell state</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+superposition">quantum superposition</a>, <a class="existingWikiWord" href="/nlab/show/quantum+interference">quantum interference</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+entanglement">quantum entanglement</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/Born+rule">Born rule</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/wave+function+collapse">wave function collapse</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/measurement+problem">measurement problem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/superselection+sector">superselection sector</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/mixed+state">mixed state</a>, <a class="existingWikiWord" href="/nlab/show/density+matrix">density matrix</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/entanglement+entropy">entanglement entropy</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/holographic+entanglement+entropy">holographic entanglement entropy</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/coherent+quantum+state">coherent quantum state</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/ground+state">ground state</a>, <a class="existingWikiWord" href="/nlab/show/excited+state">excited state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quasi-free+state">quasi-free state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Fock+space">Fock space</a>, <a class="existingWikiWord" href="/nlab/show/second+quantization">second quantization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum">vacuum</a>, <a class="existingWikiWord" href="/nlab/show/vacuum+state">vacuum state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Hadamard+state">Hadamard state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+diagram">vacuum diagram</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+expectation+value">vacuum expectation value</a>, <a class="existingWikiWord" href="/nlab/show/vacuum+amplitude">vacuum amplitude</a>, <a class="existingWikiWord" href="/nlab/show/vacuum+fluctuation">vacuum fluctuation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+energy">vacuum energy</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+polarization">vacuum polarization</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/interacting+vacuum">interacting vacuum</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/thermal+vacuum">thermal vacuum</a>, <a class="existingWikiWord" href="/nlab/show/KMS+state">KMS state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vacuum+stability">vacuum stability</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/false+vacuum">false vacuum</a>, <a class="existingWikiWord" href="/nlab/show/tachyon">tachyon</a>, <a class="existingWikiWord" href="/nlab/show/Coleman-De+Luccia+instanton">Coleman-De Luccia instanton</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/theta+vacuum">theta vacuum</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/perturbative+string+theory+vacuum">perturbative string theory vacuum</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/non-geometric+string+theory+vacuum">non-geometric string theory vacuum</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/landscape+of+string+theory+vacua">landscape of string theory vacua</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entangled+state">entangled state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/tensor+network+state">tensor network state</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/matrix+product+state">matrix product state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/tree+tensor+network+state">tree tensor network state</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><strong><a class="existingWikiWord" href="/nlab/show/observables">observables</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+observable">quantum observable</a>, <a class="existingWikiWord" href="/nlab/show/beable">beable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/algebra+of+observables">algebra of observables</a>, <a class="existingWikiWord" href="/nlab/show/star-algebra">star-algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bohr+topos">Bohr topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+operator+%28in+geometric+quantization%29">quantum operator (in geometric quantization)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+operation">quantum operation</a>, <a class="existingWikiWord" href="/nlab/show/quantum+effect">quantum effect</a>, <a class="existingWikiWord" href="/nlab/show/effect+algebra">effect algebra</a></p>
+</li>
+
+<li>
+<p>in <a class="existingWikiWord" href="/nlab/show/quantum+field+theory">quantum field theory</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/local+observable">local observable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/polynomial+observable">polynomial observable</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/linear+observable">linear observable</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/field+observable">field observable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/regular+observable">regular observable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/microcausal+observable">microcausal observable</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/normal-ordered+product">normal-ordered product</a>, <a class="existingWikiWord" href="/nlab/show/time-ordered+products">time-ordered products</a>, <a class="existingWikiWord" href="/nlab/show/retarded+product">retarded product</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Wick+algebra">Wick algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/scattering+amplitude">scattering amplitude</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/interacting+field+algebra+of+observables">interacting field algebra of observables</a>, <a class="existingWikiWord" href="/nlab/show/Bogoliubov%27s+formula">Bogoliubov's formula</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/GNS+construction">GNS construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/theorems">theorems</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/order-theoretic+structure+in+quantum+mechanics">order-theoretic structure in quantum mechanics</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gleason%27s+theorem">Gleason's theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Alfsen-Shultz+theorem">Alfsen-Shultz theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Harding-D%C3%B6ring-Hamhalter+theorem">Harding-Döring-Hamhalter theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kochen-Specker+theorem">Kochen-Specker theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Nuiten%27s+lemma">Nuiten's lemma</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Wigner%27s+theorem">Wigner's theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/no-cloning+theorem">no-cloning theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bell%27s+theorem">Bell's theorem</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p><br /></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+information">quantum information</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+operation">quantum operation</a>, <a class="existingWikiWord" href="/nlab/show/quantum+channel">quantum channel</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entanglement">entanglement</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entanglement+entropy">entanglement entropy</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/holographic+entanglement+entropy">holographic entanglement entropy</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/topological+entanglement+entropy">topological entanglement entropy</a></p>
+</li>
+</ul>
+
+<p><br /></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/topological+quantum+computation">topological quantum computation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+programming+language">quantum programming language</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+error+correction">quantum error correction</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/HaPPY+code">HaPPY code</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Majorana+dimer+code">Majorana dimer code</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>quantum algorithms:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grover%27s+algorithm">Grover's algorithm</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Shor%27s+algorithm">Shor's algorithm</a></p>
+</li>
+</ul>
+</div></div>
+
+<h4 id="computation">Computation</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/constructive+mathematics">constructive mathematics</a></strong>, <strong><a class="existingWikiWord" href="/nlab/show/realizability">realizability</a></strong>, <strong><a class="existingWikiWord" href="/nlab/show/computability">computability</a></strong></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/intuitionistic+mathematics">intuitionistic mathematics</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a>, <a class="existingWikiWord" href="/nlab/show/proofs+as+programs">proofs as programs</a>, <a class="existingWikiWord" href="/nlab/show/computational+trinitarianism">computational trinitarianism</a></p>
+
+<h3 id="constructive_mathematics">Constructive mathematics</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/topos">topos</a>, <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-topos">homotopy topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/canonical+form">canonical form</a>, <a class="existingWikiWord" href="/nlab/show/univalence">univalence</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bishop+set">Bishop set</a>, <a class="existingWikiWord" href="/nlab/show/h-set">h-set</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/decidable+equality">decidable equality</a>, <a class="existingWikiWord" href="/nlab/show/decidable+subset">decidable subset</a>, <a class="existingWikiWord" href="/nlab/show/inhabited+set">inhabited set</a>, <a class="existingWikiWord" href="/nlab/show/subsingleton">subsingleton</a></p>
+</li>
+</ul>
+
+<h3 id="realizability">Realizability</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/realizability+topos">realizability topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/realizability+model">realizability model</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/realizability+interpretation">realizability interpretation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/effective+topos">effective topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kleene%27s+first+algebra">Kleene's first algebra</a>, <a class="existingWikiWord" href="/nlab/show/Kleene%27s+second+algebra">Kleene's second algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/function+realizability">function realizability</a></p>
+</li>
+</ul>
+
+<h3 id="computability">Computability</h3>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computability">computability</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computation">computation</a>, <a class="existingWikiWord" href="/nlab/show/computational+type+theory">computational type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+function">computable function</a>, <a class="existingWikiWord" href="/nlab/show/partial+recursive+function">partial recursive function</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+analysis">computable analysis</a>, <a class="existingWikiWord" href="/nlab/show/constructive+analysis">constructive analysis</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Type+Two+Theory+of+Effectivity">Type Two Theory of Effectivity</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+function+%28analysis%29">computable function (analysis)</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/exact+real+computer+arithmetic">exact real computer arithmetic</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+set">computable set</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/persistent+homology">persistent homology</a>, <a class="existingWikiWord" href="/nlab/show/effective+homology">effective homology</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/computable+physics">computable physics</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Church-Turing+thesis">Church-Turing thesis</a></p>
+</li>
+</ul>
+</div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<ul>
+<li><a href='#general'>General</a></li>
+<li><a href='#quantum_error_correcting_codes'>Quantum error correcting codes</a></li>
+</ul>
+<li><a href='#example'>Example</a></li>
+<ul>
+<li><a href='#specific_examples'>Specific examples</a></li>
+<ul>
+<li><a href='#A3FoldqtritCode'>A 3-qutrit code</a></li>
+<li><a href='#the_happy_code'>The HaPPY code</a></li>
+<li><a href='#majorana_dimer_codes'>Majorana dimer codes</a></li>
+</ul>
+<li><a href='#classes_of_examples'>Classes of examples</a></li>
+</ul>
+<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+<ul>
+<li><a href='#general_2'>General</a></li>
+<li><a href='#experimental_realization'>Experimental realization</a></li>
+<li><a href='#ReferencesViaHolographicTensorNetworks'>Via holographic tensor networks</a></li>
+</ul>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<h3 id="general">General</h3>
+
+<p><em>Quantum error correction</em> is concerned with ensuring the robustness of <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a> against <a class="existingWikiWord" href="/nlab/show/noise">noise</a> (as in classical <a class="existingWikiWord" href="/nlab/show/error+correction">error correction</a>) and particularly against <a class="existingWikiWord" href="/nlab/show/quantum+noise">quantum noise</a> and <a class="existingWikiWord" href="/nlab/show/quantum+decoherence">quantum decoherence</a>.</p>
+
+<p>From <a href="#FerrisPoulin13">Ferris &amp; Poulin 2013</a>:</p>
+
+<blockquote>
+<p>The basic principle of quantum error correction (QEC) is to encode information into the long-range correlations of <a class="existingWikiWord" href="/nlab/show/quantum+entanglement">entangled</a> quantum many-body states in such a way that it cannot be accessed locally. When a local error affects the system, it leaves a detectable imprint—called the error syndrome. The decoding problem consists in inferring the recovery with greatest probability of success given the error syndrome. In general, this is a hard problem, but for well-chosen codes, it can be solved efficiently either exactly or heuristically.</p>
+</blockquote>
+
+<p>From <a href="#Steane06">Steane 06</a>:</p>
+
+<blockquote>
+<p>Error correction is especially important in quantum computers, because efficient quantum algorithms make use of large scale quantum interference, which is fragile, i.e. sensitive to imprecision in the computer and to unwanted coupling between the computer and the rest of the world. This makes large scale quantum computation so difficult as to be practically impossible unless error correction methods are used. Indeed, before quantum error correction was discovered, it seemed that this fragility would forbid large scale quantum computation. The ability to correct a quantum computer efficiently without disturbing the coherence of the computation is highly non-intuitive, and was thought more or less impossible. The discovery of powerful error correction methods therefore caused much excitement, since it converted large scale quantum computation from a practical impossibility to a possibility.</p>
+</blockquote>
+
+<p>From <a href="#DevittNemotoMunro09">Devitt, Nemoto &amp; Munro 2009</a>:</p>
+
+<blockquote>
+<p>Starting in 1995, several papers appeared, in rapid succession, proposing codes which were appropriate to perform error correction on quantum data (<a href="#Shor95">Sho95</a>; <a href="#Steane96">Ste96a</a>; <a href="#CalderbankShor96">CS96</a>; <a href="#LMPZ96">LMPZ96</a>; <a href="#BDSW96">BSW96</a>). This was a key theoretical development needed to convince the general community that quantum computation was indeed a possibility. Since this initial introduction, the progress in this field has been extensive.</p>
+</blockquote>
+
+<p>From <a href="#ZhuCross20">Zhu &amp; Cross 20</a>:</p>
+
+<blockquote>
+<p>Although we are currently in an era of quantum computers with tens of noisy qubits, it is likely that a decisive, practical quantum advantage can only be achieved with a scalable, fault-tolerant, error-corrected quantum computer. Therefore, development of quantum error correction is one of the central themes of the next five to ten years.</p>
+</blockquote>
+
+<p><a href="#Lucero21">Lucero 21</a>:</p>
+
+<blockquote>
+<p>Within the decade, Google aims to build a useful, error-corrected quantum computer. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>⋯</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\cdots]</annotation></semantics></math> Our journey to build an error-corrected quantum computer within the decade includes several scientific milestones, including building an error-corrected logical qubit.</p>
+</blockquote>
+
+<p>Specifically on <a class="existingWikiWord" href="/nlab/show/holographic+tensor+network">holographic quantum error correcting codes</a> (see references <a href="#ReferencesViaHolographicTensorNetworks">below</a>):</p>
+
+<p>From <a href="#Harlow20">Harlow 20</a>:</p>
+
+<blockquote>
+<p>The codes provided by AdS/CFT often come close to saturating theoretical bounds on the performance of quantum codes. It seems AdS/CFT may be a tool for discovering better quantum cryptography?</p>
+</blockquote>
+
+<p><a href="#WVSB20">WVSB 20</a>:</p>
+
+<blockquote>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/holographic+tensor+network">holographic codes</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math> could be promising candidates to circumvent our results and could possibly realise a universal set of unitary implementations of logical operators.</p>
+</blockquote>
+
+<p>From <a href="#CDCW21">CDCW 21</a>:</p>
+
+<blockquote>
+<p>There are a number of reasons to suspect that <a class="existingWikiWord" href="/nlab/show/holographic+tensor+network">holographic codes</a> may be of practical use for quantum computing.</p>
+
+<p>Holographic codes can admit erasure thresholds comparable to that of the widely-studied surface code, and likewise for their threshold against Pauli errors. Their holographic structure also naturally leads to an organization of encoded qubits into a hierarchy of levels of protection from errors, which could be useful for applications which call for many qubits withvarying levels of protection. In particular, this is reminiscent of many schemes for magic state distillation – and indeed, the concatenated codes utilized for magic state distillation share a similar hierarchical structure to holographic codes. The layered structure of holographic codes is also reminiscent of memory architectures in classical computers, where it is useful to have different levels of short- and long-term memory. Although these codes have some notable drawbacks, in particular holographic stabilizer codes require nonlocal stabilizer generators, other codes such as concatenated codes suffer similar drawbacks and have still proven to be useful. Conversely, the stringent requirement of non-local stabilizer generators allows holographic codes to protect many more qubits than a topological code and in fact attain a finite nonzero encoding rate, which is typically not possible for topological codes. Nonetheless, many open questions remain about the usefulness of holographic codes for fault-tolerant quantum computing.</p>
+</blockquote>
+
+<h3 id="quantum_error_correcting_codes">Quantum error correcting codes</h3>
+
+<p>The simple but important special case of passive correction of erasures may be handled by <em>quantum error correcting codes</em>:</p>
+
+<p>Recall that a classical <a class="existingWikiWord" href="/nlab/show/error+correcting+code">error correcting code</a> on a <a class="existingWikiWord" href="/nlab/show/finite+set">finite set</a> of states <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is, typically, a choice of <a class="existingWikiWord" href="/nlab/show/injection">injection</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> into some larger set, typically a <a class="existingWikiWord" href="/nlab/show/Cartesian+power">Cartesian power</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>L</mi><mover><mo>↪</mo><mi>code</mi></mover><mi>P</mi><mo>≔</mo><mi>H</mi><mo>×</mo><mi>⋯</mi><mo>×</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">
+  L \overset{code}{\hookrightarrow} P \coloneqq H \times \cdots \times H
+
+</annotation></semantics></math></div>
+<p>(often considered in the form of <a class="existingWikiWord" href="/nlab/show/linear+codes">linear codes</a>, but classical nonetheless). In <a class="existingWikiWord" href="/nlab/show/quantum+physics">quantum physics</a> the <a class="existingWikiWord" href="/nlab/show/Cartesian+product">Cartesian product</a> of sets of states is replaced by the <a class="existingWikiWord" href="/nlab/show/tensor+product+of+vector+spaces">tensor product</a> of <a class="existingWikiWord" href="/nlab/show/Hilbert+spaces">Hilbert spaces</a>.</p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℒ</mi></mrow><annotation encoding="application/x-tex">\mathcal{L}</annotation></semantics></math> a given <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> of <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a> (<a class="existingWikiWord" href="/nlab/show/finite+dimensional+vector+space">finite-dimensional</a> in practice), a <em>quantum error correcting code</em> is a choice of <a class="existingWikiWord" href="/nlab/show/linear+subspace">linear embedding</a> (the <em>code subspace</em>) of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math> into a larger Hilbert spaces, often an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-fold <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a> of copies of some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><munder><mi>ℋ</mi><mfrac linethickness="0"><mrow><mstyle mathcolor="blue"><mi>logical</mi></mstyle></mrow><mrow><mstyle mathcolor="blue"><mi>qbits</mi></mstyle></mrow></mfrac></munder></mtd> <mtd><munderover><mo>↪</mo><mfrac linethickness="0"><mrow><mstyle mathcolor="blue"><mi>code</mi></mstyle></mrow><mrow><mstyle mathcolor="blue"><mi>subspace</mi></mstyle></mrow></mfrac><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>code</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></munderover></mtd> <mtd><mi>𝒫</mi><mo>≔</mo><munder><mrow><msup><mi>ℋ</mi> <mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo>⊗</mo><mi>⋯</mi><mo>⊗</mo><msup><mi>ℋ</mi> <mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup></mrow><mstyle mathcolor="blue"><mi>physical</mi><mspace width="thickmathspace"></mspace><mi>qbits</mi></mstyle></munder></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+    \underset{
+     {\color{blue}logical}
+     \atop
+     {\color{blue}qbits}
+    }{
+      \mathcal{H}
+    }
+    &amp; 
+      \underoverset
+        {{\color{blue}code} \atop {\color{blue} subspace}}
+        {\;\;\;code\;\;\;}
+        {
+        \hookrightarrow
+      }
+    &amp;
+    \mathcal{P}
+    \coloneqq
+    \underset{
+      \color{blue}
+      physical\;qbits
+    }{
+    \mathcal{H}^{(1)} 
+      \otimes
+        \cdots
+      \otimes
+    \mathcal{H}^{(n)}  
+    }
+  }
+  \,,
+
+</annotation></semantics></math></div>
+<p>such that the information in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>code</mi><mo stretchy="false">(</mo><mi>ψ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">code(\psi)</annotation></semantics></math> in some of the tensor factors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>ℋ</mi> <mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\mathcal{H}^{(i)}</annotation></semantics></math> can be lost without obstructing the reconstruction of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi></mrow><annotation encoding="application/x-tex">\psi</annotation></semantics></math> (e.g. <a href="#RowellWang17">Rowell &amp; Wang 17, Sec. 3.2.3</a>).</p>
+
+<p>(Often one demands additional properties, such as that a given set of <a class="existingWikiWord" href="/nlab/show/linear+operators">linear operators</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>O</mi></mrow><annotation encoding="application/x-tex">O</annotation></semantics></math> (<a class="existingWikiWord" href="/nlab/show/quantum+observables">quantum observables</a>) acting on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi><mo>∈</mo><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\psi \in \mathcal{H}</annotation></semantics></math> are implemented on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>code</mi><mo stretchy="false">(</mo><mi>ψ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">code(\psi)</annotation></semantics></math> by combionations of operators that act non-trivially only on some of the tensor factors.)</p>
+
+<p>While this is superficially analogous to a classical <a class="existingWikiWord" href="/nlab/show/error+correcting+code">error correcting code</a>, the crucial and subtle difference is that quantum error correction codes thus take place in a non-<a class="existingWikiWord" href="/nlab/show/cartesian+monoidal+category">Cartesian</a> <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric</a> <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a>. For this reason, effects of <a class="existingWikiWord" href="/nlab/show/quantum+entanglement">quantum entanglement</a> play a paramount role in quantum error correction codes.</p>
+
+<h2 id="example">Example</h2>
+
+<h3 id="specific_examples">Specific examples</h3>
+
+<h4 id="A3FoldqtritCode">A 3-qutrit code</h4>
+
+<p>The following is a simple illustrative example from <a href="#CleveGottesmanLo99">Cleve, Gottesman &amp; Lo 99, p. 1-2</a>:</p>
+
+<p>Consider a <a class="existingWikiWord" href="/nlab/show/quantum+system">quantum system</a> with a 3-dimensional <a class="existingWikiWord" href="/nlab/show/space+of+quantum+states">space of quantum states</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><msup><mi>ℂ</mi> <mn>3</mn></msup><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>Span</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mrow><mo>|</mo><mn>0</mn><mo>⟩</mo></mrow><mo>,</mo><mspace width="thinmathspace"></mspace><mrow><mo>|</mo><mn>1</mn><mo>⟩</mo></mrow><mo>,</mo><mspace width="thinmathspace"></mspace><mrow><mo>|</mo><mn>2</mn><mo>⟩</mo></mrow><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{H} 
+    \;\coloneqq\; 
+  \mathbb{C}^3 
+    \;=\; 
+  Span\big( 
+    \left\vert 0 \right\rangle,\,
+    \left\vert 1 \right\rangle,\,
+    \left\vert 2 \right\rangle
+  \big)
+
+</annotation></semantics></math></div>
+<p>and consider a code space inside 3 copies of this space given by the following <a class="existingWikiWord" href="/nlab/show/linear+map">linear map</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>ℋ</mi></mtd> <mtd><mover><mo>⟶</mo><mrow><mphantom><mi>AAAA</mi></mphantom><mi>code</mi><mphantom><mi>AAAA</mi></mphantom></mrow></mover></mtd> <mtd><msup><mi>ℋ</mi> <mrow><mo>⊗</mo><mn>3</mn></mrow></msup></mtd></mtr> <mtr><mtd><mrow><mtable><mtr><mtd></mtd> <mtd><mi>α</mi><mrow><mo>|</mo><mn>0</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mo lspace="verythinmathspace" rspace="0em">+</mo></mtd> <mtd><mi>β</mi><mrow><mo>|</mo><mn>1</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mo lspace="verythinmathspace" rspace="0em">+</mo></mtd> <mtd><mi>γ</mi><mrow><mo>|</mo><mn>2</mn><mo>⟩</mo></mrow></mtd></mtr></mtable></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mtable><mtr><mtd></mtd> <mtd><mi>α</mi><mstyle displaystyle="false"><mfrac><mn>1</mn><msqrt><mn>3</mn></msqrt></mfrac></mstyle><mo maxsize="1.2em" minsize="1.2em">(</mo><mrow><mo>|</mo><mn>000</mn><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>|</mo><mn>111</mn><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>|</mo><mn>222</mn><mo>⟩</mo></mrow><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd><mo lspace="verythinmathspace" rspace="0em">+</mo></mtd> <mtd><mi>β</mi><mstyle displaystyle="false"><mfrac><mn>1</mn><msqrt><mn>3</mn></msqrt></mfrac></mstyle><mo maxsize="1.2em" minsize="1.2em">(</mo><mrow><mo>|</mo><mn>012</mn><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>|</mo><mn>120</mn><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>|</mo><mn>201</mn><mo>⟩</mo></mrow><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd><mo lspace="verythinmathspace" rspace="0em">+</mo></mtd> <mtd><mi>γ</mi><mstyle displaystyle="false"><mfrac><mn>1</mn><msqrt><mn>3</mn></msqrt></mfrac></mstyle><mo maxsize="1.2em" minsize="1.2em">(</mo><mrow><mo>|</mo><mn>021</mn><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>|</mo><mn>102</mn><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>|</mo><mn>210</mn><mo>⟩</mo></mrow><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr></mtable></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathcal{H}
+    &amp;
+    \overset{
+      \phantom{AAAA}
+      code
+      \phantom{AAAA}
+    }{\longrightarrow}&amp;
+    \mathcal{H}^{\otimes 3}
+    \\
+    \array{
+      &amp; \alpha \left\vert 0 \right\rangle
+      \\
+      + &amp; \beta \left\vert 1 \right\rangle
+      \\
+      + &amp; \gamma \left\vert 2 \right\rangle
+    }
+    &amp;
+      \mapsto
+    &amp;
+    \array{
+      &amp; \alpha 
+        \tfrac{1}{\sqrt{3}}
+        \big( 
+          \left\vert 000 \right\rangle 
+          +
+          \left\vert 111 \right\rangle 
+          +
+          \left\vert 222 \right\rangle 
+        \big)
+      \\
+      + &amp; \beta
+        \tfrac{1}{\sqrt{3}}
+        \big( 
+          \left\vert 012 \right\rangle 
+          +
+          \left\vert 120 \right\rangle 
+          +
+          \left\vert 201 \right\rangle 
+        \big)
+      \\
+      + &amp; \gamma 
+        \tfrac{1}{\sqrt{3}}
+        \big( 
+          \left\vert 021 \right\rangle 
+          +
+          \left\vert 102 \right\rangle 
+          +
+          \left\vert 210 \right\rangle 
+        \big)
+    }
+  }
+
+</annotation></semantics></math></div>
+<p>This code corrects errors consisting of the loss of one of the three copies, in the following sense:</p>
+
+<p>There is a <a class="existingWikiWord" href="/nlab/show/linear+operator">linear operator</a> acting only on two of the three copies, explicitly given (<a href="#ADH14">ADH 14 (3.6)</a>) by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>ℋ</mi><mo>⊗</mo><mi>ℋ</mi></mtd> <mtd><mover><mo>⟶</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msup><mi>U</mi> <mrow><mo stretchy="false">(</mo><mn>12</mn><mo stretchy="false">)</mo></mrow></msup><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover></mtd> <mtd><mi>ℋ</mi><mo>⊗</mo><mi>ℋ</mi></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>00</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>00</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>01</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>12</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>02</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>21</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>10</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>22</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>11</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>01</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>12</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>10</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>20</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>11</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>21</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>20</mn><mo>⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo>|</mo><mn>22</mn><mo>⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>|</mo><mn>02</mn><mo>⟩</mo></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathcal{H} \otimes \mathcal{H}
+    &amp;
+    \overset{
+      \;\;\;\;\;\;
+      U^{(12)}
+      \;\;\;\;\;\;
+    }{\longrightarrow}
+    &amp;
+    \mathcal{H} \otimes \mathcal{H}
+    \\
+    \left\vert 00 \right\rangle &amp;\mapsto&amp; \left\vert 00 \right\rangle
+    \\
+    \left\vert 01 \right\rangle &amp;\mapsto&amp; \left\vert 12 \right\rangle
+    \\
+    \left\vert 02 \right\rangle &amp;\mapsto&amp; \left\vert 21 \right\rangle
+    \\
+    \left\vert 10 \right\rangle &amp;\mapsto&amp; \left\vert 22 \right\rangle
+    \\
+    \left\vert 11 \right\rangle &amp;\mapsto&amp; \left\vert 01 \right\rangle
+    \\
+    \left\vert 12 \right\rangle &amp;\mapsto&amp; \left\vert 10 \right\rangle
+    \\
+    \left\vert 20 \right\rangle &amp;\mapsto&amp; \left\vert 11 \right\rangle
+    \\
+    \left\vert 21 \right\rangle &amp;\mapsto&amp; \left\vert 20 \right\rangle
+    \\
+    \left\vert 22 \right\rangle &amp;\mapsto&amp; \left\vert 02 \right\rangle
+  }
+
+</annotation></semantics></math></div>
+<p>such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>U</mi> <mrow><mo stretchy="false">(</mo><mn>12</mn><mo stretchy="false">)</mo></mrow></msup><mo>⊗</mo><msup><mi>id</mi> <mrow><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow></msup><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>∘</mo><mi>code</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mrow><mo>|</mo><mi>ψ</mi><mo>⟩</mo></mrow><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mrow><mo>|</mo><mi>ψ</mi><mo>⟩</mo></mrow><mspace width="thinmathspace"></mspace><mo>⊗</mo><mspace width="thinmathspace"></mspace><mstyle displaystyle="false"><mfrac><mn>1</mn><msqrt><mn>3</mn></msqrt></mfrac></mstyle><mrow><mo>(</mo><mrow><mo>|</mo><mn>00</mn><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>|</mo><mn>11</mn><mo>⟩</mo></mrow><mo>+</mo><mrow><mo>|</mo><mn>22</mn><mo>⟩</mo></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">
+  \big( U^{(12)} \otimes id^{(3)} \big)
+  \circ
+  code
+  \big(
+    \left\vert \psi \right\rangle
+  \big)
+  \;\; = \;\;
+  \left\vert \psi \right\rangle
+  \,
+  \otimes  
+  \,
+  \tfrac{1}{\sqrt{3}}
+  \left(
+    \left\vert 00 \right\rangle
+    +
+    \left\vert 11 \right\rangle
+    +
+    \left\vert 22 \right\rangle
+  \right)
+
+</annotation></semantics></math></div>
+<h4 id="the_happy_code">The HaPPY code</h4>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/HaPPY+code">HaPPY code</a> is a <a class="existingWikiWord" href="/nlab/show/quantum+error+correction+code">quantum error correction code</a> (a class of such codes really, indexed by a “cutoff” <a class="existingWikiWord" href="/nlab/show/natural+number">natural number</a>) which is thought to exhibit characteristic properties akin to the encoding of <a class="existingWikiWord" href="/nlab/show/bulk">bulk</a>-<a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a> by <a class="existingWikiWord" href="/nlab/show/boundary+field+theory">boundary</a>-states expected in the <a class="existingWikiWord" href="/nlab/show/AdS%2FCFT+correspondence">AdS/CFT correspondence</a>. In particular, the HaPPY code (or rather the <a class="existingWikiWord" href="/nlab/show/tensor+network">tensor network</a> that defines it) exhibits a discretized form of the <a class="existingWikiWord" href="/nlab/show/Ryu-Takayanagi+formula">Ryu-Takayanagi formula</a> for <a class="existingWikiWord" href="/nlab/show/holographic+entanglement+entropy">holographic entanglement entropy</a>.</p>
+
+<p>Concretely, the the HaPPY <a class="existingWikiWord" href="/nlab/show/code+subspace">code subspace</a> is the <a class="existingWikiWord" href="/nlab/show/image">image</a> of the <a class="existingWikiWord" href="/nlab/show/linear+map">linear map</a> formed by:</p>
+<div class="float_right_image" style="margin: -40px 0px 20px 10px">
+  <figure style="margin: 0 0 0 0">
+<img src="/nlab/files/HaPPYCodeTesselation.jpg" width="440px" />
+<figcaption style="text-align: center">From <a href="#Harlow18">Harlow 18</a></figcaption>
+</figure>
+</div>
+<ol>
+<li>
+<p>picking a <a class="existingWikiWord" href="/nlab/show/perfect+tensor">perfect tensor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/rank">rank</a> 6;</p>
+</li>
+
+<li>
+<p>picking a finite cutoff of the <a class="existingWikiWord" href="/nlab/show/pentagon">pentagonal</a> <a class="existingWikiWord" href="/nlab/show/tesselation">tesselation</a> of the <a class="existingWikiWord" href="/nlab/show/hyperbolic+plane">hyperbolic plane</a>;</p>
+</li>
+
+<li>
+<p>regarding its <a class="existingWikiWord" href="/nlab/show/Poincar%C3%A9+duality">Poincaré dual</a> <a class="existingWikiWord" href="/nlab/show/graph">graph</a> as a <a class="existingWikiWord" href="/nlab/show/tensor+network">tensor network</a> (<a class="existingWikiWord" href="/nlab/show/string+diagram">string diagram</a> in <a class="existingWikiWord" href="/nlab/show/finite-dimensional+vector+spaces">finite-dimensional vector spaces</a>) by</p>
+
+<ol>
+<li>
+<p>assigning <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> to each <a class="existingWikiWord" href="/nlab/show/vertex">vertex</a> at the center of the <a class="existingWikiWord" href="/nlab/show/pentagons">pentagons</a> (show in blue), with 5 of its indices contracted with its neighbours in the hyperbolic plane,</p>
+</li>
+
+<li>
+<p>and its 6th uncontracted index remaining as an input (shown in red);</p>
+</li>
+</ol>
+</li>
+
+<li>
+<p>regarding the uncontracted edges at the cutoff boundary as output (shown in white)</p>
+</li>
+</ol>
+
+<p>and thus as a <a class="existingWikiWord" href="/nlab/show/linear+map">linear map</a> from the <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a> over the <a class="existingWikiWord" href="/nlab/show/bulk">bulk</a>-<a class="existingWikiWord" href="/nlab/show/vertices">vertices</a> to the <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a> over the edges sticking out over the boundary.</p>
+
+<h4 id="majorana_dimer_codes">Majorana dimer codes</h4>
+
+<p>See at <em><a class="existingWikiWord" href="/nlab/show/Majorana+dimer+code">Majorana dimer code</a></em>.</p>
+
+<h3 id="classes_of_examples">Classes of examples</h3>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/stabilizer+code">stabilizer code</a></li>
+</ul>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/error+correcting+code">error correcting code</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+entanglement">quantum entanglement</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/entanglement+entropy">entanglement entropy</a>, <a class="existingWikiWord" href="/nlab/show/holographic+entanglement+entropy">holographic entanglement entropy</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+computing">quantum computing</a>, <a class="existingWikiWord" href="/nlab/show/topological+quantum+computing">topological quantum computing</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/quantum+secret+sharing">quantum secret sharing</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/tensor+network">tensor network</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<h3 id="general_2">General</h3>
+
+<p>The idea of quantum encryption based on the <a class="existingWikiWord" href="/nlab/show/no-cloning+theorem">no-cloning theorem</a> originates with:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Stephen+Wiesner">Stephen Wiesner</a>, <em>Conjugate Coding</em>, circulated in the 1960s, finally published in ACM SIGACT News <strong>15</strong> 1 (1983) 78–88 (<a href="http://users.cms.caltech.edu/~vidick/teaching/120_qcrypto/wiesner.pdf">original pdf</a>, <a href="https://doi.org/10.1145/1008908.1008920">doi:10.1145/1008908.1008920</a>)</li>
+</ul>
+
+<p>Original articles on quantum error correcting codes:</p>
+
+<ul>
+<li id="Shor95">
+<p><a class="existingWikiWord" href="/nlab/show/Peter+W.+Shor">Peter W. Shor</a>, <em>Scheme for reducing decoherence in quantum computer memory</em>, Phys. Rev. A 52, R2493(R) 1995 (<a href="https://doi.org/10.1103/PhysRevA.52.R2493">doi:10.1103/PhysRevA.52.R2493</a>)</p>
+</li>
+
+<li id="Steane96">
+<p><a class="existingWikiWord" href="/nlab/show/Andrew+M.+Steane">Andrew M. Steane</a>, <em>Error Correcting Codes in Quantum Theory</em>, Phys. Rev. Lett. 77, 793 1996 (<a href="https://doi.org/10.1103/PhysRevLett.77.793">doi:10.1103/PhysRevLett.77.793</a>)</p>
+</li>
+
+<li id="CalderbankShor96">
+<p><a class="existingWikiWord" href="/nlab/show/Robert+Calderbank">Robert Calderbank</a>, <a class="existingWikiWord" href="/nlab/show/Peter+W.+Shor">Peter W. Shor</a>, <em>Good Quantum Error-Correcting Codes Exist</em>, Phys. Rev. A, Vol. 54, No. 2, pp. 1098-1106, 1996 (<a href="https://doi.org/10.1103/PhysRevA.54.1098">doi:10.1103/PhysRevA.54.1098</a>)</p>
+</li>
+
+<li id="LMPZ96">
+<p><a class="existingWikiWord" href="/nlab/show/Raymond+Laflamme">Raymond Laflamme</a>, Cesar Miquel, Juan Pablo Paz, <a class="existingWikiWord" href="/nlab/show/Wojciech+H.+Zurek">Wojciech H. Zurek</a>, <em>Perfect Quantum Error Correction Code</em>, Phys. Rev. Lett., 77:198, 1996 (<a href="https://arxiv.org/abs/quant-ph/9602019">arXiv:quant-ph/9602019</a>)</p>
+</li>
+
+<li id="BDSW96">
+<p>Charles H. Bennett, David P. DiVincenzo, John A. Smolin, William K. Wootters, <em>Mixed State Entanglement and Quantum Error Correction</em>, Phys. Rev. A54:3824-3851, 1996 (<a href="https://doi.org/10.1103/PhysRevA.54.3824">doi:10.1103/PhysRevA.54.3824</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Andrew+M.+Steane">Andrew M. Steane</a>, <em>Multiple Particle Interference and Quantum Error Correction</em>, Proc. Roy. Soc. Lond. A452 (1996) 2551 (<a href="https://arxiv.org/abs/quant-ph/9601029">arXiv:quant-ph/9601029</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Emanuel+Knill">Emanuel Knill</a>, <a class="existingWikiWord" href="/nlab/show/Raymond+Laflamme">Raymond Laflamme</a>, <em>A Theory of Quantum Error-Correcting Codes</em>, Phys. Rev. Lett. 84:2525-2528, 2000 (<a href="https://arxiv.org/abs/quant-ph/9604034">arXiv:quant-ph/9604034</a>)</p>
+</li>
+</ul>
+
+<p>Realization that quantum error correcting codes could make quantum computation practically feasible:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Emanuel+Knill">Emanuel Knill</a>, <a class="existingWikiWord" href="/nlab/show/Raymond+Laflamme">Raymond Laflamme</a>, <a class="existingWikiWord" href="/nlab/show/Wojciech+H.+Zurek">Wojciech H. Zurek</a>, <em>Resilient Quantum Computation: Error Models and Thresholds</em>, Proceedings of the Royal Society A <strong>454</strong> 1969 (1998) &lbrack;<a href="https://arxiv.org/abs/quant-ph/9702058">arXiv:quant-ph/9702058</a>&rbrack;</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+Preskill">John Preskill</a>, <em>Fault-tolerant quantum computation</em>, in: <em>Introduction to Quantum Computation and Information</em>, World Scientific (1998) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/quant-ph/9712048">arXiv:quant-ph/9712048</a>, <a href="https://doi.org/10.1142/3724">doi:10.1142/3724</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+Preskill">John Preskill</a>, <em>Reliable Quantum Computers</em>, Proc. Roy. Soc. Lond. A <strong>454</strong> (1998) 385-410 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/quant-ph/9705031">arXiv:quant-ph/9705031</a>, <a href="https://doi.org/10.1098/rspa.1998.0167">doi:10.1098/rspa.1998.0167</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Daniel+Gottesman">Daniel Gottesman</a>, <em>Theory of fault-tolerant quantum computation</em>, Phys. Rev. A <strong>57</strong> (1998) 127-137 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://doi.org/10.1103/PhysRevA.57.127">doi:10.1103/PhysRevA.57.127</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Dorit+Aharonov">Dorit Aharonov</a>, <a class="existingWikiWord" href="/nlab/show/Michael+Ben-Or">Michael Ben-Or</a>, <em>Fault-Tolerant Quantum Computation With Constant Error Rate</em>, SIAM J. Comput., <strong>38</strong> 4 (2008) 1207–1282 &lbrack;<a href="https://arxiv.org/abs/quant-ph/9906129">arXiv:quant-ph/9906129</a>, <a href="https://doi.org/10.1007/978-3-642-32512-0_31">doi:10.1007/978-3-642-32512-0_31</a>&rbrack;</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Daniel+Gottesman">Daniel Gottesman</a>, <em>Fault-Tolerant Quantum Computation</em>, Physics in Canada <strong>63</strong> 4 (2007) 183-189 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/quant-ph/0701112">arXiv:quant-ph/0701112</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>Dorit Aharonov, Michael Ben-Or, <em>Fault-Tolerant Quantum Computation With Constant Error Rate</em>, SIAM J. Comput. <strong>38</strong> 4 (2008) 1207–1282 (<a href="https://arxiv.org/abs/quant-ph/9906129">arXiv:quant-ph/9906129</a>, <a href="https://doi.org/10.1137/S0097539799359385">doi:10.1137/S0097539799359385</a>)</p>
+</li>
+
+<li>
+<p>Panos Aliferis, <a class="existingWikiWord" href="/nlab/show/Daniel+Gottesman">Daniel Gottesman</a>, <a class="existingWikiWord" href="/nlab/show/John+Preskill">John Preskill</a>, <em>Quantum accuracy threshold for concatenated distance-3 codes</em>, Quant. Inf. Comput. 6 (2006) 97-165 (<a href="https://arxiv.org/abs/quant-ph/0504218">arXiv:quant-ph/0504218</a>)</p>
+</li>
+
+<li>
+<p>Earl T. Campbell, Barbara M. Terhal, Christophe Vuillot: <em>Roads towards fault-tolerant universal quantum computation</em>, Nature <strong>549</strong> (2017) 172–179 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://doi.org/10.1038/nature23460">doi:10.1038/nature23460</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+</ul>
+
+<p><a class="existingWikiWord" href="/nlab/show/operator+algebra">Operator algebraic</a> formulation of quantum error correction:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/David+Kribs">David Kribs</a>, <a class="existingWikiWord" href="/nlab/show/Raymond+Laflamme">Raymond Laflamme</a>, <a class="existingWikiWord" href="/nlab/show/David+Poulin">David Poulin</a>, <em>A Unified and Generalized Approach to Quantum Error Correction</em>, Phys. Rev. Lett. 94, 180501 (2005) (<a href="https://arxiv.org/abs/quant-ph/0412076">arXiv:quant-ph/0412076</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/David+W.+Kribs">David W. Kribs</a>, <a class="existingWikiWord" href="/nlab/show/Raymond+Laflamme">Raymond Laflamme</a>, <a class="existingWikiWord" href="/nlab/show/David+Poulin">David Poulin</a>, <a class="existingWikiWord" href="/nlab/show/Maia+Lesosky">Maia Lesosky</a>, <em>Operator quantum error correction</em>, Quant. Inf. &amp; Comp., 6 (2006), 383-399 (<a href="https://arxiv.org/abs/quant-ph/0504189">arXiv:quant-ph/0504189</a>)</p>
+</li>
+</ul>
+
+<p>on <a class="existingWikiWord" href="/nlab/show/quantum+observables">quantum observables</a>:</p>
+
+<ul>
+<li id="BenyKempfKribs06">
+<p>Cédric Bény, Achim Kempf, <a class="existingWikiWord" href="/nlab/show/David+W.+Kribs">David W. Kribs</a>, <em>Generalization of Quantum Error Correction via the Heisenberg Picture</em>, Phys. Rev. Lett. 98, 100502 – Published 7 March 2007 (<a href="https://doi.org/10.1103/PhysRevLett.98.100502">doi:10.1103/PhysRevLett.98.100502</a>, <a href="https://arxiv.org/abs/quant-ph/0608071">arXiv:quant-ph/0608071</a>)</p>
+</li>
+
+<li>
+<p>Cédric Bény, Achim Kempf, <a class="existingWikiWord" href="/nlab/show/David+W.+Kribs">David W. Kribs</a>, <em>Quantum Error Correction of Observables</em>, Phys. Rev. A 76, 042303 (2007) (<a href="https://arxiv.org/abs/0705.1574">arXiv:0705.1574</a>)</p>
+</li>
+</ul>
+
+<p>Introduction and survey:</p>
+
+<ul>
+<li>
+<p>Simeon Ball, Aina Centelles, Felix Huber, <em>Quantum error-correcting codes and their geometries</em> (<a href="https://arxiv.org/abs/2007.05992">arXiv:2007.05992</a>)</p>
+</li>
+
+<li id="Steane06">
+<p><a class="existingWikiWord" href="/nlab/show/Andrew+M.+Steane">Andrew M. Steane</a>, <em>A Tutorial on Quantum Error Correction</em>, in: Proceedings of the International School of Physics “Enrico Fermi”, course CLXII, “Quantum Computers, Algorithms and Chaos” (2006) &lbrack;<a href="https://www2.physics.ox.ac.uk/sites/default/files/ErrorCorrectionSteane06.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/SteaneTutorialQuantumErrorCorrection.pdf" title="pdf">pdf</a>&rbrack;</p>
+</li>
+
+<li id="DevittNemotoMunro09">
+<p><a class="existingWikiWord" href="/nlab/show/Simon+J.+Devitt">Simon J. Devitt</a>, Kae Nemoto, William J. Munro, <em>Quantum Error Correction for Beginners</em>, Rep. Prog. Phys. 76 (2013) 076001 (<a href="https://arxiv.org/abs/0905.2794">arXiv:0905.2794</a>)</p>
+</li>
+
+<li id="RowellWang17">
+<p><a class="existingWikiWord" href="/nlab/show/Eric+Rowell">Eric Rowell</a>, <a class="existingWikiWord" href="/nlab/show/Zhenghan+Wang">Zhenghan Wang</a>, Section 3.2.3 of: <em>Mathematics of Topological Quantum Computing</em>, Bull. Amer. Math. Soc. 55 (2018), 183-238 (<a href="https://arxiv.org/abs/1705.06206">arXiv:1705.06206</a>, <a href="https://doi.org/10.1090/bull/1605">doi:10.1090/bull/1605</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Scott+Aaronson">Scott Aaronson</a>, Chapter 27 of: <em>Introduction to Quantum Information Science</em> (2018) &lbrack;<a href="https://www.scottaaronson.com/qclec.pdf">pdf</a>, <a href="https://www.scottaaronson.com/cs378/">webpage</a>&rbrack;</p>
+</li>
+
+<li>
+<p>Joschka Roffe, <em>Quantum Error Correction: An Introductory Guide</em>, Contemporary Physics 2019 (<a href="https://arxiv.org/abs/1907.11157">arXiv:1907.11157</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bei+Zeng">Bei Zeng</a>, <a class="existingWikiWord" href="/nlab/show/Xie+Chen">Xie Chen</a>, <a class="existingWikiWord" href="/nlab/show/Duan-Lu+Zhou">Duan-Lu Zhou</a>, <a class="existingWikiWord" href="/nlab/show/Xiao-Gang+Wen">Xiao-Gang Wen</a>:</p>
+
+<p>Sec. 3 of: <em><a class="existingWikiWord" href="/nlab/show/Quantum+Information+Meets+Quantum+Matter">Quantum Information Meets Quantum Matter</a> – From Quantum Entanglement to Topological Phases of Many-Body Systems</em>, Quantum Science and Technology (QST), Springer (2019) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/1508.02595">arXiv:1508.02595</a>, <a href="https://doi.org/10.1007/978-1-4939-9084-9">doi:10.1007/978-1-4939-9084-9</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+
+<li id="ZhuCross20">
+<p>Guanyu Zhu, Andrew Cross, <em><a href="https://www.ibm.com/blogs/research/2020/09/hardware-aware-quantum/">Hardware-aware approach for fault-tolerant quantum computation</a></em>, IBM Research Blog, September 2, 2020</p>
+</li>
+</ul>
+
+<p>See also:</p>
+
+<ul>
+<li>Wikipedia, <em><a href="https://en.m.wikipedia.org/wiki/Quantum_error_correction">Quantum error correction</a></em></li>
+</ul>
+
+<p>In the context of <a class="existingWikiWord" href="/nlab/show/quantum+secret+sharing">quantum secret sharing</a>:</p>
+
+<ul>
+<li id="CleveGottesmanLo99">Richard Cleve, <a class="existingWikiWord" href="/nlab/show/Daniel+Gottesman">Daniel Gottesman</a>, Hoi-Kwong Lo, <em>How to share a quantum secret</em>, Phys. Rev. Lett. 83 (1999) 648-651 (<a href="https://arxiv.org/abs/quant-ph/9901025">arXiv:quant-ph/9901025</a>)</li>
+</ul>
+
+<p>On (in-)compatibility of quantum error correction with universality of quantum gates (<a class="existingWikiWord" href="/nlab/show/Eastin-Knill+theorem">Eastin-Knill theorem</a>):</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Bryan+Eastin">Bryan Eastin</a>, <a class="existingWikiWord" href="/nlab/show/Emanuel+Knill">Emanuel Knill</a>, <em>Restrictions on Transversal Encoded Quantum Gate Sets</em>, Phys. Rev. Lett. 102, 110502 (2009) (<a href="https://arxiv.org/abs/0811.4262">arXiv:0811.4262</a>)</p>
+</li>
+
+<li id="WVSB20">
+<p>Paul Webster, Michael Vasmer, Thomas R. Scruby, Stephen D. Bartlett, <em>Universal Fault-Tolerant Quantum Computing with Stabiliser Codes</em> (<a href="https://arxiv.org/abs/2012.05260">arXiv:2012.05260</a>)</p>
+</li>
+</ul>
+
+<p>In relation to the <a class="existingWikiWord" href="/nlab/show/SYK+model">SYK model</a>:</p>
+
+<ul>
+<li>Shao-Kai Jian, Chunxiao Liu, Xiao Chen, <a class="existingWikiWord" href="/nlab/show/Brian+Swingle">Brian Swingle</a>, Pengfei Zhang, <em>Quantum error as an emergent magnetic field</em> (<a href="https://arxiv.org/abs/2106.09635">arXiv:2106.09635</a>)</li>
+</ul>
+
+<p>In relation to continuous symmetries:</p>
+
+<ul>
+<li>Zi-Wen Liu, Sisi Zhou, <em>Approximate symmetries and quantum error correction</em> (<a href="https://arxiv.org/abs/2111.06355">arXiv:2111.06355</a>)</li>
+</ul>
+
+<p>Further developments:</p>
+
+<ul>
+<li>Mackenzie H. Shaw, Andrew C. Doherty, Arne L. Grimsmo, <em>Stabilizer subsystem decompositions for single- and multi-mode Gottesman-Kitaev-Preskill codes</em> &lbrack;<a href="https://arxiv.org/abs/2210.14919">arXiv:2210.14919</a>&rbrack;</li>
+</ul>
+
+<h3 id="experimental_realization">Experimental realization</h3>
+
+<p>Realization of <a class="existingWikiWord" href="/nlab/show/quantum+error+correction">quantum error correction</a> in <a class="existingWikiWord" href="/nlab/show/experiment">experiment</a>, hence in actual <a class="existingWikiWord" href="/nlab/show/quantum+computers">quantum computers</a>:</p>
+
+<ul>
+<li>
+<p>D. G. Cory, M. D. Price, W. Maas, <a class="existingWikiWord" href="/nlab/show/Emanuel+Knill">Emanuel Knill</a>, <a class="existingWikiWord" href="/nlab/show/Raymond+Laflamme">Raymond Laflamme</a>, <a class="existingWikiWord" href="/nlab/show/Wojchiek+H.+Zurek">Wojchiek H. Zurek</a>, T. F. Havel, and S. S. Somaroo, <em>Experimental Quantum Error Correction</em>, Phys. Rev. Lett. 81, 2152 (1998) (<a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.81.2152">doi:10.1103/PhysRevLett.81.2152</a>)</p>
+</li>
+
+<li>
+<p>Daniel Nigg, Markus Mueller, Esteban A. Martinez, Philipp Schindler, Markus Hennrich, Thomas Monz, Miguel A. Martin-Delgado, Rainer Blatt,</p>
+
+<p><em>Experimental Quantum Computations on a Topologically Encoded Qubit</em>, Science 18 Jul 2014: Vol. 345, Issue 6194, pp. 302-305 (<a href="https://arxiv.org/abs/1403.5426">arXiv:1403.5426</a>, <a href="https://science.sciencemag.org/content/345/6194/302">doi:10.1126/science.1253742</a>)</p>
+
+<blockquote>
+<p>(via methods from <a class="existingWikiWord" href="/nlab/show/topological+quantum+computation">topological quantum computation</a>)</p>
+</blockquote>
+</li>
+
+<li>
+<p>Adrian Cho, <em><a href="https://www.sciencemag.org/news/2020/07/biggest-flipping-challenge-quantum-computing">The biggest flipping challenge in quantum computing</a></em>, Science News Jul. 9, 2020</p>
+
+<blockquote>
+<p>(exposition)</p>
+</blockquote>
+</li>
+
+<li>
+<p>Y. Ma et al. <em>Error-transparent operations on a logical qubit protected by quantum error correction</em>, Nature Physics volume 16, pages 827–831 (2020) (<a href="https://doi.org/10.1038/s41567-020-0893-x">doi:10.1038/s41567-020-0893-x</a>)</p>
+</li>
+
+<li>
+<p>Ming Gong et al. <em>Experimental exploration of five-qubit quantum error correcting code with superconducting qubits</em>, National Science Review, nwab011 (2021) (<a href="https://doi.org/10.1093/nsr/nwab011">doi:10.1093/nsr/nwab011</a>)</p>
+
+<p>survey in:</p>
+
+<p>EurekaAlert, Science China Press: <em>Demonstration of the universal quantum error correcting code with superconducting qubits</em>, March 2021 (<a href="https://www.eurekalert.org/pub_releases/2021-03/scp-dot031521.php">2021-03/scp-dot031521</a>)</p>
+</li>
+
+<li id="Lucero21">
+<p>Erik Lucero (Google), <em><a href="https://blog.google/technology/ai/unveiling-our-new-quantum-ai-campus/">Unveiling our new Quantum AI campus</a></em>, May 18, 2021</p>
+
+<blockquote>
+<p>(outlook)</p>
+</blockquote>
+</li>
+
+<li>
+<p>Th. Monz et al., <em>Demonstration of fault-tolerant universal quantum gate operations</em>, Nature <strong>605</strong> (2022) 675–680 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://doi.org/10.1038/s41586-022-04721-1">doi:10.1038/s41586-022-04721-1</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+</ul>
+
+<h3 id="ReferencesViaHolographicTensorNetworks">Via holographic tensor networks</h3>
+
+<p>First quantum error correcting codes associated with planar bulk/boundary systems:</p>
+
+<ul>
+<li>
+<p>S. B. Bravyi, <a class="existingWikiWord" href="/nlab/show/Alexei+Kitaev">Alexei Kitaev</a>, <em>Quantum codes on a lattice with boundary</em> (<a href="https://arxiv.org/abs/quant-ph/9811052">arXiv:quant-ph/9811052</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Michael+Freedman">Michael Freedman</a>, David A. Meyer, <em>Projective Plane and Planar Quantum Codes</em>, Found. Comput. Math. 1, 325–332 (2001) (<a href="https://arxiv.org/abs/quant-ph/9810055">arXiv:quant-ph/9810055</a>, <a href="https://doi.org/10.1007/s102080010013">doi:10.1007/s102080010013</a>)</p>
+</li>
+</ul>
+
+<p>First suggestion relating quantum error correction to <a class="existingWikiWord" href="/nlab/show/black+hole+entropy">black hole entropy</a>:</p>
+
+<ul>
+<li id="VerlindeVerlinde12"><a class="existingWikiWord" href="/nlab/show/Erik+Verlinde">Erik Verlinde</a>, <a class="existingWikiWord" href="/nlab/show/Herman+Verlinde">Herman Verlinde</a>, <em>Black Hole Entanglement and Quantum Error Correction</em>, J. High Energ. Phys. 2013, 107 (2013) (<a href="https://arxiv.org/abs/1211.6913">arXiv:1211.6913</a>, <a href="https://doi.org/10.1007/JHEP10(2013)107">doi:10.1007/JHEP10(2013)107</a>)</li>
+</ul>
+
+<p>Introducing the idea of quantum error correcting codes given by <a class="existingWikiWord" href="/nlab/show/tensor+network+states">tensor network states</a>:</p>
+
+<ul>
+<li id="FerrisPoulin13">
+<p>Andrew J. Ferris, <a class="existingWikiWord" href="/nlab/show/David+Poulin">David Poulin</a>, <em>Tensor Networks and Quantum Error Correction</em>, Phys. Rev. Lett. 113, 030501 (2014) (<a href="https://arxiv.org/abs/1312.4578">arXiv:1312.4578</a>)</p>
+</li>
+
+<li>
+<p>Dave Bacon, Steven T. Flammia, Aram W. Harrow, Jonathan Shi, <em>Sparse Quantum Codes from Quantum Circuits</em>, Proc. of STOC ‘15, pp. 327-334 (2015); IEEE Transactions on Information Theory, vol 63, no 4, pp 2464-2479, April 2017 (<a href="https://arxiv.org/abs/1411.3334">arXiv:1411.3334</a>)</p>
+</li>
+</ul>
+
+<p>following observations in</p>
+
+<ul>
+<li id="Swingle09">
+<p><a class="existingWikiWord" href="/nlab/show/Brian+Swingle">Brian Swingle</a>, <em>Entanglement Renormalization and Holography</em>, Phys. Rev. D 86, 065007 (2012) (<a href="https://arxiv.org/abs/0905.1317">arXiv:0905.1317</a>)</p>
+</li>
+
+<li id="Swingle12">
+<p><a class="existingWikiWord" href="/nlab/show/Brian+Swingle">Brian Swingle</a>, <em>Constructing holographic spacetimes using entanglement renormalization</em> (<a href="https://arxiv.org/abs/1209.3304">arXiv:1209.3304</a>, <a href="http://inspirehep.net/record/1185813">spire:1185813</a>)</p>
+</li>
+</ul>
+
+<p>Interpretation of <a class="existingWikiWord" href="/nlab/show/holographic+tensor+networks">holographic tensor networks</a> encoding <a class="existingWikiWord" href="/nlab/show/holographic+entanglement+entropy">holographic entanglement entropy</a> in models for <a class="existingWikiWord" href="/nlab/show/AdS2-CFT1+duality">AdS2-CFT1 duality</a> as <a class="existingWikiWord" href="/nlab/show/quantum+error+correcting+codes">quantum error correcting codes</a>:</p>
+
+<ul>
+<li id="ADH14">
+<p><a class="existingWikiWord" href="/nlab/show/Ahmed+Almheiri">Ahmed Almheiri</a>, <a class="existingWikiWord" href="/nlab/show/Xi+Dong">Xi Dong</a>, <a class="existingWikiWord" href="/nlab/show/Daniel+Harlow">Daniel Harlow</a>, <em>Bulk Locality and Quantum Error Correction in AdS/CFT</em>, JHEP 1504:163,2015 (<a href="https://arxiv.org/abs/1411.7041">arXiv:1411.7041</a>, <a href="https://doi.org/10.1007/JHEP04(2015)163">doi:10.1007/JHEP04(2015)163</a>)</p>
+
+<blockquote>
+<p>(using <a href="#BenyKempfKribs06">Bény-Kempf-Kribs 06</a>)</p>
+</blockquote>
+</li>
+</ul>
+
+<p>with precursor observations in</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Beni+Yoshida">Beni Yoshida</a>, <em>Information storage capacity of discrete spin systems</em>, Annals of Physics 338, 134 (2013) (<a href="https://arxiv.org/abs/1111.3275">arXiv:1111.3275</a>)</p>
+
+<blockquote>
+<p>(focus on classical <a class="existingWikiWord" href="/nlab/show/error+correcting+codes">error correcting codes</a>)</p>
+</blockquote>
+</li>
+
+<li>
+<p>Jose I. Latorre, German Sierra, <em>Holographic codes</em> (<a href="https://arxiv.org/abs/1502.06618">arXiv:1502.06618</a>)</p>
+</li>
+</ul>
+
+<p>and concrete implementation by the <a class="existingWikiWord" href="/nlab/show/HaPPY+code">HaPPY code</a>:</p>
+
+<ul>
+<li id="PYHP15"><a class="existingWikiWord" href="/nlab/show/Fernando+Pastawski">Fernando Pastawski</a>, <a class="existingWikiWord" href="/nlab/show/Beni+Yoshida">Beni Yoshida</a>, <a class="existingWikiWord" href="/nlab/show/Daniel+Harlow">Daniel Harlow</a>, <a class="existingWikiWord" href="/nlab/show/John+Preskill">John Preskill</a>, <em>Holographic quantum error-correcting codes: Toy models for the bulk/boundary correspondence</em>, JHEP 06 (2015) 149 (<a href="https://arxiv.org/abs/1503.06237">arXiv:1503.06237</a>)</li>
+</ul>
+
+<p>Introduction of the more general <a class="existingWikiWord" href="/nlab/show/Majorana+dimer+code">Majorana dimer code</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Alexander+Jahn">Alexander Jahn</a>, <a class="existingWikiWord" href="/nlab/show/Marek+Gluza">Marek Gluza</a>, <a class="existingWikiWord" href="/nlab/show/Fernando+Pastawski">Fernando Pastawski</a>, <a class="existingWikiWord" href="/nlab/show/Jens+Eisert">Jens Eisert</a>, <em>Majorana dimers and holographic quantum error-correcting codes</em>, Phys. Rev. Research 1, 033079 (2019) (<a href="https://arxiv.org/abs/1905.03268">arXiv:1905.03268</a>)</li>
+</ul>
+
+<p>Exposition and review:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+Preskill">John Preskill</a>, <em>Is spacetime a quantum error-correcting code?</em>, talk at KITP 2015 (<a href="http://theory.caltech.edu/~preskill/talks/Preskill-KITP-holographic-2015.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Preskill_SpacetimeQEC.pdf" title="pdf">pdf</a>)</p>
+</li>
+
+<li id="Harlow18">
+<p><a class="existingWikiWord" href="/nlab/show/Daniel+Harlow">Daniel Harlow</a>, <em>TASI Lectures on the Emergence of Bulk Physics in AdS/CFT</em>, PoS TASI2017 (2018) 002 (<a href="https://arxiv.org/abs/1802.01040">arXiv:1802.01040</a>, <a href="https://doi.org/10.22323/1.305.0002">doi:10.22323/1.305.0002</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Pratik+Rath">Pratik Rath</a>, <em>Aspects of Holography And Quantum Error Correction</em>, 2020 (<a href="https://digitalassets.lib.berkeley.edu/etd/ucb/text/Rath_berkeley_0028E_19810.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/RathHolographyAndQEC.pdf" title="pdf">pdf</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Melanie+Swan">Melanie Swan</a>, <a class="existingWikiWord" href="/nlab/show/Renato+P+dos+Santos">Renato P dos Santos</a>, <a class="existingWikiWord" href="/nlab/show/Frank+Witte">Frank Witte</a>, <em>The AdS/CFT Correspondence and Holographic Codes</em> (<a href="https://doi.org/10.1142/9781786348210_0013">doi:10.1142/9781786348210_0013</a>, <a href="https://www.worldscientific.com/doi/abs/10.1142/9781786348210_0014">doi:10.1142/9781786348210_0014</a>), Part 5 in: Between Science and Economics, Volume 2: <em>Quantum Computing Physics, Blockchains, and Deep Learning Smart Networks</em>, World Scientific 2020 (<a href="https://doi.org/10.1142/q0243">doi:10.1142/q0243</a>)</p>
+</li>
+
+<li id="Harlow20">
+<p><a class="existingWikiWord" href="/nlab/show/Daniel+Harlow">Daniel Harlow</a>, <em>Computation and Holography</em>, talk at <a href="https://indico.fnal.gov/event/43829/">Snowmass Computational Frontier Workshop 2020</a> (<a href="https://indico.fnal.gov/event/43829/contributions/193566/attachments/132763/163346/snowmasscomp.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/HarlowComputationHolography.pdf" title="pdf">pdf</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Alexander+Jahn">Alexander Jahn</a>, <a class="existingWikiWord" href="/nlab/show/Jens+Eisert">Jens Eisert</a>, <em>Holographic tensor network models and quantum error correction: A topical review</em> (<a href="https://arxiv.org/abs/2102.02619">arXiv:2102.02619</a>)</p>
+</li>
+
+<li>
+<p>Tanay Kibe, Prabha Mandayam, Ayan Mukhopadhyay, <em>Holographic spacetime, black holes and quantum error correcting codes: A review</em> (<a href="https://arxiv.org/abs/2110.14669">arXiv:2110.14669</a>)</p>
+</li>
+</ul>
+
+<p>Further discussion of holographic quantum error correcting codes:</p>
+
+<ul>
+<li>
+<p>Henrique Lazari, Reginaldo Palazzo Jr., <em>Geometrically uniform hyperbolic codes</em>, Comput. Appl. Math. vol.24 no.2 Petrópolis 2005 (<a href="https://doi.org/10.1590/S0101-82052005000200002">doi:10.1590/S0101-82052005000200002</a>)</p>
+</li>
+
+<li>
+<p>Enrico M. Brehm, Benedikt Richter, <em>Classical Holographic Codes</em>, Phys. Rev. D 96, 066005 (2017) (<a href="https://arxiv.org/abs/1609.03560">arXiv:1609.03560</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Fernando+Pastawski">Fernando Pastawski</a>, <a class="existingWikiWord" href="/nlab/show/John+Preskill">John Preskill</a>, <em>Code properties from holographic geometries</em>, Phys. Rev. X 7, 021022 (2017) (<a href="https://arxiv.org/abs/1612.00017">arXiv:1612.00017</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Robert+J.+Harris">Robert J. Harris</a>, <a class="existingWikiWord" href="/nlab/show/Nathan+A.+McMahon">Nathan A. McMahon</a>, <a class="existingWikiWord" href="/nlab/show/Gavin+K.+Brennen">Gavin K. Brennen</a>, <a class="existingWikiWord" href="/nlab/show/Thomas+M.+Stace">Thomas M. Stace</a>, <em>Calderbank-Steane-Shor Holographic Quantum Error Correcting Codes</em>, Phys. Rev. A 98, 052301 (2018) (<a href="https://arxiv.org/abs/1806.06472">arXiv:1806.06472</a>)</p>
+</li>
+
+<li>
+<p>Tamara Kohler, Toby Cubitt, <em>Toy Models of Holographic Duality between local Hamiltonians</em>, J. High Energy Phys. 2019:17 (2019) (<a href="https://arxiv.org/abs/1810.08992">arXiv:1810.08992</a>)</p>
+</li>
+
+<li>
+<p>Tobias J. Osborne, Deniz E. Stiegemann, <em>Dynamics for holographic codes</em>, J. High Energ. Phys. 2020, 154 (2020) (<a href="https://arxiv.org/abs/1706.08823">arXiv:1706.08823</a>)</p>
+</li>
+
+<li>
+<p>Martina Gschwendtner, Robert König, Burak Şahinoğlu &amp; Eugene Tang, <em>Quantum error-detection at low energies</em>, Journal of High Energy Physics volume 2019, Article number: 21 (2019) (<a href="https://arxiv.org/abs/1902.02115">arXiv:1902.02115</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Nathan+A.+McMahon">Nathan A. McMahon</a>, <a class="existingWikiWord" href="/nlab/show/Gavin+K.+Brennen">Gavin K. Brennen</a>, <a class="existingWikiWord" href="/nlab/show/Thomas+M.+Stace">Thomas M. Stace</a>, <a class="existingWikiWord" href="/nlab/show/Robert+J.+Harris">Robert J. Harris</a>, Elliot Coupe, <em>Decoding Holographic Codes with an Integer Optimisation Decoder</em> (<a href="https://arxiv.org/abs/2008.10206">arXiv:2008.10206</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Terry+Farrelly">Terry Farrelly</a>, <a class="existingWikiWord" href="/nlab/show/Robert+J.+Harris">Robert J. Harris</a>, <a class="existingWikiWord" href="/nlab/show/Nathan+A.+McMahon">Nathan A. McMahon</a>, <a class="existingWikiWord" href="/nlab/show/Thomas+M.+Stace">Thomas M. Stace</a>, <em>Tensor-network codes</em> (<a href="https://arxiv.org/abs/2009.10329">arXiv:2009.10329</a>)</p>
+</li>
+
+<li>
+<p>ChunJun Cao, Brad Lackey, <em>Approximate Bacon-Shor Code and Holography</em> (<a href="https://arxiv.org/abs/2010.05960">arXiv:2010.05960</a>)</p>
+</li>
+
+<li id="CDCW21">
+<p>Sam Cree, Kfir Dolev, Vladimir Calvera, Dominic J. Williamson, <em>Fault-tolerant logical gates in holographic stabilizer codes are severely restricted</em> (<a href="https://arxiv.org/abs/2103.13404">arXiv:2103.13404</a>)</p>
+</li>
+
+<li>
+<p>Robert de Mello Koch, Eunice Gandote, Nirina Hasina Tahiridimbisoa, Hendrik J.R. Van Zyl, <em>Quantum Error Correction and Holographic Information from Bilocal Holography</em> (<a href="https://arxiv.org/abs/2106.00349">arXiv:2106.00349</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Chris+Akers">Chris Akers</a>, <a class="existingWikiWord" href="/nlab/show/Geoff+Penington">Geoff Penington</a>, <em>Quantum minimal surfaces from quantum error correction</em> (<a href="https://arxiv.org/abs/2109.14618">arXiv:2109.14618</a>)</p>
+</li>
+
+<li>
+<p>ChunJun Cao, Brad Lackey, <em>Quantum Lego: Building Quantum Error Correction Codes from Tensor Networks</em>, PRX Quantum <strong>3</strong> 020332 (2022) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/2109.08158">arXiv:2109.08158</a>, <a href="https://doi.org/10.1103/PRXQuantum.3.020332">doi:10.1103/PRXQuantum.3.020332</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>Jason Pollack, Patrick Rall, Andrea Rocchetto, <em>Understanding holographic error correction via unique algebras and atomic examples</em>, Journal of High Energy Physics, 56 (2022) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[</annotation></semantics></math><a href="https://arxiv.org/abs/2110.14691">arXiv:2110.14691</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">]</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>Dmitry S. Ageev, <em>Exploring uberholography</em> &lbrack;<a href="https://arxiv.org/abs/2208.07387">arXiv:2208.07387</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>Understanding in terms of the <a class="existingWikiWord" href="/nlab/show/eigenstate+thermalization+hypothesis">eigenstate thermalization hypothesis</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Ning+Bao">Ning Bao</a>, Newton Cheng, <em>Eigenstate Thermalization Hypothesis and Approximate Quantum Error Correction</em>, JHEP 08 (2019) 152 (<a href="https://arxiv.org/abs/1906.03669">arXiv:1906.03669</a>)</li>
+</ul>
+
+<p>In relation to <a class="existingWikiWord" href="/nlab/show/holographic+Renyi+entropy">holographic Renyi entropy</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Chris+Akers">Chris Akers</a>, <a class="existingWikiWord" href="/nlab/show/Pratik+Rath">Pratik Rath</a>, <em>Holographic Renyi entropy from quantum error correction</em>, J. High Energ. Phys. 2019, 52 (2019) (<a href="https://arxiv.org/abs/1811.05171">arXiv:1811.05171</a>)</li>
+</ul>
+
+<p>From <a class="existingWikiWord" href="/nlab/show/tesselations">tesselations</a> of higher-dimensional <a class="existingWikiWord" href="/nlab/show/hyperbolic+space">hyperbolic space</a>:</p>
+
+<ul>
+<li>Vivien Londe, Anthony Leverrier, <em>Golden codes: quantum LDPC codes built from regular tessellations of hyperbolic 4-manifolds</em> (<a href="https://arxiv.org/abs/1712.08578">arXiv:1712.08578</a>)</li>
+</ul>
+
+<p>In view of <a class="existingWikiWord" href="/nlab/show/black+hole+thermodynamics">black hole thermodynamics</a>:</p>
+
+<ul>
+<li>
+<p><a href="#VerlindeVerlinde12">Verlinde &amp; Verlinde 2012</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Ahmed+Almheiri">Ahmed Almheiri</a>, <em>Holographic Quantum Error Correction and the Projected Black Hole Interior</em> (<a href="https://arxiv.org/abs/1810.02055">arXiv:1810.02055</a>)</p>
+</li>
+
+<li>
+<p>Isaac H. Kim, Eugene Tang, <a class="existingWikiWord" href="/nlab/show/John+Preskill">John Preskill</a>, <em>The ghost in the radiation: Robust encodings of the black hole interior</em>, JHEP 2020, 31 (2020) (<a href="https://arxiv.org/abs/2003.05451">arXiv:2003.05451</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Chris+Akers">Chris Akers</a>, <a class="existingWikiWord" href="/nlab/show/Netta+Engelhardt">Netta Engelhardt</a>, <a class="existingWikiWord" href="/nlab/show/Daniel+Harlow">Daniel Harlow</a>, <a class="existingWikiWord" href="/nlab/show/Geoff+Penington">Geoff Penington</a>, <a class="existingWikiWord" href="/nlab/show/Shreya+Vardhan">Shreya Vardhan</a>, <em>The black hole interior from non-isometric codes and complexity</em> &lbrack;<a href="https://arxiv.org/abs/2207.06536">arXiv:2207.06536</a>&rbrack;</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Daniel+Harlow">Daniel Harlow</a>, <em>A theory of the black hole interior</em>, talk at <em><a href="https://indico.cern.ch/event/1085701">Strings 2022</a> &lbrack;<a href="https://indico.cern.ch/event/1085701/contributions/4940817/">indico:4940817/</a>&rbrack;</em></p>
+</li>
+</ul>
+
+<p>Discussion of <a class="existingWikiWord" href="/nlab/show/gauge+symmetry">gauge symmetry</a> of <a class="existingWikiWord" href="/nlab/show/holographic+tensor+networks">holographic tensor networks</a> and their <a class="existingWikiWord" href="/nlab/show/quantum+error+correcting+codes">quantum error correcting codes</a>:</p>
+
+<ul>
+<li>Kfir Dolev, Vladimir Calvera, Sam Cree, Dominic J. Williamson, <em>Gauging the bulk: generalized gauging maps and holographic codes</em> (<a href="https://arxiv.org/abs/2108.11402">arXiv:2108.11402</a>)</li>
+</ul>
+
+<p>Relation of quantum error correcting codes to the <a class="existingWikiWord" href="/nlab/show/Monster+vertex+operator+algebra">Monster vertex operator algebra</a> and more generally to <a class="existingWikiWord" href="/nlab/show/2d+SCFT">2d SCFT</a> and <a class="existingWikiWord" href="/nlab/show/string+theory">string theory</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Jeffrey+A.+Harvey">Jeffrey A. Harvey</a>, <a class="existingWikiWord" href="/nlab/show/Gregory+W.+Moore">Gregory W. Moore</a>, <em>Moonshine, Superconformal Symmetry, and Quantum Error Correction</em>, J. High Energ. Phys. <strong>2020</strong>, 146 (2020). (<a href="https://arxiv.org/abs/2003.13700">arXiv:2003.13700</a>)</li>
+</ul>
+
+<p>In relation to the <a class="existingWikiWord" href="/nlab/show/large+N+limit">large N limit</a>:</p>
+
+<ul>
+<li>Alexey Milekhin, <em>Quantum error correction and large <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></em> (<a href="https://arxiv.org/abs/2008.12869">arXiv:2008.12869</a>)</li>
+</ul>
+
+<p>In relation to <a class="existingWikiWord" href="/nlab/show/renormalization+group+flow">renormalization group flow</a>:</p>
+
+<ul>
+<li>Keiichiro Furuya, Nima Lashkari, Mudassir Moosa, <em>Renormalization group and approximate error correction</em> (<a href="https://arxiv.org/abs/2112.05099">arXiv:2112.05099</a>)</li>
+</ul>
+
+<p>Musings on possible implications on relations between <a class="existingWikiWord" href="/nlab/show/quantum+gravity">quantum gravity</a> and <a class="existingWikiWord" href="/nlab/show/quantum+information">quantum information</a>:</p>
+
+<ul>
+<li id="SimonsFoundationItFromQBit">
+<p><a class="existingWikiWord" href="/nlab/show/Simons+Foundation">Simons Foundation</a>, <em><a href="https://www.simonsfoundation.org/mathematics-physical-sciences/it-from-qubit/">It from Qubit: Simons Collaboration on Quantum Fields, Gravity and Information</a></em></p>
+</li>
+
+<li>
+<p>Iulia Georgescu, <em>Strings and qubits</em>, Nature Reviews Physics volume 1, page 477 (2019) (<a href="https://www.nature.com/articles/s42254-019-0087-6">doi:s42254-019-0087-6</a>)</p>
+</li>
+
+<li>
+<p>Natalie Wolchover, <em><a href="https://www.quantamagazine.org/how-space-and-time-could-be-a-quantum-error-correcting-code-20190103/">How Space and Time Could Be a Quantum Error-Correcting Code</a></em>, Quanta Magazine, Jan. 3 2019</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tom+Banks">Tom Banks</a>, <em>Holographic Space-time and Quantum Information</em> (<a href="https://arxiv.org/abs/2001.08205">arXiv:2001.08205</a>)</p>
+</li>
+
+<li>
+<p>ChunJun Cao, <em>From Quantum Codes to Gravity: A Journey of Gravitizing Quantum Mechanics</em> (<a href="https://arxiv.org/abs/2112.00199">arXiv:2112.00199</a>)</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on October 28, 2022 at 03:52:26.
+    See the <a href="/nlab/history/quantum+error+correction" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/quantum+error+correction" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10901/#Item_37">Discuss</a><span class="backintime"><a href="/nlab/revision/quantum+error+correction/64" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quantum+error+correction" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quantum+error+correction" accesskey="S" class="navlink" id="history" rel="nofollow">History (64 revisions)</a>
+  <a href="/nlab/show/quantum+error+correction/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/quantum+error+correction" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/quantum+error+correction" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

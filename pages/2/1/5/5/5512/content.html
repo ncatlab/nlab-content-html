@@ -1,0 +1,900 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Frobenius reciprocity in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://www.ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://www.ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Frobenius reciprocity
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/2396/#Item_22" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="category_theory">Category theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a></strong></p>
+
+<h2 id="concepts">Concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/category">category</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/functor">functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Cat">Cat</a></p>
+</li>
+</ul>
+
+<h2 id="universal_constructions">Universal constructions</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/universal+construction">universal construction</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/representable+functor">representable functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjoint functor</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/limit">limit</a>/<a class="existingWikiWord" href="/nlab/show/colimit">colimit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/weighted+limit">weighted limit</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/end">end</a>/<a class="existingWikiWord" href="/nlab/show/coend">coend</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kan+extension">Kan extension</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Yoneda+lemma">Yoneda lemma</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Isbell+duality">Isbell duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+construction">Grothendieck construction</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+functor+theorem">adjoint functor theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/monadicity+theorem">monadicity theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/adjoint+lifting+theorem">adjoint lifting theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Tannaka+duality">Tannaka duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gabriel-Ulmer+duality">Gabriel-Ulmer duality</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/small+object+argument">small object argument</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Freyd-Mitchell+embedding+theorem">Freyd-Mitchell embedding theorem</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">relation between type theory and category theory</a></p>
+</li>
+</ul>
+
+<h2 id="extensions">Extensions</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/sheaf+and+topos+theory">sheaf and topos theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/enriched+category+theory">enriched category theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/higher+category+theory">higher category theory</a></p>
+</li>
+</ul>
+
+<h2 id="applications">Applications</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/applications+of+%28higher%29+category+theory">applications of (higher) category theory</a></li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/category+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+
+<h4 id="representation_theory">Representation theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/representation+theory">representation theory</a></strong></p>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/geometric+representation+theory">geometric representation theory</a></strong></p>
+
+<h2 id="ingredients">Ingredients</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/linear+algebra">linear algebra</a>, <a class="existingWikiWord" href="/nlab/show/algebra">algebra</a>, <a class="existingWikiWord" href="/nlab/show/higher+algebra">higher algebra</a></li>
+</ul>
+
+<h2 id="definitions">Definitions</h2>
+
+<p><a class="existingWikiWord" href="/nlab/show/representation">representation</a>, <a class="existingWikiWord" href="/nlab/show/2-representation">2-representation</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-representation">∞-representation</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/group">group</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-group">∞-group</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/group+algebra">group algebra</a>, <a class="existingWikiWord" href="/nlab/show/algebraic+group">algebraic group</a>, <a class="existingWikiWord" href="/nlab/show/Lie+algebra">Lie algebra</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/vector+space">vector space</a>, <a class="existingWikiWord" href="/nlab/show/n-vector+space">n-vector space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/affine+space">affine space</a>, <a class="existingWikiWord" href="/nlab/show/symplectic+vector+space">symplectic vector space</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/action">action</a>, <a class="existingWikiWord" href="/nlab/show/%E2%88%9E-action">∞-action</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/module">module</a>, <a class="existingWikiWord" href="/nlab/show/equivariant+object">equivariant object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bimodule">bimodule</a>, <a class="existingWikiWord" href="/nlab/show/Morita+equivalence">Morita equivalence</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/induced+representation">induced representation</a>, <a class="existingWikiWord" href="/nlab/show/Frobenius+reciprocity">Frobenius reciprocity</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a>, <a class="existingWikiWord" href="/nlab/show/Banach+space">Banach space</a>, <a class="existingWikiWord" href="/nlab/show/Fourier+transform">Fourier transform</a>, <a class="existingWikiWord" href="/nlab/show/functional+analysis">functional analysis</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/orbit">orbit</a>, <a class="existingWikiWord" href="/nlab/show/coadjoint+orbit">coadjoint orbit</a>, <a class="existingWikiWord" href="/nlab/show/Killing+form">Killing form</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/unitary+representation">unitary representation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+quantization">geometric quantization</a>, <a class="existingWikiWord" href="/nlab/show/coherent+state">coherent state</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/socle">socle</a>, <a class="existingWikiWord" href="/nlab/show/quiver">quiver</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/module+algebra">module algebra</a>, <a class="existingWikiWord" href="/nlab/show/comodule+algebra">comodule algebra</a>, <a class="existingWikiWord" href="/nlab/show/Hopf+action">Hopf action</a>, <a class="existingWikiWord" href="/nlab/show/measuring">measuring</a></p>
+</li>
+</ul>
+
+<h2 id="geometric_representation_theory">Geometric representation theory</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/D-module">D-module</a>, <a class="existingWikiWord" href="/nlab/show/perverse+sheaf">perverse sheaf</a>,</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Grothendieck+group">Grothendieck group</a>, <a class="existingWikiWord" href="/nlab/show/lambda-ring">lambda-ring</a>, <a class="existingWikiWord" href="/nlab/show/symmetric+function">symmetric function</a>, <a class="existingWikiWord" href="/nlab/show/formal+group">formal group</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/principal+bundle">principal bundle</a>, <a class="existingWikiWord" href="/nlab/show/torsor">torsor</a>, <a class="existingWikiWord" href="/nlab/show/vector+bundle">vector bundle</a>, <a class="existingWikiWord" href="/nlab/show/Atiyah+Lie+algebroid">Atiyah Lie algebroid</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/geometric+function+theory">geometric function theory</a>, <a class="existingWikiWord" href="/nlab/show/groupoidification">groupoidification</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a>, <a class="existingWikiWord" href="/nlab/show/algebra+over+an+operad">algebra over an operad</a>, <a class="existingWikiWord" href="/nlab/show/actegory">actegory</a>, <a class="existingWikiWord" href="/nlab/show/crossed+module">crossed module</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/reconstruction+theorems">reconstruction theorems</a></p>
+</li>
+</ul>
+
+<h2 id="theorems">Theorems</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Borel-Weil-Bott+theorem">Borel-Weil-Bott theorem</a></p>
+</li>
+
+<li>
+<p><span class="newWikiWord">Be?linson-Bernstein localization<a href="/nlab/new/Be%3Flinson-Bernstein+localization">?</a></span></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kazhdan-Lusztig+theory">Kazhdan-Lusztig theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/BBDG+decomposition+theorem">BBDG decomposition theorem</a></p>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/representation+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#definition'>Definition</a></li>
+<ul>
+<li><a href='#InRepresentationTheory'>In representation theory</a></li>
+<li><a href='#InCategoryTheory'>In cartesian categories</a></li>
+<li><a href='#InWirthmuellerContexts'>In six operations yoga</a></li>
+</ul>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#closed_monoidal_functors_and_the_projection_formula'>Closed monoidal functors and the projection formula</a></li>
+<li><a href='#relation_to_frobenius_laws_in_frobenius_algebras'>Relation to Frobenius laws (in Frobenius algebras)</a></li>
+</ul>
+<li><a href='#examples'>Examples</a></li>
+<li><a href='#References'>References</a></li>
+</ul>
+</div>
+
+<h2 id="definition">Definition</h2>
+
+<p>The term <em>Frobenius reciprocity</em> has a meaning</p>
+
+<ul>
+<li>
+<p><a href="#InRepresentationTheory">In representation theory</a></p>
+</li>
+
+<li>
+<p><a href="#InCategoryTheory">In category theory</a>.</p>
+</li>
+</ul>
+
+<p>(For different statements of a similar name see the disambiguation at <em><a class="existingWikiWord" href="/nlab/show/Frobenius+theorem">Frobenius theorem</a></em>.)</p>
+
+<h3 id="InRepresentationTheory">In representation theory</h3>
+
+<p>In <a class="existingWikiWord" href="/nlab/show/representation+theory">representation theory</a>, <strong>Frobenius reciprocity</strong> is the statement that the <a class="existingWikiWord" href="/nlab/show/induction+functor">induction functor</a> for <a class="existingWikiWord" href="/nlab/show/group+representation">representations of groups</a> (or in some other <a class="existingWikiWord" href="/nlab/show/algebraic+categories">algebraic categories</a>) is <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> to the <a class="existingWikiWord" href="/nlab/show/restriction">restriction</a> functor. Sometimes it is used for a <a class="existingWikiWord" href="/nlab/show/decategorification">decategorified</a> version of this statement as well, on <a class="existingWikiWord" href="/nlab/show/characters">characters</a>.</p>
+
+<p>Specifically for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi><mo>↪</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">H \hookrightarrow G</annotation></semantics></math> an <a class="existingWikiWord" href="/nlab/show/subgroup">subgroup</a> inclusion, there is an <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Ind</mi><mo>⊣</mo><mi>Res</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>Rep</mi> <mi>G</mi></msub><mover><munder><mo>⟶</mo><mi>Red</mi></munder><mover><mo>←</mo><mi>Ind</mi></mover></mover><msub><mi>Rep</mi> <mi>H</mi></msub></mrow><annotation encoding="application/x-tex">
+  (Ind \dashv Res) \;\colon\;
+  Rep_G
+    \stackrel{\overset{Ind}{\leftarrow}}{\underset{Red}{\longrightarrow}} 
+  Rep_H
+
+</annotation></semantics></math></div>
+<p>between the <a class="existingWikiWord" href="/nlab/show/categories">categories</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/representations">representations</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/representations">representations</a>, where for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho</annotation></semantics></math> an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>-representation, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ind</mi><mo stretchy="false">(</mo><mi>ρ</mi><mo stretchy="false">)</mo><mo>∈</mo><mi>Rep</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Ind(\rho) \in Rep(G)</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/induced+representation">induced representation</a>.</p>
+
+<p>Sometimes also the <em><a class="existingWikiWord" href="/nlab/show/projection+formula">projection formula</a></em></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Ind</mi><mo stretchy="false">(</mo><mi>Res</mi><mo stretchy="false">(</mo><mi>W</mi><mo stretchy="false">)</mo><mo>⊗</mo><mi>V</mi><mo stretchy="false">)</mo><mo>≅</mo><mi>W</mi><mo>⊗</mo><mi>Ind</mi><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  Ind(Res(W) \otimes V) \cong W \otimes Ind(V)
+
+</annotation></semantics></math></div>
+<p>is referred to as <em>Frobenius reciprocity</em> in representation theory (e.g. <a href="http://planetmath.org/frobeniusreciprocity">here on PlanetMath</a>).</p>
+
+<h3 id="InCategoryTheory">In cartesian categories</h3>
+
+<p>In <a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a>, Frobenius reciprocity is a condition on a pair of <a class="existingWikiWord" href="/nlab/show/adjoint+functors">adjoint functors</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f_! \dashv f^*</annotation></semantics></math>. If both categories are <a class="existingWikiWord" href="/nlab/show/cartesian+closed">cartesian closed</a>, then the adjunction is said to satisfy <strong>Frobenius reciprocity</strong> if the <a class="existingWikiWord" href="/nlab/show/right+adjoint">right adjoint</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><mo lspace="verythinmathspace">:</mo><mi>𝒴</mi><mo>→</mo><mi>𝒳</mi></mrow><annotation encoding="application/x-tex">f^* \colon \mathcal{Y} \to \mathcal{X}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/cartesian+closed+functor">cartesian closed functor</a>; that is, if the canonical map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><msup><mi>b</mi> <mi>a</mi></msup><mo stretchy="false">)</mo><mo>→</mo><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><mi>b</mi><msup><mo stretchy="false">)</mo> <mrow><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">f^*(b^a) \to f^*(b)^{f^*(a)}</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> for all objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a,b</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒴</mi></mrow><annotation encoding="application/x-tex">\mathcal{Y}</annotation></semantics></math>.</p>
+
+<p>Each of the functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mo lspace="verythinmathspace" rspace="0em">−</mo> <mi>a</mi></msup></mrow><annotation encoding="application/x-tex">-^a</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mo lspace="verythinmathspace" rspace="0em">−</mo> <mrow><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">-^{f^*(a)}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^*</annotation></semantics></math> has a <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a>, so by the calculus of <a class="existingWikiWord" href="/nlab/show/mates">mates</a>, this condition is equivalent to asking that the canonical “<a class="existingWikiWord" href="/nlab/show/projection+formula">projection</a>” morphism</p>
+<div class="maruku-equation" id="eq:ProjectionMorphism"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>π</mi><mo lspace="verythinmathspace">:</mo><msub><mi>f</mi> <mo>!</mo></msub><mo stretchy="false">(</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>×</mo><mi>c</mi><mo stretchy="false">)</mo><mo>→</mo><mi>a</mi><mo>×</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>c</mi></mrow><annotation encoding="application/x-tex">
+  
+  \pi \colon f_! (f^*a \times c) \to a \times f_! c 
+
+</annotation></semantics></math></div>
+<p>is an isomorphism for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒴</mi></mrow><annotation encoding="application/x-tex">\mathcal{Y}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒳</mi></mrow><annotation encoding="application/x-tex">\mathcal{X}</annotation></semantics></math>.</p>
+
+<p>This holds for instance for the <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> between <a class="existingWikiWord" href="/nlab/show/slice+categories">slice categories</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/b}</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>b</mi><mo>′</mo></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{/b'}</annotation></semantics></math> of a <a class="existingWikiWord" href="/nlab/show/finitely+complete+category">finitely complete category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> along a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>b</mi><mo>′</mo><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f \colon b' \to b </annotation></semantics></math> – by the <a class="existingWikiWord" href="/nlab/show/pasting+law">pasting law</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>:</p>
+<div class="maruku-equation" id="eq:PastingLawForLexCategories"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><msub><mo>×</mo> <mi>b</mi></msub><mi>c</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>a</mi></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd></mtr> <mtr><mtd><mi>c</mi></mtd> <mtd><munder><mo>⟶</mo><mrow><msub><mi>p</mi> <mi>C</mi></msub></mrow></munder></mtd> <mtd><mi>b</mi><mo>′</mo></mtd> <mtd><munder><mo>⟶</mo><mi>f</mi></munder></mtd> <mtd><mi>b</mi></mtd></mtr></mtable></mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mrow><mtable><mtr><mtd><mi>a</mi><msub><mo>×</mo> <mi>b</mi></msub><msub><mi>f</mi> <mo>!</mo></msub><mi>c</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>a</mi></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd></mtr> <mtr><mtd><mi>c</mi></mtd> <mtd><munder><mo>⟶</mo><mrow><mi>f</mi><mo>∘</mo><msub><mi>p</mi> <mi>c</mi></msub></mrow></munder></mtd> <mtd><mi>b</mi><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \array{
+    f^\ast a \times_b c
+    &amp;\longrightarrow&amp;
+    f^\ast a 
+    &amp;\longrightarrow&amp;
+    a
+    \\
+    \big\downarrow
+    &amp;&amp;
+    \big\downarrow
+    &amp;&amp;
+    \big\downarrow
+    \\
+    c 
+    &amp;\underset{p_C}{\longrightarrow}&amp;
+    b'
+    &amp;\underset{f}{\longrightarrow}&amp;
+    b
+  }
+  \;\;\;\;\;\;\;\;
+  \simeq
+  \;\;\;\;\;\;\;\;
+  \array{
+    a
+      \times_b 
+    f_! c 
+    &amp;\longrightarrow&amp;
+    a
+    \\
+    \big\downarrow &amp;&amp; \big\downarrow
+    \\
+    c &amp;\underset{ f \circ p_c }{\longrightarrow}&amp; b
+    \mathrlap{\,.}
+  }
+
+</annotation></semantics></math></div>
+<p>The condition <a class="maruku-eqref" href="#eq:ProjectionMorphism">(1)</a> clearly makes sense also if the categories are <a class="existingWikiWord" href="/nlab/show/cartesian+monoidal+category">cartesian</a> but not necessarily <a class="existingWikiWord" href="/nlab/show/closed+category">closed</a>, and is the usual formulation found in the literature. It is equivalent to saying that the adjunction is a <a class="existingWikiWord" href="/nlab/show/Hopf+adjunction">Hopf adjunction</a> relative to the cartesian monoidal structures.</p>
+
+<p>This terminology is most commonly used in the following situations:</p>
+
+<ul>
+<li>
+<p>When <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^*</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> are the <a class="existingWikiWord" href="/nlab/show/inverse+image">inverse</a> and <a class="existingWikiWord" href="/nlab/show/direct+image">direct image</a> functors along a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> in a <a class="existingWikiWord" href="/nlab/show/hyperdoctrine">hyperdoctrine</a>. Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is a category and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo lspace="verythinmathspace">:</mo><msup><mi>S</mi> <mi>op</mi></msup><mo>→</mo><mi>Cat</mi></mrow><annotation encoding="application/x-tex">P \colon S^{op} \to Cat</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/indexed+category">indexed category</a> such that each category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/cartesian+closed">cartesian closed</a> and each functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><mo>=</mo><mi>P</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">f^* = P f</annotation></semantics></math> has a <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\exists_f</annotation></semantics></math> (<a class="existingWikiWord" href="/nlab/show/existential+quantifier">existential quantifier</a>, also written <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math>). Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> is said to satisfy Frobenius reciprocity, or the <strong>Frobenius condition</strong>, if each of the <a class="existingWikiWord" href="/nlab/show/adjunctions">adjunctions</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>f</mi></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\exists_f\dashv f^*</annotation></semantics></math> does. If the categories <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">P X</annotation></semantics></math> are cartesian but not closed then it still makes sense to ask for Frobenius reciprocity in the second form above, and in that case its logical interpretation is that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∃</mo><mi>x</mi><mo>.</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mo>∧</mo><mi>ψ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exists x . (\phi \wedge \psi)</annotation></semantics></math> is equivalent to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo>∃</mo><mi>x</mi><mo>.</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mo>∧</mo><mi>ψ</mi></mrow><annotation encoding="application/x-tex">(\exists x.\phi) \wedge \psi</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is not free in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi></mrow><annotation encoding="application/x-tex">\psi</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>When <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^*</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/inverse+image">inverse image</a> part of a <a class="existingWikiWord" href="/nlab/show/geometric+morphism">geometric morphism</a> between <a class="existingWikiWord" href="/nlab/show/%28n%2C1%29-topoi">(n,1)-topoi</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> of it, if the <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f_!\dashv f^*</annotation></semantics></math> satisfies Frobenius reciprocity, then the geometric morphism is called <a class="existingWikiWord" href="/nlab/show/locally+n-connected+%28n%2B1%2C1%29-topos">locally (n-1)-connected</a>. In particular, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n=0</annotation></semantics></math> so that we have a <a class="existingWikiWord" href="/nlab/show/continuous+map">continuous map</a> of <a class="existingWikiWord" href="/nlab/show/locales">locales</a>, then a left adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> satisfying Frobenius reciprocity makes it an <a class="existingWikiWord" href="/nlab/show/open+map">open map</a>, and if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=1</annotation></semantics></math> so that we have 1-<a class="existingWikiWord" href="/nlab/show/topoi">topoi</a>, then it is <a class="existingWikiWord" href="/nlab/show/locally+connected+geometric+morphism">locally connected</a> (see also <em><a class="existingWikiWord" href="/nlab/show/open+geometric+morphism">open geometric morphism</a></em>). This usage of “Frobenius reciprocity” is sometimes also extended to the dual situation of <a class="existingWikiWord" href="/nlab/show/proper+map">proper map</a>s of locales and topoi.</p>
+</li>
+</ul>
+
+<h3 id="InWirthmuellerContexts">In six operations yoga</h3>
+
+<p>The projection formula plays a notable role in Grothendieck’s yoga of <a class="existingWikiWord" href="/nlab/show/six+operations">six operations</a>. For example if an <a class="existingWikiWord" href="/nlab/show/adjoint+triple">adjoint triple</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>f</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup><mo>⊣</mo><msub><mi>f</mi> <mo>*</mo></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(f_! \dashv f^\ast \dashv f_\ast)</annotation></semantics></math> between <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric</a> <a class="existingWikiWord" href="/nlab/show/closed+monoidal+categories">closed monoidal categories</a> is a <em><a class="existingWikiWord" href="/nlab/show/Wirthm%C3%BCller+context">Wirthmüller context</a></em> (<a href="#May05">May 05</a>), <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> is a strong <a class="existingWikiWord" href="/nlab/show/closed+monoidal+functor">closed monoidal functor</a>. This implies the projection formula, i.e. the existence of a natural isomorphism</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>π</mi><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>f</mi> <mo>!</mo></msub><mo stretchy="false">(</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>⊗</mo><mi>c</mi><mo stretchy="false">)</mo><mover><mo>⟶</mo><mo>∼</mo></mover><mi>a</mi><mo>⊗</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>c</mi></mrow><annotation encoding="application/x-tex">
+  \pi \colon\;
+  f_!(f^\ast a \otimes c) \stackrel{\sim}{\longrightarrow} a \otimes f_! c
+
+</annotation></semantics></math></div>
+<p>The projection formula also holds in a <a class="existingWikiWord" href="/nlab/show/Grothendieck+context">Grothendieck context</a> or a <a class="existingWikiWord" href="/nlab/show/Verdier-Grothendieck+context">Verdier-Grothendieck context</a> (<a href="#May05">May 05</a>).</p>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="closed_monoidal_functors_and_the_projection_formula">Closed monoidal functors and the projection formula</h3>
+
+<p>The following result isolates the connection between <a class="existingWikiWord" href="/nlab/show/closed+functor">closed functors</a> and the projection formula. We begin with some context.</p>
+
+<p>Recall that a monoidal category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒴</mi></mrow><annotation encoding="application/x-tex">\mathcal{Y}</annotation></semantics></math> is <strong><a href="https://ncatlab.org/nlab/show/closed+monoidal+category#left_right_and_biclosed_monoidal_category">left closed</a></strong> if each functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>⊗</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo lspace="verythinmathspace">:</mo><mi>𝒴</mi><mo>→</mo><mi>𝒴</mi></mrow><annotation encoding="application/x-tex">a \otimes - \colon \mathcal{Y} \to \mathcal{Y}</annotation></semantics></math> has a right adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">]</mo><mo lspace="verythinmathspace">:</mo><mi>𝒴</mi><mo>→</mo><mi>𝒴</mi></mrow><annotation encoding="application/x-tex">[a, -] \colon  \mathcal{Y} \to \mathcal{Y}</annotation></semantics></math>, called the internal hom. We can similarly define right closed monoidal categories. A symmetric or even braided monoidal category is left closed if and only if it is right closed, and one then simply calls it <a class="existingWikiWord" href="/nlab/show/closed+monoidal+category">closed</a>, but for maximum generality we consider the merely monoidal case.</p>
+
+<p>A functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> between left closed monoidal categories is <strong>lax closed</strong> it if preserves the internal hom and the unit object up to a specified map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mover><mi>F</mi><mo stretchy="false">^</mo></mover><mo>:</mo><mi>F</mi><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo><mo>→</mo><mo stretchy="false">[</mo><mi>F</mi><mi>a</mi><mo>,</mo><mi>F</mi><mi>b</mi><mo stretchy="false">]</mo><mo>,</mo><mspace width="2em"></mspace><msub><mi>F</mi> <mn>0</mn></msub><mo>:</mo><mi>I</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>I</mi><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex"> 
+\hat{F}: F[a,b] \to [F a,F b], \qquad  F_0 : I \to F(I),
+
+</annotation></semantics></math></div>
+<p>natural in both variables and obeying some coherence laws listed at <a class="existingWikiWord" href="/nlab/show/closed+functor">closed functor</a>. If these are natural isomorphisms we call the functor <strong>strong closed</strong>. Any lax monoidal functor betweeen left closed monoidal categories is lax closed (for a sketch of the argument see <a class="existingWikiWord" href="/nlab/show/closed+functor">closed functor</a>), but a strong monoidal functor may not be strong closed.</p>
+
+<div class="num_prop">
+<h6 id="proposition">Proposition</h6>
+
+<p>Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f_! \dashv f^\ast</annotation></semantics></math> is an adjunction between left closed monoidal categories. Then natural maps</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo lspace="verythinmathspace">:</mo><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo><mo>→</mo><mo stretchy="false">[</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>,</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>b</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex"> \phi \colon f^*[a,b] \to [f^*a, f^*b]  </annotation></semantics></math></div>
+<p>correspond bijectively to natural maps</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>π</mi><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>f</mi> <mo>!</mo></msub><mo stretchy="false">(</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>⊗</mo><mi>c</mi><mo stretchy="false">)</mo><mo>⟶</mo><mi>a</mi><mo>⊗</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>c</mi></mrow><annotation encoding="application/x-tex">
+  \pi \colon\;
+  f_!(f^\ast a \otimes c) \longrightarrow a \otimes f_! c
+
+</annotation></semantics></math></div>
+<p>Furthermore, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> is an isomorphism if and only if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math> is, in which case we say the <strong>projection formula</strong> holds.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p>Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒳</mi></mrow><annotation encoding="application/x-tex">\mathcal{X}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒴</mi></mrow><annotation encoding="application/x-tex">\mathcal{Y}</annotation></semantics></math> are left closed monoidal categories and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub><mo lspace="verythinmathspace">:</mo><mi>𝒳</mi><mo>→</mo><mi>𝒴</mi></mrow><annotation encoding="application/x-tex">f_! \colon \mathcal{X} \to \mathcal{Y}</annotation></semantics></math> is left adjoint to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><mo lspace="verythinmathspace">:</mo><mi>𝒴</mi><mo>→</mo><mi>𝒳</mi></mrow><annotation encoding="application/x-tex">f^* \colon \mathcal{Y} \to \mathcal{X}</annotation></semantics></math>. Suppose we have a natural map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo lspace="verythinmathspace">:</mo><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo><mo>→</mo><mo stretchy="false">[</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>,</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>b</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex"> \phi \colon f^*[a,b] \to [f^*a, f^*b]  </annotation></semantics></math></div>
+<p>for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>∈</mo><mi>𝒴</mi></mrow><annotation encoding="application/x-tex">a,b \in \mathcal{Y}</annotation></semantics></math>. Thus we obtain a natural map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>𝒳</mi><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo>→</mo><mi>𝒳</mi><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mo stretchy="false">[</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>,</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>b</mi><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex"> \mathcal{X}(c, f^*[a,b]) \to \mathcal{X}(c, [f^*a, f^*b]), </annotation></semantics></math></div>
+<p>for arbitrary <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>𝒳</mi></mrow><annotation encoding="application/x-tex">c \in \mathcal{X}</annotation></semantics></math> (now natural in all three variables). By hom-tensor adjointness and the fact that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub></mrow><annotation encoding="application/x-tex">f_!</annotation></semantics></math> is the left adjoint of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^*</annotation></semantics></math> we can rewrite this as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>𝒴</mi><mo stretchy="false">(</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>c</mi><mo>,</mo><mo stretchy="false">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo>→</mo><mi>𝒳</mi><mo stretchy="false">(</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>⊗</mo><mi>c</mi><mo>,</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>b</mi><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex"> \mathcal{Y}(f_! c, [a,b]) \to \mathcal{X}(f^*a \otimes c,f^*b). </annotation></semantics></math></div>
+<p>Using both these facts again we obtain</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>𝒴</mi><mo stretchy="false">(</mo><mi>a</mi><mo>⊗</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>c</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>→</mo><mi>𝒳</mi><mo stretchy="false">(</mo><msub><mi>f</mi> <mo>!</mo></msub><mo stretchy="false">(</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>⊗</mo><mi>c</mi><mo stretchy="false">)</mo><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex"> \mathcal{Y}(a \otimes f_! c, b) \to \mathcal{X}(f_!(f^\ast a \otimes c), b)\,. </annotation></semantics></math></div>
+<p>By the <a class="existingWikiWord" href="/nlab/show/Yoneda+lemma">Yoneda lemma</a> this gives the desired natural map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>π</mi><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>f</mi> <mo>!</mo></msub><mo stretchy="false">(</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>a</mi><mo>⊗</mo><mi>c</mi><mo stretchy="false">)</mo><mo>⟶</mo><mi>a</mi><mo>⊗</mo><msub><mi>f</mi> <mo>!</mo></msub><mi>c</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \pi \colon\;
+  f_!(f^\ast a \otimes c) \longrightarrow a \otimes f_! c\,.
+
+</annotation></semantics></math></div>
+<p>By running through this calculation one can see that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> is a invertible then all the other natural maps listed above are too, including <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>. Conversely, starting with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math> we can run the argument backwards and get <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math>, and if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math> is invertible then so is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math>.</p>
+</div>
+
+<p>It follows that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^*</annotation></semantics></math> is strong closed, the projection formula holds. Also if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is strong monoidal and the projection formula holds, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^*</annotation></semantics></math> is strong closed.</p>
+
+<h3 id="relation_to_frobenius_laws_in_frobenius_algebras">Relation to Frobenius laws (in Frobenius algebras)</h3>
+
+<p>The name “Frobenius” is sometimes used to refer to other conditions on adjunctions, known as “Frobenius laws”. The formal structure of the Frobenius law appears in the notion of <a class="existingWikiWord" href="/nlab/show/Frobenius+algebra">Frobenius algebra</a>, in the axiom which relates multiplication to comultiplication, and recurs in another form isolated by Carboni and Walters in their studies of cartesian bicategories and bicategories of relations. Namely, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>δ</mi><mo lspace="verythinmathspace">:</mo><mn>1</mn><mo>→</mo><mo>⊗</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">\delta \colon 1 \to \otimes \Delta</annotation></semantics></math> denotes the diagonal transformation on a cartesian bicategory (e.g., <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Rel</mi></mrow><annotation encoding="application/x-tex">Rel</annotation></semantics></math>), with right adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>δ</mi> <mo>†</mo></msup></mrow><annotation encoding="application/x-tex">\delta^\dagger</annotation></semantics></math>, then there is a canonical map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>δ</mi><msup><mi>δ</mi> <mo>†</mo></msup><mover><mo>→</mo><mi>ϕ</mi></mover><mo stretchy="false">(</mo><mn>1</mn><mo>⊗</mo><msup><mi>δ</mi> <mo>†</mo></msup><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>δ</mi><mo>⊗</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta \delta^\dagger \stackrel{\phi}{\to} (1 \otimes \delta^\dagger)(\delta \otimes 1)</annotation></semantics></math></div>
+<p>mated to the coassociativity isomorphism</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>⊗</mo><mi>δ</mi><mo stretchy="false">)</mo><mi>δ</mi><mo>→</mo><mo stretchy="false">(</mo><mi>δ</mi><mo>⊗</mo><mn>1</mn><mo stretchy="false">)</mo><mi>δ</mi></mrow><annotation encoding="application/x-tex">(1 \otimes \delta)\delta \to (\delta \otimes 1)\delta</annotation></semantics></math></div>
+<p>and the <strong>Frobenius law</strong> here is the assumption that <em>the 2-cell <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> is an isomorphism</em>. (There are two Frobenius laws actually; the other is that a similar canonical map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>δ</mi><msup><mi>δ</mi> <mo>†</mo></msup><mover><mo>→</mo><mrow><mi>ϕ</mi><mo>′</mo></mrow></mover><mo stretchy="false">(</mo><msup><mi>δ</mi> <mo>†</mo></msup><mo>⊗</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>⊗</mo><mi>δ</mi><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">\delta \delta^\dagger \stackrel{\phi'}{\to} (\delta^\dagger \otimes 1)(1 \otimes \delta),</annotation></semantics></math></div>
+<p>mated to the inverse coassociativity, is also an isomorphism. However, it may be shown that if one of the Frobenius laws holds, then so does the other; see the article <a class="existingWikiWord" href="/nlab/show/bicategory+of+relations">bicategory of relations</a>.)</p>
+
+<p>It is very easy to make a slip and call the Frobenius law “Frobenius reciprocity”, perhaps all the more because there are close connections between the two. One example occurs in the context of bicategories of relations, as follows.</p>
+
+<p>Given a locally posetal <a class="existingWikiWord" href="/nlab/show/cartesian+bicategory">cartesian bicategory</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> and any object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, one may construct a hyperdoctrine of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo>−</mo><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo><mo lspace="verythinmathspace">:</mo><mi>Map</mi><mo stretchy="false">(</mo><mi>B</mi><msup><mo stretchy="false">)</mo> <mi>op</mi></msup><mo>→</mo><mi>Semilat</mi></mrow><annotation encoding="application/x-tex">\hom_B(i-, c)\colon Map(B)^{op} \to Semilat</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>:</mo><mi>Map</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">i: Map(B) \to B</annotation></semantics></math> is the inclusion, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Semilat</mi></mrow><annotation encoding="application/x-tex">Semilat</annotation></semantics></math> is the 2-category of meet-semilattices. Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>∈</mo><mi>hom</mi><mo stretchy="false">(</mo><mi>i</mi><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r \in \hom(i b, c)</annotation></semantics></math> is thought of as a relation from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math>, and for a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f: a \to b</annotation></semantics></math>, the relation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><mi>r</mi></mrow><annotation encoding="application/x-tex">f^\ast r</annotation></semantics></math> is the pulling back</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><mi>r</mi><mo>≔</mo><mo stretchy="false">(</mo><mi>a</mi><mover><mo>→</mo><mi>f</mi></mover><mi>b</mi><mover><mo>→</mo><mi>r</mi></mover><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f^\ast r \coloneqq (a \stackrel{f}{\to} b \stackrel{r}{\to} 1)</annotation></semantics></math></div>
+<p>along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>, and one may show that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><mo lspace="verythinmathspace" rspace="0em">−</mo></mrow><annotation encoding="application/x-tex">f^\ast-</annotation></semantics></math> preserves finite local meets. Indeed, the pushforward or quantification along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> takes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>q</mi><mo>:</mo><mi>a</mi><mo>→</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">q: a \to 1</annotation></semantics></math> to</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>f</mi></msub><mi>q</mi><mo>≔</mo><mo stretchy="false">(</mo><mi>b</mi><mover><mo>→</mo><mrow><msup><mi>f</mi> <mo>†</mo></msup></mrow></mover><mi>a</mi><mover><mo>→</mo><mi>q</mi></mover><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exists_f q \coloneqq (b \stackrel{f^\dagger}{\to} a \stackrel{q}{\to} 1)</annotation></semantics></math></div>
+<p>and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>f</mi></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\exists_f \dashv f^\ast</annotation></semantics></math> because <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>†</mo></msup></mrow><annotation encoding="application/x-tex">f^\dagger</annotation></semantics></math> is <em>right</em> adjoint to the map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>. Because <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><mo lspace="verythinmathspace" rspace="0em">−</mo></mrow><annotation encoding="application/x-tex">f^\ast-</annotation></semantics></math> is a right adjoint, it preserves local meets.</p>
+
+<p>Frobenius reciprocity in this context, ordinarily written as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>∧</mo><msub><mo>∃</mo> <mi>f</mi></msub><mi>q</mi><mo>=</mo><msub><mo>∃</mo> <mi>f</mi></msub><mo stretchy="false">(</mo><msup><mi>f</mi> <mo>*</mo></msup><mi>r</mi><mo>∧</mo><mi>q</mi><mo stretchy="false">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">r \wedge \exists_f q = \exists_f (f^\ast r \wedge q),</annotation></semantics></math></div>
+<p>can then be restated for the hyperdoctrine <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo>−</mo><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\hom_B(i-, c)</annotation></semantics></math>; it takes the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>∧</mo><mi>q</mi><msup><mi>f</mi> <mo>†</mo></msup><mo>=</mo><mo stretchy="false">(</mo><mi>r</mi><mi>f</mi><mo>∧</mo><mi>q</mi><mo stretchy="false">)</mo><msup><mi>f</mi> <mo>†</mo></msup></mrow><annotation encoding="application/x-tex">r \wedge q f^\dagger = (r f \wedge q)f^\dagger</annotation></semantics></math></div>
+<p>for any map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f: a \to b</annotation></semantics></math> and predicates <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>q</mi><mo>∈</mo><mi>hom</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">q \in \hom(a, c)</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>∈</mo><mi>hom</mi><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r \in \hom(b, c)</annotation></semantics></math>.</p>
+
+<p>Meanwhile, recall that a <strong>bicategory of relations</strong> is a (locally posetal) cartesian bicategory in which the Frobenius laws hold.</p>
+
+<div class="num_prop" id="FLtoFR">
+<h6 id="proposition_2">Proposition</h6>
+
+<p>Frobenius reciprocity holds in each hyperdoctrine <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>hom</mi> <mi>B</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo>−</mo><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\hom_B(i-, c)</annotation></semantics></math> associated with a bicategory of relations.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_sketch">Proof (sketch)</h6>
+
+<p>One first proves that a bicategory of relations is a compact closed bicategory in which each object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> is self-dual. The unit here is given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>η</mi> <mi>b</mi></msub><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mover><mo>→</mo><mrow><msup><mi>ε</mi> <mo>†</mo></msup></mrow></mover><mi>b</mi><mover><mo>→</mo><mi>δ</mi></mover><mi>b</mi><mo>⊗</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\eta_b = (1 \stackrel{\varepsilon^\dagger}{\to} b \stackrel{\delta}{\to} b \otimes b)</annotation></semantics></math></div>
+<p>and the counit by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>θ</mi> <mi>b</mi></msub><mo>=</mo><mo stretchy="false">(</mo><mi>b</mi><mo>⊗</mo><mi>b</mi><mover><mo>→</mo><mrow><msup><mi>δ</mi> <mo>†</mo></msup></mrow></mover><mi>b</mi><mover><mo>→</mo><mi>ε</mi></mover><mn>1</mn><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">\theta_b = (b \otimes b \stackrel{\delta^\dagger}{\to} b \stackrel{\varepsilon}{\to} 1).</annotation></semantics></math></div>
+<p>Using this duality, each relation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>:</mo><mi>b</mi><mo>→</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">r: b \to c</annotation></semantics></math> has an opposite relation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>r</mi> <mi>op</mi></msup><mo lspace="verythinmathspace">:</mo><mi>c</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">r^{op} \colon c \to b</annotation></semantics></math> given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>c</mi><mover><mo>→</mo><mrow><mi>c</mi><mo>⊗</mo><msub><mi>η</mi> <mi>b</mi></msub></mrow></mover><mi>c</mi><mo>⊗</mo><mi>b</mi><mo>⊗</mo><mi>b</mi><mover><mo>→</mo><mrow><mn>1</mn><mo>⊗</mo><mi>r</mi><mo>⊗</mo><mn>1</mn></mrow></mover><mi>c</mi><mo>⊗</mo><mi>c</mi><mo>⊗</mo><mi>b</mi><mover><mo>→</mo><mrow><msub><mi>θ</mi> <mi>c</mi></msub><mo>⊗</mo><mi>b</mi></mrow></mover><mi>b</mi><mo>.</mo></mrow><annotation encoding="application/x-tex">c \stackrel{c \otimes \eta_b}{\to} c \otimes b \otimes b \stackrel{1 \otimes r \otimes 1}{\to} c \otimes c \otimes b \stackrel{\theta_c \otimes b}{\to} b.</annotation></semantics></math></div>
+<p>It may further be shown that in a bicategory of relations, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f: a \to b</annotation></semantics></math> is a map, then its right adjoint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>†</mo></msup></mrow><annotation encoding="application/x-tex">f^\dagger</annotation></semantics></math> equals the opposite <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">f^{op}</annotation></semantics></math>. Therefore Frobenius reciprocity becomes the equation</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>∧</mo><mi>q</mi><msup><mi>f</mi> <mi>op</mi></msup><mo>=</mo><mo stretchy="false">(</mo><mi>r</mi><mi>f</mi><mo>∧</mo><mi>q</mi><mo stretchy="false">)</mo><msup><mi>f</mi> <mi>op</mi></msup></mrow><annotation encoding="application/x-tex">r \wedge q f^{op} = (r f \wedge q)f^{op}</annotation></semantics></math></div>
+<p>but in fact this is just a special case of the more general modular law, which holds in a bicategory of relations as shown <a href="http://rfcwalters.blogspot.com/2009/10/categorical-algebras-of-relations.html">here</a> in a blog post by Walters. The modular law in turn depends crucially upon the Frobenius laws.</p>
+</div>
+
+<p>Thus, in this instance, <em>Frobenius reciprocity follows from the Frobenius laws</em>.</p>
+
+<div class="num_prop" id="FRtoFL">
+<h6 id="proposition_3">Proposition</h6>
+
+<p>In a locally posetal cartesian bicategory, the Frobenius laws follow from Frobenius reciprocity.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_2">Proof</h6>
+
+<p>Again, Frobenius reciprocity in a (locally posetal) cartesian bicategory <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> means that for any map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f: a \to b</annotation></semantics></math> and any two relations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>q</mi><mo>∈</mo><mi>B</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">q \in B(a, c)</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>∈</mo><mi>B</mi><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r \in B(b, c)</annotation></semantics></math>, the canonical inclusion</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>q</mi><mo>∧</mo><mi>r</mi><mi>f</mi><mo stretchy="false">)</mo><msup><mi>f</mi> <mo>†</mo></msup><mo>≤</mo><mi>q</mi><msup><mi>f</mi> <mo>†</mo></msup><mo>∧</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">(q \wedge r f)f^\dagger \leq q f^\dagger \wedge r</annotation></semantics></math></div>
+<p>is an equality. One (and therefore both) of the Frobenius laws will follow by taking the following choices for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>=</mo><msub><mi>δ</mi> <mi>x</mi></msub><mo>,</mo><mspace width="2em"></mspace><mi>q</mi><mo>=</mo><msubsup><mi>ε</mi> <mi>x</mi> <mo>†</mo></msubsup><mo>⊗</mo><msub><mn>1</mn> <mi>x</mi></msub><mo>,</mo><mspace width="2em"></mspace><mi>r</mi><mo>=</mo><msub><mi>ε</mi> <mi>x</mi></msub><mo>⊗</mo><msub><mn>1</mn> <mi>x</mi></msub><mo>⊗</mo><msubsup><mi>ε</mi> <mi>x</mi> <mo>†</mo></msubsup></mrow><annotation encoding="application/x-tex">f = \delta_x, \qquad q = \varepsilon_{x}^{\dagger} \otimes 1_x, \qquad r = \varepsilon_x \otimes 1_x \otimes \varepsilon_{x}^{\dagger}</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mi>x</mi></msub><mo>:</mo><mi>x</mi><mo>→</mo><mi>x</mi><mo>⊗</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\delta_x: x \to x \otimes x</annotation></semantics></math> is the diagonal map and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ε</mi> <mi>x</mi></msub><mo>:</mo><mi>x</mi><mo>→</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\varepsilon_x: x \to 1</annotation></semantics></math> is the projection. The remainder of the proof is best exhibited by a string diagram calculation, which is given here: <a class="existingWikiWord" href="/nlab/files/Frobenius-reciprocity.pdf" title="Frobenius reciprocity implies the Frobenius law in a cartesian bicategory">Frobenius reciprocity implies the Frobenius law in a cartesian bicategory</a>.</p>
+</div>
+
+<h2 id="examples">Examples</h2>
+
+<div class="num_example">
+<h6 id="example">Example</h6>
+
+<p>Generally, for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>H</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{H}</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/topos">topos</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>X</mi><mo>⟶</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f \;\colon\; X \longrightarrow Y</annotation></semantics></math> any <a class="existingWikiWord" href="/nlab/show/morphism">morphism</a>, then the induced <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> <a class="existingWikiWord" href="/nlab/show/etale+geometric+morphism">etale geometric morphism</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>f</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup><mo>⊣</mo><msub><mi>f</mi> <mo>*</mo></msub><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>X</mi></mrow></msub><mo>→</mo><msub><mstyle mathvariant="bold"><mi>H</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>Y</mi></mrow></msub></mrow><annotation encoding="application/x-tex">
+  (f_! \dashv f^\ast \dashv f_\ast)
+  \;\colon\;
+  \mathbf{H}_{/X}
+  \to 
+  \mathbf{H}_{/Y}
+
+</annotation></semantics></math></div>
+<p>has <a class="existingWikiWord" href="/nlab/show/inverse+image">inverse image</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/cartesian+closed+functor">cartesian closed functor</a> and hence (see there) exhibits Frobenius reciprocity.</p>
+</div>
+
+<h2 id="References">References</h2>
+
+<p>The term ‘Frobenius reciprocity’, in the context of hyperdoctrines, was introduced by Lawvere in</p>
+
+<ul>
+<li>F.W. Lawvere, <em>Equality in hyperdoctrines and comprehension schema as an adjoint functor</em>, Proceedings of the AMS Symposium on Pure Mathematics XVII (1970), 1-14.</li>
+</ul>
+
+<p>Lawvere defines Frobenius reciprocity by either of the two equivalent conditions (see “Definition-Theorem” on p.6), and notes that “one of these kinds of identities is formally similar to, and reduces in particular to, the Frobenius reciprocity formula for permutation representations of groups” (p.1).</p>
+
+<p>A textbook source is around lemma 1.5.8 in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Peter+Johnstone">Peter Johnstone</a>, <em><a class="existingWikiWord" href="/nlab/show/Sketches+of+an+Elephant">Sketches of an Elephant</a></em></li>
+</ul>
+
+<p>General discussion in the context of projection formulas in <a class="existingWikiWord" href="/nlab/show/monoidal+categories">monoidal categories</a> (not necessarily cartesian) is in</p>
+
+<ul id="May05">
+<li>H. Fausk, P. Hu, <a class="existingWikiWord" href="/nlab/show/Peter+May">Peter May</a>, <em>Isomorphisms between left and right adjoints</em>, Theory and Applications of Categories , Vol. 11, 2003, No. 4, pp 107-131. (<a href="http://www.tac.mta.ca/tac/volumes/11/4/11-04abs.html">TAC</a>, <a href="http://www.math.uiuc.edu/K-theory/0573/FormalFeb16.pdf">pdf</a>)</li>
+</ul>
+
+<p>Manifestations of the Frobenius reciprocity formula, <a href="#InCartegoryTheory">in the sense of category theory</a>, recur throughout mathematics in various forms (push-pull formula, projection formula); see for example this Math Overflow post:</p>
+
+<ul>
+<li>Andrea Ferretti, Ubiquity of the push-pull formula, MO Question 18799, March 20, 2010. <a href="http://mathoverflow.net/questions/18799/ubiquity-of-the-push-pull-formula">(link)</a></li>
+</ul>
+
+<p>Further MO discussion includes</p>
+
+<ul>
+<li><a href="http://mathoverflow.net/questions/132272/wrong-way-frobenius-reciprocity-for-finite-groups-representations">Wrong-way Frobenius reciprocity for finite groups representations</a></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on June 21, 2022 at 10:02:21.
+    See the <a href="/nlab/history/Frobenius+reciprocity" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Frobenius+reciprocity" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/2396/#Item_22">Discuss</a><span class="backintime"><a href="/nlab/revision/Frobenius+reciprocity/51" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Frobenius+reciprocity" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Frobenius+reciprocity" accesskey="S" class="navlink" id="history" rel="nofollow">History (51 revisions)</a>
+  <a href="/nlab/show/Frobenius+reciprocity/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Frobenius+reciprocity" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Frobenius+reciprocity" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

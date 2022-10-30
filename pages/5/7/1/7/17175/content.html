@@ -1,0 +1,713 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Conner-Floyd Chern class in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Conner-Floyd Chern class
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/11850/#Item_3" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="algebraic_topology">Algebraic topology</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/algebraic+topology">algebraic topology</a></strong> – application of <a class="existingWikiWord" href="/nlab/show/higher+algebra">higher algebra</a> and <a class="existingWikiWord" href="/nlab/show/higher+category+theory">higher category theory</a> to the study of (<a class="existingWikiWord" href="/nlab/show/stable+homotopy+theory">stable</a>) <a class="existingWikiWord" href="/nlab/show/homotopy+theory">homotopy theory</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/topological+space">topological space</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type">homotopy type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+group">homotopy</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/cohomology">cohomology</a></p>
+
+<p><a class="existingWikiWord" href="/nlab/show/homology">homology</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/spectral+sequence">spectral sequence</a></p>
+</li>
+</ul>
+</div></div>
+</div>
+</div>
+
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#Definition'>Definition</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>The concept of <a class="existingWikiWord" href="/nlab/show/Chern+classes">Chern classes</a> of <a class="existingWikiWord" href="/nlab/show/complex+vector+bundles">complex vector bundles</a>, as <a class="existingWikiWord" href="/nlab/show/universal+characteristic+classes">universal characteristic classes</a> in <a class="existingWikiWord" href="/nlab/show/ordinary+cohomology">ordinary cohomology</a>, generalizes to any <a class="existingWikiWord" href="/nlab/show/complex+oriented+cohomology">complex oriented</a> <a class="existingWikiWord" href="/nlab/show/generalized+cohomology+theory">generalized cohomology theory</a>: the <em>Conner-Floyd Chern classes</em> (<a href="#ConnerFloyd66">Conner-Floyd 66, Section 7</a>, <a href="#Adams74">Adams 74, Section I.4</a>, review in <a href="#Kochman96">Kochman 96, Section 4.3</a>, <a href="#Lurie10">Lurie 10, Lectures 4 and 5</a>):</p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/generalized+cohomology+theory">generalized cohomology theory</a>, the analog of the <a class="existingWikiWord" href="/nlab/show/first+Chern+class">first Chern class</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>-cohomology is what appears in the very definition of <a class="existingWikiWord" href="/nlab/show/complex+oriented+cohomology">complex oriented cohomology</a>. The higher generalized Chern classes are induced from this by the <a class="existingWikiWord" href="/nlab/show/splitting+principle">splitting principle</a>. See also at <em><a href="complex+oriented+cohomology+theory#TheCohomologyRingOfBUn">complex oriented cohomology – the cohomology ring of BU(n)</a></em>.</p>
+
+<p>The Conner-Floyd Chern classes in top degree serve as the generalized <a class="existingWikiWord" href="/nlab/show/Thom+classes">Thom classes</a> that make every <a class="existingWikiWord" href="/nlab/show/complex+vector+bundle">complex vector bundle</a> have <a class="existingWikiWord" href="/nlab/show/orientation+in+generalized+cohomology">orientation in generalized cohomology</a> with respect to any <a class="existingWikiWord" href="/nlab/show/complex+oriented+cohomology+theory">complex oriented cohomology theory</a> (<a href="#Lurie10">Lurie 10, lecture 5, prop. 6</a>).</p>
+
+<h2 id="Definition">Definition</h2>
+
+<p>The definition of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>-Chern classes according to <a href="#ConnerFloyd66">Conner-Floyd 66, Theorem 7.6</a> proceeds as follows.</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">n \in \mathbb{N}</annotation></semantics></math>. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup></mrow><annotation encoding="application/x-tex">c_1^E</annotation></semantics></math> in</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>ℂ</mi><msup><mi>P</mi> <mn>1</mn></msup></mtd> <mtd><mover><mo>⟶</mo><mrow><msup><mi>Σ</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><msup><mn>1</mn> <mi>E</mi></msup><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd><msub><mi>E</mi> <mn>2</mn></msub></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd><msub><mo>↗</mo> <mpadded width="0"><mrow><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup></mrow></mpadded></msub></mtd></mtr> <mtr><mtd><mi>ℂ</mi><msup><mi>P</mi> <mn>∞</mn></msup></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathbb{C}P^1
+    &amp;
+      \overset
+        { \Sigma^2 (1^E) }
+        {\longrightarrow}
+    &amp;
+    E_2
+    \\
+    \big\downarrow &amp; \nearrow_{ \mathrlap{ c_1^E } }
+    \\
+    \mathbb{C}P^\infty
+  }
+
+</annotation></semantics></math></div>
+<p>be a <a class="existingWikiWord" href="/nlab/show/complex+oriented+cohomology">complex orientation</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>-cohomology.</p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒱</mi><mo>⟶</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">\mathcal{V} \longrightarrow X</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/complex+vector+bundle">complex vector bundle</a> of <a class="existingWikiWord" href="/nlab/show/rank+of+a+vector+bundle">rank</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n + 1</annotation></semantics></math> consider the diagram</p>
+<div class="maruku-equation" id="eq:ProjectiveBundleInConstructionOfConnerFloydClasses"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd></mtd> <mtd></mtd> <mtd><mi>𝒱</mi><mo>′</mo><mo>⊕</mo><msub><mi>ℒ</mi> <mrow><msub><mrow></mrow> <mrow><mi>P</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mrow></msub></mrow></msub></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>𝒱</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd><msup><mrow></mrow> <mrow><msub><mo></mo><mrow><mo stretchy="false">(</mo><mi>pb</mi><mo stretchy="false">)</mo></mrow></msub></mrow></msup></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd></mtr> <mtr><mtd><mi>ℂ</mi><msup><mi>P</mi> <mi>n</mi></msup></mtd> <mtd><munder><mo>⟶</mo><mrow><msub><mi>fib</mi> <mi>x</mi></msub></mrow></munder></mtd> <mtd><mi>P</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mtd> <mtd><munder><mo>⟶</mo><mi>π</mi></munder></mtd> <mtd><mi>X</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \array{
+    &amp;&amp;
+    \mathcal{V}' 
+      \oplus
+    \mathcal{L}_{{}_{P(\mathcal{V})}}
+    &amp;\longrightarrow&amp;
+    \mathcal{V}
+    \\
+    &amp;&amp;
+    \big\downarrow
+    &amp; 
+      {}^{_{(pb)}} 
+    &amp;
+    \big\downarrow
+    \\
+    \mathbb{C}P^n
+    &amp;
+      \underset{
+        fib_x
+      }{
+        \longrightarrow
+      }
+    &amp;
+    P(\mathcal{V})
+    &amp;
+      \underset
+        {\pi}
+        {\longrightarrow}
+    &amp;
+    X
+  }
+
+</annotation></semantics></math></div>
+<p>where</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>𝒱</mi><mo>∖</mo><mo stretchy="false">{</mo><mi>X</mi><mo>×</mo><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo><mo stretchy="false">}</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mo stretchy="false">/</mo><msup><mi>ℂ</mi> <mo>×</mo></msup><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mi>S</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mi mathvariant="normal">U</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  P(\mathcal{V}) 
+  \;\coloneqq\;  
+  \big(
+    \mathcal{V} \setminus \{ X \times \{0\} \} 
+  \big) / \mathbb{C}^\times
+  \;\simeq\; 
+  S(\mathcal{V})/\mathrm{U}(1)
+
+</annotation></semantics></math></div>
+<p>is the <a class="existingWikiWord" href="/nlab/show/projective+bundle">projective bundle</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒱</mi></mrow><annotation encoding="application/x-tex">\mathcal{V}</annotation></semantics></math>, with <a class="existingWikiWord" href="/nlab/show/typical+fiber">typical fiber</a> the <a class="existingWikiWord" href="/nlab/show/complex+projective+spaces">complex projective spaces</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi><msup><mi>P</mi> <mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\mathbb{C}P^n</annotation></semantics></math>, and where in the middle we are displaying the <a class="existingWikiWord" href="/nlab/show/splitting+principle">splitting</a> (<a href="projective+bundle#Splitting">here</a>) of the <a class="existingWikiWord" href="/nlab/show/pullback+bundle">pullback bundle</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math> into a <a class="existingWikiWord" href="/nlab/show/direct+sum+of+vector+bundles">direct sum</a> of a <a class="existingWikiWord" href="/nlab/show/line+bundle">line bundle</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℒ</mi></mrow><annotation encoding="application/x-tex">\mathcal{L}</annotation></semantics></math> with a remaining vector bundle <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒱</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\mathcal{V}'</annotation></semantics></math> of rank just <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+
+<p>Using the defining conditions on the total Conner-Floyd Chern class</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mn>1</mn><mo>+</mo><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mo>+</mo><msubsup><mi>c</mi> <mn>2</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mo>+</mo><msubsup><mi>c</mi> <mn>3</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mo>+</mo><mi>⋯</mi></mrow><annotation encoding="application/x-tex">
+  c^E(\mathcal{V})
+  \;\coloneqq\;
+  1 
+    + 
+  c_1^E(\mathcal{V})
+    + 
+  c_2^E(\mathcal{V})
+    + 
+  c_3^E(\mathcal{V})
+    + 
+  \cdots
+
+</annotation></semantics></math></div>
+<p>that</p>
+
+<ol>
+<li>
+<p>on a <a class="existingWikiWord" href="/nlab/show/complex+line+bundle">complex line bundle</a> we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c^E(\mathcal{L}) =  1 + c_1^E(\mathcal{L})</annotation></semantics></math> for the given complex orientation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup></mrow><annotation encoding="application/x-tex">c_1^E</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>on a <a class="existingWikiWord" href="/nlab/show/direct+sum+of+vector+bundles">direct sum of vector bundles</a> we have the <a href="Chern+class#WhitneySumFormula">Whitney sum formula</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒱</mi><mo>⊕</mo><mi>𝒲</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mo>⋅</mo><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒲</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c^E(\mathcal{V} \oplus \mathcal{W}) \;=\; c^E(\mathcal{V}) \cdot c^E(\mathcal{W})</annotation></semantics></math></p>
+</li>
+</ol>
+
+<p>we see from <a class="maruku-eqref" href="#eq:ProjectiveBundleInConstructionOfConnerFloydClasses">(1)</a> that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>π</mi> <mo>*</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="blue"><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mstyle><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒱</mi><mo>′</mo><mo stretchy="false">)</mo><mo>⋅</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mn>1</mn><mo>+</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>∈</mo><mspace width="thickmathspace"></mspace><msup><mi>E</mi> <mo>•</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  \pi^\ast
+  \big(
+    {\color{blue}
+      c^E(\mathcal{V})  
+    }
+  \big)
+  \;=\;
+  c^E(\mathcal{V}')
+  \cdot
+  \big(
+    1 
+      + 
+    {\color{orange} 
+      c^E_1(\mathcal{L})
+    }
+  \big)
+  \;\;\;
+  \in
+  \;
+  E^\bullet\big( P(\mathcal{V}) \big)
+
+</annotation></semantics></math></div>
+<p>and hence</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒱</mi><mo>′</mo><mo stretchy="false">)</mo></mtd> <mtd><mo>=</mo><mspace width="thickmathspace"></mspace><msup><mi>π</mi> <mo>*</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="blue"><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mstyle><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>⋅</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mn>1</mn><mo>+</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>≔</mo><mspace width="thickmathspace"></mspace><msup><mi>π</mi> <mo>*</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="blue"><msup><mi>c</mi> <mi>E</mi></msup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mstyle><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>⋅</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mi>k</mi></munder><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mi>k</mi></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>k</mi></msup><mspace width="thinmathspace"></mspace><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+    c^E(\mathcal{V}')
+    &amp; =\;
+    \pi^\ast 
+    \big(
+      {\color{blue}
+        c^E(\mathcal{V})
+      }
+    \big)
+    \cdot
+    \big(
+      1 + 
+      {
+        \color{orange}
+        c_1^E(\mathcal{L}) 
+      }
+    \big)^{-1}
+    \\
+    &amp; \coloneqq\;
+    \pi^\ast
+    \big(
+      {\color{blue}
+      c^E(\mathcal{V})
+      }
+    \big)
+    \cdot
+    \underset{k}{\sum} 
+    (-1)^k 
+    \big(
+      {\color{orange}
+        c_1^E(\mathcal{L})
+      }
+    \big)^k
+    \,.
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>But since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒱</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\mathcal{V}'</annotation></semantics></math> is just of rank <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>, we must have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>c</mi> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo>′</mo><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c^E_{n+1}(\mathcal{V}') = 0</annotation></semantics></math>, and hence in degree <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">2(n+1)</annotation></semantics></math> this condition reads as follows:</p>
+<div class="maruku-equation" id="eq:DefiningConditionOnConnerFloydChernClasses"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mn>0</mn></mtd> <mtd><mo>=</mo><mspace width="thickmathspace"></mspace><msup><mi>π</mi> <mo>*</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="blue"><msubsup><mi>c</mi> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mstyle><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>−</mo><msup><mi>π</mi> <mo>*</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="blue"><msubsup><mi>c</mi> <mi>n</mi> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mstyle><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>⋅</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><mo>+</mo><msup><mi>π</mi> <mo>*</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="blue"><msubsup><mi>c</mi> <mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mstyle><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>⋅</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mn>2</mn></msup><mo>−</mo><mi>⋯</mi><mo>+</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mi>n</mi></msup><msup><mi>π</mi> <mo>*</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="blue"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mstyle><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>⋅</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>n</mi></msup></mtd></mtr> <mtr><mtd></mtd> <mtd><mphantom><mo>=</mo></mphantom><mo>+</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mspace width="thinmathspace"></mspace><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \begin{aligned}
+  0
+  &amp; =\;
+  \pi^\ast
+  \big(
+    {\color{blue}
+      c^E_{n+1}(\mathcal{V})
+    }
+  \big)
+  -
+  \pi^\ast
+  \big(
+    {\color{blue}
+      c^E_{n}(\mathcal{V})
+    }
+  \big)
+  \cdot
+  {\color{orange}
+    c_1^E(\mathcal{L})
+  }
+  + 
+  \pi^\ast
+  \big(
+    {\color{blue}
+      c^E_{n-1}(\mathcal{V})
+    }
+  \big)
+  \cdot
+  \big(
+    {\color{orange}
+      c_1^E(\mathcal{L})
+    }
+  \big)^2
+  - 
+  \cdots
+  +
+  (-1)^n
+  \pi^\ast
+  \big(
+    {\color{blue}
+      c^E_{1}(\mathcal{V})
+    }
+  \big)
+  \cdot
+  \big(
+    {\color{orange}
+      c_1^E(\mathcal{L})
+    }
+  \big)^n
+  \\
+  &amp; 
+  \phantom{=}
+  + 
+  (-1)^{n+1}
+  \big(
+    {\color{orange}
+      c_1^E(\mathcal{L})
+    }
+  \big)^{n+1}
+  \,.
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>It is now sufficient to observe that</p>
+
+<ol>
+<li>
+<p>the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>-cohomology of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(\mathcal{V})</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/free+module">free</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>E</mi> <mo>•</mo></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E^\bullet(X)</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/module">module</a> <a class="existingWikiWord" href="/nlab/show/linear+span">spanned</a> by the first <a class="existingWikiWord" href="/nlab/show/cup+product">cup powers</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c_1^E(\mathcal{L})</annotation></semantics></math>:</p>
+<div class="maruku-equation" id="eq:ECohomologyOfProjectiveBundle"><span class="maruku-eq-number">(3)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>E</mi> <mo>•</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><msup><mi>E</mi> <mo>•</mo></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo maxsize="1.8em" minsize="1.8em">⟨</mo><mn>1</mn><mo>,</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><mo>,</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mn>2</mn></msup><mo>,</mo><mi>⋯</mi><mo>,</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mstyle mathcolor="orange"><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>ℒ</mi><mo stretchy="false">)</mo></mstyle><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mi>n</mi></msup><mo maxsize="1.8em" minsize="1.8em">⟩</mo><mspace width="thinmathspace"></mspace><mo>;</mo></mrow><annotation encoding="application/x-tex">
+  
+  E^\bullet\big( P(\mathcal{V})  \big) 
+    \;\simeq\; 
+  E^\bullet(X)
+ \Big\langle 
+   1, 
+   {\color{orange}
+     c_1^E(\mathcal{L})
+   }
+   , 
+   \big(
+     {\color{orange}
+    c_1^E(\mathcal{L})
+     }
+   \big)^2
+   , 
+   \cdots
+   ,  
+   \big(
+     {\color{orange}
+    c_1^E(\mathcal{L})
+     }
+   \big)^n
+ \Big\rangle
+ \,;
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>and in particular</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>π</mi> <mo>*</mo></msup><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msup><mi>E</mi> <mo>•</mo></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mover><mo>↪</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover><msup><mi>E</mi> <mo>•</mo></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  \pi^\ast 
+    \;\colon\; 
+  E^\bullet( X ) 
+    \overset{\;\;\;\;\;}{\hookrightarrow}
+  E^\bullet\big( P(\mathcal{V}) \big)
+
+</annotation></semantics></math></div>
+<p>is an <a class="existingWikiWord" href="/nlab/show/injective+function">injective function</a>,</p>
+</li>
+</ol>
+
+<p>because this means that <a class="maruku-eqref" href="#eq:DefiningConditionOnConnerFloydChernClasses">(2)</a> has a unique solution for the classes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathcolor="blue"><msubsup><mi>c</mi> <mi>k</mi> <mi>E</mi></msubsup><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mstyle><mspace width="thinmathspace"></mspace><mo>∈</mo><mspace width="thinmathspace"></mspace><msup><mi>E</mi> <mrow><mn>2</mn><mi>k</mi></mrow></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{\color{blue} c_k^E(\mathcal{V})} \,\in\, E^{2k}(X)</annotation></semantics></math> – these are the Conner-Floyd Chern classes of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒱</mi></mrow><annotation encoding="application/x-tex">\mathcal{V}</annotation></semantics></math>.</p>
+
+<p>But <a class="maruku-eqref" href="#eq:ECohomologyOfProjectiveBundle">(3)</a> holds on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi><msup><mi>P</mi> <mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\mathbb{C}P^n</annotation></semantics></math> after <a class="existingWikiWord" href="/nlab/show/pullback+in+cohomology">pullback</a> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>fib</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">fib_x</annotation></semantics></math> (by standard arguments in <a class="existingWikiWord" href="/nlab/show/complex+oriented+cohomology+theory">complex oriented cohomology theory</a>, e.g. <a href="#LurieLecture">Lurie 10, Lecture 4, Example 8</a>) and hence holds on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>𝒱</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(\mathcal{V})</annotation></semantics></math> by the generalized-cohomology version of the <a class="existingWikiWord" href="/nlab/show/Leray-Hirsch+theorem">Leray-Hirsch theorem</a> (<a href="#ConnerFloyd66">Conner-Floyd 66, Thm. 7.4</a>).</p>
+
+<p>Since this construction is natural, one finds the following <a class="existingWikiWord" href="/nlab/show/universal+characteristic+classes">universal characteristic classes</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>-cohomology:</p>
+
+<div class="num_prop" id="ConnerFloyedClasses">
+<h6 id="proposition">Proposition</h6>
+
+<p>Given a <a class="existingWikiWord" href="/nlab/show/complex+oriented+cohomology+theory">complex oriented cohomology theory</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math> with complex orientation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup></mrow><annotation encoding="application/x-tex">c_1^E</annotation></semantics></math>, then the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/generalized+cohomology">generalized cohomology</a> of the <a class="existingWikiWord" href="/nlab/show/classifying+space">classifying space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mi>U</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">B U(n)</annotation></semantics></math> is freely generated over the <a class="existingWikiWord" href="/nlab/show/graded+commutative+ring">graded commutative ring</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mo>•</mo></msub><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\pi_\bullet(E)</annotation></semantics></math> (<a href="Introduction+to+Stable+homotopy+theory+--+1-2#HomotopyGroupsOfHomotopyCommutativeRingSpectrum">prop.</a>) by classes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>c</mi> <mi>k</mi> <mi>E</mi></msubsup></mrow><annotation encoding="application/x-tex">c_k^E</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">0 \leq k \leq n</annotation></semantics></math> of degree <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mi>k</mi></mrow><annotation encoding="application/x-tex">2k</annotation></semantics></math>, these are called the <strong><a class="existingWikiWord" href="/nlab/show/Conner-Floyd-Chern+classes">Conner-Floyd-Chern classes</a></strong></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>E</mi> <mo>•</mo></msup><mo stretchy="false">(</mo><mi>B</mi><mi>U</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><msub><mi>π</mi> <mo>•</mo></msub><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo><mo stretchy="false">[</mo><mo stretchy="false">[</mo><msubsup><mi>c</mi> <mn>1</mn> <mi>E</mi></msubsup><mo>,</mo><msubsup><mi>c</mi> <mn>2</mn> <mi>E</mi></msubsup><mo>,</mo><mi>⋯</mi><mo>,</mo><msubsup><mi>c</mi> <mi>n</mi> <mi>E</mi></msubsup><mo stretchy="false">]</mo><mo stretchy="false">]</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  E^\bullet(B U(n))
+    \;\simeq\;
+  \pi_\bullet(E)[ [ c_1^E, c_2^E, \cdots, c_n^E ] ]
+  \,.
+
+</annotation></semantics></math></div>
+<p>Moreover, pullback along the canonical inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mi>U</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>→</mo><mi>B</mi><mi>U</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">B U(n) \to B U(n+1)</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/identity">identity</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>c</mi> <mi>k</mi> <mi>E</mi></msubsup></mrow><annotation encoding="application/x-tex">c_k^E</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>≤</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">k \leq n</annotation></semantics></math> and sends <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>c</mi> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow> <mi>E</mi></msubsup></mrow><annotation encoding="application/x-tex">c_{n+1}^E</annotation></semantics></math> to zero.</p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>E</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">E = </annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/HA">HZ</a> this reduces to the standard <a class="existingWikiWord" href="/nlab/show/Chern+classes">Chern classes</a>.</p>
+</div>
+
+<h2 id="references">References</h2>
+
+<p>The concept was introduced for:</p>
+
+<ul>
+<li id="ConnerFloyd66">
+<p><a class="existingWikiWord" href="/nlab/show/Pierre+Conner">Pierre Conner</a>, <a class="existingWikiWord" href="/nlab/show/Edwin+Floyd">Edwin Floyd</a>, Theorems 7.5, 7.6 of: <em><a class="existingWikiWord" href="/nlab/show/The+Relation+of+Cobordism+to+K-Theories">The Relation of Cobordism to K-Theories</a></em>, Lecture Notes in Mathematics <strong>28</strong> Springer 1966 (<a href="https://link.springer.com/book/10.1007/BFb0071091">doi:10.1007/BFb0071091</a>, <a href="http://www.ams.org/mathscinet-getitem?mr=216511">MR216511</a>)</p>
+
+<blockquote>
+<p>(with the example of <a class="existingWikiWord" href="/nlab/show/MSp">MSp</a>- and of <a class="existingWikiWord" href="/nlab/show/MU">MU</a>-cohomology theory in Section 8)</p>
+</blockquote>
+</li>
+</ul>
+
+<p>An early account in a broader context of <a class="existingWikiWord" href="/nlab/show/complex+oriented+cohomology+theory">complex oriented cohomology theory</a>:</p>
+
+<ul>
+<li id="Adams74"><a class="existingWikiWord" href="/nlab/show/Frank+Adams">Frank Adams</a>, part I.4, part II.2, part III.10 of <em><a class="existingWikiWord" href="/nlab/show/Stable+homotopy+and+generalised+homology">Stable homotopy and generalised homology</a></em>, 1974</li>
+</ul>
+
+<p>More recent accounts:</p>
+
+<ul>
+<li id="Kochman96">
+<p><a class="existingWikiWord" href="/nlab/show/Stanley+Kochman">Stanley Kochman</a>, Section 4.3 of: <em><a class="existingWikiWord" href="/nlab/show/Bordism%2C+Stable+Homotopy+and+Adams+Spectral+Sequences">Bordism, Stable Homotopy and Adams Spectral Sequences</a></em>, AMS 1996</p>
+</li>
+
+<li id="TamakiKono06">
+<p><a class="existingWikiWord" href="/nlab/show/Dai+Tamaki">Dai Tamaki</a>, <a class="existingWikiWord" href="/nlab/show/Akira+Kono">Akira Kono</a>, Section 3.4 in: <em>Generalized Cohomology</em>, Translations of Mathematical Monographs, American Mathematical Society, 2006 (<a href="https://bookstore.ams.org/mmono-230">ISBN: 978-0-8218-3514-2</a>)</p>
+</li>
+
+<li id="Lurie10">
+<p><a class="existingWikiWord" href="/nlab/show/Jacob+Lurie">Jacob Lurie</a>, <em><a class="existingWikiWord" href="/nlab/show/Chromatic+Homotopy+Theory">Chromatic Homotopy Theory</a></em>, 2010, lecture 4 (<a href="http://www.math.harvard.edu/~lurie/252xnotes/Lecture4.pdf">pdf</a>) and lecture 5 (<a href="http://www.math.harvard.edu/~lurie/252xnotes/Lecture5.pdf">pdf</a>)</p>
+</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on January 25, 2021 at 15:29:12.
+    See the <a href="/nlab/history/Conner-Floyd+Chern+class" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Conner-Floyd+Chern+class" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/11850/#Item_3">Discuss</a><span class="backintime"><a href="/nlab/revision/Conner-Floyd+Chern+class/21" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Conner-Floyd+Chern+class" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Conner-Floyd+Chern+class" accesskey="S" class="navlink" id="history" rel="nofollow">History (21 revisions)</a>
+  <a href="/nlab/show/Conner-Floyd+Chern+class/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Conner-Floyd+Chern+class" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Conner-Floyd+Chern+class" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>

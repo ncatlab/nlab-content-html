@@ -1,0 +1,549 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      Mandelbrot set in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      Mandelbrot set
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/7765/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<body>
+<h1 id="contents">Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#definition'>Definition</a></li>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#topological_properties'>Topological properties</a></li>
+</ul>
+<li><a href='#related_concepts'>Related concepts</a></li>
+</ul>
+</div>
+
+<h2 id="idea">Idea</h2>
+
+<p>The <em>Mandelbrot set</em> is the <a class="existingWikiWord" href="/nlab/show/subset">subset</a> of the <a class="existingWikiWord" href="/nlab/show/complex+plane">complex plane</a> on those points <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">c \in \mathbb{C}</annotation></semantics></math> on which the iteration of the operation “square and add <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math>” does not diverge.</p>
+
+<p>This is a famous example of a <a class="existingWikiWord" href="/nlab/show/fractal">fractal</a>.</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">c \in \mathbb{C}</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/complex+number">complex number</a>, consider the <a class="existingWikiWord" href="/nlab/show/function">function</a> on the <a class="existingWikiWord" href="/nlab/show/complex+plane">complex plane</a> that squares its argument and adds <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> to the result:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>ℂ</mi></mtd> <mtd><mover><mo>⟶</mo><mrow><mphantom><mi>AA</mi></mphantom><msub><mi>f</mi> <mi>c</mi></msub><mphantom><mi>AA</mi></mphantom></mrow></mover></mtd> <mtd><mi>ℂ</mi></mtd></mtr> <mtr><mtd><mi>z</mi></mtd> <mtd><mover><mo>↦</mo><mrow><mphantom><mi>AA</mi></mphantom><mphantom><mi>AA</mi></mphantom></mrow></mover></mtd> <mtd><msup><mi>z</mi> <mn>2</mn></msup><mo>+</mo><mi>c</mi></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \array{
+     \mathbb{C} &amp;\overset{\phantom{AA}f_c\phantom{AA}}{\longrightarrow}&amp; \mathbb{C}
+     \\
+     z &amp;\overset{\phantom{AA}\phantom{AA}}{\mapsto}&amp; z^2 + c
+  }
+  \,.
+
+</annotation></semantics></math></div>
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">n \in \mathbb{N}</annotation></semantics></math> write</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo>≔</mo><munder><munder><mrow><mi>f</mi><mo>∘</mo><mi>⋯</mi><mo>∘</mo><mi>f</mi><mo>∘</mo><mi>f</mi></mrow><mo>⏟</mo></munder><mrow><mi>n</mi><mspace width="thinmathspace"></mspace><mtext>factors</mtext></mrow></munder></mrow><annotation encoding="application/x-tex">
+  f_c^n \coloneqq \underset{n\,\text{factors}}{\underbrace{ f \circ \cdots \circ f \circ f }}
+
+</annotation></semantics></math></div>
+<p>for the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-fold <a class="existingWikiWord" href="/nlab/show/composition">composition</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mi>c</mi></msub></mrow><annotation encoding="application/x-tex">f_c</annotation></semantics></math> with itself (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>f</mi> <mi>c</mi> <mn>0</mn></msubsup><mo>≔</mo><msub><mi>id</mi> <mi>ℂ</mi></msub></mrow><annotation encoding="application/x-tex">f_c^0 \coloneqq id_{\mathbb{C}}</annotation></semantics></math>).</p>
+
+<p>Starting with value <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn><mo>∈</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">0 \in \mathbb{C}</annotation></semantics></math>, this defines a <a class="existingWikiWord" href="/nlab/show/sequence">sequence</a> of points in the complex plane <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><msub><mo stretchy="false">)</mo> <mrow><mi>i</mi><mo>∈</mo><mi>ℂ</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(f_c^n(0))_{i \in \mathbb{C}}</annotation></semantics></math> for each <a class="existingWikiWord" href="/nlab/show/complex+number">complex number</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">c \in \mathbb{C}</annotation></semantics></math>.</p>
+
+<p>The <em>Mandelbrot set</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mdlbrt</mi><mo>⊂</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">Mdlbrt \subset \mathcal{C}</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/subset">subset</a> of the <a class="existingWikiWord" href="/nlab/show/complex+plane">complex plane</a> on those values of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> for which the corresponding <a class="existingWikiWord" href="/nlab/show/sequence">sequence</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>∈</mo><mi>𝔹</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(f_c^n)_{n \in \mathbb{B}}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/bounded+set">bounded</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Mdlbrt</mi><mo>≔</mo><mrow><mo>{</mo><mi>c</mi><mo>∈</mo><mi>ℂ</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub><mspace width="thinmathspace"></mspace><mtext>is bounded</mtext><mo>}</mo></mrow><mspace width="thickmathspace"></mspace><mo>⊂</mo><mspace width="thickmathspace"></mspace><mi>ℂ</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  Mdlbrt 
+   \coloneqq
+  \left\{
+     c \in \mathbb{C}
+     \;\colon\;
+     (f_c^n(0))_{n \in \mathbb{N}}\, \text{is bounded}
+  \right\}
+  \;\subset\;
+  \mathbb{C}
+  \,.
+
+</annotation></semantics></math></div>
+<p>Globally, at low resolution, the Mandelbrot set looks like this:</p>
+
+<p><img src="https://ncatlab.org/nlab/files/MandelbrotSet.png" width="400" /></p>
+
+<h2 id="properties">Properties</h2>
+
+<h3 id="topological_properties">Topological properties</h3>
+
+<div class="num_defn" id="MandelbrotSpace">
+<h6 id="definition_2">Definition</h6>
+
+<p><strong>(Mandelbrot space)</strong></p>
+
+<p>Regard the Mandelbrot set as a <a class="existingWikiWord" href="/nlab/show/topological+space">topological space</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Mdlbrt</mi><mo>,</mo><msub><mi>τ</mi> <mi>sub</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  (Mdlbrt, \tau_{sub})
+
+</annotation></semantics></math></div>
+<p>via the <a class="existingWikiWord" href="/nlab/show/subspace+topology">subspace topology</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>τ</mi> <mi>sub</mi></msub></mrow><annotation encoding="application/x-tex">\tau_{sub}</annotation></semantics></math> inherited from the <a class="existingWikiWord" href="/nlab/show/Euclidean+space">Euclidean</a> <a class="existingWikiWord" href="/nlab/show/metric+topology">metric topology</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℂ</mi><mo>≃</mo><msup><mi>ℝ</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{C} \simeq \mathbb{R}^2</annotation></semantics></math>.</p>
+</div>
+
+<div class="num_prop" id="MndlbrtIsCompact">
+<h6 id="proposition">Proposition</h6>
+
+<p>The Mandelbrot space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Mdlbrot</mi><mo>,</mo><msub><mi>τ</mi> <mi>sub</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(Mdlbrot, \tau_{sub})</annotation></semantics></math> (def. <a class="maruku-ref" href="#MandelbrotSpace"></a>) is a <a class="existingWikiWord" href="/nlab/show/compact+topological+space">compact topological space</a>.</p>
+</div>
+
+<p>We <strong>prove</strong> this <a href="#ProofCompactMandelbrot">below</a>, after the following lemma:</p>
+
+<div class="num_lemma" id="EscapeRadius">
+<h6 id="lemma">Lemma</h6>
+
+<p><strong>(escape radius)</strong></p>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">{\vert c\vert} \gt 2</annotation></semantics></math> then the sequence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(f_c^n(0))_{n \in \mathbb{N}}</annotation></semantics></math> is not bounded, hence the sequence of <a class="existingWikiWord" href="/nlab/show/absolute+values">absolute values</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub></mrow><annotation encoding="application/x-tex">( {\vert f_c^n(0)\vert} )_{n \in \mathbb{N}}</annotation></semantics></math> diverges for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">{\vert c \vert} \gt 2</annotation></semantics></math>.</p>
+
+<p>In fact in this case the absolute values increase monotonically:</p>
+
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">{\vert c\vert} \gt 2</annotation></semantics></math> then for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n \gt 0</annotation></semantics></math> we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mo>&gt;</mo><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  {\vert f_c^{n+1}(0)\vert } \gt {\vert f_c^n(0)\vert}
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p>So assume <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">{\vert c \vert} \gt 2</annotation></semantics></math>.</p>
+
+<p>We prove the last statement by <a class="existingWikiWord" href="/nlab/show/induction">induction</a>.</p>
+
+<p>Observe that it is true for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n = 1</annotation></semantics></math>, where we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mn>2</mn></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow></mtd> <mtd><mo>=</mo><mrow><mo stretchy="false">|</mo><msup><mi>c</mi> <mn>2</mn></msup><mo>+</mo><mi>c</mi><mo stretchy="false">|</mo></mrow></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>≥</mo><mrow><mo stretchy="false">|</mo><msup><mi>c</mi> <mn>2</mn></msup><mo stretchy="false">|</mo></mrow><mo>−</mo><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><munder><munder><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mo>⏟</mo></munder><mrow><mo>&gt;</mo><mn>1</mn></mrow></munder></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>&gt;</mo><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mrow><mo stretchy="false">|</mo><msub><mi>f</mi> <mi>c</mi></msub><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+    {\vert f_c^2(0) \vert}
+    &amp; =
+    {\vert c^2 + c \vert }
+    \\
+    &amp; \geq 
+    {\vert c^2\vert } - {\vert c \vert }
+    \\
+    &amp; = 
+    {\vert c\vert}\underset{\gt 1}{\underbrace{({\vert c\vert}-1)}}
+    \\
+    &amp; \gt {\vert c\vert }
+    \\
+    &amp; =
+    {\vert f_c(0) \vert }
+  \end{aligned}
+  \,.
+
+</annotation></semantics></math></div>
+<p>Now assume that there is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">n \in \mathbb{N}</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mo>&gt;</mo><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert f_c^n(0) \vert} \gt {\vert c\vert}</annotation></semantics></math>. Then it follows that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mfrac><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow></mfrac></mtd> <mtd><mo>=</mo><mfrac><mrow><mo stretchy="false">|</mo><mo stretchy="false">(</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>+</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><mrow><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>≥</mo><mfrac><mrow><msup><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow> <mn>2</mn></msup><mo>−</mo><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow></mrow><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mo>−</mo><mfrac><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow></mfrac></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>&gt;</mo><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo><mo>−</mo><mn>1</mn></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>&gt;</mo><mn>1</mn></mtd></mtr></mtable></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+  \frac{
+    {\vert f_c^{n+1}(0)\vert}
+  }{
+    \vert  f_c^n(0) \vert
+  }
+  &amp; =
+  \frac{
+     {\vert (f_c^n(0))^2  + c \vert}
+  }{
+    f_c^n(0)
+  }
+  \\
+  &amp; \geq
+  \frac{
+     {\vert f_c^n(0)\vert}^2 - {\vert c \vert}
+  }{
+    {\vert f_c^n(0)\vert}
+  }
+  \\
+  &amp; =
+  {\vert f_c^n(0) \vert}
+  -
+  \frac{
+    {\vert c \vert}
+  }{
+    {\vert f_c^n(0) \vert}
+  }
+  \\
+  &amp; 
+  \gt
+  \vert c \vert - 1
+  \\
+  &amp; \gt 
+  1
+  \end{aligned}
+  \,.
+
+</annotation></semantics></math></div>
+<p>Here the first inequality is due to the <a class="existingWikiWord" href="/nlab/show/triangle+inequality">triangle inequality</a>, the second is due to the induction assumption, and the last one is due to the initial assumption that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo></mrow><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">{\vert c \vert} \gt 2</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof" id="ProofCompactMandelbrot">
+<h6 id="proof_2">Proof</h6>
+
+<p>that the Mandelbrot space is compact (prop. <a class="maruku-ref" href="#MndlbrtIsCompact"></a>)</p>
+
+<p>By lemma <a class="maruku-ref" href="#EscapeRadius"></a> the Mandelbrot set is a <a class="existingWikiWord" href="/nlab/show/bounded+subset">bounded subset</a> of 2d <a class="existingWikiWord" href="/nlab/show/Euclidean+space">Euclidean space</a>. Hence by the <a class="existingWikiWord" href="/nlab/show/Heine-Borel+theorem">Heine-Borel theorem</a> is is now sufficient to show that it is a <a class="existingWikiWord" href="/nlab/show/closed+subset">closed subset</a>, this will imply that it is compact.</p>
+
+<p>The subset is closed if for every point <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>ℂ</mi><mo>\</mo><mi>Mdlbrt</mi></mrow><annotation encoding="application/x-tex">c \in \mathbb{C} \backslash Mdlbrt</annotation></semantics></math> not contained in the Mandelbrot set there is an <a class="existingWikiWord" href="/nlab/show/open+neighbourhood">open neighbourhood</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> which still does not intersect the Mandelbrot set.</p>
+
+<p>Now that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∉</mo><mi>Mdlbrt</mi><mo>⊂</mo><msup><mi>ℝ</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">c \notin Mdlbrt \subset \mathbb{R}^2</annotation></semantics></math> means by definition that for every positive real number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math> there is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">n \in \mathbb{N}</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo><mo>&gt;</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">\vert f_c^n(0)\vert \gt r</annotation></semantics></math>.</p>
+
+<p>Pick such an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">r = 2</annotation></semantics></math>. Let then</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ϵ</mi><mo>≔</mo><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mo>−</mo><mn>2</mn><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \epsilon \coloneqq {\vert f_c^n(0) \vert} - 2 
+  \,.
+
+</annotation></semantics></math></div>
+<p>and consider the subset</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mrow><mi>c</mi><mo>,</mo><mi>n</mi></mrow></msub><mo>≔</mo><mrow><mo>{</mo><mi>z</mi><mo>∈</mo><mi>ℂ</mi><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><mspace width="thickmathspace"></mspace><mrow><mo>(</mo><mrow><mo>(</mo><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mo>−</mo><mi>ϵ</mi><mo>)</mo></mrow><mo>&lt;</mo><mrow><mo>(</mo><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mrow><mo stretchy="false">|</mo><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">|</mo></mrow><mo>+</mo><mi>ϵ</mi><mo>)</mo></mrow><mo>)</mo></mrow><mo>}</mo></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  U_{c,n}
+    \coloneqq
+  \left\{
+    z \in \mathbb{C}
+    \;\vert\;
+    \left(
+      \left({\vert f_c^n(0) \vert} - \epsilon \right)
+       \lt 
+      \left(  {\vert z\vert} \lt {\vert f_c^n(0) \vert} + \epsilon \right)
+    \right)
+  \right\}
+  \,.
+
+</annotation></semantics></math></div>
+<p>This is clearly an <a class="existingWikiWord" href="/nlab/show/open+neighbourhood">open neighbourhood</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_c^n(0)</annotation></semantics></math>. Hence by continuity of the function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>f</mi> <mi>c</mi> <mi>n</mi></msubsup><mo lspace="verythinmathspace">:</mo><mi>ℂ</mi><mo>→</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">f_c^n \colon \mathbb{C} \to \mathbb{C}</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/pre-image">pre-image</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msubsup><mi>f</mi> <mi>c</mi> <mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msubsup><msup><mo stretchy="false">)</mo> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msup><mo stretchy="false">(</mo><msub><mi>U</mi> <mrow><mi>c</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  (f_c^{n-1})^{-1}(U_{c,n})
+
+</annotation></semantics></math></div>
+<p>is an open neighbourhood of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>∈</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">c \in \mathbb{C}</annotation></semantics></math>, and by lemma <a class="maruku-ref" href="#EscapeRadius"></a> this does not intersect the Mandelbrot set.</p>
+</div>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Julia+set">Julia set</a></li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on May 16, 2017 at 17:58:08.
+    See the <a href="/nlab/history/Mandelbrot+set" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/Mandelbrot+set" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/7765/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/Mandelbrot+set/5" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Mandelbrot+set" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Mandelbrot+set" accesskey="S" class="navlink" id="history" rel="nofollow">History (5 revisions)</a>
+  <a href="/nlab/show/Mandelbrot+set/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/Mandelbrot+set" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/Mandelbrot+set" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>
