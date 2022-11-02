@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>
-      maybe monad in nLab
+      exception monad in nLab
   </title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -272,7 +272,7 @@ margin-left: 0em;
       </svg>
     </span>
       <span class="webName">nLab</span>
-      maybe monad
+      exception monad
   </h1>
 
 
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/5676/#Item_15" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/15386/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -677,131 +677,97 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#properties'>Properties</a></li>
-<ul>
-<li><a href='#kleisli_category'>Kleisli category</a></li>
-<li><a href='#EMCategoryAndRelationToPointedObjects'>EM-category and Relation to pointed objects</a></li>
-<li><a href='#relation_to_natural_number_objects'>Relation to natural number objects</a></li>
-<li><a href='#on_the_augmented_simplex_category'>On the augmented simplex category</a></li>
-</ul>
-<li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#related_entries'>Related entries</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
 
 <h2 id="idea">Idea</h2>
 
-<p>What is called the <em>maybe monad</em> is a simple <a class="existingWikiWord" href="/nlab/show/monad+in+computer+science">monad in computer science</a> which is used to implement the most basic kind of “<a class="existingWikiWord" href="/nlab/show/exceptions">exceptions</a>” indicating the failure of a computation in terms of <a class="existingWikiWord" href="/nlab/show/functional+programming">functional programming</a>: The maybe monad models the exception which witnesses a failure without however producing any further information.</p>
+<p>In <a class="existingWikiWord" href="/nlab/show/computer+science">computer science</a>, an <em>exception</em> is a nominal failure of a program which however is <em>handled</em> in some manner, so that the failing computation still terminates in a controlled way.</p>
 
-<p>On the type system the <a class="existingWikiWord" href="/nlab/show/maybe+monad">maybe monad</a> is the operation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>↦</mo><mi>X</mi><mo>⊔</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">X \mapsto X \sqcup \ast</annotation></semantics></math> of forming the <a class="existingWikiWord" href="/nlab/show/coproduct+type">coproduct type</a> with the <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a>. (The <a class="existingWikiWord" href="/nlab/show/exception+monad">exception monad</a> for the <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a>.)</p>
+<p>In the simplest case this may mean that the program outputs an error message instead of continuing with the intended computation.</p>
 
-<p>The idea here is that a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>⟶</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \longrightarrow Y</annotation></semantics></math> in its <a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli category</a> is in the original category a function of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>⟶</mo><mi>Y</mi><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">X \longrightarrow Y \coprod \ast </annotation></semantics></math> so either returns indeed a value in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math> or else returns the unique element of the <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a>/<a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math> – it is a <em><a class="existingWikiWord" href="/nlab/show/partial+function">partial function</a></em>. The latter case is naturally interpreted as “no value returned”, hence as indicating a “failure in computation”.</p>
+<p>In terms of <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a>, the <em>effect</em> of (possibly) throwing an exception is modeled by the <a class="existingWikiWord" href="/nlab/show/monad">monad</a>:</p>
 
-<h2 id="properties">Properties</h2>
+<ol>
+<li>
+<p>which turns a given output <a class="existingWikiWord" href="/nlab/show/data+type">data type</a> into the <a class="existingWikiWord" href="/nlab/show/coproduct+type">coproduct type</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>D</mi><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><mi>D</mi><mo>⊔</mo><mi>Msg</mi></mrow><annotation encoding="application/x-tex"> 
+  D \;\mapsto\; D \sqcup Msg 
 
-<blockquote>
-<p>under construction</p>
-</blockquote>
-
-<h3 id="kleisli_category">Kleisli category</h3>
-
-<p>The <a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli category</a> of the maybe monad on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math> is the category whose objects are sets, and whose morphisms are <a class="existingWikiWord" href="/nlab/show/partial+functions">partial functions</a>.</p>
-
-<p>This observation generalizes as follows: if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/extensive+category">extensive category</a> and has a <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>, then a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">g: X \to Y \coprod \ast</annotation></semantics></math> as an object of the <a class="existingWikiWord" href="/nlab/show/overcategory">overcategory</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mo stretchy="false">(</mo></mstyle><mi>C</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mo stretchy="false">(</mo><mi>Y</mi><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mo>*</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf(C)/(Y \coprod \ast)</annotation></semantics></math> determines (uniquely up to canonical isomorphism) an object</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>:</mo><msub><mi>X</mi> <mn>1</mn></msub><mo>→</mo><mi>Y</mi><mo>,</mo><mo>!</mo><mo>:</mo><msub><mi>X</mi> <mn>2</mn></msub><mo>→</mo><mo>*</mo><mo stretchy="false">)</mo><mo>∈</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">/</mo><mi>Y</mi><mo>×</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">/</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">(f: X_1 \to Y, !: X_2 \to \ast) \in \mathbf{C}/Y \times \mathbf{C}/\ast</annotation></semantics></math></div>
-<p>such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>=</mo><mi>f</mi><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mo>!</mo></mrow><annotation encoding="application/x-tex">g = f \coprod !</annotation></semantics></math>, in other words a partial morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>⇀</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f: X \rightharpoonup Y</annotation></semantics></math> whose domain of definition is a subobject <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>1</mn></msub><mo>↪</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">X_1 \hookrightarrow X</annotation></semantics></math> with complement <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>2</mn></msub><mo>↪</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">X_2 \hookrightarrow X</annotation></semantics></math>. In brief, maps in the Kleisli category are partial maps with complemented domain.</p>
-
-<p>In particular, in the case of a <a class="existingWikiWord" href="/nlab/show/Boolean+topos">Boolean topos</a>, the Kleisli category is the category of objects and partial maps; see also <a class="existingWikiWord" href="/nlab/show/partial+map+classifier">partial map classifier</a>.</p>
-
-<h3 id="EMCategoryAndRelationToPointedObjects">EM-category and Relation to pointed objects</h3>
-
-<p>The <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebras</a> over the maybe monad are <a class="existingWikiWord" href="/nlab/show/pointed+objects">pointed objects</a>.</p>
-
-<p>Moreover, assuming <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> has <a class="existingWikiWord" href="/nlab/show/finite+products">finite products</a> and an appropriate form of <a class="existingWikiWord" href="/nlab/show/distributive+category">distributivity</a> (which obtains if for example <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/extensive+category">lextensive</a>), the maybe monad on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/monoidal+monad">monoidal monad</a> on the <a class="existingWikiWord" href="/nlab/show/cartesian+monoidal+category">cartesian monoidal category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math>. It follows (by the discussion at <em><a class="existingWikiWord" href="/nlab/show/commutative+monad">commutative monad</a></em>, see also (<a href="#Seal12">Seal 12</a>)) that its <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">Eilenberg-Moore category</a> of algebras canonically inherits the structure of a <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a>, at least under the mild assumption that it has <a class="existingWikiWord" href="/nlab/show/reflexive+coequalizers">reflexive coequalizers</a>. Note that the maybe monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> preserves reflexive coequalizers, so the monadic functor <a class="existingWikiWord" href="/nlab/show/created+limit">creates</a> reflexive coequalizers if the base category has them; in this abstract setting the monoidal product on algebras <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>α</mi><mo>:</mo><mi>T</mi><mi>X</mi><mo>→</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(X, \alpha: T X \to X)</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><mi>β</mi><mo>:</mo><mi>T</mi><mi>Y</mi><mo>→</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(Y, \beta: T Y \to Y)</annotation></semantics></math> is given explicitly as the <a class="existingWikiWord" href="/nlab/show/coequalizer">coequalizer</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>α</mi><mo>×</mo><mi>β</mi><mo stretchy="false">)</mo><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>T</mi><mi>X</mi><mo>×</mo><mi>T</mi><mi>Y</mi><mo stretchy="false">)</mo><mo>→</mo><mi>T</mi><mo stretchy="false">(</mo><mi>X</mi><mo>×</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(\alpha \times \beta): T(T X \times T Y) \to T(X \times Y)</annotation></semantics></math> and</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>T</mi><mi>X</mi><mo>×</mo><mi>T</mi><mi>Y</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mrow><mi>T</mi><mo stretchy="false">(</mo><msub><mi>ϕ</mi> <mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mover><mi>T</mi><mi>T</mi><mo stretchy="false">(</mo><mi>X</mi><mo>×</mo><mi>Y</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mi>μ</mi></mover><mi>T</mi><mo stretchy="false">(</mo><mi>X</mi><mo>×</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(T X \times T Y) \stackrel{T(\phi_{X, Y})}{\to} T T(X \times Y) \stackrel{\mu}{\to} T(X \times Y)</annotation></semantics></math></div>
-<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> is one of the structural constraints on the monoidal monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is the multiplication on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>. One finds that this coequalizer yields the usual <a class="existingWikiWord" href="/nlab/show/smash+product">smash product</a> of pointed objects.</p>
-
-<div class="num_remark">
-<h6 id="remark">Remark</h6>
-
-<p>The smash product as the correct monoidal product can also be deduced in a perhaps more perspicuous manner if we assume more of the base category: that it is <a class="existingWikiWord" href="/nlab/show/cartesian+closed+category">cartesian closed</a>, <a class="existingWikiWord" href="/nlab/show/finite+limit">finitely complete</a>, and finitely cocomplete. In that case we construct the <a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras, i.e., the internal hom of pointed objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><mi>β</mi><mo>:</mo><mi>T</mi><mi>Y</mi><mo>→</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(Y, \beta: T Y \to Y)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Z</mi><mo>,</mo><mi>γ</mi><mo>:</mo><mi>T</mi><mi>Z</mi><mo>→</mo><mi>Z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(Z, \gamma: T Z \to Z)</annotation></semantics></math> directly as an <a class="existingWikiWord" href="/nlab/show/equalizer">equalizer</a> of maps</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msup><mi>Z</mi> <mi>Y</mi></msup></mtd> <mtd><mo>→</mo></mtd> <mtd><mi>T</mi><msup><mi>Z</mi> <mrow><mi>T</mi><mi>Y</mi></mrow></msup></mtd></mtr> <mtr><mtd></mtd> <mtd><mpadded width="0" lspace="-100%width"><mrow><msup><mi>Z</mi> <mi>β</mi></msup></mrow></mpadded><mo>↘</mo></mtd> <mtd><mo stretchy="false">↓</mo><mpadded width="0"><mrow><msup><mi>γ</mi> <mrow><mi>T</mi><mi>Y</mi></mrow></msup></mrow></mpadded></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><msup><mi>Z</mi> <mrow><mi>T</mi><mi>Y</mi></mrow></msup></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\array{
-Z^Y &amp; \to &amp; T Z^{T Y} \\ 
- &amp; \mathllap{Z^\beta} \searrow &amp; \downarrow \mathrlap{\gamma^{T Y}} \\
- &amp; &amp; Z^{T Y}
-}
 </annotation></semantics></math></div>
-<p>where the top arrow expresses <a class="existingWikiWord" href="/nlab/show/enriched+functor">enriched functoriality</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> (which in turn is closely related to the <a class="existingWikiWord" href="/nlab/show/strong+functor">strength</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>). The success of this is guaranteed by the <a class="existingWikiWord" href="/nlab/show/commutative+monad">commutativity</a> of the monad (which here takes a particularly simple form, being given by the commutative <em><a class="existingWikiWord" href="/nlab/show/monoid">monoid</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math> with respect to coproduct <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo></mrow><annotation encoding="application/x-tex">\coprod</annotation></semantics></math>). Then, by taking the monoidal product that is <a class="existingWikiWord" href="/nlab/show/adjunct">adjoint</a> to the <a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a>, one is led to the <a class="existingWikiWord" href="/nlab/show/smash+product">smash product</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>∧</mo><mi>Y</mi><msub><mo stretchy="false">)</mo> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">(X \wedge Y)_\ast</annotation></semantics></math> all the same: that is, one can read off the smash product from the fact that pointed maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mo>*</mo></msub><mo>→</mo><msub><mi>hom</mi> <mo>*</mo></msub><mo stretchy="false">(</mo><msub><mi>Y</mi> <mo>*</mo></msub><mo>,</mo><msub><mi>Z</mi> <mo>*</mo></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">X_\ast \to \hom_\ast(Y_\ast, Z_\ast)</annotation></semantics></math> should correspond to pointed maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>∧</mo><mi>Y</mi><msub><mo stretchy="false">)</mo> <mo>*</mo></msub><mo>→</mo><msub><mi>Z</mi> <mo>*</mo></msub></mrow><annotation encoding="application/x-tex">(X \wedge Y)_\ast \to Z_\ast</annotation></semantics></math>.</p>
-</div>
+<p>with the intended type of handling/messages (typically <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Msg</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">Msg = </annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/String+%28computer+science%29">string</a>);</p>
+</li>
 
-<h3 id="relation_to_natural_number_objects">Relation to natural number objects</h3>
+<li>
+<p>whose bind-operation on any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>prog</mi><mo lspace="verythinmathspace">:</mo><msub><mi>D</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>D</mi> <mn>2</mn></msub><mo>⊔</mo><mi>Msg</mi></mrow><annotation encoding="application/x-tex">prog \colon D_1 \to D_2 \sqcup Msg</annotation></semantics></math> is given by the <a class="existingWikiWord" href="/nlab/show/codiagonal+map">codiagonal map</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∇</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>Msg</mi><mo>⊔</mo><mi>Msg</mi><mspace width="thickmathspace"></mspace><mo>→</mo><mspace width="thickmathspace"></mspace><mi>Msg</mi></mrow><annotation encoding="application/x-tex">\nabla \;\colon\; Msg \sqcup Msg \;\to\; Msg</annotation></semantics></math> as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mphantom><mpadded width="0" lspace="-50%width"><mrow><msup><mo stretchy="false">|</mo> <mrow><msup><mo stretchy="false">|</mo> <mrow><msup><mo stretchy="false">|</mo> <mrow><msup><mo stretchy="false">|</mo> <mo stretchy="false">|</mo></msup></mrow></msup></mrow></msup></mrow></msup></mrow></mpadded></mphantom><mi>prog</mi><mo maxsize="1.2em" minsize="1.2em">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo maxsize="1.2em" minsize="1.2em">]</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><msub><mi>D</mi> <mn>2</mn></msub><mo>⊔</mo><mi>Msg</mi><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><mi>prog</mi><mo>⊔</mo><msub><mi>Id</mi> <mi>Msg</mi></msub><mspace width="thickmathspace"></mspace></mrow></mover><msub><mi>D</mi> <mn>3</mn></msub><mo>⊔</mo><mi>String</mi><mo>⊔</mo><mi>Msg</mi><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><msub><mi>id</mi> <mrow><msub><mi>D</mi> <mn>3</mn></msub></mrow></msub><mo>⊔</mo><mo>∇</mo><mspace width="thickmathspace"></mspace></mrow></mover><msub><mi>D</mi> <mn>3</mn></msub><mo>⊔</mo><mi>Msg</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \phantom{\mathclap{\vert^{\vert^{\vert^{\vert^{\vert}}}}}}
+  prog\big[-\big] 
+  \;\coloneqq\; 
+  D_2 \sqcup Msg 
+  \xrightarrow{\; prog \sqcup Id_{Msg} \;} 
+  D_3 \sqcup String \sqcup Msg 
+  \xrightarrow{\; id_{D_3} \sqcup \nabla \;} 
+  D_3 \sqcup Msg
+  \,,
 
-<p>Regarding just the underlying <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a> of the maybe monad, its <a class="existingWikiWord" href="/nlab/show/initial+algebra+over+an+endofunctor">initial algebra over an endofunctor</a> is a <a class="existingWikiWord" href="/nlab/show/natural+numbers+object">natural numbers object</a>.</p>
-
-<h3 id="on_the_augmented_simplex_category">On the augmented simplex category</h3>
-
-<p>We may view the <a class="existingWikiWord" href="/nlab/show/simplex+category">augmented simplex category</a> as the subcategory of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="0em" rspace="thinmathspace">Set</mo></mrow><annotation encoding="application/x-tex">\Set</annotation></semantics></math> whose objects are the finite <a class="existingWikiWord" href="/nlab/show/von+Neumann+ordinals">von Neumann ordinals</a> and whose morphisms are the monotone functions between them. Then the maybe monad on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="0em" rspace="thinmathspace">Set</mo></mrow><annotation encoding="application/x-tex">\Set</annotation></semantics></math> restricts to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Δ</mi> <mi>a</mi></msub></mrow><annotation encoding="application/x-tex">\Delta_a</annotation></semantics></math> to give the monad that sends the object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>n</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{n}</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{n+1}</annotation></semantics></math> and the morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mstyle mathvariant="bold"><mi>n</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>m</mi></mstyle></mrow><annotation encoding="application/x-tex">f:\mathbf{n}\to\mathbf{m}</annotation></semantics></math> to the morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>:</mo><mstyle mathvariant="bold"><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mstyle><mo>→</mo><mstyle mathvariant="bold"><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></mstyle></mrow><annotation encoding="application/x-tex">T(f):\mathbf{n+1}\to\mathbf{m+1}</annotation></semantics></math> defined by</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo>{</mo><mrow><mtable displaystyle="false" columnalign="left left"><mtr><mtd><mi>f</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mtd> <mtd><mi>k</mi><mo>&lt;</mo><mi>n</mi></mtd></mtr> <mtr><mtd><mi>m</mi></mtd> <mtd><mi>k</mi><mo>=</mo><mi>n</mi></mtd></mtr></mtable></mrow></mrow></mrow><annotation encoding="application/x-tex">T(f)(k) = \begin{cases}
-f(k) &amp; k \lt n\\
-m &amp; k = n
-\end{cases}
 </annotation></semantics></math></div>
-<p>In fact, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Δ</mi> <mi>a</mi></msub></mrow><annotation encoding="application/x-tex">\Delta_a</annotation></semantics></math> is freely generated by this structure and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mn>0</mn></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{0}</annotation></semantics></math> in the sense that its objects are given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>n</mi></mstyle><mo>=</mo><msup><mi>T</mi> <mi>n</mi></msup><mstyle mathvariant="bold"><mn>0</mn></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{n}=T^n\mathbf{0}</annotation></semantics></math>, the face maps are given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>δ</mi> <mi>i</mi> <mi>n</mi></msubsup><mo>=</mo><msup><mi>T</mi> <mrow><mi>n</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>η</mi> <mstyle mathvariant="bold"><mi>i</mi></mstyle></msub></mrow><annotation encoding="application/x-tex">\delta_i^n=T^{n-i-1}\eta_\mathbf{i}</annotation></semantics></math>, the degeneracy maps are given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>σ</mi> <mi>i</mi> <mi>n</mi></msubsup><mo>=</mo><msup><mi>T</mi> <mrow><mi>n</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>μ</mi> <mstyle mathvariant="bold"><mi>i</mi></mstyle></msub></mrow><annotation encoding="application/x-tex">\sigma_i^n=T^{n-i-1}\mu_\mathbf{i}</annotation></semantics></math>, and the <a class="existingWikiWord" href="/nlab/show/simplicial+identities">simplicial identities</a> are precisely the monad axioms. Another way to put this is that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>Δ</mi> <mi>a</mi></msub><mo>,</mo><mi>T</mi><mo>,</mo><mstyle mathvariant="bold"><mn>0</mn></mstyle><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\Delta_a,T,\mathbf{0})</annotation></semantics></math> is the initial object of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math>-category whose objects are categories equipped with a monad and an object.</p>
+<p>meaning that whatever exception message has already been thrown gets carried further along.</p>
+</li>
+</ol>
 
-<p>This means that if C is some other category equipped with a <strong>co</strong>monad and an object then we get a canonical functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>Δ</mi> <mi>a</mi> <mi mathvariant="normal">op</mi></msubsup><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">\Delta_a^\mathrm{op}\to C</annotation></semantics></math> and hence an augmented <a class="existingWikiWord" href="/nlab/show/simplicial+object">simplicial object</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>. In particular when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category"> category of algebras</a> of a monad on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> we get a simplicial object for each algebra, whose underlying simplicial object in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/bar+construction">bar construction</a>.</p>
+<p>If here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Msg</mi><mo>=</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">Msg = \ast</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a>, then the exception monad is also known as the <em><a class="existingWikiWord" href="/nlab/show/maybe+monad">maybe monad</a></em>, modelling the effect that a program <em>may</em> fail, without however transmitting any further information about the failure.</p>
 
-<p>The comonad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>T</mi> <mi mathvariant="normal">op</mi></msup></mrow><annotation encoding="application/x-tex">T^\mathrm{op}</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>Δ</mi> <mi>a</mi> <mi mathvariant="normal">op</mi></msubsup></mrow><annotation encoding="application/x-tex">\Delta_a^\mathrm{op}</annotation></semantics></math> induces the <a class="existingWikiWord" href="/nlab/show/decalage#DecalageComonad">Décalage comonad</a>.</p>
-
-<h2 id="related_concepts">Related concepts</h2>
+<h2 id="related_entries">Related entries</h2>
 
 <ul>
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/exception+monad">exception monad</a></p>
+<p><a class="existingWikiWord" href="/nlab/show/maybe+monad">maybe monad</a></p>
 </li>
 
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/state+monad">state monad</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/continuation+monad">continuation monad</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/successor+monad">successor monad</a></p>
+<p><a class="existingWikiWord" href="/nlab/show/writer+monad">writer monad</a></p>
 </li>
 </ul>
 
 <h2 id="references">References</h2>
 
-<ul>
-<li id="Seal12">Gavin J. Seal, <em>Tensors, monads and actions</em> &lbrack;<a href="http://arxiv.org/abs/1205.0101">arXiv:1205.0101</a>&rbrack;</li>
-</ul>
-
-<p>Around (0.4.24.2) in</p>
+<p>Exception handling as a <a class="existingWikiWord" href="/nlab/show/monad+in+computer+science">monad in computer science</a>:</p>
 
 <ul>
-<li id="Durov07"><a class="existingWikiWord" href="/nlab/show/Nikolai+Durov">Nikolai Durov</a>, <em>New Approach to Arakelov Geometry</em> (<a href="http://arxiv.org/abs/0704.2030">arXiv:0704.2030</a>)</li>
+<li><a class="existingWikiWord" href="/nlab/show/Ji%C5%99%C3%AD+Ad%C3%A1mek">Jiří Adámek</a>, Stefan Milius, Nathan Bowler, Paul B. Levy, <em>Coproducts of Monads on Set</em>, 27th Annual IEEE Symposium on Logic in Computer Science (2012) &lbrack;<a href="https://arxiv.org/abs/1409.3804">arXiv:1409.3804</a>, <a href="https://doi.org/10.1109/LICS.2012.16">doi:10.1109/LICS.2012.16</a>&rbrack;</li>
 </ul>
 
-<p>the algebraic structure of the would be “<a class="existingWikiWord" href="/nlab/show/field+with+one+element">field with one element</a>” is regarded as being the maybe monad, hence <a class="existingWikiWord" href="/nlab/show/modules">modules</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝔽</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\mathbb{F}_1</annotation></semantics></math> are defined to be <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">monad-algebras</a> over the maybe monad, hence <a class="existingWikiWord" href="/nlab/show/pointed+sets">pointed sets</a>.</p>
+<p>Lecture notes:</p>
+
+<ul>
+<li id="Uustalu21"><a class="existingWikiWord" href="/nlab/show/Tarmo+Uustalu">Tarmo Uustalu</a>, p. 11 in: <em>Monads and Interaction Lecture 1</em> lecture notes for <a href="https://staffwww.dcs.shef.ac.uk/people/G.Struth/mgs21.html">MGS 2021</a> (2021) &lbrack;<a href="https://cs.ioc.ee/~tarmo/mgs21/mgs1.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Uustalu-Monads1.pdf" title="pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>See also:</p>
+
+<ul>
+<li>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Exception_handling">Exception handling</a></em></li>
+</ul>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on November  2, 2022 at 08:36:42.
-    See the <a href="/nlab/history/maybe+monad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    Created on November  2, 2022 at 08:21:34.
+    See the <a href="/nlab/history/exception+monad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/maybe+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/5676/#Item_15">Discuss</a><span class="backintime"><a href="/nlab/revision/maybe+monad/9" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/maybe+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/maybe+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (9 revisions)</a>
-  <a href="/nlab/show/maybe+monad/cite" style="color: black">Cite</a>
-  <a href="/nlab/print/maybe+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
-    <a href="/nlab/source/maybe+monad" id="view_source" rel="nofollow">Source</a>
+  <a href="/nlab/edit/exception+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15386/#Item_2">Discuss</a>
+  <a href="/nlab/show/exception+monad/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/exception+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/exception+monad" id="view_source" rel="nofollow">Source</a>
 
   
 
