@@ -250,8 +250,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -530,20 +530,31 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
+<li><a href='#definition'>Definition</a></li>
 <li><a href='#properties'>Properties</a></li>
 <ul>
 <li><a href='#realization_in_dependent_type_theory'>Realization in dependent type theory</a></li>
 </ul>
-<li><a href='#references'>References</a></li>
 <li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+<ul>
+<li><a href='#general'>General</a></li>
+<li><a href='#related_to_lenses'>Related to lenses</a></li>
+</ul>
 </ul>
 </div>
 
 <h2 id="idea">Idea</h2>
 
-<p>The <em>store comonad</em> (also <em>costate comonad</em>) is a co<a class="existingWikiWord" href="/nlab/show/monad+%28in+computer+science%29">monad (in computer science)</a> used to implement computational storage and retrieval of data in <a class="existingWikiWord" href="/nlab/show/functional+programming">functional programming</a>.</p>
+<p>The <em>store comonad</em> (also <em>costate comonad</em>, as it is <a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> to the <em><a class="existingWikiWord" href="/nlab/show/state+monad">state monad</a></em>) is a <a class="existingWikiWord" href="/nlab/show/comonad">co-</a><a class="existingWikiWord" href="/nlab/show/monad+%28in+computer+science%29">monad (in computer science)</a> used to implement computational storage and retrieval of <a class="existingWikiWord" href="/nlab/show/data">data</a> (<a class="existingWikiWord" href="/nlab/show/databases">databases</a>) in <a class="existingWikiWord" href="/nlab/show/functional+programming">functional programming</a>.</p>
 
-<p>As a comonadic triple <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>D</mi><mo>,</mo><mi>ε</mi><mo>,</mo><mi>δ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(D,\varepsilon,\delta)</annotation></semantics></math> it is given by an <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a>,</p>
+<p>Concretely, the <a class="existingWikiWord" href="/nlab/show/coalgebra+over+a+comonad">coalgebras</a> over the store monad are equivalently the well-behaved <em><a class="existingWikiWord" href="/nlab/show/lenses+%28in+computer+science%29">lense</a>-data structures</em> (<a href="#O&#x2019;Connor10">O’Connor (2010)</a>, <a href="#O&#x2019;Connor11">(2011)</a>; see <a href="lens+in+computer+science#LensesAreCostateCoalgebras">there</a>) used to inspect and edit fields (“views”) in <a class="existingWikiWord" href="/nlab/show/databases">databases</a>.</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>On a <a class="existingWikiWord" href="/nlab/show/cartesian+closed+category">cartesian closed category</a>, the costate comonad is that induced by the <a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a>-<a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjunction</a> (<a class="existingWikiWord" href="/nlab/show/left+adjoint">left adjoint</a> to the <a class="existingWikiWord" href="/nlab/show/state+monad">state monad</a>).</p>
+
+<p>In detail: As a comonadic triple <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>D</mi><mo>,</mo><mi>ε</mi><mo>,</mo><mi>δ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(D,\varepsilon,\delta)</annotation></semantics></math> it is given by an <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a>,</p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>D</mi><mi>X</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>W</mi><mo>×</mo><mo stretchy="false">[</mo><mi>W</mi><mo>,</mo><mi>X</mi><mo stretchy="false">]</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
 D X : X \rightarrow W \times [W,X],
 
@@ -587,18 +598,6 @@ D X : X \rightarrow W \times [W,X],
 
 <p>Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mi>W</mi></msub><msup><mi>W</mi> <mo>*</mo></msup><mo>=</mo><mo stretchy="false">[</mo><mi>W</mi><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\prod_W W^\ast = [W,-]</annotation></semantics></math> is called the <em><a class="existingWikiWord" href="/nlab/show/function+monad">function monad</a></em> or <em><a class="existingWikiWord" href="/nlab/show/reader+monad">reader monad</a></em> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>W</mi></msub><msup><mi>W</mi> <mo>*</mo></msup><mo>=</mo><mi>W</mi><mo>×</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum_W W^\ast = W \times (-)</annotation></semantics></math> is the <em><a class="existingWikiWord" href="/nlab/show/writer+comonad">writer comonad</a></em>.</p>
 
-<h2 id="references">References</h2>
-
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/Bartosz+Milewski">Bartosz Milewski</a>, <a href="https://bartoszmilewski.com/2013/10/08/lenses-stores-and-yoneda/">Lenses, Stores, and Yoneda</a></li>
-</ul>
-
-<p>A discussion of <a class="existingWikiWord" href="/nlab/show/coalgebra+for+an+endofunctor">coalgebras</a> for the costate monad as <a class="existingWikiWord" href="/nlab/show/lens+%28in+computer+science%29">lenses</a>:</p>
-
-<ul>
-<li id="Gibbons"><a class="existingWikiWord" href="/nlab/show/Jeremy+Gibbons">Jeremy Gibbons</a>, <a href="https://patternsinfp.wordpress.com/2011/01/31/lenses-are-the-coalgebras-for-the-costate-comonad/">Lenses are the coalgebras for the costate comonad</a></li>
-</ul>
-
 <h2 id="related_concepts">Related concepts</h2>
 
 <ul>
@@ -618,20 +617,58 @@ D X : X \rightarrow W \times [W,X],
 <p><a class="existingWikiWord" href="/nlab/show/function+monad">function monad</a> (reader monad)</p>
 </li>
 </ul>
+
+<h2 id="references">References</h2>
+
+<h3 id="general">General</h3>
+
+<p>(…)</p>
+
+<h3 id="related_to_lenses">Related to lenses</h3>
+
+<p>The observation that <a class="existingWikiWord" href="/nlab/show/lenses+%28in+computer+science%29">lenses (in computer science)</a> are equivalently the <a class="existingWikiWord" href="/nlab/show/coalgebra+over+a+comonad">coalgebras</a> of the <a class="existingWikiWord" href="/nlab/show/costate+comonad">costate comonad</a> (cf. <em><a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a></em>) is due to:</p>
+
+<ul>
+<li id="O&#x2019;Connor10">
+<p><a class="existingWikiWord" href="/nlab/show/Russell+O%E2%80%99Connor">Russell O’Connor</a>, <em>Lenses Are Exactly the Coalgebras for the Store Comonad</em> (30th Nov 2010) &lbrack;<a href="https://r6research.livejournal.com/23705.html">r6research:23705</a>&rbrack;</p>
+</li>
+
+<li id="O&#x2019;Connor11">
+<p><a class="existingWikiWord" href="/nlab/show/Russell+O%27Connor">Russell O'Connor</a>, <em>Functor is to Lens as Applicative is to Biplate: Introducing Multiplate</em>, contribution to <a href="https://dl.acm.org/doi/proceedings/10.1145/2036918">ICFP ‘11: ACM SIGPLAN International Conference on Functional Programming</a> (2011) &lbrack;<a href="https://arxiv.org/abs/1103.2841">arXiv:1103.2841</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>Early review:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Jeremy+Gibbons">Jeremy Gibbons</a>, <em><a href="https://patternsinfp.wordpress.com/2011/01/31/lenses-are-the-coalgebras-for-the-costate-comonad/">Lenses are the coalgebras for the costate comonad</a></em> (2011)</li>
+</ul>
+
+<p>Further details:</p>
+
+<ul>
+<li id="GibbonsJohnson12"><a class="existingWikiWord" href="/nlab/show/Jeremy+Gibbons">Jeremy Gibbons</a>, <a class="existingWikiWord" href="/nlab/show/Michael+Johnson">Michael Johnson</a>, <em>Relating Algebraic and Coalgebraic Descriptions of Lenses</em>, Electronic Communications of the EASST <strong>49</strong> (2012) &lbrack;<a href="http://dx.doi.org/10.14279/tuj.eceasst.49.726">doi:10.14279/tuj.eceasst.49.726</a>, <a href="http://www.cs.ox.ac.uk/jeremy.gibbons/publications/colens.pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>Further review:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Bartosz+Milewski">Bartosz Milewski</a>, <em><a href="https://bartoszmilewski.com/2013/10/08/lenses-stores-and-yoneda/">Lenses, Stores, and Yoneda</a></em> (2013)</li>
+</ul>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on November  4, 2022 at 11:07:36.
+    Last revised on November  5, 2022 at 10:40:12.
     See the <a href="/nlab/history/store+comonad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/store+comonad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/store+comonad/10" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/store+comonad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/store+comonad" accesskey="S" class="navlink" id="history" rel="nofollow">History (10 revisions)</a>
+  <a href="/nlab/edit/store+comonad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/store+comonad/11" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/store+comonad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/store+comonad" accesskey="S" class="navlink" id="history" rel="nofollow">History (11 revisions)</a>
   <a href="/nlab/show/store+comonad/cite" style="color: black">Cite</a>
   <a href="/nlab/print/store+comonad" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/store+comonad" id="view_source" rel="nofollow">Source</a>
