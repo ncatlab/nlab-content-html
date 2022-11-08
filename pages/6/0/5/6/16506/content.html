@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/6554/#Item_14" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/6554/#Item_16" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -590,10 +590,11 @@ margin-left: 0em;
 <li><a href='#idea'>Idea</a></li>
 <li><a href='#properties'>Properties</a></li>
 <ul>
-<li><a href='#AlgebrasForTheReaderMonad'>Algebras for the reader monad</a></li>
 <li><a href='#relation_to_the_coreader_comonad_and_state_monad'>Relation to the coreader comonad and state monad</a></li>
 <li><a href='#InTermsOfDependentTypeTheory'>In terms of dependent type theory</a></li>
 <li><a href='#RelationToRandomVariables'>Relation to random variables in probability theory</a></li>
+<li><a href='#FreeModules'>Free modules over the reader monad</a></li>
+<li><a href='#AlgebrasForTheReaderMonad'>General modules over the reader monad</a></li>
 </ul>
 <li><a href='#examples'>Examples</a></li>
 <ul>
@@ -616,14 +617,6 @@ margin-left: 0em;
 <p>In the context of <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a> this monad is called the <em>reader monad</em> or <em>environment monad</em>. It serves to write programs in which all operations may “read in” a state of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math> (an “environment”).</p>
 
 <h2 id="properties">Properties</h2>
-
-<h3 id="AlgebrasForTheReaderMonad">Algebras for the reader monad</h3>
-
-<p>The reader monad on <a class="existingWikiWord" href="/nlab/show/Set">Set</a> (and similar) does not generally arise from a <a class="existingWikiWord" href="/nlab/show/monadic+adjunction">monadic adjunction</a> and its <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebras</a> may not be easily characterizable. (See also <a href="https://math.stackexchange.com/a/868317/58526">MO:a/868317</a>.)</p>
-
-<p>A special case is when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math> is a 2 element set, where the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math>-reader algebras on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math> correspond to <a class="existingWikiWord" href="/nlab/show/idempotent">idempotent</a> <a class="existingWikiWord" href="/nlab/show/semigroups">semigroups</a>, also known as <em><a class="existingWikiWord" href="/nlab/show/rectangular+band">rectangular bands</a></em>.</p>
-
-<p>But the definition of the reader monad makes sense also for other <a class="existingWikiWord" href="/nlab/show/hyperdoctrines">hyperdoctrines</a> such as for <a class="existingWikiWord" href="/nlab/show/dependent+linear+types">dependent linear types</a>: For the resulting “linear” or “quantum” version of the reader monad the situation is different, see <a href="#QuantumReaderMonad">below</a>.</p>
 
 <h3 id="relation_to_the_coreader_comonad_and_state_monad">Relation to the coreader comonad and state monad</h3>
 
@@ -674,6 +667,22 @@ margin-left: 0em;
 <p>This is also brought out by the relation of <em>linear</em> reader algebras to <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>, see <a href="#QuantumReaderMonad">below</a>.</p>
 
 <p>In <a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a>, the traditional way to model that a program may depend on random states <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>w</mi><mo>∈</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">w \in W</annotation></semantics></math> is to consider not the reader monad but the <a class="existingWikiWord" href="/nlab/show/state+monad">state monad</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mi>W</mi><mo>,</mo><mi>W</mi><mo>×</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[W,W \times (-)]</annotation></semantics></math>. This allows programs not only to depend on the state <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>w</mi><mo>∈</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">w\in W</annotation></semantics></math>, but also to change it (for instance to a new number generated by a random number generator). If however one restricts attention to programs that just depend on/read in a random environment <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>w</mi><mo>∈</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">w\in W</annotation></semantics></math> but never change it, then these standard constructs may be reduced from using the state monad to using just the reader monad.</p>
+
+<h3 id="FreeModules">Free modules over the reader monad</h3>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/set">set</a>, the <a class="existingWikiWord" href="/nlab/show/Kleisli+category">Kleisli category</a> for the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>-reader monad has <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/tuples">tuples</a> of <a class="existingWikiWord" href="/nlab/show/functions">functions</a> as <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a>:</p>
+<div style="margin: -20px 0px 20px 10px">
+  <img src="/nlab/files/KleisliCatOfReaderMonad-221108.jpg" width="600px" />
+</div>
+<p>(On the left we are showing the situation of the <a class="existingWikiWord" href="/nlab/show/comparison+functor">comparison functor</a> and on the right we are using the <a href="monad+in+computer+science#BasicIdea">“bind”-notation</a> from <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a>.)</p>
+
+<h3 id="AlgebrasForTheReaderMonad">General modules over the reader monad</h3>
+
+<p>The reader monad on <a class="existingWikiWord" href="/nlab/show/Set">Set</a> (and similar) does not generally arise from a <a class="existingWikiWord" href="/nlab/show/monadic+adjunction">monadic adjunction</a> and its general <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebras</a> may not be easily characterizable. (See also <a href="https://math.stackexchange.com/a/868317/58526">MO:a/868317</a>.)</p>
+
+<p>A special case is when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math> is a 2 element set, where the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math>-reader algebras on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math> correspond to <a class="existingWikiWord" href="/nlab/show/idempotent">idempotent</a> <a class="existingWikiWord" href="/nlab/show/semigroups">semigroups</a>, also known as <em><a class="existingWikiWord" href="/nlab/show/rectangular+band">rectangular bands</a></em>.</p>
+
+<p>But the definition of the reader monad makes sense also for other <a class="existingWikiWord" href="/nlab/show/hyperdoctrines">hyperdoctrines</a> such as for <a class="existingWikiWord" href="/nlab/show/dependent+linear+types">dependent linear types</a>: For the resulting “linear” or “quantum” version of the reader monad the situation is different, see <a href="#QuantumReaderMonad">below</a>.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -1021,11 +1030,31 @@ margin-left: 0em;
 
 <p>For example, the <a class="existingWikiWord" href="/nlab/show/dependent+linear+type">dependent linear type</a> of <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> is the free <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◯</mo> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\bigcirc_B</annotation></semantics></math>-algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◯</mo> <mi>Bool</mi></msub><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\bigcirc_{Bool} \mathbb{C}</annotation></semantics></math> spanned by the <a class="existingWikiWord" href="/nlab/show/intuitionistic+type+theory">classical type</a> <a class="existingWikiWord" href="/nlab/show/Bool">Bool</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>=</mo><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">= \{0,1\}</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/bits">bits</a>, reflecting the two canonical <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>-outcomes (<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert 0\rangle</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert 1 \rangle</annotation></semantics></math>) of <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a>.</p>
 
+<p id="QuantumMeasurementAsIndefinitenessHandling"> Curiously, from this one finds that <em><a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> is exactly indefiniteness handling</em></p>
+
+<p>where</p>
+
+<ul>
+<li>
+<p>“indefiniteness” is understood as the the effect/<a class="existingWikiWord" href="/nlab/show/modality">modality</a> expressed by the reader monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◯</mo> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\bigcirc_B</annotation></semantics></math> (see <a href="necessity+and+possibility#RelationToPotentiality">here</a>),</p>
+</li>
+
+<li>
+<p>“handling” is understood as <em>effect handling</em> in the sense of effect-<a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a> (see <a href="monad+in+computer+science#MonadModulesInIdeaSection">here</a>);</p>
+</li>
+</ul>
+
+<p>namely:</p>
+<div style="margin: -20px 0px 20px 10px">
+  <img src="/nlab/files/QMeasurementViaIndefinitenessHandling-221108.jpg" width="700px" />
+</div>
 <p>For more on this see at <em><a class="existingWikiWord" href="/nlab/show/quantum+circuits+via+dependent+linear+types">quantum circuits via dependent linear types</a></em>.</p>
 </div>
 </p>
 
-<p>This naturally relates to the discussion of <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> via <a class="existingWikiWord" href="/nlab/show/Frobenius+algebra">Frobenius algebra</a>-structures which is popular in the context of <a class="existingWikiWord" href="/nlab/show/quantum+information+theory+via+dagger-compact+categories">quantum information theory via dagger-compact categories</a>:</p>
+<p><br /></p>
+
+<p>This naturally relates to the discussion of <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> via <a class="existingWikiWord" href="/nlab/show/Frobenius+algebra">Frobenius algebra</a>-structures which is popular in the context of <a class="existingWikiWord" href="/nlab/show/quantum+information+theory+via+dagger-compact+categories">quantum information theory via dagger-compact categories</a> – as follows:</p>
 
 <p>
 <div class='num_remark' id='QuantumrReaderMonadIsFrobenius'>
@@ -1137,14 +1166,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on November  7, 2022 at 18:50:45.
+    Last revised on November  8, 2022 at 19:25:31.
     See the <a href="/nlab/history/function+monad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/function+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6554/#Item_14">Discuss</a><span class="backintime"><a href="/nlab/revision/function+monad/23" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/function+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/function+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (23 revisions)</a>
+  <a href="/nlab/edit/function+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/6554/#Item_16">Discuss</a><span class="backintime"><a href="/nlab/revision/function+monad/25" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/function+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/function+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (25 revisions)</a>
   <a href="/nlab/show/function+monad/cite" style="color: black">Cite</a>
   <a href="/nlab/print/function+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/function+monad" id="view_source" rel="nofollow">Source</a>
