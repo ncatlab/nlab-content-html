@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/14880/#Item_4" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/14880/#Item_6" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -584,11 +584,17 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#definition'>Definition</a></li>
+<li><a href='#Definition'>Definitions</a></li>
 <ul>
+<li><a href='#AsSkewKleisliTriples'>As skew Kleisi triples</a></li>
 <li><a href='#as_skewmonoids'>As skew-monoids</a></li>
+<li><a href='#relative_to_a_profunctor'>Relative to a Profunctor</a></li>
 </ul>
 <li><a href='#examples'>Examples</a></li>
+<ul>
+<li><a href='#generic_examples'>Generic examples</a></li>
+<li><a href='#specific_examples'>Specific examples</a></li>
+</ul>
 <li><a href='#related_pages'>Related pages</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -596,83 +602,136 @@ margin-left: 0em;
 
 <h2 id="idea">Idea</h2>
 
-<p>A <em>relative monad</em> is what is to a <em><a class="existingWikiWord" href="/nlab/show/relative+adjunction">relative adjunction</a></em> as a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> is to an <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a>.</p>
+<p>A <em>relative</em> monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">T : \mathbf J \to \mathbf C</annotation></semantics></math> is like a monad except that it is not an <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a>, but more generally a functor between two different categories. To even formulate such a notion, (for instance the definition of the <a class="existingWikiWord" href="/nlab/show/unit">unit</a>), the two categories have to be related somehow, typically by there being a specified functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J \colon \mathbf J \to \mathbf C</annotation></semantics></math>, in which case we say that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> is a monad <em>relative to</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math>. Ordinary monads are then the special case where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math> is the identity functor.</p>
 
-<p>In <a href="#ACU14">ACU14</a>, the authors proved that a relative monad on a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J \colon \mathbf J \to \mathbf C</annotation></semantics></math> are ‘skew-monoids in the <a class="existingWikiWord" href="/nlab/show/skew-monoidal+category">skew-monoidal category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\mathbf J, \mathbf C]</annotation></semantics></math>’ (see below).</p>
+<h2 id="Definition">Definitions</h2>
 
-<p>The specialization of the following definition to plain monads, hence to the case <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>=</mo><mi>id</mi></mrow><annotation encoding="application/x-tex">J = id</annotation></semantics></math>, yields at face value not the traditional definition of <a class="existingWikiWord" href="/nlab/show/monads">monads</a> but the (equivalent) definition of <em><a class="existingWikiWord" href="/nlab/show/extension+systems">extension systems</a></em> (also “<a class="existingWikiWord" href="/nlab/show/Kleisli+triples">Kleisli triples</a>”, being the form of <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a>).</p>
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf J, \mathbf C</annotation></semantics></math> be <a class="existingWikiWord" href="/nlab/show/categories">categories</a> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J \colon \mathbf J \to \mathbf C</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/functor">functor</a>.</p>
 
-<h2 id="definition">Definition</h2>
-
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf J, \mathbf C</annotation></semantics></math> be categories and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J: \mathbf J \to \mathbf C</annotation></semantics></math> be a functor.</p>
+<h3 id="AsSkewKleisliTriples">As skew Kleisi triples</h3>
 
 <p>
 <div class='num_defn' id='def'>
 <h6>Definition</h6>
-<p>A <strong>relative monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math></strong> is a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">T:\mathbf J \to \mathbf C</annotation></semantics></math> equipped with</p>
+<p>A <strong>relative monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math></strong> is a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">T \colon \mathbf J \to \mathbf C</annotation></semantics></math> equipped with</p>
 
-<ul>
-<li>a <em>unit</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>η</mi> <mi>X</mi></msub><mo>:</mo><mi>J</mi><mi>X</mi><mo>→</mo><mi>T</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\eta_X : J X \to T X</annotation></semantics></math> natural in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">X : \mathbf J</annotation></semantics></math>,</li>
+<ol>
+<li>
+<p>a <em><a class="existingWikiWord" href="/nlab/show/unit+of+a+monad">unit</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>η</mi> <mi>X</mi></msub><mo lspace="verythinmathspace">:</mo><mi>J</mi><mi>X</mi><mo>→</mo><mi>T</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">\eta_X \colon J X \to T X</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">X \colon \mathbf J</annotation></semantics></math>,</p>
+</li>
 
-<li>a <em><a class="existingWikiWord" href="/nlab/show/extension+system">Kleisli extension</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo>:</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">(</mo><mi>J</mi><mi>X</mi><mo>,</mo><mi>T</mi><mi>Y</mi><mo stretchy="false">)</mo><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">(</mo><mi>T</mi><mi>X</mi><mo>,</mo><mi>T</mi><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-)^* : \mathbf C(J X, T Y) \to \mathbf C(T X, T Y)</annotation></semantics></math> in both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">X,Y:\mathbf J</annotation></semantics></math></li>
-</ul>
+<li>
+<p>a <em><a class="existingWikiWord" href="/nlab/show/extension+system">Kleisli extension</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">(</mo><mi>J</mi><mi>X</mi><mo>,</mo><mi>T</mi><mi>Y</mi><mo stretchy="false">)</mo><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">(</mo><mi>T</mi><mi>X</mi><mo>,</mo><mi>T</mi><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-)^* \colon \mathbf C(J X, T Y) \to \mathbf C(T X, T Y)</annotation></semantics></math> in both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">X,Y \colon \mathbf J</annotation></semantics></math></p>
+</li>
+</ol>
 
-<p>such that for every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mi>Z</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">X,Y,Z:\mathbf J</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>:</mo><mi>J</mi><mi>X</mi><mo>→</mo><mi>T</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">k:J X \to T Y</annotation></semantics></math>,</p>
+<p>such that for every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mi>Z</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">X,Y,Z \colon \mathbf J</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo lspace="verythinmathspace">:</mo><mi>J</mi><mi>X</mi><mo>→</mo><mi>T</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">k \colon J X \to T Y</annotation></semantics></math> the following <a class="existingWikiWord" href="/nlab/show/equations">equations</a> hold:</p>
 
-<ul>
-<li><em>(left unital law)</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>=</mo><msup><mi>k</mi> <mo>*</mo></msup><mo>∘</mo><msub><mi>η</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">k = k^* \circ \eta_X</annotation></semantics></math>,</li>
+<ol>
+<li>
+<p><em>(left <a class="existingWikiWord" href="/nlab/show/unitality">unitality</a>)</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>=</mo><msup><mi>k</mi> <mo>*</mo></msup><mo>∘</mo><msub><mi>η</mi> <mi>X</mi></msub></mrow><annotation encoding="application/x-tex">k = k^* \circ \eta_X</annotation></semantics></math>,</p>
+</li>
 
-<li><em>(right unital law)</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>η</mi> <mi>X</mi> <mo>*</mo></msubsup><mo>=</mo><msub><mn>1</mn> <mrow><mi>T</mi><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\eta_X^* = 1_{T X}</annotation></semantics></math>,</li>
+<li>
+<p><em>(right <a class="existingWikiWord" href="/nlab/show/unitality">unitality</a>)</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>η</mi> <mi>X</mi> <mo>*</mo></msubsup><mo>=</mo><msub><mn>1</mn> <mrow><mi>T</mi><mi>X</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\eta_X^* = 1_{T X}</annotation></semantics></math>,</p>
+</li>
 
-<li><em>(associativity law)</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>ℓ</mi> <mo>*</mo></msup><mo>∘</mo><mi>k</mi><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo>=</mo><msup><mi>ℓ</mi> <mo>*</mo></msup><mo>∘</mo><msup><mi>k</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">(\ell^* \circ k)^* = \ell^* \circ k^*</annotation></semantics></math> for every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℓ</mi><mo>:</mo><mi>J</mi><mi>Y</mi><mo>→</mo><mi>T</mi><mi>Z</mi></mrow><annotation encoding="application/x-tex">\ell : J Y \to T Z</annotation></semantics></math>.</li>
-</ul>
+<li>
+<p><em>(<a class="existingWikiWord" href="/nlab/show/associativity">associativity</a>)</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>ℓ</mi> <mo>*</mo></msup><mo>∘</mo><mi>k</mi><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo>=</mo><msup><mi>ℓ</mi> <mo>*</mo></msup><mo>∘</mo><msup><mi>k</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">(\ell^* \circ k)^* = \ell^* \circ k^*</annotation></semantics></math> for every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℓ</mi><mo>:</mo><mi>J</mi><mi>Y</mi><mo>→</mo><mi>T</mi><mi>Z</mi></mrow><annotation encoding="application/x-tex">\ell : J Y \to T Z</annotation></semantics></math>.</p>
+</li>
+</ol>
 
 <p></p>
 </div>
 </p>
 
-<p>Notice that for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f:X \to Y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf J</annotation></semantics></math>, one has</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Tf</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi>η</mi> <mrow><mi>J</mi><mi>Y</mi></mrow></msub><mo>∘</mo><mi>J</mi><mi>f</mi><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo>.</mo></mrow><annotation encoding="application/x-tex">
-    Tf = (\eta_{J Y} \circ J f)^*.
+<p>Notice that for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f \colon X \to Y</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf J</annotation></semantics></math>, one has</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>f</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>η</mi> <mrow><mi>J</mi><mi>Y</mi></mrow></msub><mo>∘</mo><mi>J</mi><mi>f</mi><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mo>*</mo></msup><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  T f 
+  \;=\; 
+  \big(
+    \eta_{J Y} \circ J f
+  \big)^*
+  \,. 
 
 </annotation></semantics></math></div>
-<p>In computer science, monads are usually defined by a unit and an extension operator, as above, so that relative monads are very close to plain monads in that regard. Since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\mathbf J, \mathbf C]</annotation></semantics></math> lacks a monoidal structure (unlike <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\mathbf C, \mathbf C]</annotation></semantics></math>), to define relative monads like mathematicians define monads (as monoids in a category of endofunctors) we need to be more clever.</p>
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p><strong>(ordinary <a class="existingWikiWord" href="/nlab/show/monads">monads</a> as <a class="existingWikiWord" href="/nlab/show/Kleisli+triples">Kleisli triples</a>/<a class="existingWikiWord" href="/nlab/show/extension+systems">extension systems</a>)</strong> <br /> In the special case that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>=</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{J} = \mathbf{C}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>=</mo><mi>id</mi></mrow><annotation encoding="application/x-tex">J = id</annotation></semantics></math> the <a class="existingWikiWord" href="/nlab/show/identity+functor">identity functor</a>, Def. <a class="maruku-ref" href="#def"></a> reduces to the definition of ordinary <a class="existingWikiWord" href="/nlab/show/monads">monads</a>, but in the guise known as “<a class="existingWikiWord" href="/nlab/show/Kleisli+triples">Kleisli triples</a>” or “<a class="existingWikiWord" href="/nlab/show/extension+systems">extension systems</a>” which is nominally different from (though equivalent to) the way monads are traditionally presented in <a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a>/<a class="existingWikiWord" href="/nlab/show/categorical+algebra">categorical algebra</a> (namely as <a class="existingWikiWord" href="/nlab/show/monoid+objects">monoid objects</a> <a class="existingWikiWord" href="/nlab/show/internalization">internal to</a> a <a class="existingWikiWord" href="/nlab/show/functor+category">category of</a> <a class="existingWikiWord" href="/nlab/show/endofunctors">endofunctors</a>), but is exactly the form commonly used for <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a>.</p>
+</div>
+</p>
 
 <h3 id="as_skewmonoids">As skew-monoids</h3>
 
-<p>A <a class="existingWikiWord" href="/nlab/show/skew-monoidal+category">skew-monoidal category</a> is like a monoidal category except its unitors and associators are not necessarily invertible. A monoid in a skew-monoidal category is called a ‘skew-monoid’.</p>
+<p>The notion of a <em><a class="existingWikiWord" href="/nlab/show/skew-monoidal+category">skew-monoidal category</a></em> is like that of a <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a> except that the <a class="existingWikiWord" href="/nlab/show/unitors">unitors</a> and <a class="existingWikiWord" href="/nlab/show/associators">associators</a> are not necessarily <a class="existingWikiWord" href="/nlab/show/invertible+morphism">invertible</a>. A <a class="existingWikiWord" href="/nlab/show/monoid">monoid</a> in a <a class="existingWikiWord" href="/nlab/show/skew-monoidal+category">skew-monoidal category</a> is called a “<em>skew-monoid</em>”.</p>
 
-<p>Composition of functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>,</mo><mi>G</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">F,G:\mathbf J \to \mathbf C</annotation></semantics></math> can be defined by first <a class="existingWikiWord" href="/nlab/show/left+Kan+extension">extending</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math> and then composing with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>. The resulting composition product on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\mathbf J, \mathbf C]</annotation></semantics></math> is coherent but only laxly so, hence the need to appeal to skew-monoidal categories.</p>
+<p>In the general case that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{J}</annotation></semantics></math> is distinct from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/functor+category">functor category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Func</mi><mo stretchy="false">(</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Func(\mathbf J, \mathbf C)</annotation></semantics></math> lacks a natural <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a> <a class="existingWikiWord" href="/nlab/show/structure">structure</a> (as opposed to the case of <a class="existingWikiWord" href="/nlab/show/endofunctors">endofunctors</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Func</mi><mo stretchy="false">(</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Func(\mathbf{C}, \mathbf{C})</annotation></semantics></math>) so that the usual definition of <a class="existingWikiWord" href="/nlab/show/monads">monads</a> as <a class="existingWikiWord" href="/nlab/show/monoids">monoids</a> cannot apply — but a suitable “skew” variant works:</p>
+
+<p>The (skew-)<a class="existingWikiWord" href="/nlab/show/composition">composition</a> of <a class="existingWikiWord" href="/nlab/show/functors">functors</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>,</mo><mi>G</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">F,G \colon \mathbf J \to \mathbf C</annotation></semantics></math> may be defined by first <a class="existingWikiWord" href="/nlab/show/left+Kan+extension">extending</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math> and then composing with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>. The resulting composition product on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\mathbf J, \mathbf C]</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/coherence">coherent</a> but only <a class="existingWikiWord" href="/nlab/show/lax+natural+transformation">laxly</a> so, hence the need to appeal to skew-monoidal categories:</p>
 
 <p>
 <div class='num_theorem'>
 <h6>Theorem</h6>
-<p>[Theorem 3.4] Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J:\mathbf J \to \mathbf C</annotation></semantics></math> is such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">Lan</mi> <mi>J</mi></msub><mo>:</mo><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo><mo>→</mo><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathrm{Lan}_J : [\mathbf J, \mathbf C] \to [\mathbf C, \mathbf C]</annotation></semantics></math> exists (e.g. if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf J</annotation></semantics></math> is small and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf C</annotation></semantics></math> cocomplete). Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\mathbf J, \mathbf C]</annotation></semantics></math> is skew-monoidal, with unit <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math> and product <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><msup><mo>∘</mo> <mi>J</mi></msup><mi>G</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi mathvariant="normal">Lan</mi> <mi>J</mi></msub><mi>F</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F \circ^J G = (\mathrm{Lan}_J F) \circ G</annotation></semantics></math>, and a relative monad is a monoid in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo><mo>,</mo><mi>J</mi><mo>,</mo><msup><mo>∘</mo> <mi>J</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">([\mathbf J, \mathbf C], J, \circ^J)</annotation></semantics></math>.</p>
+<p><strong>(<a href="#ACU14">ACU14, Thm. 3.4</a>)</strong> <br /> Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J \colon \mathbf J \to \mathbf C</annotation></semantics></math> is such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">Lan</mi> <mi>J</mi></msub><mo lspace="verythinmathspace">:</mo><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo><mo>→</mo><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathrm{Lan}_J \colon [\mathbf J, \mathbf C] \to [\mathbf C, \mathbf C]</annotation></semantics></math> exists (e.g. if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf J</annotation></semantics></math> is small and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf C</annotation></semantics></math> cocomplete). Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\mathbf J, \mathbf C]</annotation></semantics></math> is skew-monoidal, with unit <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math> and product <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><msup><mo>∘</mo> <mi>J</mi></msup><mi>G</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi mathvariant="normal">Lan</mi> <mi>J</mi></msub><mi>F</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F \circ^J G = (\mathrm{Lan}_J F) \circ G</annotation></semantics></math>, and a relative monad is a monoid in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo><mo>,</mo><mi>J</mi><mo>,</mo><msup><mo>∘</mo> <mi>J</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">([\mathbf J, \mathbf C], J, \circ^J)</annotation></semantics></math>.</p>
 </div>
 </p>
 
 <p>When <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J:\mathbf J \to \mathbf C</annotation></semantics></math> is a free completion of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{J}</annotation></semantics></math> under colimits from some set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℱ</mi></mrow><annotation encoding="application/x-tex">\mathcal{F}</annotation></semantics></math> of indexing types, then this skew-monoidal structure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>,</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\mathbf J, \mathbf C]</annotation></semantics></math> is properly monoidal, since it is equivalent to the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℱ</mi></mrow><annotation encoding="application/x-tex">\mathcal{F}</annotation></semantics></math>-colimit preserving functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf C\to\mathbf C</annotation></semantics></math>, and the monoidal structure is just functor composition.</p>
 
+<h3 id="relative_to_a_profunctor">Relative to a Profunctor</h3>
+
+<p>The above definition makes sense even more generally when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/profunctor">profunctor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mstyle mathvariant="bold"><mi>J</mi></mstyle> <mi>op</mi></msup><mo>×</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>→</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">\mathbf J^{op} \times \mathbf {C} \to Set</annotation></semantics></math>, i.e., we require</p>
+
+<ol>
+<li>
+<p>a unit <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>η</mi> <mi>X</mi></msub><mo lspace="verythinmathspace">:</mo><mi>J</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>T</mi><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\eta_X \colon J(X, T X)</annotation></semantics></math>, a <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">X \colon \mathbf J</annotation></semantics></math>, that is an element of the <a class="existingWikiWord" href="/nlab/show/end">end</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>η</mi><mo>∈</mo><msub><mo>∫</mo> <mrow><mi>X</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow></msub><mi>J</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>T</mi><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\eta \in \int_{X: \mathbf J}J(X, T X)</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>a <em><a class="existingWikiWord" href="/nlab/show/extension+system">Kleisli extension</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mo>*</mo></msup><mo lspace="verythinmathspace">:</mo><mi>J</mi><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>T</mi><mi>Y</mi><mo stretchy="false">)</mo><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">(</mo><mi>T</mi><mi>X</mi><mo>,</mo><mi>T</mi><mi>Y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-)^* \colon J(X, T Y) \to \mathbf C(T X, T Y)</annotation></semantics></math> natural in both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle></mrow><annotation encoding="application/x-tex">X,Y \colon \mathbf J</annotation></semantics></math></p>
+</li>
+</ol>
+
+<p>with essentially the same equations. This generalizes the previous definition by defining the profunctor to be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo stretchy="false">(</mo><mi>J</mi><mo>−</mo><mo>,</mo><mo>=</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf C(J-,=)</annotation></semantics></math>.</p>
+
 <h2 id="examples">Examples</h2>
 
-<ul>
-<li>
-<p>A relative monad on the embedding <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>:</mo><mstyle mathvariant="bold"><mi>FinSet</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>Set</mi></mstyle></mrow><annotation encoding="application/x-tex">J:\mathbf{FinSet} \to \mathbf {Set}</annotation></semantics></math> is the same thing as an <a class="existingWikiWord" href="/nlab/show/abstract+clone">abstract clone</a>. These are equivalent to <a class="existingWikiWord" href="/nlab/show/finitary+monads">finitary monads</a> and single-sorted <a class="existingWikiWord" href="/nlab/show/algebraic+theories">algebraic theories</a>.</p>
-</li>
+<h3 id="generic_examples">Generic examples</h3>
 
-<li>
-<p>Any monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> induces a relative monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>TJ</mi></mrow><annotation encoding="application/x-tex">TJ</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math>, for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo>:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J:\mathbf{J}\to \mathbf{C}</annotation></semantics></math>.</p>
-</li>
+<p>
+<div class='num_remark' id='RelativeMonadsInducedFromActualMonads'>
+<h6>Example</h6>
+<p><strong>(relative monads induced from actual monads)</strong>  Any actual <a class="existingWikiWord" href="/nlab/show/monad">monad</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> induces a relative monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>J</mi></mrow><annotation encoding="application/x-tex">T J</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math>, for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">J \colon \mathbf{J}\to \mathbf{C}</annotation></semantics></math>.</p>
 
-<li>
-<p>Fixing a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝕍</mi></mrow><annotation encoding="application/x-tex">\mathbb{V}</annotation></semantics></math> with finite products, to give a <a class="existingWikiWord" href="/nlab/show/Freyd+category">Freyd category</a> is to give a strong relative monad on the <a class="existingWikiWord" href="/nlab/show/Yoneda+embedding">Yoneda embedding</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝕍</mi><mo>→</mo><mo stretchy="false">[</mo><msup><mi>𝕍</mi> <mi mathvariant="normal">op</mi></msup><mo>,</mo><mstyle mathvariant="bold"><mi>Set</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathbb{V}\to [\mathbb{V}^{\mathrm{op}},\mathbf{Set}]</annotation></semantics></math>.</p>
-</li>
+<p>A concrete instance of this case is spelled out in Exp. <a class="maruku-ref" href="#LinearSpan"></a> below.</p>
+</div>
+</p>
 
-<li>
-<p>The presheaf construction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>ℂ</mi><mo>↦</mo><mo stretchy="false">[</mo><msup><mi>ℂ</mi> <mi mathvariant="normal">op</mi></msup><mo>,</mo><mstyle mathvariant="bold"><mi>Set</mi></mstyle><mo stretchy="false">]</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\mathbb{C}\mapsto [{\mathbb{C}}^{\mathrm{op}},\mathbf{Set}])</annotation></semantics></math> can be regarded as a <a class="existingWikiWord" href="/nlab/show/relative+pseudomonad">relative pseudomonad</a> on the inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>Cat</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>CAT</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{Cat}\to \mathbf{CAT}</annotation></semantics></math>. (See also <a class="existingWikiWord" href="/nlab/show/Yoneda+structures">Yoneda structures</a>.)</p>
-</li>
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p>A relative monad on the embedding <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi><mo lspace="verythinmathspace">:</mo><mstyle mathvariant="bold"><mi>FinSet</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>Set</mi></mstyle></mrow><annotation encoding="application/x-tex">J \colon \mathbf{FinSet} \to \mathbf {Set}</annotation></semantics></math> is the same thing as an <a class="existingWikiWord" href="/nlab/show/abstract+clone">abstract clone</a>. These are equivalent to <a class="existingWikiWord" href="/nlab/show/finitary+monads">finitary monads</a> and single-sorted <a class="existingWikiWord" href="/nlab/show/algebraic+theories">algebraic theories</a>.</p>
+</div>
+</p>
 
-<li>
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p>Fixing a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝕍</mi></mrow><annotation encoding="application/x-tex">\mathbb{V}</annotation></semantics></math> with <a class="existingWikiWord" href="/nlab/show/finite+products">finite products</a>, to give a <a class="existingWikiWord" href="/nlab/show/Freyd+category">Freyd category</a> is to give a strong relative monad on the <a class="existingWikiWord" href="/nlab/show/Yoneda+embedding">Yoneda embedding</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝕍</mi><mo>→</mo><mo stretchy="false">[</mo><msup><mi>𝕍</mi> <mi mathvariant="normal">op</mi></msup><mo>,</mo><mstyle mathvariant="bold"><mi>Set</mi></mstyle><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathbb{V}\to [\mathbb{V}^{\mathrm{op}},\mathbf{Set}]</annotation></semantics></math>.</p>
+</div>
+</p>
+
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p>The <a class="existingWikiWord" href="/nlab/show/presheaf+category">presheaf category</a>-construction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>ℂ</mi><mo>↦</mo><mo stretchy="false">[</mo><msup><mi>ℂ</mi> <mi mathvariant="normal">op</mi></msup><mo>,</mo><mstyle mathvariant="bold"><mi>Set</mi></mstyle><mo stretchy="false">]</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\mathbb{C}\mapsto [{\mathbb{C}}^{\mathrm{op}},\mathbf{Set}])</annotation></semantics></math> may be regarded as a <a class="existingWikiWord" href="/nlab/show/relative+pseudomonad">relative pseudomonad</a> on the inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>Cat</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>CAT</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{Cat}\to \mathbf{CAT}</annotation></semantics></math>. (See also <em><a class="existingWikiWord" href="/nlab/show/Yoneda+structures">Yoneda structures</a></em>.)</p>
+</div>
+</p>
+
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
 <p>A <a class="existingWikiWord" href="/nlab/show/monad+with+arities">monad on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
   <semantics>
     <mrow>
@@ -696,12 +755,205 @@ margin-left: 0em;
     <annotation encoding="application/x-tex">\mathbf{J}\subseteq \mathbf C</annotation>
   </semantics>
 </math></a> is the same thing as a relative monad for the embedding <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{J}\to \mathbf C</annotation></semantics></math>. (Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>⊆</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{J}\subseteq \mathbf{C}</annotation></semantics></math> is required to be a <a class="existingWikiWord" href="/nlab/show/dense+subcategory">dense subcategory</a>, so that to give a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>⊆</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{J}\subseteq \mathbf{C}</annotation></semantics></math> is to give a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>→</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}\to\mathbf{C}</annotation></semantics></math> preserving <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math>-absolute colimits.)</p>
+</div>
+</p>
+
+<h3 id="specific_examples">Specific examples</h3>
+
+<p>
+<div class='num_remark' id='LinearSpan'>
+<h6>Example</h6>
+<p><strong>(<a class="existingWikiWord" href="/nlab/show/linear+span">linear span</a>)</strong> <br /> We spell out the simple but maybe instructive example of the construction which sends a <a class="existingWikiWord" href="/nlab/show/set">set</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> to the <a class="existingWikiWord" href="/nlab/show/vector+space">vector space</a> which it <a class="existingWikiWord" href="/nlab/show/linear+span">spans</a>, i.e. to the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/indexed+set">indexed</a> <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a> of some <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝕂</mi></mrow><annotation encoding="application/x-tex">\mathbb{K}</annotation></semantics></math>, regarded in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝕂</mi></mrow><annotation encoding="application/x-tex">\mathbb{K}</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/vector+spaces">vector spaces</a>.</p>
+
+<p>In detail, for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝕂</mi></mrow><annotation encoding="application/x-tex">\mathbb{K}</annotation></semantics></math> any <a class="existingWikiWord" href="/nlab/show/ground+field">ground field</a>, consider:</p>
+
+<ol>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>J</mi></mstyle><mo>≔</mo></mrow><annotation encoding="application/x-tex">\mathbf{J} \coloneqq </annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/Set">Set</a>;</p>
 </li>
-</ul>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>≔</mo><msub><mo>∫</mo> <mrow><mi>B</mi><mo lspace="verythinmathspace">:</mo><mi>Set</mi></mrow></msub><msub><mi>Vect</mi> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{C} \coloneqq \int_{B \colon Set} Vect_B</annotation></semantics></math> the category of <a class="existingWikiWord" href="/nlab/show/indexed+sets">indexed sets</a> of <a class="existingWikiWord" href="/nlab/show/vector+spaces">vector spaces</a> – hence of <a class="existingWikiWord" href="/nlab/show/vector+bundles">vector bundles</a> over <a class="existingWikiWord" href="/nlab/show/sets">sets</a> (i.e. over <a class="existingWikiWord" href="/nlab/show/discrete+topological+spaces">discrete topological spaces</a>)</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi class="mathscript">ℋ</mi></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd></mtr> <mtr><mtd><mi>B</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathscr{H}
+    \\
+    \big\downarrow
+    \\
+    B
+  }
+
+</annotation></semantics></math></div>
+<p>with possibly base-changing vector bundle <a class="existingWikiWord" href="/nlab/show/maps">maps</a> between them:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi class="mathscript">ℋ</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi class="mathscript">ℋ</mi><mo>′</mo></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd> <mtd></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo></mtd></mtr> <mtr><mtd><mi>B</mi></mtd> <mtd><munder><mo>⟶</mo><mi>f</mi></munder></mtd> <mtd><mi>B</mi><mo>′</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathscr{H}
+    &amp;\longrightarrow&amp;
+    \mathscr{H}'
+    \\
+    \big\downarrow
+    &amp;&amp;
+    \big\downarrow
+    \\
+    B
+    &amp;\underset{f}{\longrightarrow}&amp;
+    B'
+  }
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>the relativization functor given by sending a set to the <a class="existingWikiWord" href="/nlab/show/trivial+bundle">trivial</a> <a class="existingWikiWord" href="/nlab/show/tensor+unit">tensor unit</a>-bundle over it:</p>
+<div class="maruku-equation" id="eq:FormingTrivialTensorUnitBundle"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>J</mi></mtd> <mtd><mo lspace="verythinmathspace">:</mo></mtd> <mtd><mi>Set</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><msub><mo>∫</mo> <mrow><mi>B</mi><mo lspace="verythinmathspace">:</mo><mi>Set</mi></mrow></msub><msub><mi>Vect</mi> <mi>B</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>B</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><mi>B</mi><mo>×</mo><mi>𝕂</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \array{
+    J 
+    &amp;\colon&amp;
+    Set
+    &amp;\longrightarrow&amp;
+    \int_{B \colon Set} Vect_B
+    \\
+    &amp;&amp;
+    B
+    &amp;\mapsto&amp;
+    B \times \mathbb{K}
+  }
+
+</annotation></semantics></math></div></li>
+</ol>
+
+<p>Notice that for each <a class="existingWikiWord" href="/nlab/show/map">map</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>B</mi><mo>→</mo><mi>B</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">f \;\colon\; B \to B'</annotation></semantics></math> of base sets, there is a <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> <a class="existingWikiWord" href="/nlab/show/adjoint+triple">adjoint triple</a> of functors</p>
+<div class="maruku-equation" id="eq:BaseChangeForIndexedSetsOfVectorBundles"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>f</mi> <mo>!</mo></msub><mo>⊣</mo><msup><mi>f</mi> <mo>*</mo></msup><mo>⊣</mo><msub><mi>f</mi> <mo>*</mo></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>Vect</mi> <mi>B</mi></msub><mo>↔</mo><msub><mi>Vect</mi> <mrow><mi>B</mi><mo>′</mo></mrow></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  
+  f_! \dashv f^\ast \dashv f_\ast
+  \;\;\colon\;\;
+  Vect_{B}
+  \leftrightarrow
+  Vect_{B'}
+  \,.
+
+</annotation></semantics></math></div>
+<p>In particular, for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>′</mo><mo>=</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">S' = \ast</annotation></semantics></math> the <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal</a> <a class="existingWikiWord" href="/nlab/show/singleton+set">singleton set</a>, the left base change along the unique <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mi>X</mi></msub><mo lspace="verythinmathspace">:</mo><mi>S</mi><mo>→</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">p_X \colon S \to \ast</annotation></semantics></math> is the operation which forms the <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a> of the (<a class="existingWikiWord" href="/nlab/show/fiber">fiber</a>-)vector spaces in the bundle, and regards the resulting <a class="existingWikiWord" href="/nlab/show/vector+space">vector space</a> as a bundle over the point:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msub><mo stretchy="false">)</mo> <mo>!</mo></msub><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>Vect</mi> <mi>B</mi></msub><mo>⟶</mo><msub><mi>Vect</mi> <mo>*</mo></msub><mspace width="thinmathspace"></mspace><mo>=</mo><mspace width="thinmathspace"></mspace><mi>Vect</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  (p_B)_! 
+  \;\colon\;
+  Vect_B 
+    \longrightarrow 
+  Vect_\ast \,=\, Vect
+  \,.
+
+</annotation></semantics></math></div>
+<p>In view of this, we claim that the functor</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>Q</mi></mtd> <mtd><mo lspace="verythinmathspace">:</mo></mtd> <mtd><mi>Set</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><msub><mo>∫</mo> <mrow><mi>B</mi><mo lspace="verythinmathspace">:</mo><mi>Set</mi></mrow></msub><msub><mi>Vect</mi> <mi>B</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>S</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><mo stretchy="false">(</mo><msub><mi>p</mi> <mi>B</mi></msub><msub><mo stretchy="false">)</mo> <mo>!</mo></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>B</mi><mo>×</mo><mi>𝕂</mi><mo maxsize="1.2em" minsize="1.2em">)</mo><mpadded width="0"><mrow><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">⨁</mo><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></munder><mi>𝕂</mi></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    Q
+    &amp;\colon&amp;
+    Set
+    &amp;\longrightarrow&amp;
+    \int_{B \colon Set} Vect_{B}
+    \\
+    &amp;&amp;
+    S
+    &amp;\mapsto&amp;
+    (p_B)_!\big( B \times \mathbb{K} \big)
+    \mathrlap{
+      \;\simeq\;
+      \underset{b \colon B}{\bigoplus} \mathbb{K}
+    }
+  }
+
+</annotation></semantics></math></div>
+<p>which may be understood as sending a <a class="existingWikiWord" href="/nlab/show/set">set</a> to its <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝕂</mi></mrow><annotation encoding="application/x-tex">\mathbb{K}</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/linear+span">linear span</a>,</p>
+
+<p>carries the structure of a monad relative to the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math> from <a class="maruku-eqref" href="#eq:FormingTrivialTensorUnitBundle">(1)</a> with</p>
+
+<ol>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/unit+of+a+monad">unit</a> given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>η</mi> <mi>B</mi></msub></mtd> <mtd><mo lspace="verythinmathspace">:</mo></mtd> <mtd><mi>B</mi><mo>×</mo><mi>𝕂</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">⨁</mo><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></munder><mi>𝕂</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>k</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>↦</mo></mtd> <mtd><mo stretchy="false">(</mo><mi>k</mi><msub><mo stretchy="false">)</mo> <mi>b</mi></msub></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \eta_{B}
+    &amp;\colon&amp;
+    B \times \mathbb{K}
+    &amp;\longrightarrow&amp;
+    \underset{b \colon B}{\bigoplus} \mathbb{K}
+    \\
+    &amp;&amp;
+    (b,k) &amp;\mapsto&amp; (k)_b
+  }
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/extension+system">Kleisli extension</a> given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo maxsize="1.8em" minsize="1.8em">(</mo><mi>B</mi><mo>×</mo><mi>𝕂</mi><mover><mo>→</mo><mi>f</mi></mover><munder><mo>⊕</mo><mpadded width="0" lspace="-50%width"><mrow><mi>b</mi><mo>′</mo><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>′</mo></mrow></mpadded></munder><mi>𝕂</mi><mo maxsize="1.8em" minsize="1.8em">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo maxsize="1.8em" minsize="1.8em">(</mo><munder><mo>⊕</mo><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></munder><mi>𝕂</mi><mover><mo>→</mo><mrow><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><msub><mo maxsize="1.2em" minsize="1.2em">)</mo> <mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></msub></mrow></mover><munder><mo>⊕</mo><mrow><mi>b</mi><mo>′</mo><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></munder><mi>𝕂</mi><mo maxsize="1.8em" minsize="1.8em">)</mo></mrow><annotation encoding="application/x-tex">
+  \Big(
+    B \times \mathbb{K} 
+      \xrightarrow{f}
+    \underset{
+      \mathclap{b' \colon B'}
+    }{\oplus} \mathbb{K}
+  \Big)
+  \;\;\;\;\mapsto\;\;\;\;
+  \Big(
+    \underset{b \colon B}{\oplus} \mathbb{K}     
+    \xrightarrow{
+      \big( 
+    f(b,-) 
+      \big)_{b \colon B}
+    }
+    \underset{b' \colon B}{\oplus} \mathbb{K}     
+  \Big)
+
+</annotation></semantics></math></div></li>
+</ol>
+
+<p>This specific example may be understood as a special case of the general situation of relative monads induced from an actual monad (Exmp. <a class="maruku-ref" href="#RelativeMonadsInducedFromActualMonads"></a>): Here the actual monad in question is:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mo>▵</mo></mtd> <mtd><mo lspace="verythinmathspace">:</mo></mtd> <mtd><msub><mo>∫</mo> <mrow><mi>B</mi><mo lspace="verythinmathspace">:</mo><mi>Set</mi></mrow></msub><msub><mi>Vect</mi> <mi>B</mi></msub></mtd> <mtd><mo>⟶</mo></mtd> <mtd><msub><mo>∫</mo> <mrow><mi>B</mi><mo lspace="verythinmathspace">:</mo><mi>Set</mi></mrow></msub><msub><mi>Vect</mi> <mi>B</mi></msub></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mrow><mo>[</mo><mrow><mtable><mtr><mtd><mi class="mathscript">𝒱</mi></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">↓</mo><mpadded width="0"><mrow><msup><mrow></mrow> <mi>p</mi></msup></mrow></mpadded></mtd></mtr> <mtr><mtd><mi>B</mi></mtd></mtr></mtable></mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>]</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><msub><mi>p</mi> <mo>!</mo></msub><mi class="mathscript">𝒱</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \triangle
+    &amp;\colon&amp;
+    \int_{B \colon Set} Vect_B
+    &amp;\longrightarrow&amp;
+    \int_{B \colon Set} Vect_B
+    \\
+    &amp;&amp;
+    \left[ 
+      \array{
+        \mathscr{V} 
+        \\ 
+        \big\downarrow\mathrlap{{}^p} 
+        \\ 
+        B
+      } 
+      \;\;\;
+    \right] 
+    &amp;\mapsto&amp; 
+    p_! \mathscr{V} 
+  }
+
+</annotation></semantics></math></div>
+<p>This monad is in fact the <a class="existingWikiWord" href="/nlab/show/reflective+localization">reflective localization</a> of the <a class="existingWikiWord" href="/nlab/show/reflective+subcategory">reflective subcategory</a>-embedding of plain <a class="existingWikiWord" href="/nlab/show/VectorSpaces">VectorSpaces</a> into bundled/parameterized vector spaces:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Vect</mi><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><msub><mi>Vect</mi> <mo>*</mo></msub><mover><mo>↪</mo><mphantom><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mo>−</mo></mrow></mphantom></mover><msub><mo>∫</mo> <mrow><mi>B</mi><mo lspace="verythinmathspace">:</mo><mi>Set</mi></mrow></msub><msub><mi>Vect</mi> <mi>B</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  Vect
+  \;\simeq\;
+  Vect_\ast
+  \xhookrightarrow{\phantom{--}}
+  \int_{B \colon Set} Vect_B
+  \,.
+
+</annotation></semantics></math></div>
+<p></p>
+</div>
+</p>
 
 <h2 id="related_pages">Related pages</h2>
 
 <ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/relative+adjunction">relative adjunction</a></p>
+</li>
+
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/relative+comonad">relative comonad</a></p>
 </li>
@@ -716,7 +968,7 @@ margin-left: 0em;
 <p>The concept was introduced, in the context of <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a>, in:</p>
 
 <ul>
-<li><a class="existingWikiWord" href="/nlab/show/Thorsten+Altenkirch">Thorsten Altenkirch</a>, <a class="existingWikiWord" href="/nlab/show/James+Chapman">James Chapman</a>, <a class="existingWikiWord" href="/nlab/show/Tarmo+Uustalu">Tarmo Uustalu</a>, <em>Monads need not be endofunctors</em>, Logical Methods in Computer Science <strong>11</strong> 1:3 (2015) 1–40 &lbrack;<a href="https://arxiv.org/abs/1412.7148">arXiv:1412.7148</a>, <a href="http://www.cs.nott.ac.uk/~txa/publ/jrelmon.pdf">pdf</a>, <a href="https://doi.org/10.2168/LMCS-11(1:3)2015">doi:10.2168/LMCS-11(1:3)2015</a>&rbrack;</li>
+<li id="ACU14"><a class="existingWikiWord" href="/nlab/show/Thorsten+Altenkirch">Thorsten Altenkirch</a>, <a class="existingWikiWord" href="/nlab/show/James+Chapman">James Chapman</a>, <a class="existingWikiWord" href="/nlab/show/Tarmo+Uustalu">Tarmo Uustalu</a>, <em>Monads need not be endofunctors</em>, Logical Methods in Computer Science <strong>11</strong> 1:3 (2015) 1–40 &lbrack;<a href="https://arxiv.org/abs/1412.7148">arXiv:1412.7148</a>, <a href="http://www.cs.nott.ac.uk/~txa/publ/jrelmon.pdf">pdf</a>, <a href="https://doi.org/10.2168/LMCS-11(1:3)2015">doi:10.2168/LMCS-11(1:3)2015</a>&rbrack;</li>
 </ul>
 </body></html>
 
@@ -724,14 +976,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on November  3, 2022 at 18:03:06.
+    Last revised on November 17, 2022 at 18:54:04.
     See the <a href="/nlab/history/relative+monad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/relative+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14880/#Item_4">Discuss</a><span class="backintime"><a href="/nlab/revision/relative+monad/10" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/relative+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/relative+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (10 revisions)</a>
+  <a href="/nlab/edit/relative+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14880/#Item_6">Discuss</a><span class="backintime"><a href="/nlab/revision/relative+monad/13" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/relative+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/relative+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (13 revisions)</a>
   <a href="/nlab/show/relative+monad/cite" style="color: black">Cite</a>
   <a href="/nlab/print/relative+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/relative+monad" id="view_source" rel="nofollow">Source</a>
