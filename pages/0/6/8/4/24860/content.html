@@ -250,8 +250,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/15425/#Item_7" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/15425/#Item_13" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -422,34 +422,123 @@ margin-left: 0em;
 <h1 id="contents">Contents</h1>
 <div class='maruku_toc'>
 <ul>
-<li><a href='#idea'>Idea</a></li>
+<li><a href='#Idea'>Idea</a></li>
+<li><a href='#formalizations'>Formalizations</a></li>
+<ul>
+<li><a href='#FormalizationViaIndefinitenessEffects'>Via indefiniteness-effects</a></li>
+</ul>
 <li><a href='#examples'>Examples</a></li>
+<ul>
+<li><a href='#ExamplesQuantumComputation'>Quantum computation</a></li>
+<li><a href='#ExamplesDifferentialLinearLogic'>Differential linear logic</a></li>
+</ul>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
 
-<h2 id="idea">Idea</h2>
+<h2 id="Idea">Idea</h2>
+
+<p>Broadly speaking <em>nondeterministic</em> <a class="existingWikiWord" href="/nlab/show/computations">computations</a>/<a class="existingWikiWord" href="/nlab/show/algorithms">algorithms</a> are those whose outcome is <a href="necessity+and+possibility#RelationToPotentiality">indefinite</a>, or else dependent on parameters that are not known or specified when the computation/algorithm is laid out (they may become known at “runtime”).</p>
+
+<p>Beware that in <a class="existingWikiWord" href="/nlab/show/complexity+theory">complexity theory</a>, at least, by a “non-determinstic algorithm” one really refers instead (or more specifically) to the <em>shortest path</em> that a non-deterministic machine <em>could</em> potentially take to arrive at a desired result (cf. the <a href="#NIST">NIST entry</a>). This is the sense in which “non-determinism” appears for instance in the name of the <a class="existingWikiWord" href="/nlab/show/complexity+class">complexity class</a> “<span class="newWikiWord">NP<a href="/nlab/new/NP">?</a></span>” .</p>
 
 <p>(…)</p>
 
-<p><a class="existingWikiWord" href="/nlab/show/computations">computations</a>/<a class="existingWikiWord" href="/nlab/show/algorithms">algorithms</a> whose outcome is <a href="necessity+and+possibility#RelationToPotentiality">indefinite</a>.</p>
+<h2 id="formalizations">Formalizations</h2>
 
-<p>(…)</p>
+<h3 id="FormalizationViaIndefinitenessEffects">Via indefiniteness-effects</h3>
+
+<p>A basic <a class="existingWikiWord" href="/nlab/show/programming+language">programming language</a>-model of non-determinism is via dependence of a <a class="existingWikiWord" href="/nlab/show/program">program</a> on an unspecified parameter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b \colon B</annotation></semantics></math>, whose value is indefinite but imagined to become known at execution time – say via user input, or by <a class="existingWikiWord" href="/nlab/show/observation">observing</a> the actual value of a <a class="existingWikiWord" href="/nlab/show/random+variable">random variable</a> in an <a class="existingWikiWord" href="/nlab/show/experiment">experiment</a> and/or by making a <a class="existingWikiWord" href="/nlab/show/measurement">measurement</a> of a <a class="existingWikiWord" href="/nlab/show/stochastic+process">stochastic process</a> or a <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> of a <a class="existingWikiWord" href="/nlab/show/quantum+state">quantum state</a> (see <a href="#ExamplesQuantumComputation">below</a>).</p>
+
+<p>In this model, a non-deterministic program taking input <a class="existingWikiWord" href="/nlab/show/data">data</a> of <a class="existingWikiWord" href="/nlab/show/data+type">data type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math> and producing output data of <em>nominal</em> type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">D'</annotation></semantics></math> would be an actual (determinstic) program of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>prog</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>D</mi><mo>⟶</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>B</mi><mo>→</mo><mi>D</mi><mo>′</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">  
+  prog \;\colon\; D \longrightarrow \big( B \to D' \big)
+  \,,
+
+</annotation></semantics></math></div>
+<p>whose <em>de facto</em> output <a class="existingWikiWord" href="/nlab/show/data+type">data type</a> is not <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">D'</annotation></semantics></math> but the <a class="existingWikiWord" href="/nlab/show/function+type">function type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>→</mo><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">B \to D'</annotation></semantics></math>. This means that the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">D'</annotation></semantics></math>-result of computing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>prog</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">prog(d)</annotation></semantics></math> for any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>d</mi><mo lspace="verythinmathspace">:</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">d \colon D</annotation></semantics></math> remains “un-determined” or “indefinite” unless and until a parameter <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b \colon B</annotation></semantics></math> is somehow chosen (say “randomly”, “experimentally” or in whichever way), in which case only we obtain definite data <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>prog</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">prog(d)(b) \;\colon\; D'</annotation></semantics></math>.</p>
+
+<p>It makes sense to say that the data type</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>◯</mo> <mi>B</mi></msub><mi>D</mi><mo>′</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>B</mi><mo>→</mo><mi>D</mi><mo>′</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  \bigcirc_B D' \;\coloneqq\; \big( B \to D'\big)
+
+</annotation></semantics></math></div>
+<p>exhibits a “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>-indefinitess effect” that goes along with the execution of the program, making its output indefinite. Such <em>side effects</em> in computing may be modeled by <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a>. Indeed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◯</mo> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\bigcirc_B</annotation></semantics></math> is a classical example of such a monad, often called the <em><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/reader+monad">reader monad</a></em>, reflecting the idea that it postpones returning definite output data until it has “read in” an otherwise unspecified parameter.</p>
+
+<blockquote>
+<p>Incidentally, in terms of <a class="existingWikiWord" href="/nlab/show/modal+logic">modal logic</a> the parameter type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> plays the role of the set of “<a class="existingWikiWord" href="/nlab/show/possible+worlds">possible worlds</a>” in which the given non-deterministic computation may take definite values. For more on this modal logic perspective see at <em><a class="existingWikiWord" href="/nlab/show/necessity+and+possibility">necessity and possibility</a></em> the section <em><a href="necessity+and+possibility#RelationToPotentiality">relation to potentiality</a></em>.</p>
+</blockquote>
+
+<p>Now the <a class="existingWikiWord" href="/nlab/show/monad">monad</a>-<a class="existingWikiWord" href="/nlab/show/structure">structure</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◯</mo> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\bigcirc_B</annotation></semantics></math> allows to <em>carry along</em> this <em>indefiniteness effect</em> so that followup programs, nominally waiting for input data in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">D'</annotation></semantics></math>, are consistently treated as non-deterministic dependent on specification of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b \colon B</annotation></semantics></math>, too.</p>
+
+<p>Concretely, if</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>prog</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>D</mi><mo>→</mo><msub><mo>◯</mo> <mi>B</mi></msub><mi>D</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">
+  prog \;\colon\; D \to \bigcirc_B D'
+
+</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>prog</mi><mo>′</mo><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>D</mi><mo>′</mo><mo>→</mo><msub><mo>◯</mo> <mi>B</mi></msub><mi>D</mi><mo>″</mo></mrow><annotation encoding="application/x-tex">
+  prog' \;\colon\; D' \to \bigcirc_B D''
+
+</annotation></semantics></math></div>
+<p>are two such non-deterministic programs but conditioned on the <em>same</em> global random variable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b \colon B</annotation></semantics></math>, then their consistent <a class="existingWikiWord" href="/nlab/show/composition">composition</a>, as such, is their <a class="existingWikiWord" href="/nlab/show/Kleisli+composition">Kleisli composition</a> (which involves the categorical <a class="existingWikiWord" href="/nlab/show/multiplication">multiplication</a>-operation in the <a class="existingWikiWord" href="/nlab/show/reader+monad">reader monad</a>, see there for details):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>prog</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>&gt;&gt;=</mtext><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>prog</mi><mo>′</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≡</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msup><mi>bind</mi> <mrow><msub><mo>◯</mo> <mi>B</mi></msub></mrow></msup><mi>prog</mi><mo>′</mo><mspace width="thickmathspace"></mspace><mo>∘</mo><mspace width="thickmathspace"></mspace><mi>prog</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>D</mi><mo>→</mo><msub><mo>◯</mo> <mi>B</mi></msub><mi>D</mi><mo>″</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  prog 
+    \;\;\text{&gt;&gt;=}\;\;
+  prog'
+  \;\;\;\;
+  \equiv
+  \;\;\;\;
+  bind^{\bigcirc_B} prog' \;\circ\; prog
+  \;\colon\;
+  D \to \bigcirc_B D''
+  \,.
+
+</annotation></semantics></math></div>
+<p>Of course, in general the non-determinism of a program need not be parameterized over a fixed parameter type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>. If the sequence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>B</mi> <mi>i</mi></msub><msub><mo stretchy="false">)</mo> <mrow><mi>i</mi><mo lspace="verythinmathspace">:</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(B_i)_{i \colon I}</annotation></semantics></math> of parameters is known beforehand, one can form their <a class="existingWikiWord" href="/nlab/show/product+type">product type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>≡</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mi>i</mi></msub><msub><mi>B</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">B \equiv \prod_i B_i</annotation></semantics></math> and proceed as above, but in general even that sequence may not be pre-specified and further effect handling besides a fixed <a class="existingWikiWord" href="/nlab/show/reader+monad">reader monad</a> needs to be considered (…).</p>
 
 <h2 id="examples">Examples</h2>
 
-<p>The <a class="existingWikiWord" href="/nlab/show/cut-elimination">cut-elimination</a> of <a class="existingWikiWord" href="/nlab/show/differential+linear+logic">differential linear logic</a> is a nondeterministic computation. It takes in entry a proof of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \Delta</annotation></semantics></math> and returns in output a sum of proofs of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \Delta</annotation></semantics></math>. During the procedure, several proofs can be formed to eliminate cuts from the proof in the previous step, these different possibilities are summed and thus the algorithm returns a <a class="existingWikiWord" href="/nlab/show/formal+sum">formal sum</a> of proofs. The nondetermism is here realized by the <a class="existingWikiWord" href="/nlab/show/addition">addition</a> of proofs as formal sums of proofs that can be understood as a <a class="existingWikiWord" href="/nlab/show/disjunction">disjunction</a> but in not exactly the same way that the <a class="existingWikiWord" href="/nlab/show/linear+disjunction">linear disjunction</a> because it’s a disjunction of proofs and not of formulas. An algorithm which returns <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>π</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{1} + \pi_{2}</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>π</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{1},\pi_{2}</annotation></semantics></math> are two proofs of the same type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \Delta</annotation></semantics></math> returns in fact the disjunction of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{1}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{2}</annotation></semantics></math> because it can’t chose between the two possibilities. On the level of the syntactic proof theory, one cannot code this sum only by the intermediate of a <a class="existingWikiWord" href="/nlab/show/biproduct">biproduct</a> in a <a class="existingWikiWord" href="/nlab/show/semiadditive+category">semiadditive category</a>, because it would imply that the algorithm would introduce <a class="existingWikiWord" href="/nlab/show/cuts">cuts</a> that will not be eliminated: in a semiadditive category, the sum is defined by combining the structural morphisms of the products and coproducts, which are then equal, through composition, ie. through the <a class="existingWikiWord" href="/nlab/show/cut+rule">cut rule</a>. One thus works in a <a class="existingWikiWord" href="/nlab/show/CMon-enriched+symmetric+monoidal+category">CMon-enriched symmetric monoidal category</a> where we have access to a sum of morphism without necessarily biproducts. In the case where one considers the additive connectors in the logic, the <a class="existingWikiWord" href="/nlab/show/additive+disjunction">additive disjunction</a> and the <a class="existingWikiWord" href="/nlab/show/additive+conjunction">additive conjunction</a> are then equated under the presence of formal sums and one can reobtain this formal sum through the biproduct in the semantics. But the semantics is not able to explain the syntactic subtleties related to cut elimination and the difference between a formal sum of two proofs and a sum obtained through cuts and biproducts.</p>
+<h3 id="ExamplesQuantumComputation">Quantum computation</h3>
+
+<p>A fundamental example of non-deterministic computation is <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a>, where the process of <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> produces outcomes that – to the best knowledge of the current state of <a class="existingWikiWord" href="/nlab/show/fundamental+physics">fundamental physics</a> – are fundamentally non-deterministic in that there is not even in principle a way to predict a given outcome with certainty (only their <a class="existingWikiWord" href="/nlab/show/probability+distribution">probability distribution</a> is fixed by <a class="existingWikiWord" href="/nlab/show/quantum+theory">quantum theory</a>).</p>
+
+<p>The possible results of a <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> are indexed by a “measurement basis” which is exactly a (<a class="existingWikiWord" href="/nlab/show/finite+set">finite</a>) <a class="existingWikiWord" href="/nlab/show/set">set</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> serving as the parameter type in the <a class="existingWikiWord" href="/nlab/show/modal+logic">modal logic</a>-discussion <a href="#FormalizationViaIndefinitenessEffects">above</a>. The only difference for quantum computation is that quantum data types are <a class="existingWikiWord" href="/nlab/show/linear+types">linear types</a>, so that the relevant <a class="existingWikiWord" href="/nlab/show/reader+monad">reader monad</a> here is a linear version of the classical reader monad – see at <em><a class="existingWikiWord" href="/nlab/show/quantum+reader+monad">quantum reader monad</a></em> for details.</p>
+
+<p>A formulation of (non-deterministic) <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a> in terms of the resulting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◯</mo> <mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\bigcirc_B</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/modal+type+theory">modal</a> <a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a> is discussed at <em><a class="existingWikiWord" href="/nlab/show/quantum+circuits+via+dependent+linear+types">quantum circuits via dependent linear types</a></em>.</p>
+
+<p>But in fact the <a class="existingWikiWord" href="/nlab/show/quantum+reader+monad">quantum reader monad</a> is (for <a class="existingWikiWord" href="/nlab/show/finite+set">finite</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>) a <a class="existingWikiWord" href="/nlab/show/Frobenius+monad">Frobenius monad</a> and as such <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphic</a> (see <a href="quantum+reader+monad#QuantumReaderMonadIsSpecialFrobeniusWriterMonad">here</a>) to the “classical structures” Frobenius monad has long been proposed to model <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> in <a class="existingWikiWord" href="/nlab/show/quantum+information+theory+via+dagger-compact+categories">quantum information theory via dagger-compact categories</a> (<a href="quantum+information+theory+via+dagger-compact+categories#CoeckePavlovi&#x107;08">Coecke &amp; Pavlović (2008)</a>)</p>
+
+<h3 id="ExamplesDifferentialLinearLogic">Differential linear logic</h3>
+
+<p>Something reminiscent of – but different from – non-deterministic computation appears (see the quotes <a href="#QuotesForDifferentialLinearLogic">below</a>) in <a class="existingWikiWord" href="/nlab/show/differential+linear+logic">differential linear logic</a>, where the <a class="existingWikiWord" href="/nlab/show/cut-elimination">cut-elimination</a>-rule has been argued to “intuitively correspond” to non-determinism:</p>
+
+<p>The differential linear cut rule receives as input a <a class="existingWikiWord" href="/nlab/show/proof">proof</a> of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \Delta</annotation></semantics></math> and returns as output a <a class="existingWikiWord" href="/nlab/show/formal+sum">formal sum</a> of proofs of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \Delta</annotation></semantics></math>. During the procedure, several proofs can be formed to eliminate cuts from the proof in the previous step, these different possibilities are summed and thus the algorithm returns a <a class="existingWikiWord" href="/nlab/show/formal+sum">formal sum</a> of proofs. The nondetermism is here realized by the <a class="existingWikiWord" href="/nlab/show/addition">addition</a> of proofs as formal sums of proofs that can be understood as a <a class="existingWikiWord" href="/nlab/show/disjunction">disjunction</a> but in not exactly the same way that the <a class="existingWikiWord" href="/nlab/show/linear+disjunction">linear disjunction</a> because it’s a disjunction of proofs and not of formulas. An algorithm which returns <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>π</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{1} + \pi_{2}</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>π</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{1},\pi_{2}</annotation></semantics></math> are two proofs of the same type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash \Delta</annotation></semantics></math> returns in fact the disjunction of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{1}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\pi_{2}</annotation></semantics></math> because it can’t chose between the two possibilities. On the level of the syntactic proof theory, one cannot code this sum only by the intermediate of a <a class="existingWikiWord" href="/nlab/show/biproduct">biproduct</a> in a <a class="existingWikiWord" href="/nlab/show/semiadditive+category">semiadditive category</a>, because it would imply that the algorithm would introduce <a class="existingWikiWord" href="/nlab/show/cuts">cuts</a> that will not be eliminated: in a semiadditive category, the sum is defined by combining the structural morphisms of the products and coproducts, which are then equal, through composition, ie. through the <a class="existingWikiWord" href="/nlab/show/cut+rule">cut rule</a>. One thus works in a <a class="existingWikiWord" href="/nlab/show/CMon-enriched+symmetric+monoidal+category">CMon-enriched symmetric monoidal category</a> where we have access to a sum of morphism without necessarily biproducts. In the case where one considers the additive connectors in the logic, the <a class="existingWikiWord" href="/nlab/show/additive+disjunction">additive disjunction</a> and the <a class="existingWikiWord" href="/nlab/show/additive+conjunction">additive conjunction</a> are then equated under the presence of formal sums and one can reobtain this formal sum through the biproduct in the semantics. But the semantics is not able to explain the syntactic subtleties related to cut elimination and the difference between a formal sum of two proofs and a sum obtained through cuts and biproducts.</p>
 
 <p>In contradistinction, the cut elimination of <a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a> is a deterministic algorithm and doesn’t imply formal sums of proofs. Thus, in linear logic, if one includes the <a class="existingWikiWord" href="/nlab/show/additive+disjunction">additive disjunction</a> and the <a class="existingWikiWord" href="/nlab/show/additive+conjunction">additive conjunction</a>, they are not necessarily equated forming a <a class="existingWikiWord" href="/nlab/show/biproduct">biproduct</a> in the syntax, as in differential linear logic.</p>
 
-<p>From (<a href="#Ehrhard08">Ehrhard (2008), Introduction</a>) : “when one linearizes a proof obtained by contracting two linear inputs of a proof, one has to choose between these two inputs, and there is no canonical way of doing so: we take the non-deterministic superposition of the two possibilities. Syntactically, this means that one must accept the possibility of adding proofs of the same formula, which is standard in mathematics, but hard to accept as a primitive logical operation on proofs”.</p>
+<p id="QuotesForDifferentialLinearLogic"> From <a href="#Ehrhard08">Ehrhard (2008), Introduction</a>:</p>
+
+<blockquote>
+<p>“when one linearizes a proof obtained by contracting two linear inputs of a proof, one has to choose between these two inputs, and there is no canonical way of doing so: we take the non-deterministic superposition of the two possibilities. Syntactically, this means that one must accept the possibility of adding proofs of the same formula, which is standard in mathematics, but hard to accept as a primitive logical operation on proofs.”</p>
+</blockquote>
+
+<p>However, <a href="differential+linear+logic#EhrhardtRegnier09">Erhardt &amp; Regnier (2009), p. 3</a> admit that:</p>
+
+<blockquote>
+<p>“Notice that in our axiomatization of sums in the differential lambda-calculus, the non-deterministic reduction rule <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi><mo>+</mo><mi>s</mi><mo>′</mo><mo>→</mo><mi>s</mi></mrow><annotation encoding="application/x-tex">s + s' \to s</annotation></semantics></math> will not be valid, but sums will nevertheless intuitively correspond to a version of non-deterministic choice where all the actual choice operations are postponed: the result of a term reduction will in general be a large formal sum of terms, and we can reduce the really ”non-deterministic“ part of the computation to a unique ultimate step consisting in choosing one term of that sum. This step is however a fiction and will not appear as a reduction rule of our calculus”</p>
+</blockquote>
 
 <h2 id="related_concepts">Related concepts</h2>
 
 <ul>
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/computation">computation</a>, <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/repeat-until-success+computing">repeat-until-success computing</a></p>
 </li>
 
 <li>
@@ -463,11 +552,31 @@ margin-left: 0em;
 
 <h2 id="references">References</h2>
 
+<p>See also:</p>
+
 <ul>
-<li>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Nondeterministic_algorithm">Nondeterministic algorithm</a></em></li>
+<li>
+<p>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Nondeterministic_algorithm">Nondeterministic algorithm</a></em></p>
+</li>
+
+<li>
+<p>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Nondeterministic_Turing_machine">Nondeterministic Turing machine</a></em></p>
+</li>
 </ul>
 
-<p>Concerning the example of cut elimination in differential linear logic:</p>
+<p>The notion in <a class="existingWikiWord" href="/nlab/show/complexity+theory">complexity theory</a>:</p>
+
+<ul>
+<li id="NIST">NIST, <em><a href="https://xlinux.nist.gov/dads/HTML/nondetermAlgo.html">nondeterministic algorithm</a></em></li>
+</ul>
+
+<p>The above treatment of non-deterministic <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a> via the <a class="existingWikiWord" href="/nlab/show/quantum+reader+monad">quantum reader monad</a> is made explicit in</p>
+
+<ul>
+<li id="CQTS22"><a class="existingWikiWord" href="/nlab/show/CQTS">CQTS</a>, <em><a href="https://ncatlab.org/schreiber/show/QDataInLHoTT#QTML2022">Quantum Data Types via Linear HoTT</a></em>, talk at <em><a href="https://quasar.unina.it/qtml2022/workshop.php">Workshop on Quantum Software</a></em> @ <em><a href="https://quasar.unina.it/qtml2022.html">QTML 2022</a></em> (Nov 2022) &lbrack;<a href="/schreiber/files/QuantumDataInLHoTT-221117.pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>Concerning the quasi-example of cut elimination in differential linear logic:</p>
 
 <ul>
 <li id="Ehrhard08"><a class="existingWikiWord" href="/nlab/show/Thomas+Ehrhard">Thomas Ehrhard</a>, <em>An introduction to Differential Linear Logic: proof-nets, models and antiderivatives</em>, Mathematical Structure in Computer Science <strong>28</strong> 7 (2018) 995-1060 (<a href="https://arxiv.org/abs/1606.01642">arXiv:1606.01642</a>, <a href="https://doi.org/10.1017/S0960129516000372">doi:10.1017/S0960129516000372</a>)</li>
@@ -478,14 +587,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on November 25, 2022 at 10:54:28.
+    Last revised on November 26, 2022 at 11:08:08.
     See the <a href="/nlab/history/nondeterministic+computation" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/nondeterministic+computation" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15425/#Item_7">Discuss</a><span class="backintime"><a href="/nlab/revision/nondeterministic+computation/5" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/nondeterministic+computation" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/nondeterministic+computation" accesskey="S" class="navlink" id="history" rel="nofollow">History (5 revisions)</a>
+  <a href="/nlab/edit/nondeterministic+computation" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15425/#Item_13">Discuss</a><span class="backintime"><a href="/nlab/revision/nondeterministic+computation/7" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/nondeterministic+computation" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/nondeterministic+computation" accesskey="S" class="navlink" id="history" rel="nofollow">History (7 revisions)</a>
   <a href="/nlab/show/nondeterministic+computation/cite" style="color: black">Cite</a>
   <a href="/nlab/print/nondeterministic+computation" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/nondeterministic+computation" id="view_source" rel="nofollow">Source</a>
