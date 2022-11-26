@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/14941/#Item_3" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/14941/#Item_5" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -304,33 +304,61 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'> Idea</a></li>
-<li><a href='#examples'>Examples</a></li>
+<li><a href='#recursion_schemes_via_adjunctions'>Recursion Schemes via Adjunctions</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
 
 <h2 id="idea"> Idea</h2>
 
-<p>In <a class="existingWikiWord" href="/nlab/show/functional+programming">functional programming</a>, <em>recursion schemes</em> are patterns of definition for <a class="existingWikiWord" href="/nlab/show/recursive">recursive</a> functions. These are formally defined in order to study equational properties of recursive programs and to facilitate automated optimization of recursive programs.</p>
+<p>It is a well-known fact in <a class="existingWikiWord" href="/nlab/show/computability">computability</a> that it is not possible to write a decision procedure that tells whether another program is terminating or not. This fact is know as the <a class="existingWikiWord" href="/nlab/show/halting+theorem">halting theorem</a>.</p>
 
-<h2 id="examples">Examples</h2>
+<p>For this reason most <a class="existingWikiWord" href="/nlab/show/functional+programming">functional programming</a> languages are endowed with an unrestricted fixed-point operator at all types, which simplifies the implementation of the language, but allows the user to write functions that are not-well defined mathematically.</p>
 
-<p>By convention these are given names ending in “morphism”. For example:</p>
+<p>Inspired by <a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a>, a <em>recursion scheme</em> is a structured <a class="existingWikiWord" href="/nlab/show/recursion">recursion</a> operator that ensures that the definitions of <a class="existingWikiWord" href="/nlab/show/recursive">recursive</a> functions are well-defined.</p>
+
+<p>For example,</p>
 
 <ol>
-<li>A <a class="existingWikiWord" href="/nlab/show/catamorphism">catamorphism</a> is a fold, i.e., a homomorphism out of an <a class="existingWikiWord" href="/nlab/show/initial+algebra">initial algebra</a>.</li>
+<li>A <a class="existingWikiWord" href="/nlab/show/catamorphism">catamorphism</a> (a.k.a. a fold) is the unique <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>-algebra homomorphism from an <a class="existingWikiWord" href="/nlab/show/initial+algebra">initial algebra</a> for the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>.</li>
 
-<li>An <span class="newWikiWord">anamorphism<a href="/nlab/new/anamorphism">?</a></span> is an unfold, i.e., a homomorphism into a <a class="existingWikiWord" href="/nlab/show/final+coalgebra">final coalgebra</a>.</li>
+<li>An <span class="newWikiWord">anamorphism<a href="/nlab/new/anamorphism">?</a></span> (a.k.a. unfold) is the unique <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>-coalgebra homomorphism into the <a class="existingWikiWord" href="/nlab/show/final+coalgebra">final coalgebra</a> for the functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math>.</li>
 
-<li>A <span class="newWikiWord">hylomorphism<a href="/nlab/new/hylomorphism">?</a></span> is a composition of an anamorphism followed by a catamorphism (in a <a class="existingWikiWord" href="/nlab/show/algebraically+compact+category">category where the initial and final algebra coincide</a>).</li>
+<li>An <span class="newWikiWord">hylomorphism<a href="/nlab/new/hylomorphism">?</a></span> corresponds to the idea of a recursive coalgebra or <a class="existingWikiWord" href="/nlab/show/well-founded+coalgebra">well-founded coalgebra</a>. In words, a recursive <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>-coalgebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c, X)</annotation></semantics></math> has a unique mapping <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f : X \to Y</annotation></semantics></math> into any other <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math>-algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(Y, a)</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>=</mo><mi>a</mi><mo>∘</mo><mi>F</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>∘</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">f = a \circ F(f) \circ c</annotation></semantics></math>.</li>
 </ol>
 
 <p>A hylomorphism gives a simple example of an opportunity for optimization: an anamorphism builds up a tree structure and a catamorphism consumes it, so if this hylomorphism structure is recognized in the program, then an implementation need not build the intermediate tree, and so the <a class="existingWikiWord" href="/nlab/show/computational+complexity">space usage</a> of the program can be reduced.</p>
 
+<h2 id="recursion_schemes_via_adjunctions">Recursion Schemes via Adjunctions</h2>
+
+<p>Catamorphisms and their variants are basic and rather restricted forms of recursion, i.e. where the recursive call is called on smaller input.</p>
+
+<p>Many other patterns of recursion exists that are equally well-defined, but they cannot be expressed <em>directly</em> in terms of catamorphisms. However, most recursion schemes are adjoint folds (<a href="#HinzeWG13">Hinze, Wu and Gibbons, 2013</a>), i.e. every complex recursion scheme can be reduced to a basic one via an adjunction. Moreover, <em>every</em> recursion scheme is an instance of a conjugate hylomorphism (<a href="#HinzeWG15">Hinze, Wu and Gibbons, 2015</a>) .</p>
+
+<p>A comprehensive list of recursion schemes can be found in <a href="#YangW22">Yang and Wu, 2022</a></p>
+
 <h2 id="references">References</h2>
 
 <ul>
-<li>Erik Meijer, Maarten M. Fokkinga, Ross Paterson, <em>Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire</em>, FPCA 1991, (<a href="https://doi.org/10.1007/3540543961_7">doi</a>)</li>
+<li>
+<p>Erik Meijer, Maarten M. Fokkinga, Ross Paterson, <em>Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire</em>, FPCA 1991, (<a href="https://doi.org/10.1007/3540543961_7">doi</a>)</p>
+</li>
+
+<li id="HinzeWG13">
+<p>Ralf Hinze, Nicolas Wu and Jeremy Gibbons, <em>Unifying structured recursion schemes, ACM SIGPLAN International Conference on Functional Programming, ICFP’13, <a href="https://doi.org/10.1145/2500365.2500578">doi</a></em></p>
+</li>
+
+<li id="HinzeW16">
+<p>Ralf Hinze, Nicolas Wu, _ Unifying structured recursion schemes - An Extended Study, J. Funct. Program., 2016, <a href="https://doi.org/10.1017/S0956796815000258">doi</a></p>
+</li>
+
+<li id="HinzeWG15">
+<p>Ralf Hinze, Nicolas Wu and Jeremy Gibbons, Conjugate Hylomorphisms - Or: The Mother of All Structured Recursion Schemes, Symposium on Principles of Programming Languages, POPL 2015, <a href="https://doi.org/10.1145/2676726.2676989">doi</a></p>
+</li>
+
+<li id="YangW22">
+<p>Zhixuan Yang and Nicolas Wu, Fantastic Morphisms and Where to Find Them - A Guide to Recursion Schemes, Mathematics of Program Construction, MPC 2022, <a href="https://doi.org/10.1007/978-3-031-16912-0_9">doi</a></p>
+</li>
 </ul>
 </body></html>
 
@@ -338,14 +366,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on August 13, 2022 at 16:00:13.
+    Last revised on November 25, 2022 at 22:39:40.
     See the <a href="/nlab/history/recursion+scheme" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/recursion+scheme" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14941/#Item_3">Discuss</a><span class="backintime"><a href="/nlab/revision/recursion+scheme/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/recursion+scheme" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/recursion+scheme" accesskey="S" class="navlink" id="history" rel="nofollow">History (1 revision)</a>
+  <a href="/nlab/edit/recursion+scheme" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14941/#Item_5">Discuss</a><span class="backintime"><a href="/nlab/revision/recursion+scheme/2" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/recursion+scheme" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/recursion+scheme" accesskey="S" class="navlink" id="history" rel="nofollow">History (2 revisions)</a>
   <a href="/nlab/show/recursion+scheme/cite" style="color: black">Cite</a>
   <a href="/nlab/print/recursion+scheme" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/recursion+scheme" id="view_source" rel="nofollow">Source</a>
