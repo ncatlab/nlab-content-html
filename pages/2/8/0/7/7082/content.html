@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/4299/#Item_5" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/4299/#Item_16" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -560,19 +560,21 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#definition'>Definition</a></li>
+<li><a href='#Definition'>Definition</a></li>
 <ul>
-<li><a href='#as_functions_with_contractible_fibers'> As functions with contractible fibers</a></li>
+<li><a href='#AsFunctionsWithTwoSidedInverse'>As functions with two-sided inverse</a></li>
 <li><a href='#as_functions_with_a_left_and_a_right_inverse'>As functions with a left and a right inverse</a></li>
-<li><a href='#other_variations'>Other variations</a></li>
+<li><a href='#AsFunctionsWithContractibleFibers'> As functions with contractible fibers</a></li>
+<li><a href='#as_adjoint_equivalences'>As adjoint equivalences</a></li>
 <li><a href='#as_onetoone_correspondences'>As one-to-one correspondences</a></li>
 <li><a href='#rules_for_equivalence_types'>Rules for equivalence types</a></li>
 <li><a href='#coinductive_definition'>Coinductive definition</a></li>
 <li><a href='#strict_equivalences'>Strict equivalences</a></li>
 </ul>
-<li><a href='#properties'>Properties</a></li>
+<li><a href='#Properties'>Properties</a></li>
 <ul>
-<li><a href='#constructing_the_inverse_function'>Constructing the inverse function.</a></li>
+<li><a href='#TheIssueWithQuasiInverses'>The issue with two-sided quasi-inverses</a></li>
+<li><a href='#ConstructingTheInverseFunction'>Constructing the inverse function</a></li>
 </ul>
 <li><a href='#Semantics'>Semantics</a></li>
 <ul>
@@ -580,57 +582,206 @@ margin-left: 0em;
 <li><a href='#of__2'>Of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Equiv</mi><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Equiv(-)</annotation></semantics></math></a></li>
 </ul>
 <li><a href='#related_concepts'>Related concepts</a></li>
-<li><a href='#references'>References</a></li>
+<li><a href='#References'>References</a></li>
 </ul>
 </div>
 
 <h2 id="idea">Idea</h2>
 
+<p>We discuss the correct (operational) notion of <a class="existingWikiWord" href="/nlab/show/equivalence">equivalence</a> in <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>.</p>
+
 <p>In <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> with <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a> or <a class="existingWikiWord" href="/nlab/show/uniqueness+of+identity+proofs">uniqueness of identity proofs</a>, the notion of <strong>equivalence</strong> corresponds roughly to the notion of <a class="existingWikiWord" href="/nlab/show/bijection">bijection</a> or <a class="existingWikiWord" href="/nlab/show/one-to-one+correspondence">one-to-one correspondence</a> in <a class="existingWikiWord" href="/nlab/show/set+theory">set theory</a>.</p>
 
-<p>In the context of dependent type theories without <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a> or <a class="existingWikiWord" href="/nlab/show/uniqueness+of+identity+proofs">uniqueness of identity proofs</a>, such as <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>, <strong>equivalence</strong> corresponds to the notion of <a class="existingWikiWord" href="/nlab/show/equivalence">equivalence</a> in <a class="existingWikiWord" href="/nlab/show/groupoid">groupoid theory</a> and the notion of <a class="existingWikiWord" href="/nlab/show/homotopy+equivalence">homotopy equivalence</a> in <a class="existingWikiWord" href="/nlab/show/homotopy+theory">homotopy theory</a>. These are sometimes called <strong><a class="existingWikiWord" href="/nlab/show/weak+equivalences">weak equivalences</a></strong>, but there is nothing <a class="existingWikiWord" href="/nlab/show/weak+equivalence">weak</a> about them (in particular, they always have homotopy inverses).</p>
+<p>In the context of dependent type theories without <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a> or <a class="existingWikiWord" href="/nlab/show/uniqueness+of+identity+proofs">uniqueness of identity proofs</a>, such as <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>, <strong>equivalence</strong> corresponds to the notion of <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalence</a> in <a class="existingWikiWord" href="/nlab/show/groupoid">groupoid theory</a> and, more generally, the notion of <a class="existingWikiWord" href="/nlab/show/homotopy+equivalence">homotopy equivalence</a> in <a class="existingWikiWord" href="/nlab/show/homotopy+theory">homotopy theory</a>.</p>
 
-<h2 id="definition">Definition</h2>
+<p>In <a class="existingWikiWord" href="/nlab/show/point-set+topology">point-set topology</a> and generally in the context of <a class="existingWikiWord" href="/nlab/show/homotopical+category">homotopical</a> <a class="existingWikiWord" href="/nlab/show/1-category">1-category</a>-<a class="existingWikiWord" href="/nlab/show/category+theory">theory</a>, these are called <em><a class="existingWikiWord" href="/nlab/show/weak+equivalences">weak equivalences</a></em>, since without suitable <a class="existingWikiWord" href="/nlab/show/resolution">resolution</a> they may not be <a class="existingWikiWord" href="/nlab/show/homotopy+equivalences">homotopy equivalences</a>. However, via the <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> of <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a> in <a class="existingWikiWord" href="/nlab/show/type-theoretic+model+categories">type-theoretic model categories</a>, the required <a class="existingWikiWord" href="/nlab/show/resolutions">resolutions</a> are all implicit (essentially since all objects are assumed to be <a class="existingWikiWord" href="/nlab/show/cofibrant+object">cofibrant</a> and <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a> are interpreted as <a class="existingWikiWord" href="/nlab/show/fibrant+resolution">fibrant resolution</a> of <a class="existingWikiWord" href="/nlab/show/diagonal+maps">diagonal maps</a>) so that all (weak) equivalences are actually homotopy equivalences.</p>
 
-<p>We work in <a class="existingWikiWord" href="/nlab/show/intensional+type+theory">intensional</a> <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a> with <a class="existingWikiWord" href="/nlab/show/dependent+sums">dependent sums</a>, <a class="existingWikiWord" href="/nlab/show/dependent+products">dependent products</a>, and <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a>.</p>
+<h2 id="Definition">Definition</h2>
 
-<h3 id="as_functions_with_contractible_fibers"> As functions with contractible fibers</h3>
+<p>Notice that there are several ways to define a <a class="existingWikiWord" href="/nlab/show/bijection">bijection</a> in <a class="existingWikiWord" href="/nlab/show/set+theory">set theory</a>:</p>
 
-<p>Given types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f:A \to B</annotation></semantics></math>, and an element <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b:B</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/fiber+type">fiber type</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a></p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">fiber</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">\mathrm{fiber}(f,b) \coloneqq \sum_{a:A} f(a) = b</annotation></semantics></math></div>
-<p>the <a class="existingWikiWord" href="/nlab/show/proposition">proposition</a> that a type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/contractible+type">contractible type</a> is</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">isContr</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>a</mi><mo>:</mo><mi>C</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>C</mi></mrow></munder><mi>a</mi><msub><mo>=</mo> <mi>C</mi></msub><mi>b</mi></mrow><annotation encoding="application/x-tex">\mathrm{isContr}(C) \coloneqq \sum_{a:C} \prod_{b:C} a =_C b</annotation></semantics></math></div>
-<p>and the <a class="existingWikiWord" href="/nlab/show/proposition">proposition</a> that a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> has contractible fibers</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">hasContrFibers</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></munder><mi mathvariant="normal">isContr</mi><mo stretchy="false">(</mo><mi mathvariant="normal">fiber</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{hasContrFibers}(f) \coloneqq \prod_{b:B} \mathrm{isContr}(\mathrm{fiber}(f,b))</annotation></semantics></math></div>
-<p>We say <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is an <strong>equivalence</strong> if it comes with an witness <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>:</mo><mi mathvariant="normal">hasContrFibers</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p:\mathrm{hasContrFibers}(f)</annotation></semantics></math>; that is, a function is an equivalence if all of its <a class="existingWikiWord" href="/nlab/show/fiber+types">fiber types</a> are <a class="existingWikiWord" href="/nlab/show/contractible+types">contractible types</a>.</p>
+<ol>
+<li>
+<p>as a map which admits a <em>two sided</em> <a class="existingWikiWord" href="/nlab/show/inverse+morphism">inverse morphism</a> –</p>
 
-<p>Given two types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, the <strong>type of equivalences</strong> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a></p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>≃</mo><mi>B</mi><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow></munder><mi mathvariant="normal">hasContrFibers</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A \simeq B \coloneqq \sum_{f:A \to B} \mathrm{hasContrFibers}(f)</annotation></semantics></math></div>
-<h3 id="as_functions_with_a_left_and_a_right_inverse">As functions with a left and a right inverse</h3>
+<p>in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a> this leads to the notion of <em><a class="existingWikiWord" href="/nlab/show/quasi-inverse+functions">quasi-inverse functions</a></em> or <em><a class="existingWikiWord" href="/nlab/show/homotopy+equivalence">homotopy equivalence</a></em></p>
 
-<p>There is also another definition of an equivalence: a function which has both a left inverse and a right inverse:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">hasLeftRightInv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>≔</mo><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>g</mi><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></munder><mi>f</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msub><mo>=</mo> <mi>B</mi></msub><mi>b</mi><mo>)</mo></mrow><mo>×</mo><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>h</mi><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>a</mi><msub><mo>=</mo> <mi>A</mi></msub><mi>h</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{hasLeftRightInv}(f) \coloneqq \left(\sum_{g:B \to A} \prod_{b:B} f(g(b)) =_B b\right) \times \left(\sum_{h:B \to A} \prod_{a:A} a =_A h(f(a))\right)</annotation></semantics></math></div>
-<h3 id="other_variations">Other variations</h3>
+<p>(Def. <a class="maruku-ref" href="#FunctionWithTwoSidedInverse"></a> below);</p>
+</li>
 
-<p>Three variations of this definition are, informally:</p>
+<li>
+<p>as a map which admits a <a class="existingWikiWord" href="/nlab/show/left+inverse">left inverse</a> and a <a class="existingWikiWord" href="/nlab/show/right+inverse">right inverse</a> –</p>
+
+<p>in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a> this leads to the notion of <em>left/right quasi-invertible maps</em> or <em>homotopy isomorphisms</em></p>
+
+<p>(Def. <a class="maruku-ref" href="#FunctionsWithLeftAndRightInverse"></a> below);</p>
+</li>
+
+<li>
+<p>as a function which is both an <a class="existingWikiWord" href="/nlab/show/injection">injection</a> (whose fibers are <a class="existingWikiWord" href="/nlab/show/subsingletons">subsingletons</a>) and a <a class="existingWikiWord" href="/nlab/show/surjection">surjection</a> (whose fibers are <a class="existingWikiWord" href="/nlab/show/inhabited">inhabited</a>) –</p>
+
+<p>in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a> this leads to the definition of equivalence as a function with contractible fibers</p>
+
+<p>(Def. <a class="maruku-ref" href="#FunctionWithContractibleFiber"></a> below).</p>
+</li>
+</ol>
+
+<p><br /></p>
+
+<p id="OutlookOnEquivalenceOfDefinitions"> As (eventually to be) discussed in the <em><a href="#Properties">Properties</a></em>-section below, the evident types formed by these definitions are co-inhabited: we have a function from any one of them to any of the others. Moreover, at least if we assume <a class="existingWikiWord" href="/nlab/show/function+extensionality">function extensionality</a>, the evident types of “homotopy isomorphisms” and of functions with contractible fibers are equivalent and are <a class="existingWikiWord" href="/nlab/show/h-propositions">h-propositions</a>. This is not true for the evident type of homotopy equivalences (as discussed <a href="#TheIssueWithQuasiInverses">below</a>) which is not in general an h-prop even with function extensionality. However, often the most convenient way to show that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is an equivalence is by exhibiting it as a term of the type of homotopy equivalences.</p>
+
+<p><br /></p>
+
+<p>Throughout, we work in <a class="existingWikiWord" href="/nlab/show/intensional+type+theory">intensional</a> <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a> with <a class="existingWikiWord" href="/nlab/show/dependent+sums">dependent sums</a>, <a class="existingWikiWord" href="/nlab/show/dependent+products">dependent products</a>, and <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a>.</p>
+
+<p>In all of the following we consider:</p>
 
 <ul>
 <li>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f\colon A\to B</annotation></semantics></math> is an equivalence if there is a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">g\colon B\to A</annotation></semantics></math> and homotopies <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo lspace="verythinmathspace">:</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>a</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi></mrow></msub><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p\colon \prod_{a\colon A} (g(f(a)) = a)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>q</mi><mo lspace="verythinmathspace">:</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></msub><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">q\colon \prod_{b\colon B} (f(g(b)) = b)</annotation></semantics></math> (a <strong><a class="existingWikiWord" href="/nlab/show/homotopy+equivalence">homotopy equivalence</a></strong>)</p>
+<p><a class="existingWikiWord" href="/nlab/show/types">types</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thickmathspace"></mspace></mrow><annotation encoding="application/x-tex">\;</annotation></semantics></math> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>,</p>
 </li>
 
 <li>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f\colon A\to B</annotation></semantics></math> is an equivalence if there is the above data, together with a higher homotopy expressing one <a class="existingWikiWord" href="/nlab/show/triangle+identity">triangle identity</a> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> (an <strong><a class="existingWikiWord" href="/nlab/show/adjoint+equivalence">adjoint equivalence</a></strong>).</p>
+<p>a <a class="existingWikiWord" href="/nlab/show/term">term</a> of <a class="existingWikiWord" href="/nlab/show/function+type">function type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f \colon A \to B</annotation></semantics></math>,</p>
 </li>
 
 <li>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f\colon A\to B</annotation></semantics></math> is an equivalence if there are maps <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>,</mo><mi>h</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">g,h\colon B\to A</annotation></semantics></math> and homotopies <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo lspace="verythinmathspace">:</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>a</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi></mrow></msub><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p\colon \prod_{a\colon A} (g(f(a)) = a)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>q</mi><mo lspace="verythinmathspace">:</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow></msub><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">q\colon \prod_{b\colon B} (f(h(b)) = b)</annotation></semantics></math> (sometimes called a <strong>homotopy isomorphism</strong>).</p>
+<p>a <a class="existingWikiWord" href="/nlab/show/term">term</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b \colon B</annotation></semantics></math>.</p>
 </li>
 </ul>
 
-<p>By formalizing these, we obtain types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>homotopyEquiv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">homotopyEquiv(f)</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>isAdjointEquiv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">isAdjointEquiv(f)</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>isHIso</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">isHIso(f)</annotation></semantics></math>. All four of these types are co-inhabited: we have a function from any one of them to any of the others. Moreover, at least if we assume <a class="existingWikiWord" href="/nlab/show/function+extensionality">function extensionality</a>, the types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>isAdjointEquiv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">isAdjointEquiv(f)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>isHIso</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">isHIso(f)</annotation></semantics></math> are themselves <em>equivalent</em> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>hasContrFibers</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">hasContrFibers(f)</annotation></semantics></math>, and all three are <a class="existingWikiWord" href="/nlab/show/h-propositions">h-propositions</a>.</p>
+<p><br /></p>
 
-<p>This is not true for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>homotopyEquiv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">homotopyEquiv(f)</annotation></semantics></math>, which is not in general an h-prop even with function extensionality. However, often the most convenient way to show that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is an equivalence is by exhibiting a term in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>homotopyEquiv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">homotopyEquiv(f)</annotation></semantics></math> (although such a term could just as well be interpreted to lie in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>isHIso</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">isHIso(f)</annotation></semantics></math> with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>h</mi><mo>≔</mo><mi>g</mi></mrow><annotation encoding="application/x-tex">h\coloneqq g</annotation></semantics></math>).</p>
+<p>Most of the following claims may be found proven in <a href="#UFP13">UFP13, §2.4 &amp; §4</a>.</p>
+
+<h3 id="AsFunctionsWithTwoSidedInverse">As functions with two-sided inverse</h3>
+
+<p>
+<div class='num_defn' id='FunctionWithTwoSidedInverse'>
+<h6>Definition</h6>
+<p><strong>(function with two-sided inverse, up to homotopy)</strong> <br /> A function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f \,\colon\, A \to B</annotation></semantics></math> is said to be <a class="existingWikiWord" href="/nlab/show/quasi-inverse+function">quasi invertible</a> if it has a <em>two-sided</em> inverse, up to homotopy (hence also called a <em><a class="existingWikiWord" href="/nlab/show/homotopy+equivalence">homotopy equivalence</a></em>):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>qinv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mrow><mover><mi>f</mi><mo>¯</mo></mover><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>Id</mi> <mrow><mo stretchy="false">(</mo><mi>A</mi><mo>→</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mover><mi>f</mi><mo>¯</mo></mover><mo>∘</mo><mi>f</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mi>a</mi><mo>↦</mo><mi>a</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>×</mo><mspace width="thickmathspace"></mspace><msub><mi>Id</mi> <mrow><mo stretchy="false">(</mo><mi>B</mi><mo>→</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>f</mi><mo>∘</mo><mover><mi>f</mi><mo>¯</mo></mover><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mi>b</mi><mo>↦</mo><mi>b</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  qinv(f)
+  \;\coloneqq\;
+  \underset{
+    \overline{f} \colon B \to A
+  }{\sum}
+  \;\;
+  Id_{(A \to A)}
+  \big(
+    \overline{f} \circ f 
+    ,\,
+    (a \mapsto a)
+  \big)
+  \;\times\;
+  Id_{(B \to B)}
+  \big(
+    f \circ \overline{f} 
+    ,\,
+    (b \mapsto b)
+  \big)
+
+</annotation></semantics></math></div>
+<p></p>
+</div>
+</p>
+
+<p>This definition may seem the most obvious, but it suffers from a subltety in the construction of the type of all such functions, see <a href="#TheIssueWithQuasiInverses">below</a>.</p>
+
+<h3 id="as_functions_with_a_left_and_a_right_inverse">As functions with a left and a right inverse</h3>
+
+<p>In variation of Def. <a class="maruku-ref" href="#FunctionWithTwoSidedInverse"></a>, we need not presuppose that the left and right inverse are already identified (this circumvents the <a href="#TheIssueWithQuasiInverses">issue with two-sided inverses</a>):</p>
+
+<p>
+<div class='num_defn' id='FunctionsWithLeftAndRightInverse'>
+<h6>Definition</h6>
+<p><strong>(function with left and right inverse, up to homotopy)</strong> <br /></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">hasLeftRightInv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>g</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></munder><mspace width="thickmathspace"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msub><mo>=</mo> <mi>B</mi></msub><mi>b</mi><mo>)</mo></mrow><mspace width="thickmathspace"></mspace><mo>×</mo><mo>;</mo><mspace width="thickmathspace"></mspace><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>h</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow></munder><mspace width="thickmathspace"></mspace><mi>a</mi><msub><mo>=</mo> <mi>A</mi></msub><mi>h</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">
+  \mathrm{hasLeftRightInv}(f) 
+  \;\coloneqq\; 
+  \left(
+    \sum_{g \colon B \to A} 
+    \;
+    \prod_{b:B} 
+    \;
+    f(g(b)) =_B b
+  \right) 
+   \;\times;\ 
+  \left(
+    \sum_{h \colon B \to A} 
+    \;
+    \prod_{a:A} 
+    \;
+    a =_A h(f(a))
+  \right)
+
+</annotation></semantics></math></div>
+<p></p>
+</div>
+</p>
+
+<p>This is also called a <em>homotopy isomorphism</em>.</p>
+
+<h3 id="AsFunctionsWithContractibleFibers"> As functions with contractible fibers</h3>
+
+<p>Recall that:</p>
+
+<ol>
+<li>
+<p>the (<a class="existingWikiWord" href="/nlab/show/homotopy+fiber">homotopy</a>) <a class="existingWikiWord" href="/nlab/show/fiber+type">fiber type</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">fiber</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow></munder><mspace width="thickmathspace"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \mathrm{fiber}(f,b) 
+  \;\coloneqq\; 
+  \sum_{a:A} 
+    \; f(a) = b
+  \,,
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/proposition">proposition</a> that any type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/contractible+type">contractible type</a> is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">isContr</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>a</mi><mo>:</mo><mi>C</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>C</mi></mrow></munder><mi>a</mi><msub><mo>=</mo> <mi>C</mi></msub><mi>b</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \mathrm{isContr}(C) 
+  \;\coloneqq\; 
+  \sum_{a:C} \prod_{b:C} a =_C b
+  \,,
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>so that the <a class="existingWikiWord" href="/nlab/show/proposition">proposition</a> that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> has <em>contractible fibers</em> is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">hasContrFibers</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></munder><mi mathvariant="normal">isContr</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi mathvariant="normal">fiber</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \mathrm{hasContrFibers}(f) 
+  \;\coloneqq\; 
+  \prod_{b:B} 
+   \mathrm{isContr}
+   \big(
+     \mathrm{fiber}(f,b)
+   \big)
+  \,.
+
+</annotation></semantics></math></div></li>
+</ol>
+
+<p>
+<div class='num_defn' id='FunctionWithContractibleFiber'>
+<h6>Definition</h6>
+<p><strong>(functions with contractible fibers)</strong> <br /> We say <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is an <strong>equivalence</strong> if it comes with a witness <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo lspace="verythinmathspace">:</mo><mi mathvariant="normal">hasContrFibers</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p \colon \mathrm{hasContrFibers}(f)</annotation></semantics></math>; that is, a function is an equivalence if all of its <a class="existingWikiWord" href="/nlab/show/fiber+types">fiber types</a> are <a class="existingWikiWord" href="/nlab/show/contractible+types">contractible types</a>.</p>
+</div>
+</p>
+
+<p>Given two types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, the <strong>type of equivalences</strong> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>≃</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow></munder><mi mathvariant="normal">hasContrFibers</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  A \simeq B 
+  \;\coloneqq\; 
+  \sum_{f:A \to B} 
+    \mathrm{hasContrFibers}(f)
+  \,.
+
+</annotation></semantics></math></div>
+<h3 id="as_adjoint_equivalences">As adjoint equivalences</h3>
+
+<p>like for a homotopy equivalence above, but in addition requiring the <a class="existingWikiWord" href="/nlab/show/triangle+identity">triangle identity</a> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math> (as in an <a class="existingWikiWord" href="/nlab/show/adjoint+equivalence">adjoint equivalence</a>).</p>
 
 <h3 id="as_onetoone_correspondences">As one-to-one correspondences</h3>
 
@@ -690,11 +841,100 @@ margin-left: 0em;
 
 <p>Judgmentally strict equivalences are used in defining <a class="existingWikiWord" href="/nlab/show/Shulman+univalent+universes">Shulman univalent universes</a> in <a class="existingWikiWord" href="/nlab/show/higher+observational+type+theory">higher observational type theory</a>.</p>
 
-<h2 id="properties">Properties</h2>
+<h2 id="Properties">Properties</h2>
 
-<h3 id="constructing_the_inverse_function">Constructing the inverse function.</h3>
+<h3 id="TheIssueWithQuasiInverses">The issue with two-sided quasi-inverses</h3>
 
-<p>For every equivalence, there is a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">g:B \to A</annotation></semantics></math> which is an <a class="existingWikiWord" href="/nlab/show/inverse+function">inverse function</a>.</p>
+<p>The possibly most evident definition of equivalences as two-sided <a class="existingWikiWord" href="/nlab/show/quasi-inverse+functions">quasi-inverse functions</a> (Def. <a class="maruku-ref" href="#FunctionWithTwoSidedInverse"></a>) suffers from the drawback that the type</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>qinv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mrow><mover><mi>f</mi><mo>¯</mo></mover><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>Id</mi> <mrow><mo stretchy="false">(</mo><mi>A</mi><mo>→</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mover><mi>f</mi><mo>¯</mo></mover><mo>∘</mo><mi>f</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mi>a</mi><mo>↦</mo><mi>a</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>×</mo><mspace width="thickmathspace"></mspace><msub><mi>Id</mi> <mrow><mo stretchy="false">(</mo><mi>B</mi><mo>→</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>f</mi><mo>∘</mo><mover><mi>f</mi><mo>¯</mo></mover><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mi>b</mi><mo>↦</mo><mi>b</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  f \colon A \to B
+  \;\;\;\;\;\;
+  \vdash
+  \;\;\;\;\;\;
+  qinv(f)
+  \coloneqq
+  \underset{
+    \overline{f} \colon B \to A
+  }{\sum}
+  \;\;
+  Id_{(A \to A)}
+  \big(
+    \overline{f} \circ f 
+    ,\,
+    (a \mapsto a)
+  \big)
+  \;\times\;
+  Id_{(B \to B)}
+  \big(
+    f \circ \overline{f} 
+    ,\,
+    (b \mapsto b)
+  \big)
+  \,,
+
+</annotation></semantics></math></div>
+<p>which may naively look like it merely detects whether <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> is an equivalence, is in fact <em>not</em> a <a class="existingWikiWord" href="/nlab/show/mere+proposition">mere proposition</a> (<a href="#UFP13">UFP13, Thm. 4.1.3</a>).</p>
+
+<p>This means that the type</p>
+<div class="maruku-equation" id="eq:TheSubtlyWrongTypeOfEquivalences"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow></munder><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mrow><mover><mi>f</mi><mo>¯</mo></mover><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>Id</mi> <mrow><mo stretchy="false">(</mo><mi>A</mi><mo>→</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mover><mi>f</mi><mo>¯</mo></mover><mo>∘</mo><mi>f</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mi>a</mi><mo>↦</mo><mi>a</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>×</mo><mspace width="thickmathspace"></mspace><msub><mi>Id</mi> <mrow><mo stretchy="false">(</mo><mi>B</mi><mo>→</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>f</mi><mo>∘</mo><mover><mi>f</mi><mo>¯</mo></mover><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mi>b</mi><mo>↦</mo><mi>b</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  
+  \underset{
+    f \colon A \to B
+  }{\sum}  
+  \;
+  \underset{
+    \overline{f} \colon B \to A
+  }{\sum}
+  \;\;
+  Id_{(A \to A)}
+  \big(
+    \overline{f} \circ f 
+    ,\,
+    (a \mapsto a)
+  \big)
+  \;\times\;
+  Id_{(B \to B)}
+  \big(
+    f \circ \overline{f} 
+    ,\,
+    (b \mapsto b)
+  \big)
+
+</annotation></semantics></math></div>
+<p>is — despite its possible superficial appearance (cf. &lbrack;<a href="#HofmannStreicher98">Hofmann &amp; Streicher (1998), §5.4</a>&rbrack;) – <em>not</em> in fact equivalent to the correct type of equivalences <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Equiv</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Equiv(A,B)</annotation></semantics></math>, which is instead obtained from this expression by including a <a class="existingWikiWord" href="/nlab/show/0-truncation">0-truncation</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msub><mo stretchy="false">]</mo> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">[-]_{0}</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Equiv</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow></munder><mo maxsize="3em" minsize="3em">[</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mrow><mover><mi>f</mi><mo>¯</mo></mover><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>Id</mi> <mrow><mo stretchy="false">(</mo><mi>A</mi><mo>→</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mover><mi>f</mi><mo>¯</mo></mover><mo>∘</mo><mi>f</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mi>a</mi><mo>↦</mo><mi>a</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>×</mo><mspace width="thickmathspace"></mspace><msub><mi>Id</mi> <mrow><mo stretchy="false">(</mo><mi>B</mi><mo>→</mo><mi>B</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>f</mi><mo>∘</mo><mover><mi>f</mi><mo>¯</mo></mover><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mi>b</mi><mo>↦</mo><mi>b</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><msub><mo maxsize="3em" minsize="3em">]</mo> <mn>0</mn></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  Equiv(A,B)
+  \;\simeq\;
+  \underset{
+    f \colon A \to B
+  }{\sum}  
+  \Bigg[
+  \underset{
+    \overline{f} \colon B \to A
+  }{\sum}
+  \;\;
+  Id_{(A \to A)}
+  \big(
+    \overline{f} \circ f 
+    ,\,
+    (a \mapsto a)
+  \big)
+  \;\times\;
+  Id_{(B \to B)}
+  \big(
+    f \circ \overline{f} 
+    ,\,
+    (b \mapsto b)
+  \big)
+  \Bigg]_0
+  \,.
+
+</annotation></semantics></math></div>
+<p><br /></p>
+
+<h3 id="ConstructingTheInverseFunction">Constructing the inverse function</h3>
+
+<p>For every function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f \colon A \to B</annotation></semantics></math> with contractible fibers (Def. <a class="maruku-ref" href="#FunctionWithContractibleFiber"></a>), there exists a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">g \colon B \to A</annotation></semantics></math> which is an <a class="existingWikiWord" href="/nlab/show/inverse+function">inverse function</a>.</p>
 
 <p>The <a class="existingWikiWord" href="/nlab/show/principle+of+unique+choice">principle of unique choice</a> implies that given a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f:A \to B</annotation></semantics></math>, if for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b:B</annotation></semantics></math> the fiber of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> is contractible, then for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">b:B</annotation></semantics></math> there is an element <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">fiber</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g(b):\mathrm{fiber}(f, b)</annotation></semantics></math>.</p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></munder><mi mathvariant="normal">isContr</mi><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><msub><mo>=</mo> <mi>A</mi></msub><mi>b</mi><mo>)</mo></mrow><mo>→</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>b</mi><mo>:</mo><mi>B</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><msub><mo>=</mo> <mi>A</mi></msub><mi>b</mi></mrow><annotation encoding="application/x-tex">\prod_{b:B} \mathrm{isContr}\left(\sum_{a:A} f(a) =_A b\right) \to \prod_{b:B} \sum_{a:A} f(a) =_A b</annotation></semantics></math></div>
@@ -849,30 +1089,62 @@ margin-left: 0em;
 </li>
 </ul>
 
-<h2 id="references">References</h2>
+<h2 id="References">References</h2>
 
-<p>An introduction to equivalence in homotopy type theory is in</p>
-
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/Andrej+Bauer">Andrej Bauer</a>, <em>A seminar on HoTT equivalences</em> (<a href="http://homotopytypetheory.org/2011/12/07/a-seminar-on-hott-equivalences/">blog post</a>)</li>
-</ul>
-
-<p>and basic ideas are also indicated from <a href="https://home.sandiego.edu/~shulman/hottminicourse2012/02hott.pdf#page=60">slide 60 of part 2</a>, <a href="https://home.sandiego.edu/~shulman/hottminicourse2012/03models.pdf#page=49">slide 49 of part 3</a> of</p>
-
-<ul id="Shulman">
-<li><a class="existingWikiWord" href="/nlab/show/Mike+Shulman">Mike Shulman</a>, <em>Minicourse in homotopy type theory</em> (2012) (<a href="https://home.sandiego.edu/~shulman/hottminicourse2012/">web</a>)</li>
-</ul>
-
-<p><a class="existingWikiWord" href="/nlab/show/Coq">Coq</a> code for homotopy equivalences is at</p>
+<p>The notion of two-sided homotopy equivalence of types in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a> appears (together with the formulation of the <a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a>) already in</p>
 
 <ul>
-<li><a href="https://github.com/HoTT/HoTT/blob/master/theories/Basics/Equivalences.v">HoTT repository</a></li>
+<li id="HofmannStreicher98"><a class="existingWikiWord" href="/nlab/show/Martin+Hofmann">Martin Hofmann</a>, <a class="existingWikiWord" href="/nlab/show/Thomas+Streicher">Thomas Streicher</a>, §5.4 of: <em>The groupoid interpretation of type theory</em>, in: <a class="existingWikiWord" href="/nlab/show/Giovanni+Sambin">Giovanni Sambin</a> et al. (eds.), <em>Twenty-five years of constructive type theory</em>, Proceedings of a congress, Venice, Italy, October 19-21, 1995. Oxford: Logic Guides. <strong>36</strong>, Clarendon Press (1998) 83-111 &lbrack;<a href="https://global.oup.com/academic/product/twenty-five-years-of-constructive-type-theory-9780198501275">ISBN:9780198501275</a>, <a href="http://www.mathematik.tu-darmstadt.de/~streicher/venedig.ps.gz">ps</a>, <a class="existingWikiWord" href="/nlab/files/HofmannStreicherGroupoidInterpretation.pdf" title="pdf">pdf</a>&rbrack;</li>
 </ul>
 
-<p>For equivalences as one-to-one correspondences in homotopy type theory, see</p>
+<p>except that these authors refer to the subtly incorrect type <a class="maruku-eqref" href="#eq:TheSubtlyWrongTypeOfEquivalences">(1)</a> of all equivalences.</p>
+
+<p>The notion of equivalences as <a class="existingWikiWord" href="/nlab/show/function+type">functions</a> with <a class="existingWikiWord" href="/nlab/show/contractible+type">contractible</a> <a class="existingWikiWord" href="/nlab/show/fiber+type">homotopy fibers</a> (and thereby the fix of the <a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a> of <a href="#HofmannStreicher98">Hofmann &amp; Streicher (1998), §5.4</a>) is due to:</p>
 
 <ul>
-<li>Mike Shulman, Towards a Third-Generation HOTT Part 1 (<a href="https://www.cmu.edu/dietrich/philosophy/hott/slides/shulman-2022-04-28.pdf">slides</a>, <a href="https://www.youtube.com/watch?v=FrxkVzItMzA">video</a>)</li>
+<li id="UnivalentFoundationsProject"><a class="existingWikiWord" href="/nlab/show/Vladimir+Voevodsky">Vladimir Voevodsky</a>, p. 10 of: <em>Univalent Foundations Project</em> (2010) &lbrack;<a href="http://www.math.ias.edu/~vladimir/Site3/Univalent_Foundations_files/univalent_foundations_project.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Voevodsky-UFP2010.pdf" title="pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>Introduction and exposition:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Andrej+Bauer">Andrej Bauer</a>, <em>HoTT equivalences</em>, talk (2011) &lbrack;<a href="https://math.andrej.com/2011/12/07/hott-equivalences/">webpage</a>, <a href="https://www.youtube.com/watch?v=V3YUsZx_fmo">video</a>&rbrack;</p>
+</li>
+
+<li id="Shulman">
+<p><a class="existingWikiWord" href="/nlab/show/Mike+Shulman">Mike Shulman</a>, from <a href="https://home.sandiego.edu/~shulman/hottminicourse2012/02hott.pdf#page=60">slide 60 of part 2</a>, <a href="https://home.sandiego.edu/~shulman/hottminicourse2012/03models.pdf#page=49">slide 49 of part 3</a> in: <em>Minicourse in homotopy type theory</em> (2012) &lbrack;<a href="https://home.sandiego.edu/~shulman/hottminicourse2012/">web</a>&rbrack;</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Andrej+Bauer">Andrej Bauer</a>, <em>Equivalences</em> &lbrack;<a href="https://www.youtube.com/watch?v=BuI62-o3Ds8">video</a>&rbrack;, Part 4 of: <em><a href="https://www.youtube.com/playlist?list=PL-47DDuiZOMCRDiXDZ1fI0TFLQgQqOdDa">Introduction to homotopy type theory</a></em>, lecture series (2019)</p>
+</li>
+</ul>
+
+<p>Textbook account:</p>
+
+<ul>
+<li id="UFP13"><a class="existingWikiWord" href="/nlab/show/Univalent+Foundations+Project">Univalent Foundations Project</a>, §2.4 and §4 in: <em><a class="existingWikiWord" href="/nlab/show/Homotopy+Type+Theory+--+Univalent+Foundations+of+Mathematics">Homotopy Type Theory – Univalent Foundations of Mathematics</a></em> (2013) &lbrack;<a href="http://homotopytypetheory.org/book/">web</a>, <a href="http://hottheory.files.wordpress.com/2013/03/hott-online-323-g28e4374.pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>Implementation of equivalences in <a class="existingWikiWord" href="/nlab/show/proof+assistants">proof assistants</a>:</p>
+
+<p>in <a class="existingWikiWord" href="/nlab/show/Coq">Coq</a>:</p>
+
+<ul>
+<li><a href="https://github.com/HoTT/HoTT/blob/master/theories/Basics/Equivalences.v">github.com/HoTT/HoTT/blob/master/theories/Basics/Equivalences.v</a></li>
+</ul>
+
+<p>in <a class="existingWikiWord" href="/nlab/show/Agda">Agda</a>:</p>
+
+<ul>
+<li><a href="https://agda.github.io/agda-stdlib/v1.1/Function.Equivalence.html">agda.github.io/agda-stdlib/v1.1/Function.Equivalence.html</a></li>
+</ul>
+
+<p>On equivalences as one-to-one correspondences in homotopy type theory:</p>
+
+<ul>
+<li>Mike Shulman, <em>Towards a Third-Generation HOTT</em> Part 1 &lbrack;<a href="https://www.cmu.edu/dietrich/philosophy/hott/slides/shulman-2022-04-28.pdf">slides</a>, <a href="https://www.youtube.com/watch?v=FrxkVzItMzA">video</a>&rbrack;</li>
 </ul>
 </body></html>
 
@@ -880,14 +1152,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on December 24, 2022 at 06:45:58.
+    Last revised on December 27, 2022 at 18:54:16.
     See the <a href="/nlab/history/equivalence+in+type+theory" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/equivalence+in+type+theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4299/#Item_5">Discuss</a><span class="backintime"><a href="/nlab/revision/equivalence+in+type+theory/34" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/equivalence+in+type+theory" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/equivalence+in+type+theory" accesskey="S" class="navlink" id="history" rel="nofollow">History (34 revisions)</a>
+  <a href="/nlab/edit/equivalence+in+type+theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4299/#Item_16">Discuss</a><span class="backintime"><a href="/nlab/revision/equivalence+in+type+theory/38" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/equivalence+in+type+theory" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/equivalence+in+type+theory" accesskey="S" class="navlink" id="history" rel="nofollow">History (38 revisions)</a>
   <a href="/nlab/show/equivalence+in+type+theory/cite" style="color: black">Cite</a>
   <a href="/nlab/print/equivalence+in+type+theory" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/equivalence+in+type+theory" id="view_source" rel="nofollow">Source</a>
