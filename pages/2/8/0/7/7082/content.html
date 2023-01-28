@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/4299/#Item_23" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/4299/#Item_24" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -561,7 +561,7 @@ margin-left: 0em;
 <h1 id="equivalences_in_type_theory">Equivalences in type theory</h1>
 <div class='maruku_toc'>
 <ul>
-<li><a href='#idea'>Idea</a></li>
+<li><a href='#Idea'>Idea</a></li>
 <li><a href='#Definition'>Definitions</a></li>
 <ul>
 <li><a href='#strict_equivalences'>Strict equivalences</a></li>
@@ -570,7 +570,7 @@ margin-left: 0em;
 <li><a href='#rules_for_isequiv'>Rules for isEquiv</a></li>
 <li><a href='#defining_isequiv_from_other_type_formers'>Defining isEquiv from other type formers</a></li>
 </ul>
-<li><a href='#historical_note'>Historical note</a></li>
+<li><a href='#HistoricalNote'>Historical note</a></li>
 </ul>
 <li><a href='#Properties'>Properties</a></li>
 <ul>
@@ -587,20 +587,36 @@ margin-left: 0em;
 <li><a href='#References'>References</a></li>
 <ul>
 <li><a href='#general'>General</a></li>
-<li><a href='#application_in_proof_reuse'>Application in proof reuse</a></li>
+<li><a href='#ApplicationsInProofReuse'>Applications</a></li>
 </ul>
 </ul>
 </div>
 
-<h2 id="idea">Idea</h2>
+<h2 id="Idea">Idea</h2>
 
-<p>We discuss the correct (operational) notion of <a class="existingWikiWord" href="/nlab/show/equivalence">equivalence</a> in <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>.</p>
+<p>In (<a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent</a>) <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a> and in particular in <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>, two <a class="existingWikiWord" href="/nlab/show/types">types</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> are called (homotopy-)<em><a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphic</a></em></p>
 
-<p>In <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> with <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a> or <a class="existingWikiWord" href="/nlab/show/uniqueness+of+identity+proofs">uniqueness of identity proofs</a>, the notion of <strong>equivalence</strong> corresponds roughly to the notion of <a class="existingWikiWord" href="/nlab/show/bijection">bijection</a> or <a class="existingWikiWord" href="/nlab/show/one-to-one+correspondence">one-to-one correspondence</a> in <a class="existingWikiWord" href="/nlab/show/set+theory">set theory</a>.</p>
+<blockquote>
+<p>&lbrack;<a href="#Rittri89">Rittri (1989)</a>, <a href="#Cosmo95">Cosmo (1995, §1.8)</a>, <a href="#HofmannStreicher98">Hofmann &amp; Streicher (1998, §5.4)</a>, <a href="#KapulkinLumsdaine21">Kapulkin &amp; Lumsdaine (2012, 2021, Def. 3.1.1)</a>, but see <a href="#HistoricalNote">below</a>&rbrack;</p>
+</blockquote>
 
-<p>In the context of dependent type theories without <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a> or <a class="existingWikiWord" href="/nlab/show/uniqueness+of+identity+proofs">uniqueness of identity proofs</a>, such as <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>, <strong>equivalence</strong> corresponds to the notion of <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalence</a> in <a class="existingWikiWord" href="/nlab/show/groupoid">groupoid theory</a> and, more generally, the notion of <a class="existingWikiWord" href="/nlab/show/homotopy+equivalence">homotopy equivalence</a> in <a class="existingWikiWord" href="/nlab/show/homotopy+theory">homotopy theory</a>.</p>
+<p>or <em><a class="existingWikiWord" href="/nlab/show/equivalence">equivalent</a></em> &lbrack;<a href="#UFP13">UFP13, §4</a>&rbrack; (for fine-print see the definitions <a href="#Definition">below</a>) if there exists a transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">D \to C</annotation></semantics></math> which may be <a class="existingWikiWord" href="/nlab/show/inverse">inverted</a> (up to the relevant re-<a class="existingWikiWord" href="/nlab/show/identification+type">indentifications</a>), hence if any program operating on data of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> may be transformed into a program operating on data of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, and vice versa (see practical examples referenced <a href="#ApplicationsInProofReuse">below</a>).</p>
 
-<p>In <a class="existingWikiWord" href="/nlab/show/point-set+topology">point-set topology</a> and generally in the context of <a class="existingWikiWord" href="/nlab/show/homotopical+category">homotopical</a> <a class="existingWikiWord" href="/nlab/show/1-category">1-category</a>-<a class="existingWikiWord" href="/nlab/show/category+theory">theory</a>, these are called <em><a class="existingWikiWord" href="/nlab/show/weak+equivalences">weak equivalences</a></em>, since without suitable <a class="existingWikiWord" href="/nlab/show/resolution">resolution</a> they may not be <a class="existingWikiWord" href="/nlab/show/homotopy+equivalences">homotopy equivalences</a>. However, via the <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> of <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a> in <a class="existingWikiWord" href="/nlab/show/type-theoretic+model+categories">type-theoretic model categories</a>, the required <a class="existingWikiWord" href="/nlab/show/resolutions">resolutions</a> are all implicit (essentially since all objects are assumed to be <a class="existingWikiWord" href="/nlab/show/cofibrant+object">cofibrant</a> and <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a> are interpreted as <a class="existingWikiWord" href="/nlab/show/fibrant+resolution">fibrant resolution</a> of <a class="existingWikiWord" href="/nlab/show/diagonal+maps">diagonal maps</a>) so that all (weak) equivalences are actually homotopy equivalences.</p>
+<p>Alternatively, a <a class="existingWikiWord" href="/nlab/show/function+type">function</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">D \to C</annotation></semantics></math> may be called a <em><a class="existingWikiWord" href="/nlab/show/bijection">bijection</a></em> if all its <a class="existingWikiWord" href="/nlab/show/pre-images">pre-images</a> are essentially unique, namely if all its <a class="existingWikiWord" href="/nlab/show/fiber+types">fiber types</a> are <a class="existingWikiWord" href="/nlab/show/contractible+types">contractible types</a>. In the <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> this is called a <em><a class="existingWikiWord" href="/nlab/show/weak+homotopy+equivalence">weak homotopy equivalence</a></em>, whence this term is also used for the type-theoretic notion &lbrack;<a href="#Voevodsky10">Voevodsky (2010), p. 8, 10</a>&rbrack;.</p>
+
+<p><img src="https://ncatlab.org/nlab/files/TypeEquivalence-230128b.jpg" width="800" /></p>
+
+<p>These two notions are in fact equivalent &lbrack;<a href="#UFP13">UFP13, around Thm. 4.4.5</a>&rbrack;.</p>
+
+<p><img src="https://ncatlab.org/nlab/files/TypeBijectionIsEquivalence-230128.jpg" width="750" /></p>
+
+<p>In the special case of <a class="existingWikiWord" href="/nlab/show/0-truncated">0-truncated</a> types (<a class="existingWikiWord" href="/nlab/show/h-sets">h-sets</a>), hence in <a class="existingWikiWord" href="/nlab/show/dependent+type+theories">dependent type theories</a> with <em><a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a></em> or the axiom imposing <em><a class="existingWikiWord" href="/nlab/show/uniqueness+of+identity+proofs">uniqueness of identity proofs</a></em>, the notion of type equivalence corresponds essentially to the notion of <em><a class="existingWikiWord" href="/nlab/show/bijection">bijection</a></em> or <em><a class="existingWikiWord" href="/nlab/show/one-to-one+correspondence">one-to-one correspondence</a></em> in <a class="existingWikiWord" href="/nlab/show/set+theory">set theory</a>.</p>
+
+<p>In the special case of <a class="existingWikiWord" href="/nlab/show/1-truncated">1-truncated</a> types (<a class="existingWikiWord" href="/nlab/show/h-groupoids">h-groupoids</a>), type equivalence corresponds essentially to the notion of <em><a class="existingWikiWord" href="/nlab/show/equivalence+of+groupoids">equivalence of groupoids</a></em> in <a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a>.</p>
+
+<p>In full <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a> the <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> of type equivalence is <em><a class="existingWikiWord" href="/nlab/show/homotopy+equivalence">homotopy equivalence</a></em> and that of type bijection is <em><a class="existingWikiWord" href="/nlab/show/weak+homotopy+equivalence">weak homotopy equivalence</a></em>. That these notions coincide corresponds to the <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> of types being as <a class="existingWikiWord" href="/nlab/show/cofibrant+object">co</a>-/<a class="existingWikiWord" href="/nlab/show/fibrant+objects">fibrant objects</a>, on which <a class="existingWikiWord" href="/nlab/show/weak+homotopy+equivalences">weak homotopy equivalences</a> coincide with <a class="existingWikiWord" href="/nlab/show/homotopy+equivalences">homotopy equivalences</a> (by the <a class="existingWikiWord" href="/nlab/show/Whitehead+theorem">Whitehead theorem</a>).</p>
+
+<p>Finally, the notion of equivalence/bijection of types is <em>a priori</em> different from that of <em><a class="existingWikiWord" href="/nlab/show/identification+type">identification</a></em> of types in the <a class="existingWikiWord" href="/nlab/show/type+universe">type universe</a>. To assert that the two notions do agree after all is to impose the <a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a>.</p>
 
 <h2 id="Definition">Definitions</h2>
 
@@ -736,7 +752,7 @@ margin-left: 0em;
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi><mo>⊢</mo><mi mathvariant="normal">isEquiv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>g</mi><mo>:</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow></munder><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>x</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>g</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msub><mo>=</mo> <mi>A</mi></msub><mi>x</mi><mo>)</mo></mrow><mo>×</mo><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>y</mi><mo>:</mo><mi>B</mi></mrow></munder><mi>f</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msub><mo>=</mo> <mi>B</mi></msub><mi>y</mi><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">f:A \to B \vdash \mathrm{isEquiv}(f) \coloneqq \sum_{g:B \to A} \left(\prod_{x:A} g(f(x)) =_A x\right) \times \left(\prod_{y:B} f(g(y)) =_B y\right)</annotation></semantics></math></div>
 <p>In all three cases, by <a class="existingWikiWord" href="/nlab/show/function+extensionality">function extensionality</a> for the first two and additionally by <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a> or <a class="existingWikiWord" href="/nlab/show/UIP">UIP</a> for the third case, the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">isEquiv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{isEquiv}(f)</annotation></semantics></math> type family is a <a class="existingWikiWord" href="/nlab/show/mere+proposition">mere proposition</a> for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f:A \to B</annotation></semantics></math>. Thus, we can define the <a class="existingWikiWord" href="/nlab/show/equivalence+type">equivalence type</a> as</p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>≃</mo><mi>B</mi><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow></munder><mi mathvariant="normal">isEquiv</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A \simeq B \coloneqq \sum_{f:A \to B} \mathrm{isEquiv}(f)</annotation></semantics></math></div>
-<h3 id="historical_note">Historical note</h3>
+<h3 id="HistoricalNote">Historical note</h3>
 
 <p>The first attempt at a definition of an equivalence of type was the definition of a quasi-invertible function by <a href="#HofmannStreicher98">Hofmann &amp; Streicher (1998), §5.4</a>. In the absence of <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a> or <a class="existingWikiWord" href="/nlab/show/uniqueness+of+identity+proofs">uniqueness of identity proofs</a>, this definition suffers from a subltety in the construction of equivalence types, see <a href="#TheIssueWithQuasiInverses">below</a>. In the absence of <a class="existingWikiWord" href="/nlab/show/function+extensionality">function extensionality</a>, the definition of an equivalence as a homotopy isomorphism, first proposed by <a class="existingWikiWord" href="/nlab/show/Andr%C3%A9+Joyal">André Joyal</a> in a 2011 Oberwolfach meeting, recorded in <a href="#KapulkinLumsdaine21">Kapulkin &amp; Lumsdaine (2012, 2021), Def. 3.1.1</a>, similarly suffers from a subltety in the construction of equivalence types.</p>
 
@@ -1082,11 +1098,25 @@ margin-left: 0em;
 <li>Mike Shulman, <em>Towards a Third-Generation HOTT</em> Part 1 &lbrack;<a href="https://www.cmu.edu/dietrich/philosophy/hott/slides/shulman-2022-04-28.pdf">slides</a>, <a href="https://www.youtube.com/watch?v=FrxkVzItMzA">video</a>&rbrack;</li>
 </ul>
 
-<h3 id="application_in_proof_reuse">Application in proof reuse</h3>
+<h3 id="ApplicationsInProofReuse">Applications</h3>
+
+<p>Origin of the notion of type isomorphy in and application to <a class="existingWikiWord" href="/nlab/show/programming+language">programming language</a>-theory and -practice:</p>
 
 <ul>
+<li id="Rittri89">
+<p>Mikael Rittri, <em>Using types as search keys in function libraries</em>, in: <em>FPCA ‘89: Proceedings of the fourth international conference on Functional programming languages and computer architecture</em> (1989) 174–183 &lbrack;<a href="https://doi.org/10.1145/99370.99384">doi:10.1145/99370.99384</a>, <a href="https://dl.acm.org/doi/pdf/10.1145/99370.99384">pdf</a>&rbrack;</p>
+</li>
+
+<li id="Cosmo95">
+<p><a class="existingWikiWord" href="/nlab/show/Roberto+Di+Cosmo">Roberto Di Cosmo</a>, <em>Isomorphisms of Types – from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>-calculus to information retrieval and language design</em>, Progress in Theoretical Computer Science, Birkhäuser (1995) &lbrack;<a href="https://doi.org/10.1007/978-1-4612-2572-0">doi:10.1007/978-1-4612-2572-0</a>&rbrack;</p>
+</li>
+
 <li>
 <p>Gilles Barthe, Olivier Pons, <em>Type Isomorphisms and Proof Reuse in Dependent Type Theory</em>, in <em>Foundations of Software Science and Computation Structures. FoSSaCS 2001</em>, Lecture Notes in Computer Science <strong>2030</strong>, Springer (2001) &lbrack;<a href="https://doi.org/10.1007/3-540-45315-6_4">doi:10.1007/3-540-45315-6_4</a>&rbrack;</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Roberto+Di+Cosmo">Roberto Di Cosmo</a>, <em>A short survey of isomorphisms of types</em>, Mathematical Structures in Computer Science <strong>15</strong> 5 (2005) 825-838 &lbrack;<a href="https://doi.org/10.1017/S0960129505004871">doi:10.1017/S0960129505004871</a>, <a href="https://www.dicosmo.org/Articles/mscs-survey.pdf">pdf</a>&rbrack;</p>
 </li>
 
 <li>
@@ -1103,14 +1133,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on January 26, 2023 at 19:13:14.
+    Last revised on January 28, 2023 at 10:14:49.
     See the <a href="/nlab/history/equivalence+in+type+theory" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/equivalence+in+type+theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4299/#Item_23">Discuss</a><span class="backintime"><a href="/nlab/revision/equivalence+in+type+theory/49" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/equivalence+in+type+theory" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/equivalence+in+type+theory" accesskey="S" class="navlink" id="history" rel="nofollow">History (49 revisions)</a>
+  <a href="/nlab/edit/equivalence+in+type+theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4299/#Item_24">Discuss</a><span class="backintime"><a href="/nlab/revision/equivalence+in+type+theory/52" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/equivalence+in+type+theory" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/equivalence+in+type+theory" accesskey="S" class="navlink" id="history" rel="nofollow">History (52 revisions)</a>
   <a href="/nlab/show/equivalence+in+type+theory/cite" style="color: black">Cite</a>
   <a href="/nlab/print/equivalence+in+type+theory" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/equivalence+in+type+theory" id="view_source" rel="nofollow">Source</a>
