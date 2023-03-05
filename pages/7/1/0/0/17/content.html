@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/2528/#Item_57" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/2528/#Item_62" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -631,35 +631,101 @@ margin-left: 0em;
 
 <h3 id="merging">How to merge pages</h3>
 
-<p>Suppose we have two pages, named ‘A’ and ‘B’, and you decide that they ought to be merged into a single page, say ‘A’. Of course, you need to edit ‘A’ to contain the material from ‘B’ and make a coherent whole, but there are also some technical aspects. We do <em>not</em> want to simply delete ‘B’, since it contains the history of the edits to that page, which might turn out to be useful. However, we <em>do</em> want these two things:</p>
+<p>It happens at times that you may wish the material in existing pages <code>A</code> and <code>B</code>, would be merged into a single page. (This occurs notably after any user accidentally created a new page unaware that another page on the topic was already in existence.)</p>
+
+<p>In most cases it will be best to raise the issue on the <a href="https://nforum.ncatlab.org/">nForum</a>, check if regulars agree that the pages ought to be merged, and hope that one of them takes care of it.</p>
+
+<p>If you do decide to merge on your own, here are instructions.</p>
+
+<blockquote>
+<p>The basic idea is evident: Merge the content, delete one of the entries and make its previous name redirect to the remaining page. But the redirecting takes some care; and a complication is that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>Lab pages cannot be deleted (not by regular users, anyway) but only “orphaned”.</p>
+</blockquote>
+
+<p>Suppose that <code>A</code> is the name of the page to be kept and and that <code>B</code> is the name of the one to be deleted. Then:</p>
 
 <ol>
-<li>links to ‘B’ ought to send the reader to ‘A’;</li>
-
-<li>the old page ‘B’ should be clearly marked as archive material.</li>
-</ol>
-
-<p>We accomplish (1) with a <a class="existingWikiWord" href="/nlab/show/redirect">redirect</a>; we accomplish (2) with a <span class="newWikiWord">page move<a href="/nlab/new/page+move">?</a></span>. If you do this too carelessly, then it will not work; in the worst case, links to ‘B’ will still go to the archive page, and that will look to the casual reader like a regular page. So follow these steps:</p>
+<li>
+<p>Edit <code>A</code></p>
 
 <ol>
-<li>Edit ‘A’ so that it looks how you want, and add the line ‘’ to the bottom. Submit.</li>
+<li>
+<p>so that it looks like the intended merged entry.</p>
+</li>
 
-<li>Open ‘B’ for editing.</li>
+<li>
+<p>Add the line “[[!redirects B]]” to the bottom.</p>
 
-<li>Click the checkbox ‘Change page name.’, which will bring up a new field ‘New name:’.</li>
+<p>And in case the page <code>B</code> itself has [[!redirects X]]-lines in its source, copy them all over to <code>A</code>.</p>
+</li>
 
-<li>In that field, add ‘ &gt; history’ to the end, so that ‘B’ becomes ‘B &gt; history’.</li>
-
-<li>Click in the big edit box, which will automatically add ‘’ to the top.</li>
-
-<li>Change the line ‘’ into ‘&lt; <a class="existingWikiWord" href="/nlab/show/B">B</a>’ instead.</li>
-
-<li>Delete everything else (consisting of the material that you already merged into ‘A’).</li>
-
-<li>Submit.</li>
+<li>
+<p>Submit.</p>
+</li>
 </ol>
+</li>
 
-<p>The result is that links to ‘B’ will redirect to ‘A’ (not to ‘B &gt; history’). And if anyone does land on ‘B &gt; history’, all that they will see is ‘&lt; <a class="existingWikiWord" href="/nlab/show/HomePage">B</a>’ with a link to ‘B’ (properly redirected to ‘A’). But if they're really at ‘B &gt; history’ on purpose to check the edit history, then that history is there for them.</p>
+<li>
+<p>Edit <code>B</code></p>
+
+<ol>
+<li>
+<p>by first clearing its content (e.g. with a keystroke such as <code>Ctrl-A</code> <code>Del</code>).</p>
+</li>
+
+<li>
+<p>Click the checkbox ‘Change page name.’, which will bring up a new field ‘New name:’.</p>
+</li>
+
+<li>
+<p>In that field, append “<code>&gt; history</code>” to the string “<code>B</code>”, so that the new page name becomes “<code>B &gt; history</code>”.</p>
+
+<blockquote>
+<p>(The idea is to change to any name that is neither coincides with an existing nor with a future entry.)</p>
+</blockquote>
+
+<p>Do <em>not</em> submit the edit <em>yet</em>.</p>
+</li>
+
+<li>
+<p>Before finishing we need to work around what the wiki software thinks is intended behaviour:</p>
+
+<ol>
+<li>
+<p>Click in the big edit box – this will automatically add the line “[[!redirects B]]”.</p>
+
+<blockquote>
+<p>(The wiki software is trying to be helpful, not knowing that we want to delete the entry for good.)</p>
+</blockquote>
+</li>
+
+<li>
+<p>Delete that line (to ensure that all requests for <code>B</code> will now take the reader to <code>A</code>),</p>
+</li>
+
+<li>
+<p>and instead add “<code>see</code> [[A]]”.</p>
+
+<blockquote>
+<p>(This just in case anyone ever comes across this page in the future – which should not actually happen, due to the [[!redirects B]]-command meanwhile added to <code>A</code>.)</p>
+</blockquote>
+</li>
+</ol>
+</li>
+
+<li>
+<p>Finally ready to submit this quasi-deletion of <code>B</code>.</p>
+
+<p>But since the page’s name was changed in the process, the software will require announcing this edit in the box below the edit box. So enter there something like:</p>
+
+<p>“<code>As we discussed, I am orphaning this page and have merged its previous content into page "A".</code>”</p>
+</li>
+
+<li>
+<p>Submit.</p>
+</li>
+</ol>
+</li>
+</ol>
 
 <h3 id="how_to_remove_a_page">How to remove a page</h3>
 
@@ -1979,14 +2045,14 @@ P(B)^{\mathrlap{A}} &amp; \underset{\chi_\sigma^A}{\longrightarrow} &amp;  P(1)^
 
 <div class="revisedby">
     <p>
-    Last revised on February 10, 2023 at 07:53:26.
+    Last revised on March  5, 2023 at 06:31:53.
     See the <a href="/nlab/history/HowTo" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/HowTo" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/2528/#Item_57">Discuss</a><span class="backintime"><a href="/nlab/revision/HowTo/191" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/HowTo" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/HowTo" accesskey="S" class="navlink" id="history" rel="nofollow">History (191 revisions)</a>
+  <a href="/nlab/edit/HowTo" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/2528/#Item_62">Discuss</a><span class="backintime"><a href="/nlab/revision/HowTo/193" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/HowTo" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/HowTo" accesskey="S" class="navlink" id="history" rel="nofollow">History (193 revisions)</a>
   <a href="/nlab/show/HowTo/cite" style="color: black">Cite</a>
   <a href="/nlab/print/HowTo" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/HowTo" id="view_source" rel="nofollow">Source</a>
