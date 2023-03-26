@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/3125/#Item_37" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/3125/#Item_41" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -819,8 +819,8 @@ margin-left: 0em;
 <ul>
 <li><a href='#presentation_1'>Presentation 1</a></li>
 <ul>
-<li><a href='#judgments_and_contexts'>Judgments and contexts</a></li>
-<li><a href='#structural_rules'>Structural rules</a></li>
+<li><a href='#JudgmentsAndContexts'>Judgments and contexts</a></li>
+<li><a href='#StructuralRules'>Structural rules</a></li>
 <li><a href='#definitional_equality'>Definitional equality</a></li>
 <li><a href='#definitions'>Definitions</a></li>
 <li><a href='#rules_for_types'>Rules for types</a></li>
@@ -896,41 +896,82 @@ margin-left: 0em;
 
 <p>This first presentation uses <a class="existingWikiWord" href="/nlab/show/judgmental+equality">judgmental equality</a>, and could be contrasted with the second presentation, which uses <a class="existingWikiWord" href="/nlab/show/propositional+equality">propositional equality</a> and a very weak <a class="existingWikiWord" href="/nlab/show/logic">logic</a> over <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a>.</p>
 
-<h4 id="judgments_and_contexts">Judgments and contexts</h4>
+<h4 id="JudgmentsAndContexts">Judgments and contexts</h4>
 
-<p>The syntax of Martin-Löf dependent type theory can be constructed in two stages. The first is the <em>raw</em> or <em>untyped</em> syntax of the theory consisting of expressions that are readable but not meaningful. The second stage consists of defining the <em>derivable judgements</em> of the type theory inductively which then pick out the meaningful contexts, types and terms.</p>
+<p>The <a class="existingWikiWord" href="/nlab/show/syntax">syntax</a> of Martin-Löf dependent type theory can be constructed in two stages:</p>
 
-<p>A context is a list of types. Variables can be defined as De Bruijn indices in which case the type of a variable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> is given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>th type in a context.</p>
+<ul>
+<li>
+<p>The first is the <em>raw</em> or <em>untyped</em> syntax of the theory consisting of expressions that are readable but not necessarily meaningful.</p>
+</li>
+
+<li>
+<p>The second stage consists of defining the <em>derivable judgements</em> of the type theory <a class="existingWikiWord" href="/nlab/show/induction">inductively</a> which then pick out the meaningful <a class="existingWikiWord" href="/nlab/show/contexts">contexts</a>, <a class="existingWikiWord" href="/nlab/show/types">types</a> and <a class="existingWikiWord" href="/nlab/show/terms">terms</a>.</p>
+</li>
+</ul>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/context">context</a> is a <a class="existingWikiWord" href="/nlab/show/list">list</a> of succesivley <a class="existingWikiWord" href="/nlab/show/dependent+types">dependent types</a>. The <a class="existingWikiWord" href="/nlab/show/variables">variables</a> may be defined as <a class="existingWikiWord" href="/nlab/show/de+Bruijn+indices">de Bruijn indices</a>, in which case the type of a variable <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> is given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>th type in a <a class="existingWikiWord" href="/nlab/show/context">context</a>.</p>
 
 <p>One may also define contexts as coming with a variable name, in which case one needs a notion of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>-equivalence (syntactic identity modulo renaming of bound variables) and of capture-free substitution. De Bruijn indices avoid this step but can be more obfuscating.</p>
 
 <p>Types and terms are built inductively from various constructors. Types, terms and contexts are defined mutually.</p>
 
-<p>We have the basic judgement forms:</p>
+<p>We have the basic <a class="existingWikiWord" href="/nlab/show/judgement">judgement</a> forms:</p>
 
 <ul>
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A\; \mathrm{type}</annotation></semantics></math> - <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a well-typed type in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>.</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><annotation encoding="application/x-tex">\Gamma \; \mathrm{ctx}</annotation></semantics></math></p>
 
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math> - <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> is a well-typed term of type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> in context <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>.</li>
+<p>saying that: “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> is a well-formed context”;</p>
+</li>
 
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><annotation encoding="application/x-tex">\Gamma \; \mathrm{ctx}</annotation></semantics></math> - <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math> is a well-formed context.</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash A\; \mathrm{type}</annotation></semantics></math></p>
+
+<p>saying that “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a well-typed <a class="existingWikiWord" href="/nlab/show/dependent+type">dependent type</a> in <a class="existingWikiWord" href="/nlab/show/context">context</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>”;</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma \vdash a : A</annotation></semantics></math></p>
+
+<p>saying that “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> is a well-typed <a class="existingWikiWord" href="/nlab/show/term">term</a> of <a class="existingWikiWord" href="/nlab/show/type">type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> in <a class="existingWikiWord" href="/nlab/show/context">context</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math>”;</p>
+</li>
 </ul>
 
-<p>In addition, we work in the logical framework of <a class="existingWikiWord" href="/nlab/show/natural+deduction">natural deduction</a>, where everything is given by rules. Contexts are defined by the following rules:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow></mrow><mrow><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>,</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{}{() \; \mathrm{ctx}} \qquad \frac{\Gamma \; \mathrm{ctx} \quad \Gamma \vdash A \; \mathrm{type}}{(\Gamma, a:A) \; \mathrm{ctx}}</annotation></semantics></math></div>
-<h4 id="structural_rules">Structural rules</h4>
+<p>The following table indicates the corresponding <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> <a class="existingWikiWord" href="/nlab/show/categorical+semantics+of+dependent+types">of these notions of dependent type theory</a>:</p>
+<center>
+<img src="/nlab/files/DependentTermsSyntaxAndSemantics-230326.jpg" width="650" />
+</center>
+<p>We work in the <a class="existingWikiWord" href="/nlab/show/logical+framework">logical framework</a> of <a class="existingWikiWord" href="/nlab/show/natural+deduction">natural deduction</a>, where everything is given by <a class="existingWikiWord" href="/nlab/show/inference+rules">inference rules</a>.</p>
 
-<p>There are three structural rules in dependent type theory, the <span class="newWikiWord">variable rule<a href="/nlab/new/variable+rule">?</a></span>, the <a class="existingWikiWord" href="/nlab/show/weakening+rule">weakening rule</a>, and the <a class="existingWikiWord" href="/nlab/show/substitution+rule">substitution rule</a>.</p>
+<p>To start with, <a class="existingWikiWord" href="/nlab/show/contexts">contexts</a> are built from <a class="existingWikiWord" href="/nlab/show/dependent+types">dependent types</a> by the following rules (cf. <a class="existingWikiWord" href="/nlab/show/type+telescope">type telescope</a>):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow></mrow><mrow><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>,</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+  \frac{}{() \; \mathrm{ctx}} \qquad \frac{\Gamma \; \mathrm{ctx} \quad \Gamma \vdash A \; \mathrm{type}}{(\Gamma, a:A) \; \mathrm{ctx}}
 
-<p>The variable rule states that we may derive a typing judgment if the typing judgment is in the context already:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo>,</mo><mi>Δ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, a:A, \Delta \; \mathrm{ctx}}{\Gamma, a:A, \Delta \vdash a:A}</annotation></semantics></math></div>
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒥</mi></mrow><annotation encoding="application/x-tex">\mathcal{J}</annotation></semantics></math> be any arbitrary judgment. Then we have the following rules:</p>
+</annotation></semantics></math></div>
+<h4 id="StructuralRules">Structural rules</h4>
 
-<p>The weakening rule:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>𝒥</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>𝒥</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, \Delta \vdash \mathcal{J} \quad \Gamma \vdash A \; \mathrm{type}}{\Gamma, a:A, \Delta \vdash \mathcal{J}}</annotation></semantics></math></div>
-<p>The substitution rule:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>,</mo><mi>b</mi><mo>:</mo><mi>A</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>𝒥</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>b</mi><mo stretchy="false">]</mo><mo>⊢</mo><mi>𝒥</mi><mo stretchy="false">[</mo><mi>a</mi><mo stretchy="false">/</mo><mi>b</mi><mo stretchy="false">]</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \vdash a:A \quad \Gamma, b:A, \Delta \vdash \mathcal{J}}{\Gamma, \Delta[a/b] \vdash \mathcal{J}[a/b]}</annotation></semantics></math></div>
-<p>The weakening and substitution rules are admissible rules: they do not need to be explicitly included in the type theory as they could be proven by induction on the structure of all possible derivations.</p>
+<p>Among the <em><a class="existingWikiWord" href="/nlab/show/structural+rules">structural rules</a></em> of dependent type theory are (e.g. <a href="#Jacobs98">Jacobs (1998), p. 122</a>, <a href="#UFP13">UFP13, A.2.2</a>, <a href="#Rijke18">Rijke (2018), Sec. 1.4</a>):</p>
+
+<ul>
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/variable+rule">variable rule</a>,</p>
+</li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/weakening+rule">weakening rule</a>,</p>
+</li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/substitution+rule">substitution rule</a></p>
+</li>
+</ul>
+
+<p>shown in the following table together with their <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> <a class="existingWikiWord" href="/nlab/show/categorical+semantics+of+dependent+types">of dependent types</a>:</p>
+<center>
+<img src="/nlab/files/StructuralTypeInferenceRules-230326b.jpg" width="650" />
+</center>
+<p>The weakening and substitution rules are <a class="existingWikiWord" href="/nlab/show/admissible+rules">admissible rules</a>: they do not need to be explicitly included in the type theory as they could be proven by induction on the structure of all possible derivations.</p>
 
 <h4 id="definitional_equality">Definitional equality</h4>
 
@@ -1228,7 +1269,7 @@ margin-left: 0em;
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow></mrow><mrow><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>,</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>ϕ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">prop</mi></mrow><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>,</mo><mi>ϕ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">true</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{}{() \; \mathrm{ctx}} \qquad \frac{\Gamma \; \mathrm{ctx} \quad \Gamma \vdash A \; \mathrm{type}}{(\Gamma, a:A) \; \mathrm{ctx}} \qquad \frac{\Gamma \; \mathrm{ctx} \quad \Gamma \vdash \phi \; \mathrm{prop}}{(\Gamma, \phi \; \mathrm{true}) \; \mathrm{ctx}}</annotation></semantics></math></div>
 <h4 id="structural_rules_2">Structural rules</h4>
 
-<p>There are three structural rules in dependent type theory, the <span class="newWikiWord">variable rule<a href="/nlab/new/variable+rule">?</a></span>, the <a class="existingWikiWord" href="/nlab/show/weakening+rule">weakening rule</a>, and the <a class="existingWikiWord" href="/nlab/show/substitution+rule">substitution rule</a>.</p>
+<p>There are three structural rules in dependent type theory, the <a class="existingWikiWord" href="/nlab/show/variable+rule">variable rule</a>, the <a class="existingWikiWord" href="/nlab/show/weakening+rule">weakening rule</a>, and the <a class="existingWikiWord" href="/nlab/show/substitution+rule">substitution rule</a>.</p>
 
 <p>The variable rule states that we may derive a typing judgment if the typing judgment is in the context already:</p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo>,</mo><mi>Δ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>a</mi><mo>:</mo><mi>A</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>a</mi><mo>:</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, a:A, \Delta \; \mathrm{ctx}}{\Gamma, a:A, \Delta \vdash a:A}</annotation></semantics></math></div>
@@ -1661,16 +1702,48 @@ margin-left: 0em;
 <li><a class="existingWikiWord" href="/nlab/show/Martin+Hofmann">Martin Hofmann</a>, <em>Syntax and semantics of dependent types</em>, in <em>Semantics and logics of computation</em>, Publ. Newton Inst. <strong>14</strong>, Cambridge Univ. Press (1997) 79-130 &lbrack;<a href="https://doi.org/10.1017/CBO9780511526619.004">doi:10.1017/CBO9780511526619.004</a>&rbrack;</li>
 </ul>
 
+<p>Textbook accounts on general <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a>:</p>
+
+<ul>
+<li id="Thompson91">
+<p><a class="existingWikiWord" href="/nlab/show/Simon+Thompson">Simon Thompson</a>, §6.3 in: <em><a class="existingWikiWord" href="/nlab/show/Type+Theory+and+Functional+Programming">Type Theory and Functional Programming</a></em>, Addison-Wesley (1991) &lbrack;ISBN:0-201-41667-0, <a href="http://www.cs.kent.ac.uk/people/staff/sjt/TTFP">webpage</a>, <a href="http://www.cs.kent.ac.uk/people/staff/sjt/TTFP/ttfp.pdf">pdf</a>&rbrack;</p>
+</li>
+
+<li id="Jacobs98">
+<p><a class="existingWikiWord" href="/nlab/show/Bart+Jacobs">Bart Jacobs</a>, Chapter 10 in: <em>Categorical Logic and Type Theory</em>, Studies in Logic and the Foundations of Mathematics <strong>141</strong>, Elsevier (1998) &lbrack;<a href="https://www.sciencedirect.com/bookseries/studies-in-logic-and-the-foundations-of-mathematics/vol/141">ISBN:978-0-444-50170-7</a>, <a href="https://people.mpi-sws.org/~dreyer/courses/catlogic/jacobs.pdf">pdf</a>&rbrack;</p>
+
+<blockquote>
+<p>(emphasis on the <a class="existingWikiWord" href="/nlab/show/categorical+model+of+dependent+types">categorical model of dependent types</a>)</p>
+</blockquote>
+</li>
+
+<li id="UFP13">
+<p><a class="existingWikiWord" href="/nlab/show/Univalent+Foundations+Project">Univalent Foundations Project</a>, §A of <em><a class="existingWikiWord" href="/nlab/show/Homotopy+Type+Theory+--+Univalent+Foundations+of+Mathematics">Homotopy Type Theory – Univalent Foundations of Mathematics</a></em> (2013) &lbrack;<a href="http://homotopytypetheory.org/book/">web</a>, <a href="http://hottheory.files.wordpress.com/2013/03/hott-online-323-g28e4374.pdf">pdf</a>&rbrack;</p>
+
+<blockquote>
+<p>(in the context of <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>)</p>
+</blockquote>
+</li>
+
+<li id="Rijke18">
+<p><a class="existingWikiWord" href="/nlab/show/Egbert+Rijke">Egbert Rijke</a>, <em>Dependent type theory</em> &lbrack;<a href="https://www.andrew.cmu.edu/user/erijke/hott/dtt.pdf">pdf</a>&rbrack;, Lecture 1 in: <em><a class="existingWikiWord" href="/nlab/show/Introduction+to+Homotopy+Type+Theory">Introduction to Homotopy Type Theory</a></em>, lecture notes, CMU (2018) &lbrack;<a href="http://www.andrew.cmu.edu/user/erijke/hott/hott_intro.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Rijke-IntroductionHoTT-2018.pdf" title="pdf">pdf</a>, <a href="https://www.andrew.cmu.edu/user/erijke/hott/">webpage</a>&rbrack;</p>
+
+<blockquote>
+<p>(in the context of <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>)</p>
+</blockquote>
+</li>
+</ul>
+
 <p>A philosophical examination:</p>
 
 <ul>
 <li><a class="existingWikiWord" href="/nlab/show/G%C3%B6ran+Sundholm%E2%80%8B">Göran Sundholm​</a>, <em>Proof Theory and Meaning</em> (1986), (<a href="https://openaccess.leidenuniv.nl/bitstream/handle/1887/11978/9_05?sequence=1">pdf</a>)</li>
 </ul>
 
-<p>An introduction and survey (with an eye towards <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>) is in chapter 1 of</p>
+<p>An introduction and survey (with an eye towards <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>):</p>
 
 <ul>
-<li id="Warren"><a class="existingWikiWord" href="/nlab/show/Michael+Warren">Michael Warren</a>, <em>Homotopy theoretic aspects of constructive type theory</em>, PhD thesis (2008) (<a href="http://www.andrew.cmu.edu/user/awodey/students/warren.pdf">pdf</a>)</li>
+<li id="Warren"><a class="existingWikiWord" href="/nlab/show/Michael+Warren">Michael Warren</a>, chapter 1 of: <em>Homotopy theoretic aspects of constructive type theory</em>, PhD thesis (2008) (<a href="http://www.andrew.cmu.edu/user/awodey/students/warren.pdf">pdf</a>)</li>
 </ul>
 
 <p>as well as</p>
@@ -1702,14 +1775,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on March 16, 2023 at 21:35:48.
+    Last revised on March 26, 2023 at 10:50:40.
     See the <a href="/nlab/history/Martin-L%C3%B6f+dependent+type+theory" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Martin-L%C3%B6f+dependent+type+theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/3125/#Item_37">Discuss</a><span class="backintime"><a href="/nlab/revision/Martin-L%C3%B6f+dependent+type+theory/46" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Martin-L%C3%B6f+dependent+type+theory" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Martin-L%C3%B6f+dependent+type+theory" accesskey="S" class="navlink" id="history" rel="nofollow">History (46 revisions)</a>
+  <a href="/nlab/edit/Martin-L%C3%B6f+dependent+type+theory" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/3125/#Item_41">Discuss</a><span class="backintime"><a href="/nlab/revision/Martin-L%C3%B6f+dependent+type+theory/47" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Martin-L%C3%B6f+dependent+type+theory" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Martin-L%C3%B6f+dependent+type+theory" accesskey="S" class="navlink" id="history" rel="nofollow">History (47 revisions)</a>
   <a href="/nlab/show/Martin-L%C3%B6f+dependent+type+theory/cite" style="color: black">Cite</a>
   <a href="/nlab/print/Martin-L%C3%B6f+dependent+type+theory" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/Martin-L%C3%B6f+dependent+type+theory" id="view_source" rel="nofollow">Source</a>
