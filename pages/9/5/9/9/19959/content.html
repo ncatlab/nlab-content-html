@@ -513,7 +513,7 @@ y \langle x\coloneqq N\rangle &amp;\to y \quad (x\neq y)\\
 (\lambda y.M)\langle x\coloneqq N\rangle &amp;\to \lambda y. (M\langle x\coloneqq N\rangle) \quad (x\neq y \;\text{and}\; y \;\text{not free in}\; N)
 \end{aligned}
 </annotation></semantics></math></div>
-<p>(We are being somewhat cavalier about <a class="existingWikiWord" href="/nlab/show/variables">variables</a>; one can also implement explicit substitutions using <a class="existingWikiWord" href="/nlab/show/de+Bruijn+indices">de Bruijn indices</a>.)</p>
+<p>(We are being somewhat cavalier about <a class="existingWikiWord" href="/nlab/show/variables">variables</a>; one can also define and implement explicit substitutions using <a class="existingWikiWord" href="/nlab/show/de+Bruijn+indices">de Bruijn indices</a>.)</p>
 
 <h2 id="combining_substitutions_and_strong_normalization">Combining substitutions and strong normalization</h2>
 
@@ -527,13 +527,13 @@ y \langle x\coloneqq N\rangle &amp;\to y \quad (x\neq y)\\
 
 <h2 id="categorical_models_of_explicit_substitutions">Categorical Models of Explicit Substitutions</h2>
 
-<p>The original calculus of explicit substitutions, considered as a type theory, can be given sound and complete categorical models, in terms of indexed categories.</p>
+<p>The original calculus of explicit substitutions of Abadi et al, considered as a type theory, can be given sound and complete categorical models, in terms of indexed categories.</p>
 
-<p>This explicit substitutions construction is parametric in the kind of logic that your terms stand for: the Calculus of Constructions (<a href="#Ritter">Ritter</a>), intuitionistic propositional logic, Intuitionistic Linear Logic (<a href="#Ghani2000">Ghani2000</a>) and propositional Constructive Necessity (<a href="#Ghani1998">Ghani1998</a>) can be given formalizations in terms of explicit substitutions calculi. These constructions help to show the correctness of the implementation of the associated type theories.</p>
+<p>This explicit substitutions construction is parametric in the kind of logic that the terms stand for. The Calculus of Constructions (<a href="#Ritter">Ritter</a>), Intuitionistic Propositional Logic and Intuitionistic Linear Logic (<a href="#Ghani2000">Ghani2000</a>) and propositional Constructive Necessity (<a href="#Ghani1998">Ghani1998</a>) can be given formalizations and implementations in terms of explicit substitutions calculi. These constructions help to show the correctness of the implementation of the associated type theories.</p>
 
 <h2 id="the_linear_substitution_calculus">The linear substitution calculus</h2>
 
-<p>More recently, in 2010 the <em>linear substitution calculus</em> was introduced by Delia Kesner and Beniamino Accattoli, which according to Damiano Mazza is based on two fundamental ideas:</p>
+<p>In 2010 a new version of a <em>linear substitution calculus</em> was introduced by Delia Kesner and Beniamino Accattoli, which according to Damiano Mazza is based on two fundamental ideas:</p>
 
 <blockquote>
 <p><em>Explicit substitutions in the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>-calculus come from <a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a></em>: if you write down a term calculus for the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><mo>⊸</mo><mo>,</mo><mo>!</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{\multimap,!\}</annotation></semantics></math> fragment of ILL, however you do it, you’re going to see let binders pop up, and these behave very much like explicit substitutions, in the sense that normalization needs commuting conversions. Now, if you take Girard’s (call-by-name) embedding of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>-calculus in ILL, you see that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math>-reduction decomposes exactly along the lines of what an ES calculus would do, with the explicit substitutions corresponding to the let binders for exponentials. While I think that this had been noticed immediately after the introduction of linear logic, Delia and Beniamino took it a step further and designed an ES calculus (the structural <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>-calculus, a precursor to the LSC) by mimicking the behavior of ILL terms which are in the image of Girard’s embedding. The upshot is that, since Girard’s embedding preserves SN, so does the structural <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>-calculus: linear logic is the “right” way of implementing explicit substitutions.</p>
@@ -541,11 +541,17 @@ y \langle x\coloneqq N\rangle &amp;\to y \quad (x\neq y)\\
 <p><em>Explicit substitutions should behave like boxes in proof nets</em>: the let binders mentioned above correspond to what are known as “exponential boxes” in proof nets. Cut-elimination in proof nets has the amazing property (from the rewriting viewpoint) that it does not need commuting conversions. In terms of explicit substitutions, this means that ESs should not need to “move” through a term in order to be applied, one should be able to apply them just where they are created. Rewriting should happen “remotely” or, as they say, “at a distance”. Beniamino and Delia noticed that there’s a consistent way of generalizing redexes in a term calculus with ESs (no need for proof nets!) so that they are transparent to the presence of ESs. Combine this with the above idea (that ESs should behave like in linear logic, i.e., be “linear”, substituting one occurrence at a time) and you obtain the LSC.</p>
 </blockquote>
 
-<p>The LSC has found applications in:</p>
+<p>The LSC, just as the previous versions of explicit substitutions calculi, has found applications in</p>
 
 <blockquote>
 <p><strong>abstract machines</strong>: Beniamino Accattoli, Pablo Barenbaum, and Damiano Mazza showed how the LSC may be related in a very sharp way to a host of abstract machines, for any reduction strategy you can think of (call by name, call by value, call by need). Each strategy in the LSC “distills” an abstract machine, in the sense that the rewriting rules of the LSC are in bijection with the actual computational transitions of the machines, while the “administrative” transitions (needed by the machine to navigate through the term in search for the next redex) sort of “evaporate” and become structural equivalences in the LSC (they relate syntactically different terms which are behaviorally equal). In particular, the LSC gives a slick formulation of (weak) call-by-need.</p>
+</blockquote>
 
+<p>In fact the formalization of abstract machines is given as the original motivation of Abadi et al.</p>
+
+<p>The LSC also has applications in:</p>
+
+<blockquote>
 <p><strong>complexity</strong>: for decades, people had been wondering whether <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math>-reduction is a reasonable cost model for <a class="existingWikiWord" href="/nlab/show/computational+complexity">computational complexity</a>. Most were convinced that the answer was “no”, because <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math>-reduction may make an arbitrary number of duplications in just one step. Suprisingly, Beniamino Accattoli and Ugo Dal Lago showed that the answer is in fact “yes”, and their proof uses the LSC in a crucial way, in particular its capability of succinctly expressing computation thanks to sharing.</p>
 </blockquote>
 
@@ -604,14 +610,14 @@ y \langle x\coloneqq N\rangle &amp;\to y \quad (x\neq y)\\
 
 <div class="revisedby">
     <p>
-    Last revised on April  7, 2023 at 03:18:33.
+    Last revised on April  7, 2023 at 20:02:45.
     See the <a href="/nlab/history/explicit+substitution" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/explicit+substitution" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/9310/#Item_6">Discuss</a><span class="backintime"><a href="/nlab/revision/explicit+substitution/7" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/explicit+substitution" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/explicit+substitution" accesskey="S" class="navlink" id="history" rel="nofollow">History (7 revisions)</a>
+  <a href="/nlab/edit/explicit+substitution" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/9310/#Item_6">Discuss</a><span class="backintime"><a href="/nlab/revision/explicit+substitution/8" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/explicit+substitution" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/explicit+substitution" accesskey="S" class="navlink" id="history" rel="nofollow">History (8 revisions)</a>
   <a href="/nlab/show/explicit+substitution/cite" style="color: black">Cite</a>
   <a href="/nlab/print/explicit+substitution" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/explicit+substitution" id="view_source" rel="nofollow">Source</a>
