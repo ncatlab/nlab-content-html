@@ -250,8 +250,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/443/#Item_8" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/443/#Item_13" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -893,9 +893,10 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#definition'>Definition</a></li>
-<li><a href='#Definition'>Localization at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences</a></li>
-<ul>
+<li><a href='#left_and_right_localization_at_a_class_of_morphisms'>Left and right localization at a class of morphisms</a></li>
+<li><a href='#local_objects_and_local_equivalences'>Local objects and local equivalences</a></li>
+<li><a href='#Definition'>Left and right Bousfield localizations</a></li>
+<li><a href='#third_definition'>Third definition</a></li>
 <li><a href='#Properties'>Properties</a></li>
 <ul>
 <li><a href='#fibrants_in__are_the_local_fibrants_in_'>Fibrants in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">L_S C</annotation></semantics></math> are the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local fibrants in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></a></li>
@@ -904,7 +905,6 @@ margin-left: 0em;
 <li><a href='#LocHasToBeSLoc'>Every Bousfield localization is of this form</a></li>
 <li><a href='#FunctorialityOfLocalization'>Functoriality of localization</a></li>
 <li><a href='#further_properties'>Further properties</a></li>
-</ul>
 </ul>
 <li><a href='#Existence'>Existence of localizations for combinatorial model categories</a></li>
 <ul>
@@ -947,26 +947,141 @@ margin-left: 0em;
 
 <h2 id="idea">Idea</h2>
 
-<p>Bousfield localization is a procedure that to a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> structure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> assigns a new one with more weak equivalences. It is a special case of a <a class="existingWikiWord" href="/nlab/show/localization+of+model+categories">localization of model categories</a>, corresponding to the homotopy-version of the notion of <a class="existingWikiWord" href="/nlab/show/localization">localization</a> of categories by <a class="existingWikiWord" href="/nlab/show/reflective+subcategories">reflective subcategories</a>: <a class="existingWikiWord" href="/nlab/show/reflective+localization">reflective localization</a>. In fact, left Bousfield localization is a <a class="existingWikiWord" href="/nlab/show/Quillen+reflection">Quillen reflection</a>.</p>
+<p>Left Bousfield localization is a model-categorical analogue of <a class="existingWikiWord" href="/nlab/show/reflective+localization">reflective localization</a>.</p>
 
-<p>The historically original example is the <a class="existingWikiWord" href="/nlab/show/Bousfield+localization+of+spectra">Bousfield localization of spectra</a>. But the notion is much more general.</p>
+<p>Recall that the reflective localization of a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> at a set of morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> can be presented as the <a class="existingWikiWord" href="/nlab/show/category+of+fractions">category of fractions</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> with respect to the class of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local equivalences.</p>
 
-<h2 id="definition">Definition</h2>
+<p>In complete analogy to this, the left Bousfield localization of a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a>, and, more generally, a <a class="existingWikiWord" href="/nlab/show/relative+category">relative category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> at a set of morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> can be presented as the same underlying category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> equipped with the larger class of weak equivalences: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences.</p>
+
+<p>Here the process of enlarging the class of weak equivalences can be seen as the homotopy coherent analogue of the <a class="existingWikiWord" href="/nlab/show/category+of+fractions">category of fractions</a>.</p>
+
+<p>A left Bousfield localization is in particular a <a class="existingWikiWord" href="/nlab/show/Quillen+reflection">Quillen reflection</a>.</p>
+
+<p>The historically original example is the <a class="existingWikiWord" href="/nlab/show/Bousfield+localization+of+spectra">Bousfield localization of spectra</a>. But the notion is much more general, as explained above.</p>
+
+<h2 id="left_and_right_localization_at_a_class_of_morphisms">Left and right localization at a class of morphisms</h2>
+
+<p>
+<div class='num_defn'>
+<h6>Definition</h6>
+<p>(Hirschhorn, Definition 3.3.1.) The <strong>left localization</strong> of a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> with respect to a class of morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is the initial object (if it exists) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>→</mo><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">C\to L_S C</annotation></semantics></math> in the following category. Objects are <a class="existingWikiWord" href="/nlab/show/left+Quillen+functors">left Quillen functors</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>→</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">C\to D</annotation></semantics></math> whose <a class="existingWikiWord" href="/nlab/show/left+derived+functor">left derived functor</a> sends elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> to weak equivalences in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>. Morphisms are commutative triangles of left Quillen functors.</p>
+</div>
+</p>
+
+<p>The definition immediately implies that left localizations, if they exist, are unique up to a unique isomorphism.</p>
+
+<p>The adjective “left” refers to the fact that the localization functor is implemented as the <a class="existingWikiWord" href="/nlab/show/left+derived+functor">left derived functor</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>→</mo><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">C\to L_S C</annotation></semantics></math>, in complete analogy to how the localization functor for a <a class="existingWikiWord" href="/nlab/show/reflective+localization">reflective localization</a> is a left adjoint functor.</p>
+
+<p>Right localizations are defined analogously and generalize <a class="existingWikiWord" href="/nlab/show/coreflective+localizations">coreflective localizations</a>.</p>
+
+<h2 id="local_objects_and_local_equivalences">Local objects and local equivalences</h2>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> with a class of morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>.</p>
+
+<p>We want to characterize objects in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> that “see elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> as weak equivalences”.</p>
+
+<p>
+<div class='num_lemma'>
+<h6>Lemma</h6>
+<p>In an ordinary category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, by the <a class="existingWikiWord" href="/nlab/show/Yoneda+lemma">Yoneda lemma</a> a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \to B</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> precisely if for all objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> the morphism</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  Hom_C(f,X) : Hom_C(B,X) \to Hom_C(A,X)
+
+</annotation></semantics></math></div>
+<p>is an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> (of sets, i.e., a <a class="existingWikiWord" href="/nlab/show/bijection">bijection</a>).</p>
+</div>
+</p>
+
+<p>So we can “test isomorphism by homming them into objects”.</p>
+
+<p>More generally, recall the following facts about <a class="existingWikiWord" href="/nlab/show/reflective+localizations">reflective localizations</a>. If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is a category and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is a class of morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, then an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local object is an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">X\in C</annotation></semantics></math> such that for every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f\colon A\to B</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, the map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(B,X)\to C(A,X)</annotation></semantics></math> is an isomorphism. An <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local equivalence is a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>g</mi><mo lspace="verythinmathspace">:</mo><mi>E</mi><mo>→</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">g\colon E\to F</annotation></semantics></math> such that for every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">X\in C</annotation></semantics></math>, the map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>F</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(F,X)\to C(E,X)</annotation></semantics></math> is an isomorphism. The reflective localization of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> (if it exists) is defined as an initial object in the category whose objects are left adjoint functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>→</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">C\to D</annotation></semantics></math> that send elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> to isomorphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math>, and morphisms are commutative triangles of left adjoint functors. The functor from the full subcategory of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local objects in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> into the <a class="existingWikiWord" href="/nlab/show/category+of+fractions">category of fractions</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> with respect to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local equivalences is an equivalence of categories. Thus, both domain and codomain of the above functor are models for the <a class="existingWikiWord" href="/nlab/show/reflective+localization">reflective localization</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>.</p>
+
+<p>The following definitions offer a completely analogous picture for <a class="existingWikiWord" href="/nlab/show/model+categories">model categories</a>.</p>
+
+<div class="num_defn">
+<h6 id="definition">Definition</h6>
+
+<p><strong>(<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local objects and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences)</strong></p>
+
+<p>(Hirschhorn , Definition 3.1.4.)</p>
+
+<p>Say that</p>
+
+<ul>
+<li>
+<p>an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/local+object">local object</a> if for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi><mo>:</mo><mi>A</mi><mo>↪</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">s : A \hookrightarrow B</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> the morphism</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>RMap</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>RMap</mi><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>RMap</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">RMap(s,X) : RMap(B,X) \to RMap(A,X)</annotation></semantics></math></div>
+<p>is a weak equivalence of <a class="existingWikiWord" href="/nlab/show/simplicial+sets">simplicial sets</a>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>RMap</mi></mrow><annotation encoding="application/x-tex">RMap</annotation></semantics></math> denotes the <a class="existingWikiWord" href="/nlab/show/homotopy+function+complex">homotopy function complex</a>, implemented, for example, as the <a class="existingWikiWord" href="/nlab/show/hammock+localization">hammock localization</a>;</p>
+</li>
+
+<li>
+<p>conversely, say that a map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>↪</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \hookrightarrow B</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalence if for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> the morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>RMap</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>RMap</mi><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>RMap</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">RMap(f,X) : RMap(B,X) \to
+RMap(A,X)</annotation></semantics></math> is a weak equivalence of simplicial sets.</p>
+</li>
+</ul>
+</div>
+
+<p>We write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>W</mi> <mi>S</mi></msub></mrow><annotation encoding="application/x-tex">W_S</annotation></semantics></math> for the collection of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences.</p>
+
+<div class="num_remark">
+<h6 id="remark">Remark</h6>
+
+<p>For every weak equivalence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mover><mo>→</mo><mo>≃</mo></mover><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \stackrel{\simeq}{\to} B</annotation></semantics></math> between cofibrant objects and every fibrant object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> in a <a class="existingWikiWord" href="/nlab/show/simplicial+model+category">simplicial model category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> the map</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(f,X) : C(B,X) \to C(A,X)</annotation></semantics></math></div>
+<p>is a weak equivalence of simplicial sets. This is described in detail at <a href="http://ncatlab.org/nlab/show/%28infinity%2C1%29-categorical+hom-space#EnrichedHomsCofToFib">enriched homs from cofibrants to fibrants</a>.</p>
+</div>
+
+<p>
+<div class='num_lemma'>
+<h6>Lemma</h6>
+<p>(Hirschhorn, Proposition 3.1.5.)( Every ordinary weak equivalence is also <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalence.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>W</mi><mo>⊂</mo><msub><mi>W</mi> <mi>S</mi></msub><mo>.</mo></mrow><annotation encoding="application/x-tex">W \subset W_S.</annotation></semantics></math></div>
+<p></p>
+</div>
+</p>
+
+<h2 id="Definition">Left and right Bousfield localizations</h2>
+
+<div class="num_defn">
+<h6 id="definition_2">Definition</h6>
+
+<p><strong>(left Bousfield localization)</strong></p>
+
+<p>The left Bousfield localization <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">L_S C</annotation></semantics></math> of a <a class="existingWikiWord" href="/nlab/show/model+category">model category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> <strong>at a class of morphisms <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></strong> is, if it exists, the new model category structure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> with</p>
+
+<ul>
+<li>
+<p>cofibrations are the same as before, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>cof</mi> <mrow><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow></msub><mo>=</mo><msub><mi>cof</mi> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">cof_{L_S C } = cof_C</annotation></semantics></math>;</p>
+</li>
+
+<li>
+<p>weak equivalences are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local equivalences.</p>
+</li>
+</ul>
+</div>
+
+<p>Again, the adjective “left” refers to the fact that the localization is implemented by the <a class="existingWikiWord" href="/nlab/show/left+derived+functor">left derived functor</a>, generalizing <a class="existingWikiWord" href="/nlab/show/reflective+localizations">reflective localizations</a>.</p>
+
+<p>Right Bousfield localizations are defined analogously and generalize <a class="existingWikiWord" href="/nlab/show/coreflective+localizations">coreflective localizations</a>.</p>
+
+<p>
+<div class='num_prop'>
+<h6>Proposition</h6>
+<p>(Hirschhorn, Theorem 3.3.19.) Any left Bousfield localization of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is also a left localization of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>. Likewise for right localizations.</p>
+</div>
+</p>
+
+<p>In practice, left localizations are always constructed as left Bousfield localizations. Therefore, both notions are used interchangeably.</p>
+
+<h2 id="third_definition">Third definition</h2>
 
 <p>
 <div class='num_defn' id='DefinitionOfLeftBousfieldLocalizations'>
 <h6>Definition</h6>
 <p>A <em>left Bousfield localization</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>C</mi> <mi>loc</mi></msub></mrow><annotation encoding="application/x-tex">C_{loc}</annotation></semantics></math> of a model category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is another model category structure on the same underlying category with the same cofibrations,</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>cof</mi> <mrow><msub><mi>C</mi> <mi>loc</mi></msub></mrow></msub><mo>=</mo><msub><mi>cof</mi> <mi>c</mi></msub></mrow><annotation encoding="application/x-tex">
-  cof_{C_{loc}} = cof_c
-
-</annotation></semantics></math></div>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>cof</mi> <mrow><msub><mi>C</mi> <mi>loc</mi></msub></mrow></msub><mo>=</mo><msub><mi>cof</mi> <mi>c</mi></msub></mrow><annotation encoding="application/x-tex">cof_{C_{loc}} = cof_c</annotation></semantics></math></div>
 <p>but more weak equivalences</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>W</mi> <mrow><msub><mi>C</mi> <mi>loc</mi></msub></mrow></msub><mo>⊃</mo><msub><mi>W</mi> <mi>C</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
-  W_{C_{loc}} \supset W_C
-  \,.
-
-</annotation></semantics></math></div>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>W</mi> <mrow><msub><mi>C</mi> <mi>loc</mi></msub></mrow></msub><mo>⊃</mo><msub><mi>W</mi> <mi>C</mi></msub><mo>.</mo></mrow><annotation encoding="application/x-tex">W_{C_{loc}} \supset W_C.</annotation></semantics></math></div>
 <p></p>
 </div>
 </p>
@@ -974,7 +1089,7 @@ margin-left: 0em;
 <p>While that’s a very simple definition, it turns out that something interesting happens to the fibrations when we keep the cofibrations fixed and increase the weak equivalences.</p>
 
 <div class="num_remark" id="ImmediateImpiciationsOfLeftBousfieldLocalization">
-<h6 id="remark">Remark</h6>
+<h6 id="remark_2">Remark</h6>
 
 <p>It follows directly that</p>
 
@@ -1032,7 +1147,7 @@ margin-left: 0em;
 <p>Bousfield localization is a model category version of <em>reflection onto <a class="existingWikiWord" href="/nlab/show/local+objects">local objects</a></em>, in the sense discussed at <em><a class="existingWikiWord" href="/nlab/show/reflective+localization">reflective localization</a></em>.</p>
 </div>
 
-<p>Indeed – at least when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/combinatorial+simplicial+model+category">combinatorial simplicial model category</a> – Bousfield localization is an example of a <a class="existingWikiWord" href="/nlab/show/localization+of+a+simplicial+model+category">localization of a simplicial model category</a> and under <a class="existingWikiWord" href="/nlab/show/presentable+%28infinity%2C1%29-category">passage to the sub-category of fibrant-cofibrant objects</a> this Quillen adjunction becomes the inclusion of a <a class="existingWikiWord" href="/nlab/show/reflective+%28%E2%88%9E%2C1%29-subcategory">reflective (∞,1)-subcategory</a></p>
+<p>Indeed, the Quillen adjunction given by a left Bousfield localization under <a class="existingWikiWord" href="/nlab/show/presentable+%28infinity%2C1%29-category">passage to the sub-category of fibrant-cofibrant objects</a> becomes the inclusion of a <a class="existingWikiWord" href="/nlab/show/reflective+%28%E2%88%9E%2C1%29-subcategory">reflective (∞,1)-subcategory</a></p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mrow><msub><mi>C</mi> <mi>loc</mi></msub></mrow> <mo>∘</mo></msup><mover><mo>↪</mo><mover><mo>←</mo><mi>lex</mi></mover></mover><msup><mi>C</mi> <mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">
   {C_{loc}}^\circ \stackrel{\stackrel{lex}{\leftarrow}}{\hookrightarrow}
   C^\circ
@@ -1042,151 +1157,9 @@ margin-left: 0em;
 
 <p>Such a localization is determined by the collection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> of <em><a class="existingWikiWord" href="/nlab/show/local+object">local weak equivalences</a></em> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, and alternatively by the collection of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/local+object">local object</a>s in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>. Indeed, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mrow><msub><mi>C</mi> <mi>loc</mi></msub></mrow> <mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">{C_{loc}}^\circ</annotation></semantics></math> is the full <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>∞</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\infty,1)</annotation></semantics></math>-subcategory on the cofibrant and fibrant and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
 
-<h2 id="Definition">Localization at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences</h2>
+<h2 id="Properties">Properties</h2>
 
-<p>More in detail, the weak equivalences that are added under Bousfield localization are ‘’<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences“ for some set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>⊂</mo><mi>Mor</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S \subset Mor(C)</annotation></semantics></math>. We will see <a href="#LocHasToBeSLoc">below</a> why this is necessarily the case if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/cofibrantly+generated+model+category">cofibrantly generated model category</a>. For the moment, we take the following to be a refined definition of left Bousfield localization.</p>
-
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> be a</p>
-
-<ul>
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/left+proper+model+category">left proper</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/cofibrantly+generated+model+category">cofibrantly generated</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/simplicial+model+category">simplicial model category</a>.</p>
-</li>
-
-<li>
-<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>⊂</mo><msub><mi>cof</mi> <mi>C</mi></msub><mo>⊂</mo><mi>Mor</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S \subset cof_C \subset Mor(C)</annotation></semantics></math> be a subclass of cofibrations with cofibrant domain.</p>
-</li>
-</ul>
-
-<p>We want to characterize objects in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> that “see elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> as weak equivalences”. Notice that</p>
-
-<p>
-<div class='num_lemma'>
-<h6>Lemma</h6>
-<p></p>
-
-<p>In an ordinary category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, by the <a class="existingWikiWord" href="/nlab/show/Yoneda+lemma">Yoneda lemma</a> a morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \to B</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> precisely if for all objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> the morphism</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><msub><mi>Hom</mi> <mi>C</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
-  Hom_C(f,X) : Hom_C(B,X) \to Hom_C(A,X)
-
-</annotation></semantics></math></div>
-<p>is an <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> (of sets, i.e. a <a class="existingWikiWord" href="/nlab/show/bijection">bijection</a>).</p>
-</div>
-</p>
-
-<p>So we can “test isomorphism by homming them into objects”. This phenomenon we use now the other way round, to characterize new weak equivalences:</p>
-
-<div class="num_defn">
-<h6 id="definition_2">Definition</h6>
-
-<p><strong>(<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local objects and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences)</strong></p>
-
-<p>Say that</p>
-
-<ul>
-<li>
-<p>a fibrant object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/local+object">local object</a> if for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi><mo>:</mo><mi>A</mi><mo>↪</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">s : A \hookrightarrow B</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> the morphism</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
-  C(s,X) : C(B,X) \to C(A,X)
-
-</annotation></semantics></math></div>
-<p>is a trivial <a class="existingWikiWord" href="/nlab/show/Kan+fibration">Kan fibration</a>;</p>
-</li>
-
-<li>
-<p>conversely, say that a cofibration <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>↪</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \hookrightarrow B</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalence if for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local fibrant objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> the morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(f,X) : C(B,X) \to
-C(A,X)</annotation></semantics></math> is a trivial <a class="existingWikiWord" href="/nlab/show/Kan+fibration">Kan fibration</a>.</p>
-</li>
-</ul>
-</div>
-
-<p>This is a slightly simplified version of a more general definition using <a class="existingWikiWord" href="/nlab/show/derived+hom+space">derived hom space</a>s, where we do not have to assume that the domains and codomains of elements are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> and not that the local objects are fibrant.</p>
-
-<div class="num_def">
-<h6 id="definition_3">Definition</h6>
-
-<p><strong>(<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local objects and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences)</strong></p>
-
-<p>Assume that we have fibrant and cofibrant replacement functors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo>,</mo><mi>Q</mi><mo>:</mo><mi>C</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">P,Q : C \to C</annotation></semantics></math>. Then say</p>
-
-<ul>
-<li>
-<p>an object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/local+object">local object</a> if for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi><mo>:</mo><mi>A</mi><mo>↪</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">s : A \hookrightarrow B</annotation></semantics></math> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> the morphism</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>Q</mi><mi>s</mi><mo>,</mo><mi>P</mi><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>Q</mi><mi>B</mi><mo>,</mo><mi>P</mi><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mo stretchy="false">(</mo><mi>Q</mi><mi>A</mi><mo>,</mo><mi>P</mi><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
-  C(Q s,P X) : C(Q B,P X) \to C(Q A,P X)
-
-</annotation></semantics></math></div>
-<p>is a <a class="existingWikiWord" href="/nlab/show/model+structure+on+simplicial+sets">weak equivalence of simplicial sets</a>;</p>
-</li>
-
-<li>
-<p>conversely, say that a cofibration <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>↪</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \hookrightarrow B</annotation></semantics></math> is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalence if for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> the morphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>Q</mi><mi>f</mi><mo>,</mo><mi>P</mi><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>Q</mi><mi>B</mi><mo>,</mo><mi>P</mi><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mo stretchy="false">(</mo><mi>Q</mi><mi>A</mi><mo>,</mo><mi>P</mi><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(Q f,P X) : C(Q B,P X) \to
-C(Q A,P X)</annotation></semantics></math> is a weak equivalence.</p>
-</li>
-</ul>
-
-<p>That this second condition is indeed compatible with the first one is shown <a href="http://ncatlab.org/nlab/show/local+object#PropInModCat">here</a>.</p>
-</div>
-
-<p>We write <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>W</mi> <mi>S</mi></msub></mrow><annotation encoding="application/x-tex">W_S</annotation></semantics></math> for the collection of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences.</p>
-
-<div class="num_remark">
-<h6 id="remark_2">Remark</h6>
-
-<p>For every weak equivalence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mover><mo>→</mo><mo>≃</mo></mover><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \stackrel{\simeq}{\to} B</annotation></semantics></math> between cofibrant objects and every fibrant object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> it follows generally from the fact that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/SSet">SSet</a>-<a class="existingWikiWord" href="/nlab/show/enriched+category">enriched category</a> that</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>B</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>→</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
-  C(f,X) : C(B,X) \to C(A,X)
-
-</annotation></semantics></math></div>
-<p>is a weak equivalence of simplicial sets. This is described in detail at <a href="http://ncatlab.org/nlab/show/%28infinity%2C1%29-categorical+hom-space#EnrichedHomsCofToFib">enriched homs from cofibrants to fibrants</a>.</p>
-</div>
-
-<p>Here this implies in particular</p>
-
-<p>
-<div class='num_lemma'>
-<h6>Lemma</h6>
-<p>Every ordinary weak equivalence is also <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalence.</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>W</mi><mo>⊂</mo><msub><mi>W</mi> <mi>S</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
-  W \subset W_S
-  \,.
-
-</annotation></semantics></math></div>
-<p></p>
-</div>
-</p>
-
-<p>Therefore, for any set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>, we can consider the left Bousfield localization at the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>W</mi> <mi>S</mi></msub></mrow><annotation encoding="application/x-tex">W_S</annotation></semantics></math>:</p>
-
-<div class="num_defn">
-<h6 id="definition_4">Definition</h6>
-
-<p><strong>(left Bousfield localization)</strong></p>
-
-<p>The left Bousfield localization <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">L_S C</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> <strong>at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></strong> is, if it exists, the new model category structure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> with</p>
-
-<ul>
-<li>
-<p>cofibrations are the same as before, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>cof</mi> <mrow><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow></msub><mo>=</mo><msub><mi>cof</mi> <mi>C</mi></msub></mrow><annotation encoding="application/x-tex">cof_{L_S C } = cof_C</annotation></semantics></math>;</p>
-</li>
-
-<li>
-<p>acyclic cofibrations are the cofibrations that are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local weak equivalences.</p>
-</li>
-</ul>
-</div>
-
-<h3 id="Properties">Properties</h3>
-
-<p>Assume that the left Bousfield localization <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">L_S C</annotation></semantics></math> of a given model category at a class <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> of cofibrations with cofibrant domain exists. Then it has the following properties.</p>
+<p>Assume that the left Bousfield localization <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">L_S C</annotation></semantics></math> of a given model category at a class <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> of morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> exists. Then it has the following properties.</p>
 
 <h4 id="fibrants_in__are_the_local_fibrants_in_">Fibrants in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>L</mi> <mi>S</mi></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">L_S C</annotation></semantics></math> are the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-local fibrants in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></h4>
 
@@ -2290,10 +2263,18 @@ C(Q A,P X)</annotation></semantics></math> is a weak equivalence.</p>
 </li>
 </ul>
 
-<p>Detailed discussion (for <a class="existingWikiWord" href="/nlab/show/left+proper+model+category">left proper</a> <a class="existingWikiWord" href="/nlab/show/cellular+model+category">cellular model categories</a>):</p>
+<p>Detailed discussion (including existence results for <a class="existingWikiWord" href="/nlab/show/left+proper+model+category">left proper</a> <a class="existingWikiWord" href="/nlab/show/cellular+model+category">cellular model categories</a>):</p>
 
 <ul>
-<li id="Hirschhorn02"><a class="existingWikiWord" href="/nlab/show/Philip+Hirschhorn">Philip Hirschhorn</a>, Section 3.3 and Chapter 4 of: <em><a class="existingWikiWord" href="/nlab/show/Model+Categories+and+Their+Localizations">Model Categories and Their Localizations</a></em>, AMS Math. Survey and Monographs <strong>99* (2002) &lbrack;<a href="https://bookstore.ams.org/surv-99-s/">ISBN:978-0-8218-4917-0</a>, <a href="http://www.gbv.de/dms/goettingen/360115845.pdf">pdf toc</a>, <a href="http://www.maths.ed.ac.uk/~aar/papers/hirschhornloc.pdf">pdf</a>&rbrack;</strong></li>
+<li id="Hirschhorn02"><a class="existingWikiWord" href="/nlab/show/Philip+Hirschhorn">Philip Hirschhorn</a>, Section 3.3 and Chapter 4 of: <em><a class="existingWikiWord" href="/nlab/show/Model+Categories+and+Their+Localizations">Model Categories and Their Localizations</a></em>, AMS Math. Survey and Monographs 99 (2002) &lbrack;<a href="https://bookstore.ams.org/surv-99-s/">ISBN:978-0-8218-4917-0</a>, <a href="http://www.gbv.de/dms/goettingen/360115845.pdf">pdf toc</a>, <a href="http://www.maths.ed.ac.uk/~aar/papers/hirschhornloc.pdf">pdf</a>&rbrack;</li>
+</ul>
+
+<p>Existence results for <a class="existingWikiWord" href="/nlab/show/combinatorial+model+categories">combinatorial model categories</a>:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Clark+Barwick">Clark Barwick</a>, <em>On left and right model categories and left and right Bousfield localizations</em>, Homology, Homotopy and Applications 12:2 (2010), 245–320.
+<p><a href="https://arxiv.org/abs/0708.2067">arXiv:0708.2067v2</a>, <a href="https://doi.org/10.4310/hha.2010.v12.n2.a9">doi:10.4310/hha.2010.v12.n2.a9</a>.</p>
+</li>
 </ul>
 
 <p>In</p>
@@ -2337,14 +2318,14 @@ C(Q A,P X)</annotation></semantics></math> is a weak equivalence.</p>
 
 <div class="revisedby">
     <p>
-    Last revised on April 21, 2023 at 11:50:33.
+    Last revised on April 21, 2023 at 19:34:34.
     See the <a href="/nlab/history/Bousfield+localization+of+model+categories" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Bousfield+localization+of+model+categories" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/443/#Item_8">Discuss</a><span class="backintime"><a href="/nlab/revision/Bousfield+localization+of+model+categories/63" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Bousfield+localization+of+model+categories" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Bousfield+localization+of+model+categories" accesskey="S" class="navlink" id="history" rel="nofollow">History (63 revisions)</a>
+  <a href="/nlab/edit/Bousfield+localization+of+model+categories" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/443/#Item_13">Discuss</a><span class="backintime"><a href="/nlab/revision/Bousfield+localization+of+model+categories/64" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Bousfield+localization+of+model+categories" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Bousfield+localization+of+model+categories" accesskey="S" class="navlink" id="history" rel="nofollow">History (64 revisions)</a>
   <a href="/nlab/show/Bousfield+localization+of+model+categories/cite" style="color: black">Cite</a>
   <a href="/nlab/print/Bousfield+localization+of+model+categories" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/Bousfield+localization+of+model+categories" id="view_source" rel="nofollow">Source</a>
