@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussions/?CategoryID=0" title="Discuss this page on the nForum. It does not yet have a dedicated thread; feel free to create one, giving it the same name as the title of this page" style="color:black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/16430/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -493,6 +493,7 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#definition'>Definition</a></li>
+<li><a href='#finitary_monads_and_lawvere_theories'>Finitary monads and Lawvere theories</a></li>
 <li><a href='#properties'>Properties</a></li>
 <li><a href='#applications'>Applications</a></li>
 <li><a href='#related_concepts'>Related concepts</a></li>
@@ -503,17 +504,23 @@ margin-left: 0em;
 
 <h2 id="definition">Definition</h2>
 
-<p>A <a class="existingWikiWord" href="/nlab/show/monad">monad</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>μ</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T,\mu,i)</annotation></semantics></math> on the category <a class="existingWikiWord" href="/nlab/show/Set">Set</a> of sets, is <strong>finitary</strong> (also called <strong>algebraic</strong>, although some people consider any monad to be an algebraic notion) if the underlying <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>:</mo><mi mathvariant="normal">Set</mi><mo>→</mo><mi mathvariant="normal">Set</mi></mrow><annotation encoding="application/x-tex">T:\mathrm{Set}\to\mathrm{Set}</annotation></semantics></math> commutes with <a class="existingWikiWord" href="/nlab/show/filtered+colimits">filtered colimits</a>.</p>
+<p>A <a class="existingWikiWord" href="/nlab/show/monad">monad</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>μ</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T,\mu,i)</annotation></semantics></math>, is <strong>finitary</strong> if the underlying <a class="existingWikiWord" href="/nlab/show/endofunctor">endofunctor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>:</mo><mi>C</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">T: C \to C</annotation></semantics></math> preserves <a class="existingWikiWord" href="/nlab/show/filtered+colimits">filtered colimits</a>.</p>
 
-<p>In other words, an algebraic monad is a <a class="existingWikiWord" href="/nlab/show/monoid">monoid</a> in the category of algebraic endofunctors on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Set</mi></mrow><annotation encoding="application/x-tex">\mathrm{Set}</annotation></semantics></math>.</p>
+<p>In other words, a finitary monad is a <a class="existingWikiWord" href="/nlab/show/monoid">monoid</a> in the category of finitary endofunctors on some category.</p>
 
-<h2 id="properties">Properties</h2>
+<h2 id="finitary_monads_and_lawvere_theories">Finitary monads and Lawvere theories</h2>
 
-<p>A finitary monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>μ</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T,\mu,i)</annotation></semantics></math> is completely determined by its value on all finite <a class="existingWikiWord" href="/nlab/show/ordinal">ordinal</a>s <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℕ</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">n\in\mathbb{N}_0</annotation></semantics></math> considered as standard <a class="existingWikiWord" href="/nlab/show/finite+set">finite set</a>s. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(n)</annotation></semantics></math> is then the set of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-ary operations. The notion of algebraic monad is hence similar to the notion of a nonsymmetric <a class="existingWikiWord" href="/nlab/show/operad">operad</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Set</mi></mrow><annotation encoding="application/x-tex">\mathrm{Set}</annotation></semantics></math>, but it is not equivalent, because of the possibility of duplicating or discarding inputs.</p>
+<p>A finitary monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>μ</mi><mo>,</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T,\mu,i)</annotation></semantics></math> on <a class="existingWikiWord" href="/nlab/show/Set">Set</a> is completely determined by its value on all finite <a class="existingWikiWord" href="/nlab/show/ordinal">ordinal</a>s <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>∈</mo><msub><mi>ℕ</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">n\in\mathbb{N}_0</annotation></semantics></math> considered as standard <a class="existingWikiWord" href="/nlab/show/finite+set">finite set</a>s. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(n)</annotation></semantics></math> is then the set of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>-ary operations. The notion of algebraic monad is hence similar to the notion of a nonsymmetric <a class="existingWikiWord" href="/nlab/show/operad">operad</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Set</mi></mrow><annotation encoding="application/x-tex">\mathrm{Set}</annotation></semantics></math>, but it is not equivalent, because of the possibility of duplicating or discarding inputs.</p>
 
 <p>More precisely, each finitary monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> defines a <a class="existingWikiWord" href="/nlab/show/Lawvere+theory">Lawvere theory</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Th</mi> <mi>T</mi></msub></mrow><annotation encoding="application/x-tex">Th_T</annotation></semantics></math>, namely <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Th</mi> <mi>T</mi></msub><mo>=</mo><msubsup><mi>Free</mi> <mi>fin</mi> <mi>op</mi></msubsup></mrow><annotation encoding="application/x-tex">Th_T = Free_{fin}^{op}</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Free</mi> <mi>fin</mi></msub></mrow><annotation encoding="application/x-tex">Free_{fin}</annotation></semantics></math> is the category of <a class="existingWikiWord" href="/nlab/show/free+construction">free</a> algebras <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(n)</annotation></semantics></math> on finite sets (as a full subcategory of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Alg</mi> <mi>T</mi></msub></mrow><annotation encoding="application/x-tex">Alg_T</annotation></semantics></math>). In fact, the two notions are equivalent: the assignment</p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>↦</mo><msub><mi>Th</mi> <mi>T</mi></msub></mrow><annotation encoding="application/x-tex">T \mapsto Th_T</annotation></semantics></math></div>
 <p>defines an equivalence between the category of finitary monads on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Set</mi></mrow><annotation encoding="application/x-tex">Set</annotation></semantics></math> and the category of Lawvere theories. Moreover, the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras is equivalent to the <a class="existingWikiWord" href="/nlab/show/category+of+models">category of models</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Th</mi> <mi>T</mi></msub></mrow><annotation encoding="application/x-tex">Th_T</annotation></semantics></math>. However, a technical advantage of Lawvere theories is that they can be interpreted in categories other than <a class="existingWikiWord" href="/nlab/show/Set">Set</a>: a model of a Lawvere theory <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒯</mi></mrow><annotation encoding="application/x-tex">\mathcal{T}</annotation></semantics></math> in a category with cartesian products <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is just a product-preserving functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒯</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">\mathcal{T} \to C</annotation></semantics></math>.</p>
+
+<h2 id="properties">Properties</h2>
+
+<ul>
+<li>The category of finitary monads on a <a class="existingWikiWord" href="/nlab/show/locally+finitely+presentable+category">locally finitely presentable</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi class="mathscript">𝒜</mi></mrow><annotation encoding="application/x-tex">\mathscr{A}</annotation></semantics></math> category is also <a class="existingWikiWord" href="/nlab/show/locally+finitely+presentable+category">locally finitely presentable</a>, and is <a class="existingWikiWord" href="/nlab/show/monadic">monadic</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">[</mo><mo stretchy="false">|</mo><mi class="mathscript">𝒜</mi><mo stretchy="false">|</mo><mo>,</mo><mi class="mathscript">𝒜</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[|\mathscr{A}|, \mathscr{A}]</annotation></semantics></math> (see <a href="#Lack">Lack</a>).</li>
+</ul>
 
 <h2 id="applications">Applications</h2>
 
@@ -533,7 +540,17 @@ margin-left: 0em;
 <li>J. Adamek and J. Rosicky, <em><a class="existingWikiWord" href="/nlab/show/Locally+presentable+and+accessible+categories">Locally presentable and accessible categories</a></em> (chapter 3), LMS Lecture Notes 189, Cambridge U. Press, 1994.</li>
 </ul>
 
-<p>Durov’s application of finitary monads to the “field with one element” may be found in…</p>
+<p>For properties of the category of finitary monads, see</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Stephen+Lack">Stephen Lack</a>. <em>On the monadicity of finitary monads</em>. Journal of Pure and Applied Algebra 140.1 (1999): 65-73.</li>
+</ul>
+
+<p>Durov’s application of finitary monads to the “field with one element” may be found in:</p>
+
+<ul>
+<li id="Durov07"><a class="existingWikiWord" href="/nlab/show/Nikolai+Durov">Nikolai Durov</a>, <em>A new approach to Arakelov geometry</em>, <a href="http://arxiv.org/abs/0704.2030">arxiv/0704.2030</a></li>
+</ul>
 
 <h2 id="discussion">Discussion</h2>
 
@@ -558,14 +575,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on August  8, 2013 at 10:00:51.
+    Last revised on April 30, 2023 at 19:08:19.
     See the <a href="/nlab/history/finitary+monad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/finitary+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/finitary+monad/14" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/finitary+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/finitary+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (14 revisions)</a>
+  <a href="/nlab/edit/finitary+monad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/16430/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/finitary+monad/15" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/finitary+monad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/finitary+monad" accesskey="S" class="navlink" id="history" rel="nofollow">History (15 revisions)</a>
   <a href="/nlab/show/finitary+monad/cite" style="color: black">Cite</a>
   <a href="/nlab/print/finitary+monad" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/finitary+monad" id="view_source" rel="nofollow">Source</a>
