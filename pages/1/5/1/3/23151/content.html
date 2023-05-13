@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/13585/#Item_3" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/13585/#Item_10" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -445,8 +445,18 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
+<li><a href='#Definitions'>Definitions</a></li>
+<ul>
+<li><a href='#ViaIndexedSetsOfObjects'>Via indexed sets of objects</a></li>
+<li><a href='#AsAGrothendieckConstruction'>As a Grothendieck construction</a></li>
+<li><a href='#ViaCoproductOfPresheaves'>Via coproducts of presheaves</a></li>
+</ul>
 <li><a href='#properties'>Properties</a></li>
 <li><a href='#Examples'>Examples</a></li>
+<ul>
+<li><a href='#coproduct_completion_of_connected_objects'>Coproduct completion of connected objects</a></li>
+<li><a href='#coproduct_compeletion_of_extensive_categories'>Coproduct compeletion of extensive categories</a></li>
+</ul>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -456,13 +466,19 @@ margin-left: 0em;
 
 <p>Given a <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, its <em>free coproduct completion</em> (or <em>free sum completion</em>) is <a class="existingWikiWord" href="/nlab/show/generalized+the">the</a> category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">PSh_{\sqcup}(\mathcal{C})</annotation></semantics></math> (often denoted <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Fam</mi><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Fam(\mathcal{C})</annotation></semantics></math>, for <em><a class="existingWikiWord" href="/nlab/show/families">families</a></em> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>) obtained by <a class="existingWikiWord" href="/nlab/show/free+construction">freely</a> adjoining <a class="existingWikiWord" href="/nlab/show/coproducts">coproducts</a> of all <a class="existingWikiWord" href="/nlab/show/objects">objects</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>.</p>
 
-<p>(The following description is pretty immediate, but see also <a href="#HuTholen95">Hu &amp; Tholen 1995, p. 281, 286</a>.)</p>
+<h2 id="Definitions">Definitions</h2>
 
-<p>An explicit description of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">PSh_{\sqcup}(\mathcal{C})</annotation></semantics></math> is:</p>
+<p>Here are a few concrete realizations of free coproduct completions.</p>
+
+<h3 id="ViaIndexedSetsOfObjects">Via indexed sets of objects</h3>
+
+<p>The following explicit description of the coproduct completion is pretty immediate and seems to be part of <a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a> <a class="existingWikiWord" href="/nlab/show/folklore">folklore</a> (for instance the way it is referred to in <a href="#CarboniLackWalters93">Carboni, Lack &amp; Walters (1993), Proof of Prop. 2.4</a>). Early references include <a href="#B&#xE9;nabou1985">Bénabou (1985), §3</a>, see also <a href="#HuTholen95">Hu &amp; Tholen (1995), p. 281, 286</a>.</p>
+
+<p>An explicit description of the free coproduct completion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">PSh_{\sqcup}(\mathcal{C})</annotation></semantics></math> of a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is:</p>
 
 <ul>
 <li>
-<p>Its <a class="existingWikiWord" href="/nlab/show/objects">objects</a> are <a class="existingWikiWord" href="/nlab/show/pairs">pairs</a> consisting of</p>
+<p>Its <a class="existingWikiWord" href="/nlab/show/objects">objects</a> are <a class="existingWikiWord" href="/nlab/show/dependent+pair">dependent</a> <a class="existingWikiWord" href="/nlab/show/pairs">pairs</a> consisting of</p>
 
 <ol>
 <li>
@@ -494,7 +510,114 @@ margin-left: 0em;
 </li>
 </ul>
 
-<p>Slightly more abstractly, this is <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalently</a> the <a class="existingWikiWord" href="/nlab/show/full+subcategory">full subcategory</a></p>
+<h3 id="AsAGrothendieckConstruction">As a Grothendieck construction</h3>
+
+<p>The following is also pretty immediate and essentially discussed in <a href="#B&#xE9;nabou1985">Bénabou (1985), §3</a> (though without mentioning of the term “<a class="existingWikiWord" href="/nlab/show/Grothendieck+construction">Grothendieck construction</a>”).</p>
+
+<p>The free coproduct completion of a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is equivalently the <a class="existingWikiWord" href="/nlab/show/Grothendieck+construction">Grothendieck construction</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><munder><mo>∫</mo><mrow><mi>S</mi><mspace width="thinmathspace"></mspace><mo>∈</mo><mspace width="thinmathspace"></mspace><mi>Set</mi></mrow></munder><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">
+  PSh_{\sqcup}(\mathcal{C})
+  \;\;
+    \simeq
+  \;\;
+  \underset
+    { S \,\in\, Set }
+    { \int }
+  \;
+  \underset{s \in S}{\prod}
+  \mathcal{C}
+
+</annotation></semantics></math></div>
+<p>on the <a class="existingWikiWord" href="/nlab/show/contravariant+functor">contravariant</a> <a class="existingWikiWord" href="/nlab/show/pseudofunctor">pseudofunctor</a> on <a class="existingWikiWord" href="/nlab/show/Set">Set</a> which sends a set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> to the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-indexed <a class="existingWikiWord" href="/nlab/show/product+category">product category</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> with itself (equivalently: to the <a class="existingWikiWord" href="/nlab/show/functor+category">functor category</a> into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> out of the <a class="existingWikiWord" href="/nlab/show/discrete+category">discrete category</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>):</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msup><mi>Set</mi> <mi>op</mi></msup></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>Cat</mi></mtd></mtr> <mtr><mtd><mi>S</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><mi>Func</mi><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>≃</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>𝒞</mi></mtd></mtr> <mtr><mtd><mo maxsize="1.8em" minsize="1.8em">↓</mo><mpadded width="0"><mrow><msup><mrow></mrow> <mi>f</mi></msup></mrow></mpadded></mtd> <mtd></mtd> <mtd><mo maxsize="1.8em" minsize="1.8em">↑</mo><mpadded width="0"><mrow><msup><mrow></mrow> <mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow></msup></mrow></mpadded></mtd></mtr> <mtr><mtd><mi>T</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><mi>Func</mi><mo stretchy="false">(</mo><mi>T</mi><mo>,</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mtd> <mtd><mo>≃</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>t</mi><mo>∈</mo><mi>T</mi></mrow></munder><mi>𝒞</mi><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    Set^{op} &amp;\longrightarrow&amp; Cat
+    \\
+    S 
+      &amp;\mapsto&amp; Func(S,\mathcal{C}) 
+      &amp; \simeq \;\underset{s \in S}{\prod} \mathcal{C}
+    \\
+    \Big\downarrow\mathrlap{{}^{f}}
+    &amp;&amp;
+    \Big\uparrow\mathrlap{{}^{f^\ast}}
+    \\
+    T 
+      &amp;\mapsto&amp; Func(T,\mathcal{C}) 
+      &amp; 
+    \simeq \;\underset{t \in T}{\prod} \mathcal{C}
+    \mathrlap{\,,}
+  }
+
+</annotation></semantics></math></div>
+<p>where the <a class="existingWikiWord" href="/nlab/show/base+change">base change</a>-<a class="existingWikiWord" href="/nlab/show/functors">functors</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> are given (on <a class="existingWikiWord" href="/nlab/show/functor+categories">functor categories</a> by <a class="existingWikiWord" href="/nlab/show/precomposition">precomposition</a> with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math>, hence) by:</p>
+<div class="maruku-equation" id="eq:PullbackFunctorBetweenProductCategories"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>S</mi><mo>⟶</mo><mi>T</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mrow><mtable><mtr><mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>t</mi><mo>∈</mo><mi>T</mi></mrow></munder><mi>𝒞</mi></mtd> <mtd><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>f</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover></mtd> <mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>𝒞</mi></mtd></mtr> <mtr><mtd><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>X</mi> <mi>t</mi></msub><msub><mo maxsize="1.2em" minsize="1.2em">)</mo> <mrow><mi>t</mi><mo>∈</mo><mi>T</mi></mrow></msub></mtd> <mtd><mo>↦</mo></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>X</mi> <mrow><mi>f</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></msub><msub><mo maxsize="1.2em" minsize="1.2em">)</mo> <mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  
+  f \,\colon\, S \longrightarrow T
+  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+  \vdash
+  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+  \array{
+    \underset{t \in T}{\prod} \mathcal{C}
+    &amp;\xrightarrow{\;\; f \;\;}&amp;
+    \underset{s \in S}{\prod} \mathcal{C}
+    \\
+    \big(
+      X_t
+    \big)_{t \in T}
+    &amp;\mapsto&amp;
+    \big(
+      X_{f(s)}
+    \big)_{s \in S}
+    \,.
+  }
+
+</annotation></semantics></math></div>
+<p>Namely, by definition of the <a class="existingWikiWord" href="/nlab/show/Grothendieck+construction">Grothendieck construction</a></p>
+
+<ol>
+<li>
+<p>its <a class="existingWikiWord" href="/nlab/show/objects">objects</a> are <a class="existingWikiWord" href="/nlab/show/dependent+pair">dependent</a> <a class="existingWikiWord" href="/nlab/show/pairs">pairs</a> of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>S</mi></msub><mspace width="thickmathspace"></mspace><mo>≡</mo><mspace width="thickmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>S</mi><mo>∈</mo><mi>Set</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><msub><mi>X</mi> <mi>s</mi></msub><mo>∈</mo><mi>𝒞</mi><msub><mo stretchy="false">)</mo> <mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  X_S
+  \;\equiv\;
+  \big(
+    S \in Set
+    ,\, 
+    (X_s \in \mathcal{C})_{s \in S}   
+  \big)
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>its <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>ϕ</mi> <mi>f</mi></msub><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>X</mi> <mi>S</mi></msub><mo>⟶</mo><msub><mi>Y</mi> <mi>T</mi></msub></mrow><annotation encoding="application/x-tex">
+  \phi_f \;\colon\; X_S \longrightarrow Y_T
+
+</annotation></semantics></math></div>
+<p>are <a class="existingWikiWord" href="/nlab/show/dependent+pair">dependent</a> <a class="existingWikiWord" href="/nlab/show/pairs">pairs</a> consisting of a <a class="existingWikiWord" href="/nlab/show/map">map</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>S</mi><mo>⟶</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">
+  f \,\colon\, S \longrightarrow T
+
+</annotation></semantics></math></div>
+<p>and a morphism in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\underset{s \in S}{\prod} \mathcal{C}</annotation></semantics></math> of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>X</mi> <mi>S</mi></msub><mo>⟶</mo><msup><mi>f</mi> <mo>*</mo></msup><msub><mi>Y</mi> <mi>T</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \phi \,\colon\, X_S \longrightarrow f^\ast Y_T
+  \,.
+
+</annotation></semantics></math></div>
+<p>where, by definition <a class="maruku-eqref" href="#eq:PullbackFunctorBetweenProductCategories">(1)</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">f^\ast</annotation></semantics></math> and the nature of <a class="existingWikiWord" href="/nlab/show/product+categories">product categories</a>, the latter is an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/indexed+set">indexed set</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>ϕ</mi> <mi>s</mi></msub><msub><mo stretchy="false">)</mo> <mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(\phi_s)_{s \in S}</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>ϕ</mi> <mi>s</mi></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>X</mi> <mi>s</mi></msub><mo>⟶</mo><msub><mi>Y</mi> <mrow><mi>f</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \phi_s \,\colon\, X_s \longrightarrow Y_{f(s)} 
+  \,.
+
+</annotation></semantics></math></div></li>
+</ol>
+
+<p>But this is manifestly the same as the explicit description of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">PSh_{\sqcup}(\mathcal{C})</annotation></semantics></math> <a href="#ViaIndexedSetsOfObjects">above</a>.</p>
+
+<h3 id="ViaCoproductOfPresheaves">Via coproducts of presheaves</h3>
+
+<p>The free coproduct completion of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalently</a> the <a class="existingWikiWord" href="/nlab/show/full+subcategory">full subcategory</a></p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo><mover><mo>↪</mo><mspace width="thickmathspace"></mspace></mover><mi>PSh</mi><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
   PSh_{\sqcup}(\mathcal{C})
   \xhookrightarrow{\;}
@@ -518,12 +641,12 @@ margin-left: 0em;
 
 <h2 id="properties">Properties</h2>
 
-<p>Fairly immediate from the explicit definition above is:</p>
+<p>Fairly immediate from the explicit definition <a href="#ViaIndexedSetsOfObjects">above</a> is:</p>
 
 <p>
 <div class='num_prop' id='CategoriesOfCoproductsOfConnectedObjects'>
 <h6>Proposition</h6>
-<p>A <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding="application/x-tex">\mathcal{B}</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalent</a> to a <a class="existingWikiWord" href="/nlab/show/free+coproduct+completion">free coproduct completion</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">PSh_{\sqcup}(\mathcal{C})</annotation></semantics></math> for a <a class="existingWikiWord" href="/nlab/show/small+category">small category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> if</p>
+<p>A <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding="application/x-tex">\mathcal{B}</annotation></semantics></math> with small-indexed <a class="existingWikiWord" href="/nlab/show/coproducts">coproducts</a> is <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalent</a> to a <a class="existingWikiWord" href="/nlab/show/free+coproduct+completion">free coproduct completion</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">PSh_{\sqcup}(\mathcal{C})</annotation></semantics></math> for a <a class="existingWikiWord" href="/nlab/show/small+category">small category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> if</p>
 
 <ol>
 <li>
@@ -541,10 +664,81 @@ margin-left: 0em;
 
 <p></p>
 </div>
- (<a href="#CarboniVitale98">Carboni &amp; Vitale 1998, Lem. 42</a>)</p>
+ (<a href="#CarboniVitale98">Carboni &amp; Vitale 1998, Lem. 42</a>) 
+<div class='proof'>
+<h6>Proof</h6>
+<p>Since, by assumption, the objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding="application/x-tex">\mathcal{B}</annotation></semantics></math> are already presented by <a class="existingWikiWord" href="/nlab/show/indexed+sets">indexed sets</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>X</mi> <mi>s</mi></msub><msub><mo maxsize="1.2em" minsize="1.2em">)</mo> <mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\big(X_s\big)_{s \in S}</annotation></semantics></math> of objects in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>, it is sufficient to see that under this presentation the morphisms</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>X</mi> <mi>s</mi></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>⟶</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>t</mi><mo>∈</mo><mi>T</mi></mrow></munder><msub><mi>Y</mi> <mi>t</mi></msub><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  \phi
+  \,\colon\,
+  \big(\underset{s \in S}{\coprod} X_s\big)
+  \longrightarrow
+  \big(\underset{t \in T}{\coprod} Y_t\big)
+
+</annotation></semantics></math></div>
+<p>in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℬ</mi></mrow><annotation encoding="application/x-tex">\mathcal{B}</annotation></semantics></math> correspond bijectively to indexed sets of morphisms in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> according to the explicit description of the free coproduct completion <a href="#ViaIndexedSetsOfObjects">above</a>. Indeed, using</p>
+
+<ol>
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/hom-functors+preserve+limits">general fact</a> that <a class="existingWikiWord" href="/nlab/show/hom-functors">hom-functors</a> take <a class="existingWikiWord" href="/nlab/show/coproducts">coproducts</a> in the first argument to <a class="existingWikiWord" href="/nlab/show/products">products</a></p>
+</li>
+
+<li>
+<p>the defining property that the resulting hom-functors out of connected objects take coproducts in the second argument to coproducts,</p>
+</li>
+</ol>
+
+<p>we obtain the following sequence of <a class="existingWikiWord" href="/nlab/show/natural+bijections">natural bijections</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="left left"><mtr><mtd><msub><mi>Hom</mi> <mi>𝒞</mi></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mi>s</mi></munder><msub><mi>X</mi> <mi>s</mi></msub><mo>,</mo><mspace width="thinmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mi>t</mi></munder><msub><mi>Y</mi> <mi>t</mi></msub><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mi>s</mi></munder><msub><mi>Hom</mi> <mi>𝒞</mi></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>X</mi> <mi>s</mi></msub><mo>,</mo><mspace width="thinmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo> <mi>t</mi></munder><msub><mi>Y</mi> <mi>t</mi></msub><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><msub><mi>t</mi> <mi>s</mi></msub><mo>∈</mo><mi>T</mi></mrow></munder><msub><mi>Hom</mi> <mi>𝒞</mi></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>X</mi> <mi>s</mi></msub><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>Y</mi> <mrow><msub><mi>t</mi> <mi>s</mi></msub></mrow></msub><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>f</mi><mo lspace="verythinmathspace">:</mo><mi>S</mi><mo>→</mo><mi>T</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>Hom</mi> <mi>𝒞</mi></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>X</mi> <mi>s</mi></msub><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>Y</mi> <mrow><mi>f</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">
+\begin{array}{ll}
+  Hom_{\mathcal{C}}\big(
+    \coprod_s X_s
+    ,\,
+    \coprod_t Y_t
+  \big)
+  \\
+  \;\simeq\;
+  \prod_s
+  Hom_{\mathcal{C}}\big(
+     X_s
+    ,\,
+    \coprod_t Y_t
+  \big)
+  \\
+  \;\simeq\;
+  \underset{s \in S}{\prod}
+  \underset{t_s \in T}{\coprod}
+  Hom_{\mathcal{C}}\big(
+    X_s
+    ,\,
+    Y_{t_s}
+  \big)
+  \\
+  \;\simeq\;
+  \underset{f \colon S \to T}{\coprod}
+  \underset{s \in S}{\prod}
+  Hom_{\mathcal{C}}\big(
+    X_s
+    ,\,
+    Y_{f(s)}
+  \big)
+  \,.
+\end{array}
+
+</annotation></semantics></math></div>
+<p></p>
+</div>
+</p>
 
 <p>
-<div class='num_prop'>
+<div class='num_prop' id='FCCOfAccessibleCatIsAccesible'>
+<h6>Proposition</h6>
+<p>The free coproduct completion of an <a class="existingWikiWord" href="/nlab/show/accessible+category">accessible category</a> is itself accessible.</p>
+</div>
+ (<a href="#MakkaiPar&#xE9;1989">Makkai &amp; Paré (1989), Cor. 5.3.6</a>)</p>
+
+<p>
+<div class='num_prop' id='FreeCoproductCompletionIsExtensive'>
 <h6>Proposition</h6>
 <p>Any free coproduct completion is an <a class="existingWikiWord" href="/nlab/show/extensive+category">extensive category</a>.</p>
 </div>
@@ -552,12 +746,39 @@ margin-left: 0em;
 
 <h2 id="Examples">Examples</h2>
 
-<p>The following examples follow as special cases of Prop. <a class="maruku-ref" href="#CategoriesOfCoproductsOfConnectedObjects"></a>.</p>
+<h3 id="coproduct_completion_of_connected_objects">Coproduct completion of connected objects</h3>
+
+<p>The following examples follow as special cases of Prop. <a class="maruku-ref" href="#CategoriesOfCoproductsOfConnectedObjects"></a>:</p>
 
 <p>
 <div class='num_remark'>
 <h6>Example</h6>
 <p>The category <a class="existingWikiWord" href="/nlab/show/Set">Set</a> is the <a class="existingWikiWord" href="/nlab/show/free+coproduct+completion">free coproduct completion</a> of the <a class="existingWikiWord" href="/nlab/show/terminal+category">terminal category</a>.</p>
+</div>
+</p>
+
+<p>
+<div class='num_remark' id='SkeletalGroupoids'>
+<h6>Example</h6>
+<p><strong>(<a class="existingWikiWord" href="/nlab/show/skeletal+groupoids">skeletal groupoids</a> form the free coproduct completion of <a class="existingWikiWord" href="/nlab/show/groups">groups</a>)</strong> <br /> The <a class="existingWikiWord" href="/nlab/show/1-category">1-category</a> of <a class="existingWikiWord" href="/nlab/show/skeletal+groupoids">skeletal groupoids</a> among that of all <a class="existingWikiWord" href="/nlab/show/strict+groupoids">strict groupoids</a> is the free coproduct completion of the category of 1-object <a class="existingWikiWord" href="/nlab/show/delooping+groupoids">delooping groupoids</a> which (<em>as <a class="existingWikiWord" href="/nlab/show/1-categories">1-categories</a></em>) is equivalently the category of <a class="existingWikiWord" href="/nlab/show/groups">groups</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>Grp</mi><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>Grpd</mi> <mrow><mo stretchy="false">(</mo><mi>Obj</mi><mo>=</mo><mo>*</mo><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>Grpd</mi> <mi>skl</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">  
+  PSh_{\sqcup}\big(
+    Grp
+  \big)
+  \;\;
+    \simeq
+  \;\;
+  PSh_{\sqcup}\big(
+    Grpd_{(Obj = \ast)}
+  \big)
+  \;\;
+    \simeq
+  \;\;
+  Grpd_{skl}
+  \,.
+
+</annotation></semantics></math></div>
+<p></p>
 </div>
 </p>
 
@@ -602,6 +823,91 @@ margin-left: 0em;
 </div>
 </p>
 
+<h3 id="coproduct_compeletion_of_extensive_categories">Coproduct compeletion of extensive categories</h3>
+
+<p>
+<div class='num_remark' id='CoproductCompletionOfExtensiveCategories'>
+<h6>Example</h6>
+<p><strong>(coproduct completion of extensive categories)</strong> <br /> While Prop. <a class="maruku-ref" href="#FreeCoproductCompletionIsExtensive"></a> says that every free coproduct completion is extensive, if a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is already extensive to start with then its free coproduct completion may equivalently be described as the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/bundles">bundles</a> over <a class="existingWikiWord" href="/nlab/show/sets">sets</a>, the latter regarded as objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> via the unique <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a>-<a class="existingWikiWord" href="/nlab/show/preserved+colimit">preserving</a> <a class="existingWikiWord" href="/nlab/show/functor">functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ι</mi> <mi>Set</mi></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>Set</mi><mo>⟶</mo><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\iota_{Set} \,\colon\, Set \longrightarrow \mathcal{C}</annotation></semantics></math>, hence as the <a class="existingWikiWord" href="/nlab/show/comma+category">comma category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mi>Set</mi></msub><mspace width="thinmathspace"></mspace><mo>≔</mo><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>id</mi> <mi>𝒞</mi></msub><mo>,</mo><msub><mi>ι</mi> <mi>Set</mi></msub><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{C}_{Set} \,\coloneqq\, \big(id_{\mathcal{C}}, \iota_{Set}\big)</annotation></semantics></math>:</p>
+<div class="maruku-equation" id="eq:AsACategoryOfBundles"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>𝒳</mi><mspace width="thickmathspace"></mspace><mtext>extensive</mtext><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>PSh</mi> <mo>⊔</mo></msub><mo stretchy="false">(</mo><mi>𝒞</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>𝒞</mi> <mi>Set</mi></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mrow><mo>{</mo><mrow><mtable><mtr><mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>X</mi> <mi>s</mi></msub></mtd> <mtd><mover><mo>⟶</mo><mi>ϕ</mi></mover></mtd> <mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>t</mi><mo>∈</mo><mi>T</mi></mrow></munder><msub><mi>Y</mi> <mi>t</mi></msub></mtd></mtr> <mtr><mtd><mo maxsize="1.8em" minsize="1.8em">↓</mo></mtd> <mtd></mtd> <mtd><mo maxsize="1.8em" minsize="1.8em">↓</mo></mtd></mtr> <mtr><mtd><mi>S</mi></mtd> <mtd><munder><mo>⟶</mo><mi>f</mi></munder></mtd> <mtd><mi>T</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mtd></mtr></mtable></mrow><mo>}</mo></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \mathcal{X}\;\text{extensive}
+  \;\;\;\;\;\;\;\;\;\;
+    \vdash
+  \;\;\;\;\;\;\;\;\;\;
+  PSh_{\sqcup}(\mathcal{C})
+  \;\;
+    \simeq
+  \;\;
+  \mathcal{C}_{Set}
+  \;\;
+    =
+  \;\;
+  \left\{
+  \array{
+    \underset{s \in S}{\coprod} X_s
+    &amp;\overset{\phi}{\longrightarrow}&amp;
+    \underset{t \in T}{\coprod} Y_t
+    \\
+    \Big\downarrow
+    &amp;&amp;
+    \Big\downarrow
+    \\
+    S &amp;\underset{f}{\longrightarrow}&amp; T
+    \,,
+  }
+  \right\}
+
+</annotation></semantics></math></div>
+<p>where on the right we are indicating a generic <a class="existingWikiWord" href="/nlab/show/morphism">morphism</a> of such <a class="existingWikiWord" href="/nlab/show/bundles">bundles</a>.</p>
+
+<p>Namely, since every <a class="existingWikiWord" href="/nlab/show/set">set</a> is the <a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a> of <a class="existingWikiWord" href="/nlab/show/singleton+sets">singleton sets</a> indexed by its <a class="existingWikiWord" href="/nlab/show/elements">elements</a>, and due to the defining property of an <a class="existingWikiWord" href="/nlab/show/extensive+category">extensive category</a> that the coproduct functors are <a class="existingWikiWord" href="/nlab/show/equivalence+of+categories">equivalences</a> between (<a class="existingWikiWord" href="/nlab/show/product+category">products</a> of) <a class="existingWikiWord" href="/nlab/show/slice+categories">slice categories</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>ι</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>𝒞</mi> <mrow><mo stretchy="false">/</mo><mi>ι</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">
+  \mathcal{C}_{/ \iota(S)}
+  \;\;
+  \simeq
+  \;\;
+  \underset{s \in S}{\prod} 
+    \mathcal{C}_{/\iota(s)}
+
+</annotation></semantics></math></div>
+<p>it follows that:</p>
+
+<ol>
+<li>
+<p>every object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>S</mi></msub></mrow><annotation encoding="application/x-tex">X_S</annotation></semantics></math> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>𝒞</mi> <mrow><mi>ι</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\iota(S)}</annotation></semantics></math> is of the form shown in <a class="maruku-eqref" href="#eq:AsACategoryOfBundles">(2)</a> hence determined by a family <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>X</mi> <mi>s</mi></msub><msub><mo stretchy="false">)</mo> <mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(X_s)_{s \in S}</annotation></semantics></math>,</p>
+</li>
+
+<li>
+<p>morphisms as shown in <a class="maruku-eqref" href="#eq:AsACategoryOfBundles">(2)</a> are equivalently (by the <a class="existingWikiWord" href="/nlab/show/universal+property">universal property</a> of the <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a>) morphisms of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>X</mi> <mi>s</mi></msub></mtd> <mtd><mover><mo>⟶</mo><mi>ϕ</mi></mover></mtd> <mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>Y</mi> <mrow><mi>f</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></msub></mtd></mtr> <mtr><mtd><mo maxsize="1.8em" minsize="1.8em">↓</mo></mtd> <mtd></mtd> <mtd><mo maxsize="1.8em" minsize="1.8em">↓</mo></mtd></mtr> <mtr><mtd><mi>S</mi></mtd> <mtd><munder><mo>⟶</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>id</mi> <mi>S</mi></msub><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></munder></mtd> <mtd><mi>S</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+\array{
+  \underset{s \in S}{\coprod}
+  X_s
+  &amp;\overset{\phi}{\longrightarrow}&amp;
+  \underset{s \in S}{\coprod} Y_{f(s)}
+  \\
+  \Big\downarrow
+  &amp;&amp;
+  \Big\downarrow
+  \\
+  S &amp;\underset{\;\;\; id_S \;\;\;}{\longrightarrow}&amp; S
+  \,,
+}
+
+</annotation></semantics></math></div>
+<p>(where we used <a class="existingWikiWord" href="/nlab/show/universal+colimit">pullback stability of coproducts</a> in an extensive category, see <a href="extensive+category#DisjointAndPullbackStableCoproducts">there</a>, to deduce that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mo>*</mo></msup><msub><mi>Y</mi> <mi>S</mi></msub><mspace width="thinmathspace"></mspace><mo>≃</mo><mspace width="thinmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><msup><mi>f</mi> <mo>*</mo></msup><mo stretchy="false">(</mo><msub><mi>Y</mi> <mi>S</mi></msub><msub><mo stretchy="false">)</mo> <mi>s</mi></msub><mspace width="thinmathspace"></mspace><mo>≃</mo><mspace width="thinmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∐</mo><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>Y</mi> <mrow><mi>f</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">f^\ast Y_S \,\simeq\, \underset{s \in S}{\coprod} f^\ast(Y_S)_s \,\simeq\, \underset{s \in S}{\coprod} Y_{f(s)}</annotation></semantics></math>)</p>
+
+<p>which by extensitivity are equivalently <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-indexed families <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ϕ</mi> <mi>s</mi></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>X</mi> <mi>s</mi></msub><mo>⟶</mo><msub><mi>Y</mi> <mrow><mi>f</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">\phi_s\,\colon\, X_s \longrightarrow Y_{f(s)}</annotation></semantics></math>.</p>
+</li>
+</ol>
+
+<p>This is again manifestly the explicit description of the free coproduct completion from <a href="#ViaIndexedSetsOfObjects">above</a>.</p>
+
+<p>Conversely this gives a sense that if a category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> is <em>not</em> extensive, so that the notion of <a class="existingWikiWord" href="/nlab/show/bundles">bundles</a> with total spaces and fibers in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math> does not make sense, its free coproduct completion may be understood as the closest stand-in for that category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒞</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math>-bundles over sets.</p>
+</div>
+</p>
+
 <h2 id="related_concepts">Related concepts</h2>
 
 <ul>
@@ -615,6 +921,18 @@ margin-left: 0em;
 </ul>
 
 <h2 id="references">References</h2>
+
+<p>Early discussion of the concept:</p>
+
+<ul>
+<li id="B&#xE9;nabou1985"><a class="existingWikiWord" href="/nlab/show/Jean+B%C3%A9nabou">Jean Bénabou</a>, §3 in: <em>Fibered Categories and the Foundations of Naive Category Theory</em>, The Journal of Symbolic Logic, Vol. <strong>50</strong> 1 (1985) 10-37 &lbrack;<a href="http://dx.doi.org/10.2307/2273784">doi:10.2307/2273784</a>&rbrack;</li>
+</ul>
+
+<p>On <a class="existingWikiWord" href="/nlab/show/accessible+category">accessibility</a> of free coproduct completions:</p>
+
+<ul>
+<li id="MakkaiPar&#xE9;1989"><a class="existingWikiWord" href="/nlab/show/Michael+Makkai">Michael Makkai</a>, <a class="existingWikiWord" href="/nlab/show/Robert+Par%C3%A9">Robert Paré</a>, §5.2.2 (pp. 116) in: <em>Accessible categories: The foundations of categorical model theory</em>, Contemporary Mathematics <strong>104</strong>, American Mathematical Society (1989) &lbrack;<a href="https://bookstore.ams.org/conm-104">ISBN:978-0-8218-7692-3</a>&rbrack;</li>
+</ul>
 
 <p>On <a class="existingWikiWord" href="/nlab/show/limits">limits</a> in free coproduct completions:</p>
 
@@ -631,22 +949,30 @@ margin-left: 0em;
 <p>In the general context of <a class="existingWikiWord" href="/nlab/show/extensive+categories">extensive categories</a>:</p>
 
 <ul>
-<li id="CarboniLackWalters93"><a class="existingWikiWord" href="/nlab/show/Aurelio+Carboni">Aurelio Carboni</a>, <a class="existingWikiWord" href="/nlab/show/Stephen+Lack">Stephen Lack</a>, <a class="existingWikiWord" href="/nlab/show/Bob+Walters">R. F. C. Walters</a>, <em>Introduction to extensive and distributive categories</em>, JPAA <strong>84</strong> (1993) pp. 145-158 (<a href="https://doi.org/10.1016/0022-4049(93)90035-R">doi:10.1016/0022-4049(93)90035-R</a>)</li>
+<li id="CarboniLackWalters93"><a class="existingWikiWord" href="/nlab/show/Aurelio+Carboni">Aurelio Carboni</a>, <a class="existingWikiWord" href="/nlab/show/Stephen+Lack">Stephen Lack</a>, <a class="existingWikiWord" href="/nlab/show/Bob+Walters">R. F. C. Walters</a>, <em>Introduction to extensive and distributive categories</em>, JPAA <strong>84</strong> (1993) pp. 145-158 &lbrack;<a href="https://doi.org/10.1016/0022-4049(93)90035-R">doi:10.1016/0022-4049(93)90035-R</a>&rbrack;</li>
 </ul>
+
+<p>As <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> for <a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theories">dependent linear type theories</a> (in the context of <a class="existingWikiWord" href="/nlab/show/quantum+programming+languages">quantum programming languages</a> with “<a class="existingWikiWord" href="/nlab/show/dynamic+lifting">dynamic lifting</a>”, such as proto-<a class="existingWikiWord" href="/nlab/show/Quipper">Quipper</a>), the free coproduct completion of <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric</a> <a class="existingWikiWord" href="/nlab/show/closed+monoidal+categories">closed monoidal categories</a> is considered in</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Francisco+Rios">Francisco Rios</a>, <a class="existingWikiWord" href="/nlab/show/Peter+Selinger">Peter Selinger</a>, §3.2 in: <em>A Categorical Model for a Quantum Circuit Description Language</em>, EPTCS <strong>266</strong> (2018) 164-178 &lbrack;<a href="https://arxiv.org/abs/1706.02630">arXiv:1706.02630</a>, <a href="https://doi.org/10.4204/EPTCS.266.11">doi:10.4204/EPTCS.266.11</a>&rbrack;</li>
+</ul>
+
+<p>and its <a href="Quipper#ReferencesDependentLinearTypesAndCategoricalSemantics">followups</a>.</p>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on July 12, 2022 at 17:36:12.
+    Last revised on May 13, 2023 at 11:13:47.
     See the <a href="/nlab/history/free+coproduct+completion" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/free+coproduct+completion" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13585/#Item_3">Discuss</a><span class="backintime"><a href="/nlab/revision/free+coproduct+completion/4" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/free+coproduct+completion" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/free+coproduct+completion" accesskey="S" class="navlink" id="history" rel="nofollow">History (4 revisions)</a>
+  <a href="/nlab/edit/free+coproduct+completion" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13585/#Item_10">Discuss</a><span class="backintime"><a href="/nlab/revision/free+coproduct+completion/7" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/free+coproduct+completion" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/free+coproduct+completion" accesskey="S" class="navlink" id="history" rel="nofollow">History (7 revisions)</a>
   <a href="/nlab/show/free+coproduct+completion/cite" style="color: black">Cite</a>
   <a href="/nlab/print/free+coproduct+completion" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/free+coproduct+completion" id="view_source" rel="nofollow">Source</a>
