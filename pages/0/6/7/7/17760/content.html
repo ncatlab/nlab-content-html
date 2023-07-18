@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -297,45 +297,112 @@ margin-left: 0em;
 
 
 <div id="revision">
-    <p>(…)</p>
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title></title></head>
+<body>
+<h2 id="idea">Idea</h2>
 
-<p>e.g. <a href='#EGNO15'>EGNO 15, theorem 3.2.1</a></p>
+<p>The Frobenius-Perron theorem is a foundational result in the theory of non-negative matrices. In its simplest form it says that the largest eigenvalue of any square matrix with positive entries is real, is of multiplicity one, and that it has an eigenvector with strictly positive entries. The largest real eigenvalue of a matrix with non-negative entries is aptly known as the Frobenius-Perron eigenvalue, and its corresponding positive eigenvector is the Frobenius-Perron eigenvector.</p>
 
-<h2 id='related_concepts'>Related concepts</h2>
-
-<ul>
-<li><a class='existingWikiWord' href='/nlab/show/Frobenius-Perron+dimension'>Frobenius-Perron dimension</a></li>
-</ul>
-
-<h2 id='references'>References</h2>
+<p>Seeing as matrices with positive/non-negative entries are ubiquitous across mathematics, this theorem has a plethora of applications. For instance,</p>
 
 <ul>
 <li>
-<p><a class='existingWikiWord' href='/nlab/show/Damien+Calaque'>Damien Calaque</a>, <a class='existingWikiWord' href='/nlab/show/Pavel+Etingof'>Pavel Etingof</a>, section 4 of <em>Lectures on tensor categories</em> (<a href='https://arxiv.org/abs/math/0401246'>arXiv:math/0401246</a>)</p>
+<p><a class="existingWikiWord" href="/nlab/show/stochastic+processes">stochastic processes</a>/<a class="existingWikiWord" href="/nlab/show/Markov+chains">Markov chains</a>, where the Frobenius-Perron eigenvector corresponds to a stable state/limiting behavior of the process.</p>
 </li>
 
-<li id='EGNO15'>
-<p><a class='existingWikiWord' href='/nlab/show/Pavel+Etingof'>Pavel Etingof</a>, Shlomo Gelaki, Dmitri Nikshych, <a class='existingWikiWord' href='/nlab/show/Victor+Ostrik'>Victor Ostrik</a>, section 3.2 in <em>Tensor categories</em>, Mathematical Surveys and Monographs, Volume 205, American Mathematical Society, 2015 (pdf</p>
+<li>
+<p>Algebraic graph theory - the study of linear-algebraic properties of graphs. That is, situations where one studies the linear algebra of adjacency matrices of graphs. Adjacency matrices are necessarily non-negative, and the Frobenius-Perron eigenvector can be of great utility. This theory is used strongly, for instance, in the proofs of many <a class="existingWikiWord" href="/nlab/show/ADE+classifications">ADE classifications</a>.</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fusion+rings">fusion rings</a>/<a class="existingWikiWord" href="/nlab/show/fusion+categories">fusion categories</a>. Here, the fusion rules of the category will naturally induce non-negative matrices. The Frobenius-Perron eigenvalue of fusion matrix corresponding to an element is known as its <a class="existingWikiWord" href="/nlab/show/Frobenius-Perron+dimension">Frobenius-Perron dimension</a> and serves a key role in theory.</p>
+</li>
+</ul>
+
+<h2 id="statements">Statements</h2>
+
+<p>There are a collection of related results all known as the Frobenius-Perron theorem, which require more or less strong strong conditions and give more or less strong results. The most canonical “Frobenius-Perron theorem” is as follows:</p>
+
+<p>
+<div class='num_theorem'>
+<h6>Theorem</h6>
+<p>The eigenvalue of largest absolute value for any matrix with positive entries will be a positive real number. It’s corresponding eigenspace will be one-dimensional, and it will have an eigenvector with all positive entries.</p>
+</div>
+</p>
+
+<p>Conversely, we have the following result:</p>
+
+<p>
+<div class='num_theorem'>
+<h6>Theorem</h6>
+<p>If an eigenvector to a positive matrix has positive entries, then its eigenvalue must be the Frobenius-Perron eigenvalue.</p>
+</div>
+</p>
+
+<p>This gives a very simple way of computing the Frobenius-Perron eigenvalue of a positive matrix. Namely, all one has to do is construct a positive eigenvector and measure its eigenvalue.</p>
+
+<p>Often, one will be applying the Frobenius-Perron theorem to matrices with non-negative entries. Here, we can say the following:</p>
+
+<p>
+<div class='num_theorem'>
+<h6>Theorem</h6>
+<p>The eigenvalue of largest absolute value for any matrix with non-negative entries will be a non-negative real number. It will have an eigenvector with all non-negative entries.</p>
+</div>
+</p>
+
+<p>There are many non-negative matrices for which the stronger positive-matrix formulation of the theorem still holds. Namely, we have the following:</p>
+
+<p>
+<div class='num_theorem'>
+<h6>Theorem</h6>
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> be a matrix such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>A</mi> <mi>m</mi></msup></mrow><annotation encoding="application/x-tex">A^m</annotation></semantics></math> is positive for some <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m\geq 1</annotation></semantics></math>. The eigenvalue of largest absolute value for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> will be a positive real number. It’s corresponding eigenspace will be one-dimensional, and it will have an eigenvector with all positive entries.</p>
+</div>
+</p>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Frobenius-Perron+dimension">Frobenius-Perron dimension</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/fusion+category">fusion category</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Damien+Calaque">Damien Calaque</a>, <a class="existingWikiWord" href="/nlab/show/Pavel+Etingof">Pavel Etingof</a>, section 4 of <em>Lectures on tensor categories</em> (<a href="https://arxiv.org/abs/math/0401246">arXiv:math/0401246</a>)</p>
+</li>
+
+<li id="EGNO15">
+<p><a class="existingWikiWord" href="/nlab/show/Pavel+Etingof">Pavel Etingof</a>, Shlomo Gelaki, Dmitri Nikshych, <a class="existingWikiWord" href="/nlab/show/Victor+Ostrik">Victor Ostrik</a>, section 3.2 in <em>Tensor categories</em>, Mathematical Surveys and Monographs, Volume 205, American Mathematical Society, 2015 (pdf</p>
 
 <p>))</p>
 </li>
 
 <li>
-<p>Wikipedia, <em><a href='https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem'>Perron-Frobenius theorem</a></em></p>
+<p>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem">Perron-Frobenius theorem</a></em></p>
 </li>
 </ul>
+</body></html>
+
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on November 10, 2016 at 21:36:38.
+    Last revised on July 17, 2023 at 19:21:24.
     See the <a href="/nlab/history/Frobenius-Perron+theorem" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Frobenius-Perron+theorem" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/Frobenius-Perron+theorem/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Frobenius-Perron+theorem" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Frobenius-Perron+theorem" accesskey="S" class="navlink" id="history" rel="nofollow">History (1 revision)</a>
+  <a href="/nlab/edit/Frobenius-Perron+theorem" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/Frobenius-Perron+theorem/2" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Frobenius-Perron+theorem" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Frobenius-Perron+theorem" accesskey="S" class="navlink" id="history" rel="nofollow">History (2 revisions)</a>
   <a href="/nlab/show/Frobenius-Perron+theorem/cite" style="color: black">Cite</a>
   <a href="/nlab/print/Frobenius-Perron+theorem" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/Frobenius-Perron+theorem" id="view_source" rel="nofollow">Source</a>
