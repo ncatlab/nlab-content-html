@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -492,7 +492,9 @@ margin-left: 0em;
 
 <h2 id="idea"> Idea</h2>
 
-<p>De Bruijn indices are used to represent <a class="existingWikiWord" href="/nlab/show/terms">terms</a> in <a class="existingWikiWord" href="/nlab/show/lambda+calculus">lambda calculus</a> without naming <a class="existingWikiWord" href="/nlab/show/bound+variables">bound variables</a>.</p>
+<p>De Bruijn indices are used to represent <a class="existingWikiWord" href="/nlab/show/terms">terms</a> in <a class="existingWikiWord" href="/nlab/show/lambda+calculus">lambda calculus</a> and <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a> without naming <a class="existingWikiWord" href="/nlab/show/bound+variables">bound variables</a>.</p>
+
+<p>Usually in informal mathematical language, an expression involving a lambda is written out as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mi>x</mi><mo>.</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda x.\phi(x)</annotation></semantics></math>. However, this involves the use of <a class="existingWikiWord" href="/nlab/show/bound+variables">bound variables</a>, which are hard to deal with when formalizing <a class="existingWikiWord" href="/nlab/show/substitution">substitution</a> of variables; in addition, the statements <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mi>x</mi><mo>.</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda x.\phi(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mi>y</mi><mo>.</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda y.\phi(y)</annotation></semantics></math> refer to the same thing. De Bruijn indices involve the use <a class="existingWikiWord" href="/nlab/show/natural+numbers">natural numbers</a> instead of bound variables; both <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mi>x</mi><mo>.</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda x.\phi(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mi>y</mi><mo>.</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda y.\phi(y)</annotation></semantics></math> would be written as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mi>ϕ</mi><mo stretchy="false">(</mo><munder><mn>0</mn><mo>̲</mo></munder><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda \phi(\underline{0})</annotation></semantics></math> when using De Bruijn indices, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mi>x</mi><mo>.</mo><mi>λ</mi><mi>y</mi><mo>.</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda x.\lambda y.\phi(x, y)</annotation></semantics></math> would be written as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mi>λ</mi><mi>ϕ</mi><mo stretchy="false">(</mo><munder><mn>1</mn><mo>̲</mo></munder><mo>,</mo><munder><mn>0</mn><mo>̲</mo></munder><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda \lambda \phi(\underline{1}, \underline{0})</annotation></semantics></math>. A statement like <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>λ</mi><mi>x</mi><mo>.</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x \lambda x.\phi(x)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is both a bound variable and a free variable would be written as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mn>1</mn><mo>̲</mo></munder><mi>λ</mi><mi>ϕ</mi><mo stretchy="false">(</mo><munder><mn>0</mn><mo>̲</mo></munder><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\underline{1} \lambda \phi(\underline{0})</annotation></semantics></math> using de Bruijn indices.</p>
 
 <h2 id="see_also"> See also</h2>
 
@@ -501,6 +503,12 @@ margin-left: 0em;
 </ul>
 
 <h2 id="references">References</h2>
+
+<p>de Bruijn indices are discussed in section 9.1 of:</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/Th%C3%A9o+Winterhalter">Théo Winterhalter</a>, <em>Formalisation and Meta-Theory of Type Theory</em>, Nantes (2020) &lbrack;<a href="https://github.com/TheoWinterhalter/phd-thesis/releases/download/v1.2.1/TheoWinterhalter-PhD-v1.2.1.pdf">pdf</a>, <a href="https://github.com/TheoWinterhalter/phd-thesis">github</a>&rbrack;</li>
+</ul>
 
 <p>The notion is due to:</p>
 
@@ -519,14 +527,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on January 26, 2023 at 10:13:48.
+    Last revised on July 21, 2023 at 22:15:44.
     See the <a href="/nlab/history/de+Bruijn+indices" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/de+Bruijn+indices" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14451/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/de+Bruijn+indices/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/de+Bruijn+indices" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/de+Bruijn+indices" accesskey="S" class="navlink" id="history" rel="nofollow">History (1 revision)</a>
+  <a href="/nlab/edit/de+Bruijn+indices" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/14451/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/de+Bruijn+indices/2" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/de+Bruijn+indices" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/de+Bruijn+indices" accesskey="S" class="navlink" id="history" rel="nofollow">History (2 revisions)</a>
   <a href="/nlab/show/de+Bruijn+indices/cite" style="color: black">Cite</a>
   <a href="/nlab/print/de+Bruijn+indices" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/de+Bruijn+indices" id="view_source" rel="nofollow">Source</a>
