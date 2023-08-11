@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/15360/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/15360/#Item_3" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -897,6 +897,8 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
+<li><a href='#CircuitModel'>Circuit model</a></li>
+<li><a href='#via_linear_stateeffects'>Via linear state-effects</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
@@ -905,7 +907,57 @@ margin-left: 0em;
 
 <p>In <a class="existingWikiWord" href="/nlab/show/quantum+computing">quantum computing</a> and <a class="existingWikiWord" href="/nlab/show/quantum+information+theory">quantum information theory</a>, the notion of <em>quantum random access memory</em> (QRAM, due to <a href="#GiovanettiyLloydMaccone08">Giovanettiy, Lloyd &amp; Maccone 2008</a>) is meant to be the <a class="existingWikiWord" href="/nlab/show/quantum+physics">quantum</a>-analog of the <a class="existingWikiWord" href="/nlab/show/classical+physics">classical</a> notion of <a class="existingWikiWord" href="/nlab/show/random+access+memory">random access memory</a>; the key point being that QRAM may be addressed by <em><a class="existingWikiWord" href="/nlab/show/quantum+superpositions">quantum superpositions</a></em> of address values and then reads/writes the corresponding <a class="existingWikiWord" href="/nlab/show/quantum+superposition">quantum superposition</a> of quantum data (<a href="#GiovanettiyLloydMaccone08">GLM08, (1)</a>).</p>
 
-<p>The (original and followup) references on QRAM are somewhat vague on the precise intended operational definition. But recall that a classical random access memory of <a class="existingWikiWord" href="/nlab/show/data+type">data type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mem</mi></mrow><annotation encoding="application/x-tex">Mem</annotation></semantics></math> is modeled (in terms of <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a>) by the <a class="existingWikiWord" href="/nlab/show/state+monad">state monad</a> induced from the <em><a class="existingWikiWord" href="/nlab/show/cartesian+monoidal+category">cartesian</a></em> <a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a>-<a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjunction</a></p>
+<h2 id="CircuitModel">Circuit model</h2>
+
+<p>The <em>circuit model</em> for QRAM essentially identifies a quantum program</p>
+
+<ul>
+<li>
+<p>of nominal type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi><mo>⟶</mo><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">\mathscr{H} \longrightarrow \mathscr{H}</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>but with access to a QRAM space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mem</mi></mrow><annotation encoding="application/x-tex">Mem</annotation></semantics></math></p>
+</li>
+</ul>
+
+<p>with a a <a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a> of type</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>QMem</mi><mo>⊗</mo><mi class="mathscript">ℋ</mi><mo>⟶</mo><mi>QMem</mi><mo>⊗</mo><mi class="mathscript">ℋ</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  QMem \otimes \mathscr{H} 
+    \longrightarrow
+  QMem \otimes \mathscr{H}
+  \,.
+
+</annotation></semantics></math></div>
+<p>In the existing literature this is typically stated in terms of concrete examples rather than in abstract generality, see for instance &lbrack;<a href="#ArunachalamEtAl15">Arunachalam et al 2015, Fig. 9</a>&rbrack; or &lbrack;<a href="#ParkPetruccioneRhee19">Park, Petruccione &amp; Rhee 2019, Fig 1</a>&rbrack; with review in &lbrack;<a href="#PhalakChatterjeeGhosh23">Phalak, Chatterjee &amp; Ghosh 2023, Fig 4</a>&rbrack;. A nicely transparent example is given in by <a href="#quantumcomputinguk">quantumcomputinguk.org</a>:</p>
+<center>
+<img src="https://ncatlab.org/nlab/files/CircuitQRAMExample-quantumcomputinguk.jpg" width="700" />
+</center>
+<p>(Here the block “Memory Cells” is our “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>QMem</mi></mrow><annotation encoding="application/x-tex">QMem</annotation></semantics></math>”, the rest is our <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">\mathscr{H}</annotation></semantics></math>.)</p>
+
+<p>This <a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a> is such that (assuming <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>q</mi> <mn>2</mn></msub><mo>=</mo><mi>⋯</mi><mo>=</mo><msub><mi>q</mi> <mn>6</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">q_2 =\cdots = q_6 = 0</annotation></semantics></math>)</p>
+
+<ul>
+<li>
+<p>if the Read/Write flag is 0 then</p>
+
+<p>it keeps all qbits (except for “Routing” and) except that the “Readout QBit” is set to one of the four “Memory values” depending on the four possible values of the “Addressing QBits”</p>
+</li>
+
+<li>
+<p>if the Read/Write flag is 1 then</p>
+
+<p>it keeps all qbits (except for “Routing” and) except that the “Memory QBit” addressed by the value of the “Addressing QBits” is set to the value of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>q</mi> <mn>10</mn></msub></mrow><annotation encoding="application/x-tex">q_{10}</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>for a <a class="existingWikiWord" href="/nlab/show/superposition">superposition</a> of these inputs it yields the corresponding superposition of outputs.</p>
+</li>
+</ul>
+
+<h2 id="via_linear_stateeffects">Via linear state-effects</h2>
+
+<p>Recall that a classical random access memory of <a class="existingWikiWord" href="/nlab/show/data+type">data type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mem</mi></mrow><annotation encoding="application/x-tex">Mem</annotation></semantics></math> is modeled (in terms of <a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a>) by the <a class="existingWikiWord" href="/nlab/show/state+monad">state monad</a> induced from the <em><a class="existingWikiWord" href="/nlab/show/cartesian+monoidal+category">cartesian</a></em> <a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a>-<a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjunction</a></p>
 
 <ul>
 <li><a class="existingWikiWord" href="/nlab/show/product">product</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thickmathspace"></mspace></mrow><annotation encoding="application/x-tex">\;</annotation></semantics></math> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Mem</mi><mo>×</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊣</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>Maps</mi><mo stretchy="false">(</mo><mi>Mem</mi><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Mem \times (-) \;\;\dashv\;\; Maps(Mem, -)</annotation></semantics></math> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thickmathspace"></mspace></mrow><annotation encoding="application/x-tex">\;</annotation></semantics></math><a class="existingWikiWord" href="/nlab/show/function+set">function set</a></li>
@@ -935,8 +987,8 @@ margin-left: 0em;
 </ul>
 
 <p>and the corresponding <a class="existingWikiWord" href="/nlab/show/monad">monad</a> is</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>QRAM</mi><mo stretchy="false">(</mo><mi>Mem</mi><mo>,</mo><mi>A</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>LinMaps</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>QMem</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi>QMem</mi><mo>⊗</mo><mi>A</mi><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
-  QRAM(Mem,A)
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>QRAM</mi><mo stretchy="false">(</mo><mi>Mem</mi><mo>,</mo><mi class="mathscript">ℋ</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>LinMaps</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>QMem</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi>QMem</mi><mo>⊗</mo><mi class="mathscript">ℋ</mi><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  QRAM(Mem, \mathscr{H})
   \;\coloneqq\;
   LinMaps
   \big(
@@ -944,7 +996,7 @@ margin-left: 0em;
     ,\,
     QMem 
     \otimes
-    A
+    \mathscr{H}
   \big)
 
 </annotation></semantics></math></div>
@@ -980,7 +1032,13 @@ margin-left: 0em;
 <p>The terminology “quantum random access memory” is due to</p>
 
 <ul>
-<li id="GiovanettiyLloydMaccone08"><a class="existingWikiWord" href="/nlab/show/Vittorio+Giovannetti">Vittorio Giovannetti</a>, <a class="existingWikiWord" href="/nlab/show/Seth+Lloyd">Seth Lloyd</a>, <a class="existingWikiWord" href="/nlab/show/Lorenzo+Maccone">Lorenzo Maccone</a>, <em>Quantum random access memory</em>, Phys. Rev. Lett. <strong>100</strong> 160501 (2008) &lbrack;<a href="https://doi.org/10.1103/PhysRevLett.100.160501">doi:10.1103/PhysRevLett.100.160501</a>, <a href="https://arxiv.org/abs/0708.1879">arXiv:0708.1879</a>&rbrack;</li>
+<li id="GiovanettiyLloydMaccone08">
+<p><a class="existingWikiWord" href="/nlab/show/Vittorio+Giovannetti">Vittorio Giovannetti</a>, <a class="existingWikiWord" href="/nlab/show/Seth+Lloyd">Seth Lloyd</a>, <a class="existingWikiWord" href="/nlab/show/Lorenzo+Maccone">Lorenzo Maccone</a>, <em>Quantum random access memory</em>, Phys. Rev. Lett. <strong>100</strong> 160501 (2008) &lbrack;<a href="https://doi.org/10.1103/PhysRevLett.100.160501">doi:10.1103/PhysRevLett.100.160501</a>, <a href="https://arxiv.org/abs/0708.1879">arXiv:0708.1879</a>&rbrack;</p>
+</li>
+
+<li id="GiovanettiyLloydMaccone08b">
+<p><a class="existingWikiWord" href="/nlab/show/Vittorio+Giovannetti">Vittorio Giovannetti</a>, <a class="existingWikiWord" href="/nlab/show/Seth+Lloyd">Seth Lloyd</a>, <a class="existingWikiWord" href="/nlab/show/Lorenzo+Maccone">Lorenzo Maccone</a>, <em>Architectures for a quantum random access memory</em>, Phys. Rev. A <strong>78</strong> 052310 (2008) &lbrack;<a href="https://doi.org/10.1103/PhysRevA.78.052310">doi:10.1103/PhysRevA.78.052310</a>, <a href="https://arxiv.org/abs/0807.4994">arXiv:0807.4994</a>&rbrack;</p>
+</li>
 </ul>
 
 <p>but it could be argued (?) that the notion is implicit already in <a href="quantum+programming+language#Knill96">Knill (1996)</a>.</p>
@@ -988,7 +1046,35 @@ margin-left: 0em;
 <p>Further development:</p>
 
 <ul>
-<li id="GiovanettiyLloydMaccone08b"><a class="existingWikiWord" href="/nlab/show/Vittorio+Giovannetti">Vittorio Giovannetti</a>, <a class="existingWikiWord" href="/nlab/show/Seth+Lloyd">Seth Lloyd</a>, <a class="existingWikiWord" href="/nlab/show/Lorenzo+Maccone">Lorenzo Maccone</a>, <em>Architectures for a quantum random access memory</em>, Phys. Rev. A <strong>78</strong> 052310 (2008) &lbrack;<a href="https://doi.org/10.1103/PhysRevA.78.052310">doi:10.1103/PhysRevA.78.052310</a>&rbrack;</li>
+<li id="ArunachalamEtAl15">
+<p>S. Arunachalam et al., <em>On the robustness of bucket brigade quantum RAM</em>, New Journal of Physics, <strong>17</strong> 12 (2015) 123010 &lbrack;<a href="https://arxiv.org/abs/1502.03450">arXiv:1502.03450</a>, <a href="https://doi.org/10.1088/1367-2630/17/12/123010">doi:10.1088/1367-2630/17/12/123010</a>&rbrack;</p>
+</li>
+
+<li id="ParkPetruccioneRhee19">
+<p>Park, Petruccione, Rhee, <em>Circuit-Based Quantum Random Access Memory for Classical Data</em>, Scientific Reports <strong>9</strong> 3949 (2019) &lbrack;<a href="https://doi.org/10.1038/s41598-019-40439-3">doi:10.1038/s41598-019-40439-3</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>Review:</p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Alessandro+Luongo">Alessandro Luongo</a>, <em><a href="https://quantumalgorithms.org/chap-classical-data-quantum-computers.html#the-qram">The QRAM</a></em>, §3.1.1. in: <em><a href="https://quantumalgorithms.org/">Quantum algorithms for data analysis</a></em></p>
+</li>
+
+<li id="PhalakChatterjeeGhosh23">
+<p>Koustubh Phalak, Avimita Chatterjee, Swaroop Ghosh, <em>Quantum Random Access Memory For Dummies</em> &lbrack;<a href="https://arxiv.org/abs/2305.01178">arXiv:2305.01178</a>&rbrack;</p>
+</li>
+
+<li>
+<p>Samuel Jaques, Arthur G. Rattew, <em>QRAM: A Survey and Critique</em> &lbrack;<a href="https://arxiv.org/abs/2305.10310">arXiv:2305.10310</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>With Qiskit:</p>
+
+<ul>
+<li id="quantumcomputinguk"><em><a href="https://quantumcomputinguk.org/tutorials/implementing-qram-in-qiskit-with-code">Implementing QRAM in Qiskit</a></em></li>
 </ul>
 </body></html>
 
@@ -996,14 +1082,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on May  2, 2023 at 06:05:24.
+    Last revised on August 11, 2023 at 20:29:36.
     See the <a href="/nlab/history/QRAM" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/QRAM" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15360/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/QRAM/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/QRAM" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/QRAM" accesskey="S" class="navlink" id="history" rel="nofollow">History (1 revision)</a>
+  <a href="/nlab/edit/QRAM" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15360/#Item_3">Discuss</a><span class="backintime"><a href="/nlab/revision/QRAM/4" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/QRAM" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/QRAM" accesskey="S" class="navlink" id="history" rel="nofollow">History (4 revisions)</a>
   <a href="/nlab/show/QRAM/cite" style="color: black">Cite</a>
   <a href="/nlab/print/QRAM" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/QRAM" id="view_source" rel="nofollow">Source</a>
