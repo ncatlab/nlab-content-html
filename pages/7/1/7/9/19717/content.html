@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/9037/#Item_52" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9037/#Item_57" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -423,9 +423,13 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#Idea'>Idea</a></li>
-<li><a href='#definition'>Definition</a></li>
+<li><a href='#Definition'>Definition</a></li>
 <li><a href='#the_category_of_lenses'>The category of lenses</a></li>
 <li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#PossibilityMonadicity'>Monadicity over Possibility monad</a></li>
+<li><a href='#MonadicityOverStateMonade'>Monadicity over the CoState comonad</a></li>
+</ul>
 <li><a href='#generalizations'>Generalizations</a></li>
 <ul>
 <li><a href='#lenses_without_laws'>Lenses without laws</a></li>
@@ -443,17 +447,31 @@ margin-left: 0em;
 
 <h2 id="Idea">Idea</h2>
 
-<p>In <a class="existingWikiWord" href="/nlab/show/computer+science">computer science</a>, originally in <a class="existingWikiWord" href="/nlab/show/database+theory">database theory</a>, a data structure called <em>lenses</em> &lbrack;<a href="#BohannonPierceVaughan06">Bohannon, Pierce &amp; Vaughan (2006, §3)</a>, <a href="#FosterGreenwaldMoorePierceSchmitt07">Foster, Greenwald, Moore, Pierce &amp; Schmitt (2007, §3)</a>&rbrack; is used to formally capture situations where from some <a class="existingWikiWord" href="/nlab/show/data">data</a>(<a class="existingWikiWord" href="/nlab/show/database">-base</a>) may be extracted a specific <em>view</em> (say one field in a record structure) in such a way that changes made to the view can be reflected as <em>updates</em> to the original data.</p>
+<p>In <a class="existingWikiWord" href="/nlab/show/computer+science">computer science</a>, originally in <a class="existingWikiWord" href="/nlab/show/database+theory">database theory</a>, a data <a class="existingWikiWord" href="/nlab/show/structure">structure</a>-<a class="existingWikiWord" href="/nlab/show/type">type</a> now called (lawful) <em>lenses</em> &lbrack;<a href="#BohannonPierceVaughan06">Bohannon, Pierce &amp; Vaughan (2006, §3)</a>, <a href="#FosterGreenwaldMoorePierceSchmitt07">Foster, Greenwald, Moore, Pierce &amp; Schmitt (2007, §3)</a>, but considered under different names already by <a href="#Oles82">Oles 1982</a>, <a href="#Oles86">1986</a> and <a href="#HofmannPierce96">Hofmann &amp; Pierce 1996</a>&rbrack; is used to encode <a class="existingWikiWord" href="/nlab/show/data">data</a>(<a class="existingWikiWord" href="/nlab/show/database">-base</a>) types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> equipped with a read/write functionality (only) for a specified view-type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>.</p>
 
-<p>The same construction has been devised on numerous occasions (cf. <a href="#Hedges18">Hedges (2018)</a>).</p>
+<p>In particular, “very well-behaved” or “lawful” lenses (see Def. <a class="maruku-ref" href="#Lens"></a> below) – those for which updates of the “view” <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> completely overwrite any previous such changes – turn out to equivalently be data base types of product form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>=</mo><mi>D</mi><mo>×</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">S = D \times V</annotation></semantics></math> with “view” given by projecting onto the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-factor. As such, lawful lenses are equivalent to (cf. <em><a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a></em>):</p>
 
-<p>In particular, “well-behaved lenses” (<a href="#BohannonPierceVaughan06">BPV06, Def. 3.2</a>those for which updates of the “view” completely overwrite any previous such changes) turn out to equivalently be just the <a class="existingWikiWord" href="/nlab/show/coalgebra+over+a+comonad">coalgebras</a> of the <a class="existingWikiWord" href="/nlab/show/costate+comonad">costate comonad</a> (cf. <em><a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a></em>), an observation due to <a href="#O&#x2019;Connor10">O’Connor (2010)</a>, <a href="#O&#x2019;Connor11">(2011)</a>; see Prop. <a class="maruku-ref" href="#LensesAreCostateCoalgebras"></a> below.</p>
+<ul>
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/module+over+a+monad">modales</a> over the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/possibility">possibility</a>-monad</p>
+
+<p>(<a href="#JohnsonRosebrughWood10">Johnson, Rosebrugh &amp; Wood 2010, Prop. 9</a>, see Prop. <a class="maruku-ref" href="#LawfulLensesArePossibilityModales"></a> below)</p>
+</li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/comodule+over+a+comonad">comodales</a> over the <a class="existingWikiWord" href="/nlab/show/costate+comonad">costate comonad</a>,</p>
+
+<p>(<a href="#O&#x2019;Connor10">O’Connor (2010)</a>, <a href="#O&#x2019;Connor11">(2011)</a>, see Prop. <a class="maruku-ref" href="#LensesAreCostateCoalgebras"></a> below).</p>
+</li>
+</ul>
+
+<p>Thus, lawful lenses may be thought of as encoding read/write functionality (only) at a certain address in a data base (compare the <a class="existingWikiWord" href="/nlab/show/RAM">RAM</a>-model given by the <a class="existingWikiWord" href="/nlab/show/state+monad">state monad</a> which encodes read/write of the entire data base type at once).</p>
 
 <p>More generally, there are two different approaches to lenses:</p>
 
 <ul>
 <li>
-<p>Lawful lenses are an algebraic structure which axiomatize product projections. The laws govern the ways views and updates relate. These are generalized into <a class="existingWikiWord" href="/nlab/show/delta+lens">Delta lenses</a>, which are more flexible lawful lenses.</p>
+<p>Lawful lenses (as above) are an algebraic structure which axiomatize product projections. The laws govern the ways views and updates relate. These are generalized into <a class="existingWikiWord" href="/nlab/show/delta+lens">Delta lenses</a>, which are more flexible lawful lenses.</p>
 </li>
 
 <li>
@@ -465,40 +483,127 @@ margin-left: 0em;
 
 <p>In this sense, lawless lenses are applications of two mathematical frameworks which are interesting in their own right: <a class="existingWikiWord" href="/nlab/show/fibration">fibrations</a> and <a class="existingWikiWord" href="/nlab/show/optics+%28in+computer+science%29">optics</a> (thus <a class="existingWikiWord" href="/nlab/show/Tambara+module">Tambara modules</a>).</p>
 
-<h2 id="definition">Definition</h2>
-
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>,</mo><mn>1</mn><mo>,</mo><mo>×</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\mathbf{C}, 1, \times)</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/category">category</a> with <a class="existingWikiWord" href="/nlab/show/finite+products">finite products</a>.</p>
+<h2 id="Definition">Definition</h2>
 
 <p>
-<div class='num_defn'>
+<div class='num_defn' id='Lens'>
 <h6>Definition</h6>
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>,</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">S,V</annotation></semantics></math> be objects of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf C</annotation></semantics></math>. A <strong>(lawful) lens</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>, with <strong>source</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> and <strong>view</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>, is a pair of arrows <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">get</mi><mo>:</mo><mi>S</mi><mo>→</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">\mathrm{get} : S \to V</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">put</mi><mo>:</mo><mi>V</mi><mo>×</mo><mi>S</mi><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">\mathrm{put} : V \times S \to S</annotation></semantics></math>, often taken to satisfy the following equations, or <em>lens laws</em>:</p>
+<p><strong>(lenses)</strong> <br /> Given a <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>,</mo><mn>1</mn><mo>,</mo><mo>×</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\mathbf{C}, 1, \times)</annotation></semantics></math> with <a class="existingWikiWord" href="/nlab/show/finite+products">finite products</a>, a <em>lens</em> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> is:</p>
 
 <ol>
-<li>(PutGet) the get of a put is the projection: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">get</mi><mi mathvariant="normal">put</mi><mo>=</mo><msub><mi>π</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\mathrm{get} \mathrm{put} = \pi_0</annotation></semantics></math>.</li>
+<li>
+<p>a <a class="existingWikiWord" href="/nlab/show/pair">pair</a> of <a class="existingWikiWord" href="/nlab/show/objects">objects</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math></p>
 
-<li>(GetPut) the put for a trivially updated state is trivial: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">put</mi><mo stretchy="false">⟨</mo><mi mathvariant="normal">get</mi><mo>,</mo><msub><mn>1</mn> <mi>S</mi></msub><mo stretchy="false">⟩</mo><mo>=</mo><msub><mn>1</mn> <mi>S</mi></msub></mrow><annotation encoding="application/x-tex">\mathrm{put} \langle \mathrm{get}, 1_S \rangle = 1_S</annotation></semantics></math>.</li>
+<ol>
+<li>
+<p>(“source”)</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>S</mi><mspace width="thinmathspace"></mspace><mo>∈</mo><mspace width="thinmathspace"></mspace><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">S \,\in\, \mathbf{C}</annotation></semantics></math></div></li>
 
-<li>(PutPut) composing puts does not depend on the first view update: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">put</mi><mo stretchy="false">(</mo><msub><mn>1</mn> <mi>V</mi></msub><mo>×</mo><mi mathvariant="normal">put</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">put</mi><msub><mi>π</mi> <mrow><mn>0</mn><mo>,</mo><mn>2</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\mathrm{put}(1_V \times \mathrm{put}) = \mathrm{put} \pi_{0,2}</annotation></semantics></math>.</li>
+<li>
+<p>(“view”)</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>V</mi><mspace width="thinmathspace"></mspace><mo>∈</mo><mspace width="thinmathspace"></mspace><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">V \,\in\, \mathbf{C}</annotation></semantics></math></div></li>
 </ol>
+</li>
+
+<li>
+<p>a <a class="existingWikiWord" href="/nlab/show/pair">pair</a> of <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a> of the form</p>
+
+<ol>
+<li>
+<p>(“view”, “read-out”, “forward operation”)</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">get</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>S</mi><mo>⟶</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">
+  \mathrm{get} 
+ \;\colon\; 
+  S \longrightarrow V
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>(“update”, “write”, “backward operation”)</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">put</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>V</mi><mo>×</mo><mi>S</mi><mo>⟶</mo><mi>S</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \mathrm{put} 
+ \;\colon\; 
+  V \times S \longrightarrow S
+  \,.
+
+</annotation></semantics></math></div></li>
+</ol>
+</li>
+</ol>
+
+<p>The lens is called <em>well-behaved</em> if this data satisfies:</p>
+
+<ul>
+<li>
+<p>(PutGet) “what has just been written is read out as such”:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>v</mi><mo lspace="verythinmathspace">:</mo><mi>V</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi>s</mi><mo lspace="verythinmathspace">:</mo><mi>S</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>get</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>put</mi><mo stretchy="false">(</mo><mi>v</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi>s</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>v</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  v \colon V
+  ,\,
+  s \colon S
+  \;\;\;\;\;\;
+  \vdash
+  \;\;\;\;\;\;
+  get\big(
+    put 
+   (v,\,s) 
+  \big)
+  \;=\; 
+  v
+  \,,
+
+</annotation></semantics></math></div></li>
+</ul>
+
+<p>and</p>
+
+<ul>
+<li>
+<p>(GetPut) “writing what has just been read out means no change”:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>s</mi><mo lspace="verythinmathspace">:</mo><mi>S</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>put</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>get</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>,</mo><mspace width="thinmathspace"></mspace><mi>s</mi><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>s</mi></mrow><annotation encoding="application/x-tex">
+  s \colon S
+  \;\;\;\;\;\;
+  \vdash
+  \;\;\;\;\;\;
+  put\big(
+    get(s) 
+    ,\,
+    s
+  \big)   
+  \;=\;
+  s
+
+</annotation></semantics></math></div></li>
+</ul>
+
+<p>and it is called <em>very well-behaved</em> or <em>lawful</em> if in addition it satisfies:</p>
+
+<ul>
+<li>
+<p>(PutPut) “writing means to over-write previous edits”:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>v</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi>v</mi><mo>′</mo><mo lspace="verythinmathspace">:</mo><mi>V</mi><mo>,</mo><mspace width="thickmathspace"></mspace><mi>s</mi><mo lspace="verythinmathspace">:</mo><mi>S</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>put</mi><mo maxsize="1.8em" minsize="1.8em">(</mo><mi>v</mi><mo>′</mo><mo>,</mo><mspace width="thinmathspace"></mspace><mi>put</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>v</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi>s</mi><mo maxsize="1.2em" minsize="1.2em">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>put</mi><mo stretchy="false">(</mo><mi>v</mi><mo>′</mo><mo>,</mo><mspace width="thinmathspace"></mspace><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  v,\,v' \colon V
+  ,\;
+  s \colon S
+  \;\;\;\;\;\;
+  \vdash
+  \;\;\;\;\;\;
+  put\Big(
+    v',\,
+    put\big(
+      v,\, s 
+    \big)
+  \Big)
+  \;=\;
+  put(v',\, s)
+
+</annotation></semantics></math></div></li>
+</ul>
 
 <p></p>
 </div>
 </p>
 
-<p>
-<div class='num_remark'>
-<h6>Remark</h6>
-<p>The two morphisms comprising a lens can also be called ‘view’ and ‘update’. More generally, they are referred to as the ‘forward’ and ‘backward’ parts of the lens.</p>
-</div>
-</p>
-
-<p>
-<div class='num_remark'>
-<h6>Remark</h6>
-<p>Sometimes a lens satisfying all three laws is said to be <em>lawful</em>. Sometimes it is said that a <em>well-behaved</em> lens satisfies (1) and (2) and a <em>very well-behaved</em> lens satisfies also (3).</p>
-</div>
-</p>
+<p>(<a href="#HofmannPierce96">Hofmann &amp; Pierce 1996, p. 12</a>; <a href="#BohannonPierceVaughan06">Bohannon, Pierce &amp; Vaughan 2006, Def. 3.2</a>, cf. eg. <a href="#JohnsonRosebrughWood10">Johnson, Rosebrugh &amp; Wood 2010, Def. 8</a>)</p>
 
 <h2 id="the_category_of_lenses">The category of lenses</h2>
 
@@ -526,194 +631,313 @@ margin-left: 0em;
 
 <h2 id="properties">Properties</h2>
 
+<h3 id="PossibilityMonadicity">Monadicity over Possibility monad</h3>
+
 <p>
-<div class='num_prop'>
+<div class='num_prop' id='LawfulLensesArePossibilityModales'>
 <h6>Proposition</h6>
-<p>Lenses are <a class="existingWikiWord" href="/nlab/show/algebra+over+a+monad">algebras</a> for a <a class="existingWikiWord" href="/nlab/show/monad">monad</a> generated by the <a class="existingWikiWord" href="/nlab/show/adjunction">adjunction</a>:</p>
-<div style="text-align: center">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="125.308" height="42.704" viewBox="0 0 125.308 42.704">
+<p><strong>(lawful lenses are possibility modales)</strong> <br /> Lawful lenses in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> with view <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> (Def. <a class="maruku-ref" href="#Lens"></a>) are equivalently the <a class="existingWikiWord" href="/nlab/show/module+of+a+monad">modules</a> (<a class="existingWikiWord" href="/nlab/show/modales">modales</a>) of the left <a class="existingWikiWord" href="/nlab/show/base+change">base change</a> <a class="existingWikiWord" href="/nlab/show/monad">monad</a> on the <a class="existingWikiWord" href="/nlab/show/slice+category">slice category</a> over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> (the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-<a href="necessity+and+possibility#globally">possibility</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◊</mo> <mi>V</mi></msub></mrow><annotation encoding="application/x-tex">\lozenge_V</annotation></semantics></math>):</p>
+<div class="maruku-equation" id="eq:PossibilityMonadOverTheViewObject"><span class="maruku-eq-number">(1)</span><code class="maruku-mathml">
+  
+
+</code></div><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="154.19pt" height="87.248pt" viewBox="0 0 154.19 87.248" version="1.2">
 <defs>
 <g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-0-0">
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph0-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph0-1">
+<path style="stroke:none;" d="M 11.09375 -9.953125 C 11.09375 -10.296875 11.09375 -10.34375 10.765625 -10.34375 L 9.65625 -9.265625 C 8.828125 -9.984375 7.828125 -10.34375 6.734375 -10.34375 C 3.203125 -10.34375 0.921875 -8.1875 0.921875 -5.078125 C 0.921875 -2.03125 3.125 0.171875 6.75 0.171875 C 9.390625 0.171875 11.09375 -1.625 11.09375 -3.375 C 11.09375 -3.625 11 -3.640625 10.78125 -3.640625 C 10.640625 -3.640625 10.484375 -3.640625 10.46875 -3.484375 C 10.34375 -1.234375 8.421875 -0.453125 7.09375 -0.453125 C 6.125 -0.453125 4.828125 -0.71875 4 -1.65625 C 3.484375 -2.21875 3 -3.03125 3 -5.078125 C 3 -6.53125 3.234375 -7.609375 3.921875 -8.4375 C 4.875 -9.546875 6.359375 -9.703125 7.0625 -9.703125 C 8.171875 -9.703125 9.96875 -9.078125 10.40625 -6.46875 C 10.4375 -6.34375 10.578125 -6.34375 10.75 -6.34375 C 11.09375 -6.34375 11.09375 -6.375 11.09375 -6.71875 Z M 11.09375 -9.953125 "></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph1-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph1-1">
+<path style="stroke:none;" d="M 4.59375 -6.984375 C 4.65625 -7.125 4.65625 -7.15625 4.65625 -7.171875 C 4.65625 -7.3125 4.546875 -7.40625 4.421875 -7.40625 C 4.265625 -7.40625 4.21875 -7.28125 4.1875 -7.1875 L 0.640625 2.046875 C 0.578125 2.1875 0.578125 2.21875 0.578125 2.234375 C 0.578125 2.375 0.6875 2.46875 0.8125 2.46875 C 0.96875 2.46875 1 2.34375 1.046875 2.25 Z M 4.59375 -6.984375 "></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph1-2">
+<path style="stroke:none;" d="M 6.609375 -5.5625 C 7.109375 -6.3125 7.484375 -6.40625 7.875 -6.421875 C 7.984375 -6.421875 8.03125 -6.53125 8.03125 -6.609375 C 8.03125 -6.640625 8.015625 -6.75 7.890625 -6.75 C 7.765625 -6.75 7.8125 -6.71875 7.09375 -6.71875 C 6.453125 -6.71875 6.1875 -6.75 6.15625 -6.75 C 6.109375 -6.75 5.953125 -6.75 5.953125 -6.5625 C 5.953125 -6.421875 6.078125 -6.421875 6.125 -6.421875 C 6.40625 -6.40625 6.53125 -6.296875 6.53125 -6.125 C 6.53125 -5.96875 6.4375 -5.84375 6.390625 -5.75 L 3.1875 -0.90625 L 2.359375 -5.96875 C 2.34375 -6.0625 2.34375 -6.109375 2.34375 -6.140625 C 2.34375 -6.265625 2.484375 -6.421875 2.984375 -6.421875 C 3.109375 -6.421875 3.234375 -6.421875 3.234375 -6.609375 C 3.234375 -6.640625 3.203125 -6.75 3.078125 -6.75 C 2.984375 -6.75 2.59375 -6.71875 2.515625 -6.71875 L 1.890625 -6.71875 C 1 -6.71875 0.875 -6.75 0.796875 -6.75 C 0.75 -6.75 0.609375 -6.75 0.609375 -6.5625 C 0.609375 -6.421875 0.734375 -6.421875 0.875 -6.421875 C 1.375 -6.421875 1.390625 -6.328125 1.4375 -6.078125 L 2.40625 -0.0625 C 2.421875 0.125 2.4375 0.203125 2.625 0.203125 C 2.796875 0.203125 2.859375 0.125 2.921875 0.015625 Z M 6.609375 -5.5625 "></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph2-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph2-1">
+<path style="stroke:none;" d="M 6.46875 -4.546875 C 6.59375 -4.65625 6.609375 -4.703125 6.609375 -4.78125 C 6.609375 -4.890625 6.5 -5 6.375 -5 C 6.296875 -5 6.25 -4.96875 6.140625 -4.859375 L 4.078125 -2.796875 L 2 -4.875 C 1.890625 -4.984375 1.84375 -5 1.765625 -5 C 1.65625 -5 1.546875 -4.90625 1.546875 -4.78125 C 1.546875 -4.6875 1.578125 -4.65625 1.671875 -4.546875 L 3.75 -2.46875 L 1.6875 -0.40625 C 1.5625 -0.28125 1.546875 -0.234375 1.546875 -0.15625 C 1.546875 -0.03125 1.65625 0.0625 1.765625 0.0625 C 1.859375 0.0625 1.890625 0.046875 2 -0.0625 L 4.0625 -2.140625 L 6.21875 0.015625 C 6.265625 0.046875 6.328125 0.0625 6.375 0.0625 C 6.5 0.0625 6.609375 -0.046875 6.609375 -0.15625 C 6.609375 -0.234375 6.5625 -0.28125 6.5625 -0.28125 C 6.515625 -0.34375 4.9375 -1.921875 4.390625 -2.46875 Z M 6.46875 -4.546875 "></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph3-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph3-1">
+<path style="stroke:none;" d="M 8.3125 1.21875 C 8.3125 0.9375 8.3125 0.453125 9.3125 0.453125 L 9.3125 0 L 6.3125 0 L 6.3125 0.453125 C 7.3125 0.453125 7.3125 0.9375 7.3125 1.21875 L 7.3125 9.421875 L 2.578125 9.421875 L 2.578125 1.21875 C 2.578125 0.9375 2.578125 0.453125 3.578125 0.453125 L 3.578125 0 L 0.578125 0 L 0.578125 0.453125 C 1.578125 0.453125 1.578125 0.9375 1.578125 1.21875 L 1.578125 8.65625 C 1.578125 8.9375 1.578125 9.421875 0.578125 9.421875 L 0.578125 9.875 L 9.3125 9.875 L 9.3125 9.421875 C 8.3125 9.421875 8.3125 8.9375 8.3125 8.65625 Z M 8.3125 1.21875 "></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph4-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph4-1">
+<path style="stroke:none;" d="M 5.65625 -4.15625 C 5.671875 -4.203125 5.75 -4.28125 5.796875 -4.34375 C 6.109375 -4.703125 6.359375 -4.75 6.65625 -4.765625 C 6.734375 -4.765625 6.78125 -4.875 6.78125 -4.953125 C 6.78125 -4.984375 6.765625 -5.0625 6.671875 -5.0625 C 6.46875 -5.0625 6.25 -5.03125 6.03125 -5.03125 C 5.859375 -5.03125 5.421875 -5.0625 5.25 -5.0625 C 5.125 -5.0625 5.078125 -4.96875 5.078125 -4.875 C 5.078125 -4.765625 5.1875 -4.765625 5.234375 -4.765625 C 5.28125 -4.75 5.546875 -4.734375 5.546875 -4.5625 C 5.546875 -4.46875 5.4375 -4.328125 5.40625 -4.265625 L 2.90625 -0.6875 L 2.140625 -4.46875 C 2.140625 -4.546875 2.140625 -4.5625 2.140625 -4.59375 C 2.140625 -4.6875 2.28125 -4.765625 2.625 -4.765625 C 2.71875 -4.765625 2.828125 -4.765625 2.828125 -4.953125 C 2.828125 -4.96875 2.828125 -5.0625 2.703125 -5.0625 C 2.546875 -5.0625 2.375 -5.03125 2.203125 -5.03125 C 2.046875 -5.03125 1.890625 -5.03125 1.71875 -5.03125 C 1.71875 -5.03125 1.28125 -5.03125 1.28125 -5.03125 C 1.15625 -5.03125 1 -5.0625 0.859375 -5.0625 C 0.78125 -5.0625 0.703125 -5.015625 0.703125 -4.875 C 0.703125 -4.765625 0.8125 -4.765625 0.90625 -4.765625 C 1.34375 -4.765625 1.359375 -4.703125 1.390625 -4.546875 L 2.28125 -0.03125 C 2.296875 0.09375 2.3125 0.15625 2.484375 0.15625 C 2.625 0.15625 2.671875 0.109375 2.734375 0 Z M 5.65625 -4.15625 "></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph5-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph5-1">
+<path style="stroke:none;" d="M 4.25 -6.5625 C 4.25 -6.75 4.25 -6.9375 4.03125 -6.9375 C 3.828125 -6.9375 3.828125 -6.71875 3.828125 -6.5625 L 3.828125 -0.421875 L 0.9375 -0.421875 C 0.78125 -0.421875 0.578125 -0.421875 0.578125 -0.203125 C 0.578125 0 0.78125 0 0.9375 0 L 7.140625 0 C 7.3125 0 7.5 0 7.5 -0.203125 C 7.5 -0.421875 7.3125 -0.421875 7.140625 -0.421875 L 4.25 -0.421875 Z M 4.25 -6.5625 "></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph6-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph6-1">
+<path style="stroke:none;" d="M 5.9375 -2.6875 C 6.03125 -2.8125 6.03125 -2.828125 6.03125 -2.890625 C 6.03125 -2.9375 5.953125 -3.046875 5.953125 -3.046875 L 3.5 -6.90625 C 3.453125 -6.984375 3.390625 -7.078125 3.28125 -7.078125 C 3.1875 -7.078125 3.125 -6.984375 3.078125 -6.90625 L 0.640625 -3.078125 C 0.546875 -2.9375 0.546875 -2.921875 0.546875 -2.875 C 0.546875 -2.8125 0.625 -2.71875 0.625 -2.703125 L 3.078125 1.140625 C 3.125 1.234375 3.1875 1.3125 3.28125 1.3125 C 3.390625 1.3125 3.453125 1.234375 3.5 1.140625 Z M 0.984375 -2.875 L 3.28125 -6.5 L 5.59375 -2.890625 L 3.296875 0.734375 L 3.28125 0.734375 Z M 0.984375 -2.875 "></path>
+</symbol>
 </g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-0-1">
-<path d="M 11.1875 -10.03125 C 11.1875 -10.375 11.1875 -10.421875 10.859375 -10.421875 L 9.734375 -9.34375 C 8.90625 -10.0625 7.90625 -10.421875 6.796875 -10.421875 C 3.21875 -10.421875 0.921875 -8.265625 0.921875 -5.125 C 0.921875 -2.046875 3.15625 0.171875 6.8125 0.171875 C 9.46875 0.171875 11.1875 -1.640625 11.1875 -3.40625 C 11.1875 -3.65625 11.09375 -3.671875 10.875 -3.671875 C 10.71875 -3.671875 10.578125 -3.671875 10.5625 -3.515625 C 10.421875 -1.234375 8.5 -0.46875 7.15625 -0.46875 C 6.1875 -0.46875 4.875 -0.734375 4.03125 -1.671875 C 3.515625 -2.234375 3.03125 -3.0625 3.03125 -5.125 C 3.03125 -6.59375 3.25 -7.671875 3.953125 -8.515625 C 4.921875 -9.640625 6.40625 -9.78125 7.125 -9.78125 C 8.25 -9.78125 10.046875 -9.15625 10.5 -6.53125 C 10.53125 -6.390625 10.671875 -6.390625 10.84375 -6.390625 C 11.1875 -6.390625 11.1875 -6.421875 11.1875 -6.78125 Z M 11.1875 -10.03125 "></path>
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-1-0">
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-1-1">
-<path d="M 6.40625 -10.65625 C 6.40625 -10.671875 6.5 -10.890625 6.5 -10.921875 C 6.5 -11.09375 6.34375 -11.203125 6.234375 -11.203125 C 6.15625 -11.203125 6.015625 -11.203125 5.90625 -10.875 L 0.890625 3.1875 C 0.890625 3.203125 0.8125 3.421875 0.8125 3.453125 C 0.8125 3.625 0.953125 3.734375 1.078125 3.734375 C 1.171875 3.734375 1.296875 3.71875 1.40625 3.40625 Z M 6.40625 -10.65625 "></path>
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-1-2">
-<path d="M 9.25 -8.546875 C 9.75 -9.34375 10.21875 -9.703125 10.984375 -9.765625 C 11.125 -9.78125 11.25 -9.78125 11.25 -10.046875 C 11.25 -10.109375 11.21875 -10.203125 11.078125 -10.203125 C 10.8125 -10.203125 10.171875 -10.171875 9.90625 -10.171875 C 9.46875 -10.171875 9.015625 -10.203125 8.609375 -10.203125 C 8.484375 -10.203125 8.328125 -10.203125 8.328125 -9.921875 C 8.328125 -9.78125 8.46875 -9.765625 8.53125 -9.765625 C 9.078125 -9.71875 9.140625 -9.453125 9.140625 -9.28125 C 9.140625 -9.046875 8.9375 -8.703125 8.921875 -8.6875 L 4.234375 -1.25 L 3.1875 -9.3125 C 3.1875 -9.734375 3.953125 -9.765625 4.125 -9.765625 C 4.34375 -9.765625 4.484375 -9.765625 4.484375 -10.046875 C 4.484375 -10.203125 4.3125 -10.203125 4.265625 -10.203125 C 4.015625 -10.203125 3.71875 -10.171875 3.46875 -10.171875 L 2.625 -10.171875 C 1.53125 -10.171875 1.09375 -10.203125 1.078125 -10.203125 C 0.984375 -10.203125 0.8125 -10.203125 0.8125 -9.9375 C 0.8125 -9.765625 0.90625 -9.765625 1.15625 -9.765625 C 1.90625 -9.765625 1.953125 -9.640625 2 -9.265625 L 3.203125 -0.046875 C 3.234375 0.265625 3.234375 0.3125 3.453125 0.3125 C 3.625 0.3125 3.703125 0.265625 3.859375 0.03125 Z M 9.25 -8.546875 "></path>
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-2-0">
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-2-1">
-<path d="M 4.703125 -6.921875 C 4.59375 -7.125 4.46875 -7.125 4.40625 -7.125 C 4.34375 -7.125 4.21875 -7.125 4.109375 -6.921875 L 0.578125 -0.25 C 0.515625 -0.140625 0.515625 -0.125 0.515625 -0.09375 C 0.515625 0 0.59375 0 0.75 0 L 8.0625 0 C 8.234375 0 8.296875 0 8.296875 -0.09375 C 8.296875 -0.125 8.296875 -0.140625 8.234375 -0.25 Z M 4.078125 -6.140625 L 6.921875 -0.78125 L 1.234375 -0.78125 Z M 4.078125 -6.140625 "></path>
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-2-2">
-<path d="M 3.890625 -3.234375 C 4 -3.34375 4 -3.359375 4 -3.40625 C 4 -3.453125 3.96875 -3.515625 3.9375 -3.546875 L 1.796875 -6.484375 L 4.234375 -6.484375 C 5.78125 -6.484375 6.546875 -6.25 6.734375 -4.546875 L 7.046875 -4.546875 L 6.765625 -6.8125 L 0.875 -6.8125 C 0.65625 -6.8125 0.59375 -6.8125 0.59375 -6.578125 L 3.203125 -2.984375 L 0.703125 -0.3125 C 0.609375 -0.203125 0.59375 -0.203125 0.59375 -0.140625 C 0.59375 0 0.71875 0 0.875 0 L 6.765625 0 L 7.046875 -2.375 L 6.734375 -2.375 C 6.515625 -0.734375 5.890625 -0.453125 4.1875 -0.453125 L 1.28125 -0.453125 Z M 3.890625 -3.234375 "></path>
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-3-0">
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-3-1">
-<path d="M 5.703125 -4.203125 C 5.71875 -4.234375 5.796875 -4.3125 5.84375 -4.375 C 6.15625 -4.75 6.421875 -4.78125 6.71875 -4.796875 C 6.796875 -4.8125 6.84375 -4.921875 6.84375 -5 C 6.828125 -5.015625 6.828125 -5.09375 6.71875 -5.09375 C 6.53125 -5.09375 6.296875 -5.078125 6.09375 -5.078125 C 5.90625 -5.078125 5.46875 -5.09375 5.28125 -5.09375 C 5.15625 -5.09375 5.125 -5 5.125 -4.921875 C 5.125 -4.8125 5.234375 -4.796875 5.28125 -4.796875 C 5.328125 -4.796875 5.59375 -4.78125 5.59375 -4.59375 C 5.59375 -4.5 5.484375 -4.359375 5.4375 -4.296875 L 2.921875 -0.6875 L 2.171875 -4.515625 C 2.15625 -4.578125 2.15625 -4.59375 2.15625 -4.625 C 2.15625 -4.71875 2.3125 -4.796875 2.640625 -4.796875 C 2.734375 -4.796875 2.859375 -4.796875 2.859375 -4.984375 C 2.859375 -5.015625 2.84375 -5.09375 2.71875 -5.09375 C 2.5625 -5.09375 2.390625 -5.078125 2.21875 -5.078125 C 2.0625 -5.078125 1.90625 -5.078125 1.734375 -5.078125 C 1.734375 -5.078125 1.296875 -5.078125 1.296875 -5.078125 C 1.171875 -5.078125 1.015625 -5.09375 0.875 -5.09375 C 0.796875 -5.09375 0.703125 -5.0625 0.703125 -4.921875 C 0.703125 -4.796875 0.8125 -4.796875 0.90625 -4.796875 C 1.359375 -4.796875 1.359375 -4.75 1.390625 -4.578125 L 2.296875 -0.03125 C 2.328125 0.09375 2.34375 0.15625 2.5 0.15625 C 2.65625 0.15625 2.6875 0.109375 2.765625 0 Z M 5.703125 -4.203125 "></path>
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-4-0">
-</g>
-<g id="IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-4-1">
-<path d="M 4.34375 -6.546875 C 4.34375 -6.703125 4.34375 -6.921875 4.109375 -6.921875 C 3.890625 -6.921875 3.890625 -6.703125 3.890625 -6.53125 L 3.890625 -0.453125 L 0.984375 -0.453125 C 0.8125 -0.453125 0.59375 -0.453125 0.59375 -0.234375 C 0.59375 0 0.8125 0 0.984375 0 L 7.265625 0 C 7.421875 0 7.640625 0 7.640625 -0.234375 C 7.640625 -0.453125 7.421875 -0.453125 7.265625 -0.453125 L 4.34375 -0.453125 Z M 4.34375 -6.546875 "></path>
-</g>
-</g>
+<clipPath id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-clip1">
+  <path d="M 132 35 L 153.128906 35 L 153.128906 51 L 132 51 Z M 132 35 "></path>
+</clipPath>
 </defs>
-<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
-<use xlink:href="#IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-0-1" x="6.434" y="24.251"></use>
+<g id="Whlio1dyL7EH-YQ_IrgGw1jjVI0=-surface1">
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph0-1" x="6.636291" y="45.946978"></use>
 </g>
-<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
-<use xlink:href="#IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-0-1" x="87.633" y="24.251"></use>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph0-1" x="87.141409" y="45.946978"></use>
 </g>
-<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
-<use xlink:href="#IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-1-1" x="99.7755" y="24.251"></use>
-<use xlink:href="#IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-1-2" x="107.092082" y="24.251"></use>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph1-1" x="99.180146" y="48.25211"></use>
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph1-2" x="104.428056" y="48.25211"></use>
 </g>
-<path fill="none" stroke-width="0.47818" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -37.396187 -6.973281 L 17.818656 -6.973281 " transform="matrix(1, 0, 0, -1, 62.654, 20.515)"></path>
-<path fill="none" stroke-width="0.47818" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -2.484718 2.867846 C -2.031593 1.149096 -1.019874 0.336596 -0.0003425 0.00065875 C -1.019874 -0.335279 -2.031593 -1.147779 -2.484718 -2.870435 " transform="matrix(1, 0, 0, -1, 80.71128, 27.48894)"></path>
-<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
-<use xlink:href="#IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-2-1" x="44.688" y="37.813"></use>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -35.061639 -6.952732 L 20.152378 -6.952732 " transform="matrix(0.991455,0,0,-0.991455,60.062802,43.251213)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.487696 2.868718 C -2.030665 1.146974 -1.018106 0.335351 -0.00160728 0.000457582 C -1.018106 -0.334435 -2.030665 -1.146059 -2.487696 -2.867803 " transform="matrix(0.991455,0,0,-0.991455,80.278937,50.144985)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph2-1" x="44.605035" y="60.380573"></use>
 </g>
-<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
-<use xlink:href="#IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-3-1" x="53.50925" y="39.48675"></use>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph1-2" x="52.767184" y="60.380573"></use>
 </g>
-<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
-<use xlink:href="#IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-4-1" x="48.988" y="23.973"></use>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 20.629108 8.988177 L -34.584909 8.988177 " transform="matrix(0.991455,0,0,-0.991455,60.062802,43.251213)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.487525 2.867313 C -2.030494 1.149509 -1.021875 0.333946 -0.00143627 -0.000947402 C -1.021875 -0.33584 -2.030494 -1.147464 -2.487525 -2.869208 " transform="matrix(-0.991455,0,0,0.991455,25.537639,34.340783)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph3-1" x="43.980418" y="20.360015"></use>
 </g>
-<path fill="none" stroke-width="0.47818" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 18.295219 6.972031 L -36.915719 6.972031 " transform="matrix(1, 0, 0, -1, 62.654, 20.515)"></path>
-<path fill="none" stroke-width="0.47818" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -2.486215 2.869096 C -2.03309 1.14644 -1.021371 0.33394 -0.00184 0.00190875 C -1.021371 -0.334029 -2.03309 -1.146529 -2.486215 -2.869185 " transform="matrix(-1, 0, 0, 1, 25.49816, 13.54106)"></path>
-<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
-<use xlink:href="#IbKAPNy6P4TLY8WltGJ3W-HMS5g=-glyph-2-2" x="49.282" y="10.025"></use>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph4-1" x="53.892485" y="30.854561"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph5-1" x="48.875229" y="45.843867"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 52.88522 11.332429 C 91.094548 43.383665 93.517598 -43.385158 55.678622 -11.637295 " transform="matrix(0.991455,0,0,-0.991455,60.062802,43.251213)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.487461 2.868746 C -2.031263 1.148013 -1.020138 0.335143 0.00201478 -0.000465344 C -1.019937 -0.333273 -2.033733 -1.147819 -2.486576 -2.870055 " transform="matrix(-0.759533,-0.637228,-0.637228,0.759533,115.083265,54.638356)"></path>
+<g clip-path="url(#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-clip1)" clip-rule="nonzero">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 153.132812 35.8125 L 132.222656 35.8125 L 132.222656 50.691406 L 153.132812 50.691406 Z M 153.132812 35.8125 "></path>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph6-1" x="135.412356" y="45.839901"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#Whlio1dyL7EH-YQ_IrgGw1jjVI0=-glyph4-1" x="141.996854" y="47.500587"></use>
+</g>
 </g>
 </svg>
-</div>
+<p>where</p>
+
+<ol>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>view</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>S</mi><mo>→</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">view \,\colon\, S \to V</annotation></semantics></math> is identified with the slicing morphism,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>get</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>V</mi><mo>×</mo><mi>S</mi><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">get \,\colon\, V \times S \to S</annotation></semantics></math> is identified with the module action <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◊</mo> <mi>V</mi></msub><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">\lozenge_V(S) \to S</annotation></semantics></math>.</p>
+</li>
+</ol>
+
 <p></p>
 </div>
- 
-<div class='proof'>
+ (<a href="#JohnsonRosebrughWood10">Johnson, Rosebrugh &amp; Wood 2010, Prop. 9</a>) 
+<div class='proof' id='ProofOfLawfulLensesArePossibilityModales'>
 <h6>Proof</h6>
-<p>See (<a href="#JohnsonRosebrughWood10">Johnson-Rosebrugh-Wood 2010, Proposition 9</a>). See also the <a href="necessity+and+possibility#globally">possibility</a> operator.</p>
+<p>By direct unwinding of the definitions:</p>
+<div style="margin: -30px 10px 10px 10px">
+  <img src="/nlab/files/LawfulLensesAsPossibilityModales-230613.jpg" width="800px" />
+</div>
+<p></p>
 </div>
 </p>
 
 <p>
-<div class='num_prop'>
+<div class='num_prop' id='LawfulLensesMonadicity'>
 <h6>Proposition</h6>
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>=</mo><mi>Set</mi></mrow><annotation encoding="application/x-tex">\mathbf{C} = Set</annotation></semantics></math>. Then every lens <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi><mo>=</mo><mo stretchy="false">(</mo><mi>S</mi><mo>,</mo><mi>V</mi><mo>,</mo><mi mathvariant="normal">get</mi><mo>,</mo><mi mathvariant="normal">put</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L = (S, V, \mathrm{get}, \mathrm{put})</annotation></semantics></math> is equivalent a “constant complement” lens whose <strong>Get</strong> is a product projection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>1</mn></msub><mo>:</mo><mi>C</mi><mo>×</mo><mi>V</mi><mo>→</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">\pi_{1} : C \times V \to V</annotation></semantics></math> and whose <strong>Put</strong> is the function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mrow><mn>0</mn><mo>,</mo><mn>2</mn></mrow></msub><mo>:</mo><mi>C</mi><mo>×</mo><mi>V</mi><mo>×</mo><mi>V</mi><mo>→</mo><mi>C</mi><mo>×</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">\pi_{0,2} : C \times V \times V \to C \times V</annotation></semantics></math> for some set <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+<p>If the ambient category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/topos">topos</a> (such as <a class="existingWikiWord" href="/nlab/show/Sets">Sets</a>) and the view <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/inhabited+object">inhabited</a>, then the adjunction <a class="maruku-eqref" href="#eq:PossibilityMonadOverTheViewObject">(1)</a> is <a class="existingWikiWord" href="/nlab/show/monadic+functor">monadic</a>.</p>
 </div>
- 
+ For the case <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle><mo>=</mo><mi>Sets</mi></mrow><annotation encoding="application/x-tex">\mathbf{C} = Sets</annotation></semantics></math> this is <a href="#JohnsonRosebrughWood10">Johnson, Rosebrugh &amp; Wood 2010, Thm. 12, Cor. 13</a>. 
 <div class='proof'>
 <h6>Proof</h6>
-<p>See (<a href="#JohnsonRosebrughWood10">Johnson-Rosebrugh-Wood 2010, Corollary 13</a>).</p>
+<p>The <a class="existingWikiWord" href="/nlab/show/monadicity+theorem">monadicity theorem</a> (<a href="monadicity+theorem#BeckMonadicityTheoremAlternative">here</a>) readily gives that the above adjunction <a class="maruku-eqref" href="#eq:PossibilityMonadOverTheViewObject">(1)</a> is <a class="existingWikiWord" href="/nlab/show/monadic+functor">monadic functor</a>: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mtext>-</mtext><mo stretchy="false">)</mo><mo>×</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">(\text{-})\times V</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/preserved+colimit">preserves</a> all colimits (cf. <a class="existingWikiWord" href="/nlab/show/universal+colimits">universal colimits</a>) hence in particular the relevant <a class="existingWikiWord" href="/nlab/show/coequalizers">coequalizers</a>, and it is <a class="existingWikiWord" href="/nlab/show/conservative+functor">conservative</a> by the assumption that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> is inhabited (this is clear by inspection in <a class="existingWikiWord" href="/nlab/show/Sets">Sets</a> – which is what <a href="#JohnsonRosebrughWood10">JRW10</a> observe on their p. 13 – for the general case use <a class="existingWikiWord" href="/nlab/show/Sketches+of+an+Elephant">Johnstone 2002, vol 1, Lem. 1.3.2</a>).</p>
 </div>
 </p>
+
+<p>
+<div class='num_remark' id='MonadicityOfLawfulLensesAsMonadicDescent'>
+<h6>Remark</h6>
+<p><strong>(relation to <a class="existingWikiWord" href="/nlab/show/monadic+descent">monadic descent</a>)</strong> <br /> In (<a class="existingWikiWord" href="/nlab/show/algebraic+geometry">algebraic</a>) <a class="existingWikiWord" href="/nlab/show/geometry">geometry</a>, the statement of Prop. <a class="maruku-ref" href="#LawfulLensesMonadicity"></a> is known as <em><a class="existingWikiWord" href="/nlab/show/monadic+descent">monadic descent</a></em>. In this context one would say that:</p>
+
+<ul>
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/epimorphism">epimorphism</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>→</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">V \to \ast</annotation></semantics></math> (reflecting that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/inhabited+objects">inhabited</a>, necessarily an <a class="existingWikiWord" href="/nlab/show/effective+epimorphism">effective epimorphism</a> given that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> is assumed to be a <a class="existingWikiWord" href="/nlab/show/topos">topos</a>) is the <em>morphism of effective descent</em>, representing a <a class="existingWikiWord" href="/nlab/show/covering">covering</a>,</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◊</mo> <mi>V</mi></msub></mrow><annotation encoding="application/x-tex">\lozenge_V</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/modale">modale</a>-<a class="existingWikiWord" href="/nlab/show/structure">structure</a> is <em><a class="existingWikiWord" href="/nlab/show/descent+data">descent data</a></em> on the <a class="existingWikiWord" href="/nlab/show/underlying">underlying</a> object in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mstyle mathvariant="bold"><mi>C</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>V</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf{C}_{/V}</annotation></semantics></math>,</p>
+</li>
+
+<li>
+<p>the <a class="existingWikiWord" href="/nlab/show/Eilenberg-Moore+category">EM-category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mstyle mathvariant="bold"><mi>C</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>V</mi></mrow></msub><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mrow><msub><mo>◊</mo> <mi>V</mi></msub></mrow></msup></mrow><annotation encoding="application/x-tex">\big(\mathbf{C}_{/V}\big)^{\lozenge_V}</annotation></semantics></math> is the <em><a class="existingWikiWord" href="/nlab/show/category+of+descent+data">category of descent data</a></em> along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>→</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">V \to \ast</annotation></semantics></math>,</p>
+</li>
+</ul>
+
+<p>and so the monadicity theorem <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle><mspace width="thinmathspace"></mspace><mo>≃</mo><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mstyle mathvariant="bold"><mi>C</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>V</mi></mrow></msub><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mrow><msub><mo>◊</mo> <mi>V</mi></msub></mrow></msup></mrow><annotation encoding="application/x-tex">\mathbf{C} \,\simeq\, \big(\mathbf{C}_{/V}\big)^{\lozenge_V}</annotation></semantics></math> in Prop. <a class="maruku-ref" href="#LawfulLensesMonadicity"></a> states that objects over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> which are equipped with such descent data are equivalent to objects over <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>, hence “do descend” along <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>→</mo><mo>*</mo></mrow><annotation encoding="application/x-tex">V \to \ast</annotation></semantics></math>.</p>
+</div>
+</p>
+
+<p>
+<div class='num_remark'>
+<h6>Remark</h6>
+<p><strong>(relation to <a class="existingWikiWord" href="/nlab/show/epistemic+logic">epistemic logic</a>)</strong> <br /> Prop. <a class="maruku-ref" href="#LawfulLensesMonadicity"></a> says that the category of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◊</mo> <mi>V</mi></msub></mrow><annotation encoding="application/x-tex">\lozenge_V</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/modales">modales</a> among objects in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mstyle mathvariant="bold"><mi>C</mi></mstyle> <mrow><mo stretchy="false">/</mo><mi>V</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf{C}_{/V}</annotation></semantics></math> is equivalent to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math>. This makes good sense when viewing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>◊</mo> <mi>V</mi></msub></mrow><annotation encoding="application/x-tex">\lozenge_V</annotation></semantics></math> as the <a class="existingWikiWord" href="/nlab/show/possibility">possibility</a>-<a class="existingWikiWord" href="/nlab/show/modality">modality</a>, see the discussion of <em>potentiality</em> <a href="necessity+and+possibility#RelationToPotentiality">there</a>.</p>
+</div>
+</p>
+
+<h3 id="MonadicityOverStateMonade">Monadicity over the CoState comonad</h3>
+
+<p>Alternatively:</p>
 
 <p>
 <div class='num_prop' id='LensesAreCostateCoalgebras'>
 <h6>Proposition</h6>
-<p><strong>(well-behaved lenses are the <a class="existingWikiWord" href="/nlab/show/costate+comonad">costate</a> <a class="existingWikiWord" href="/nlab/show/coalgebra+over+a+comonad">coalgebras</a>)</strong></p>
+<p><strong>(lawful lenses are the <a class="existingWikiWord" href="/nlab/show/costate+comonad">costate</a> <a class="existingWikiWord" href="/nlab/show/coalgebra+over+a+comonad">coalgebras</a>)</strong></p>
 
-<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/cartesian+closed+category">cartesian closed category</a>, the well-behaved lenses in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> are equivalently the <a class="existingWikiWord" href="/nlab/show/coalgebra+over+a+comonad">coalgebras</a> of the <a class="existingWikiWord" href="/nlab/show/costate+comonad">CoState</a> <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a>, i.e. that induced by the <a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a>-<a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjunction</a>:</p>
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/cartesian+closed+category">cartesian closed category</a>, the lawful <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-lenses in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math> (Def. <a class="maruku-ref" href="#Lens"></a>) are equivalently the <a class="existingWikiWord" href="/nlab/show/coalgebra+over+a+comonad">coalgebras</a> of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/costate+comonad">CoState</a> <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a>, i.e. that induced by the <a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a>-<a class="existingWikiWord" href="/nlab/show/adjoint+functor">adjunction</a>:</p>
 <div style="text-align: center">
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="106.209pt" height="47.339pt" viewBox="0 0 106.209 47.339" version="1.2">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="153.696pt" height="83.893pt" viewBox="0 0 153.696 83.893" version="1.2">
 <defs>
 <g>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph0-0">
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph0-0">
 <path style="stroke:none;" d=""></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph0-1">
-<path style="stroke:none;" d="M 11.03125 -9.90625 C 11.03125 -10.234375 11.03125 -10.28125 10.71875 -10.28125 L 9.609375 -9.21875 C 8.78125 -9.9375 7.796875 -10.28125 6.703125 -10.28125 C 3.1875 -10.28125 0.90625 -8.140625 0.90625 -5.046875 C 0.90625 -2.015625 3.109375 0.171875 6.71875 0.171875 C 9.34375 0.171875 11.03125 -1.625 11.03125 -3.359375 C 11.03125 -3.609375 10.953125 -3.625 10.71875 -3.625 C 10.578125 -3.625 10.4375 -3.625 10.421875 -3.46875 C 10.28125 -1.21875 8.390625 -0.453125 7.0625 -0.453125 C 6.09375 -0.453125 4.796875 -0.71875 3.984375 -1.65625 C 3.46875 -2.203125 2.984375 -3.015625 2.984375 -5.046875 C 2.984375 -6.5 3.21875 -7.578125 3.90625 -8.40625 C 4.84375 -9.5 6.328125 -9.65625 7.03125 -9.65625 C 8.140625 -9.65625 9.921875 -9.03125 10.359375 -6.4375 C 10.390625 -6.3125 10.515625 -6.3125 10.703125 -6.3125 C 11.03125 -6.3125 11.03125 -6.328125 11.03125 -6.6875 Z M 11.03125 -9.90625 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph0-1">
+<path style="stroke:none;" d="M 11.171875 -10.03125 C 11.171875 -10.375 11.171875 -10.421875 10.84375 -10.421875 L 9.734375 -9.34375 C 8.890625 -10.0625 7.890625 -10.421875 6.796875 -10.421875 C 3.21875 -10.421875 0.921875 -8.25 0.921875 -5.125 C 0.921875 -2.046875 3.15625 0.171875 6.796875 0.171875 C 9.453125 0.171875 11.171875 -1.640625 11.171875 -3.40625 C 11.171875 -3.65625 11.09375 -3.671875 10.859375 -3.671875 C 10.71875 -3.671875 10.5625 -3.671875 10.546875 -3.5 C 10.421875 -1.234375 8.484375 -0.46875 7.140625 -0.46875 C 6.171875 -0.46875 4.859375 -0.734375 4.03125 -1.671875 C 3.5 -2.234375 3.03125 -3.0625 3.03125 -5.125 C 3.03125 -6.578125 3.25 -7.671875 3.953125 -8.5 C 4.90625 -9.625 6.40625 -9.78125 7.125 -9.78125 C 8.234375 -9.78125 10.046875 -9.140625 10.484375 -6.515625 C 10.515625 -6.390625 10.65625 -6.390625 10.828125 -6.390625 C 11.171875 -6.390625 11.171875 -6.421875 11.171875 -6.78125 Z M 11.171875 -10.03125 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-0">
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-0">
 <path style="stroke:none;" d=""></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-1">
-<path style="stroke:none;" d="M 2.65625 2.453125 L 2.65625 2 L 1.671875 2 L 1.671875 -6.921875 L 2.65625 -6.921875 L 2.65625 -7.375 L 1.21875 -7.375 L 1.21875 2.453125 Z M 2.65625 2.453125 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-1">
+<path style="stroke:none;" d="M 2.6875 2.484375 L 2.6875 2.03125 L 1.6875 2.03125 L 1.6875 -7 L 2.6875 -7 L 2.6875 -7.453125 L 1.234375 -7.453125 L 1.234375 2.484375 Z M 2.6875 2.484375 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-2">
-<path style="stroke:none;" d="M 1.671875 -7.375 L 0.21875 -7.375 L 0.21875 -6.921875 L 1.21875 -6.921875 L 1.21875 2 L 0.21875 2 L 0.21875 2.453125 L 1.671875 2.453125 Z M 1.671875 -7.375 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-2">
+<path style="stroke:none;" d="M 1.6875 -7.453125 L 0.234375 -7.453125 L 0.234375 -7 L 1.234375 -7 L 1.234375 2.03125 L 0.234375 2.03125 L 0.234375 2.484375 L 1.6875 2.484375 Z M 1.6875 -7.453125 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-3">
-<path style="stroke:none;" d="M 3.265625 2.453125 C 3.34375 2.453125 3.46875 2.453125 3.46875 2.34375 C 3.46875 2.296875 3.453125 2.296875 3.328125 2.15625 C 1.984375 0.890625 1.65625 -0.9375 1.65625 -2.453125 C 1.65625 -5.28125 2.828125 -6.609375 3.328125 -7.0625 C 3.453125 -7.1875 3.46875 -7.203125 3.46875 -7.25 C 3.46875 -7.296875 3.4375 -7.375 3.328125 -7.375 C 3.171875 -7.375 2.6875 -6.875 2.609375 -6.78125 C 1.28125 -5.40625 1.015625 -3.640625 1.015625 -2.453125 C 1.015625 -0.25 1.9375 1.515625 3.265625 2.453125 Z M 3.265625 2.453125 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-3">
+<path style="stroke:none;" d="M 7.03125 -6.734375 C 7.03125 -6.890625 7.03125 -7 6.890625 -7 C 6.828125 -7 6.8125 -6.984375 6.734375 -6.859375 L 6.21875 -6.125 C 5.859375 -6.515625 5.203125 -7 4.25 -7 C 2.25 -7 0.59375 -5.390625 0.59375 -3.40625 C 0.59375 -1.390625 2.25 0.203125 4.265625 0.203125 C 5.9375 0.203125 7.03125 -1.109375 7.03125 -2.328125 C 7.03125 -2.421875 7.03125 -2.515625 6.859375 -2.515625 C 6.75 -2.515625 6.734375 -2.46875 6.71875 -2.359375 C 6.640625 -0.828125 5.40625 -0.125 4.359375 -0.125 C 3.515625 -0.125 1.625 -0.640625 1.625 -3.40625 C 1.625 -6.078125 3.40625 -6.671875 4.359375 -6.671875 C 5.28125 -6.671875 6.4375 -6 6.703125 -4.296875 C 6.703125 -4.21875 6.71875 -4.140625 6.859375 -4.140625 C 7.03125 -4.140625 7.03125 -4.21875 7.03125 -4.40625 Z M 7.03125 -6.734375 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-4">
-<path style="stroke:none;" d="M 3.03125 -2.453125 C 3.03125 -3.390625 2.875 -4.515625 2.265625 -5.671875 C 1.78125 -6.578125 0.890625 -7.375 0.71875 -7.375 C 0.625 -7.375 0.59375 -7.296875 0.59375 -7.25 C 0.59375 -7.21875 0.59375 -7.1875 0.703125 -7.078125 C 2.078125 -5.765625 2.390625 -3.96875 2.390625 -2.453125 C 2.390625 0.359375 1.234375 1.703125 0.734375 2.15625 C 0.59375 2.28125 0.59375 2.296875 0.59375 2.34375 C 0.59375 2.390625 0.625 2.453125 0.71875 2.453125 C 0.875 2.453125 1.359375 1.953125 1.4375 1.875 C 2.765625 0.484375 3.03125 -1.28125 3.03125 -2.453125 Z M 3.03125 -2.453125 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-4">
+<path style="stroke:none;" d="M 4.96875 -2.109375 C 4.96875 -3.359375 3.9375 -4.4375 2.640625 -4.4375 C 1.328125 -4.4375 0.296875 -3.359375 0.296875 -2.109375 C 0.296875 -0.875 1.359375 0.09375 2.640625 0.09375 C 3.921875 0.09375 4.96875 -0.875 4.96875 -2.109375 Z M 2.640625 -0.203125 C 2.09375 -0.203125 1.671875 -0.46875 1.453125 -0.8125 C 1.21875 -1.21875 1.1875 -1.703125 1.1875 -2.203125 C 1.1875 -2.578125 1.1875 -3.1875 1.484375 -3.609375 C 1.75 -3.953125 2.171875 -4.15625 2.640625 -4.15625 C 3.15625 -4.15625 3.578125 -3.90625 3.8125 -3.5625 C 4.078125 -3.140625 4.078125 -2.609375 4.078125 -2.203125 C 4.078125 -1.75 4.0625 -1.203125 3.78125 -0.78125 C 3.515625 -0.390625 3.078125 -0.203125 2.640625 -0.203125 Z M 2.640625 -0.203125 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph2-0">
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-5">
+<path style="stroke:none;" d="M 2.3125 -4.140625 C 1.671875 -4.296875 1.21875 -4.796875 1.21875 -5.40625 C 1.21875 -6.078125 1.78125 -6.703125 2.65625 -6.703125 C 4.375 -6.703125 4.59375 -5.09375 4.65625 -4.703125 C 4.671875 -4.59375 4.6875 -4.53125 4.8125 -4.53125 C 4.96875 -4.53125 4.96875 -4.59375 4.96875 -4.796875 L 4.96875 -6.734375 C 4.96875 -6.890625 4.96875 -7 4.84375 -7 C 4.765625 -7 4.734375 -6.96875 4.671875 -6.859375 L 4.328125 -6.296875 C 3.828125 -6.84375 3.1875 -7 2.640625 -7 C 1.453125 -7 0.59375 -6.109375 0.59375 -5.09375 C 0.59375 -4.328125 1.015625 -3.921875 1.203125 -3.734375 C 1.5625 -3.375 1.890625 -3.296875 2.96875 -3.046875 C 3.8125 -2.84375 3.96875 -2.8125 4.296875 -2.46875 C 4.390625 -2.359375 4.640625 -2.015625 4.640625 -1.53125 C 4.640625 -0.84375 4.109375 -0.125 3.1875 -0.125 C 2.09375 -0.125 0.953125 -0.640625 0.890625 -2.03125 C 0.890625 -2.1875 0.890625 -2.25 0.75 -2.25 C 0.59375 -2.25 0.59375 -2.171875 0.59375 -1.984375 L 0.59375 -0.046875 C 0.59375 0.109375 0.59375 0.203125 0.71875 0.203125 C 0.796875 0.203125 0.8125 0.1875 0.875 0.09375 C 0.921875 0.03125 0.953125 -0.0625 1.234375 -0.484375 C 1.859375 0.078125 2.59375 0.203125 3.1875 0.203125 C 4.4375 0.203125 5.265625 -0.78125 5.265625 -1.84375 C 5.265625 -2.703125 4.703125 -3.59375 3.6875 -3.828125 Z M 2.3125 -4.140625 "></path>
+</symbol>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-6">
+<path style="stroke:none;" d="M 1.84375 -3.953125 L 3.328125 -3.953125 L 3.328125 -4.28125 L 1.84375 -4.28125 L 1.84375 -6.109375 L 1.546875 -6.109375 C 1.53125 -5.203125 1.125 -4.265625 0.203125 -4.234375 L 0.203125 -3.953125 L 1.09375 -3.953125 L 1.09375 -1.25 C 1.09375 -0.078125 1.984375 0.09375 2.4375 0.09375 C 3.109375 0.09375 3.515625 -0.5 3.515625 -1.25 L 3.515625 -1.796875 L 3.203125 -1.796875 L 3.203125 -1.265625 C 3.203125 -0.578125 2.890625 -0.203125 2.515625 -0.203125 C 1.84375 -0.203125 1.84375 -1.0625 1.84375 -1.21875 Z M 1.84375 -3.953125 "></path>
+</symbol>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-7">
+<path style="stroke:none;" d="M 4.171875 -2.96875 C 4.171875 -3.9375 3.234375 -4.4375 2.328125 -4.4375 C 1.5 -4.4375 0.765625 -4.109375 0.765625 -3.453125 C 0.765625 -3.15625 0.96875 -2.984375 1.234375 -2.984375 C 1.515625 -2.984375 1.703125 -3.1875 1.703125 -3.453125 C 1.703125 -3.6875 1.546875 -3.859375 1.328125 -3.90625 C 1.703125 -4.15625 2.234375 -4.15625 2.3125 -4.15625 C 2.859375 -4.15625 3.421875 -3.765625 3.421875 -2.953125 L 3.421875 -2.640625 C 2.84375 -2.609375 2.171875 -2.578125 1.484375 -2.296875 C 0.609375 -1.921875 0.4375 -1.34375 0.4375 -1.015625 C 0.4375 -0.15625 1.4375 0.09375 2.125 0.09375 C 2.859375 0.09375 3.296875 -0.3125 3.515625 -0.703125 C 3.5625 -0.328125 3.828125 0.046875 4.265625 0.046875 C 4.359375 0.046875 5.203125 0.015625 5.203125 -0.890625 L 5.203125 -1.4375 L 4.90625 -1.4375 L 4.90625 -0.890625 C 4.90625 -0.484375 4.75 -0.328125 4.546875 -0.328125 C 4.171875 -0.328125 4.171875 -0.78125 4.171875 -0.890625 Z M 3.421875 -1.40625 C 3.421875 -0.4375 2.609375 -0.171875 2.203125 -0.171875 C 1.6875 -0.171875 1.25 -0.53125 1.25 -1 C 1.25 -1.65625 1.875 -2.328125 3.421875 -2.390625 Z M 3.421875 -1.40625 "></path>
+</symbol>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-8">
+<path style="stroke:none;" d="M 4.109375 -2.265625 C 4.328125 -2.265625 4.375 -2.265625 4.375 -2.5 C 4.375 -3.375 3.890625 -4.4375 2.5 -4.4375 C 1.265625 -4.4375 0.296875 -3.40625 0.296875 -2.171875 C 0.296875 -0.890625 1.375 0.09375 2.625 0.09375 C 3.890625 0.09375 4.375 -0.96875 4.375 -1.1875 C 4.375 -1.234375 4.359375 -1.328125 4.21875 -1.328125 C 4.109375 -1.328125 4.09375 -1.265625 4.078125 -1.203125 C 3.71875 -0.234375 2.859375 -0.203125 2.6875 -0.203125 C 2.234375 -0.203125 1.78125 -0.421875 1.484375 -0.875 C 1.1875 -1.328125 1.1875 -1.96875 1.1875 -2.265625 Z M 1.1875 -2.53125 C 1.28125 -3.921875 2.125 -4.15625 2.5 -4.15625 C 3.65625 -4.15625 3.703125 -2.75 3.703125 -2.53125 Z M 1.1875 -2.53125 "></path>
+</symbol>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-9">
+<path style="stroke:none;" d="M 3.3125 2.484375 C 3.390625 2.484375 3.515625 2.484375 3.515625 2.359375 C 3.515625 2.328125 3.5 2.3125 3.375 2.1875 C 2 0.90625 1.671875 -0.9375 1.671875 -2.484375 C 1.671875 -5.34375 2.859375 -6.6875 3.359375 -7.140625 C 3.5 -7.28125 3.515625 -7.28125 3.515625 -7.328125 C 3.515625 -7.390625 3.46875 -7.453125 3.375 -7.453125 C 3.203125 -7.453125 2.71875 -6.953125 2.640625 -6.859375 C 1.296875 -5.46875 1.03125 -3.671875 1.03125 -2.484375 C 1.03125 -0.265625 1.953125 1.53125 3.3125 2.484375 Z M 3.3125 2.484375 "></path>
+</symbol>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-10">
+<path style="stroke:none;" d="M 3.078125 -2.484375 C 3.078125 -3.421875 2.90625 -4.5625 2.296875 -5.734375 C 1.8125 -6.640625 0.90625 -7.453125 0.71875 -7.453125 C 0.625 -7.453125 0.59375 -7.390625 0.59375 -7.328125 C 0.59375 -7.296875 0.59375 -7.28125 0.71875 -7.15625 C 2.109375 -5.828125 2.421875 -4.015625 2.421875 -2.484375 C 2.421875 0.375 1.25 1.71875 0.734375 2.171875 C 0.609375 2.3125 0.59375 2.3125 0.59375 2.359375 C 0.59375 2.421875 0.625 2.484375 0.71875 2.484375 C 0.890625 2.484375 1.375 1.984375 1.453125 1.890625 C 2.796875 0.5 3.078125 -1.296875 3.078125 -2.484375 Z M 3.078125 -2.484375 "></path>
+</symbol>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph2-0">
 <path style="stroke:none;" d=""></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph2-1">
-<path style="stroke:none;" d="M 6.578125 -5.546875 C 7.078125 -6.296875 7.453125 -6.375 7.84375 -6.390625 C 7.953125 -6.390625 7.984375 -6.5 7.984375 -6.578125 C 7.984375 -6.609375 7.96875 -6.71875 7.859375 -6.71875 C 7.734375 -6.71875 7.78125 -6.6875 7.0625 -6.6875 C 6.421875 -6.6875 6.15625 -6.71875 6.125 -6.71875 C 6.078125 -6.71875 5.921875 -6.71875 5.921875 -6.53125 C 5.921875 -6.390625 6.046875 -6.390625 6.109375 -6.390625 C 6.375 -6.375 6.5 -6.265625 6.5 -6.09375 C 6.5 -5.9375 6.40625 -5.8125 6.359375 -5.734375 L 3.171875 -0.890625 L 2.34375 -5.953125 C 2.34375 -6.03125 2.328125 -6.078125 2.328125 -6.109375 C 2.328125 -6.234375 2.484375 -6.390625 2.984375 -6.390625 C 3.09375 -6.390625 3.21875 -6.390625 3.21875 -6.578125 C 3.21875 -6.609375 3.1875 -6.71875 3.0625 -6.71875 C 2.984375 -6.71875 2.578125 -6.6875 2.5 -6.6875 L 1.890625 -6.6875 C 1 -6.6875 0.875 -6.71875 0.78125 -6.71875 C 0.75 -6.71875 0.59375 -6.71875 0.59375 -6.53125 C 0.59375 -6.390625 0.734375 -6.390625 0.875 -6.390625 C 1.375 -6.390625 1.390625 -6.296875 1.421875 -6.046875 L 2.390625 -0.0625 C 2.421875 0.125 2.421875 0.203125 2.609375 0.203125 C 2.78125 0.203125 2.84375 0.125 2.90625 0.015625 Z M 6.578125 -5.546875 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph2-1">
+<path style="stroke:none;" d="M 6.65625 -5.609375 C 7.15625 -6.359375 7.53125 -6.4375 7.9375 -6.453125 C 8.046875 -6.46875 8.078125 -6.5625 8.078125 -6.640625 C 8.078125 -6.671875 8.0625 -6.78125 7.9375 -6.78125 C 7.828125 -6.78125 7.859375 -6.75 7.140625 -6.75 C 6.5 -6.75 6.234375 -6.78125 6.1875 -6.78125 C 6.140625 -6.78125 6 -6.78125 6 -6.59375 C 6 -6.46875 6.125 -6.453125 6.171875 -6.453125 C 6.4375 -6.4375 6.5625 -6.34375 6.5625 -6.15625 C 6.5625 -6 6.484375 -5.875 6.421875 -5.796875 L 3.203125 -0.90625 L 2.375 -6.015625 C 2.359375 -6.109375 2.359375 -6.15625 2.359375 -6.1875 C 2.359375 -6.3125 2.5 -6.453125 3.015625 -6.453125 C 3.125 -6.453125 3.265625 -6.453125 3.265625 -6.640625 C 3.265625 -6.6875 3.234375 -6.78125 3.09375 -6.78125 C 3.015625 -6.78125 2.609375 -6.765625 2.53125 -6.75 L 1.90625 -6.75 C 1.015625 -6.75 0.890625 -6.78125 0.796875 -6.78125 C 0.75 -6.78125 0.609375 -6.78125 0.609375 -6.59375 C 0.609375 -6.453125 0.734375 -6.453125 0.890625 -6.453125 C 1.390625 -6.453125 1.40625 -6.375 1.4375 -6.125 L 2.421875 -0.0625 C 2.4375 0.125 2.453125 0.203125 2.640625 0.203125 C 2.8125 0.203125 2.875 0.125 2.9375 0.015625 Z M 6.65625 -5.609375 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph2-2">
-<path style="stroke:none;" d="M 1.84375 -0.140625 C 1.84375 0.484375 1.703125 1.046875 1.09375 1.65625 C 1.046875 1.6875 1.03125 1.703125 1.03125 1.765625 C 1.03125 1.84375 1.109375 1.890625 1.171875 1.890625 C 1.296875 1.890625 2.109375 1.125 2.109375 -0.03125 C 2.109375 -0.65625 1.875 -1.09375 1.4375 -1.09375 C 1.09375 -1.09375 0.90625 -0.8125 0.90625 -0.546875 C 0.90625 -0.28125 1.09375 0 1.453125 0 C 1.6875 0 1.84375 -0.140625 1.84375 -0.140625 Z M 1.84375 -0.140625 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph2-2">
+<path style="stroke:none;" d="M 1.859375 -0.15625 C 1.859375 0.5 1.71875 1.0625 1.109375 1.671875 C 1.0625 1.703125 1.046875 1.734375 1.046875 1.78125 C 1.046875 1.859375 1.125 1.921875 1.1875 1.921875 C 1.3125 1.921875 2.140625 1.140625 2.140625 -0.03125 C 2.140625 -0.671875 1.890625 -1.109375 1.453125 -1.109375 C 1.109375 -1.109375 0.921875 -0.828125 0.921875 -0.5625 C 0.921875 -0.28125 1.109375 0 1.46875 0 C 1.703125 0 1.859375 -0.140625 1.859375 -0.15625 Z M 1.859375 -0.15625 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph3-0">
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph3-0">
 <path style="stroke:none;" d=""></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph3-1">
-<path style="stroke:none;" d="M 6.875 -2.234375 C 7.03125 -2.234375 7.25 -2.234375 7.25 -2.453125 C 7.25 -2.6875 7.03125 -2.6875 6.875 -2.6875 L 1.234375 -2.6875 C 1.078125 -2.6875 0.859375 -2.6875 0.859375 -2.453125 C 0.859375 -2.234375 1.078125 -2.234375 1.234375 -2.234375 Z M 6.875 -2.234375 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph3-1">
+<path style="stroke:none;" d="M 6.953125 -2.25 C 7.109375 -2.25 7.328125 -2.25 7.328125 -2.484375 C 7.328125 -2.71875 7.109375 -2.71875 6.953125 -2.71875 L 1.25 -2.71875 C 1.09375 -2.71875 0.875 -2.71875 0.875 -2.484375 C 0.875 -2.25 1.09375 -2.25 1.25 -2.25 Z M 6.953125 -2.25 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph3-2">
-<path style="stroke:none;" d="M 4.28125 -6.453125 C 4.28125 -6.609375 4.28125 -6.828125 4.0625 -6.828125 C 3.828125 -6.828125 3.828125 -6.609375 3.828125 -6.4375 L 3.828125 -0.453125 L 0.96875 -0.453125 C 0.796875 -0.453125 0.578125 -0.453125 0.578125 -0.21875 C 0.578125 0 0.796875 0 0.96875 0 L 7.171875 0 C 7.328125 0 7.53125 0 7.53125 -0.21875 C 7.53125 -0.453125 7.328125 -0.453125 7.171875 -0.453125 L 4.28125 -0.453125 Z M 4.28125 -6.453125 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph3-2">
+<path style="stroke:none;" d="M 4.328125 -6.515625 C 4.328125 -6.671875 4.328125 -6.890625 4.109375 -6.890625 C 3.875 -6.890625 3.875 -6.671875 3.875 -6.515625 L 3.875 -0.453125 L 0.96875 -0.453125 C 0.8125 -0.453125 0.59375 -0.453125 0.59375 -0.234375 C 0.59375 0 0.8125 0 0.96875 0 L 7.25 0 C 7.40625 0 7.625 0 7.625 -0.234375 C 7.625 -0.453125 7.40625 -0.453125 7.25 -0.453125 L 4.328125 -0.453125 Z M 4.328125 -6.515625 "></path>
 </symbol>
-<symbol overflow="visible" id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph3-3">
-<path style="stroke:none;" d="M 6.4375 -4.515625 C 6.5625 -4.640625 6.578125 -4.6875 6.578125 -4.75 C 6.578125 -4.875 6.484375 -4.984375 6.34375 -4.984375 C 6.265625 -4.984375 6.21875 -4.9375 6.109375 -4.828125 L 4.0625 -2.78125 L 2 -4.84375 C 1.875 -4.96875 1.828125 -4.984375 1.765625 -4.984375 C 1.640625 -4.984375 1.53125 -4.890625 1.53125 -4.75 C 1.53125 -4.671875 1.578125 -4.625 1.671875 -4.53125 L 3.734375 -2.453125 L 1.6875 -0.40625 C 1.546875 -0.28125 1.53125 -0.21875 1.53125 -0.15625 C 1.53125 -0.03125 1.640625 0.0625 1.765625 0.0625 C 1.84375 0.0625 1.875 0.046875 1.984375 -0.0625 L 4.046875 -2.125 L 6.1875 0.015625 C 6.234375 0.046875 6.296875 0.0625 6.34375 0.0625 C 6.484375 0.0625 6.578125 -0.046875 6.578125 -0.15625 C 6.578125 -0.234375 6.53125 -0.28125 6.53125 -0.28125 C 6.484375 -0.34375 4.90625 -1.90625 4.375 -2.453125 Z M 6.4375 -4.515625 "></path>
+<symbol overflow="visible" id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph3-3">
+<path style="stroke:none;" d="M 6.515625 -4.578125 C 6.625 -4.6875 6.640625 -4.734375 6.640625 -4.8125 C 6.640625 -4.921875 6.546875 -5.03125 6.421875 -5.03125 C 6.328125 -5.03125 6.296875 -5 6.1875 -4.890625 L 4.109375 -2.8125 L 2.015625 -4.90625 C 1.890625 -5.015625 1.84375 -5.03125 1.78125 -5.03125 C 1.65625 -5.03125 1.546875 -4.9375 1.546875 -4.8125 C 1.546875 -4.71875 1.59375 -4.6875 1.6875 -4.578125 L 3.78125 -2.484375 L 1.703125 -0.40625 C 1.5625 -0.28125 1.546875 -0.234375 1.546875 -0.15625 C 1.546875 -0.03125 1.65625 0.0625 1.78125 0.0625 C 1.875 0.0625 1.890625 0.046875 2 -0.0625 L 4.09375 -2.15625 L 6.265625 0.015625 C 6.3125 0.046875 6.375 0.0625 6.421875 0.0625 C 6.546875 0.0625 6.640625 -0.046875 6.640625 -0.15625 C 6.640625 -0.234375 6.59375 -0.28125 6.59375 -0.28125 C 6.5625 -0.34375 4.96875 -1.921875 4.421875 -2.484375 Z M 6.515625 -4.578125 "></path>
 </symbol>
 </g>
 </defs>
-<g id="fTFjsZPzuKuw1ww0tutUYHk4uwk=-surface1">
+<g id="ECqjN_MAdvF1ky-SYwpI2W6tqF8=-surface1">
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph0-1" x="6.686638" y="27.02761"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph0-1" x="53.814559" y="47.009486"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph0-1" x="86.76746" y="27.02761"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph0-1" x="134.85327" y="47.009486"></use>
 </g>
-<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -27.844475 -8.365659 L 27.368986 -8.365659 " transform="matrix(0.986229,0,0,-0.986229,52.714939,21.9722)"></path>
-<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.487295 2.870496 C -2.031804 1.147551 -1.021802 0.335589 0.0000831143 -0.00107874 C -1.021802 -0.333785 -2.031804 -1.145748 -2.487295 -2.868693 " transform="matrix(0.986229,0,0,-0.986229,79.941324,30.221592)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -27.845837 -8.366096 L 27.368627 -8.366096 " transform="matrix(0.998026,0,0,-0.998026,100.392431,41.892607)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.488459 2.867429 C -2.030524 1.149193 -1.020718 0.335086 0.000829431 -0.00151579 C -1.020718 -0.334204 -2.030524 -1.148311 -2.488459 -2.87046 " transform="matrix(0.998026,0,0,-0.998026,127.944485,50.240675)"></path>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-1" x="40.974867" y="41.057706"></use>
-</g>
-<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph2-1" x="43.875614" y="41.057706"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-1" x="88.512928" y="61.207403"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph2-2" x="50.535291" y="41.057706"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph2-1" x="91.447124" y="61.207403"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph3-1" x="53.43464" y="41.057706"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph2-2" x="98.186461" y="61.207403"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-2" x="61.553772" y="41.057706"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph3-1" x="101.121738" y="61.207403"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph3-2" x="48.654634" y="26.753439"></use>
-</g>
-<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 27.844281 5.584256 L -27.36918 5.584256 " transform="matrix(0.986229,0,0,-0.986229,52.714939,21.9722)"></path>
-<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.487101 2.8706 C -2.03161 1.147654 -1.021607 0.335692 0.000277246 -0.000975709 C -1.021607 -0.333682 -2.03161 -1.149606 -2.487101 -2.86859 " transform="matrix(-0.986229,0,0,0.986229,25.488555,16.465806)"></path>
-<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-3" x="36.335645" y="10.541804"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-2" x="109.337987" y="61.207403"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph3-1" x="40.395211" y="10.541804"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph3-2" x="96.284556" y="46.732035"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -50.719114 8.730153 C -83.698278 41.709317 -80.919355 -41.70926 -48.272879 -9.070612 " transform="matrix(0.998026,0,0,-0.998026,100.392431,41.892607)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.485895 2.870778 C -2.031852 1.149329 -1.018818 0.335721 -0.000288692 -0.00184746 C -1.018761 -0.334054 -2.031657 -1.147833 -2.485408 -2.869359 " transform="matrix(0.705754,-0.705634,-0.705634,-0.705754,52.381713,50.775836)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 51.894531 35.285156 L 0 35.285156 L 0 48.5 L 51.894531 48.5 Z M 51.894531 35.285156 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph2-1" x="3.21065" y="45.289887"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph1-4" x="48.514343" y="10.541804"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-3" x="11.711336" y="45.289887"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-4" x="19.341562" y="45.289887"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-5" x="24.624256" y="45.289887"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-6" x="30.493584" y="45.289887"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-7" x="34.602015" y="45.289887"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-6" x="39.884709" y="45.289887"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-8" x="43.993139" y="45.289887"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 27.846132 5.583316 L -27.368332 5.583316 " transform="matrix(0.998026,0,0,-0.998026,100.392431,41.892607)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.484841 2.868909 C -2.03082 1.146759 -1.021014 0.336566 0.000534104 -0.0000357076 C -1.021014 -0.336638 -2.03082 -1.146831 -2.484841 -2.86898 " transform="matrix(-0.998026,0,0,0.998026,72.840377,36.320348)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-9" x="83.817215" y="30.325486"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph3-3" x="52.575141" y="10.541804"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph3-1" x="87.926587" y="30.325486"></use>
 </g>
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
-  <use xlink:href="#fTFjsZPzuKuw1ww0tutUYHk4uwk=-glyph2-1" x="60.694273" y="10.541804"></use>
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph1-10" x="96.142836" y="30.325486"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph3-3" x="100.250961" y="30.325486"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#ECqjN_MAdvF1ky-SYwpI2W6tqF8=-glyph2-1" x="108.468457" y="30.325486"></use>
 </g>
 </g>
 </svg>
@@ -773,6 +997,24 @@ margin-left: 0em;
 
 <h3 id="general">General</h3>
 
+<p>The definition of what are now called (lawful) lenses is already in</p>
+
+<ul>
+<li id="Oles82">
+<p><a class="existingWikiWord" href="/nlab/show/Frank+J.+Oles">Frank J. Oles</a>, <em>A category-theoretic approach to the semantics of programming languages</em>, Syracuse University (1982) &lbrack;<a href="https://www.cs.cmu.edu/afs/cs.cmu.edu/project/fox-19/member/jcr/www/FrankOlesThesis.pdf">pdf</a>&rbrack;</p>
+</li>
+
+<li id="Oles86">
+<p><a class="existingWikiWord" href="/nlab/show/Frank+J.+Oles">Frank J. Oles</a>, <em>Type algebras, functor categories and block structure</em>, Algebraic methods in semantics (1986) 543–573, Daimi Report No. 156 (1983): &lbrack;<a href="https://doi.org/10.7146/dpb.v12i156.7430">doi:10.7146/dpb.v12i156.7430</a>, <a href="https://tidsskrift.dk/daimipb/article/view/7430/6281">pdf</a>&rbrack;</p>
+</li>
+
+<li id="HofmannPierce96">
+<p><a class="existingWikiWord" href="/nlab/show/Martin+Hofmann">Martin Hofmann</a>, <a class="existingWikiWord" href="/nlab/show/Benjamin+Pierce">Benjamin Pierce</a>, p. 12 in: <em>Positive Subtyping</em>, Information and Computation <strong>126</strong> 1 (1996) 11-33 &lbrack;<a href="https://doi.org/10.1006/inco.1996.0031">doi:10.1006/inco.1996.0031</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>but gained wider attention only with:</p>
+
 <ul>
 <li id="BohannonPierceVaughan06">
 <p>Aaron Bohannon, <a class="existingWikiWord" href="/nlab/show/Benjamin+C.+Pierce">Benjamin C. Pierce</a>, Jeffrey A. Vaughan, <em>Relational lenses: a language for updatable views</em>, Proceedings of Principles of Database Systems (PODS) (2006) 338-347 &lbrack;<a href="https://doi.org/10.1145/1142351.1142399">doi:10.1145/1142351.1142399</a>, <a href="https://www.cis.upenn.edu/~bcpierce/papers/dblenses-pods.pdf">pdf</a>&rbrack;</p>
@@ -781,7 +1023,11 @@ margin-left: 0em;
 <li id="FosterGreenwaldMoorePierceSchmitt07">
 <p>J. N. Foster, M. B. Greenwald, J. T. Moore, <a class="existingWikiWord" href="/nlab/show/Benjamin+C.+Pierce">Benjamin C. Pierce</a>, A. Schmitt, <em>Combinators for bidirectional tree transformations: A linguistic approach to the view-update problem</em>, ACM Transactions on Programming Languages and Systems <strong>29</strong> 3 (2007) 17-es &lbrack;<a href="https://doi.org/10.1145/1232420.1232424">doi:x10.1145/1232420.1232424</a>&rbrack;</p>
 </li>
+</ul>
 
+<p>Further discussion:</p>
+
+<ul>
 <li id="JohnsonRosebrughWood10">
 <p><a class="existingWikiWord" href="/nlab/show/Michael+Johnson">Michael Johnson</a>, <a class="existingWikiWord" href="/nlab/show/Robert+Rosebrugh">Robert Rosebrugh</a>, <a class="existingWikiWord" href="/nlab/show/Richard+Wood">Richard Wood</a>, <em>Algebras and Update Strategies</em>, Journal of Universal Computer Science <strong>16</strong> (2010) &lbrack;<a href="http://dx.doi.org/10.3217/jucs-016-05-0729">doi:10.3217/jucs-016-05-0729</a>&rbrack;</p>
 </li>
@@ -888,14 +1134,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on August 11, 2023 at 10:43:40.
+    Last revised on August 13, 2023 at 17:54:27.
     See the <a href="/nlab/history/lens+%28in+computer+science%29" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/lens+%28in+computer+science%29" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/9037/#Item_52">Discuss</a><span class="backintime"><a href="/nlab/revision/lens+%28in+computer+science%29/31" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/lens+%28in+computer+science%29" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/lens+%28in+computer+science%29" accesskey="S" class="navlink" id="history" rel="nofollow">History (31 revisions)</a>
+  <a href="/nlab/edit/lens+%28in+computer+science%29" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/9037/#Item_57">Discuss</a><span class="backintime"><a href="/nlab/revision/lens+%28in+computer+science%29/34" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/lens+%28in+computer+science%29" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/lens+%28in+computer+science%29" accesskey="S" class="navlink" id="history" rel="nofollow">History (34 revisions)</a>
   <a href="/nlab/show/lens+%28in+computer+science%29/cite" style="color: black">Cite</a>
   <a href="/nlab/print/lens+%28in+computer+science%29" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/lens+%28in+computer+science%29" id="view_source" rel="nofollow">Source</a>
