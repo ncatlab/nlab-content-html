@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/5649/#Item_28" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/5649/#Item_30" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -531,7 +531,7 @@ margin-left: 0em;
 <h1 id="contents">Contents</h1>
 <div class='maruku_toc'>
 <ul>
-<li><a href='#idea'>Idea</a></li>
+<li><a href='#Idea'>Idea</a></li>
 <li><a href='#categorical_semantics'>Categorical semantics</a></li>
 <ul>
 <li><a href='#intuitionistic_case'>Intuitionistic case</a></li>
@@ -552,17 +552,98 @@ margin-left: 0em;
 </ul>
 </div>
 
-<h2 id="idea">Idea</h2>
+<h2 id="Idea">Idea</h2>
 
-<p>In full <a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a>/<a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a> there is assumed a (comonadic) <a class="existingWikiWord" href="/nlab/show/modality">modality</a> denoted “!” and called the <em>exponential modality</em>, whose role is, roughly, to give linear types also a non-linear interpretation. This is also called the “of course”-modality or the <em>storage modality</em>, and sometimes the “bang”-operation.</p>
+<p>In full <a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a> &lbrack;<a href="#Girard1987">Girard 1987</a>&rbrack; and more generally in <a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a> there is assumed a (comonadic) <a class="existingWikiWord" href="/nlab/show/modality">modality</a> traditionally denoted “!” whose role is to model the “underlying” classical <a class="existingWikiWord" href="/nlab/show/intuitionistic+type+theory">(intuitionistic) type</a> of a given <a class="existingWikiWord" href="/nlab/show/linear+type">linear type</a>.</p>
 
-<p>In classical linear logic (meaning with involutive de Morgan duality), the de Morgan dual of “!” is denoted “?” and called the “why not”-modality.</p>
+<p>This is alternatively called the “exponential modality” (for good reasons discussed <a href="#TheExponentialCondition">below</a>), or “storage modality” (as it allows to duplicate and hence “store” otherwise linear data) and sometimes pronounced “of course” (intended alongside “necessarily” and “possibly” as used in <a class="existingWikiWord" href="/nlab/show/modal+logic">modal logic</a>) or even “bang” (just in reference to the symbol “!”).</p>
 
-<p>In <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a> of linear type theory, if one views <a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a> as <a class="existingWikiWord" href="/nlab/show/quantum+logic">quantum logic</a>, the !-modality typically appears as a kind of <a class="existingWikiWord" href="/nlab/show/Fock+space">Fock space</a> construction. Then this means that the !-modality produces <a class="existingWikiWord" href="/nlab/show/free+field+theory">free</a> <a class="existingWikiWord" href="/nlab/show/second+quantization">second quantization</a>. The original categorical semantics of linear logic, in terms of <a href="#dePaiva89">Dialectica categories</a>, sees the !-modality simply as a kind of free (as much as possible) comonoid.</p>
+<p>In classical linear logic (meaning with involutive <a class="existingWikiWord" href="/nlab/show/de+Morgan+duality">de Morgan duality</a>), the de Morgan dual of “!” is denoted “?” and then sometimes pronounced “why not”.</p>
 
+<p>Today it is understood (cf. <a href="#Melli&#xE8;s09">Melliès 2009</a>, <a href="/nlab/files/Mellies-CategoricalSemanticsLinear.pdf#page=36">p. 36</a>) that the exponential modality is best and generally to be thought as as, first of all a <em><a class="existingWikiWord" href="/nlab/show/comonad">comonad</a></em> on <a class="existingWikiWord" href="/nlab/show/linear+types">linear types</a> (<a href="#Seely89">Seely 1989 §2</a>, <a href="#dePaiva89">dePaiva 1989</a>, <a href="#BBPH92">Benton, Bierman, de Paiva and Hyland 1992</a>) which, secondly, is <a href="monad#RelationBetweenAdjunctionsAndMonads">induced</a> by an adjunction to classical (meaning here: non-linear <a class="existingWikiWord" href="/nlab/show/intuitionistic+type+theory">intuitionistic</a>) with special <a class="existingWikiWord" href="/nlab/show/monoidal+functor">monoidal</a> properties (<a href="#Seely89">Seely 1989 §2</a>, <a href="#Bierman94">Bierman 1994 pp. 157</a>, <a href="#Benton95">Benton 1995</a>).</p>
+
+<p>In an elementary and illuminating example (which may not have received the attention it deserves):</p>
+
+<ul>
+<li>
+<p>classical intuitionistic types form (are interpreted in) the category of <a class="existingWikiWord" href="/nlab/show/Sets">Sets</a></p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ClaTypes</mi><mspace width="thinmathspace"></mspace><mo>≔</mo><mspace width="thinmathspace"></mspace><mi>Set</mi></mrow><annotation encoding="application/x-tex">ClaTypes \,\coloneqq\, Set</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>linear tupes form (are interpreted in) the category of <a class="existingWikiWord" href="/nlab/show/vector+spaces">vector spaces</a> (cf. <a href="linear+logic#Murfet14">Murfet 2014</a>)</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi><mspace width="thinmathspace"></mspace><mo>≔</mo><mspace width="thinmathspace"></mspace><msub><mi>Vect</mi> <mi>𝕂</mi></msub></mrow><annotation encoding="application/x-tex">LinTypes  \,\coloneqq\, Vect_{\mathbb{K}}</annotation></semantics></math></p>
+</li>
+</ul>
+
+<p>and the <a class="existingWikiWord" href="/nlab/show/adjoint+functors">adjoint functors</a> in question are</p>
+
+<ul>
+<li>
+<p>forming the <a class="existingWikiWord" href="/nlab/show/linear+span">linear span</a> of a set</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>Set</mi></mtd> <mtd><mover><mo>⟶</mo><mi mathvariant="normal">Q</mi></mover></mtd> <mtd><mi>Vect</mi></mtd></mtr> <mtr><mtd><mi>W</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><msub><mo>⊕</mo> <mi>W</mi></msub><mi>𝟙</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    Set &amp;\overset{\mathrm{Q}}{\longrightarrow}&amp; Vect
+    \\
+    W &amp;\mapsto&amp; \oplus_W \mathbb{1}
+  }
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>forming the <a class="existingWikiWord" href="/nlab/show/underlying+set">underlying set</a> of a <a class="existingWikiWord" href="/nlab/show/vector+space">vector space</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>Vect</mi></mtd> <mtd><mover><mo>⟶</mo><mi mathvariant="normal">C</mi></mover></mtd> <mtd><mi>Set</mi></mtd></mtr> <mtr><mtd><mi class="mathscript">𝒱</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><mi>Hom</mi><mo stretchy="false">(</mo><mi>𝟙</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi class="mathscript">𝒱</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    Vect &amp;\overset{\mathrm{C}}{\longrightarrow}&amp; Set
+    \\
+    \mathscr{V} &amp;\mapsto&amp; Hom(\mathbb{1}, \, \mathscr{V})
+  }
+
+</annotation></semantics></math></div></li>
+</ul>
+
+<p>in which case the exponential modality acts by sending a vector space to the linear span of its underlying set</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>Vect</mi></mtd> <mtd><mover><mo>⟶</mo><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>!</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mover></mtd> <mtd><mi>Vect</mi></mtd></mtr> <mtr><mtd><mi class="mathscript">𝒱</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><munder><mo lspace="thinmathspace" rspace="thinmathspace">⨁</mo><mi class="mathscript">𝒱</mi></munder><mi>𝟙</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+     Vect &amp;\overset{\;\; ! \;\;}{\longrightarrow}&amp; Vect
+     \\
+     \mathscr{V} &amp;\mapsto&amp; \underset{\mathscr{V}}{\bigoplus} \mathbb{1}
+     \,.
+  }
+
+</annotation></semantics></math></div>
+<p>One sees that this construction takes (<a class="existingWikiWord" href="/nlab/show/direct+sums">direct</a>) sums to (<a class="existingWikiWord" href="/nlab/show/tensor+product+of+vector+spaces">tensor</a>) products</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>!</mo><mo stretchy="false">(</mo><mi class="mathscript">𝒱</mi><mo>⊕</mo><mi class="mathscript">𝒱</mi><mo>′</mo><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mo>!</mo><mi class="mathscript">𝒱</mi><mo stretchy="false">)</mo><mo>⊗</mo><mo stretchy="false">(</mo><mo>!</mo><mi class="mathscript">𝒱</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  !(\mathscr{V} \oplus \mathscr{V}')
+  \;\simeq\;
+  (! \mathscr{V}) \otimes (! \mathscr{V}')
+
+</annotation></semantics></math></div>
+<p>and zero (<a class="existingWikiWord" href="/nlab/show/zero+object">objects</a>) to unit (<a class="existingWikiWord" href="/nlab/show/unit+object">objects</a>)</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>!</mo><mn>0</mn><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mi>𝟙</mi></mrow><annotation encoding="application/x-tex">
+  ! 0 
+    \;\simeq\;
+  \mathbb{1}
+
+</annotation></semantics></math></div>
+<p>as expected of any <a class="existingWikiWord" href="/nlab/show/exponential+map">exponential map</a>, whence the name “exponential modality”.</p>
+
+<p>This example is the 0-sector of the more famous <em><a class="existingWikiWord" href="/nlab/show/stabilization">stabilization</a></em> (<a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-adjoint+functor"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mn>∞</mn>
+    </mrow>
+    <annotation encoding="application/x-tex">\infty</annotation>
+  </semantics>
+</math>-</a>)adjunction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msubsup><mi>Σ</mi> <mo>+</mo> <mn>∞</mn></msubsup><mo>⊣</mo><msubsup><mi>Ω</mi> <mo>+</mo> <mn>∞</mn></msubsup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\Sigma_+^\infty \dashv \Omega_+^\infty)</annotation></semantics></math> between (the <a class="existingWikiWord" href="/nlab/show/homotopy+theory">homotopy theory</a> of) <a class="existingWikiWord" href="/nlab/show/topological+spaces">topological spaces</a> and (the <a class="existingWikiWord" href="/nlab/show/stable+homotopy+theory">stable homotopy theory</a> of) <a class="existingWikiWord" href="/nlab/show/module+spectra">module</a> <a class="existingWikiWord" href="/nlab/show/spectra">spectra</a> equipped with the <a class="existingWikiWord" href="/nlab/show/symmetric+smash+product+of+spectra">symmetric smash product of spectra</a> (given by forming <a class="existingWikiWord" href="/nlab/show/suspension+spectra">suspension spectra</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>↦</mo><msubsup><mi>Σ</mi> <mo>+</mo> <mn>∞</mn></msubsup><mi>X</mi></mrow><annotation encoding="application/x-tex">X \mapsto \Sigma_+^\infty X</annotation></semantics></math>), which points to a deeper origin of the “exponential modality”, see <a href="#RealizationInLinearHomotopyTypeTheory">below</a> and at <em><a class="existingWikiWord" href="/nlab/show/linear+homotopy+type+theory">linear homotopy type theory</a></em> for more on this.</p>
+<center>
+<img src="https://ncatlab.org/nlab/files/QuantClassExponential-230821.jpg" width="600" />
+</center>
 <h2 id="categorical_semantics">Categorical semantics</h2>
 
-<p>Everyone agrees that ! should be a <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> (and ? should be a <a class="existingWikiWord" href="/nlab/show/monad">monad</a>, see also at <em><a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a></em>), but there are different ways to proceed from there. The goal is to capture the syntactic rules allowing assumptions of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">!A</annotation></semantics></math> to be duplicated and discarded.</p>
+<p>Following <a href="#Seely89">Seely 1989</a>, <a href="#dePaiva89">dePaiva 1989</a>, <a href="#BBPH92">Benton, Bierman, de Paiva and Hyland 1992</a> it is common convention that “!” should be a <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> on the type system (and ? should be a <a class="existingWikiWord" href="/nlab/show/monad">monad</a>, see also at <em><a class="existingWikiWord" href="/nlab/show/monads+in+computer+science">monads in computer science</a></em>), but there is some room in which further axioms to impose. The goal is to capture the syntactic rules allowing assumptions of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">!A</annotation></semantics></math> to be duplicated and discarded.</p>
 
 <h3 id="intuitionistic_case">Intuitionistic case</h3>
 
@@ -571,50 +652,129 @@ margin-left: 0em;
 <div class="num_defn">
 <h6 id="definition">Definition</h6>
 
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> be an <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric monoidal category</a> with <a class="existingWikiWord" href="/nlab/show/cartesian+products">cartesian products</a>. A <strong>Seely comonad</strong> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is a comonad that is a <a class="existingWikiWord" href="/nlab/show/strong+monoidal+functor">strong monoidal functor</a> from the <a class="existingWikiWord" href="/nlab/show/cartesian+monoidal+category">cartesian monoidal structure</a> to the symmetric monoidal structure, i.e. we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo><mo stretchy="false">(</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo stretchy="false">)</mo><mo>≅</mo><mo>!</mo><mi>A</mi><mo>⊗</mo><mo>!</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">!(A\times B)\cong !A \otimes !B</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo><mn>1</mn><mo>≅</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">!1\cong I</annotation></semantics></math> coherently. (There is also an additional <a class="existingWikiWord" href="/nlab/show/coherence">coherence</a> <a class="existingWikiWord" href="/nlab/show/axiom">axiom</a> that should be imposed; see <a href="#Mellies09">Mellies, section 7.3</a>.)</p>
-</div>
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> be</p>
 
-<p>(Note that in linear logic, the cartesian monoidal structure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math> is sometimes denoted by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>&amp;</mi></mrow><annotation encoding="application/x-tex">\&amp;</annotation></semantics></math>.) This implies that the <a class="existingWikiWord" href="/nlab/show/Kleisli+category+of+a+comonad">Kleisli category</a> of ! (i.e.\ the category of cofree !-coalgebras) is cartesian monoidal. If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is <em>closed</em> symmetric monoidal then the Kleisli category of a <a class="existingWikiWord" href="/nlab/show/cartesian+closed+category">cartesian closed category</a>, which is a categorical version of the translation of intuitionistic logic into linear logic.</p>
+<ul>
+<li>a <a class="existingWikiWord" href="/nlab/show/cartesian+monoidal+category">cartesian monoidal category</a>, with <a class="existingWikiWord" href="/nlab/show/Cartesian+product">Cartesian product</a> “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math>” and <a class="existingWikiWord" href="/nlab/show/tensor+unit">tensor unit</a> the <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>.</li>
+</ul>
+
+<p>which <em>in addition</em> carries the <a class="existingWikiWord" href="/nlab/show/structure">structure</a> of</p>
+
+<ul>
+<li>a <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric monoidal category</a> with respect to a <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math> with <a class="existingWikiWord" href="/nlab/show/tensor+unit">tensor unit</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝟙</mi></mrow><annotation encoding="application/x-tex">\mathbb{1}</annotation></semantics></math>.</li>
+</ul>
+
+<p>A <strong>Seely comonad</strong> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> that is a <a class="existingWikiWord" href="/nlab/show/strong+monoidal+functor">strong monoidal</a> as a functor from cartesian monoidal structure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math> to the other monoidal structure <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>LinTypes</mi><mo>,</mo><mo>×</mo><mo stretchy="false">)</mo><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><mo>!</mo><mspace width="thickmathspace"></mspace></mrow></mover><mo stretchy="false">(</mo><mi>LinTypes</mi><mo>,</mo><mo>⊗</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  (LinTypes, \times)
+  \xrightarrow{ \; ! \; }
+  (LinTypes, \otimes)
+
+</annotation></semantics></math></div>
+<p>meaning that there are <a class="existingWikiWord" href="/nlab/show/natural+transformations">natural transformations</a> of the form</p>
+<div class="maruku-equation" id="eq:StrongMonoidalPropertyOfExponential"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi>B</mi><mo lspace="verythinmathspace">:</mo><mi>LinTypes</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>!</mo><mo stretchy="false">(</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≅</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mo>!</mo><mi>A</mi><mo stretchy="false">)</mo><mo>⊗</mo><mo stretchy="false">(</mo><mo>!</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  
+  A,\, B \colon LinTypes
+  \;\;\;\;\;\;\;
+  \vdash
+  \;\;\;\;\;\;\;
+  !(A \times B) 
+   \;\cong\; 
+  (!A) \otimes (!B) 
+
+</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>!</mo><mo>*</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>𝟙</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  ! \ast \;\;\simeq\;\; \mathbb{1}
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<p>(There is also an additional <a class="existingWikiWord" href="/nlab/show/coherence">coherence</a> <a class="existingWikiWord" href="/nlab/show/axiom">axiom</a> that should be imposed; see <a href="#Melli&#xE8;s09">Melliès 2009, section 7.3</a>.)</p>
+
+<p>
+<div class='num_remark' id='TheExponentialCondition'>
+<h6>Remark</h6>
+<p><strong>(the exponential condition)</strong> <br /> In <a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a>, the cartesian monoidal structure on linear types is often denoted “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>&amp;</mi></mrow><annotation encoding="application/x-tex">\&amp;</annotation></semantics></math>” (“<a class="existingWikiWord" href="/nlab/show/additive+conjunction">additive conjunction</a>”), in which case the condition <a class="maruku-eqref" href="#eq:StrongMonoidalPropertyOfExponential">(1)</a> reads</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>!</mo><mo stretchy="false">(</mo><mi>A</mi><mi>&amp;</mi><mi>B</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≅</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mo>!</mo><mi>A</mi><mo stretchy="false">)</mo><mo>⊗</mo><mo stretchy="false">(</mo><mo>!</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  !(A \&amp; B) 
+   \;\cong\; 
+  (!A) \otimes (!B) 
+  \,.
+
+</annotation></semantics></math></div>
+<p>But in key examples of categories of (the multiplicative fragment of) linear logic (such as <a class="existingWikiWord" href="/nlab/show/Vect">Vect</a>, cf. <a href="linear+logic#Murfet14">Murfet 2014</a>), the <a class="existingWikiWord" href="/nlab/show/cartesian+product">cartesian product</a> is actually a <a class="existingWikiWord" href="/nlab/show/biproduct">biproduct</a>, hence a <a class="existingWikiWord" href="/nlab/show/direct+sum">direct sum</a>, in which case the condition on the exponential modality is that</p>
+
+<p><em>it takes (direct) sums to (tensor) products</em></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>!</mo><mo stretchy="false">(</mo><mi>A</mi><mo>⊕</mo><mi>B</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≅</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mo>!</mo><mi>A</mi><mo stretchy="false">)</mo><mo>⊗</mo><mo stretchy="false">(</mo><mo>!</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  !(A \oplus B) 
+   \;\cong\; 
+  (!A) \otimes (!B) 
+
+</annotation></semantics></math></div>
+<p><em>it takes zero (objects) to unit (objects)</em></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>!</mo><mn>0</mn><mspace width="thickmathspace"></mspace><mo>≅</mo><mspace width="thickmathspace"></mspace><mi>𝟙</mi></mrow><annotation encoding="application/x-tex">
+  ! 0 
+    \;\cong\;
+  \mathbb{1}
+
+</annotation></semantics></math></div>
+<p>as befits any <a class="existingWikiWord" href="/nlab/show/exponential+map">exponential map</a> and may explain the choice of terminology here.</p>
+</div>
+</p>
+
+<p>This condition implies that the <a class="existingWikiWord" href="/nlab/show/Kleisli+category+of+a+comonad">Kleisli category</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo></mrow><annotation encoding="application/x-tex">!</annotation></semantics></math> (i.e.\ the category of cofree !-coalgebras) is cartesian monoidal. If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> is <em><a class="existingWikiWord" href="/nlab/show/closed+monoidal+category">closed</a></em> symmetric monoidal then the Kleisli category of a <a class="existingWikiWord" href="/nlab/show/cartesian+closed+category">cartesian closed category</a>, which is a categorical version of the translation of intuitionistic logic into linear logic.</p>
 
 <p>Of course, the above definition depends on the existence of the cartesian product. A different definition that doesn’t require the existence of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math> was given by <a href="#BBPH92">Benton, Bierman, de Paiva, and Hyland</a>:</p>
 
 <div class="num_defn">
 <h6 id="definition_2">Definition</h6>
 
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric monoidal category</a>; a <strong>linear exponential comonad</strong> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/lax+monoidal+functor">lax monoidal</a> comonad such that every cofree !-coalgebra naturally carries the structure of a <a class="existingWikiWord" href="/nlab/show/comonoid+object">comonoid object</a> in the category of coalgebras (i.e. the cofree-coalgebra functor lifts to the category of comonoids in the category of coalgebras).</p>
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric monoidal category</a>; a <strong>linear exponential comonad</strong> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/lax+monoidal+functor">lax monoidal</a> comonad such that every cofree !-coalgebra naturally carries the structure of a <a class="existingWikiWord" href="/nlab/show/comonoid+object">comonoid object</a> in the category of coalgebras (i.e. the cofree-coalgebra functor lifts to the category of comonoids in the category of coalgebras).</p>
 </div>
 
 <p>It follows automatically that all !-coalgebras are comonoids, and therefore that the category of all !-coalgebras (not just the cofree ones) is cartesian monoidal. Note that for a comonad on a <a class="existingWikiWord" href="/nlab/show/poset">poset</a>, every coalgebra is free; thus the world of pure propositional “logic” doesn’t tell us whether to consider the Kleisli category or the Eilenberg-Moore category for the translation.</p>
 
-<p>A more even-handed approach is the following (see <a href="#Benton95">Benton (1995)</a> and <a href="#Mellies09">Mellies (2009)</a>), based on the observation that both Kleisli and Eilenberg-Moore categories are instances of adjunctions.</p>
+<p>A more even-handed approach is the following (see <a href="#Benton95">Benton (1995)</a> and <a href="#Melli&#xE8;s09">Melliès (2009)</a>), based on the observation that both Kleisli and Eilenberg-Moore categories are instances of adjunctions.</p>
+
+<p>
+<div class='num_defn' id='LinearNonlinearAdjunction'>
+<h6>Definition</h6>
+<p></p>
+
+<p>A <strong>linear-nonlinear adjunction</strong> is a <a class="existingWikiWord" href="/nlab/show/monoidal+adjunction">monoidal adjunction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>ClaTypes</mi><mo>⇄</mo><mi>LinTypes</mi><mo lspace="verythinmathspace">:</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F \colon ClaTypes \rightleftarrows LinTypes \colon G</annotation></semantics></math> in which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> is symmetric monoidal and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ClaTypes</mi></mrow><annotation encoding="application/x-tex">ClaTypes</annotation></semantics></math> is cartesian monoidal. The induced !-modality is the comonad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">F G</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>.</p>
+
+<p></p>
+</div>
+</p>
+
+<p>This includes both of the previous definitions where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> is taken respectively to be the Kleisli category or the Eilenberg-Moore category of !. Conversely, in any linear-nonlinear adjunction the induced comonad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">F G</annotation></semantics></math> can be shown to be a linear exponential comonad. Moreover, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo></mrow><annotation encoding="application/x-tex">!</annotation></semantics></math> is a linear exponential comonad on a symmetric monoidal category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> with finite products, then the cofree !-coalgebra functor is a right adjoint and hence preserves cartesian products; but the cartesian products of coalgebras are the tensor products in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, so we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo><mo stretchy="false">(</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo stretchy="false">)</mo><mo>≅</mo><mo>!</mo><mi>A</mi><mo>⊗</mo><mo>!</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">!(A\times B) \cong !A \otimes !B</annotation></semantics></math>, the Seely condition.</p>
+
+<h3 id="classical_case">Classical case</h3>
+
+<p>For “classical” linear logic, we want <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> to be not just (closed) symmetric monoidal but <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/star-autonomous+category">autonomous</a>. If an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-autonomous category has a linear exponential comonad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo></mrow><annotation encoding="application/x-tex">!</annotation></semantics></math> one can derive a ? from the ! by <a class="existingWikiWord" href="/nlab/show/de+Morgan+duality">de Morgan duality</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>?</mo><mi>A</mi><mo>=</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mo>!</mo><mo stretchy="false">(</mo><msup><mi>A</mi> <mo>*</mo></msup><mo stretchy="false">)</mo><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">?A = \big(!(A^*)\big)^*</annotation></semantics></math>. The resulting relationship between ! and ? was axiomatized in a way not requiring the de Morgan duality by <a href="#BluteCockettSeely96">Blute, Cockett &amp; Seely (1996)</a>:</p>
 
 <div class="num_defn">
 <h6 id="definition_3">Definition</h6>
 
-<p>A <strong>linear-nonlinear adjunction</strong> is a <a class="existingWikiWord" href="/nlab/show/monoidal+adjunction">monoidal adjunction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>M</mi><mo>⇄</mo><mi>L</mi><mo lspace="verythinmathspace">:</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F \colon M \rightleftarrows L \colon G</annotation></semantics></math> in which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> is symmetric monoidal and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> is cartesian monoidal. The induced !-modality is the comonad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">F G</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math>.</p>
-</div>
-
-<p>This includes both of the previous definitions where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math> is taken respectively to be the Kleisli category or the Eilenberg-Moore category of !. Conversely, in any linear-nonlinear adjunction the induced comonad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>G</mi></mrow><annotation encoding="application/x-tex">F G</annotation></semantics></math> can be shown to be a linear exponential comonad. Moreover, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo></mrow><annotation encoding="application/x-tex">!</annotation></semantics></math> is a linear exponential comonad on a symmetric monoidal category <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> with finite products, then the cofree !-coalgebra functor is a right adjoint and hence preserves cartesian products; but the cartesian products of coalgebras are the tensor products in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math>, so we have <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo><mo stretchy="false">(</mo><mi>A</mi><mo>×</mo><mi>B</mi><mo stretchy="false">)</mo><mo>≅</mo><mo>!</mo><mi>A</mi><mo>⊗</mo><mo>!</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">!(A\times B) \cong !A \otimes !B</annotation></semantics></math>, the Seely condition.</p>
-
-<h3 id="classical_case">Classical case</h3>
-
-<p>For “classical” linear logic, we want <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> to be not just (closed) symmetric monoidal but <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/star-autonomous+category">autonomous</a>. If an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-autonomous category has a linear exponential comonad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo></mrow><annotation encoding="application/x-tex">!</annotation></semantics></math> one can derive a ? from the ! by de Morgan duality, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>?</mo><mi>A</mi><mo>=</mo><mo stretchy="false">(</mo><mo>!</mo><mo stretchy="false">(</mo><msup><mi>A</mi> <mo>*</mo></msup><mo stretchy="false">)</mo><msup><mo stretchy="false">)</mo> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">?A = (!(A^*))^*</annotation></semantics></math>. The resulting relationship between ! and ? was axiomatized in a way not requiring the de Morgan duality by <a href="#BluteCockettSeely96">Blute, Cockett &amp; Seely (1996)</a>:</p>
-
-<div class="num_defn">
-<h6 id="definition_4">Definition</h6>
-
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/linearly+distributive+category">linearly distributive category</a> with tensor product <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math> and cotensor product <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⅋</mo></mrow><annotation encoding="application/x-tex">\parr</annotation></semantics></math>. A (!,?)-modality on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> consists of:</p>
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/linearly+distributive+category">linearly distributive category</a> with tensor product <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math> and cotensor product <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⅋</mo></mrow><annotation encoding="application/x-tex">\parr</annotation></semantics></math>. A (!,?)-modality on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> consists of:</p>
 
 <ol>
-<li>a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math>-monoidal comonad ! and a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⅋</mo></mrow><annotation encoding="application/x-tex">\parr</annotation></semantics></math>-comonoidal monad ?</li>
+<li>
+<p>a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math>-monoidal comonad ! and a <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⅋</mo></mrow><annotation encoding="application/x-tex">\parr</annotation></semantics></math>-comonoidal monad ?</p>
+</li>
 
-<li>? is a !-strong monad, and ! is a ?-strong comonad</li>
+<li>
+<p>? is a !-strong monad, and ! is a ?-strong comonad</p>
+</li>
 
-<li>all free !-coalgebras are naturally commutative <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math>-comonoids, and all free ?-algebras are naturally commutative <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⅋</mo></mrow><annotation encoding="application/x-tex">\parr</annotation></semantics></math>-monoids.</li>
+<li>
+<p>all free !-coalgebras are naturally commutative <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math>-comonoids, and all free ?-algebras are naturally commutative <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⅋</mo></mrow><annotation encoding="application/x-tex">\parr</annotation></semantics></math>-monoids.</p>
+</li>
 </ol>
 </div>
 
-<p>Here a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/strong+functor">strong</a> with respect to a lax monoidal functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math> if there is a natural transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>A</mi><mo>⊗</mo><mi>G</mi><mi>B</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>A</mi><mo>⊗</mo><mi>G</mi><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F A \otimes G B \to F(A\otimes G B)</annotation></semantics></math> satisfying some natural axioms, and we similarly require compatibility of the monad and comonad structure transformations. <a href="#BluteCockettSeely96">BCS96</a> showed that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is in fact <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-autonomous, it follows from the above definition that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>?</mo><mi>A</mi><mo>=</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mo>!</mo><mo stretchy="false">(</mo><msup><mi>A</mi> <mo>*</mo></msup><mo stretchy="false">)</mo><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">?A = \big(!(A^*)\big)^*</annotation></semantics></math> as expected.</p>
+<p>Here a functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/strong+functor">strong</a> with respect to a lax monoidal functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math> if there is a natural transformation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mi>A</mi><mo>⊗</mo><mi>G</mi><mi>B</mi><mo>→</mo><mi>F</mi><mo stretchy="false">(</mo><mi>A</mi><mo>⊗</mo><mi>G</mi><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F A \otimes G B \to F(A\otimes G B)</annotation></semantics></math> satisfying some natural axioms, and we similarly require compatibility of the monad and comonad structure transformations. <a href="#BluteCockettSeely96">BCS96</a> showed that if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>LinTypes</mi></mrow><annotation encoding="application/x-tex">LinTypes</annotation></semantics></math> is in fact <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-autonomous, it follows from the above definition that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>?</mo><mi>A</mi><mo>=</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mo>!</mo><mo stretchy="false">(</mo><msup><mi>A</mi> <mo>*</mo></msup><mo stretchy="false">)</mo><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">?A = \big(!(A^*)\big)^*</annotation></semantics></math> as expected.</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -623,7 +783,7 @@ margin-left: 0em;
 <p>
 <div class='num_theorem'>
 <h6>Theorem</h6>
-<p>Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>M</mi><mo>⇄</mo><mi>C</mi><mo>:</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F \colon M \rightleftarrows C : G</annotation></semantics></math> is a linear-nonlinear adjunction, where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is closed symmetric monoidal with finite limits and colimits, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">\bot\in C</annotation></semantics></math> is an object. Then there is an induced linear-nonlinear adjunction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi><mo>⇄</mo><mi>Chu</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">M \rightleftarrows Chu(C,\bot)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Chu</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Chu(C,\bot)</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/Chu+construction">Chu construction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Chu</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Chu(C,\bot)</annotation></semantics></math>, which is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-autonomous with finite limits and colimits. Hence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Chu</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Chu(C,\bot)</annotation></semantics></math> admits a !-modality.</p>
+<p>Suppose <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>M</mi><mo>⇄</mo><mi>C</mi><mo>:</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F \colon M \rightleftarrows C : G</annotation></semantics></math> is a linear-nonlinear adjunction (Def. <a class="maruku-ref" href="#LinearNonlinearAdjunction"></a>), where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math> is closed symmetric monoidal with finite limits and colimits, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊥</mo><mo>∈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">\bot\in C</annotation></semantics></math> is an object. Then there is an induced linear-nonlinear adjunction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>M</mi><mo>⇄</mo><mi>Chu</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">M \rightleftarrows Chu(C,\bot)</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Chu</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Chu(C,\bot)</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/Chu+construction">Chu construction</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Chu</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Chu(C,\bot)</annotation></semantics></math>, which is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-autonomous with finite limits and colimits. Hence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Chu</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mo>⊥</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Chu(C,\bot)</annotation></semantics></math> admits a !-modality.</p>
 </div>
  
 <div class='proof'>
@@ -724,7 +884,13 @@ margin-left: 0em;
 <p>A streamlined statement of the <a class="existingWikiWord" href="/nlab/show/inference+rules">inference rules</a> and the observation that these make the exponential a <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a> is due to:</p>
 
 <ul>
-<li id="Seely"><a class="existingWikiWord" href="/nlab/show/R.+A.+G.+Seely">R. A. G. Seely</a>, §2 of: <em>Linear logic, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-autonomous categories and cofree coalgebras</em>, in <em>Categories in Computer Science and Logic</em>, Contemporary Mathematics <strong>92</strong> (1989) &lbrack;<a class="existingWikiWord" href="/nlab/files/SeelyLinearLogic.pdf" title="pdf">pdf</a>, <a href="http://www.math.mcgill.ca/rags/nets/llsac.ps.gz">ps.gz</a>, <a href="https://bookstore.ams.org/conm-92">ISBN:978-0-8218-5100-5</a>&rbrack;</li>
+<li id="Seely89">
+<p><a class="existingWikiWord" href="/nlab/show/R.+A.+G.+Seely">R. A. G. Seely</a>, §2 of: <em>Linear logic, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>-autonomous categories and cofree coalgebras</em>, in <em>Categories in Computer Science and Logic</em>, Contemporary Mathematics <strong>92</strong> (1989) &lbrack;<a class="existingWikiWord" href="/nlab/files/SeelyLinearLogic.pdf" title="pdf">pdf</a>, <a href="http://www.math.mcgill.ca/rags/nets/llsac.ps.gz">ps.gz</a>, <a href="https://bookstore.ams.org/conm-92">ISBN:978-0-8218-5100-5</a>&rbrack;</p>
+</li>
+
+<li id="dePaiva89">
+<p><a class="existingWikiWord" href="/nlab/show/Valeria+de+Paiva">Valeria de Paiva</a>, §2 of: <em>The Dialectica Categories</em>, in <em>Categories in Computer Science and Logic</em>, Contemporary Mathematics <strong>92</strong> (1989) &lbrack;<a href="https://bookstore.ams.org/conm-92">ISBN:978-0-8218-5100-5</a>, <a href="https://doi.org/10.1090/conm/092">doi:10.1090/conm/092</a>&rbrack;</p>
+</li>
 </ul>
 
 <p>Brief survey in a context of <a class="existingWikiWord" href="/nlab/show/computer+science">computer science</a>/<a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a>:</p>
@@ -736,20 +902,28 @@ margin-left: 0em;
 <p>Further on the semantics of exponential conjunction as a <a class="existingWikiWord" href="/nlab/show/comonad">comonad</a>:</p>
 
 <ul>
-<li id="depaiva89">
-<p><a class="existingWikiWord" href="/nlab/show/Valeria+de+Paiva">Valeria de Paiva</a>, §2 of: <em>The Dialectica Categories</em>, in <em>Categories in Computer Science and Logic</em>, Contemporary Mathematics <strong>92</strong> (1989) &lbrack;<a href="https://bookstore.ams.org/conm-92">ISBN:978-0-8218-5100-5</a>, <a href="https://doi.org/10.1090/conm/092">doi:10.1090/conm/092</a>&rbrack;</p>
+<li id="deP1988">
+<p><a class="existingWikiWord" href="/nlab/show/Valeria+de+Paiva">Valeria de Paiva</a>, <em>The Dialectica Categories</em>, PhD thesis, technical report 213, Computer Laboratory, University of Cambridge (1991) &lbrack;<a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-213.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/dePaivaDialectica.pdf" title="pdf">pdf</a>&rbrack;</p>
+</li>
+
+<li id="BBP92">
+<p><a class="existingWikiWord" href="/nlab/show/Nick+Benton">Nick Benton</a>, <a class="existingWikiWord" href="/nlab/show/Gavin+Bierman">Gavin Bierman</a>, <a class="existingWikiWord" href="/nlab/show/Valeria+de+Paiva">Valeria de Paiva</a>, §8 of: <em>Term assignment for intuitionistic linear logic</em>, Technical report 262, Computer Laboratory, University of Cambridge (August 1992) &lbrack;<a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-262.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/BentonBiermanDePaiva-TermAssignment.pdf" title="pdf">pdf</a>&rbrack;</p>
+
+<blockquote>
+<p>(published abridged as <a href="#BBPH92">BBPH92</a>)</p>
+</blockquote>
 </li>
 
 <li id="BBPH92">
 <p><a class="existingWikiWord" href="/nlab/show/Nick+Benton">Nick Benton</a>, <a class="existingWikiWord" href="/nlab/show/Gavin+Bierman">Gavin Bierman</a>, <a class="existingWikiWord" href="/nlab/show/Valeria+de+Paiva">Valeria de Paiva</a>, <a class="existingWikiWord" href="/nlab/show/Martin+Hyland">Martin Hyland</a>, <em>Linear <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>-Calculus and Categorical Models Revisited</em>, in <em>Computer Science Logic. CSL 1992</em>, Lecture Notes in Computer Science <strong>702</strong>, Springer (1993) &lbrack;<a href="https://doi.org/10.1007/3-540-56992-8_6">doi:10.1007/3-540-56992-8_6</a>&rbrack;</p>
+
+<blockquote>
+<p>(abridged version of <a href="#BBP92">BBP92</a>)</p>
+</blockquote>
 </li>
 
 <li id="BluteCockettSeely96">
 <p><a class="existingWikiWord" href="/nlab/show/R.+F.+Blute">R. F. Blute</a> , <a class="existingWikiWord" href="/nlab/show/J.+R.+B.+Cockett">J. R. B. Cockett</a>, <a class="existingWikiWord" href="/nlab/show/R.+A.+G.+Seely">R. A. G. Seely</a>, <em>! and ? – Storage as tensorial strength</em>, Mathematical Structures in Computer Science <strong>6</strong> 4 (1996) 313-351 &lbrack;<a href="https://doi.org/10.1017/S0960129500001055">doi:10.1017/S0960129500001055</a>&rbrack;</p>
-</li>
-
-<li id="Mellies09">
-<p><a class="existingWikiWord" href="/nlab/show/Paul-Andr%C3%A9+Melli%C3%A8s">Paul-André Melliès</a>, <em>Categorical semantics of linear logic</em>, 2009. <a href="https://www.irif.fr/~mellies/papers/panorama.pdf">pdf</a></p>
 </li>
 
 <li id="HylandSchalk01">
@@ -757,7 +931,31 @@ margin-left: 0em;
 </li>
 </ul>
 
-<p>Construction of such comonads based on cofree comonoids can be found in (among other places):</p>
+<p>and its <a href="monad#CategoryOfAdjunctionResolutionsOfAMonad">resolution</a> by a <a class="existingWikiWord" href="/nlab/show/monoidal+adjunction">monoidal adjunction</a> between the linear and a classical (intuitionistic) type system:</p>
+
+<ul>
+<li id="Bierman94">
+<p><a class="existingWikiWord" href="/nlab/show/Gavin+Bierman">Gavin Bierman</a>, <em>On Intuitionistic Linear Logic</em>, Cambridge (1994) &lbrack;<a class="existingWikiWord" href="/nlab/files/Bierman-LinearLogic.pdf" title="pdf">pdf</a>, <a href="https://www.dropbox.com/s/hdxgubjljb96rmf/Biermanthesis.pdf?dl=0">pdf</a>&rbrack;</p>
+</li>
+
+<li id="Benton95">
+<p><a class="existingWikiWord" href="/nlab/show/Nick+Benton">Nick Benton</a>, <em>A mixed linear and non-linear logic: Proofs, terms and models</em>, in <em>Computer Science Logic. CSL 1994</em>, Lecture Notes in Computer Science <strong>933</strong> (1995) &lbrack;<a href="https://doi.org/10.1007/BFb0022251">doi:10.1007/BFb0022251</a>, <a class="existingWikiWord" href="/nlab/files/BentonLinearLogic.pdf" title="pdf">pdf</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>Review:</p>
+
+<ul>
+<li id="Melli&#xE8;s02">
+<p><a class="existingWikiWord" href="/nlab/show/Paul-Andr%C3%A9+Melli%C3%A8s">Paul-André Melliès</a>, <em>Categorical models of linear logic revisited</em> (2002) &lbrack;<a href="https://hal.science/hal-00154229">hal:00154229</a>&rbrack;</p>
+</li>
+
+<li id="Melli&#xE8;s09">
+<p><a class="existingWikiWord" href="/nlab/show/Paul-Andr%C3%A9+Melli%C3%A8s">Paul-André Melliès</a>, <em>Categorical semantics of linear logic</em>, in <em><a href="https://smf.emath.fr/publications/modeles-interactifs-de-calcul-et-de-comportement-de-programme">Interactive models of computation and program behaviour</a></em>, Panoramas et synthèses <strong>27</strong> (2009) 1-196 &lbrack;<a href="https://smf.emath.fr/publications/semantique-categorielle-de-la-logique-lineaire">web</a>, <a href="https://www.irif.fr/~mellies/papers/panorama.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Mellies-CategoricalSemanticsLinear.pdf" title="pdf">pdf</a>&rbrack;</p>
+</li>
+</ul>
+
+<p>Construction of such comonads based on cofree comonoids:</p>
 
 <ul>
 <li>
@@ -808,14 +1006,6 @@ margin-left: 0em;
 
 <li>
 <p>G. Plotkin. <em>Type theory and recursion.</em> In Proceedings of the Eigth Symposium of Logic in Computer Science, Montreal , page 374. IEEE Computer Society Press, 1993.</p>
-</li>
-
-<li id="Benton95">
-<p><a class="existingWikiWord" href="/nlab/show/Nick+Benton">Nick Benton</a>, <em>A mixed linear and non-linear logic: Proofs, terms and models</em>, in <em>Computer Science Logic. CSL 1994</em>, Lecture Notes in Computer Science <strong>933</strong> &lbrack;<a href="https://doi.org/10.1007/BFb0022251">doi:10.1007/BFb0022251</a>, <a class="existingWikiWord" href="/nlab/files/BentonLinearLogic.pdf" title="pdf">pdf</a>&rbrack;</p>
-</li>
-
-<li id="Bierman95">
-<p><a class="existingWikiWord" href="/nlab/show/Gavin+Bierman">Gavin Bierman</a>, <em>On Intuitionistic Linear Logic</em>, Cambridge (1993) &lbrack;<a href="https://www.dropbox.com/s/hdxgubjljb96rmf/Biermanthesis.pdf?dl=0">pdf</a>&rbrack;</p>
 </li>
 
 <li>
@@ -874,14 +1064,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on August 20, 2023 at 20:18:22.
+    Last revised on August 21, 2023 at 14:24:01.
     See the <a href="/nlab/history/%21-modality" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/%21-modality" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/5649/#Item_28">Discuss</a><span class="backintime"><a href="/nlab/revision/%21-modality/39" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/%21-modality" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/%21-modality" accesskey="S" class="navlink" id="history" rel="nofollow">History (39 revisions)</a>
+  <a href="/nlab/edit/%21-modality" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/5649/#Item_30">Discuss</a><span class="backintime"><a href="/nlab/revision/%21-modality/43" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/%21-modality" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/%21-modality" accesskey="S" class="navlink" id="history" rel="nofollow">History (43 revisions)</a>
   <a href="/nlab/show/%21-modality/cite" style="color: black">Cite</a>
   <a href="/nlab/print/%21-modality" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/%21-modality" id="view_source" rel="nofollow">Source</a>
