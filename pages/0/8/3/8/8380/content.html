@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/15359/#Item_34" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/15359/#Item_38" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -1286,7 +1286,7 @@ margin-left: 0em;
 
 <p>Finally, to turn all this into an efficient <a class="existingWikiWord" href="/nlab/show/programming+language">programming language</a> one just has to declare a convenient <a class="existingWikiWord" href="/nlab/show/syntax">syntax</a> for denoting <a class="existingWikiWord" href="/nlab/show/Kleisli+composition">Kleisli composition</a>.</p>
 
-<p>One such syntax is known as “<em>do notation</em>” (introduced by <a class="existingWikiWord" href="/nlab/show/Mark+Jones">Mark Jones</a> in the 1990s &lbrack;<a href="Haskell#HHPW07">HHPW07, p. 25</a>&rbrack; and adopted by <a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a> in <a href="https://www.haskell.org/definition/from12to13.html#do">version 1.3</a>, for review see <a href="#BentonHughesMoggi02">Benton, Hughes &amp; Moggi 2002 p. 70</a>, <a href="#Milewski19">Milewski 2019 §20.3</a>), which aims to jointly express:</p>
+<p>One such syntax is known as “<em>do notation</em>” (introduced with “<code>{...}</code>” instead of “<code>do</code>” by <a href="#Launchbury93">Launchbury 1993 §3.3</a>, then promoted by <a class="existingWikiWord" href="/nlab/show/Mark+Jones">Mark Jones</a> in the 1990s &lbrack;<a href="Haskell#HHPW07">HHPW07, p. 25</a>&rbrack; and adopted by <a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a> in <a href="https://www.haskell.org/definition/from12to13.html#do">version 1.3</a>, for review see <a href="#BentonHughesMoggi02">Benton, Hughes &amp; Moggi 2002 p. 70</a>, <a href="#Milewski19">Milewski 2019 §20.3</a>), which aims to jointly express:</p>
 
 <ol>
 <li>
@@ -1298,35 +1298,87 @@ margin-left: 0em;
 </li>
 </ol>
 
-<p>as follows:</p>
+<p>Concretely, do-notation is the following <a class="existingWikiWord" href="/nlab/show/syntactic+sugar">syntactic sugar</a> for combined <a class="existingWikiWord" href="/nlab/show/Kleisli+composition">Kleisli composition</a> and <a class="existingWikiWord" href="/nlab/show/bound+variable">variable binding</a></p>
+
+<ol>
+<li>
+<p><code>do prog</code> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≡</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><annotation encoding="application/x-tex">\;\;\equiv\;\;</annotation></semantics></math> <code>prog</code></p>
+</li>
+
+<li>
+<p><code>do prog1 prog2</code> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≡</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><annotation encoding="application/x-tex">\;\;\equiv\;\;</annotation></semantics></math> <code>prog1 bind (\_ -&gt; prog2)</code></p>
+</li>
+
+<li>
+<p><code>do (x &lt;- prog1) prog2</code> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>≡</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow><annotation encoding="application/x-tex">\;\;\equiv\;\;</annotation></semantics></math> <code>prog1 bind (\x -&gt; prog2)</code></p>
+</li>
+</ol>
+
+<p>The generic case looks like this:</p>
 <div style="margin: -30px 0px 20px 10px">
   <img src="/nlab/files/KleisliCompositeInDoNotation-230826.jpg" width="520px" />
 </div>
-<p>The notation becomes more suggestive with the further convention that the “<code>&lt;-</code>”-symbols may notationally be suppressed for functions with trivial in- or out-put (ie. of <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>) besides their <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℰ</mi></mrow><annotation encoding="application/x-tex">\mathcal{E}</annotation></semantics></math>-effect, as in this example:</p>
+<p>but the notation becomes more suggestive with the rule that the “<code>&lt;-</code>”-symbols may notationally be suppressed for functions with trivial in- or out-put (ie. of <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>*</mo></mrow><annotation encoding="application/x-tex">\ast</annotation></semantics></math>) besides their <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℰ</mi></mrow><annotation encoding="application/x-tex">\mathcal{E}</annotation></semantics></math>-effect, as in this example:</p>
 <div style="margin: -30px 0px 20px 10px">
   <img src="/nlab/files/PureEffectKleisliCompositeInDoNotation-230826.jpg" width="520px" />
 </div>
 <p>This case brings out clearly how the ambient “<code>do</code>…<code>return</code>”-syntax block expresses the (Kleisli-)composition of any number of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℰ</mi></mrow><annotation encoding="application/x-tex">\mathcal{E}</annotation></semantics></math>-effectful procedures.</p>
 
-<p>On top of that the “<code>&lt;-</code>”-syntax is meant to be suggestive of <em>reading out</em> a value. This is commonly motivated by appeal to the <a class="existingWikiWord" href="/nlab/show/IO-monad">IO-monad</a>, but a pure example of the same idea is provided by the <a class="existingWikiWord" href="/nlab/show/list+monad">list monad</a>, where “<code>&lt;-</code>” may be understood as “reading the next element from the list”.</p>
+<p>On top of that the “<code>&lt;-</code>”-syntax is meant to be suggestive of <em>reading out</em> a value. This is accurate imagery for the <a class="existingWikiWord" href="/nlab/show/state+monad">state monad</a> (and its abstraction to the <a class="existingWikiWord" href="/nlab/show/IO-monad">IO-monad</a>), where from the two pasic operations of reading/writng a global variable</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>read</mi></mtd> <mtd><mo lspace="verythinmathspace">:</mo></mtd> <mtd><mi>W</mi><mi>State</mi><mo stretchy="false">(</mo><mi>W</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mi>read</mi></mtd> <mtd><mo>≡</mo></mtd> <mtd><mi>w</mi><mo>↦</mo><mo stretchy="false">(</mo><mi>w</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mrow><mtable><mtr><mtd><mi>write</mi></mtd> <mtd><mo lspace="verythinmathspace">:</mo></mtd> <mtd><mi>W</mi><mo>→</mo><mi>W</mi><mi>State</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mi>write</mi></mtd> <mtd><mo>≡</mo></mtd> <mtd><mi>w</mi><mo>↦</mo><mo stretchy="false">(</mo><mi>w</mi><mo>′</mo><mo>↦</mo><mi>w</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    read &amp;\colon&amp; W State(W)
+    \\
+    read &amp;\equiv&amp; w \mapsto (w,w)
+  }
+  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+  \array{
+    write &amp;\colon&amp; W \to W State(\ast)
+    \\
+    write &amp;\equiv&amp; w \mapsto (w' \mapsto w)
+  }
 
-<p>For instance, the following code produces the <a class="existingWikiWord" href="/nlab/show/list">list</a> obtained from a given list of <a class="existingWikiWord" href="/nlab/show/natural+numbers">natural numbers</a> by incrementing all entries:</p>
+</annotation></semantics></math></div>
+<p>any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math>-stateful program, such as the simple example</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>inc</mi></mtd> <mtd><mo lspace="verythinmathspace">:</mo></mtd> <mtd><mi>ℕ</mi><mi>State</mi><mo stretchy="false">(</mo><mo>*</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mi>inc</mi></mtd> <mtd><mo>≡</mo></mtd> <mtd><mi>n</mi><mo>↦</mo><mi>n</mi><mo>+</mo><mn>1</mn></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    inc &amp;\colon&amp; \mathbb{N}State(\ast)
+    \\
+    inc &amp;\equiv&amp; n \mapsto n+1 
+  }
+
+</annotation></semantics></math></div>
+<p>may be constucted in do-notation, such as:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/StatefulNumberIncrementInDONotation-230828.jpg" width="560px" />
+</div>
+<p>For a similar effect monad such as the <a class="existingWikiWord" href="/nlab/show/list+monad">list monad</a> the analogous <code>do</code>-code for incrementing all entries in a list of numbers looks as follows:</p>
 <div style="margin: -30px 0px 20px 10px">
   <img src="/nlab/files/ListReadKleisliCompositeInDoNotation-230826.jpg" width="520px" />
 </div>
-<p>The <code>do</code>-notation on the right evokes the idea that a number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo lspace="verythinmathspace">:</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">n \colon \mathbb{N}</annotation></semantics></math> is “read out” from MyList and then its increment returned — while leaving linguistically implicit the idea that this operation is “repeated until the list is empty” and all results re-compiled into an output list.</p>
+<p>Here The <code>do</code>-notation on the right evokes the idea that in <em>each step</em> a number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo lspace="verythinmathspace">:</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">n \colon \mathbb{N}</annotation></semantics></math> is “read out” from MyList and then its increment returned — but leaves linguistically implicit the idea that this operation is to be performed <em>for all elements</em> of the list and all results re-compiled into an output list.</p>
 
-<p>Indeed, in general it may be misleading to think of Kleisli composition as being about “reading out” data. What Kleisli composition is really about is acting on data that has <em>generators</em> and defining a program by what it does <em>on generators</em>, hence <em>for</em> a given generator.</p>
-
-<p>Therefore the conceptually more accurate (if maybe practically less convenient) program-linguistic reflection of the monadic effect-binding operation would be a “<code>for</code>…<code>do</code>”-block:</p>
+<p>Indeed, in general it is misleading to think of Kleisli composition as being about “reading out” data. What Kleisli composition is really about is acting on data that has <em>generators</em> and defining a program by what it does <em>on generators</em>, hence <em>for</em> a given generating datum:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/KleisliMapsActOnGeneratingData-23-828.jpg" width="560px" />
+</div>
+<p>Therefore the conceptually more accurate (if maybe less concise) program-linguistic reflection of the monadic effect-binding operation would be a “<code>for</code>…<code>do</code>”-block:</p>
 <div style="margin: -20px 0px 20px 10px">
-  <img src="/nlab/files/ForDoNotation-230827b.jpg" width="420px" />
+  <img src="/nlab/files/ForDoNotation-230827c.jpg" width="420px" />
 </div>
 <p>In terms of such for-do-notation, the generic case that we started with above has the following syntactic rendering:</p>
 <div style="margin: -30px 0px 20px 10px">
   <img src="/nlab/files/KleisliCompositeInForDoNotation-230826.jpg" width="670px" />
 </div>
-<p>This syntax may be notationally less convenient in practice but it evokes rather closely what is actually going on in monadic effect binding.</p>
+<p>This syntax may be notationally less concise but it evokes rather closely what is actually going on in programming with monadic effects.</p>
+
+<p>For example, the above operation of icrementing all numbers in a given list reads in <code>for</code>…<code>do</code>-notation as follows:</p>
+<div style="margin: -20px 0px 20px 10px">
+  <img src="/nlab/files/ListIncrementViaForDo-280827b.jpg" width="750px" />
+</div>
+<p>neatly indicative of how the operation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">+1</annotation></semantics></math> is applied <em>for</em> every number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> found <em>in</em> the list.</p>
+
+<p>(NB.: There is no clash with <code>for</code>…<code>do</code>-notation as used for loops in <a class="existingWikiWord" href="/nlab/show/imperative+programming">imperative programming</a>, since <a class="existingWikiWord" href="/nlab/show/functional+programming">functionally</a> these are instead expressed by <a class="existingWikiWord" href="/nlab/show/recursion">recursion</a>.)</p>
 
 <p><br /></p>
 
@@ -1511,6 +1563,10 @@ margin-left: 0em;
 <p><a class="existingWikiWord" href="/nlab/show/Eugenio+Moggi">Eugenio Moggi</a>, <em>Computational lambda-calculus and monads</em>, in: <em>Proceedings of the Fourth Annual Symposium on Logic in Computer Science</em> (1989) 14-23 &lbrack;<a href="https://doi.org/10.1109/LICS.1989.39155">doi:10.1109/LICS.1989.39155</a>&rbrack;</p>
 </li>
 
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Philip+Wadler">Philip Wadler</a>, <em>Comprehending Monads</em>, in <em>Conference on Lisp and functional programming</em>, ACM Press (1990) &lbrack;<a class="existingWikiWord" href="/nlab/files/WadlerMonads.pdf" title="pdf">pdf</a>, <a href="https://doi.org/10.1145/91556.91592">doi:10.1145/91556.91592</a>&rbrack;</p>
+</li>
+
 <li id="Moggi91">
 <p><a class="existingWikiWord" href="/nlab/show/Eugenio+Moggi">Eugenio Moggi</a>, <em>Notions of computation and monads</em>, Information and Computation, <strong>93</strong> 1 (1991) &lbrack;<a href="https://doi.org/10.1016/0890-5401(91)90052-4">doi:10.1016/0890-5401(91)90052-4</a>, <a href="http://www.disi.unige.it/person/MoggiE/ftp/ic91.pdf">pdf</a>&rbrack;</p>
 </li>
@@ -1526,6 +1582,12 @@ margin-left: 0em;
 
 <ul>
 <li><a class="existingWikiWord" href="/nlab/show/Martin+Hyland">Martin Hyland</a>, <a class="existingWikiWord" href="/nlab/show/John+Power">John Power</a>, §6 of: <em>The Category Theoretic Understanding of Universal Algebra: Lawvere Theories and Monads</em>, Electronic Notes in Theor. Comp. Sci. <strong>172</strong> (2007) 437-458 &lbrack;<a href="https://doi.org/10.1016/j.entcs.2007.02.019">doi:10.1016/j.entcs.2007.02.019</a>, <a href="https://www.dpmms.cam.ac.uk/~martin/Research/Publications/2007/hp07.pdf">preprint</a>&rbrack;</li>
+</ul>
+
+<p>Origin of the <a class="existingWikiWord" href="/nlab/show/do-notation">do-notation</a> for <a class="existingWikiWord" href="/nlab/show/Kleisli+composition">Kleisli composition</a> of effectful programs:</p>
+
+<ul>
+<li id="Launchbury93"><a class="existingWikiWord" href="/nlab/show/John+Launchbury">John Launchbury</a>, §3.3 in: <em>Lazy imperative programming</em>, Proceedings of <em>ACM Sigplan Workshop on State in Programming Languages</em>, Copenhagen (1993) &lbrack;<a href="https://launchbury.files.wordpress.com/2019/01/lazy-imperative-programming.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Launchbury-LazyImperative.pdf" title="pdf">pdf</a>&rbrack;</li>
 </ul>
 
 <p>In the generality of <a class="existingWikiWord" href="/nlab/show/relative+monads">relative monads</a>:</p>
@@ -1581,10 +1643,6 @@ margin-left: 0em;
 <p>Further discussion/exposition of the notion and application of (co)monads in computer science:</p>
 
 <ul>
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Philip+Wadler">Philip Wadler</a>, <em>Comprehending Monads</em>, in <em>Conference on Lisp and functional programming</em>, ACM Press (1990) &lbrack;<a class="existingWikiWord" href="/nlab/files/WadlerMonads.pdf" title="pdf">pdf</a>, <a href="https://doi.org/10.1145/91556.91592">doi:10.1145/91556.91592</a>&rbrack;</p>
-</li>
-
 <li id="BrookesGeva91">
 <p><a class="existingWikiWord" href="/nlab/show/Stephen+Brookes">Stephen Brookes</a>, Shai Geva, <em>Computational Comonads and Intensional Semantics</em>, CMU-CS-91-190 (1991) &lbrack;<a class="existingWikiWord" href="/nlab/files/BrookersGeva-ComputationalComonads.pdf" title="pdf">pdf</a>&rbrack;</p>
 </li>
@@ -1723,14 +1781,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on August 27, 2023 at 20:25:41.
+    Last revised on August 28, 2023 at 12:57:40.
     See the <a href="/nlab/history/monad+%28in+computer+science%29" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/monad+%28in+computer+science%29" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15359/#Item_34">Discuss</a><span class="backintime"><a href="/nlab/revision/monad+%28in+computer+science%29/108" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/monad+%28in+computer+science%29" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/monad+%28in+computer+science%29" accesskey="S" class="navlink" id="history" rel="nofollow">History (108 revisions)</a>
+  <a href="/nlab/edit/monad+%28in+computer+science%29" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15359/#Item_38">Discuss</a><span class="backintime"><a href="/nlab/revision/monad+%28in+computer+science%29/110" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/monad+%28in+computer+science%29" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/monad+%28in+computer+science%29" accesskey="S" class="navlink" id="history" rel="nofollow">History (110 revisions)</a>
   <a href="/nlab/show/monad+%28in+computer+science%29/cite" style="color: black">Cite</a>
   <a href="/nlab/print/monad+%28in+computer+science%29" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/monad+%28in+computer+science%29" id="view_source" rel="nofollow">Source</a>
