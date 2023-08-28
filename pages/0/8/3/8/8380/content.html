@@ -1298,7 +1298,7 @@ margin-left: 0em;
 </li>
 </ol>
 
-<p>Concretely, do-notation is the following <a class="existingWikiWord" href="/nlab/show/syntactic+sugar">syntactic sugar</a> for combined <a class="existingWikiWord" href="/nlab/show/Kleisli+composition">Kleisli composition</a> and <a class="existingWikiWord" href="/nlab/show/bound+variable">variable binding</a></p>
+<p>Syntactically, do-notation is the following <a class="existingWikiWord" href="/nlab/show/syntactic+sugar">syntactic sugar</a> for combined <a class="existingWikiWord" href="/nlab/show/Kleisli+composition">Kleisli composition</a> and <a class="existingWikiWord" href="/nlab/show/bound+variable">variable binding</a>:</p>
 
 <ol>
 <li>
@@ -1314,7 +1314,11 @@ margin-left: 0em;
 </li>
 </ol>
 
-<p>The generic case looks like this:</p>
+<p>This is, first of all, a suggestive notation for expressing effect-binding:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/EffectBindingViaDoNotation-230828.jpg" width="350px" />
+</div>
+<p>but thereby it furthermore provides a convenient means of expressing successive Kleisli-composition simply by successivley “calling” the separate procedures, much in the style of <a class="existingWikiWord" href="/nlab/show/imperative+programming">imperative programming</a> (which thereby is emulated/encapsulated by pure <a class="existingWikiWord" href="/nlab/show/functional+programming">functional programming</a>):</p>
 <div style="margin: -30px 0px 20px 10px">
   <img src="/nlab/files/KleisliCompositeInDoNotation-230826.jpg" width="520px" />
 </div>
@@ -1380,6 +1384,46 @@ margin-left: 0em;
 
 <p>(NB.: There is no clash with <code>for</code>…<code>do</code>-notation as used for loops in <a class="existingWikiWord" href="/nlab/show/imperative+programming">imperative programming</a>, since <a class="existingWikiWord" href="/nlab/show/functional+programming">functionally</a> these are instead expressed by <a class="existingWikiWord" href="/nlab/show/recursion">recursion</a>.)</p>
 
+<p>The appropriateness of rendering effect binding as a <code>for</code>…<code>do</code>-expression becomes yet more pronounced in contexts of <a class="existingWikiWord" href="/nlab/show/substructural+logic">substructural</a> <a class="existingWikiWord" href="/nlab/show/type+theory">typing contexts</a> such as in <a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a>, where the idea of “reading out” of monadic types via “<code>&lt;-</code>”-notation becomes yet more dubious.</p>
+
+<p>For example, consider the <a class="existingWikiWord" href="/nlab/show/relative+monad">relative monad</a> (<a href="relative+monad#LinearSpan">this example</a>) which sends <a class="existingWikiWord" href="/nlab/show/sets">sets</a> to the <a class="existingWikiWord" href="/nlab/show/vector+spaces">vector spaces</a> that are their <a class="existingWikiWord" href="/nlab/show/linear+spans">linear spans</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mpadded width="0" lspace="-100%width"><mrow><mi mathvariant="normal">Q</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mpadded><mi>Set</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>Vect</mi></mtd></mtr> <mtr><mtd><mi>W</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><munder><mo>⊕</mo><mi>W</mi></munder><mi>𝟙</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathllap{\mathrm{Q} \;\;\colon\;\;}
+    Set &amp;\longrightarrow&amp; Vect
+    \\
+    W &amp;\mapsto&amp; \underset{W}{\oplus} \mathbb{1}
+  } 
+
+</annotation></semantics></math></div>
+<p>with</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mpadded width="0" lspace="-100%width"><mrow><msup><mi>bind</mi> <mi mathvariant="normal">Q</mi></msup><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace></mrow></mpadded><mo stretchy="false">(</mo><mi>W</mi><mo>→</mo><mi mathvariant="normal">Q</mi><mi>W</mi><mo>′</mo><mo stretchy="false">)</mo></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mo stretchy="false">(</mo><mi mathvariant="normal">Q</mi><mi>W</mi><mo>→</mo><mi mathvariant="normal">Q</mi><mi>W</mi><mo>′</mo><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mrow><mo>(</mo><mi>w</mi><mo>↦</mo><mrow><mo>|</mo><msub><mi>ψ</mi> <mi>w</mi></msub><mo>⟩</mo></mrow><mo>)</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>w</mi></munder><msub><mi>q</mi> <mrow><msub><mrow></mrow> <mi>W</mi></msub></mrow></msub><mrow><mo>|</mo><mi>w</mi><mo>⟩</mo></mrow><mspace width="thinmathspace"></mspace><mo>↦</mo><mspace width="thinmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>w</mi></munder><msub><mi>q</mi> <mrow><msub><mrow></mrow> <mi>w</mi></msub></mrow></msub><mrow><mo>|</mo><msub><mi>ψ</mi> <mi>w</mi></msub><mo>⟩</mo></mrow><mo>)</mo></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \array{
+    \mathllap{bind^{\mathrm{Q}} \;\;\colon\;\;}
+    (W  \to \mathrm{Q}W') 
+    &amp;\longrightarrow&amp; 
+    (\mathrm{Q}W \to \mathrm{Q}W')
+    \\
+    \left(
+      w
+      \mapsto
+      \left\vert \psi_w \right\rangle
+    \right)
+    &amp;\mapsto&amp;
+    \left(
+      \sum_w q_{{}_W} \left\vert w \right\rangle
+      \,\mapsto\,
+      \sum_w q_{{}_w} \left\vert \psi_w \right\rangle
+    \right)
+  } 
+
+</annotation></semantics></math></div>
+<p>In this case the traditional <code>do</code>-notation would suggest that given a vector one may “read out” a basis element from it – which does not make conceptual sense.</p>
+
+<p>Instead, what’s really happening is that to define a linear map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>G</mi><mo lspace="verythinmathspace">:</mo><mi mathvariant="normal">Q</mi><mi>W</mi><mo>→</mo><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">G \colon \mathrm{Q}W \to \mathscr{H}</annotation></semantics></math> on a vector space equipped with a <a class="existingWikiWord" href="/nlab/show/basis+of+a+vector+space">linear basis</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math> (literally: a set of free <a href="basis+of+a+vector+space#GeneratedVectorSpace">generators</a>) it is sufficient to define this map <em>for</em> each basis-vector <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo>|</mo><mi>w</mi><mo>⟩</mo></mrow></mrow><annotation encoding="application/x-tex">\left\vert w \right\rangle</annotation></semantics></math> — and this is just what the <code>for</code>…<code>do</code>-notation for the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Q</mi></mrow><annotation encoding="application/x-tex">\mathrm{Q}</annotation></semantics></math>-monad expresses:</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/LinearMapInForDoNotation-230828.jpg" width="150px" />
+</div>
 <p><br /></p>
 
 <h2 id="Examples">Examples</h2>
@@ -1781,14 +1825,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on August 28, 2023 at 12:57:40.
+    Last revised on August 28, 2023 at 16:34:46.
     See the <a href="/nlab/history/monad+%28in+computer+science%29" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/monad+%28in+computer+science%29" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15359/#Item_38">Discuss</a><span class="backintime"><a href="/nlab/revision/monad+%28in+computer+science%29/110" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/monad+%28in+computer+science%29" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/monad+%28in+computer+science%29" accesskey="S" class="navlink" id="history" rel="nofollow">History (110 revisions)</a>
+  <a href="/nlab/edit/monad+%28in+computer+science%29" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15359/#Item_38">Discuss</a><span class="backintime"><a href="/nlab/revision/monad+%28in+computer+science%29/113" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/monad+%28in+computer+science%29" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/monad+%28in+computer+science%29" accesskey="S" class="navlink" id="history" rel="nofollow">History (113 revisions)</a>
   <a href="/nlab/show/monad+%28in+computer+science%29/cite" style="color: black">Cite</a>
   <a href="/nlab/print/monad+%28in+computer+science%29" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/monad+%28in+computer+science%29" id="view_source" rel="nofollow">Source</a>
