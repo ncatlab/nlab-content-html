@@ -250,8 +250,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/1550/#Item_94" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/1550/#Item_95" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -791,11 +791,13 @@ margin-left: 0em;
 <h1 id="contents">Contents</h1>
 <div class='maruku_toc'>
 <ul>
-<li><a href='#idea'>Idea</a></li>
+<li><a href='#Idea'>Idea</a></li>
 <li><a href='#definition'>Definition</a></li>
 <ul>
-<li><a href='#InTermsOfMatrices'>In terms of matrices</a></li>
-<li><a href='#InTermsOfCompactClosedCategories'>In terms of compact closed categories</a></li>
+<li><a href='#InTermsOfPositivityConditions'>In terms of positivity conditions</a></li>
+<li><a href='#InTermsOfKrausDecompositions'>In terms of Kraus decompositions</a></li>
+<li><a href='#InTermsOfartialTraces'>In terms of partial traces</a></li>
+<li><a href='#InTermsOfCompactClosedCategories'>In terms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>†</mo></mrow><annotation encoding="application/x-tex">\dagger</annotation></semantics></math>-compact closed categories</a></li>
 </ul>
 <li><a href='#properties'>Properties</a></li>
 <ul>
@@ -806,87 +808,156 @@ margin-left: 0em;
 <ul>
 <li><a href='#quantum_measurement_and_povms'>Quantum measurement and POVMs</a></li>
 <li><a href='#DecoherenceExample'>Decoherence and partial traces</a></li>
-<li><a href='#noice_channels'>Noice channels</a></li>
+<li><a href='#noise_channels'>Noise channels</a></li>
 </ul>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
 
-<h2 id="idea">Idea</h2>
+<h2 id="Idea">Idea</h2>
 
-<p>Any physical process is supposed to take <a class="existingWikiWord" href="/nlab/show/physical+states">physical states</a> into physical states (<a class="existingWikiWord" href="/nlab/show/Schr%C3%B6dinger+picture">Schrödinger picture</a>). If <a class="existingWikiWord" href="/nlab/show/density+matrices">density matrices</a> are used to describe <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a> in <a class="existingWikiWord" href="/nlab/show/quantum+mechanics">quantum mechanics</a>, then it must be some operation that sends density matrices to density matrices. So for finite-dimensional state spaces a process should be a <a class="existingWikiWord" href="/nlab/show/linear+map">linear map</a> of <a class="existingWikiWord" href="/nlab/show/vector+spaces">vector spaces</a> of <a class="existingWikiWord" href="/nlab/show/matrices">matrices</a></p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>U</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>Mat</mi><mo stretchy="false">(</mo><mi>n</mi><mo>×</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo><mo>→</mo><mi>Mat</mi><mo stretchy="false">(</mo><mi>k</mi><mo>×</mo><mi>k</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
-  U 
+<p>In <a class="existingWikiWord" href="/nlab/show/quantum+physics">quantum physics</a> – and specifically in <a class="existingWikiWord" href="/nlab/show/quantum+information+theory">quantum information theory</a> and <a class="existingWikiWord" href="/nlab/show/quantum+probability+theory">quantum probability theory</a> – by a <em>quantum operation</em> or <em>quantum channel</em> one means any physically reasonable operation on, or transformation of <em><a class="existingWikiWord" href="/nlab/show/mixed+states">mixed states</a></em> (in contrast to <em><a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a></em> operating on <a class="existingWikiWord" href="/nlab/show/pure+states">pure states</a>), notably such as sending information through a “communication channel” (in the sense of <a class="existingWikiWord" href="/nlab/show/information+theory">information theory</a>), whence the terminology <em>quantum channel</em>.</p>
+
+<p>More concretely, the physical nature of quantum channels is that they unify “loss-less” <a class="existingWikiWord" href="/nlab/show/unitary+operator">unitary</a> transformations on <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a> (as known <a class="existingWikiWord" href="/nlab/show/Schr%C3%B6dinger+equation">Schrödinger evoluation</a> and <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a>) with stochastic effects such as due to <a class="existingWikiWord" href="/nlab/show/quantum+noise">quantum noise</a> and <a class="existingWikiWord" href="/nlab/show/quantum+state+collapse">quantum state collapse</a> due to <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>.</p>
+
+<p>In short, just as the notion of <a class="existingWikiWord" href="/nlab/show/mixed+states">mixed states</a> generalizes the notion of <a class="existingWikiWord" href="/nlab/show/pure+state">pure</a> <a class="existingWikiWord" href="/nlab/show/quantum+states">quantum states</a> with their objective, intrinsic and fundamental stochasticity (expressed the <a class="existingWikiWord" href="/nlab/show/Born+rule">Born rule</a>) to include also subjective, <a class="existingWikiWord" href="/nlab/show/thermodynamics">thermodynamical</a> <a class="existingWikiWord" href="/nlab/show/probability+distribution">classical stochasticity</a>, so quantum channels generalize <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> from pure to mixed states.</p>
+
+<p>Mathematically, with <a class="existingWikiWord" href="/nlab/show/mixed+states">mixed states</a> represented by <a class="existingWikiWord" href="/nlab/show/density+matrices">density matrices</a> and generally by <a class="existingWikiWord" href="/nlab/show/positive+linear+operators">positive linear operators</a>, a quantum channel is just a suitable <a class="existingWikiWord" href="/nlab/show/map">map</a> between spaces of such <a class="existingWikiWord" href="/nlab/show/matrices">matrices</a> or <a class="existingWikiWord" href="/nlab/show/linear+operators">linear operators</a>, whence they are sometimes also called <em><a class="existingWikiWord" href="/nlab/show/superoperators">superoperators</a></em> (in the sense of “operators operating on operators”).</p>
+
+<p>But in the context of <a class="existingWikiWord" href="/nlab/show/quantum+information+theory">quantum information theory</a> the relevant <a class="existingWikiWord" href="/nlab/show/spaces+of+quantum+states">spaces of quantum states</a> are all <a class="existingWikiWord" href="/nlab/show/finite-dimensional+Hilbert+space">finite-dimensional</a>, in which case quantum channels are traditionally discussed as (special) <a class="existingWikiWord" href="/nlab/show/linear+maps">linear maps</a> between <a class="existingWikiWord" href="/nlab/show/vector+spaces">vector spaces</a> of <a class="existingWikiWord" href="/nlab/show/square+matrix">square</a> <a class="existingWikiWord" href="/nlab/show/matrices">matrices</a>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>chan</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi>Mat</mi> <mrow><msub><mi>n</mi> <mn>1</mn></msub></mrow></msub><mo stretchy="false">(</mo><mi>ℂ</mi><mo stretchy="false">)</mo><mo>⟶</mo><msub><mi>Mat</mi> <mrow><msub><mi>n</mi> <mn>2</mn></msub></mrow></msub><mo stretchy="false">(</mo><mi>ℂ</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  chan
   \;\colon\;
-  Mat(n \times n, \mathbb{C}) 
-    \to 
-  Mat(k \times k, \mathbb{C})
+  Mat_{n_1}(\mathbb{C}) 
+    \longrightarrow
+  Mat_{n_2}(\mathbb{C})
+  \,.
 
 </annotation></semantics></math></div>
-<p>(so far this is a general “<a class="existingWikiWord" href="/nlab/show/superoperator">superoperator</a>”) that preserves the subset of <a class="existingWikiWord" href="/nlab/show/density+matrices">density matrices</a>, in that</p>
+<p>Slightly more abstractly, such as in the formulation of <a class="existingWikiWord" href="/nlab/show/quantum+information+theory+via+dagger-compact+categories">quantum information theory via dagger-compact categories</a>, these are certain <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a> in a <a class="existingWikiWord" href="/nlab/show/compact+closed+category">compact closed category</a> of the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>chan</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><msub><mi class="mathscript">ℋ</mi> <mn>1</mn></msub><mo>⊗</mo><msubsup><mi class="mathscript">ℋ</mi> <mn>1</mn> <mo>*</mo></msubsup><mo>⟶</mo><msub><mi class="mathscript">ℋ</mi> <mn>2</mn></msub><mo>⊗</mo><msubsup><mi class="mathscript">ℋ</mi> <mn>2</mn> <mo>*</mo></msubsup></mrow><annotation encoding="application/x-tex">
+  chan
+  \;\colon\;
+  \mathscr{H}_1 \otimes \mathscr{H}_1^\ast
+    \longrightarrow
+  \mathscr{H}_2 \otimes \mathscr{H}_2^\ast
+
+</annotation></semantics></math></div>
+<p>(where above <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>n</mi> <mi>i</mi></msub><mo>=</mo><mi>dim</mi><mo stretchy="false">(</mo><msub><mi class="mathscript">ℋ</mi> <mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n_i = dim(\mathscr{H}_i)</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/dimension+of+a+vector+space">dimension</a> of the given <a class="existingWikiWord" href="/nlab/show/finite-dimensional+Hilbert+space">finite-dimensional Hilbert space</a>).</p>
+
+<p>The key point is that such linear maps are to qualify as quantum channels iff they suitably restrict to maps between the <em><a class="existingWikiWord" href="/nlab/show/convex+set">convex</a></em> <a class="existingWikiWord" href="/nlab/show/subsets">subsets</a> of <a class="existingWikiWord" href="/nlab/show/density+matrices">density matrices</a> (the <a class="existingWikiWord" href="/nlab/show/mixed+states">mixed states</a>) inside <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi class="mathscript">ℋ</mi> <mi>i</mi></msub><mo>⊗</mo><msubsup><mi class="mathscript">ℋ</mi> <mi>i</mi> <mo>*</mo></msubsup></mrow><annotation encoding="application/x-tex">\mathscr{H}_i\otimes\mathscr{H}_i^\ast</annotation></semantics></math>, which is a non-linear condition.</p>
+
+<p>There is some slight variation in the exact list of properties demanded of a quantum channel, but the key demand is that it be a “<em>positive map</em>” in that it takes <a class="existingWikiWord" href="/nlab/show/positive+operators">positive operators</a> (such as <a class="existingWikiWord" href="/nlab/show/density+operators">density operators</a>) to positive operators — and in fact a <em>completely positive map</em>, meaning that it remains positive after <a class="existingWikiWord" href="/nlab/show/tensor+product+of+vector+spaces">tensoring</a> with any <a class="existingWikiWord" href="/nlab/show/identity+map">identity transformation</a>.</p>
+
+<p>This is discussed below at:</p>
 
 <ul>
-<li>
-<p>it preserves the <a class="existingWikiWord" href="/nlab/show/trace">trace</a> of matrices;</p>
-</li>
-
-<li>
-<p>takes <a class="existingWikiWord" href="/nlab/show/hermitian+matrices">hermitian matrices</a> with non-negative <a class="existingWikiWord" href="/nlab/show/eigenvalues">eigenvalues</a> to hermitian matrices with non-negative eigenvalues.</p>
-</li>
+<li><em><a href="#InTermsOfPositivityConditions">In terms of positivity conditions</a></em></li>
 </ul>
 
-<p>Such a map is then called a <em>quantum operation</em>. The notion of a quantum operation is built from the <a class="existingWikiWord" href="/nlab/show/Stinespring+factorization+theorem">Stinespring factorization theorem</a>.</p>
+<p>Often demanded is also that a quantum channel preserves the <a class="existingWikiWord" href="/nlab/show/trace">trace</a> of matrices, which in <a class="existingWikiWord" href="/nlab/show/quantum+probability">quantum probability</a> means that it preserves total probability, hence that it is the quantum analog of a <em><span class="newWikiWord">stochastic map<a href="/nlab/new/stochastic+map">?</a></span></em> — through what fundamentally matters is that a quantum channel at most lowers the probability (the description of the channel need not describe all possible outcomes, but it must not make new outcomes appear out of nowhere).</p>
+
+<p>Less often demanded is that a quantum channel also preserves the <a class="existingWikiWord" href="/nlab/show/identity+matrix">identity matrix</a>, in which case it is the quantum analog of a <span class="newWikiWord">doubly stochastic map<a href="/nlab/new/doubly+stochastic+map">?</a></span>.</p>
+
+<p>Beyond these abstract characterizations, the <a class="existingWikiWord" href="/nlab/show/Stinespring+factorization+theorem">Stinespring factorization theorem</a> characterizes quantum channels more explicitly as those maps on matrices arising as <a class="existingWikiWord" href="/nlab/show/sums">sums</a> of <a class="existingWikiWord" href="/nlab/show/conjugations">conjugations</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>chan</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>ρ</mi><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mi>w</mi></munder><msub><mi>E</mi> <mi>w</mi></msub><mo>⋅</mo><mi>ρ</mi><mo>⋅</mo><msubsup><mi>E</mi> <mi>w</mi> <mo>†</mo></msubsup></mrow><annotation encoding="application/x-tex">
+  chan
+  \;\colon\;
+  \rho 
+  \;\mapsto\;
+  \underset{w}{\sum}
+  E_w \cdot \rho \cdot E_w^\dagger
+
+</annotation></semantics></math></div>
+<p>by certain <a class="existingWikiWord" href="/nlab/show/tuples">tuples</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>E</mi> <mi>w</mi></msub><msub><mo stretchy="false">)</mo> <mrow><mi>w</mi><mo lspace="verythinmathspace">:</mo><mi>W</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(E_w)_{w \colon W}</annotation></semantics></math> of linear operators (“<em>Kraus operators</em>”). Much of the discussion of quantum channels in the literature proceeds by manipulating such <em>Kraus decompositions</em> of quantum channels.</p>
+
+<p>This is discussed below at:</p>
+
+<ul>
+<li><em><a href="#InTermsOfKrausDecompositions">In terms of Kraus decompositions</a></em></li>
+</ul>
+
+<p>For example, a <a class="existingWikiWord" href="/nlab/show/unitary+quantum+channel">unitary quantum channel</a> describing a loss-less <a class="existingWikiWord" href="/nlab/show/quantum+gate">quantum gate</a> is given by a single <a class="existingWikiWord" href="/nlab/show/unitary+operator">unitary</a> Kraus operator as</p>
+<div class="maruku-equation" id="eq:UnitaryChannelInIdeaSection"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>chan</mi> <mi>U</mi></msub><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>ρ</mi><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><mi>U</mi><mo>⋅</mo><mi>ρ</mi><mo>⋅</mo><msup><mi>U</mi> <mo>†</mo></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  
+  chan_U
+  \;\colon\;
+  \rho 
+  \;\mapsto\;
+  U \cdot \rho \cdot U^\dagger
+  \,,
+
+</annotation></semantics></math></div>
+<p>while, on the other extreme, a <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> in a maesurement <a class="existingWikiWord" href="/nlab/show/basis+of+a+vector+space">basis</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><munder><mo>⊕</mo><mi>W</mi></munder><mi>ℂ</mi><mo>≃</mo><mi class="mathscript">ℋ</mi></mrow><annotation encoding="application/x-tex">\underset{W}{\oplus} \mathbb{C}  \simeq \mathscr{H}</annotation></semantics></math> is given by the corresponding <a class="existingWikiWord" href="/nlab/show/projection+operators">projection operators</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>P</mi> <mi>w</mi></msub></mrow><annotation encoding="application/x-tex">P_w</annotation></semantics></math> as</p>
+<div class="maruku-equation" id="eq:MeasurementChannelInIdeaSection"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>meas</mi> <mi>W</mi></msub><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>ρ</mi><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo><mi>w</mi></munder><msub><mi>P</mi> <mi>w</mi></msub><mo>⋅</mo><mi>ρ</mi><mo>⋅</mo><msub><mi>P</mi> <mi>w</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  
+  meas_W
+  \;\colon\;
+  \rho 
+  \;\mapsto\;
+  \underset{w}{\sum}
+  P_w \cdot \rho \cdot P_w
+  \,.
+
+</annotation></semantics></math></div>
+<p>Remarkably (from the discussion at <em><a class="existingWikiWord" href="/nlab/show/quantum+decoherence">quantum decoherence</a></em>) one finds that such a measurement channel <a class="maruku-eqref" href="#eq:MeasurementChannelInIdeaSection">(2)</a> may equivalently be understood as the result of a unitary evolution <a class="maruku-eqref" href="#eq:UnitaryChannelInIdeaSection">(1)</a> of the state <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho</annotation></semantics></math> coupled to an environment state <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math> <em>followed by</em> the <a class="existingWikiWord" href="/nlab/show/partial+trace">partial trace</a> over the environment’s Hilbert space. This observation turns out to generally lead to yet another characterization of quantum channels:</p>
+
+<p>Quantum channels equivalently act on a density matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho</annotation></semantics></math> by</p>
+
+<ol>
+<li>
+<p>tensoring it to another state <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></p>
+
+<p>(coupling the system to an environment/“bath”)</p>
+</li>
+
+<li>
+<p>sending the tensor state through a unitary channel <a class="maruku-eqref" href="#eq:UnitaryChannelInIdeaSection">(1)</a></p>
+
+<p>(<a class="existingWikiWord" href="/nlab/show/Schr%C3%B6dinger+equation">Schrödinger evolution</a> of the couplesystem)</p>
+</li>
+
+<li>
+<p>applying the <a class="existingWikiWord" href="/nlab/show/partial+trace">partial trace</a> over the Hilbert space of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></p>
+
+<p>(averaging the outcome over all states of the environment/bath).</p>
+</li>
+</ol>
+
+<p>In this perspective, quantum channels are understood as a kind of unitary quantum gates after all, but acting on <a class="existingWikiWord" href="/nlab/show/open+quantum+systems">open quantum systems</a> including their environment with the stochasticity induced (only) by (deliberate) ignorance of the environment’s state.</p>
+
+<p>This is discussed below at:</p>
+
+<ul>
+<li><em><a href="#InTermsOfartialTraces">In terms of partial traces</a></em></li>
+</ul>
+
+<p>In this last form, the formulation of quantum gates lends itself to formulation in the <a class="existingWikiWord" href="/nlab/show/string+diagram">string diagram</a>-calculus of <a class="existingWikiWord" href="/nlab/show/quantum+information+theory+via+dagger-compact+categories">quantum information theory via dagger-compact categories</a>.</p>
+
+<p>This is discussed below at :</p>
+
+<ul>
+<li><a href="#InTermsOfCompactClosedCategories">In terms of dagger-compact closed categories</a></li>
+</ul>
+
+<p><br /></p>
 
 <h2 id="definition">Definition</h2>
 
-<p>We first give the traditional definition in terms of <a class="existingWikiWord" href="/nlab/show/linear+algebra">linear algebra</a> and <a class="existingWikiWord" href="/nlab/show/matrices">matrices</a> in</p>
+<h3 id="InTermsOfPositivityConditions">In terms of positivity conditions</h3>
 
-<ul>
-<li><a href="#InTermsOfMatrices">In terms of matrices</a></li>
-</ul>
+<p>(…)</p>
 
-<p>Then we consider the general abstract formulation</p>
+<h3 id="InTermsOfKrausDecompositions">In terms of Kraus decompositions</h3>
 
-<ul>
-<li><a href="#InTermsOfCompactClosedCategories">In terms of compact closed categories</a></li>
-</ul>
+<p>(…)</p>
 
-<h3 id="InTermsOfMatrices">In terms of matrices</h3>
+<h3 id="InTermsOfartialTraces">In terms of partial traces</h3>
 
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>,</mo><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">k,n \in \mathbb{N}</annotation></semantics></math>.</p>
+<p>(…)</p>
 
-<p>A matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mi>Mat</mi><mo stretchy="false">(</mo><mi>n</mi><mo>×</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A \in Mat(n \times n, \mathbb{C})</annotation></semantics></math> is called <em><a class="existingWikiWord" href="/nlab/show/positive+semidefinite">positive</a></em> if it is hermitian – if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>A</mi> <mo>†</mo></msup><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">A^\dagger = A</annotation></semantics></math> – and if all its eigenvalues (which then are necessarily real) are non-negative.</p>
-
-<p>A linear map (morphism of <a class="existingWikiWord" href="/nlab/show/vector+space">vector space</a>s of matrices)</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Φ</mi><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>Mat</mi><mo stretchy="false">(</mo><mi>n</mi><mo>×</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo><mo>→</mo><mi>Mat</mi><mo stretchy="false">(</mo><mi>k</mi><mo>×</mo><mi>k</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
-  \Phi
-  \;\colon\;
-  Mat(n \times n, \mathbb{C}) 
-    \to 
-  Mat(k \times k, \mathbb{C})
-
-</annotation></semantics></math></div>
-<p>is called <em>positive</em> if it takes positive matrices to positive matrices.</p>
-
-<p>The map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math> is called <em>completely positive</em> if for all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>∈</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex">p \in \mathbb{N}</annotation></semantics></math> the <a class="existingWikiWord" href="/nlab/show/tensor+product">tensor product</a></p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Φ</mi><mo>⊗</mo><msub><mi>Id</mi> <mrow><mi>Mat</mi><mo stretchy="false">(</mo><mi>p</mi><mo>×</mo><mi>p</mi><mo stretchy="false">)</mo><mo>,</mo><mi>ℂ</mi></mrow></msub><mspace width="thickmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thickmathspace"></mspace><mi>Mat</mi><mo stretchy="false">(</mo><mi>n</mi><mo>×</mo><mi>n</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo><mo>⊗</mo><mi>Mat</mi><mo stretchy="false">(</mo><mi>p</mi><mo>×</mo><mi>p</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo><mo>⟶</mo><mi>Mat</mi><mo stretchy="false">(</mo><mi>k</mi><mo>×</mo><mi>k</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo><mo>⊗</mo><mi>Mat</mi><mo stretchy="false">(</mo><mi>p</mi><mo>×</mo><mi>p</mi><mo>,</mo><mi>ℂ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
-  \Phi \otimes Id_{Mat(p\times p),\mathbb{C}} 
-  \;\colon\;
-  Mat(n \times n , \mathbb{C})
-  \otimes
-  Mat(p \times p , \mathbb{C})
-    \longrightarrow
-  Mat(k \times k , \mathbb{C})
-  \otimes
-  Mat(p \times p , \mathbb{C})
-
-</annotation></semantics></math></div>
-<p>is positive.</p>
-
-<p>A <em>quantum operation</em> (or quantum channel) is a map that is both completely positive and trace preserving (often abbreviated to CPTP).</p>
-
-<h3 id="InTermsOfCompactClosedCategories">In terms of compact closed categories</h3>
+<h3 id="InTermsOfCompactClosedCategories">In terms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>†</mo></mrow><annotation encoding="application/x-tex">\dagger</annotation></semantics></math>-compact closed categories</h3>
 
 <p>… due to (<a href="#Selinger05">Selinger 05</a>) … see for instance (<a href="#CoeckeHeunen11">Coecke-Heunen 11, section 2</a>) for a quick summary …</p>
 
@@ -910,7 +981,7 @@ margin-left: 0em;
 
 </annotation></semantics></math></div></div>
 
-<p>This is originally due to (<a href="#Stinespring55">Stinespring 55</a>). The decomposition in the theorem is called <em>Kraus decomposition</em> after (<a href="#Kraus71">Kraus 71</a>). See also (<a href="#Choi76">Choi 76, theorem 1</a>). A brief review is for instance in (<a href="#Kuperberg05">Kuperberg 05, theorem 1.5.1</a>). A general abstract proof in terms of <a class="existingWikiWord" href="/nlab/show/dagger+category">†-categories</a> is given in (<a href="#Selinger05">Selinger 05</a>). A characterization of completely positive maps entirely in terms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>†</mo></mrow><annotation encoding="application/x-tex">\dagger</annotation></semantics></math>-categories is given in (<a href="#Coecke07">Coecke 07</a>).</p>
+<p>This is originally due to <a href="#Stinespring55">Stinespring 1955</a>. The decomposition in the theorem is called <em>Kraus decomposition</em> after <a href="#Kraus71">Kraus 1971</a>. See also (<a href="#Choi75">Choi 75, theorem 1</a>). Review includes Nielsen &amp; Chuang 2000, Thm. 8.1Kuperberg 2005, Thm. 1.5.1](#Kuperberg05). A general abstract proof in terms of <a class="existingWikiWord" href="/nlab/show/dagger+category">†-categories</a> is given by <a href="#Selinger05">Selinger 2005</a>. A characterization of completely positive maps entirely in terms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>†</mo></mrow><annotation encoding="application/x-tex">\dagger</annotation></semantics></math>-categories is given in <a href="#Coecke07">Coecke 2007</a>.</p>
 
 <p>The matrices <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>E</mi> <mi>i</mi></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{E_i\}</annotation></semantics></math> that are associated to a completely positive and trace-preserving map by the above theorem are called <strong>Kraus operators</strong>.</p>
 
@@ -961,7 +1032,7 @@ margin-left: 0em;
 
 <p>For the moment see the references at <em><a class="existingWikiWord" href="/nlab/show/quantum+decoherence">quantum decoherence</a></em>.</p>
 
-<h3 id="noice_channels">Noice channels</h3>
+<h3 id="noise_channels">Noise channels</h3>
 
 <p>Examples of <a class="existingWikiWord" href="/nlab/show/quantum+noise">quantum noise</a> channels:</p>
 
@@ -1326,7 +1397,7 @@ margin-left: 0em;
 <p>In the context of <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a>:</p>
 
 <ul>
-<li>
+<li id="NielsenChuang00">
 <p><a class="existingWikiWord" href="/nlab/show/Michael+A.+Nielsen">Michael A. Nielsen</a>, <a class="existingWikiWord" href="/nlab/show/Isaac+L.+Chuang">Isaac L. Chuang</a>, §8.2 in: <em>Quantum computation and quantum information</em>, Cambridge University Press (2000) &lbrack;<a href="https://doi.org/10.1017/CBO9780511976667">doi:10.1017/CBO9780511976667</a>, <a href="http://csis.pace.edu/~ctappert/cs837-19spring/QC-textbook.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/NielsenChuangQuantumComputation.pdf" title="pdf">pdf</a>&rbrack;</p>
 </li>
 
@@ -1339,7 +1410,7 @@ margin-left: 0em;
 </li>
 
 <li id="Kuperberg05">
-<p><a class="existingWikiWord" href="/nlab/show/Greg+Kuperberg">Greg Kuperberg</a>, §1.5 of <em>A concise introduction to quantum probability, quantum mechanics, and quantum computation</em>, 2005 (<a href="http://www.math.ucdavis.edu/~greg/intro-2005.pdf">pdf</a>)</p>
+<p><a class="existingWikiWord" href="/nlab/show/Greg+Kuperberg">Greg Kuperberg</a>, §1.5 of <em>A concise introduction to quantum probability, quantum mechanics, and quantum computation</em> (2005) &lbrack;<a href="http://www.math.ucdavis.edu/~greg/intro-2005.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Kuperberg-ConciseQuantum.pdf" title="pdf">pdf</a>&rbrack;</p>
 </li>
 </ul>
 
@@ -1407,13 +1478,11 @@ margin-left: 0em;
 </li>
 </ul>
 
-<p>This is further explored in</p>
+<p>This is further explored in:</p>
 
 <ul>
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/Bob+Coecke">Bob Coecke</a>, <a class="existingWikiWord" href="/nlab/show/Eric+Paquette">Eric Paquette</a>, <a class="existingWikiWord" href="/nlab/show/Dusko+Pavlovic">Dusko Pavlovic</a>, <em>Classical and quantum structures</em> (2008) &lbrack;<a href="http://www.comlab.ox.ac.uk/files/627/RR-08-02.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Coecke-Paquette-Pavlovic-CQS.pdf" title="pdf">pdf</a></p>
-
-<p>&rbrack;</p>
+<p><a class="existingWikiWord" href="/nlab/show/Bob+Coecke">Bob Coecke</a>, <a class="existingWikiWord" href="/nlab/show/Eric+Paquette">Eric Paquette</a>, <a class="existingWikiWord" href="/nlab/show/Dusko+Pavlovic">Dusko Pavlovic</a>, <em>Classical and quantum structures</em> (2008) &lbrack;<a href="http://www.comlab.ox.ac.uk/files/627/RR-08-02.pdf">pdf</a>, <a class="existingWikiWord" href="/nlab/files/Coecke-Paquette-Pavlovic-CQS.pdf" title="pdf">pdf</a>&rbrack;</p>
 </li>
 
 <li id="CoeckeHeunen11">
@@ -1448,14 +1517,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on September 16, 2023 at 11:05:17.
+    Last revised on September 17, 2023 at 14:05:39.
     See the <a href="/nlab/history/quantum+operation" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/quantum+operation" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/1550/#Item_94">Discuss</a><span class="backintime"><a href="/nlab/revision/quantum+operation/92" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quantum+operation" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quantum+operation" accesskey="S" class="navlink" id="history" rel="nofollow">History (92 revisions)</a>
+  <a href="/nlab/edit/quantum+operation" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/1550/#Item_95">Discuss</a><span class="backintime"><a href="/nlab/revision/quantum+operation/96" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quantum+operation" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quantum+operation" accesskey="S" class="navlink" id="history" rel="nofollow">History (96 revisions)</a>
   <a href="/nlab/show/quantum+operation/cite" style="color: black">Cite</a>
   <a href="/nlab/print/quantum+operation" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/quantum+operation" id="view_source" rel="nofollow">Source</a>
