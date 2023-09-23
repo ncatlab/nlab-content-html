@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/12924/#Item_4" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/12924/#Item_8" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -566,6 +566,7 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#Idea'>Idea</a></li>
+<li><a href='#Details'>Details</a></li>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -595,6 +596,957 @@ margin-left: 0em;
 
 <p>This construction is sometimes viewed (see <a href="#HP07">HP07</a>, and at <em><a class="existingWikiWord" href="/nlab/show/Eff">Eff</a></em>) as a complication resulting from passing to monads from the setting of <a class="existingWikiWord" href="/nlab/show/Lawvere+theories">Lawvere theories</a>, where any two theories may be naturally combined.</p>
 
+<h2 id="Details">Details</h2>
+
+<p>The following Def. <a class="maruku-ref" href="#MonadTransformer"></a> is essentially the notion in <a href="#LiangHudakJones95">Liang, Hudak &amp; Jones 1995, left column of p. 339</a>, as now commonly used in <a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a> (see the <em><a href="https://hackage.haskell.org/package/transformers-0.5.6.2/docs/Control-Monad-Trans-Class.html#g:1">Haskell Transformer class</a></em>).</p>
+
+<blockquote>
+<p>These authors, and the <a class="existingWikiWord" href="/nlab/show/functional+programming">functional programming</a>/<a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a>-community following them, insist that “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>trans</mi> <mrow><mo stretchy="false">(</mo><mtext>-</mtext><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">trans_{(\text{-})}</annotation></semantics></math>” <a class="maruku-eqref" href="#eq:UnderlyingNaturalTransformation">(1)</a> — which they denote “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>lift</mi><mtext>-</mtext></mrow><annotation encoding="application/x-tex">lift \text{-}</annotation></semantics></math>” — is not just a transformation between a single pair of monads, but a component a <a class="existingWikiWord" href="/nlab/show/pointed+endofunctor">pointed endofunctor</a> on the whole category of monads. This further condition may be considered (or not) in addition to the following discussion.</p>
+</blockquote>
+
+<p>
+<div class='num_defn' id='MonadTransformer'>
+<h6>Definition</h6>
+<p>Given monads <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℰ</mi></mrow><annotation encoding="application/x-tex">\mathcal{E}</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℰ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\mathcal{E}'</annotation></semantics></math> on the same <a class="existingWikiWord" href="/nlab/show/category">category</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mstyle mathvariant="bold"><mi>C</mi></mstyle></mrow><annotation encoding="application/x-tex">\mathbf{C}</annotation></semantics></math>, a <em>monad transformer</em> between them is:</p>
+
+<ul>
+<li>
+<p>a system of <a class="existingWikiWord" href="/nlab/show/morphisms">morphisms</a></p>
+<div class="maruku-equation" id="eq:UnderlyingNaturalTransformation"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>D</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>Type</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>trans</mi> <mi>D</mi></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>ℰ</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>→</mo><mi>ℰ</mi><mo>′</mo><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+   
+   D \,\colon\, Type
+   \;\;\;\;\;\;
+   \vdash
+   \;\;\;\;\;\;
+   trans_D 
+     \,\colon\, 
+   \mathcal{E}(D) \to \mathcal{E}'(D)
+
+</annotation></semantics></math></div></li>
+</ul>
+
+<p>which</p>
+
+<ol>
+<li>
+<p>preserves the return-operations, in that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>trans</mi><mo>∘</mo><msup><mi>ret</mi> <mi>ℰ</mi></msup><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msup><mi>ret</mi> <mrow><mi>ℰ</mi><mo>′</mo></mrow></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  trans \circ ret^{\mathcal{E}}
+  \;=\;
+  ret^{\mathcal{E}'}
+  \,,
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>preserves the bind-operations, in that for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>prog</mi> <mn>12</mn></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>D</mi> <mn>1</mn></msub><mo>→</mo><mi>ℰ</mi><mo stretchy="false">(</mo><msub><mi>D</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">prog_{12}\,\colon\, D_1 \to \mathcal{E}(D_2)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>prog</mi> <mn>23</mn></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>D</mi> <mn>2</mn></msub><mo>→</mo><mi>ℰ</mi><mo stretchy="false">(</mo><msub><mi>D</mi> <mn>3</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">prog_{23}\,\colon\, D_2 \to \mathcal{E}(D_3)</annotation></semantics></math></p>
+
+<p>we have</p>
+<div class="maruku-equation" id="eq:RespectForBindOperation"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>3</mn></msub></mrow></msub><mo>∘</mo><mo maxsize="1.8em" minsize="1.8em">(</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>bind</mi> <mi>ℰ</mi></msup><msub><mi>prog</mi> <mn>23</mn></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>∘</mo><msub><mi>prog</mi> <mn>12</mn></msub><mo maxsize="1.8em" minsize="1.8em">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msup><mi>bind</mi> <mrow><mi>ℰ</mi><mo>′</mo></mrow></msup><mo maxsize="1.8em" minsize="1.8em">(</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>3</mn></msub></mrow></msub><mo>∘</mo><msub><mi>prog</mi> <mn>23</mn></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo><mo>∘</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>2</mn></msub></mrow></msub><mo>∘</mo><msub><mi>prog</mi> <mn>12</mn></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow></mpadded></mrow><annotation encoding="application/x-tex">
+  
+  trans_{D_3}
+  \circ
+  \Big(
+    \big( bind^{\mathcal{E}} prog_{23} \big)
+    \circ
+    prog_{12}
+  \Big)
+  \;\;=\;\;
+  bind^{\mathcal{E}'}
+  \Big(
+    \big(
+      trans_{D_3} \circ prog_{23}
+    \big)
+  \Big)
+  \circ
+  \big(
+    trans_{D_2} \circ prog_{12}
+  \big)
+  \mathrlap{\,.}
+
+</annotation></semantics></math></div></li>
+</ol>
+
+<p></p>
+</div>
+</p>
+
+<p>In <a href="#SchrijversPir&#xF3;gWuJaskelioff19">Schrijvers, Piróg, Wu &amp; Jaskelioff 2019 p. 99</a> the analogous condition is stated in terms of the join-operation. We may check that these are equivalent:</p>
+
+<p>
+<div class='num_prop'>
+<h6>Proposition</h6>
+<p>A system of transformations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>trans</mi> <mi>D</mi></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>ℰ</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>→</mo><mi>ℰ</mi><mo>′</mo><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">trans_D \,\colon\, \mathcal{E}(D) \to \mathcal{E}'(D)</annotation></semantics></math> is a monad transformer in the sense of Def. <a class="maruku-ref" href="#MonadTransformer"></a> iff it is a <a href="monad#TransformationOfMonadsOnFixedCategory">homomorphism of monads</a> (in the original sense of <a href="monad#Maranda66">Maranda 1966</a>), i.e.:</p>
+
+<ol>
+<li>
+<p>a <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural transformation</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="0em" rspace="thinmathspace">trans</mo><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>ℰ</mi><mo>→</mo><mi>ℰ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\trans \,\colon\, \mathcal{E} \to \mathcal{E}'</annotation></semantics></math> of the <a class="existingWikiWord" href="/nlab/show/underlying">underlying</a> <a class="existingWikiWord" href="/nlab/show/functors">functors</a>,</p>
+</li>
+
+<li>
+<p>respecting the <a class="existingWikiWord" href="/nlab/show/unit+of+a+monad">unit/return-operation</a>, in that the following <a class="existingWikiWord" href="/nlab/show/commuting+diagram">diagrams commute</a>:</p>
+<div class="maruku-equation" id="eq:RespectForTheUnit"><span class="maruku-eq-number">(3)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>D</mi></mtd> <mtd><mover><mo>⟶</mo><mrow><msubsup><mi>ret</mi> <mi>D</mi> <mi>ℰ</mi></msubsup></mrow></mover></mtd> <mtd><mi>ℰ</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mpadded width="0" lspace="-100%width"><mrow><msup><mrow></mrow> <mi>id</mi></msup></mrow></mpadded><mo maxsize="1.8em" minsize="1.8em">↓</mo></mtd> <mtd></mtd> <mtd><mo maxsize="1.8em" minsize="1.8em">↓</mo><mpadded width="0"><mrow><msup><mrow></mrow> <mrow><msub><mi>trans</mi> <mi>D</mi></msub></mrow></msup></mrow></mpadded></mtd></mtr> <mtr><mtd><mi>D</mi></mtd> <mtd><munder><mo>⟶</mo><mrow><msubsup><mi>ret</mi> <mi>D</mi> <mrow><mi>ℰ</mi><mo>′</mo></mrow></msubsup></mrow></munder></mtd> <mtd><mi>ℰ</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \array{
+    D 
+      &amp;\overset{ret^{\mathcal{E}}_D}{\longrightarrow}&amp;
+    \mathcal{E}(D)
+    \\
+    \mathllap{{}^{id}}\Big\downarrow 
+      &amp;&amp; 
+    \Big\downarrow\mathrlap{{}^{trans_D}}
+    \\
+    D 
+      &amp;\underset{ret^{\mathcal{E}'}_D}{\longrightarrow}&amp;
+    \mathcal{E}(D)
+  }
+
+</annotation></semantics></math></div></li>
+
+<li>
+<p>respecting the join-operation (the “monad multiplication”), in that it makes the following <a class="existingWikiWord" href="/nlab/show/commuting+diagram">diagram commute</a>:</p>
+</li>
+</ol>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="324.007pt" height="107.015pt" viewBox="0 0 324.007 107.015" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1">
+<path style="stroke:none;" d="M 2.828125 -4.296875 C 0.46875 -3.015625 0.328125 -1.5 0.328125 -1.203125 C 0.328125 -0.3125 1.203125 0.265625 2.328125 0.265625 C 4.3125 0.265625 5.890625 -1.609375 5.890625 -1.859375 C 5.890625 -1.9375 5.84375 -1.9375 5.78125 -1.9375 C 5.640625 -1.9375 5.1875 -1.78125 4.921875 -1.421875 C 4.671875 -1.078125 4.171875 -0.390625 3.109375 -0.390625 C 2.28125 -0.390625 1.34375 -0.828125 1.34375 -1.71875 C 1.34375 -2.296875 2 -4.046875 3.875 -4.125 C 4.421875 -4.140625 4.84375 -4.5625 4.84375 -4.6875 C 4.84375 -4.765625 4.78125 -4.765625 4.71875 -4.765625 C 3.0625 -4.84375 2.71875 -5.65625 2.71875 -6.140625 C 2.71875 -6.40625 2.90625 -7.703125 4.5625 -7.703125 C 4.78125 -7.703125 5.6875 -7.65625 5.6875 -7.046875 C 5.6875 -6.859375 5.59375 -6.6875 5.546875 -6.625 C 5.515625 -6.578125 5.484375 -6.53125 5.484375 -6.484375 C 5.484375 -6.40625 5.5625 -6.40625 5.609375 -6.40625 C 5.953125 -6.40625 6.6875 -6.875 6.6875 -7.546875 C 6.6875 -8.25 5.875 -8.34375 5.34375 -8.34375 C 3.734375 -8.34375 1.71875 -7.078125 1.71875 -5.625 C 1.71875 -4.921875 2.25 -4.5 2.828125 -4.296875 Z M 2.828125 -4.296875 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-1">
+<path style="stroke:none;" d="M 4.890625 13.609375 C 4.890625 13.5625 4.875 13.53125 4.84375 13.5 C 4.296875 12.921875 3.5 11.96875 3 10.03125 C 2.71875 8.953125 2.625 7.734375 2.625 6.625 C 2.625 3.515625 3.359375 1.34375 4.78125 -0.203125 C 4.890625 -0.3125 4.890625 -0.328125 4.890625 -0.359375 C 4.890625 -0.46875 4.796875 -0.46875 4.75 -0.46875 C 4.578125 -0.46875 3.9375 0.234375 3.78125 0.421875 C 2.5625 1.84375 1.796875 3.984375 1.796875 6.625 C 1.796875 8.296875 2.09375 10.6875 3.640625 12.6875 C 3.765625 12.828125 4.53125 13.734375 4.75 13.734375 C 4.796875 13.734375 4.890625 13.734375 4.890625 13.609375 Z M 4.890625 13.609375 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-2">
+<path style="stroke:none;" d="M 3.609375 6.625 C 3.609375 4.953125 3.3125 2.5625 1.765625 0.5625 C 1.640625 0.421875 0.875 -0.46875 0.65625 -0.46875 C 0.609375 -0.46875 0.515625 -0.453125 0.515625 -0.359375 C 0.515625 -0.3125 0.546875 -0.265625 0.59375 -0.234375 C 1.15625 0.375 1.9375 1.34375 2.421875 3.21875 C 2.6875 4.296875 2.796875 5.515625 2.796875 6.625 C 2.796875 7.8125 2.6875 9.03125 2.375 10.1875 C 1.9375 11.84375 1.234375 12.796875 0.625 13.453125 C 0.515625 13.5625 0.515625 13.578125 0.515625 13.609375 C 0.515625 13.703125 0.609375 13.734375 0.65625 13.734375 C 0.84375 13.734375 1.5 13 1.640625 12.84375 C 2.84375 11.40625 3.609375 9.28125 3.609375 6.625 Z M 3.609375 6.625 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-1">
+<path style="stroke:none;" d="M 3.84375 2.875 C 3.84375 2.84375 3.84375 2.8125 3.640625 2.625 C 2.46875 1.421875 1.796875 -0.53125 1.796875 -2.953125 C 1.796875 -5.25 2.359375 -7.21875 3.734375 -8.625 C 3.84375 -8.734375 3.84375 -8.75 3.84375 -8.78125 C 3.84375 -8.859375 3.796875 -8.875 3.75 -8.875 C 3.59375 -8.875 2.625 -8.03125 2.03125 -6.875 C 1.4375 -5.671875 1.15625 -4.40625 1.15625 -2.953125 C 1.15625 -1.890625 1.328125 -0.484375 1.9375 0.78125 C 2.640625 2.203125 3.609375 2.96875 3.75 2.96875 C 3.796875 2.96875 3.84375 2.953125 3.84375 2.875 Z M 3.84375 2.875 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2">
+<path style="stroke:none;" d="M 3.203125 -2.234375 L 3.203125 -2.875 L 0.125 -2.875 L 0.125 -2.234375 Z M 3.203125 -2.234375 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-3">
+<path style="stroke:none;" d="M 3.34375 -2.953125 C 3.34375 -3.84375 3.21875 -5.3125 2.5625 -6.6875 C 1.859375 -8.109375 0.890625 -8.875 0.765625 -8.875 C 0.703125 -8.875 0.65625 -8.859375 0.65625 -8.78125 C 0.65625 -8.75 0.65625 -8.734375 0.859375 -8.53125 C 2.03125 -7.328125 2.703125 -5.375 2.703125 -2.953125 C 2.703125 -0.65625 2.140625 1.3125 0.765625 2.71875 C 0.65625 2.8125 0.65625 2.84375 0.65625 2.875 C 0.65625 2.953125 0.703125 2.96875 0.765625 2.96875 C 0.90625 2.96875 1.890625 2.125 2.46875 0.953125 C 3.0625 -0.25 3.34375 -1.53125 3.34375 -2.953125 Z M 3.34375 -2.953125 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph3-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph3-1">
+<path style="stroke:none;" d="M 2.09375 -3.734375 C 2.125 -3.84375 2.15625 -3.890625 2.15625 -3.984375 C 2.15625 -4.234375 1.921875 -4.40625 1.703125 -4.40625 C 1.390625 -4.40625 1.296875 -4.140625 1.265625 -4.03125 L 0.265625 -0.625 C 0.234375 -0.53125 0.234375 -0.5 0.234375 -0.5 C 0.234375 -0.421875 0.28125 -0.40625 0.359375 -0.390625 C 0.5 -0.328125 0.515625 -0.328125 0.53125 -0.328125 C 0.5625 -0.328125 0.609375 -0.328125 0.65625 -0.453125 Z M 2.09375 -3.734375 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph3-2">
+<path style="stroke:none;" d="M 1.9375 -2.859375 C 0.71875 -2.28125 0.234375 -1.328125 0.234375 -0.828125 C 0.234375 -0.171875 0.921875 0.171875 1.671875 0.171875 C 3.046875 0.171875 4.171875 -1.078125 4.171875 -1.25 C 4.171875 -1.296875 4.140625 -1.3125 4.109375 -1.3125 C 4.0625 -1.3125 3.734375 -1.265625 3.484375 -0.9375 C 3.1875 -0.546875 2.796875 -0.296875 2.21875 -0.296875 C 1.6875 -0.296875 0.9375 -0.515625 0.9375 -1.171875 C 0.9375 -1.625 1.421875 -2.703125 2.703125 -2.734375 C 3.125 -2.75 3.390625 -3.046875 3.390625 -3.125 C 3.390625 -3.1875 3.34375 -3.203125 3.3125 -3.203125 C 2.078125 -3.25 1.875 -3.78125 1.875 -4.09375 C 1.875 -4.4375 2.078125 -5.09375 3.140625 -5.09375 C 3.296875 -5.09375 3.484375 -5.078125 3.671875 -5.015625 C 3.765625 -4.984375 3.96875 -4.921875 3.96875 -4.65625 C 3.96875 -4.546875 3.90625 -4.453125 3.875 -4.40625 C 3.859375 -4.375 3.828125 -4.34375 3.828125 -4.3125 C 3.828125 -4.28125 3.859375 -4.25 3.90625 -4.25 C 4.140625 -4.25 4.65625 -4.53125 4.65625 -5.015625 C 4.65625 -5.484375 4.046875 -5.5625 3.703125 -5.5625 C 2.53125 -5.5625 1.171875 -4.6875 1.171875 -3.734375 C 1.171875 -3.40625 1.375 -3.046875 1.9375 -2.859375 Z M 1.9375 -2.859375 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-1">
+<path style="stroke:none;" d="M 1.46875 -3.140625 L 2.640625 -3.140625 L 2.640625 -3.40625 L 1.46875 -3.40625 L 1.46875 -4.859375 L 1.21875 -4.859375 C 1.21875 -4.140625 0.890625 -3.390625 0.15625 -3.359375 L 0.15625 -3.140625 L 0.875 -3.140625 L 0.875 -0.984375 C 0.875 -0.0625 1.578125 0.078125 1.9375 0.078125 C 2.46875 0.078125 2.78125 -0.390625 2.78125 -0.984375 L 2.78125 -1.421875 L 2.546875 -1.421875 L 2.546875 -1 C 2.546875 -0.453125 2.296875 -0.171875 2 -0.171875 C 1.46875 -0.171875 1.46875 -0.84375 1.46875 -0.96875 Z M 1.46875 -3.140625 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-2">
+<path style="stroke:none;" d="M 1.453125 -1.796875 C 1.453125 -2.390625 1.703125 -3.25 2.453125 -3.265625 C 2.40625 -3.234375 2.328125 -3.171875 2.328125 -2.984375 C 2.328125 -2.734375 2.515625 -2.625 2.671875 -2.625 C 2.859375 -2.625 3.03125 -2.75 3.03125 -2.984375 C 3.03125 -3.265625 2.78125 -3.484375 2.4375 -3.484375 C 1.921875 -3.484375 1.5625 -3.09375 1.40625 -2.65625 L 1.390625 -2.65625 L 1.390625 -3.484375 L 0.28125 -3.390625 L 0.28125 -3.125 C 0.8125 -3.125 0.875 -3.078125 0.875 -2.6875 L 0.875 -0.609375 C 0.875 -0.265625 0.78125 -0.265625 0.28125 -0.265625 L 0.28125 0 C 0.578125 -0.03125 1.015625 -0.03125 1.203125 -0.03125 C 1.671875 -0.03125 1.6875 -0.03125 2.203125 0 L 2.203125 -0.265625 L 2.046875 -0.265625 C 1.46875 -0.265625 1.453125 -0.34375 1.453125 -0.625 Z M 1.453125 -1.796875 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-3">
+<path style="stroke:none;" d="M 3.3125 -2.34375 C 3.3125 -3.125 2.5625 -3.515625 1.84375 -3.515625 C 1.1875 -3.515625 0.609375 -3.265625 0.609375 -2.75 C 0.609375 -2.515625 0.765625 -2.375 0.984375 -2.375 C 1.203125 -2.375 1.34375 -2.53125 1.34375 -2.734375 C 1.34375 -2.921875 1.234375 -3.0625 1.0625 -3.09375 C 1.34375 -3.296875 1.78125 -3.296875 1.828125 -3.296875 C 2.265625 -3.296875 2.71875 -2.984375 2.71875 -2.34375 L 2.71875 -2.09375 C 2.25 -2.078125 1.734375 -2.046875 1.171875 -1.828125 C 0.484375 -1.515625 0.34375 -1.0625 0.34375 -0.8125 C 0.34375 -0.125 1.140625 0.078125 1.6875 0.078125 C 2.265625 0.078125 2.625 -0.25 2.796875 -0.5625 C 2.828125 -0.265625 3.03125 0.046875 3.390625 0.046875 C 3.46875 0.046875 4.140625 0.015625 4.140625 -0.703125 L 4.140625 -1.140625 L 3.890625 -1.140625 L 3.890625 -0.703125 C 3.890625 -0.390625 3.765625 -0.265625 3.609375 -0.265625 C 3.3125 -0.265625 3.3125 -0.625 3.3125 -0.703125 Z M 2.71875 -1.109375 C 2.71875 -0.34375 2.0625 -0.140625 1.75 -0.140625 C 1.34375 -0.140625 1 -0.421875 1 -0.796875 C 1 -1.3125 1.484375 -1.859375 2.71875 -1.890625 Z M 2.71875 -1.109375 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-4">
+<path style="stroke:none;" d="M 3.828125 -2.390625 C 3.828125 -3.046875 3.53125 -3.484375 2.703125 -3.484375 C 1.921875 -3.484375 1.5625 -2.90625 1.46875 -2.71875 L 1.46875 -3.484375 L 0.328125 -3.390625 L 0.328125 -3.125 C 0.859375 -3.125 0.921875 -3.078125 0.921875 -2.6875 L 0.921875 -0.609375 C 0.921875 -0.265625 0.828125 -0.265625 0.328125 -0.265625 L 0.328125 0 C 0.65625 -0.03125 1.015625 -0.03125 1.21875 -0.03125 C 1.453125 -0.03125 1.78125 -0.03125 2.125 0 L 2.125 -0.265625 C 1.625 -0.265625 1.515625 -0.265625 1.515625 -0.609375 L 1.515625 -2.046875 C 1.515625 -2.875 2.15625 -3.265625 2.640625 -3.265625 C 3.109375 -3.265625 3.234375 -2.921875 3.234375 -2.421875 L 3.234375 -0.609375 C 3.234375 -0.265625 3.140625 -0.265625 2.640625 -0.265625 L 2.640625 0 C 2.96875 -0.03125 3.328125 -0.03125 3.53125 -0.03125 C 3.765625 -0.03125 4.09375 -0.03125 4.4375 0 L 4.4375 -0.265625 C 3.921875 -0.265625 3.828125 -0.265625 3.828125 -0.609375 Z M 3.828125 -2.390625 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-5">
+<path style="stroke:none;" d="M 2.8125 -3.3125 C 2.8125 -3.4375 2.8125 -3.515625 2.703125 -3.515625 C 2.671875 -3.515625 2.640625 -3.515625 2.515625 -3.390625 C 2.5 -3.390625 2.4375 -3.3125 2.40625 -3.3125 C 2.40625 -3.3125 2.390625 -3.3125 2.328125 -3.34375 C 2.203125 -3.4375 1.984375 -3.515625 1.625 -3.515625 C 0.515625 -3.515625 0.28125 -2.921875 0.28125 -2.546875 C 0.28125 -2.140625 0.5625 -1.921875 0.59375 -1.890625 C 0.90625 -1.65625 1.09375 -1.625 1.625 -1.53125 C 1.984375 -1.453125 2.59375 -1.34375 2.59375 -0.8125 C 2.59375 -0.5 2.390625 -0.140625 1.671875 -0.140625 C 0.875 -0.140625 0.640625 -0.75 0.53125 -1.171875 C 0.5 -1.28125 0.5 -1.3125 0.40625 -1.3125 C 0.28125 -1.3125 0.28125 -1.25 0.28125 -1.109375 L 0.28125 -0.125 C 0.28125 0 0.28125 0.078125 0.375 0.078125 C 0.421875 0.078125 0.4375 0.078125 0.578125 -0.078125 C 0.609375 -0.125 0.703125 -0.21875 0.734375 -0.265625 C 1.09375 0.0625 1.46875 0.078125 1.671875 0.078125 C 2.671875 0.078125 3.015625 -0.5 3.015625 -1.015625 C 3.015625 -1.390625 2.796875 -1.953125 1.859375 -2.125 C 1.796875 -2.140625 1.34375 -2.21875 1.3125 -2.21875 C 1.078125 -2.265625 0.703125 -2.4375 0.703125 -2.75 C 0.703125 -2.984375 0.875 -3.328125 1.625 -3.328125 C 2.515625 -3.328125 2.546875 -2.671875 2.5625 -2.453125 C 2.578125 -2.390625 2.625 -2.375 2.6875 -2.375 C 2.8125 -2.375 2.8125 -2.421875 2.8125 -2.578125 Z M 2.8125 -3.3125 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-6">
+<path style="stroke:none;" d="M 1.796875 -4.859375 C 1.796875 -5.109375 1.59375 -5.296875 1.34375 -5.296875 C 1.109375 -5.296875 0.921875 -5.109375 0.921875 -4.875 C 0.921875 -4.59375 1.125 -4.421875 1.34375 -4.421875 C 1.609375 -4.421875 1.796875 -4.640625 1.796875 -4.859375 Z M 0.546875 -3.390625 L 0.546875 -3.125 C 1.140625 -3.125 1.21875 -3.078125 1.21875 -2.6875 L 1.21875 0.375 C 1.21875 0.59375 1.1875 1.390625 0.640625 1.390625 C 0.515625 1.390625 0.34375 1.359375 0.25 1.3125 C 0.296875 1.296875 0.453125 1.203125 0.453125 0.984375 C 0.453125 0.765625 0.3125 0.609375 0.09375 0.609375 C -0.109375 0.609375 -0.28125 0.734375 -0.28125 0.984375 C -0.28125 1.390625 0.15625 1.609375 0.640625 1.609375 C 1.28125 1.609375 1.796875 1.109375 1.796875 0.359375 L 1.796875 -3.484375 Z M 0.546875 -3.390625 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-7">
+<path style="stroke:none;" d="M 3.953125 -1.6875 C 3.953125 -2.671875 3.125 -3.515625 2.09375 -3.515625 C 1.046875 -3.515625 0.234375 -2.671875 0.234375 -1.6875 C 0.234375 -0.6875 1.078125 0.078125 2.09375 0.078125 C 3.109375 0.078125 3.953125 -0.6875 3.953125 -1.6875 Z M 2.09375 -0.171875 C 1.671875 -0.171875 1.328125 -0.375 1.15625 -0.640625 C 0.96875 -0.96875 0.9375 -1.359375 0.9375 -1.75 C 0.9375 -2.046875 0.9375 -2.53125 1.1875 -2.859375 C 1.390625 -3.140625 1.71875 -3.296875 2.09375 -3.296875 C 2.5 -3.296875 2.84375 -3.09375 3.015625 -2.828125 C 3.234375 -2.5 3.25 -2.0625 3.25 -1.75 C 3.25 -1.390625 3.234375 -0.953125 3 -0.625 C 2.796875 -0.3125 2.4375 -0.171875 2.09375 -0.171875 Z M 2.09375 -0.171875 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-8">
+<path style="stroke:none;" d="M 1.53125 -4.859375 C 1.53125 -5.09375 1.359375 -5.296875 1.09375 -5.296875 C 0.875 -5.296875 0.65625 -5.125 0.65625 -4.875 C 0.65625 -4.59375 0.890625 -4.421875 1.09375 -4.421875 C 1.375 -4.421875 1.53125 -4.65625 1.53125 -4.859375 Z M 0.359375 -3.390625 L 0.359375 -3.125 C 0.859375 -3.125 0.9375 -3.078125 0.9375 -2.703125 L 0.9375 -0.609375 C 0.9375 -0.265625 0.84375 -0.265625 0.328125 -0.265625 L 0.328125 0 C 0.640625 -0.03125 1.078125 -0.03125 1.203125 -0.03125 C 1.296875 -0.03125 1.78125 -0.03125 2.046875 0 L 2.046875 -0.265625 C 1.53125 -0.265625 1.5 -0.296875 1.5 -0.609375 L 1.5 -3.484375 Z M 0.359375 -3.390625 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-9">
+<path style="stroke:none;" d="M 2.625 1.96875 C 2.6875 1.96875 2.78125 1.96875 2.78125 1.875 C 2.78125 1.84375 2.78125 1.84375 2.671875 1.734375 C 1.59375 0.71875 1.328125 -0.75 1.328125 -1.96875 C 1.328125 -4.25 2.265625 -5.3125 2.671875 -5.671875 C 2.78125 -5.78125 2.78125 -5.78125 2.78125 -5.828125 C 2.78125 -5.859375 2.75 -5.921875 2.671875 -5.921875 C 2.546875 -5.921875 2.15625 -5.515625 2.09375 -5.4375 C 1.03125 -4.34375 0.8125 -2.921875 0.8125 -1.96875 C 0.8125 -0.203125 1.546875 1.21875 2.625 1.96875 Z M 2.625 1.96875 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-10">
+<path style="stroke:none;" d="M 2.4375 -1.96875 C 2.4375 -2.71875 2.3125 -3.625 1.828125 -4.546875 C 1.4375 -5.28125 0.71875 -5.921875 0.578125 -5.921875 C 0.5 -5.921875 0.46875 -5.859375 0.46875 -5.828125 C 0.46875 -5.796875 0.46875 -5.78125 0.5625 -5.6875 C 1.671875 -4.625 1.921875 -3.1875 1.921875 -1.96875 C 1.921875 0.296875 0.984375 1.359375 0.578125 1.734375 C 0.484375 1.828125 0.46875 1.84375 0.46875 1.875 C 0.46875 1.921875 0.5 1.96875 0.578125 1.96875 C 0.703125 1.96875 1.09375 1.5625 1.15625 1.5 C 2.21875 0.390625 2.4375 -1.03125 2.4375 -1.96875 Z M 2.4375 -1.96875 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph5-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph5-1">
+<path style="stroke:none;" d="M 1.65625 -2.140625 C 0.4375 -1.53125 0.359375 -0.78125 0.359375 -0.625 C 0.359375 -0.09375 0.984375 0.125 1.5625 0.125 C 2.703125 0.125 3.609375 -0.8125 3.609375 -0.9375 C 3.609375 -1 3.546875 -1 3.53125 -1 C 3.5 -1 3.296875 -1 3.0625 -0.75 C 2.953125 -0.625 2.609375 -0.265625 2.015625 -0.265625 C 1.640625 -0.265625 0.9375 -0.375 0.9375 -0.890625 C 0.9375 -1.109375 1.078125 -1.421875 1.296875 -1.640625 C 1.71875 -2.015625 2.296875 -2.03125 2.34375 -2.03125 C 2.484375 -2.03125 2.5625 -2.03125 2.71875 -2.125 C 2.828125 -2.203125 2.921875 -2.28125 2.921875 -2.359375 C 2.921875 -2.40625 2.875 -2.421875 2.796875 -2.421875 C 2.4375 -2.421875 1.640625 -2.515625 1.640625 -3.0625 C 1.640625 -3.15625 1.671875 -3.484375 1.984375 -3.640625 C 2.125 -3.71875 2.40625 -3.78125 2.6875 -3.78125 C 2.8125 -3.78125 2.96875 -3.765625 3.125 -3.71875 C 3.1875 -3.703125 3.359375 -3.671875 3.359375 -3.46875 C 3.359375 -3.40625 3.328125 -3.34375 3.296875 -3.296875 C 3.28125 -3.28125 3.265625 -3.25 3.265625 -3.234375 C 3.265625 -3.1875 3.296875 -3.171875 3.34375 -3.171875 C 3.515625 -3.171875 3.921875 -3.375 3.921875 -3.75 C 3.921875 -4.078125 3.546875 -4.171875 3.125 -4.171875 C 2.0625 -4.171875 1.078125 -3.5 1.078125 -2.796875 C 1.078125 -2.34375 1.546875 -2.171875 1.65625 -2.140625 Z M 1.65625 -2.140625 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph5-2">
+<path style="stroke:none;" d="M 1.859375 -2.78125 C 1.90625 -2.875 1.90625 -2.9375 1.90625 -2.96875 C 1.90625 -3.15625 1.75 -3.3125 1.546875 -3.3125 C 1.3125 -3.3125 1.25 -3.109375 1.21875 -3.015625 L 0.390625 -0.484375 C 0.375 -0.453125 0.359375 -0.40625 0.359375 -0.375 C 0.359375 -0.28125 0.59375 -0.234375 0.609375 -0.234375 C 0.65625 -0.234375 0.6875 -0.28125 0.703125 -0.328125 Z M 1.859375 -2.78125 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-1">
+<path style="stroke:none;" d="M 2.359375 1.34375 C 1.703125 0.84375 1.171875 -0.09375 1.171875 -1.484375 C 1.171875 -2.84375 1.6875 -3.796875 2.359375 -4.296875 C 2.359375 -4.3125 2.375 -4.328125 2.375 -4.359375 C 2.375 -4.390625 2.34375 -4.4375 2.28125 -4.4375 C 2.171875 -4.4375 0.75 -3.515625 0.75 -1.484375 C 0.75 0.546875 2.171875 1.484375 2.28125 1.484375 C 2.34375 1.484375 2.375 1.4375 2.375 1.390625 C 2.375 1.375 2.359375 1.34375 2.359375 1.34375 Z M 2.359375 1.34375 "></path>
+</symbol>
+<symbol overflow="visible" id="IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-2">
+<path style="stroke:none;" d="M 2.09375 -1.484375 C 2.09375 -3.5 0.671875 -4.4375 0.5625 -4.4375 C 0.484375 -4.4375 0.46875 -4.390625 0.46875 -4.359375 C 0.46875 -4.328125 0.484375 -4.3125 0.59375 -4.21875 C 1.125 -3.765625 1.671875 -2.890625 1.671875 -1.484375 C 1.671875 -0.21875 1.234375 0.71875 0.5625 1.28125 C 0.484375 1.359375 0.46875 1.359375 0.46875 1.390625 C 0.46875 1.421875 0.484375 1.484375 0.5625 1.484375 C 0.671875 1.484375 2.09375 0.546875 2.09375 -1.484375 Z M 2.09375 -1.484375 "></path>
+</symbol>
+</g>
+</defs>
+<g id="IPNY_XhDXXRO--OEJw3zY7QAGus=-surface1">
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1" x="6.085618" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-1" x="13.397318" y="4.80973"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1" x="18.827339" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-1" x="26.13904" y="14.404417"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="30.650059" y="14.404417"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-3" x="34.516647" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-2" x="39.02642" y="4.80973"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1" x="138.171854" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-1" x="145.483555" y="4.80973"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1" x="150.912584" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph3-1" x="158.224285" y="10.105981"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-1" x="160.993794" y="14.404417"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="165.504813" y="14.404417"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-3" x="169.371401" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-2" x="173.882165" y="4.80973"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1" x="273.026608" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph3-1" x="280.338309" y="10.105981"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-1" x="283.107817" y="4.80973"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1" x="288.537838" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph3-1" x="295.849539" y="10.105981"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-1" x="298.619047" y="14.404417"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="303.130066" y="14.404417"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-3" x="306.996654" y="14.404417"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph1-2" x="311.507419" y="4.80973"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1" x="15.170993" y="98.742146"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-1" x="22.482694" y="98.742146"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="26.993713" y="98.742146"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-3" x="30.860301" y="98.742146"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph0-1" x="283.497233" y="98.742146"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph3-1" x="290.808934" y="94.442719"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-1" x="293.578443" y="98.742146"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="298.089462" y="98.742146"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-3" x="301.95605" y="98.742146"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -112.785775 41.961283 L -29.380557 41.961283 " transform="matrix(0.99088,0,0,-0.99088,161.511033,53.019987)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.487123 2.867746 C -2.03377 1.148945 -1.020623 0.332909 0.000407582 0.00176342 C -1.020623 -0.333324 -2.03377 -1.14936 -2.487123 -2.868161 " transform="matrix(0.99088,0,0,-0.99088,132.636315,11.443154)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 71.902344 19.1875 L 110.722656 19.1875 L 110.722656 3.699219 L 71.902344 3.699219 Z M 71.902344 19.1875 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-1" x="74.455321" y="11.107761"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-2" x="77.718531" y="11.107761"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-3" x="80.988848" y="11.107761"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-4" x="85.184742" y="11.107761"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-5" x="89.846583" y="11.107761"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph5-1" x="93.156192" y="15.155504"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-1" x="97.615151" y="15.155504"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="100.466902" y="15.155504"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-2" x="104.333315" y="15.155504"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -137.495512 30.213514 L -137.495512 -32.124563 " transform="matrix(0.99088,0,0,-0.99088,161.511033,53.019987)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.486233 2.870293 C -2.03288 1.14755 -1.019733 0.335456 0.00129766 0.000368436 C -1.019733 -0.334719 -2.03288 -1.146813 -2.486233 -2.869556 " transform="matrix(0,0.99088,0.99088,0,25.269166,85.088558)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 10.8125 62.78125 L 39.726562 62.78125 L 39.726562 45.628906 L 10.8125 45.628906 Z M 10.8125 62.78125 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-6" x="13.363629" y="55.082008"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-7" x="15.927917" y="55.082008"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-8" x="20.123811" y="55.082008"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-4" x="22.454337" y="55.082008"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph5-1" x="27.115056" y="52.226293"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-1" x="27.115056" y="58.748262"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="29.966808" y="58.748262"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-2" x="33.83322" y="58.748262"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 23.310947 41.961283 L 106.720107 41.961283 " transform="matrix(0.99088,0,0,-0.99088,161.511033,53.019987)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.48477 2.867746 C -2.031416 1.148945 -1.01827 0.332909 -0.00118116 0.00176342 C -1.01827 -0.333324 -2.031416 -1.14936 -2.48477 -2.868161 " transform="matrix(0.99088,0,0,-0.99088,267.493358,11.443154)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 202.089844 18.960938 L 250.25 18.960938 L 250.25 3.921875 L 202.089844 3.921875 Z M 202.089844 18.960938 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph3-2" x="204.638078" y="12.551472"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph5-2" x="209.750026" y="9.764128"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-9" x="212.409547" y="12.551472"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-1" x="215.672756" y="12.551472"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-2" x="218.935966" y="12.551472"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-3" x="222.206284" y="12.551472"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-4" x="226.402177" y="12.551472"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-5" x="231.064018" y="12.551472"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-1" x="234.373385" y="14.931565"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="237.225136" y="14.931565"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-2" x="241.091549" y="14.931565"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-10" x="244.436758" y="12.551472"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 134.701873 30.213514 L 134.701873 -32.124563 " transform="matrix(0.99088,0,0,-0.99088,161.511033,53.019987)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.486233 2.871018 C -2.03288 1.148275 -1.019733 0.336181 0.00129766 0.00109315 C -1.019733 -0.333994 -2.03288 -1.146088 -2.486233 -2.868832 " transform="matrix(0,0.99088,0.99088,0,294.983292,85.088558)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 280.523438 63.644531 L 309.441406 63.644531 L 309.441406 44.765625 L 280.523438 44.765625 Z M 280.523438 63.644531 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-6" x="283.074128" y="55.947046"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-7" x="285.638416" y="55.947046"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-8" x="289.83431" y="55.947046"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-4" x="292.164836" y="55.947046"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph5-1" x="296.825555" y="53.091331"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph5-2" x="301.285504" y="50.605214"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-1" x="296.825555" y="59.6133"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="299.677307" y="59.6133"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-2" x="303.543719" y="59.6133"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -121.955342 -43.154851 L 117.285214 -43.154851 " transform="matrix(0.99088,0,0,-0.99088,161.511033,53.019987)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.486322 2.870164 C -2.032969 1.14742 -1.019822 0.335326 0.00120874 0.000238998 C -1.019822 -0.334848 -2.032969 -1.146942 -2.486322 -2.869686 " transform="matrix(0.99088,0,0,-0.99088,277.963646,95.781487)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 142.5 102.691406 L 176.367188 102.691406 L 176.367188 88.871094 L 142.5 88.871094 Z M 142.5 102.691406 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-1" x="145.051531" y="96.278819"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-2" x="148.314741" y="96.278819"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-3" x="151.585058" y="96.278819"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-4" x="155.780952" y="96.278819"></use>
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph4-5" x="160.442793" y="96.278819"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-1" x="163.752403" y="98.658912"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph2-2" x="166.604154" y="98.658912"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#IPNY_XhDXXRO--OEJw3zY7QAGus=-glyph6-2" x="170.470566" y="98.658912"></use>
+</g>
+</g>
+</svg>
+<p></p>
+</div>
+ 
+<div class='proof'>
+<h6>Proof</h6>
+<p>Recall that the relation between the bind- and join-operations is:</p>
+<div class="maruku-equation" id="eq:BindFromJoin"><span class="maruku-eq-number">(4)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>bind</mi> <mi>ℰ</mi></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>D</mi> <mn>1</mn></msub><mo>→</mo><mi>ℰ</mi><mo stretchy="false">(</mo><msub><mi>D</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thickmathspace"></mspace><mo>≡</mo><mspace width="thickmathspace"></mspace><msubsup><mi>join</mi> <mrow><msub><mi>D</mi> <mn>2</mn></msub></mrow> <mi>ℰ</mi></msubsup><mo>∘</mo><mi>ℰ</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  
+  bind^{\mathcal{E}} \big( f \,\colon\, D_1 \to \mathcal{E}(D_2) \big)
+  \;\equiv\;
+  join^{\mathcal{E}}_{D_2} \circ \mathcal{E}(f)
+
+</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation" id="eq:FunctorFromBind"><span class="maruku-eq-number">(5)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ℰ</mi><mo stretchy="false">(</mo><mi>f</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>D</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>D</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≡</mo><mspace width="thickmathspace"></mspace><msup><mi>bind</mi> <mi>ℰ</mi></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>D</mi> <mn>1</mn></msub><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><mi>f</mi><mspace width="thickmathspace"></mspace></mrow></mover><msub><mi>D</mi> <mn>2</mn></msub><mover><mo>→</mo><mrow><mspace width="thickmathspace"></mspace><msubsup><mi>ret</mi> <mrow><msub><mi>D</mi> <mn>2</mn></msub></mrow> <mi>ℰ</mi></msubsup><mspace width="thickmathspace"></mspace></mrow></mover><mi>ℰ</mi><mo stretchy="false">(</mo><msub><mi>D</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">
+  
+ \mathcal{E}(f \,\colon\, D_1 \to D_2)
+ \;\equiv\;
+ bind^{\mathcal{E}}
+ \big(
+   D_1 
+     \xrightarrow{\; f \;} 
+   D_2
+     \xrightarrow{\; ret^{\mathcal{E}}_{D_2} \;}
+   \mathcal{E}(D_2)
+ \big) 
+
+</annotation></semantics></math></div><div class="maruku-equation" id="eq:JoinFromBind"><span class="maruku-eq-number">(6)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi>join</mi> <mi>D</mi> <mi>ℰ</mi></msubsup><mspace width="thickmathspace"></mspace><mo>≡</mo><mspace width="thickmathspace"></mspace><msup><mi>bind</mi> <mi>ℰ</mi></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>id</mi> <mrow><mi>ℰ</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow></msub><mo maxsize="1.2em" minsize="1.2em">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  
+  join^{\mathcal{E}}_{D}
+  \;\equiv\;
+  bind^{\mathcal{E}}\big( id_{\mathcal{E}(D)} \big)
+  \,.
+
+</annotation></semantics></math></div>
+<p>Now in one direction: Given a <a href="monad#TransformationOfMonadsOnFixedCategory">morphism of monads</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>trans</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><mi>ℰ</mi><mo>→</mo><mi>ℰ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">trans \,\colon\, \mathcal{E} \to \mathcal{E}'</annotation></semantics></math>, then consider the <a class="existingWikiWord" href="/nlab/show/pasting+diagram">pasting diagram</a> of the above square with the <a class="existingWikiWord" href="/nlab/show/naturality+square">naturality square</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>trans</mi></mrow><annotation encoding="application/x-tex">trans</annotation></semantics></math> as follows:</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="464.685pt" height="190.933pt" viewBox="0 0 464.685 190.933" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1">
+<path style="stroke:none;" d="M 1.875 -0.890625 C 1.765625 -0.46875 1.75 -0.34375 0.90625 -0.34375 C 0.6875 -0.34375 0.5625 -0.34375 0.5625 -0.125 C 0.5625 0 0.640625 0 0.875 0 L 4.65625 0 C 7.078125 0 9.4375 -2.5 9.4375 -5.15625 C 9.4375 -6.890625 8.40625 -8.15625 6.6875 -8.15625 L 2.859375 -8.15625 C 2.625 -8.15625 2.515625 -8.15625 2.515625 -7.9375 C 2.515625 -7.8125 2.625 -7.8125 2.8125 -7.8125 C 3.53125 -7.8125 3.53125 -7.71875 3.53125 -7.59375 C 3.53125 -7.5625 3.53125 -7.5 3.484375 -7.3125 Z M 4.40625 -7.34375 C 4.5 -7.796875 4.546875 -7.8125 5.015625 -7.8125 L 6.328125 -7.8125 C 7.453125 -7.8125 8.484375 -7.203125 8.484375 -5.5625 C 8.484375 -4.953125 8.25 -2.875 7.09375 -1.5625 C 6.75 -1.171875 5.84375 -0.34375 4.46875 -0.34375 L 3.109375 -0.34375 C 2.9375 -0.34375 2.921875 -0.34375 2.84375 -0.359375 C 2.71875 -0.375 2.703125 -0.390625 2.703125 -0.484375 C 2.703125 -0.578125 2.71875 -0.640625 2.75 -0.75 Z M 4.40625 -7.34375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-1">
+<path style="stroke:none;" d="M 2.5 -5.078125 C 2.5 -5.296875 2.484375 -5.296875 2.265625 -5.296875 C 1.9375 -4.984375 1.515625 -4.796875 0.765625 -4.796875 L 0.765625 -4.53125 C 0.984375 -4.53125 1.40625 -4.53125 1.875 -4.734375 L 1.875 -0.65625 C 1.875 -0.359375 1.84375 -0.265625 1.09375 -0.265625 L 0.8125 -0.265625 L 0.8125 0 C 1.140625 -0.03125 1.828125 -0.03125 2.1875 -0.03125 C 2.546875 -0.03125 3.234375 -0.03125 3.5625 0 L 3.5625 -0.265625 L 3.28125 -0.265625 C 2.53125 -0.265625 2.5 -0.359375 2.5 -0.65625 Z M 2.5 -5.078125 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-2">
+<path style="stroke:none;" d="M 2.25 -1.625 C 2.375 -1.75 2.703125 -2.015625 2.84375 -2.125 C 3.328125 -2.578125 3.796875 -3.015625 3.796875 -3.734375 C 3.796875 -4.6875 3 -5.296875 2.015625 -5.296875 C 1.046875 -5.296875 0.421875 -4.578125 0.421875 -3.859375 C 0.421875 -3.46875 0.734375 -3.421875 0.84375 -3.421875 C 1.015625 -3.421875 1.265625 -3.53125 1.265625 -3.84375 C 1.265625 -4.25 0.859375 -4.25 0.765625 -4.25 C 1 -4.84375 1.53125 -5.03125 1.921875 -5.03125 C 2.65625 -5.03125 3.046875 -4.40625 3.046875 -3.734375 C 3.046875 -2.90625 2.46875 -2.296875 1.515625 -1.34375 L 0.515625 -0.296875 C 0.421875 -0.21875 0.421875 -0.203125 0.421875 0 L 3.5625 0 L 3.796875 -1.421875 L 3.546875 -1.421875 C 3.53125 -1.265625 3.46875 -0.875 3.375 -0.71875 C 3.328125 -0.65625 2.71875 -0.65625 2.59375 -0.65625 L 1.171875 -0.65625 Z M 2.25 -1.625 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-3">
+<path style="stroke:none;" d="M 2.015625 -2.65625 C 2.640625 -2.65625 3.046875 -2.203125 3.046875 -1.359375 C 3.046875 -0.359375 2.484375 -0.078125 2.0625 -0.078125 C 1.625 -0.078125 1.015625 -0.234375 0.734375 -0.65625 C 1.03125 -0.65625 1.234375 -0.84375 1.234375 -1.09375 C 1.234375 -1.359375 1.046875 -1.53125 0.78125 -1.53125 C 0.578125 -1.53125 0.34375 -1.40625 0.34375 -1.078125 C 0.34375 -0.328125 1.15625 0.171875 2.078125 0.171875 C 3.125 0.171875 3.875 -0.5625 3.875 -1.359375 C 3.875 -2.03125 3.34375 -2.625 2.53125 -2.8125 C 3.15625 -3.03125 3.640625 -3.5625 3.640625 -4.203125 C 3.640625 -4.84375 2.921875 -5.296875 2.09375 -5.296875 C 1.234375 -5.296875 0.59375 -4.84375 0.59375 -4.234375 C 0.59375 -3.9375 0.78125 -3.8125 1 -3.8125 C 1.25 -3.8125 1.40625 -3.984375 1.40625 -4.21875 C 1.40625 -4.515625 1.140625 -4.625 0.96875 -4.625 C 1.3125 -5.0625 1.921875 -5.09375 2.0625 -5.09375 C 2.265625 -5.09375 2.875 -5.03125 2.875 -4.203125 C 2.875 -3.65625 2.640625 -3.3125 2.53125 -3.1875 C 2.296875 -2.9375 2.109375 -2.921875 1.625 -2.890625 C 1.46875 -2.890625 1.40625 -2.875 1.40625 -2.765625 C 1.40625 -2.65625 1.484375 -2.65625 1.625 -2.65625 Z M 2.015625 -2.65625 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-4">
+<path style="stroke:none;" d="M 2.09375 1.28125 C 1.578125 1.28125 1.484375 1.28125 1.484375 0.921875 L 1.484375 -0.390625 C 1.859375 0.015625 2.265625 0.078125 2.53125 0.078125 C 3.53125 0.078125 4.421875 -0.703125 4.421875 -1.71875 C 4.421875 -2.71875 3.609375 -3.515625 2.640625 -3.515625 C 2.328125 -3.515625 1.875 -3.4375 1.46875 -3.015625 L 1.46875 -3.515625 L 0.28125 -3.421875 L 0.28125 -3.15625 C 0.84375 -3.15625 0.890625 -3.109375 0.890625 -2.78125 L 0.890625 0.921875 C 0.890625 1.28125 0.78125 1.28125 0.28125 1.28125 L 0.28125 1.546875 C 0.625 1.515625 0.96875 1.515625 1.1875 1.515625 C 1.421875 1.515625 1.75 1.515625 2.09375 1.546875 Z M 1.484375 -2.65625 C 1.671875 -2.96875 2.078125 -3.265625 2.578125 -3.265625 C 3.1875 -3.265625 3.703125 -2.59375 3.703125 -1.71875 C 3.703125 -0.8125 3.125 -0.140625 2.484375 -0.140625 C 2.203125 -0.140625 1.84375 -0.265625 1.578125 -0.65625 C 1.484375 -0.796875 1.484375 -0.8125 1.484375 -0.953125 Z M 1.484375 -2.65625 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-5">
+<path style="stroke:none;" d="M 1.46875 -1.8125 C 1.46875 -2.421875 1.71875 -3.28125 2.484375 -3.296875 C 2.4375 -3.265625 2.34375 -3.203125 2.34375 -3.015625 C 2.34375 -2.765625 2.546875 -2.65625 2.703125 -2.65625 C 2.890625 -2.65625 3.0625 -2.78125 3.0625 -3.015625 C 3.0625 -3.296875 2.8125 -3.515625 2.453125 -3.515625 C 1.9375 -3.515625 1.578125 -3.125 1.421875 -2.671875 L 1.40625 -2.671875 L 1.40625 -3.515625 L 0.28125 -3.421875 L 0.28125 -3.15625 C 0.828125 -3.15625 0.890625 -3.109375 0.890625 -2.71875 L 0.890625 -0.625 C 0.890625 -0.265625 0.78125 -0.265625 0.28125 -0.265625 L 0.28125 0 C 0.59375 -0.03125 1.03125 -0.03125 1.21875 -0.03125 C 1.6875 -0.03125 1.703125 -0.03125 2.21875 0 L 2.21875 -0.265625 L 2.0625 -0.265625 C 1.484375 -0.265625 1.46875 -0.34375 1.46875 -0.640625 Z M 1.46875 -1.8125 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-6">
+<path style="stroke:none;" d="M 3.984375 -1.703125 C 3.984375 -2.6875 3.15625 -3.546875 2.109375 -3.546875 C 1.0625 -3.546875 0.234375 -2.6875 0.234375 -1.703125 C 0.234375 -0.703125 1.09375 0.078125 2.109375 0.078125 C 3.140625 0.078125 3.984375 -0.703125 3.984375 -1.703125 Z M 2.109375 -0.171875 C 1.6875 -0.171875 1.34375 -0.375 1.171875 -0.65625 C 0.96875 -0.984375 0.953125 -1.375 0.953125 -1.765625 C 0.953125 -2.078125 0.953125 -2.546875 1.1875 -2.890625 C 1.40625 -3.171875 1.734375 -3.328125 2.109375 -3.328125 C 2.53125 -3.328125 2.875 -3.125 3.046875 -2.859375 C 3.265625 -2.515625 3.28125 -2.09375 3.28125 -1.765625 C 3.28125 -1.40625 3.265625 -0.96875 3.03125 -0.625 C 2.828125 -0.3125 2.46875 -0.171875 2.109375 -0.171875 Z M 2.109375 -0.171875 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-7">
+<path style="stroke:none;" d="M 1.375 -0.546875 C 1.125 -0.578125 0.9375 -0.78125 0.9375 -1.078125 C 0.9375 -1.265625 0.984375 -1.34375 1.03125 -1.40625 C 1.375 -1.21875 1.6875 -1.171875 1.875 -1.171875 C 2.65625 -1.171875 3.25 -1.71875 3.25 -2.34375 C 3.25 -2.640625 3.109375 -2.90625 2.921875 -3.109375 C 3.03125 -3.203125 3.296875 -3.375 3.6875 -3.375 C 3.65625 -3.359375 3.609375 -3.3125 3.609375 -3.1875 C 3.609375 -3.046875 3.71875 -2.9375 3.859375 -2.9375 C 3.96875 -2.9375 4.109375 -3.015625 4.109375 -3.203125 C 4.109375 -3.328125 4 -3.609375 3.65625 -3.609375 C 3.515625 -3.609375 3.125 -3.5625 2.765625 -3.234375 C 2.5625 -3.375 2.25 -3.515625 1.875 -3.515625 C 1.09375 -3.515625 0.515625 -2.96875 0.515625 -2.34375 C 0.515625 -1.96875 0.71875 -1.6875 0.890625 -1.53125 C 0.703125 -1.328125 0.640625 -1.078125 0.640625 -0.890625 C 0.640625 -0.5625 0.8125 -0.3125 0.984375 -0.171875 C 0.5625 -0.0625 0.234375 0.25 0.234375 0.609375 C 0.234375 1.1875 1.0625 1.640625 2.109375 1.640625 C 3.109375 1.640625 3.984375 1.234375 3.984375 0.59375 C 3.984375 0.171875 3.734375 -0.171875 3.46875 -0.296875 C 3 -0.546875 2.609375 -0.546875 1.828125 -0.546875 Z M 1.875 -1.40625 C 1.140625 -1.40625 1.140625 -2.171875 1.140625 -2.34375 C 1.140625 -2.640625 1.171875 -2.84375 1.296875 -3 C 1.4375 -3.1875 1.65625 -3.28125 1.875 -3.28125 C 2.609375 -3.28125 2.609375 -2.515625 2.609375 -2.34375 C 2.609375 -2.046875 2.578125 -1.84375 2.453125 -1.6875 C 2.28125 -1.453125 2.03125 -1.40625 1.875 -1.40625 Z M 2.25 -0.03125 C 2.46875 -0.03125 3.515625 -0.03125 3.515625 0.609375 C 3.515625 1.03125 2.90625 1.40625 2.109375 1.40625 C 1.3125 1.40625 0.703125 1.03125 0.703125 0.609375 C 0.703125 0.4375 0.84375 -0.03125 1.484375 -0.03125 Z M 2.25 -0.03125 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-8">
+<path style="stroke:none;" d="M 1.484375 -3.171875 L 2.671875 -3.171875 L 2.671875 -3.4375 L 1.484375 -3.4375 L 1.484375 -4.90625 L 1.234375 -4.90625 C 1.234375 -4.171875 0.90625 -3.421875 0.15625 -3.390625 L 0.15625 -3.171875 L 0.875 -3.171875 L 0.875 -1 C 0.875 -0.0625 1.59375 0.078125 1.953125 0.078125 C 2.5 0.078125 2.8125 -0.390625 2.8125 -1 L 2.8125 -1.4375 L 2.5625 -1.4375 L 2.5625 -1.015625 C 2.5625 -0.46875 2.3125 -0.171875 2.015625 -0.171875 C 1.484375 -0.171875 1.484375 -0.859375 1.484375 -0.984375 Z M 1.484375 -3.171875 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-9">
+<path style="stroke:none;" d="M 3.34375 -2.375 C 3.34375 -3.15625 2.59375 -3.546875 1.859375 -3.546875 C 1.203125 -3.546875 0.609375 -3.296875 0.609375 -2.765625 C 0.609375 -2.53125 0.78125 -2.390625 0.984375 -2.390625 C 1.21875 -2.390625 1.359375 -2.546875 1.359375 -2.765625 C 1.359375 -2.953125 1.25 -3.09375 1.0625 -3.125 C 1.359375 -3.328125 1.796875 -3.328125 1.84375 -3.328125 C 2.296875 -3.328125 2.734375 -3.015625 2.734375 -2.359375 L 2.734375 -2.125 C 2.28125 -2.09375 1.75 -2.078125 1.1875 -1.84375 C 0.484375 -1.53125 0.34375 -1.078125 0.34375 -0.8125 C 0.34375 -0.125 1.15625 0.078125 1.703125 0.078125 C 2.28125 0.078125 2.640625 -0.25 2.828125 -0.5625 C 2.859375 -0.265625 3.0625 0.046875 3.421875 0.046875 C 3.5 0.046875 4.171875 0.015625 4.171875 -0.71875 L 4.171875 -1.15625 L 3.921875 -1.15625 L 3.921875 -0.71875 C 3.921875 -0.390625 3.8125 -0.265625 3.640625 -0.265625 C 3.34375 -0.265625 3.34375 -0.625 3.34375 -0.71875 Z M 2.734375 -1.125 C 2.734375 -0.34375 2.09375 -0.140625 1.765625 -0.140625 C 1.359375 -0.140625 1 -0.421875 1 -0.8125 C 1 -1.328125 1.5 -1.875 2.734375 -1.90625 Z M 2.734375 -1.125 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-10">
+<path style="stroke:none;" d="M 3.875 -2.421875 C 3.875 -3.078125 3.5625 -3.515625 2.734375 -3.515625 C 1.9375 -3.515625 1.578125 -2.9375 1.484375 -2.75 L 1.484375 -3.515625 L 0.328125 -3.421875 L 0.328125 -3.15625 C 0.875 -3.15625 0.9375 -3.109375 0.9375 -2.71875 L 0.9375 -0.625 C 0.9375 -0.265625 0.84375 -0.265625 0.328125 -0.265625 L 0.328125 0 C 0.671875 -0.03125 1.015625 -0.03125 1.234375 -0.03125 C 1.46875 -0.03125 1.796875 -0.03125 2.140625 0 L 2.140625 -0.265625 C 1.640625 -0.265625 1.53125 -0.265625 1.53125 -0.625 L 1.53125 -2.0625 C 1.53125 -2.90625 2.171875 -3.296875 2.65625 -3.296875 C 3.140625 -3.296875 3.265625 -2.953125 3.265625 -2.453125 L 3.265625 -0.625 C 3.265625 -0.265625 3.171875 -0.265625 2.65625 -0.265625 L 2.65625 0 C 3 -0.03125 3.359375 -0.03125 3.5625 -0.03125 C 3.796875 -0.03125 4.140625 -0.03125 4.484375 0 L 4.484375 -0.265625 C 3.96875 -0.265625 3.875 -0.265625 3.875 -0.625 Z M 3.875 -2.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-11">
+<path style="stroke:none;" d="M 2.84375 -3.34375 C 2.84375 -3.46875 2.84375 -3.546875 2.734375 -3.546875 C 2.6875 -3.546875 2.671875 -3.546875 2.546875 -3.421875 C 2.53125 -3.421875 2.453125 -3.34375 2.4375 -3.34375 C 2.421875 -3.34375 2.40625 -3.34375 2.359375 -3.375 C 2.234375 -3.46875 2 -3.546875 1.640625 -3.546875 C 0.53125 -3.546875 0.28125 -2.953125 0.28125 -2.5625 C 0.28125 -2.171875 0.578125 -1.9375 0.59375 -1.90625 C 0.921875 -1.671875 1.09375 -1.640625 1.640625 -1.546875 C 2.015625 -1.46875 2.625 -1.359375 2.625 -0.828125 C 2.625 -0.515625 2.421875 -0.140625 1.6875 -0.140625 C 0.875 -0.140625 0.640625 -0.765625 0.546875 -1.1875 C 0.515625 -1.296875 0.5 -1.328125 0.40625 -1.328125 C 0.28125 -1.328125 0.28125 -1.265625 0.28125 -1.109375 L 0.28125 -0.125 C 0.28125 0 0.28125 0.078125 0.375 0.078125 C 0.4375 0.078125 0.4375 0.078125 0.578125 -0.078125 C 0.625 -0.125 0.703125 -0.21875 0.75 -0.265625 C 1.109375 0.0625 1.484375 0.078125 1.6875 0.078125 C 2.703125 0.078125 3.046875 -0.5 3.046875 -1.03125 C 3.046875 -1.40625 2.828125 -1.96875 1.875 -2.140625 C 1.8125 -2.15625 1.359375 -2.234375 1.328125 -2.234375 C 1.078125 -2.296875 0.703125 -2.46875 0.703125 -2.78125 C 0.703125 -3.015625 0.890625 -3.359375 1.640625 -3.359375 C 2.53125 -3.359375 2.578125 -2.703125 2.59375 -2.484375 C 2.59375 -2.421875 2.65625 -2.390625 2.703125 -2.390625 C 2.84375 -2.390625 2.84375 -2.453125 2.84375 -2.59375 Z M 2.84375 -3.34375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-12">
+<path style="stroke:none;" d="M 2.65625 1.984375 C 2.71875 1.984375 2.8125 1.984375 2.8125 1.890625 C 2.8125 1.859375 2.8125 1.859375 2.703125 1.75 C 1.609375 0.71875 1.34375 -0.75 1.34375 -1.984375 C 1.34375 -4.28125 2.28125 -5.359375 2.6875 -5.734375 C 2.8125 -5.828125 2.8125 -5.84375 2.8125 -5.875 C 2.8125 -5.921875 2.78125 -5.96875 2.703125 -5.96875 C 2.578125 -5.96875 2.171875 -5.5625 2.109375 -5.5 C 1.046875 -4.375 0.828125 -2.953125 0.828125 -1.984375 C 0.828125 -0.203125 1.5625 1.234375 2.65625 1.984375 Z M 2.65625 1.984375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-13">
+<path style="stroke:none;" d="M 2.46875 -1.984375 C 2.46875 -2.75 2.328125 -3.65625 1.84375 -4.59375 C 1.453125 -5.328125 0.71875 -5.96875 0.578125 -5.96875 C 0.5 -5.96875 0.484375 -5.921875 0.484375 -5.875 C 0.484375 -5.84375 0.484375 -5.828125 0.578125 -5.734375 C 1.6875 -4.671875 1.9375 -3.21875 1.9375 -1.984375 C 1.9375 0.296875 1 1.375 0.59375 1.75 C 0.484375 1.84375 0.484375 1.859375 0.484375 1.890625 C 0.484375 1.9375 0.5 1.984375 0.578125 1.984375 C 0.703125 1.984375 1.109375 1.578125 1.171875 1.515625 C 2.234375 0.390625 2.46875 -1.03125 2.46875 -1.984375 Z M 2.46875 -1.984375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-14">
+<path style="stroke:none;" d="M 1.8125 -4.90625 C 1.8125 -5.15625 1.609375 -5.359375 1.359375 -5.359375 C 1.125 -5.359375 0.921875 -5.15625 0.921875 -4.921875 C 0.921875 -4.640625 1.140625 -4.46875 1.359375 -4.46875 C 1.625 -4.46875 1.8125 -4.6875 1.8125 -4.90625 Z M 0.5625 -3.421875 L 0.5625 -3.15625 C 1.15625 -3.15625 1.234375 -3.109375 1.234375 -2.71875 L 1.234375 0.375 C 1.234375 0.59375 1.1875 1.40625 0.640625 1.40625 C 0.53125 1.40625 0.34375 1.375 0.25 1.328125 C 0.296875 1.3125 0.46875 1.21875 0.46875 0.984375 C 0.46875 0.765625 0.3125 0.609375 0.09375 0.609375 C -0.109375 0.609375 -0.28125 0.75 -0.28125 1 C -0.28125 1.40625 0.15625 1.625 0.65625 1.625 C 1.296875 1.625 1.8125 1.109375 1.8125 0.359375 L 1.8125 -3.515625 Z M 0.5625 -3.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-15">
+<path style="stroke:none;" d="M 1.546875 -4.90625 C 1.546875 -5.140625 1.375 -5.359375 1.109375 -5.359375 C 0.875 -5.359375 0.671875 -5.171875 0.671875 -4.921875 C 0.671875 -4.640625 0.90625 -4.46875 1.109375 -4.46875 C 1.390625 -4.46875 1.546875 -4.703125 1.546875 -4.90625 Z M 0.359375 -3.421875 L 0.359375 -3.15625 C 0.875 -3.15625 0.9375 -3.109375 0.9375 -2.71875 L 0.9375 -0.625 C 0.9375 -0.265625 0.84375 -0.265625 0.328125 -0.265625 L 0.328125 0 C 0.640625 -0.03125 1.09375 -0.03125 1.21875 -0.03125 C 1.3125 -0.03125 1.796875 -0.03125 2.078125 0 L 2.078125 -0.265625 C 1.546875 -0.265625 1.515625 -0.296875 1.515625 -0.609375 L 1.515625 -3.515625 Z M 0.359375 -3.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1">
+<path style="stroke:none;" d="M 2.859375 -4.34375 C 0.46875 -3.046875 0.328125 -1.5 0.328125 -1.21875 C 0.328125 -0.3125 1.21875 0.265625 2.359375 0.265625 C 4.34375 0.265625 5.953125 -1.625 5.953125 -1.875 C 5.953125 -1.953125 5.890625 -1.953125 5.828125 -1.953125 C 5.6875 -1.953125 5.234375 -1.8125 4.953125 -1.4375 C 4.703125 -1.09375 4.203125 -0.390625 3.140625 -0.390625 C 2.296875 -0.390625 1.34375 -0.84375 1.34375 -1.734375 C 1.34375 -2.3125 2.015625 -4.09375 3.90625 -4.15625 C 4.46875 -4.1875 4.890625 -4.609375 4.890625 -4.734375 C 4.890625 -4.8125 4.828125 -4.8125 4.765625 -4.8125 C 3.078125 -4.890625 2.75 -5.71875 2.75 -6.1875 C 2.75 -6.46875 2.921875 -7.765625 4.609375 -7.765625 C 4.828125 -7.765625 5.734375 -7.734375 5.734375 -7.109375 C 5.734375 -6.921875 5.640625 -6.75 5.59375 -6.6875 C 5.5625 -6.640625 5.53125 -6.59375 5.53125 -6.546875 C 5.53125 -6.46875 5.625 -6.46875 5.65625 -6.46875 C 6.015625 -6.46875 6.75 -6.9375 6.75 -7.609375 C 6.75 -8.3125 5.921875 -8.421875 5.390625 -8.421875 C 3.765625 -8.421875 1.734375 -7.140625 1.734375 -5.671875 C 1.734375 -4.96875 2.265625 -4.546875 2.859375 -4.34375 Z M 2.859375 -4.34375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-1">
+<path style="stroke:none;" d="M 3.890625 2.90625 C 3.890625 2.875 3.890625 2.84375 3.6875 2.640625 C 2.484375 1.4375 1.8125 -0.53125 1.8125 -2.96875 C 1.8125 -5.296875 2.375 -7.296875 3.765625 -8.703125 C 3.890625 -8.8125 3.890625 -8.828125 3.890625 -8.875 C 3.890625 -8.9375 3.828125 -8.96875 3.78125 -8.96875 C 3.625 -8.96875 2.640625 -8.109375 2.0625 -6.9375 C 1.453125 -5.71875 1.171875 -4.453125 1.171875 -2.96875 C 1.171875 -1.90625 1.34375 -0.484375 1.953125 0.78125 C 2.671875 2.21875 3.640625 3 3.78125 3 C 3.828125 3 3.890625 2.96875 3.890625 2.90625 Z M 3.890625 2.90625 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-2">
+<path style="stroke:none;" d="M 3.375 -2.96875 C 3.375 -3.890625 3.25 -5.359375 2.578125 -6.75 C 1.875 -8.1875 0.890625 -8.96875 0.765625 -8.96875 C 0.71875 -8.96875 0.65625 -8.9375 0.65625 -8.875 C 0.65625 -8.828125 0.65625 -8.8125 0.859375 -8.609375 C 2.0625 -7.40625 2.71875 -5.421875 2.71875 -2.984375 C 2.71875 -0.671875 2.15625 1.328125 0.78125 2.734375 C 0.65625 2.84375 0.65625 2.875 0.65625 2.90625 C 0.65625 2.96875 0.71875 3 0.765625 3 C 0.921875 3 1.90625 2.140625 2.484375 0.96875 C 3.09375 -0.25 3.375 -1.546875 3.375 -2.96875 Z M 3.375 -2.96875 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-1">
+<path style="stroke:none;" d="M 2.109375 -3.78125 C 2.15625 -3.875 2.1875 -3.9375 2.1875 -4.015625 C 2.1875 -4.28125 1.9375 -4.453125 1.71875 -4.453125 C 1.40625 -4.453125 1.3125 -4.171875 1.28125 -4.0625 L 0.265625 -0.625 C 0.234375 -0.53125 0.234375 -0.515625 0.234375 -0.5 C 0.234375 -0.4375 0.28125 -0.421875 0.359375 -0.390625 C 0.515625 -0.328125 0.53125 -0.328125 0.546875 -0.328125 C 0.5625 -0.328125 0.609375 -0.328125 0.671875 -0.46875 Z M 2.109375 -3.78125 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-2">
+<path style="stroke:none;" d="M 1.953125 -2.890625 C 0.71875 -2.296875 0.234375 -1.34375 0.234375 -0.828125 C 0.234375 -0.171875 0.921875 0.171875 1.6875 0.171875 C 3.078125 0.171875 4.21875 -1.09375 4.21875 -1.265625 C 4.21875 -1.3125 4.171875 -1.328125 4.140625 -1.328125 C 4.09375 -1.328125 3.765625 -1.28125 3.515625 -0.9375 C 3.21875 -0.5625 2.828125 -0.296875 2.234375 -0.296875 C 1.703125 -0.296875 0.953125 -0.53125 0.953125 -1.171875 C 0.953125 -1.640625 1.4375 -2.71875 2.71875 -2.765625 C 3.15625 -2.78125 3.421875 -3.078125 3.421875 -3.15625 C 3.421875 -3.21875 3.375 -3.234375 3.34375 -3.234375 C 2.109375 -3.28125 1.890625 -3.8125 1.890625 -4.125 C 1.890625 -4.484375 2.109375 -5.140625 3.171875 -5.140625 C 3.328125 -5.140625 3.515625 -5.125 3.71875 -5.0625 C 3.796875 -5.03125 4 -4.96875 4 -4.703125 C 4 -4.59375 3.9375 -4.5 3.90625 -4.453125 C 3.890625 -4.421875 3.875 -4.375 3.875 -4.34375 C 3.875 -4.3125 3.90625 -4.28125 3.953125 -4.28125 C 4.171875 -4.28125 4.703125 -4.578125 4.703125 -5.0625 C 4.703125 -5.546875 4.078125 -5.609375 3.75 -5.609375 C 2.5625 -5.609375 1.171875 -4.734375 1.171875 -3.78125 C 1.171875 -3.4375 1.390625 -3.078125 1.953125 -2.890625 Z M 1.953125 -2.890625 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-1">
+<path style="stroke:none;" d="M 4.9375 13.734375 C 4.9375 13.6875 4.90625 13.65625 4.890625 13.625 C 4.34375 13.046875 3.53125 12.078125 3.03125 10.125 C 2.75 9.03125 2.640625 7.8125 2.640625 6.6875 C 2.640625 3.546875 3.390625 1.34375 4.828125 -0.203125 C 4.9375 -0.3125 4.9375 -0.328125 4.9375 -0.359375 C 4.9375 -0.484375 4.84375 -0.484375 4.796875 -0.484375 C 4.609375 -0.484375 3.96875 0.234375 3.8125 0.421875 C 2.59375 1.859375 1.8125 4.015625 1.8125 6.6875 C 1.8125 8.375 2.109375 10.78125 3.6875 12.796875 C 3.796875 12.9375 4.578125 13.859375 4.796875 13.859375 C 4.84375 13.859375 4.9375 13.859375 4.9375 13.734375 Z M 4.9375 13.734375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-2">
+<path style="stroke:none;" d="M 3.640625 6.6875 C 3.640625 5 3.34375 2.59375 1.78125 0.578125 C 1.65625 0.4375 0.890625 -0.484375 0.671875 -0.484375 C 0.609375 -0.484375 0.53125 -0.453125 0.53125 -0.359375 C 0.53125 -0.3125 0.546875 -0.28125 0.59375 -0.234375 C 1.171875 0.375 1.953125 1.34375 2.4375 3.25 C 2.71875 4.34375 2.828125 5.5625 2.828125 6.6875 C 2.828125 7.890625 2.71875 9.109375 2.40625 10.28125 C 1.953125 11.953125 1.25 12.90625 0.640625 13.578125 C 0.53125 13.6875 0.53125 13.703125 0.53125 13.734375 C 0.53125 13.828125 0.609375 13.859375 0.671875 13.859375 C 0.84375 13.859375 1.5 13.125 1.65625 12.953125 C 2.875 11.515625 3.640625 9.359375 3.640625 6.6875 Z M 3.640625 6.6875 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-1">
+<path style="stroke:none;" d="M 2.140625 -3.796875 C 2.140625 -3.96875 2.125 -3.96875 1.9375 -3.96875 C 1.546875 -3.59375 0.9375 -3.59375 0.71875 -3.59375 L 0.71875 -3.359375 C 0.875 -3.359375 1.265625 -3.359375 1.625 -3.515625 L 1.625 -0.5 C 1.625 -0.3125 1.625 -0.234375 1.015625 -0.234375 L 0.765625 -0.234375 L 0.765625 0 C 1.09375 -0.03125 1.546875 -0.03125 1.890625 -0.03125 C 2.21875 -0.03125 2.6875 -0.03125 3.015625 0 L 3.015625 -0.234375 L 2.75 -0.234375 C 2.140625 -0.234375 2.140625 -0.3125 2.140625 -0.5 Z M 2.140625 -3.796875 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-2">
+<path style="stroke:none;" d="M 3.21875 -1.109375 L 2.984375 -1.109375 C 2.984375 -1.03125 2.921875 -0.640625 2.828125 -0.578125 C 2.78125 -0.53125 2.296875 -0.53125 2.21875 -0.53125 L 1.109375 -0.53125 L 1.875 -1.15625 C 2.078125 -1.3125 2.609375 -1.703125 2.78125 -1.875 C 2.96875 -2.0625 3.21875 -2.359375 3.21875 -2.78125 C 3.21875 -3.53125 2.53125 -3.96875 1.734375 -3.96875 C 0.96875 -3.96875 0.4375 -3.46875 0.4375 -2.90625 C 0.4375 -2.59375 0.6875 -2.5625 0.75 -2.5625 C 0.90625 -2.5625 1.078125 -2.671875 1.078125 -2.890625 C 1.078125 -3.015625 1 -3.203125 0.734375 -3.203125 C 0.875 -3.515625 1.234375 -3.734375 1.640625 -3.734375 C 2.28125 -3.734375 2.609375 -3.265625 2.609375 -2.78125 C 2.609375 -2.359375 2.328125 -1.921875 1.90625 -1.546875 L 0.5 -0.25 C 0.4375 -0.1875 0.4375 -0.1875 0.4375 0 L 3.03125 0 Z M 3.21875 -1.109375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-3">
+<path style="stroke:none;" d="M 1.75 -1.984375 C 2.265625 -1.984375 2.609375 -1.640625 2.609375 -1.03125 C 2.609375 -0.375 2.203125 -0.09375 1.765625 -0.09375 C 1.609375 -0.09375 1 -0.125 0.734375 -0.46875 C 0.96875 -0.5 1.0625 -0.65625 1.0625 -0.8125 C 1.0625 -1.015625 0.90625 -1.15625 0.71875 -1.15625 C 0.5625 -1.15625 0.375 -1.046875 0.375 -0.796875 C 0.375 -0.203125 1.03125 0.125 1.796875 0.125 C 2.671875 0.125 3.265625 -0.4375 3.265625 -1.03125 C 3.265625 -1.46875 2.9375 -1.921875 2.21875 -2.109375 C 2.6875 -2.265625 3.078125 -2.640625 3.078125 -3.140625 C 3.078125 -3.609375 2.515625 -3.96875 1.796875 -3.96875 C 1.09375 -3.96875 0.5625 -3.640625 0.5625 -3.15625 C 0.5625 -2.90625 0.765625 -2.828125 0.890625 -2.828125 C 1.03125 -2.828125 1.203125 -2.9375 1.203125 -3.140625 C 1.203125 -3.328125 1.0625 -3.4375 0.90625 -3.46875 C 1.1875 -3.765625 1.734375 -3.765625 1.78125 -3.765625 C 2.09375 -3.765625 2.46875 -3.625 2.46875 -3.140625 C 2.46875 -2.8125 2.28125 -2.234375 1.6875 -2.203125 C 1.578125 -2.1875 1.421875 -2.171875 1.359375 -2.171875 C 1.3125 -2.171875 1.234375 -2.171875 1.234375 -2.078125 C 1.234375 -1.984375 1.3125 -1.984375 1.40625 -1.984375 Z M 1.75 -1.984375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-4">
+<path style="stroke:none;" d="M 2.375 1.34375 C 1.71875 0.84375 1.1875 -0.09375 1.1875 -1.5 C 1.1875 -2.875 1.703125 -3.828125 2.375 -4.328125 C 2.375 -4.34375 2.390625 -4.359375 2.390625 -4.390625 C 2.390625 -4.421875 2.375 -4.484375 2.296875 -4.484375 C 2.1875 -4.484375 0.75 -3.546875 0.75 -1.5 C 0.75 0.546875 2.1875 1.5 2.296875 1.5 C 2.375 1.5 2.390625 1.4375 2.390625 1.40625 C 2.390625 1.375 2.375 1.359375 2.375 1.34375 Z M 2.375 1.34375 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-5">
+<path style="stroke:none;" d="M 2.109375 -1.5 C 2.109375 -3.53125 0.6875 -4.484375 0.5625 -4.484375 C 0.5 -4.484375 0.484375 -4.421875 0.484375 -4.390625 C 0.484375 -4.359375 0.484375 -4.34375 0.59375 -4.25 C 1.125 -3.796875 1.6875 -2.90625 1.6875 -1.5 C 1.6875 -0.234375 1.234375 0.71875 0.5625 1.296875 C 0.484375 1.359375 0.484375 1.375 0.484375 1.40625 C 0.484375 1.4375 0.5 1.5 0.5625 1.5 C 0.671875 1.5 2.109375 0.5625 2.109375 -1.5 Z M 2.109375 -1.5 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph7-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph7-1">
+<path style="stroke:none;" d="M 1.25 -0.5 C 1.1875 -0.28125 1.1875 -0.234375 0.734375 -0.234375 C 0.609375 -0.234375 0.59375 -0.234375 0.5625 -0.21875 C 0.53125 -0.203125 0.515625 -0.125 0.515625 -0.078125 C 0.53125 0 0.578125 0 0.703125 0 L 2.953125 0 C 4.296875 0 5.640625 -1.171875 5.640625 -2.484375 C 5.640625 -3.4375 4.9375 -4.078125 3.96875 -4.078125 L 1.671875 -4.078125 C 1.5625 -4.078125 1.46875 -4.078125 1.46875 -3.921875 C 1.46875 -3.84375 1.5625 -3.84375 1.671875 -3.84375 C 1.78125 -3.84375 1.921875 -3.84375 2.046875 -3.796875 C 2.046875 -3.734375 2.046875 -3.703125 2.03125 -3.609375 Z M 2.59375 -3.640625 C 2.640625 -3.828125 2.640625 -3.84375 2.90625 -3.84375 L 3.734375 -3.84375 C 4.4375 -3.84375 5.046875 -3.5 5.046875 -2.6875 C 5.046875 -2.484375 4.96875 -1.53125 4.390625 -0.890625 C 4.078125 -0.546875 3.546875 -0.234375 2.84375 -0.234375 L 1.953125 -0.234375 C 1.84375 -0.234375 1.828125 -0.234375 1.765625 -0.25 Z M 2.59375 -3.640625 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-1">
+<path style="stroke:none;" d="M 1.875 -2.8125 C 1.921875 -2.890625 1.921875 -2.953125 1.921875 -3 C 1.921875 -3.1875 1.765625 -3.34375 1.5625 -3.34375 C 1.328125 -3.34375 1.25 -3.125 1.234375 -3.046875 L 0.390625 -0.484375 C 0.375 -0.453125 0.359375 -0.40625 0.359375 -0.375 C 0.359375 -0.28125 0.609375 -0.234375 0.609375 -0.234375 C 0.65625 -0.234375 0.6875 -0.28125 0.703125 -0.328125 Z M 1.875 -2.8125 "></path>
+</symbol>
+<symbol overflow="visible" id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-2">
+<path style="stroke:none;" d="M 1.671875 -2.15625 C 0.4375 -1.546875 0.375 -0.78125 0.375 -0.625 C 0.375 -0.09375 0.984375 0.125 1.5625 0.125 C 2.734375 0.125 3.640625 -0.828125 3.640625 -0.953125 C 3.640625 -1.015625 3.5625 -1.015625 3.546875 -1.015625 C 3.53125 -1.015625 3.328125 -1 3.078125 -0.75 C 2.96875 -0.625 2.625 -0.265625 2.03125 -0.265625 C 1.640625 -0.265625 0.9375 -0.375 0.9375 -0.90625 C 0.9375 -1.109375 1.09375 -1.4375 1.3125 -1.640625 C 1.734375 -2.03125 2.328125 -2.046875 2.359375 -2.046875 C 2.5 -2.046875 2.59375 -2.046875 2.75 -2.15625 C 2.84375 -2.21875 2.953125 -2.296875 2.953125 -2.375 C 2.953125 -2.421875 2.890625 -2.4375 2.828125 -2.4375 C 2.453125 -2.453125 1.65625 -2.53125 1.65625 -3.09375 C 1.65625 -3.171875 1.6875 -3.515625 2 -3.671875 C 2.140625 -3.75 2.421875 -3.8125 2.703125 -3.8125 C 2.828125 -3.8125 2.984375 -3.796875 3.140625 -3.75 C 3.21875 -3.734375 3.375 -3.6875 3.375 -3.5 C 3.375 -3.4375 3.34375 -3.375 3.3125 -3.3125 C 3.3125 -3.296875 3.296875 -3.28125 3.296875 -3.25 C 3.296875 -3.21875 3.328125 -3.1875 3.375 -3.1875 C 3.546875 -3.1875 3.953125 -3.40625 3.953125 -3.765625 C 3.953125 -4.109375 3.578125 -4.203125 3.15625 -4.203125 C 2.078125 -4.203125 1.078125 -3.53125 1.078125 -2.8125 C 1.078125 -2.359375 1.5625 -2.1875 1.671875 -2.15625 Z M 1.671875 -2.15625 "></path>
+</symbol>
+</g>
+</defs>
+<g id="oF2dO7Pqa6EONEZVyUOrc1dVrvU=-surface1">
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1" x="5.143513" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-1" x="14.856929" y="15.155941"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="123.262443" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-1" x="130.636444" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1" x="135.185361" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-2" x="144.897777" y="15.155941"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-2" x="149.627571" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="267.015996" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-1" x="274.389997" y="9.028095"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-1" x="277.183104" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1" x="281.73202" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-2" x="291.445435" y="15.155941"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-2" x="296.17423" y="13.364155"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="114.099654" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-1" x="121.473656" y="88.743058"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="126.948944" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-1" x="134.322945" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1" x="138.872861" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-3" x="148.585277" y="100.212283"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-2" x="153.314072" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-2" x="157.863987" y="88.743058"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="257.853207" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-1" x="265.227208" y="94.084437"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-1" x="268.020315" y="88.743058"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="273.496603" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-1" x="280.870604" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1" x="285.41952" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-3" x="295.131936" y="100.212283"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-2" x="299.860731" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-2" x="304.410647" y="88.743058"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="404.399866" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-1" x="411.773867" y="94.084437"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-1" x="414.566974" y="88.743058"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="420.043262" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-1" x="427.417263" y="94.084437"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-1" x="430.21037" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1" x="434.759286" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-3" x="444.471702" y="100.212283"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-2" x="449.201496" y="98.419498"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph5-2" x="453.750412" y="88.743058"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="123.262443" y="183.47584"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-1" x="130.636444" y="183.47584"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1" x="135.185361" y="183.47584"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-3" x="144.897777" y="185.267626"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-2" x="149.627571" y="183.47584"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph2-1" x="414.959708" y="183.47584"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-1" x="422.333709" y="179.13978"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-1" x="425.126816" y="183.47584"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph0-1" x="429.675732" y="183.47584"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-3" x="439.388148" y="185.267626"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph3-2" x="444.117942" y="183.47584"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -207.399322 85.116182 L -114.820983 85.116182 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.484799 2.870703 C -2.031367 1.146879 -1.018962 0.333828 0.00126004 0.0015717 C -1.018962 -0.334594 -2.031367 -1.147644 -2.484799 -2.867559 " transform="matrix(0.999323,0,0,-0.999323,117.678428,10.376571)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 56.660156 15.6875 L 86.183594 15.6875 L 86.183594 5.066406 L 56.660156 5.066406 Z M 56.660156 15.6875 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-4" x="59.234846" y="11.068711"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-5" x="63.936409" y="11.068711"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-6" x="67.234592" y="11.068711"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-7" x="71.466237" y="11.068711"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-1" x="75.814607" y="13.115324"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-2" x="79.465044" y="13.115324"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -72.714334 85.116182 L 29.030371 85.116182 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.486425 2.870703 C -2.032993 1.146879 -1.020588 0.333828 -0.000366021 0.0015717 C -1.020588 -0.334594 -2.032993 -1.147644 -2.486425 -2.867559 " transform="matrix(0.999323,0,0,-0.999323,261.43396,10.376571)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 193.289062 16.964844 L 227.902344 16.964844 L 227.902344 3.789062 L 193.289062 3.789062 Z M 193.289062 16.964844 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-8" x="195.862229" y="11.261581"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-5" x="199.153244" y="11.261581"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-9" x="202.451426" y="11.261581"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-10" x="206.683072" y="11.261581"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-11" x="211.384635" y="11.261581"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph7-1" x="214.721445" y="12.599674"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-2" x="220.684403" y="14.392458"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -93.529216 74.562157 L -93.529216 12.226961 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.487638 2.870096 C -2.034206 1.146272 -1.021801 0.333221 -0.00157861 0.000964467 C -1.021801 -0.335201 -2.034206 -1.148252 -2.487638 -2.868167 " transform="matrix(0,0.999323,0.999323,0,138.717786,83.454703)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 118.085938 58.890625 L 159.347656 58.890625 L 159.347656 45.726562 L 118.085938 45.726562 Z M 118.085938 58.890625 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-2" x="120.661206" y="54.271425"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-12" x="125.816712" y="54.271425"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-4" x="129.107726" y="54.271425"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-5" x="133.809289" y="54.271425"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-6" x="137.107472" y="54.271425"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-7" x="141.339117" y="54.271425"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-2" x="145.687242" y="56.318038"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-3" x="149.337679" y="56.318038"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-13" x="153.485955" y="54.271425"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 51.721524 74.562157 L 51.721524 12.226961 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.487638 2.870305 C -2.034206 1.146481 -1.021801 0.33343 -0.00157861 0.00117388 C -1.021801 -0.334991 -2.034206 -1.148042 -2.487638 -2.867957 " transform="matrix(0,0.999323,0.999323,0,283.869921,83.454703)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 261.898438 58.96875 L 305.839844 58.96875 L 305.839844 45.648438 L 261.898438 45.648438 Z M 261.898438 58.96875 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-2" x="264.470721" y="54.349372"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-1" x="269.626226" y="51.538278"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-12" x="272.308408" y="54.349372"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-4" x="275.599422" y="54.349372"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-5" x="280.300985" y="54.349372"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-6" x="283.599168" y="54.349372"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-7" x="287.830814" y="54.349372"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-2" x="292.178938" y="56.395985"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-3" x="295.829375" y="56.395985"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-13" x="299.977652" y="54.349372"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -63.547968 -0.0000714436 L 19.860097 -0.0000714436 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.4876 2.86906 C -2.034168 1.149145 -1.021763 0.336094 -0.00154064 -0.0000714436 C -1.021763 -0.336237 -2.034168 -1.149287 -2.4876 -2.869203 " transform="matrix(0.999323,0,0,-0.999323,252.271071,95.433522)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 187.914062 103.058594 L 233.277344 103.058594 L 233.277344 87.808594 L 187.914062 87.808594 Z M 187.914062 103.058594 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-8" x="190.487872" y="95.277628"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-5" x="193.778887" y="95.277628"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-9" x="197.077069" y="95.277628"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-10" x="201.308715" y="95.277628"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-11" x="206.010278" y="95.277628"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-2" x="209.348087" y="98.695311"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-4" x="213.845039" y="98.695311"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph7-1" x="216.721089" y="98.695311"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-3" x="222.684047" y="100.488096"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-5" x="226.832235" y="98.695311"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -93.529216 -11.74631 L -93.529216 -74.085415 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.485462 2.870096 C -2.03203 1.146272 -1.019625 0.333221 0.000597315 0.000964467 C -1.019625 -0.335201 -2.03203 -1.148252 -2.485462 -2.868167 " transform="matrix(0,0.999323,0.999323,0,138.717786,169.706434)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 123.90625 146.828125 L 153.527344 146.828125 L 153.527344 130.292969 L 123.90625 130.292969 Z M 123.90625 146.828125 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-14" x="126.480262" y="139.82543"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-6" x="129.0664" y="139.82543"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-15" x="133.298046" y="139.82543"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-10" x="135.648429" y="139.82543"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-2" x="140.34986" y="136.945382"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph7-1" x="140.34986" y="142.461643"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-3" x="146.312818" y="144.253428"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 83.102157 -0.0000714436 L 166.510221 -0.0000714436 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.485575 2.86906 C -2.032143 1.149145 -1.019738 0.336094 0.00048424 -0.0000714436 C -1.019738 -0.336237 -2.032143 -1.149287 -2.485575 -2.869203 " transform="matrix(0.999323,0,0,-0.999323,398.819829,95.433522)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 332.628906 102.636719 L 381.660156 102.636719 L 381.660156 88.230469 L 332.628906 88.230469 Z M 332.628906 102.636719 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph4-2" x="335.198776" y="96.932506"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-1" x="340.354281" y="94.121412"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-12" x="343.036463" y="96.932506"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-8" x="346.327477" y="96.932506"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-5" x="349.618492" y="96.932506"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-9" x="352.916674" y="96.932506"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-10" x="357.14832" y="96.932506"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-11" x="361.849883" y="96.932506"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph7-1" x="365.187447" y="98.271598"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-3" x="371.150405" y="100.063384"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-13" x="375.796256" y="96.932506"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 199.767125 -11.74631 L 199.767125 -74.085415 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.485462 2.870266 C -2.03203 1.146442 -1.019625 0.333392 0.000597315 0.00113533 C -1.019625 -0.33503 -2.03203 -1.148081 -2.485462 -2.867996 " transform="matrix(0,0.999323,0.999323,0,431.815272,169.706434)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 417.003906 147.699219 L 446.625 147.699219 L 446.625 129.421875 L 417.003906 129.421875 Z M 417.003906 147.699219 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-14" x="419.57358" y="140.697839"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-6" x="422.159718" y="140.697839"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-15" x="426.391364" y="140.697839"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-10" x="428.741747" y="140.697839"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-2" x="433.443178" y="137.817791"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph8-1" x="437.94013" y="135.310491"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph7-1" x="433.443178" y="143.333052"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-3" x="439.406136" y="145.124838"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -72.714334 -85.116325 L 177.075973 -85.116325 " transform="matrix(0.999323,0,0,-0.999323,232.184607,95.433522)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.486474 2.867417 C -2.033042 1.147501 -1.020637 0.334451 -0.000414565 -0.00171459 C -1.020637 -0.333971 -2.033042 -1.147022 -2.486474 -2.870846 " transform="matrix(0.999323,0,0,-0.999323,409.379321,180.490474)"></path>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 267.261719 187.078125 L 301.875 187.078125 L 301.875 173.902344 L 267.261719 173.902344 Z M 267.261719 187.078125 "></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-8" x="269.833086" y="181.373266"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-5" x="273.1241" y="181.373266"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-9" x="276.422283" y="181.373266"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-10" x="280.653929" y="181.373266"></use>
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph1-11" x="285.355492" y="181.373266"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph7-1" x="288.693301" y="182.711359"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#oF2dO7Pqa6EONEZVyUOrc1dVrvU=-glyph6-3" x="294.656259" y="184.504143"></use>
+</g>
+</g>
+</svg>
+<p>Going diagonally through this <a class="existingWikiWord" href="/nlab/show/commuting+diagram">commuting diagram</a> and using <a class="maruku-eqref" href="#eq:BindFromJoin">(4)</a>: The total left and bottom composite is the left hand side of <a class="maruku-eqref" href="#eq:RespectForBindOperation">(2)</a> and the total top and right composite is the right hand side of <a class="maruku-eqref" href="#eq:RespectForBindOperation">(2)</a>, thus proving their equality.</p>
+
+<p>In the other direction, if <a class="maruku-eqref" href="#eq:RespectForBindOperation">(2)</a> holds then its restriction to the case <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>prog</mi> <mn>12</mn></msub><mspace width="thinmathspace"></mspace><mo>≡</mo><mspace width="thinmathspace"></mspace><mi>id</mi><mspace width="thinmathspace"></mspace><mo>≡</mo><mspace width="thinmathspace"></mspace><msub><mi>prog</mi> <mn>23</mn></msub></mrow><annotation encoding="application/x-tex">prog_{12} \,\equiv\, id \,\equiv\, prog_{23}</annotation></semantics></math> immediately yields, by <a class="maruku-eqref" href="#eq:JoinFromBind">(6)</a>, the above commtuting diagram expressing respect for the join.</p>
+
+<p id="NaturalityFollows"> It just remains to see that the system of transformations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>trans</mi> <mrow><mo stretchy="false">(</mo><mtext>-</mtext><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">trans_{(\text{-})}</annotation></semantics></math> <a class="maruku-eqref" href="#eq:UnderlyingNaturalTransformation">(1)</a> is necessarily <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural</a>. This is shown by the following sequence of equalities, for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>prog</mi><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace><msub><mi>D</mi> <mn>1</mn></msub><mo>→</mo><msub><mi>D</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">prog \,\colon\, D_1 \to D_2</annotation></semantics></math>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="left left"><mtr><mtd><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>2</mn></msub></mrow></msub><mo>∘</mo><mi>ℰ</mi><mo stretchy="false">(</mo><mi>prog</mi><mo stretchy="false">)</mo></mtd></mtr> <mtr><mtd><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>2</mn></msub></mrow></msub><mo>∘</mo><msup><mi>bind</mi> <mi>ℰ</mi></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>D</mi> <mn>1</mn></msub><mover><mo>→</mo><mi>prog</mi></mover><msub><mi>D</mi> <mn>2</mn></msub><mover><mo>→</mo><mrow><msubsup><mi>ret</mi> <mi>D</mi> <mi>ℰ</mi></msubsup></mrow></mover><mi>ℰ</mi><mo stretchy="false">(</mo><msub><mi>D</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mtd></mtr> <mtr><mtd><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msup><mi>bind</mi> <mrow><mi>ℰ</mi><mo>′</mo></mrow></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>D</mi> <mn>1</mn></msub><mover><mo>→</mo><mi>prog</mi></mover><msub><mi>D</mi> <mn>2</mn></msub><mover><mo>→</mo><mrow><msubsup><mi>ret</mi> <mi>D</mi> <mi>ℰ</mi></msubsup></mrow></mover><mi>ℰ</mi><mo stretchy="false">(</mo><msub><mi>D</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mover><mo>→</mo><mrow><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>2</mn></msub></mrow></msub></mrow></mover><mi>ℰ</mi><mo>′</mo><mo stretchy="false">(</mo><msub><mi>D</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>∘</mo><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>1</mn></msub></mrow></msub></mtd></mtr> <mtr><mtd><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msup><mi>bind</mi> <mrow><mi>ℰ</mi><mo>′</mo></mrow></msup><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>D</mi> <mn>1</mn></msub><mover><mo>→</mo><mi>prog</mi></mover><msub><mi>D</mi> <mn>2</mn></msub><mover><mo>→</mo><mrow><msubsup><mi>ret</mi> <mi>D</mi> <mrow><mi>ℰ</mi><mo>′</mo></mrow></msubsup></mrow></mover><mi>ℰ</mi><mo>′</mo><mo stretchy="false">(</mo><msub><mi>D</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo><mo>∘</mo><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>1</mn></msub></mrow></msub></mtd></mtr> <mtr><mtd><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>ℰ</mi><mo>′</mo><mo stretchy="false">(</mo><mi>prog</mi><mo stretchy="false">)</mo><mo>∘</mo><msub><mi>trans</mi> <mrow><msub><mi>D</mi> <mn>1</mn></msub></mrow></msub><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow></mpadded></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">
+  \begin{array}{ll}
+    trans_{D_2}  \circ \mathcal{E}(prog)
+    \\
+    \;=\;
+    trans_{D_2}
+    \circ
+    bind^{\mathcal{E}}\big(
+      D_1 
+        \xrightarrow{ prog } 
+      D_2
+        \xrightarrow{ ret^{\mathcal{E}}_D }
+      \mathcal{E}(D_2)
+    \big)
+    \\
+    \;=\;
+    bind^{\mathcal{E}'}\big(
+      D_1 
+        \xrightarrow{ prog } 
+      D_2
+        \xrightarrow{ ret^{\mathcal{E}}_D }
+      \mathcal{E}(D_2)
+        \xrightarrow{ trans_{D_2} }
+      \mathcal{E}'(D_2)
+    \big)
+    \circ
+    trans_{D_1}
+    \\
+    \;=\;
+    bind^{\mathcal{E}'}\big(
+      D_1 
+        \xrightarrow{ prog } 
+      D_2
+        \xrightarrow{ ret^{\mathcal{E}'}_D }
+      \mathcal{E}'(D_2)
+    \big)
+    \circ
+    trans_{D_1}
+    \\
+    \;=\;
+    \mathcal{E}'(prog)
+    \circ
+    trans_{D_1}
+    \mathrlap{\,,}
+  \end{array}
+
+</annotation></semantics></math></div>
+<p>where we used, in order of appearance: <a class="maruku-eqref" href="#eq:FunctorFromBind">(5)</a>, <a class="maruku-eqref" href="#eq:RespectForBindOperation">(2)</a>, <a class="maruku-eqref" href="#eq:RespectForTheUnit">(3)</a> and finally <a class="maruku-eqref" href="#eq:FunctorFromBind">(5)</a> again.</p>
+</div>
+</p>
+
 <h2 id="related_concepts">Related concepts</h2>
 
 <ul>
@@ -617,6 +1569,10 @@ margin-left: 0em;
 <li id="LiangHudakJones95">
 <p>Sheng Liang, <a class="existingWikiWord" href="/nlab/show/Paul+Hudak">Paul Hudak</a>, <a class="existingWikiWord" href="/nlab/show/Mark+Jones">Mark Jones</a>, <em>Monad transformers and modular interpreters</em>, POPL ‘95 (1995) 333–343 &lbrack;<a href="https://doi.org/10.1145/199448.199528">doi:10.1145/199448.199528</a>&rbrack;</p>
 </li>
+
+<li id="SchrijversPir&#xF3;gWuJaskelioff19">
+<p>Tom Schrijvers, Maciej Piróg, Nicolas Wu, Mauro Jaskelioff: <em>Monad transformers and modular algebraic effects: what binds them together</em>, in: <em>Haskell 2019: Proceedings of the 12th ACM SIGPLAN International Symposium on Haskell</em> (2019) 98–113 &lbrack;<a href="https://doi.org/10.1145/3331545.3342595">doi:10.1145/3331545.3342595</a>&rbrack;</p>
+</li>
 </ul>
 
 <p>Textbook account:</p>
@@ -637,6 +1593,10 @@ margin-left: 0em;
 </li>
 
 <li>
+<p><a href="https://hackage.haskell.org/package/transformers-0.5.6.2/docs/Control-Monad-Trans-Class.html">hackage.haskell.org/package/transformers-0.5.6.2/docs/Control-Monad-Trans-Class.html</a></p>
+</li>
+
+<li>
 <p>Bryan O’Sullivan, Don Stewart, and John Goerzen, <em>Monad transformers</em>, <a href="http://book.realworldhaskell.org/read/monad-transformers.html">Chapter 18</a> of <em>Real World Haskell</em></p>
 </li>
 
@@ -646,6 +1606,10 @@ margin-left: 0em;
 
 <li id="HP07">
 <p><a class="existingWikiWord" href="/nlab/show/Martin+Hyland">Martin Hyland</a>, <a class="existingWikiWord" href="/nlab/show/John+Power">John Power</a>, <em>The Category Theoretic Understanding of Universal Algebra: Lawvere Theories and Monads</em>, Electronic Notes in Theoretical Computer Science (ENTCS) <strong>172</strong> (2007) 437-458 &lbrack;<a href="https://www.dpmms.cam.ac.uk/~martin/Research/Publications/2007/hp07.pdf">pdf</a>&rbrack;</p>
+</li>
+
+<li>
+<p>Mauro Jaskelioff, <em>Monatron: An Extensible Monad Transformer Library</em>, in: <em>Implementation and Application of Functional Languages. IFL 2008</em>, Lecture Notes in Computer Science <strong>5836</strong> (2011) 233–248 &lbrack;<a href="https://doi.org/10.1007/978-3-642-24452-0_13">doi:10.1007/978-3-642-24452-0_13</a>&rbrack;</p>
 </li>
 
 <li>
@@ -666,14 +1630,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on September 18, 2023 at 06:41:29.
+    Last revised on September 23, 2023 at 12:24:58.
     See the <a href="/nlab/history/monad+transformer" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/monad+transformer" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/12924/#Item_4">Discuss</a><span class="backintime"><a href="/nlab/revision/monad+transformer/10" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/monad+transformer" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/monad+transformer" accesskey="S" class="navlink" id="history" rel="nofollow">History (10 revisions)</a>
+  <a href="/nlab/edit/monad+transformer" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/12924/#Item_8">Discuss</a><span class="backintime"><a href="/nlab/revision/monad+transformer/13" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/monad+transformer" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/monad+transformer" accesskey="S" class="navlink" id="history" rel="nofollow">History (13 revisions)</a>
   <a href="/nlab/show/monad+transformer/cite" style="color: black">Cite</a>
   <a href="/nlab/print/monad+transformer" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/monad+transformer" id="view_source" rel="nofollow">Source</a>
