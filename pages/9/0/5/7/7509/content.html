@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -501,7 +501,11 @@ margin-left: 0em;
 <li><a href='#positive_versus_negative'>Positive versus negative</a></li>
 </ul>
 </ul>
+<li><a href='#properties'>Properties</a></li>
+<ul>
+<li><a href='#typal_congruence_rules'>Typal congruence rules</a></li>
 <li><a href='#quantification_in_dependent_type_theory'>Quantification in dependent type theory</a></li>
+</ul>
 <li><a href='#categorical_interpretation'>Categorical interpretation</a></li>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
@@ -529,16 +533,10 @@ margin-left: 0em;
 <h2 id="overview">Overview</h2>
 <div>
 
-<table><thead><tr><th></th><th><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></th><th><a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a></th></tr></thead><tbody><tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/syntax">syntax</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/semantics">semantics</a></td></tr>
-<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/natural+deduction">natural deduction</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/universal+construction">universal construction</a></td></tr>
-<tr><td style="text-align: left;"></td><td style="text-align: left;"><strong><a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a></strong></td><td style="text-align: left;"><strong><a class="existingWikiWord" href="/nlab/show/dependent+sum">dependent sum</a></strong></td></tr>
-<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type+formation">type formation</a></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mo>⊢</mo><mspace width="mediummathspace"></mspace><mi>A</mi><mo lspace="verythinmathspace">:</mo><mi>Type</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>x</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo lspace="verythinmathspace">:</mo><mi>Type</mi></mrow><mrow><mo>⊢</mo><mspace width="thickmathspace"></mspace><mrow><mo>(</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi></mrow></msub><mi>B</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mo>)</mo></mrow><mo lspace="verythinmathspace">:</mo><mi>Type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\vdash\: A \colon Type \;\;\;\;\; x \colon A \;\vdash\; B(x)\colon Type}{\vdash \; \left(\sum_{x \colon A} B\left(x\right)\right) \colon Type}</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo>(</mo><mi>A</mi><mo>∈</mo><mi>𝒞</mi><mo>,</mo><mrow><mtable><mtr><mtd><mi>B</mi></mtd></mtr> <mtr><mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mrow><msub><mi>p</mi> <mn>1</mn></msub></mrow></mpadded></msup></mtd></mtr> <mtr><mtd><mi>A</mi></mtd></mtr></mtable></mrow><mspace width="thickmathspace"></mspace><mo>∈</mo><mi>𝒞</mi><mo stretchy="false">/</mo><mi>A</mi><mo>)</mo></mrow><mo>⇒</mo><mrow><mo>(</mo><mi>B</mi><mo>∈</mo><mi>𝒞</mi><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\left(A \in \mathcal{C}, \array{ B \\ \downarrow^{\mathrlap{p_1}} \\ A} \; \in \mathcal{C}/A \right) \Rightarrow \left( B \in \mathcal{C}\right)</annotation></semantics></math></td></tr>
-<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/term+introduction">term introduction</a></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mo>⊢</mo><mspace width="mediummathspace"></mspace><mi>a</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><mi>b</mi><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mrow><mo>⊢</mo><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo lspace="verythinmathspace">:</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi></mrow></msub><mi>B</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\vdash\: a \colon A \;\;\;\;\; \vdash\; b \colon B(a)}{\vdash (a,b) \colon \sum_{x \colon A} B\left(x\right) }</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>Q</mi></mtd> <mtd><mover><mo>→</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd><mi>B</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mrow></mrow> <mpadded width="0" lspace="-100%width"><mi>a</mi></mpadded></msub><mo>↘</mo></mtd> <mtd></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>A</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\array{ Q &amp;\stackrel{(a,b)}{\to}&amp; B \\ &amp; {}_{\mathllap{a}}\searrow &amp; \\ &amp;&amp; A }</annotation></semantics></math></td></tr>
-<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/term+elimination">term elimination</a></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mo>⊢</mo><mspace width="thickmathspace"></mspace><mi>t</mi><mo lspace="verythinmathspace">:</mo><mrow><mo>(</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo lspace="verythinmathspace">:</mo><mi>A</mi></mrow></msub><mi>B</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mo>)</mo></mrow></mrow><mrow><mo>⊢</mo><mspace width="thickmathspace"></mspace><msub><mi>p</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo lspace="verythinmathspace">:</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⊢</mo><mspace width="thickmathspace"></mspace><msub><mi>p</mi> <mn>2</mn></msub><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo lspace="verythinmathspace">:</mo><mi>B</mi><mo stretchy="false">(</mo><msub><mi>p</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\vdash\; t \colon \left(\sum_{x \colon A} B\left(x\right)\right)}{\vdash\; p_1(t) \colon A\;\;\;\;\; \vdash\; p_2(t) \colon B(p_1(t))}</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>Q</mi></mtd> <mtd><mover><mo>→</mo><mi>t</mi></mover></mtd> <mtd><mi>B</mi></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mrow><msub><mi>p</mi> <mn>1</mn></msub></mrow></mpadded></msup></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>A</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\array{ Q &amp;\stackrel{t}{\to}&amp; B \\ &amp;  &amp; \downarrow^{\mathrlap{p_1}} \\ &amp;&amp; A }</annotation></semantics></math></td></tr>
-<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/computation+rule">computation rule</a></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mn>1</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>p</mi> <mn>2</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">p_1(a,b) = a\;\;\;\; p_2(a,b) = b</annotation></semantics></math></td><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>Q</mi></mtd> <mtd><mover><mo>→</mo><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo></mrow></mover></mtd> <mtd><mi>B</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><msub><mrow></mrow> <mpadded width="0" lspace="-100%width"><mi>a</mi></mpadded></msub><mo>↘</mo></mtd> <mtd><msup><mo stretchy="false">↓</mo> <mpadded width="0"><mrow><msub><mi>p</mi> <mn>1</mn></msub></mrow></mpadded></msup></mtd></mtr> <mtr><mtd></mtd> <mtd></mtd> <mtd><mi>A</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\array{ Q &amp;\stackrel{(a,b)}{\to}&amp; B \\ &amp; {}_{\mathllap{a}}\searrow &amp; \downarrow^{\mathrlap{p_1}} \\ &amp;&amp; A }</annotation></semantics></math></td></tr>
-</tbody></table>
-
-</div>
+<p>The <a class="existingWikiWord" href="/nlab/show/inference+rules">inference rules</a> for <a class="existingWikiWord" href="/nlab/show/dependent+pair+types">dependent pair types</a> (aka “dependent sum types” or “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>-types”):</p>
+<div style="margin: -30px 0px 20px 10px">
+  <img src="/nlab/files/DependentPairTypeInference-230215.jpg" width="770px" />
+</div></div>
 <h2 id="definition">Definition</h2>
 
 <p>Like any <a class="existingWikiWord" href="/nlab/show/type+formation">type constructor</a> in <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>, the dependent sum type is specified by rules saying when we can <a class="existingWikiWord" href="/nlab/show/type+formation">introduce</a> it as a type, how to <a class="existingWikiWord" href="/nlab/show/term+introduction">construct terms</a> of that type, how to use or “<a class="existingWikiWord" href="/nlab/show/term+elimination">eliminate</a>” terms of that type, and how to <a class="existingWikiWord" href="/nlab/show/computation+rule">compute</a> when we combine the constructors with the eliminators.</p>
@@ -664,7 +662,29 @@ p\colon \sum_{x\colon A} B(x) \qquad x\colon A, y\colon B(x) \vdash c\colon C((x
 
 <p>One might expect that in “<a class="existingWikiWord" href="/nlab/show/dependent+linear+type+theory">dependent linear type theory</a>” the positive and negative dependent sums would become different. However, the meaning of the quoted phrase is unclear.</p>
 
-<h2 id="quantification_in_dependent_type_theory">Quantification in dependent type theory</h2>
+<h2 id="properties">Properties</h2>
+
+<h3 id="typal_congruence_rules">Typal congruence rules</h3>
+
+<p>These are called <em>typal congruence rules</em> because they are the analogue of the judgmental <a class="existingWikiWord" href="/nlab/show/congruence+rules">congruence rules</a> which use <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a> and <a class="existingWikiWord" href="/nlab/show/equivalence+types">equivalence types</a> instead of <a class="existingWikiWord" href="/nlab/show/judgmental+equality">judgmental equality</a>:</p>
+
+<p>
+<div class='num_theorem'>
+<h6>Theorem</h6>
+<p>Given types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">A'</annotation></semantics></math> and type families <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x:A \vdash B(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mo>′</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x:A \vdash B'(x)</annotation></semantics></math> and equivalences <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>e</mi> <mi>A</mi></msub><mo>:</mo><mi>A</mi><mo>≃</mo><mi>A</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">e_A:A \simeq A'</annotation></semantics></math> and dependent function of equivalences <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>e</mi> <mi>B</mi></msub><mo>:</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>x</mi><mo>:</mo><mi>A</mi></mrow></msub><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>≃</mo><mi>B</mi><mo>′</mo><mo stretchy="false">(</mo><msub><mi>e</mi> <mi>A</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">e_B:\prod_{x:A} B(x) \simeq B'(e_A(x))</annotation></semantics></math>, there is an equivalence</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">congform</mi><mo stretchy="false">(</mo><msub><mi>e</mi> <mi>A</mi></msub><mo>,</mo><msub><mi>e</mi> <mi>B</mi></msub><mo stretchy="false">)</mo><mo>:</mo><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>x</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow><mo>≃</mo><mrow><mo>(</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>x</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{congform}(e_A, e_B):\left(\prod_{x:A} B(x)\right) \simeq \left(\prod_{x:A} B(x)\right)</annotation></semantics></math></div>
+<p></p>
+</div>
+</p>
+
+<p>
+<div class='proof'>
+<h6>Proof</h6>
+<p>This is theorem 11.1.6 of <a href="#Rijke22">Rijke 2022</a>, and a proof of this is given in that reference.</p>
+</div>
+</p>
+
+<h3 id="quantification_in_dependent_type_theory">Quantification in dependent type theory</h3>
 
 <p>Given a family of types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>A</mi><mo>⊢</mo><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x:A \vdash B(x)</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/existential+quantifier">existential quantifier</a> is defined as the <a class="existingWikiWord" href="/nlab/show/bracket+type">bracket type</a> of the dependent sum type</p>
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∃</mo><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>≔</mo><mrow><mo>[</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo>:</mo><mi>A</mi></mrow></munder><mi>B</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>]</mo></mrow></mrow><annotation encoding="application/x-tex">\exists x:A.B(x) \coloneqq \left[\sum_{x:A} B(x)\right]</annotation></semantics></math></div>
@@ -712,6 +732,12 @@ p\colon \sum_{x\colon A} B(x) \qquad x\colon A, y\colon B(x) \vdash c\colon C((x
 
 <h2 id="references">References</h2>
 
+<p>A textbook account could be found in section 4.6 of:</p>
+
+<ul>
+<li id="Rijke22"><a class="existingWikiWord" href="/nlab/show/Egbert+Rijke">Egbert Rijke</a>, <em><a class="existingWikiWord" href="/nlab/show/Introduction+to+Homotopy+Type+Theory">Introduction to Homotopy Type Theory</a></em>, Cambridge Studies in Advanced Mathematics, Cambridge University Press (<a href="https://arxiv.org/abs/2212.11082">arXiv:2212.11082</a>)</li>
+</ul>
+
 <p>Discussion in a context of <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>:</p>
 
 <ul>
@@ -725,14 +751,14 @@ p\colon \sum_{x\colon A} B(x) \qquad x\colon A, y\colon B(x) \vdash c\colon C((x
 
 <div class="revisedby">
     <p>
-    Last revised on January 31, 2023 at 14:50:29.
+    Last revised on October  2, 2023 at 21:33:48.
     See the <a href="/nlab/history/dependent+sum+type" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/dependent+sum+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15823/#Item_4">Discuss</a><span class="backintime"><a href="/nlab/revision/dependent+sum+type/16" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/dependent+sum+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/dependent+sum+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (16 revisions)</a>
+  <a href="/nlab/edit/dependent+sum+type" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15823/#Item_4">Discuss</a><span class="backintime"><a href="/nlab/revision/dependent+sum+type/18" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/dependent+sum+type" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/dependent+sum+type" accesskey="S" class="navlink" id="history" rel="nofollow">History (18 revisions)</a>
   <a href="/nlab/show/dependent+sum+type/cite" style="color: black">Cite</a>
   <a href="/nlab/print/dependent+sum+type" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/dependent+sum+type" id="view_source" rel="nofollow">Source</a>
