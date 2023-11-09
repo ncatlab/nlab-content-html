@@ -250,8 +250,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/15787/#Item_12" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/15787/#Item_13" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -552,6 +552,8 @@ margin-left: 0em;
 <ul>
 <li><a href='#extensionality_principle_of_the_boolean_domain'>Extensionality principle of the boolean domain</a></li>
 <li><a href='#relation_to_sum_types'>Relation to sum types</a></li>
+<li><a href='#boolean_logic'>Boolean logic</a></li>
+<li><a href='#other_properties'>Other properties</a></li>
 </ul>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
@@ -584,6 +586,14 @@ margin-left: 0em;
 <h2 id="definition">Definition</h2>
 
 <h3 id="InTypeTheory">In type theory</h3>
+
+<p>As an <a class="existingWikiWord" href="/nlab/show/inductive+type">inductive type</a>, the boolean domain is given by</p>
+
+<pre><code>Inductive Bool : Type
+  | zero : Bool
+  | one : Bool</code></pre>
+
+<p>This says that the type is inductively constructed from two <a class="existingWikiWord" href="/nlab/show/terms">terms</a> in the type Bool, whose <a class="existingWikiWord" href="/nlab/show/semantics">interpretation</a> is as the two points of the type.</p>
 
 <h4 id="natural_deduction_inference_rules">Natural deduction inference rules</h4>
 
@@ -734,7 +744,79 @@ margin-left: 0em;
 <h3 id="relation_to_sum_types">Relation to sum types</h3>
 
 <p>The <a class="existingWikiWord" href="/nlab/show/sum+types">sum types</a> can be defined in terms of the boolean domain and the <a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a>. Given types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, the sum type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>+</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A + B</annotation></semantics></math> is defined as</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>+</mo><mi>B</mi><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo>:</mo><mi>𝟚</mi></mrow></munder><msubsup><mi mathvariant="normal">typerec</mi> <mi mathvariant="normal">Bool</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A + B \coloneqq \sum_{x:\mathbb{2}} \mathrm{typerec}_{\mathrm{Bool}}^{A, B}(x)</annotation></semantics></math></div>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>+</mo><mi>B</mi><mo>≔</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo>:</mo><mi mathvariant="normal">Bool</mi></mrow></munder><msubsup><mi mathvariant="normal">typerec</mi> <mi mathvariant="normal">Bool</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A + B \coloneqq \sum_{x:\mathrm{Bool}} \mathrm{typerec}_{\mathrm{Bool}}^{A, B}(x)</annotation></semantics></math></div>
+<h3 id="boolean_logic">Boolean logic</h3>
+
+<p>One could recursively define the logical functions on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">\mathrm{Bool}</annotation></semantics></math> as follows</p>
+
+<ul>
+<li>For negation <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo></mrow><annotation encoding="application/x-tex">\neg</annotation></semantics></math>
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><mn>0</mn><mo>:</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\neg 0 := 1</annotation></semantics></math></li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>¬</mo><mn>1</mn><mo>:</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\neg 1 := 0</annotation></semantics></math></li>
+</ul>
+</li>
+
+<li>For conjunction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∧</mo></mrow><annotation encoding="application/x-tex">\wedge</annotation></semantics></math>
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn><mo>∧</mo><mi>a</mi><mo>:</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">0 \wedge a := 0</annotation></semantics></math></li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>∧</mo><mi>a</mi><mo>:</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">1 \wedge a := a</annotation></semantics></math></li>
+</ul>
+</li>
+
+<li>For disjunction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∨</mo></mrow><annotation encoding="application/x-tex">\vee</annotation></semantics></math>
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn><mo>∨</mo><mi>a</mi><mo>:</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">0 \vee a := a</annotation></semantics></math></li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>∨</mo><mi>a</mi><mo>:</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 \vee a := 1</annotation></semantics></math></li>
+</ul>
+</li>
+
+<li>For implication <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\implies</annotation></semantics></math>
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn><mo>⇒</mo><mi>a</mi><mo>:</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0 \implies a := 1</annotation></semantics></math></li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>⇒</mo><mi>a</mi><mo>:</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">1 \implies a := a</annotation></semantics></math></li>
+</ul>
+</li>
+
+<li>For the biconditional <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⇔</mo></mrow><annotation encoding="application/x-tex">\iff</annotation></semantics></math>
+<ul>
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn><mo>⇔</mo><mi>a</mi><mo>:</mo><mo>=</mo><mo>¬</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">0 \iff a := \neg a</annotation></semantics></math></li>
+
+<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>⇔</mo><mi>a</mi><mo>:</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">1 \iff a := a</annotation></semantics></math></li>
+</ul>
+</li>
+</ul>
+
+<p>One could prove that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Bool</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mo>¬</mo><mo>,</mo><mo>∧</mo><mo>,</mo><mo>∨</mo><mo>,</mo><mo>⇒</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\mathrm{Bool}, 0, 1, \neg, \wedge, \vee, \implies)</annotation></semantics></math> form a <a class="existingWikiWord" href="/nlab/show/Boolean+algebra">Boolean algebra</a>. The <a class="existingWikiWord" href="/nlab/show/poset">poset</a> structure is given by implication.</p>
+
+<p>One could also inductively define <a class="existingWikiWord" href="/nlab/show/observational+equality">observational equality</a> on the booleans <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">Eq</mi> <mi mathvariant="normal">Bool</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Eq}_\mathrm{Bool}(x, y)</annotation></semantics></math> as an indexed inductive type on the boolean type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">\mathrm{Bool}</annotation></semantics></math> with the following constructors</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">eq</mi> <mn>0</mn></msub><mo>:</mo><msub><mi mathvariant="normal">Eq</mi> <mi>𝟚</mi></msub><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{eq}_0: \mathrm{Eq}_\mathbb{2}(0, 0)</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">eq</mi> <mn>1</mn></msub><mo>:</mo><msub><mi mathvariant="normal">Eq</mi> <mi>𝟚</mi></msub><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{eq}_1: \mathrm{Eq}_\mathbb{2}(1, 1)</annotation></semantics></math></div>
+<p>A <em>boolean predicate</em> valued in a type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> is a function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo>:</mo><mi>T</mi><mo>→</mo><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">P: T \rightarrow \mathrm{Bool}</annotation></semantics></math>, and the type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>→</mo><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">T \to \mathrm{Bool}</annotation></semantics></math> is a boolean <a class="existingWikiWord" href="/nlab/show/function+algebra">function algebra</a> for finite types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>, and if <a class="existingWikiWord" href="/nlab/show/path+types">path types</a> exist, for all types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>. Thus the <a class="existingWikiWord" href="/nlab/show/functor">functor</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>:</mo><mi>U</mi><mo>→</mo><mi>BoolAlg</mi></mrow><annotation encoding="application/x-tex">F: U \to BoolAlg</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo><mo>=</mo><mi>T</mi><mo>→</mo><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">F(T) = T \to \mathrm{Bool}</annotation></semantics></math> for a <a class="existingWikiWord" href="/nlab/show/type+universe">type universe</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/Boolean+hyperdoctrine">Boolean hyperdoctrine</a>, and one could do <a class="existingWikiWord" href="/nlab/show/classical+logic">classical</a> <a class="existingWikiWord" href="/nlab/show/first-order+logic">first-order logic</a> inside <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">\mathrm{Bool}</annotation></semantics></math> and path types exist in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>.</p>
+
+<p>In fact, just with <a class="existingWikiWord" href="/nlab/show/dependent+sum+types">dependent sum types</a>, <a class="existingWikiWord" href="/nlab/show/dependent+product+types">dependent product types</a>, <a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a>, <a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a>, and the two-valued type in a type universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>, any <a class="existingWikiWord" href="/nlab/show/two-valued+logic">two-valued logic</a> could be done inside <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>. Furthermore, since binary <a class="existingWikiWord" href="/nlab/show/disjoint+coproducts">disjoint coproducts</a> exist when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">\mathrm{Bool}</annotation></semantics></math> exists, all finite types exist in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>, and any <span class="newWikiWord">finitely-valued logic<a href="/nlab/new/finitely-valued+logic">?</a></span>, such as the <a class="existingWikiWord" href="/nlab/show/internal+logic">internal logic</a> of a <a class="existingWikiWord" href="/nlab/show/finite">finite</a> <a class="existingWikiWord" href="/nlab/show/cartesian+power">cartesian power</a> of <a class="existingWikiWord" href="/nlab/show/Set">Set</a>, could be done inside <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>.</p>
+
+<p>For finite types, one could also inductively define specific functions</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∀</mo><mi>a</mi><mo>∈</mo><mi>A</mi><mo>.</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>:</mo><mo stretchy="false">(</mo><mi>A</mi><mo>→</mo><mi mathvariant="normal">Bool</mi><mo stretchy="false">)</mo><mo>→</mo><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">\forall a \in A.(-)(a):(A \to \mathrm{Bool}) \to \mathrm{Bool}</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo>∃</mo><mi>a</mi><mo>∈</mo><mi>A</mi><mo>.</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>:</mo><mo stretchy="false">(</mo><mi>A</mi><mo>→</mo><mstyle mathvariant="bold"><mn>2</mn></mstyle><mo stretchy="false">)</mo><mo>→</mo><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">\exists a \in A.(-)(a):(A \to \mathbf{2}) \to \mathrm{Bool}</annotation></semantics></math></div>
+<p>from the type of boolean predicates on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Bool</mi></mrow><annotation encoding="application/x-tex">\mathrm{Bool}</annotation></semantics></math> such that they behave like <a class="existingWikiWord" href="/nlab/show/existential+quantification">existential quantification</a> and <a class="existingWikiWord" href="/nlab/show/universal+quantification">universal quantification</a>.</p>
+
+<h3 id="other_properties">Other properties</h3>
+
+<ul>
+<li>
+<p>The boolean domain is the <a class="existingWikiWord" href="/nlab/show/suspension+type">suspension type</a> of the <a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a>, and the suspension of the boolean domain is the <a class="existingWikiWord" href="/nlab/show/circle+type">circle type</a>. Geometrically, the boolean domain is a zero-dimensional sphere.</p>
+</li>
+
+<li>
+<p>The boolean domain is <a class="existingWikiWord" href="/nlab/show/homotopy+equivalent">homotopy equivalent</a> to the type of <a class="existingWikiWord" href="/nlab/show/decidable+propositions">decidable propositions</a> in a universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒰</mi></mrow><annotation encoding="application/x-tex">\mathcal{U}</annotation></semantics></math>.</p>
+</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Bool</mi><mo>≅</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>P</mi><mo>:</mo><mi>𝒰</mi></mrow></munder><mi>isProp</mi><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">)</mo><mo>×</mo><mi>isDecidable</mi><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{Bool} \cong \sum_{P:\mathcal{U}} isProp(P) \times isDecidable(P)</annotation></semantics></math></div>
+<p>As a result, sometimes the boolean domain is called a <strong>decidable subset classifier</strong>.</p>
+
 <h2 id="related_concepts">Related concepts</h2>
 
 <ul>
@@ -744,6 +826,14 @@ margin-left: 0em;
 
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/type+of+propositions">type of propositions</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/boolean+domain+object">boolean domain object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/two-valued+logic">two-valued logic</a></p>
 </li>
 </ul>
 
@@ -769,6 +859,10 @@ margin-left: 0em;
 </li>
 
 <li>
+<p>Univalent Foundations Project, <a class="existingWikiWord" href="/nlab/show/HoTT+book">Homotopy Type Theory – Univalent Foundations of Mathematics</a> (2013)</p>
+</li>
+
+<li>
 <p><a class="existingWikiWord" href="/nlab/show/Egbert+Rijke">Egbert Rijke</a>, Exc. 4.2 (pp. 35) in: <em><a class="existingWikiWord" href="/nlab/show/Introduction+to+Homotopy+Type+Theory">Introduction to Homotopy Type Theory</a></em> (2023) &lbrack;<a href="https://arxiv.org/abs/2212.11082">arXiv:2212.11082</a>&rbrack;</p>
 </li>
 </ul>
@@ -778,14 +872,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on November  9, 2023 at 01:29:44.
+    Last revised on November  9, 2023 at 17:57:38.
     See the <a href="/nlab/history/boolean+domain" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/boolean+domain" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15787/#Item_12">Discuss</a><span class="backintime"><a href="/nlab/revision/boolean+domain/29" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/boolean+domain" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/boolean+domain" accesskey="S" class="navlink" id="history" rel="nofollow">History (29 revisions)</a>
+  <a href="/nlab/edit/boolean+domain" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15787/#Item_13">Discuss</a><span class="backintime"><a href="/nlab/revision/boolean+domain/30" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/boolean+domain" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/boolean+domain" accesskey="S" class="navlink" id="history" rel="nofollow">History (30 revisions)</a>
   <a href="/nlab/show/boolean+domain/cite" style="color: black">Cite</a>
   <a href="/nlab/print/boolean+domain" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/boolean+domain" id="view_source" rel="nofollow">Source</a>
