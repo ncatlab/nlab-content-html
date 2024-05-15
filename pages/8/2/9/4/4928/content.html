@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussions/?CategoryID=0" title="Discuss this page on the nForum. It does not yet have a dedicated thread; feel free to create one, giving it the same name as the title of this page" style="color:black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/18006/#Item_3" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -317,11 +317,13 @@ margin-left: 0em;
 </ul>
 </div>
 
-<p>(The ideas section here is partially adapted from papers of <a class="existingWikiWord" href="/nlab/show/Eric+Goubault">Eric Goubault</a>. In particular the paper in HHA, see reference list. He was one of the first to propose some form of <a class="existingWikiWord" href="/nlab/show/directed+homotopy+theory">directed homotopy</a> as a model for aspects of concurrency.) This entry tries to list and summarise various models for concurrency and to examine some of them for (potential) interaction with other entries in the Lab, especially ones related to directed topology, and to causal sets (<a class="existingWikiWord" href="/nlab/show/causets">causets</a>). (This comparison will initially not be deep, as we will first put down a lot of definitions in the linked pages, with a view to possible interactions later on.)</p>
-
 <h2 id="idea">Idea</h2>
 
-<p>Concurrency theory in Theoretical Computer Science deals with systems in which several computational activities ( <em>processes</em> ) can be performed at the same time, in an asynchronous way. Concurrent systems were introduced in order to have increased computational power and speed or so that some concurrent transactions can be handled more efficiently (and sometimes handled at all). Some of the models discussed here have been, perhaps, superceded as the technology has moved on, and the <em>flavour of the month</em> changes, but they still provide useful mathematical models with potential for use elsewhere, so are certainly worth examining.</p>
+<blockquote>
+<p>(This Idea-section is partially adapted from papers of <a class="existingWikiWord" href="/nlab/show/Eric+Goubault">Eric Goubault</a>, in particular <a href="#Goubault03">Goubault 2003</a>. He was one of the first to propose some form of <a class="existingWikiWord" href="/nlab/show/directed+homotopy+theory">directed homotopy</a> as a model for aspects of concurrency.) This entry tries to list and summarise various models for concurrency and to examine some of them for (potential) interaction with other entries in the Lab, especially ones related to directed topology, and to causal sets (<a class="existingWikiWord" href="/nlab/show/causets">causets</a>). (This comparison will initially not be deep, as we will first put down a lot of definitions in the linked pages, with a view to possible interactions later on.)</p>
+</blockquote>
+
+<p>Concurrency theory in Theoretical Computer Science deals with systems in which several computational activities (<em>processes</em>) can be performed at the same time, in an asynchronous way. Concurrent systems were introduced in order to have increased computational power and speed or so that some concurrent transactions can be handled more efficiently (and sometimes handled at all). Some of the models discussed here have been, perhaps, superseded as the technology has moved on, and the <em>flavour of the month</em> changes, but they still provide useful mathematical models with potential for use elsewhere, so are certainly worth examining.</p>
 
 <p>One of the main problems about concurrency is to have processes cooperating successfully for a common goal. Cooperation seems to imply some form of synchronisation and information passing. This can be done through <em>message passing</em> models, for instance. In that class of models, processes have their own local memory, which cannot be accessed by other processes. The way to communicate values to other processes is by explicitly sending values to these other processes. One of the possible ways of doing this is via a <em>Rendezvous model</em> in which the action of sending results in the sender being blocked until the receiver actually receives the message and then, symmetrically the action of receiving blocks the receiver until the message is actually received. This method gives a partial synchronisation of the sender and receiver for the purpose of the passing of the message.</p>
 
@@ -329,15 +331,15 @@ margin-left: 0em;
 <p>The source I am using to help me understand this does not quite make sense here and other sources that I have looked at, have not helped that much, so can someone de-blurr the meaning for me here. <a class="existingWikiWord" href="/nlab/show/Tim+Porter">Tim</a></p>
 </div>
 
-<p>There are variants to this, which include <em>non-blocking send but blocking receive</em> , <em>non-blocking send and receive</em> (<em>asynchronous message passing</em>), <em>broadcast to groups of processes</em> , instead of ‘’point to point’‘ communication, etc.</p>
+<p>There are variants to this, which include <em>non-blocking send but blocking receive</em> , <em>non-blocking send and receive</em> (<em>asynchronous message passing</em>), <em>broadcast to groups of processes</em> , instead of “point to point” communication, etc.</p>
 
 <div class="query">
 <p><a class="existingWikiWord" href="/nlab/show/Adam">Adam</a>: “Non-blocking send with blocking receive” is the rule required by Kahn process networks; this ensures that the resulting processes form a <a href="http://en.wikipedia.org/wiki/Domain_theory">domain</a>. From a semantics standpoint I’m not sure that broadcast to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> recipients is really any different from just sending <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> messages, one to each recipient.</p>
 </div>
 
-<h4 id="shared_memory_models">Shared memory models</h4>
+<h3 id="shared_memory_models">Shared memory models</h3>
 
-<p>These make up another class of concurrent architectures. Here processes have a local memory where they can perform local computations, but also have a common memory space which is accessible to all. Communication between processes is essentially asynchronous and is realised by reading and writing values in this common space. Here the problem occurs that several processes may want to write values to the same part of the memory at the same time. To avoid the problems that this implies it is necessary to ‘protect’ the access to shared variables by some mechanism. A classical one is the ‘’semaphore’‘ as introduced by Dijkstra in 1968. One of the usual pictures of a ‘toy’ situation used here is the <a class="existingWikiWord" href="/nlab/show/progress+graph">Swiss flag progress graph</a>, where two users attempt to change records in a database. There is a shared resource and hence a problem of conflict, even of deadlock.</p>
+<p>These make up another class of concurrent architectures. Here processes have a local memory where they can perform local computations, but also have a common memory space which is accessible to all. Communication between processes is essentially asynchronous and is realised by reading and writing values in this common space. Here the problem occurs that several processes may want to write values to the same part of the memory at the same time. To avoid the problems that this implies it is necessary to ‘protect’ the access to shared variables by some mechanism. A classical one is the “semaphore” as introduced by Dijkstra in 1968. One of the usual pictures of a ‘toy’ situation used here is the <a class="existingWikiWord" href="/nlab/show/progress+graph">Swiss flag progress graph</a>, where two users attempt to change records in a database. There is a shared resource and hence a problem of conflict, even of deadlock.</p>
 
 <p>The challenge is to find adequate mathematical models so as better to understand the behaviour of such concurrent systems.</p>
 
@@ -355,7 +357,7 @@ margin-left: 0em;
 
 <h2 id="models">Models</h2>
 
-<h4 id="traditional_models">Traditional Models</h4>
+<h3 id="traditional_models">Traditional Models</h3>
 
 <ul>
 <li>
@@ -383,7 +385,7 @@ margin-left: 0em;
 </li>
 </ul>
 
-<h4 id="geometrical_models">Geometrical models</h4>
+<h3 id="geometrical_models">Geometrical models</h3>
 
 <ul>
 <li>
@@ -426,8 +428,8 @@ margin-left: 0em;
 <p><a class="existingWikiWord" href="/nlab/show/Lisbeth+Fajstrup">Lisbeth Fajstrup</a>, <a class="existingWikiWord" href="/nlab/show/Eric+Goubault">Eric Goubault</a>, <a class="existingWikiWord" href="/nlab/show/Emmanuel+Haucourt">Emmanuel Haucourt</a>, <a class="existingWikiWord" href="/nlab/show/Samuel+Mimram">Samuel Mimram</a>, <a class="existingWikiWord" href="/nlab/show/Martin+Raussen">Martin Raussen</a>, <a class="existingWikiWord" href="/nlab/show/Directed+Algebraic+Topology+and+Concurrency">Directed Algebraic Topology and Concurrency</a>,Springer International Publishing 2016 (xi+167 pages)</p>
 </li>
 
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/Eric+Goubault">Eric Goubault</a>, <a class="existingWikiWord" href="/nlab/show/Some+geometric+perspectives+in+concurrency+theory">Some geometric perspectives in concurrency theory</a>,</p>
+<li id="Goubault03">
+<p><a class="existingWikiWord" href="/nlab/show/Eric+Goubault">Eric Goubault</a>, <em><a class="existingWikiWord" href="/nlab/show/Some+geometric+perspectives+in+concurrency+theory">Some geometric perspectives in concurrency theory</a></em>, Homology Homotopy Appl. <strong>5</strong> 2 (2003), 95-136 &lbrack;<a href="https://eudml.org/doc/50689">eudml:50689</a>&rbrack;</p>
 </li>
 
 <li>
@@ -440,14 +442,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on March 29, 2023 at 04:07:39.
+    Last revised on May 15, 2024 at 10:31:17.
     See the <a href="/nlab/history/models+for+concurrency" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/models+for+concurrency" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/models+for+concurrency/25" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/models+for+concurrency" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/models+for+concurrency" accesskey="S" class="navlink" id="history" rel="nofollow">History (25 revisions)</a>
+  <a href="/nlab/edit/models+for+concurrency" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/18006/#Item_3">Discuss</a><span class="backintime"><a href="/nlab/revision/models+for+concurrency/27" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/models+for+concurrency" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/models+for+concurrency" accesskey="S" class="navlink" id="history" rel="nofollow">History (27 revisions)</a>
   <a href="/nlab/show/models+for+concurrency/cite" style="color: black">Cite</a>
   <a href="/nlab/print/models+for+concurrency" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/models+for+concurrency" id="view_source" rel="nofollow">Source</a>
