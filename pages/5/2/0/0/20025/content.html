@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/9414/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/9414/#Item_5" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -551,7 +551,11 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#in_constructive_mathematics'>In constructive mathematics</a></li>
+<li><a href='#variants'>Variants</a></li>
+<ul>
+<li><a href='#over_noncommutative_rings'>Over noncommutative rings</a></li>
+</ul>
+<li><a href='#gauss_decomposition'>Gauss decomposition</a></li>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -559,16 +563,34 @@ margin-left: 0em;
 
 <h2 id="idea">Idea</h2>
 
-<p>What is called <em>Gaussian elimination</em> is an <a class="existingWikiWord" href="/nlab/show/algorithm">algorithm</a> for solving systems of <a class="existingWikiWord" href="/nlab/show/linear+equations">linear equations</a>. It proceeds by encoding the system as a suitable <a class="existingWikiWord" href="/nlab/show/matrix">matrix</a> and then applying <a class="existingWikiWord" href="/nlab/show/elementary+row+operations">elementary row operations</a> to bring it into <a class="existingWikiWord" href="/nlab/show/upper+triangular+form">upper triangular form</a>.</p>
+<p>What is called <em>Gaussian elimination</em> is an <a class="existingWikiWord" href="/nlab/show/algorithm">algorithm</a> for solving systems of <a class="existingWikiWord" href="/nlab/show/linear+equations">linear equations</a>. It proceeds by encoding the system as a <a class="existingWikiWord" href="/nlab/show/matrix">matrix</a> equation</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mspace width="thinmathspace"></mspace><mi>x</mi><mo>=</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">
+ A \, x = b
 
-<h2 id="in_constructive_mathematics">In constructive mathematics</h2>
+</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> is a column matrix of free coefficients, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is a column vector of unknowns, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is the matrix of coefficients. The entire system is therefore encoded by the matrix of the system which is in block form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">|</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A | b)</annotation></semantics></math>. The algorithm consists of applying <a class="existingWikiWord" href="/nlab/show/elementary+row+operations">elementary row operations</a> in a systematic way to bring it into <a class="existingWikiWord" href="/nlab/show/upper+triangular+form">upper triangular form</a>.</p>
 
-<p>Gaussian elimination only works for <a class="existingWikiWord" href="/nlab/show/discrete+fields">discrete fields</a> such as the <a class="existingWikiWord" href="/nlab/show/rational+numbers">rational numbers</a> or the <a class="existingWikiWord" href="/nlab/show/algebraic+numbers">algebraic numbers</a>. The algorithm does not work for other types of fields such as <a class="existingWikiWord" href="/nlab/show/Heyting+fields">Heyting fields</a>, which means that it doesn’t work for the <a class="existingWikiWord" href="/nlab/show/real+numbers">real numbers</a>, however defined.</p>
+<h2 id="variants">Variants</h2>
+
+<h3 id="over_noncommutative_rings">Over noncommutative rings</h3>
+
+<p>Coeffients may be in a noncommutative ring and we may search for a solution in that ring. However, all the coefficients are from the same, say left side of the unknowns. The algorithm is proceeding as in the commutative case, provided certain expressions are invertible along the way. Recursive nature of the algorithm is related to the hereditary property of <a class="existingWikiWord" href="/nlab/show/quasideterminant">quasideterminant</a>s.</p>
+
+<h2 id="gauss_decomposition">Gauss decomposition</h2>
+
+<p>Performing the Gauss elimination procedure when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a square matrix to end with upper triangular matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> means that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is written in the form</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>=</mo><mi>w</mi><mi>L</mi><mi>U</mi></mrow><annotation encoding="application/x-tex">
+A = w L U
+
+</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math> is a permutation matrix, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math> a lower triangular matrix with units of diagonal and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> an upper triangular matrix. This is the <a class="existingWikiWord" href="/nlab/show/Gauss+decomposition">Gauss decomposition</a> with respect to the lower Borel subgroup of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>GL</mi><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">GL(n,k)</annotation></semantics></math>. A noncommutative Gauss decomposition exists for matrices over noncommutative <a class="existingWikiWord" href="/nlab/show/division+ring">division ring</a>s.</p>
 
 <h2 id="related_concepts">Related concepts</h2>
 
 <ul>
 <li><a class="existingWikiWord" href="/nlab/show/Gram-Schmidt+process">Gram-Schmidt process</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/Gauss+decomposition">Gauss decomposition</a></li>
 </ul>
 
 <h2 id="references">References</h2>
@@ -582,14 +604,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on May 11, 2022 at 18:46:20.
+    Last revised on May 19, 2024 at 18:07:54.
     See the <a href="/nlab/history/Gaussian+elimination" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Gaussian+elimination" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/9414/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/Gaussian+elimination/2" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Gaussian+elimination" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Gaussian+elimination" accesskey="S" class="navlink" id="history" rel="nofollow">History (2 revisions)</a>
+  <a href="/nlab/edit/Gaussian+elimination" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/9414/#Item_5">Discuss</a><span class="backintime"><a href="/nlab/revision/Gaussian+elimination/4" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Gaussian+elimination" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Gaussian+elimination" accesskey="S" class="navlink" id="history" rel="nofollow">History (4 revisions)</a>
   <a href="/nlab/show/Gaussian+elimination/cite" style="color: black">Cite</a>
   <a href="/nlab/print/Gaussian+elimination" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/Gaussian+elimination" id="view_source" rel="nofollow">Source</a>
