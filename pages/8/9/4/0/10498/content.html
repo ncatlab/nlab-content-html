@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -301,7 +301,7 @@ margin-left: 0em;
 <head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>The polarization identity</title></head>
 <body>
 <blockquote>
-<p>This entry is about the notion in <a class="existingWikiWord" href="/nlab/show/linear+algebra">linear algebra</a> relating bilinear and quadratic forms. For the notion in <a class="existingWikiWord" href="/nlab/show/symplectic+geometry">symplectic geometry</a> see at <em><a class="existingWikiWord" href="/nlab/show/polarization">polarization</a></em>. For polarization of light, see <em><a class="existingWikiWord" href="/nlab/show/wave+polarization">wave polarization</a></em>.</p>
+<p>This entry is about the notion in <a class="existingWikiWord" href="/nlab/show/linear+algebra">linear algebra</a> relating <a class="existingWikiWord" href="/nlab/show/bilinear+form">bilinear</a> and <a class="existingWikiWord" href="/nlab/show/quadratic+forms">quadratic forms</a>. For the notion in <a class="existingWikiWord" href="/nlab/show/symplectic+geometry">symplectic geometry</a> see at <em><a class="existingWikiWord" href="/nlab/show/polarization">polarization</a></em>. For polarization of <a class="existingWikiWord" href="/nlab/show/waves">waves</a> (<a class="existingWikiWord" href="/nlab/show/light">light</a>), see <em><a class="existingWikiWord" href="/nlab/show/wave+polarization">wave polarization</a></em>.</p>
 </blockquote>
 
 <div class="rightHandSide">
@@ -559,65 +559,136 @@ margin-left: 0em;
 <li><a href='#examples'>Examples</a></li>
 <li><a href='#higher_order'>Higher order</a></li>
 <li><a href='#related_concepts'>Related concepts</a></li>
+<li><a href='#literature'>Literature</a></li>
 </ul>
 </div>
 
 <h2 id="idea">Idea</h2>
 
-<p>Any <a class="existingWikiWord" href="/nlab/show/symmetric+bilinear+form">symmetric bilinear form</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>⋅</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-) \cdot (-)</annotation></semantics></math> defines a <a class="existingWikiWord" href="/nlab/show/quadratic+form">quadratic form</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(-)^2</annotation></semantics></math>. The <em>polarization identity</em> reconstructs the bilinear form from the quadratic form. More generally, starting from any <a class="existingWikiWord" href="/nlab/show/bilinear+form">bilinear form</a>, the polarization identity reconstructs its symmetrization. A slight variation applies this also to <a class="existingWikiWord" href="/nlab/show/sesquilinear+forms">sesquilinear forms</a>, which don't require any kind of symmetry to work. The whole business actually applies to <a class="existingWikiWord" href="/nlab/show/bilinear+maps">bilinear maps</a>, not just forms (that is, taking arbitrary values, not just values in the <a class="existingWikiWord" href="/nlab/show/base+field">base field</a> or some other <a class="existingWikiWord" href="/nlab/show/line">line</a>). Some kind of linearity is crucial: polarization doesn't work without addition (and subtraction); we must also be able to divide by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math> for the best results. It is also possible to generalize from quadratic forms to higher-order <span class="newWikiWord">homogenous form<a href="/nlab/new/homogenous+form">?</a></span>s if we can divide by larger integers.</p>
+<p>Any <a class="existingWikiWord" href="/nlab/show/symmetric+bilinear+form">symmetric bilinear form</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>⋅</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-) \cdot (-)</annotation></semantics></math> defines a <a class="existingWikiWord" href="/nlab/show/quadratic+form">quadratic form</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(-)^2</annotation></semantics></math>. The <em>polarization identity</em> reconstructs the bilinear form from the quadratic form.</p>
+
+<p>More generally, starting from any <a class="existingWikiWord" href="/nlab/show/bilinear+form">bilinear form</a>, the polarization identity reconstructs its symmetrization.<br />A slight variation applies this also to <a class="existingWikiWord" href="/nlab/show/sesquilinear+forms">sesquilinear forms</a>, which don't require any kind of symmetry to work.</p>
+
+<p>The whole business actually applies to <a class="existingWikiWord" href="/nlab/show/bilinear+maps">bilinear maps</a>, not just forms (that is, taking arbitrary values, not just values in the <a class="existingWikiWord" href="/nlab/show/base+field">base field</a> or some other <a class="existingWikiWord" href="/nlab/show/line">line</a>). Some kind of linearity is crucial: polarization doesn't work without <a class="existingWikiWord" href="/nlab/show/addition">addition</a> (and <a class="existingWikiWord" href="/nlab/show/subtraction">subtraction</a>); we must also be able to divide by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math> for the best results. It is also possible to generalize from quadratic forms to higher-order homogenous forms if we can divide by larger integers.</p>
 
 <h2 id="statements">Statements</h2>
 
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/commutative+ring">commutative ring</a>. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math> be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/modules">modules</a>, and let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi><mo lspace="verythinmathspace">:</mo><mi>V</mi><mo>×</mo><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">m\colon V \times V \to W</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/bilinear+map">bilinear map</a>; that is, we have an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-module <a class="existingWikiWord" href="/nlab/show/homomorphism">homomorphism</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>⊗</mo><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">V \otimes V \to W</annotation></semantics></math>. Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi><mo lspace="verythinmathspace">:</mo><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">Q\colon V \to W</annotation></semantics></math> be the <a class="existingWikiWord" href="/nlab/show/quadratic+map">quadratic map</a> given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Q(x) = m(x,x)</annotation></semantics></math>; this is <em>not</em> an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-module homomorphism.</p>
+<p>Let</p>
+
+<ul>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/commutative+ring">commutative ring</a>;</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>,</mo><mspace width="thinmathspace"></mspace><mi>W</mi></mrow><annotation encoding="application/x-tex">V,\, W</annotation></semantics></math> be <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-<a class="existingWikiWord" href="/nlab/show/modules">modules</a>;</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi><mo lspace="verythinmathspace">:</mo><mi>V</mi><mo>×</mo><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">m\colon V \times V \to W</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/bilinear+map">bilinear map</a>,</p>
+
+<p>(an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-module <a class="existingWikiWord" href="/nlab/show/homomorphism">homomorphism</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>V</mi><mo>⊗</mo><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">V \otimes V \to W</annotation></semantics></math> out of their <a class="existingWikiWord" href="/nlab/show/tensor+product+of+modules">tensor product</a>);</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi><mo lspace="verythinmathspace">:</mo><mi>V</mi><mo>→</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">Q\colon V \to W</annotation></semantics></math> be the <a class="existingWikiWord" href="/nlab/show/quadratic+map">quadratic map</a> given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>≔</mo><mi>m</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Q(x) \coloneqq m(x,x)</annotation></semantics></math></p>
+
+<p>(NB: this is <em>not</em> an <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>-module homomorphism).</p>
+</li>
+</ul>
 
 <p>Then we have:</p>
 
 <ul>
-<li>the <em><a class="existingWikiWord" href="/nlab/show/parallelogram+law">parallelogram law</a></em>: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>Q</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mo>+</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">2 Q(x) + 2 Q(y) = Q(x + y) + Q(x - y)</annotation></semantics></math>, and</li>
+<li>
+<p>the <em><a class="existingWikiWord" href="/nlab/show/parallelogram+law">parallelogram law</a></em>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mn>2</mn><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>Q</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>=</mo><mspace width="thinmathspace"></mspace><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mo>+</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  2 Q(x) + 2 Q(y) \,=\, Q(x + y) + Q(x - y)
+  \,,
 
-<li>the <strong>polarization identity</strong>: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mo>−</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">2 m(x,y) + 2 m(y,x) = Q(x + y) - Q(x - y)</annotation></semantics></math>.</li>
+</annotation></semantics></math></div></li>
+</ul>
+
+<p>and</p>
+
+<ul>
+<li>
+<p>the <strong>polarization identity</strong>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mi>m</mi><mo stretchy="false">(</mo><mi>y</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>=</mo><mspace width="thinmathspace"></mspace><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo stretchy="false">)</mo><mo>−</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  2 m(x,y) + 2 m(y,x) \,=\, Q(x + y) - Q(x - y)
+  \,.
+
+</annotation></semantics></math></div></li>
 </ul>
 
 <p>Writing <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Q(x)</annotation></semantics></math> as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>x</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x^2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">m(x,y)</annotation></semantics></math> as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">x y</annotation></semantics></math>, these read:</p>
 
 <ul>
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><msup><mi>x</mi> <mn>2</mn></msup><mo>+</mo><mn>2</mn><msup><mi>y</mi> <mn>2</mn></msup><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2 x^2 + 2 y^2 = (x + y)^2 + (x - y)^2</annotation></semantics></math>,</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><msup><mi>x</mi> <mn>2</mn></msup><mo>+</mo><mn>2</mn><msup><mi>y</mi> <mn>2</mn></msup><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2 x^2 + 2 y^2 = (x + y)^2 + (x - y)^2</annotation></semantics></math>,</p>
+</li>
 
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mi>x</mi><mi>y</mi><mo>+</mo><mn>2</mn><mi>y</mi><mi>x</mi><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>−</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2 x y + 2 y x = (x + y)^2 - (x - y)^2</annotation></semantics></math>.</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn><mi>x</mi><mi>y</mi><mo>+</mo><mn>2</mn><mi>y</mi><mi>x</mi><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>−</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2 x y + 2 y x = (x + y)^2 - (x - y)^2</annotation></semantics></math>.</p>
+</li>
 </ul>
 
 <p>The polarization identity also has these alternative forms:</p>
 
 <ul>
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>+</mo><mi>y</mi><mi>x</mi><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>−</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>−</mo><msup><mi>y</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y + y x = (x + y)^2 - x^2 - y^2</annotation></semantics></math>,</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>+</mo><mi>y</mi><mi>x</mi><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>−</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>−</mo><msup><mi>y</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y + y x = (x + y)^2 - x^2 - y^2</annotation></semantics></math>,</p>
+</li>
 
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>+</mo><mi>y</mi><mi>x</mi><mo>=</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>+</mo><msup><mi>y</mi> <mn>2</mn></msup><mo>−</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y + y x = x^2 + y^2 - (x - y)^2</annotation></semantics></math>;</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>+</mo><mi>y</mi><mi>x</mi><mo>=</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>+</mo><msup><mi>y</mi> <mn>2</mn></msup><mo>−</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y + y x = x^2 + y^2 - (x - y)^2</annotation></semantics></math>;</p>
+</li>
 </ul>
 
 <p>these may derived by adding or subtracting the parallelogram law and the first polarization identity assuming that multiplication by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math> is cancellable in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math>; they can also both be proved directly without any such assumption.</p>
 
 <p>The most general form of such expressions is</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>k</mi><mi>x</mi><mi>y</mi><mo>+</mo><mi>k</mi><mi>y</mi><mi>x</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msub><mi>c</mi> <mi>i</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi> <mi>i</mi></msub><mi>x</mi><mo>+</mo><msub><mi>b</mi> <mi>i</mi></msub><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex"> k x y + k y x = \sum_i c_i (a_i x + b_i y)^2 </annotation></semantics></math></div>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>k</mi><mi>x</mi><mi>y</mi><mo>+</mo><mi>k</mi><mi>y</mi><mi>x</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msub><mi>c</mi> <mi>i</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi> <mi>i</mi></msub><mi>x</mi><mo>+</mo><msub><mi>b</mi> <mi>i</mi></msub><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex"> 
+  k x y + k y x = \sum_i c_i (a_i x + b_i y)^2 
+
+</annotation></semantics></math></div>
 <p>for any <a class="existingWikiWord" href="/nlab/show/finite+sequence">finite sequence</a> of triples <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(a,b,c)</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> such that</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msubsup><mi>a</mi> <mi>i</mi> <mn>2</mn></msubsup><msub><mi>c</mi> <mi>i</mi></msub><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msubsup><mi>b</mi> <mi>i</mi> <mn>2</mn></msubsup><msub><mi>c</mi> <mi>i</mi></msub><mo>=</mo><mn>0</mn><mo>,</mo></mrow><annotation encoding="application/x-tex"> \sum_i a_i ^ 2 c_i = \sum_i b_i ^ 2 c_i = 0 ,</annotation></semantics></math></div>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msubsup><mi>a</mi> <mi>i</mi> <mn>2</mn></msubsup><msub><mi>c</mi> <mi>i</mi></msub><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msubsup><mi>b</mi> <mi>i</mi> <mn>2</mn></msubsup><msub><mi>c</mi> <mi>i</mi></msub><mo>=</mo><mn>0</mn><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex"> 
+  \sum_i a_i ^ 2 c_i = \sum_i b_i ^ 2 c_i = 0
+  \,,
+
+</annotation></semantics></math></div>
 <p>if</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>b</mi> <mi>i</mi></msub><msub><mi>c</mi> <mi>i</mi></msub><mo>.</mo></mrow><annotation encoding="application/x-tex"> k = \sum_i a_i b_i c_i .</annotation></semantics></math></div>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>k</mi><mo>=</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>b</mi> <mi>i</mi></msub><msub><mi>c</mi> <mi>i</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex"> 
+  k = \sum_i a_i b_i c_i 
+  \,.
+
+</annotation></semantics></math></div>
 <p>In the three specific versions of the polarization identity listed above, the values of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math> are all always <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math>, or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>, but there is no reason to restrict ourselves to this or even assume that they are integers (or even rational numbers or more generally members of the <a class="existingWikiWord" href="/nlab/show/prime+field">prime field</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math>). (If we want to allow <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math> to be a <a class="existingWikiWord" href="/nlab/show/rig">rig</a>, then we can use a version of this with sums on both sides of the equation, but that seems like <a class="existingWikiWord" href="/nlab/show/centipede+mathematics">centipede mathematics</a> since I don't know any application of that case.)</p>
 
 <p>Now suppose that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math> is <span class="newWikiWord">symmetric<a href="/nlab/new/symmetric+bilinear+map">?</a></span>, so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>=</mo><mi>y</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">x y = y x</annotation></semantics></math>. And suppose that multiplication by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math> is (not merely cancellable but also) invertible in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math>. (If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo stretchy="false">/</mo><mn>2</mn><mo>∈</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">1/2 \in R</annotation></semantics></math>, then that is more than sufficient.) Then the polarization identities read:</p>
 
 <ul>
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y = \frac{1}{4} (x + y)^2 - \frac{1}{4} (x - y)^2</annotation></semantics></math>,</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y = \frac{1}{4} (x + y)^2 - \frac{1}{4} (x - y)^2</annotation></semantics></math>,</p>
+</li>
 
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi> <mn>2</mn></msup><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>y</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y = \frac{1}{2} (x + y)^2 - \frac{1}{2} x^2 - \frac{1}{2} y^2</annotation></semantics></math>,</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi> <mn>2</mn></msup><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>y</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y = \frac{1}{2} (x + y)^2 - \frac{1}{2} x^2 - \frac{1}{2} y^2</annotation></semantics></math>,</p>
+</li>
 
-<li><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi> <mn>2</mn></msup><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>y</mi> <mn>2</mn></msup><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y = \frac{1}{2} x^2 + \frac{1}{2} y^2 - \frac{1}{2} (x - y)^2</annotation></semantics></math>.</li>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi> <mn>2</mn></msup><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>y</mi> <mn>2</mn></msup><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x y = \frac{1}{2} x^2 + \frac{1}{2} y^2 - \frac{1}{2} (x - y)^2</annotation></semantics></math>.</p>
+</li>
 </ul>
 
-<p>That is, we may recover <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> (in any of these ways). The second one is probably the most widely used. Regardless of the original symmetry of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math>, we may recover its symmetrization <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∘</mo><mi>y</mi><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mi>y</mi><mo>+</mo><mi>y</mi><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">x \circ y = (x y + y x)/2</annotation></semantics></math> (the <span class="newWikiWord">Jordan product<a href="/nlab/new/Jordan+product">?</a></span>) in any these ways. The most general formula for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∘</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \circ y</annotation></semantics></math> is</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∘</mo><mi>y</mi><mo>=</mo><mfrac><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msub><mi>c</mi> <mi>i</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi> <mi>i</mi></msub><mi>x</mi><mo>+</mo><msub><mi>b</mi> <mi>i</mi></msub><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><mn>2</mn><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>b</mi> <mi>i</mi></msub><msub><mi>c</mi> <mi>i</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex"> x \circ y
-= \frac{\sum_i c_i (a_i x + b_i y)^2}
-{\sum_i 2 a_i b_i c_i} 
+<p>That is, we may recover <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math> from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math> (in any of these ways). The second one is probably the most widely used. Regardless of the original symmetry of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math>, we may recover its symmetrization <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∘</mo><mi>y</mi><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mi>y</mi><mo>+</mo><mi>y</mi><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">/</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">x \circ y = (x y + y x)/2</annotation></semantics></math> (the <a class="existingWikiWord" href="/nlab/show/Jordan+product">Jordan product</a>) in any these ways. The most general formula for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∘</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \circ y</annotation></semantics></math> is</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>∘</mo><mi>y</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mfrac><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><msub><mi>c</mi> <mi>i</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi> <mi>i</mi></msub><mi>x</mi><mo>+</mo><msub><mi>b</mi> <mi>i</mi></msub><mi>y</mi><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>i</mi></munder><mn>2</mn><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>b</mi> <mi>i</mi></msub><msub><mi>c</mi> <mi>i</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex"> 
+  x \circ y
+  \;=\;
+  \frac{\sum_i c_i (a_i x + b_i y)^2}
+  {\sum_i 2 a_i b_i c_i} 
+
 </annotation></semantics></math></div>
 <p>when the sums of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>a</mi> <mn>2</mn></msup><mi>c</mi></mrow><annotation encoding="application/x-tex">a^2 c</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>b</mi> <mn>2</mn></msup><mi>c</mi></mrow><annotation encoding="application/x-tex">b^2 c</annotation></semantics></math> are zero (as above) and the sum in the denominator is invertible. (In that case, one could also normalize the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math>s so that the denominator becomes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math>.) Notice that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math> must be invertible to have any hope of recovering <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math> or its symmetrization; but we could recover <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mi>y</mi><mo>+</mo><mi>y</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">x y + y x</annotation></semantics></math> without that.</p>
 
@@ -673,20 +744,32 @@ margin-left: 0em;
 <ul>
 <li><a class="existingWikiWord" href="/nlab/show/cubical+structure+on+a+line+bundle">cubical structure on a line bundle</a></li>
 </ul>
+
+<h2 id="literature">Literature</h2>
+
+<ul>
+<li>
+<p>Wikipedia, <em><a href="https://en.wikipedia.org/wiki/Polarization_identity">Polarization identity</a></em></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Encyclopedia+of+Mathematics">Encyclopedia of Mathematics</a>, <em><a href="https://encyclopediaofmath.org/wiki/Polarization_identity">Polarization identity</a></em></p>
+</li>
+</ul>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on March 21, 2021 at 21:23:01.
+    Last revised on May 24, 2024 at 09:14:35.
     See the <a href="/nlab/history/polarization+identity" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/polarization+identity" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10225/#Item_7">Discuss</a><span class="backintime"><a href="/nlab/revision/polarization+identity/13" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/polarization+identity" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/polarization+identity" accesskey="S" class="navlink" id="history" rel="nofollow">History (13 revisions)</a>
+  <a href="/nlab/edit/polarization+identity" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10225/#Item_7">Discuss</a><span class="backintime"><a href="/nlab/revision/polarization+identity/14" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/polarization+identity" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/polarization+identity" accesskey="S" class="navlink" id="history" rel="nofollow">History (14 revisions)</a>
   <a href="/nlab/show/polarization+identity/cite" style="color: black">Cite</a>
   <a href="/nlab/print/polarization+identity" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/polarization+identity" id="view_source" rel="nofollow">Source</a>
