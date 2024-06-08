@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/2528/#Item_66" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/2528/#Item_68" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -421,7 +421,7 @@ margin-left: 0em;
 <li><a href='#how_to_include_one_page_within_another'>How to include one page within another</a></li>
 <li><a href='#HowToUploadFiles'>How to upload files</a></li>
 <li><a href='#how_to_use_redirects'>How to use redirects</a></li>
-<li><a href='#how_to_put_parentheses_in_external_links'>How to put parentheses in external links</a></li>
+<li><a href='#ParenthesisInHyperlinks'>How to handle parentheses in hyperlink URLs</a></li>
 <li><a href='#how_to_add_a_floating_table_of_contents'>How to add a floating table of contents</a></li>
 <li><a href='#diagrams'>How to draw commutative diagrams and pictures</a></li>
 <ul>
@@ -1298,9 +1298,33 @@ First quantization is a mystery, but second quantization is a functor.
 
 <p>See <a class="existingWikiWord" href="/nlab/show/redirects">redirects</a>.</p>
 
-<h3 id="how_to_put_parentheses_in_external_links">How to put parentheses in external links</h3>
+<h3 id="ParenthesisInHyperlinks">How to handle parentheses in hyperlink URLs</h3>
 
-<p>Since the mechanism for inserting links uses parentheses to delimit the link, it’s not obvious how to put parentheses actually in the link itself. Since Wikipedia uses them a fair bit, it’s worth knowing how to put them in. The trick is to use the URL codes rather than the actual characters. URL codes are generally used to send “unsafe” characters in URLs (safe characters are <code>a</code>-<code>zA</code>-<code>Z0</code>-<code>9$-_.+!\*'(),</code>). Although parentheses are actually “safe”, due to their special meaning for the markdown filter, to put them in URLs here they need to be treated as “unsafe”. URL codes have the syntax <code>%hex</code> where <code>hex</code> is the index of the character in the ASCII character set represented as a 2-digit hexadecimal. Wikipedia (among other places) has a <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters">table</a> of the character set from which one can read off the required hexadecimal. In particular, we see that <code>(</code> is <code>%28</code> and <code>)</code> is <code>%29</code>. Thus</p>
+<p>Since the Instiki code for hyperlinks</p>
+
+<pre><code>  [link text](url)</code></pre>
+
+<p>uses parenthesis, the parser gets confused when the <code>url</code> itself contains parenthesis. To work around this one can</p>
+
+<ul>
+<li>
+<p>“escape” the parenthesis by replacing in the <code>url</code></p>
+
+<p>“<code>(...)</code>” by “<code>%28...%29</code>”</p>
+</li>
+</ul>
+
+<p>or</p>
+
+<ul>
+<li>
+<p>fall back to the HTML tag</p>
+
+<p><code>&lt;a href="url"&gt;link text&lt;/a&gt;</code></p>
+</li>
+</ul>
+
+<p>For example</p>
 
 <pre><code>[Monad (category theory)#Monads and adjunctions](http://en.wikipedia.org/wiki/Monad_%28category_theory%29#Monads_and_adjunctions)</code></pre>
 
@@ -1310,6 +1334,18 @@ First quantization is a mystery, but second quantization is a functor.
 <dd>
 <p><a href="http://en.wikipedia.org/wiki/Monad_%28category_theory%29#Monads_and_adjunctions">Monad (category theory)#Monads and adjunctions</a></p>
 </dd>
+</dl>
+
+<p>Alternatively, reference-style links handle parentheses correctly:</p>
+
+<pre><code>[Monad (category theory)#Monads and adjunctions][1]
+
+[1]: http://en.wikipedia.org/wiki/Monad_(category_theory)#Monads_and_adjunctions</code></pre>
+
+<dl>
+<dt>produces</dt>
+
+<dd><a href="http://en.wikipedia.org/wiki/Monad_(category_theory)#Monads_and_adjunctions">Monad (category theory)#Monads and adjunctions</a></dd>
 </dl>
 
 <h3 id="how_to_add_a_floating_table_of_contents">How to add a floating table of contents</h3>
@@ -2084,14 +2120,14 @@ P(B)^{\mathrlap{A}} &amp; \underset{\chi_\sigma^A}{\longrightarrow} &amp;  P(1)^
 
 <div class="revisedby">
     <p>
-    Last revised on February  6, 2024 at 05:01:03.
+    Last revised on June  8, 2024 at 19:05:28.
     See the <a href="/nlab/history/HowTo" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/HowTo" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/2528/#Item_66">Discuss</a><span class="backintime"><a href="/nlab/revision/HowTo/202" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/HowTo" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/HowTo" accesskey="S" class="navlink" id="history" rel="nofollow">History (202 revisions)</a>
+  <a href="/nlab/edit/HowTo" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/2528/#Item_68">Discuss</a><span class="backintime"><a href="/nlab/revision/HowTo/205" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/HowTo" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/HowTo" accesskey="S" class="navlink" id="history" rel="nofollow">History (205 revisions)</a>
   <a href="/nlab/show/HowTo/cite" style="color: black">Cite</a>
   <a href="/nlab/print/HowTo" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/HowTo" id="view_source" rel="nofollow">Source</a>
