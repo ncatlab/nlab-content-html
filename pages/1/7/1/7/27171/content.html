@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>
-      polymorphism in nLab
+      impredicative polymorphism in nLab
   </title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -272,7 +272,7 @@ margin-left: 0em;
       </svg>
     </span>
       <span class="webName">nLab</span>
-      polymorphism
+      impredicative polymorphism
   </h1>
 
 
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/4187/#Item_15" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/18549/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -298,7 +298,7 @@ margin-left: 0em;
 
 <div id="revision">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
-<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Polymorphism</title></head>
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title></title></head>
 <body>
 <div class="rightHandSide">
 <div class="toc clickDown" tabindex="0">
@@ -481,129 +481,145 @@ margin-left: 0em;
 </div>
 </div>
 
-<blockquote>
-<p>This page is about the concept of polymorphism of declarations in <a class="existingWikiWord" href="/nlab/show/computer+science">computer science</a>. For polymorphism of <a class="existingWikiWord" href="/nlab/show/type+universes">type universes</a> see instead at <em><a class="existingWikiWord" href="/nlab/show/universe+polymorphism">universe polymorphism</a></em>. For the generalisation of <em>morphisms</em> introduced by <a class="existingWikiWord" href="/nlab/show/Shinichi+Mochizuki">Shinichi Mochizuki</a>, see <em><a class="existingWikiWord" href="/nlab/show/poly-morphism">poly-morphism</a></em>.</p>
-</blockquote>
 
-<h1 id="polymorphism">Polymorphism</h1>
+<h1 id='section_table_of_contents'>Contents</h1>
 <div class='maruku_toc'>
 <ul>
-<li><a href='#idea'>Idea</a></li>
-<li><a href='#ad_hoc_polymorphism'>Ad hoc polymorphism</a></li>
-<li><a href='#parametric_polymorphism'>Parametric polymorphism</a></li>
-<ul>
-<li><a href='#theorems_for_free'>Theorems for Free</a></li>
-</ul>
-<li><a href='#related_concepts'>Related concepts</a></li>
-<li><a href='#references'>References</a></li>
+<li><a href='#definition'> Definition</a></li>
+<li><a href='#examples'> Examples</a></li>
+<li><a href='#properties'> Properties</a></li>
+<li><a href='#related_concepts'> Related concepts</a></li>
+<li><a href='#references'> References</a></li>
 </ul>
 </div>
 
-<h2 id="idea">Idea</h2>
 
-<p>In <a class="existingWikiWord" href="/nlab/show/computer+science">computer science</a>, <em>polymorphism</em> refers to situations either where the same name is used to refer to more than one <a class="existingWikiWord" href="/nlab/show/function">function</a>, or where the same function is used at more than one <a class="existingWikiWord" href="/nlab/show/type">type</a>. One usually distinguishes these two kinds of polymorphism as <em>ad hoc polymorphism</em> and <em>parametric polymorphism</em>, respectively.</p>
+<h2 id="definition"> Definition</h2>
 
-<h2 id="ad_hoc_polymorphism">Ad hoc polymorphism</h2>
+<p>A <a class="existingWikiWord" href="/nlab/show/type+universe">type universe</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> has <strong>impredicative polymorphism</strong> or is <strong>impredicative</strong> if <a class="existingWikiWord" href="/nlab/show/dependent+product+types">dependent product types</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>-indexed families of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>-small types are themselves <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>-small.</p>
 
-<p>In <strong>ad hoc polymorphism</strong>, one simply defines multiple functions with the same name and different <a class="existingWikiWord" href="/nlab/show/types">types</a>, relying on the compiler (or, in some cases, the run-time system) to determine the correct function to call based on the types of its arguments and return value. This is also called <strong>overloading</strong>. For instance, using a mathematical notation, one might define functions</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>add</mi><mo>:</mo><mi>ℕ</mi><mo>×</mo><mi>ℕ</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex"> add : \mathbb{N} \times \mathbb{N} \to \mathbb{N}</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>add</mi><mo>:</mo><mi>ℝ</mi><mo>×</mo><mi>ℝ</mi><mo>→</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex"> add : \mathbb{R} \times \mathbb{R} \to \mathbb{R}</annotation></semantics></math></div>
-<p>and then when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>add</mi><mo stretchy="false">(</mo><mn>3</mn><mo>,</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">add(3,2)</annotation></semantics></math> is invoked, the compiler knows to call the first function since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/natural+numbers">natural numbers</a>, whereas when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>add</mi><mo stretchy="false">(</mo><mn>4.2</mn><mo>,</mo><mi>π</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">add(4.2,\pi)</annotation></semantics></math> is invoked it calls the second function since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>4.2</mn></mrow><annotation encoding="application/x-tex">4.2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/real+numbers">real numbers</a>.</p>
+<p>For <a class="existingWikiWord" href="/nlab/show/Russell+universes">Russell universes</a>, this is given by the <a class="existingWikiWord" href="/nlab/show/inference+rule">inference rule</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mo>:</mo><mi>U</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>X</mi><mo>:</mo><mi>U</mi></mrow></munder><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X:U \vdash P(X):U}{\Gamma \vdash \prod_{X:U} P(X):U}</annotation></semantics></math></div>
+<p>The situation is a little bit more complicated for <a class="existingWikiWord" href="/nlab/show/Tarski+universes">Tarski universes</a>. Like all other conditions on <a class="existingWikiWord" href="/nlab/show/Tarski+universes">Tarski universes</a>, there is an orthogonal axis for which impredicativity might vary: weak or strict impredicativity, which has to do with whether one uses an <a class="existingWikiWord" href="/nlab/show/equivalence+of+types">equivalence of types</a> or <a class="existingWikiWord" href="/nlab/show/judgmental+equality">judgmental equality</a> to define small types.</p>
 
-<p>Note that there is nothing which stipulates that the <em>behavior</em> of a class of ad-hocly polymorphic functions with the same name should be at all similar. Nothing prevents us from defining <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>add</mi><mo>:</mo><mi>ℕ</mi><mo>×</mo><mi>ℕ</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex"> add : \mathbb{N} \times \mathbb{N} \to \mathbb{N}</annotation></semantics></math> to add its arguments but <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>add</mi><mo>:</mo><mi>ℝ</mi><mo>×</mo><mi>ℝ</mi><mo>→</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex"> add : \mathbb{R} \times \mathbb{R} \to \mathbb{R}</annotation></semantics></math> to subtract its arguments. Of course, it is good programming practice to make overloaded functions similar in their behavior.</p>
-
-<p>In the example above, there might even be a <a class="existingWikiWord" href="/nlab/show/coercion">coercion</a> function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>:</mo><mi>ℕ</mi><mo>→</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">c : \mathbb{N} \to \mathbb{R}</annotation></semantics></math>, to be invoked whenever a natural number appears where the compiler expects a real number, giving a <a class="existingWikiWord" href="/nlab/show/commutative+diagram">commutative diagram</a></p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><mi>ℕ</mi><mo>×</mo><mi>ℕ</mi></mtd> <mtd><mover><mo>→</mo><mi>add</mi></mover></mtd> <mtd><mi>ℕ</mi></mtd></mtr> <mtr><mtd><mpadded width="0" lspace="-100%width"><mrow><mi>c</mi><mo>×</mo><mi>c</mi></mrow></mpadded><mo stretchy="false">↓</mo></mtd> <mtd></mtd> <mtd><mo stretchy="false">↓</mo><mpadded width="0"><mi>c</mi></mpadded></mtd></mtr> <mtr><mtd><mi>ℝ</mi><mo>×</mo><mi>ℝ</mi></mtd> <mtd><munder><mo>→</mo><mi>add</mi></munder></mtd> <mtd><mi>ℝ</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex"> \array {
-   \mathbb{N} \times \mathbb{N}     &amp; \overset{add}\to  &amp; \mathbb{N} \\
-   \mathllap{c \times c} \downarrow &amp;                   &amp; \downarrow \mathrlap{c} \\
-   \mathbb{R} \times \mathbb{R}     &amp; \underset{add}\to &amp; \mathbb{R}
-} 
-</annotation></semantics></math></div>
-<p>But things don't always work out this way.</p>
-
-<h2 id="parametric_polymorphism">Parametric polymorphism</h2>
-
-<p>In <strong>parametric polymorphism</strong> or <strong>parametricity</strong>, one writes code to define a function <em>once</em>, which contains a “type variable” that can be instantiated at many different types to produce different functions. For instance, we can define a function</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>first</mi><mo>:</mo><mi>A</mi><mo>×</mo><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex"> first : A\times A \to A </annotation></semantics></math></div>
-<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is a type variable (or <em>parameter</em>), by</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>first</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>≔</mo><mi>x</mi><mo>.</mo></mrow><annotation encoding="application/x-tex"> first(x,y) \coloneqq x. </annotation></semantics></math></div>
-<p>Now the compiler automatically instantiates a copy of this function, with identical code, for any type at which it is called. Thus we can behave as if we had functions</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>first</mi><mo>:</mo><mi>ℕ</mi><mo>×</mo><mi>ℕ</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex"> first : \mathbb{N} \times \mathbb{N} \to \mathbb{N}</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>first</mi><mo>:</mo><mi>ℝ</mi><mo>×</mo><mi>ℝ</mi><mo>→</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex"> first : \mathbb{R} \times \mathbb{R} \to \mathbb{R}</annotation></semantics></math></div>
-<p>and so on, for any types we wish. In contrast to <em>ad hoc</em> polymorphism, in this case we do have a guarantee that all these same-named functions are doing “the same thing”, because they are all instantiated by the same original polymorphic code.</p>
-
-<p>In a <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependently typed programming language</a> with a <a class="existingWikiWord" href="/nlab/show/type+of+types">type of types</a>, such as <a class="existingWikiWord" href="/nlab/show/Coq">Coq</a> or <a class="existingWikiWord" href="/nlab/show/Agda">Agda</a>, a parametrically polymorphic family of functions can simply be considered to be a single dependently typed function whose first argument is a type. Thus our function above would be typed as</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>first</mi><mo>:</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>A</mi><mo>:</mo><mi>Type</mi></mrow></munder><mi>A</mi><mo>×</mo><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex"> first : \prod_{A:Type} A\times A \to A</annotation></semantics></math></div>
-<p>However, parametric polymorphism makes sense and is very useful even in languages with less rich type systems, such as <a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a> and <span class="newWikiWord">Standard ML<a href="/nlab/new/Standard+ML">?</a></span>.</p>
-
-<h3 id="theorems_for_free">Theorems for Free</h3>
-
-<p>In type systems with parametric polymorphism, such as <a class="existingWikiWord" href="/nlab/show/System+F">System F</a>, there is a family of proofs for every polymorphic type signature which each give an algebraic law for any function with that signature. For example, the type signature <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>×</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">A \times B \to A</annotation></semantics></math> has the <span class="newWikiWord">free theorem<a href="/nlab/new/free+theorem">?</a></span></p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>∘</mo><mi>f</mi><mo>=</mo><mi>f</mi><mo>∘</mo><mo stretchy="false">(</mo><mi>α</mi><mo>×</mo><mi>β</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> \alpha \circ f = f \circ (\alpha \times \beta) </annotation></semantics></math></div>
-<p>for all functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> with that signature (<a href="#Wadler89">Wadler 89</a>, figure 1).</p>
-
-<h2 id="related_concepts">Related concepts</h2>
+<ul>
+<li>A Tarski universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U, T)</annotation></semantics></math> has <strong>weak impredicative polymorphism</strong> or is <strong>weakly impredicative</strong> if for all functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo>:</mo><mi>U</mi><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">P:U \to U</annotation></semantics></math> the <a class="existingWikiWord" href="/nlab/show/dependent+product+type">dependent product type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>X</mi><mo>:</mo><mi>U</mi></mrow></msub><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\prod_{X:U} P(X)</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/essentially+small+type">essentially <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>U</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">U</annotation>
+  </semantics>
+</math>-small</a></li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>P</mi><mo>:</mo><mi>U</mi><mo>→</mo><mi>U</mi></mrow></munder><munder><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><msub><mo>∀</mo> <mi>P</mi></msub><mo>:</mo><mi>U</mi></mrow></munder><mi>T</mi><mo stretchy="false">(</mo><msub><mo>∀</mo> <mi>P</mi></msub><mo stretchy="false">)</mo><mo>≃</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>X</mi><mo>:</mo><mi>U</mi></mrow></munder><mi>T</mi><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\prod_{P:U \to U} \sum_{\forall_P:U} T(\forall_P) \simeq \prod_{X:U} T(P(X))</annotation></semantics></math></div>
+<ul>
+<li>A Tarski universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U, T)</annotation></semantics></math> has <strong>strict impredicative polymorphism</strong> or is <strong>strictly impredicative</strong> if for all functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo>:</mo><mi>U</mi><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">P:U \to U</annotation></semantics></math> the <a class="existingWikiWord" href="/nlab/show/dependent+product+type">dependent product type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>X</mi><mo>:</mo><mi>U</mi></mrow></msub><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\prod_{X:U} P(X)</annotation></semantics></math> is <a class="existingWikiWord" href="/nlab/show/small+type"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>U</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">U</annotation>
+  </semantics>
+</math>-small</a></li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mo>:</mo><mi>U</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mo>∀</mo><mi>X</mi><mo>:</mo><mi>U</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mo>:</mo><mi>U</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>T</mi><mo stretchy="false">(</mo><mo>∀</mo><mi>X</mi><mo>:</mo><mi>U</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≡</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>X</mi><mo>:</mo><mi>U</mi></mrow></munder><mi>T</mi><mo stretchy="false">(</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X:U \vdash P(X):U}{\Gamma \vdash \forall X:U.P(X):U} \qquad \frac{\Gamma, X:U \vdash P(X):U}{\Gamma \vdash T(\forall X:U.P(X)) \equiv \prod_{X:U} T(P(X)) \; \mathrm{type}}</annotation></semantics></math></div>
+<h2 id="examples"> Examples</h2>
 
 <ul>
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/logical+relations">logical relations</a></p>
+<p>The base universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">Set</mi></mrow><annotation encoding="application/x-tex">\mathrm{Set}</annotation></semantics></math> historically had impredicative polymorphism in <a class="existingWikiWord" href="/nlab/show/Coq">Coq</a>, according to <a href="#P&#xE9;drot22">Pédrot 2022</a>.</p>
 </li>
 
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/impredicative+polymorphism">impredicative polymorphism</a></p>
+<p>In <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> defined using a single <a class="existingWikiWord" href="/nlab/show/type">type</a> <a class="existingWikiWord" href="/nlab/show/judgment">judgment</a>, the <a class="existingWikiWord" href="/nlab/show/universe+of+all+propositions">universe of all propositions</a> is a type universe with impredicative polymorphism if and only if <a class="existingWikiWord" href="/nlab/show/weak+function+extensionality">weak function extensionality</a> holds.</p>
 </li>
 
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/parametric+dependent+type+theory">parametric dependent type theory</a></p>
+<p>More generally, let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math> be a <a class="existingWikiWord" href="/nlab/show/universe+of+propositions">universe of propositions</a>, and assume <a class="existingWikiWord" href="/nlab/show/weak+function+extensionality">weak function extensionality</a> holds. Then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math> has impredicative polymorphism if and only if it is closed under <a class="existingWikiWord" href="/nlab/show/dependent+product+types">dependent product types</a> of predicates in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>; i.e. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/inflattice">inflattice</a>.</p>
 </li>
 </ul>
 
-<h2 id="references">References</h2>
+<h2 id="properties"> Properties</h2>
 
-<p>The distinction between ad hoc and parametric polymorphism is originally due to <a class="existingWikiWord" href="/nlab/show/Christopher+Strachey">Christopher Strachey</a>:</p>
+<p>Impredicative polymorphism of any universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> with a <a class="existingWikiWord" href="/nlab/show/type">type</a> which is not a <a class="existingWikiWord" href="/nlab/show/mere+proposition">mere proposition</a> is inconsistent with <a class="existingWikiWord" href="/nlab/show/propositional+resizing">propositional resizing</a> for a universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>.</p>
 
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/Christopher+Strachey">Christopher Strachey</a>, <em>Fundamental concepts in programming languages</em>, Lecture Notes from August 1967 (International Summer School in Computer Programming, Copenhagen), later published in Higher-Order and Symbolic Computation, 13, 11-49, 2000. (<a href="https://www.itu.dk/courses/BPRD/E2009/fundamental-1967.pdf">pdf</a>)</li>
-</ul>
-
-<p>Other classic papers include:</p>
+<h2 id="related_concepts"> Related concepts</h2>
 
 <ul>
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/John+C.+Reynolds">John C. Reynolds</a>, <em>Towards a Theory of Type Structure</em>, Lecture Notes in Computer Science 19, 408-425, 1974. (<a href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=2289&amp;context=compsci">pdf</a>)</p>
+<p><a class="existingWikiWord" href="/nlab/show/polymorphism">polymorphism</a></p>
 </li>
 
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/Robin+Milner">Robin Milner</a>, <em>A Theory of Type Polymorphism in Programming</em>, Journal of Computer and System Sciences 17, 348-375, 1978. (<a href="https://courses.engr.illinois.edu/cs421/sp2013/project/milner-polymorphism.pdf">pdf</a>)</p>
+<p><a class="existingWikiWord" href="/nlab/show/internal+parametricity">internal parametricity</a></p>
 </li>
 
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/John+C.+Reynolds">John C. Reynolds</a>, <em>Types, Abstraction, and Parametric Polymorphism</em>, Information Processing 83, 1983. (<a href="http://www.cse.chalmers.se/edu/year/2010/course/DAT140_Types/Reynolds_typesabpara.pdf">pdf</a>)</p>
+<p><a class="existingWikiWord" href="/nlab/show/impredicative+universe">impredicative universe</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/impredicative+dependent+type+theory">impredicative dependent type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/propositional+resizing">propositional resizing</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/taboo">taboo</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+of+all+propositions">type of all propositions</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/weak+function+extensionality">weak function extensionality</a></p>
 </li>
 </ul>
 
-<p>Theorems for free were explained in:</p>
+<h2 id="references"> References</h2>
 
 <ul>
-<li id="Wadler89"><a class="existingWikiWord" href="/nlab/show/Philip+Wadler">Philip Wadler</a>, <em>Theorems for free!</em>, in Proceedings of the fourth international conference on Functional programming languages and computer architecture (FPCA 1989). 1989. (<a href="https://www2.cs.sfu.ca/CourseCentral/831/burton/Notes/July14/free.pdf">pdf</a>, <a href="https://doi.org/10.1145/99370.99404">doi:10.1145/99370.99404</a>)</li>
-</ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Andrew+Pitts">Andrew Pitts</a>, <em>Nontrivial Power Types can’t be Subtypes of Polymorphic Types</em> (<a href="https://www.cl.cam.ac.uk/~amp12/papers/nontpt/nontpt.pdf">pdf</a>)</p>
+</li>
 
-<p>See also the references at <em><a class="existingWikiWord" href="/nlab/show/parametric+dependent+type+theory">parametric dependent type theory</a></em> for the various notions of parametricity in various kinds of <a class="existingWikiWord" href="/nlab/show/dependent+type+theories">dependent type theories</a>.</p>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Taichi+Uemura">Taichi Uemura</a>, <em>Cubical Assemblies, a Univalent and Impredicative Universe and a Failure of Propositional Resizing</em>, in 24th International Conference on Types for Proofs and Programs (TYPES 2018). Leibniz International Proceedings in Informatics (LIPIcs), Volume 130, pp. 7:1-7:20, Schloss Dagstuhl – Leibniz-Zentrum für Informatik (2019) (<a href="https://doi.org/10.4230/LIPIcs.TYPES.2018.7">doi:10.4230/LIPIcs.TYPES.2018.7</a>, <a href="https://arxiv.org/abs/1803.06649">arXiv:1803.06649</a>)</p>
+</li>
+
+<li>
+<p><em>Dependent Type Theory vs Polymorphic Type Theory</em>, Category Theory Zulip (<a href="https://categorytheory.zulipchat.com/#narrow/stream/229199-learning.3A-questions/topic/Dependent.20Type.20Theory.20vs.20Polymorphic.20Type.20Theory">web</a>)</p>
+</li>
+
+<li id="P&#xE9;drot22">
+<p>Pierre-Marie Pédrot, <em>Why not have <code>Prop : Set</code> in Coq?</em>, Proof Assistant StackExchange, 27 June 2022. (<a href="https://proofassistants.stackexchange.com/questions/1551/why-not-have-prop-set-in-coq">web</a>)</p>
+</li>
+
+<li>
+<p><em>Mere propositions and Consistency with Impredicativity, Excluded Middle and Large Elimination</em>, Proof Assistant StackExchange (<a href="https://proofassistants.stackexchange.com/questions/2456/mere-propositions-and-consistency-with-impredicativity-excluded-middle-and-larg">web</a>)</p>
+</li>
+</ul>
 </body></html>
 
 </div>
 
 <div class="revisedby">
     <p>
-    Last revised on September 19, 2024 at 16:32:26.
-    See the <a href="/nlab/history/polymorphism" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    Last revised on September 19, 2024 at 18:35:10.
+    See the <a href="/nlab/history/impredicative+polymorphism" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/polymorphism" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4187/#Item_15">Discuss</a><span class="backintime"><a href="/nlab/revision/polymorphism/18" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/polymorphism" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/polymorphism" accesskey="S" class="navlink" id="history" rel="nofollow">History (18 revisions)</a>
-  <a href="/nlab/show/polymorphism/cite" style="color: black">Cite</a>
-  <a href="/nlab/print/polymorphism" accesskey="p" id="view_print" rel="nofollow">Print</a>
-    <a href="/nlab/source/polymorphism" id="view_source" rel="nofollow">Source</a>
+  <a href="/nlab/edit/impredicative+polymorphism" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/18549/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/impredicative+polymorphism/2" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/impredicative+polymorphism" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/impredicative+polymorphism" accesskey="S" class="navlink" id="history" rel="nofollow">History (2 revisions)</a>
+  <a href="/nlab/show/impredicative+polymorphism/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/impredicative+polymorphism" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/impredicative+polymorphism" id="view_source" rel="nofollow">Source</a>
 
   
 
