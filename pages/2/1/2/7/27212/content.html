@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>
-      coherence theorem in nLab
+      strictification theorem in nLab
   </title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -272,7 +272,7 @@ margin-left: 0em;
       </svg>
     </span>
       <span class="webName">nLab</span>
-      coherence theorem
+      strictification theorem
   </h1>
 
 
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/18447/#Item_3" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/18561/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -565,8 +565,16 @@ margin-left: 0em;
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#coherence_versus_strictification'>Coherence versus strictification</a></li>
-<li><a href='#ListOfTheorems'>List of coherence theorems</a></li>
+<li><a href='#examples_of_strictification_theorems'>Examples of strictification theorems</a></li>
+<li><a href='#approaches_to_strictification'>Approaches to strictification</a></li>
+<ul>
+<li><a href='#2monads'>2-monads</a></li>
+<li><a href='#operads'>Operads</a></li>
+<li><a href='#clubs'>Clubs</a></li>
+<li><a href='#yoneda_embedding'>Yoneda embedding</a></li>
+</ul>
+<li><a href='#strictification_versus_coherence'>Strictification versus coherence</a></li>
+<li><a href='#list_of_strictification_theorems'>List of strictification theorems</a></li>
 <li><a href='#related_pages'>Related pages</a></li>
 <li><a href='#references'>References</a></li>
 </ul>
@@ -574,92 +582,100 @@ margin-left: 0em;
 
 <h2 id="idea">Idea</h2>
 
-<p>Generally, a <strong>coherence theorem</strong> in <a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a> and <a class="existingWikiWord" href="/nlab/show/higher+category+theory">higher category theory</a> asserts that a <a class="existingWikiWord" href="/nlab/show/coherence+law">coherence law</a> is satisfied: it is a means of getting a handle on categorical structures where laws only hold up to <a class="existingWikiWord" href="/nlab/show/isomorphism">isomorphism</a> or higher <a class="existingWikiWord" href="/nlab/show/k-morphism">k-morphism</a> equivalences.</p>
+<p>A <strong>strictification theorem</strong> is a theorem of the form: <em>every weak structure is suitably equivalent to a semi-strict structure</em>.</p>
 
-<p>Given a <a class="existingWikiWord" href="/nlab/show/doctrine">doctrine</a>, such as the doctrine for monoidal categories, a coherence theorem may provide a full or partial algorithm for deciding equality in free algebras. Usually such a doctrine is specified only by certain “generating” operations and constraint morphisms between them; the coherence question then consists in determining exactly what additional operations and morphisms are derivable from these, and in particular when two such derived morphisms are equal. For instance, one may be interested in the coherence problem for closed categories: how does one decide equality of morphisms in freely generated closed categories, or in other words, how does one decide which diagrams (generated from the closed structure) commute?</p>
+<p>There are typically two varieties of strictification theorems:</p>
 
-<p>The first, and perhaps easiest, coherence theorem is Mac Lane’s, which says that in a free <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a>, <em>every</em> diagram of constraint morphisms commutes. The especially nice form of this theorem should not lead one to expect that all coherence theorems are of the form “every diagram commutes”—in many categorical structures, it is <em>not</em> the case that all diagrams of constraints commute, and so the coherence question must address more precisely <em>which</em> diagrams of constraints commute. For instance, in a <a class="existingWikiWord" href="/nlab/show/braided+monoidal+category">braided monoidal category</a> not every diagram of constraints commutes, but the coherence theorem gives a concise classification of those that do in terms of their underlying braids.</p>
+<ol>
+<li>Every weak structure is weakly equivalent to a semi-strict structure.</li>
 
-<p>Coherence theorems are often useful when working with algebras in a doctrine, since it provides a way to tell whether two particular composites of constraints which may arise in practice are actually equal. One should beware, however, that coherence theorems only relate to the behavior of <em>free</em> algebras, or equivalently to the equality of <em>formally defined</em> composites. Even in a structure having a coherence theorem of the “every diagram commutes” sort, it may happen in a <em>particular</em> algebra that there exist diagrams of constraints which do not commute. For instance, one can find a monoidal category containing objects <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x,y,z</annotation></semantics></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>⊗</mo><mo stretchy="false">(</mo><mi>y</mi><mo>⊗</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>x</mi><mo>⊗</mo><mi>y</mi><mo stretchy="false">)</mo><mo>⊗</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">x\otimes (y\otimes z) = (x\otimes y)\otimes z</annotation></semantics></math> on the nose, but such that the <a class="existingWikiWord" href="/nlab/show/associator">associator</a> isomorphism <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>a</mi> <mrow><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi></mrow></msub><mo>:</mo><mi>x</mi><mo>⊗</mo><mo stretchy="false">(</mo><mi>y</mi><mo>⊗</mo><mi>z</mi><mo stretchy="false">)</mo><mover><mo>→</mo><mo>≃</mo></mover><mo stretchy="false">(</mo><mi>x</mi><mo>⊗</mo><mi>y</mi><mo stretchy="false">)</mo><mo>⊗</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">a_{x,y,z}:x\otimes (y\otimes z) \stackrel{\simeq}{\to} (x\otimes y)\otimes z</annotation></semantics></math> is not the identity. (For example, <a class="existingWikiWord" href="/nlab/show/skeletons">skeletons</a> of naturally occurring monoidal categories often have this property. This issue also arises in the classification of <a class="existingWikiWord" href="/nlab/show/2-groups">2-groups</a> via cohomology.)</p>
+<li>Every <em>free</em> weak structure is weakly equivalent to a <em>free</em> semi-strict structure.</li>
+</ol>
 
-<h2 id="coherence_versus_strictification">Coherence versus strictification</h2>
+<p>For instance, in the case of <a class="existingWikiWord" href="/nlab/show/monoidal+categories">monoidal categories</a>, the following are true.</p>
 
-<p>See <a class="existingWikiWord" href="/nlab/show/coherence+versus+strictification">coherence versus strictification</a>.</p>
+<ol>
+<li>Every <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a> is monoidally <a class="existingWikiWord" href="/nlab/show/equivalent">equivalent</a> to a <a class="existingWikiWord" href="/nlab/show/strict+monoidal+category">strict monoidal category</a>.</li>
 
-<h2 id="ListOfTheorems">List of coherence theorems</h2>
+<li>Every free <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a> is monoidally <a class="existingWikiWord" href="/nlab/show/equivalent">equivalent</a> to a free <a class="existingWikiWord" href="/nlab/show/strict+monoidal+category">strict monoidal category</a>.</li>
+</ol>
+
+<p>However, one must be careful not to assume that it is always possible to strictify everything. For instance, the strictification theorem for <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+categories">symmetric monoidal categories</a> states the following.</p>
+
+<ol>
+<li>Every <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric monoidal category</a> is monoidally <a class="existingWikiWord" href="/nlab/show/equivalent">equivalent</a> to a <a class="existingWikiWord" href="/nlab/show/symmetric+strict+monoidal+category">symmetric strict monoidal category</a> (<em>not</em> a <a class="existingWikiWord" href="/nlab/show/strict+symmetric+monoidal+category">strict symmetric monoidal category</a>).</li>
+
+<li>Every free <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a> is monoidally <a class="existingWikiWord" href="/nlab/show/equivalent">equivalent</a> to a free <a class="existingWikiWord" href="/nlab/show/symmetric+strict+monoidal+category">symmetric strict monoidal category</a>.</li>
+</ol>
+
+<p>This is why we use the term “semi-strict” above: a strictification theorem expresses the extent to which a structure may be strictified, which may not be completely. Another classical example is <a class="existingWikiWord" href="/nlab/show/tricategories">tricategories</a>, which may be strictified to <a class="existingWikiWord" href="/nlab/show/Gray-categories">Gray-categories</a>, but not in general to <a class="existingWikiWord" href="/nlab/show/3-categories">3-categories</a>.</p>
+
+<p>Strictification theorems are related to, but not the same as, <a class="existingWikiWord" href="/nlab/show/coherence+theorems">coherence theorems</a>.</p>
+
+<h2 id="examples_of_strictification_theorems">Examples of strictification theorems</h2>
+
+<p>See <a class="existingWikiWord" href="/nlab/show/coherence+theorem">coherence theorem</a> for a list of coherence theorems that also include strictification results.</p>
+
+<h2 id="approaches_to_strictification">Approaches to strictification</h2>
+
+<p>There exist several approaches for proving strictification theorems.</p>
+
+<p>for describing “doctrines” or algebraic structures on categories, which can be used to describe free algebras and state coherence theorems. All are closely related.</p>
+
+<h3 id="2monads">2-monads</h3>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/2-monad">2-monad</a> can be regarded as the “extensional essence” of an algebraic structure on categories (or on objects of some other 2-category). Of course, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> is a 2-monad describing some structure, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">T A</annotation></semantics></math> is the free such structure on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>; thus the first sort of coherence theorem can be precisely stated as “describe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">T A</annotation></semantics></math> as explicitly as possible in terms of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>.”</p>
+
+<p>However, the notion of monad is so general that in practice, for proving coherence theorems it is useful to have a more explicit way of “presenting” a monad in terms of generating operations and relations; this is the purpose of the structures presented below, such as <a class="existingWikiWord" href="/nlab/show/operads">operads</a> and <a class="existingWikiWord" href="/nlab/show/clubs">clubs</a>. Not all monads can be presented in such a more explicit way, but for those that can, it is a very useful simplification.</p>
+
+<p>The notion of <em>strict</em> 2-monad on a <a class="existingWikiWord" href="/nlab/show/strict+2-category">strict 2-category</a> also provides a general way to state a strictification theorem, although one must beware that this theorem is not always true, and when it is true, it doesn’t necessarily give what one was looking for. This general “coherence theorem schema” for a 2-monad <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> would be that every <a class="existingWikiWord" href="/nlab/show/pseudoalgebra+for+a+2-monad">pseudo</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebra is equivalent to a strict one. A stronger statement, which is true in most cases when the weaker version is, would be that the inclusion</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Str</mi><mi>T</mi><mi>Alg</mi><mo>↪</mo><mi>Ps</mi><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex"> Str T Alg \hookrightarrow Ps T Alg </annotation></semantics></math></div>
+<p>of the 2-category of strict <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras and strict <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-morphisms into the 2-category of pseudo <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebras and pseudo <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-morphisms has a strict left 2-adjoint, usually written <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo><mo>′</mo></mrow><annotation encoding="application/x-tex">(-)'</annotation></semantics></math>, and moreover for a pseudo algebra <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, the unit <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>→</mo><mi>A</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">A \to A'</annotation></semantics></math> is an <a class="existingWikiWord" href="/nlab/show/equivalence">equivalence</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ps</mi><mi>T</mi><mi>Alg</mi></mrow><annotation encoding="application/x-tex">Ps T Alg</annotation></semantics></math>. Thus <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> is not only equivalent to a strict <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebra, it is equivalent to a canonically defined one which is characterized by a universal property.</p>
+
+<p>This “coherence theorem” is true in a lot of generality, although there are 2-monads for which it fails (see (<a href="#Shulman">Shulman</a>)). However, often it leaves a lot of work to be done in order to extract what is commonly thought of as a coherence theorem. This is because the notion of pseudo <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-algebra is always an <em>unbiased</em> weak structure, whereas it is more usual to study biased structures. Moreover, in most cases, proving an equivalence between biased and unbiased notions requires the full strength of the coherence theorem (in the description-of-free-algebras sense) for the biased notion!</p>
+
+<h3 id="operads">Operads</h3>
+
+<p>For now, see <a class="existingWikiWord" href="/nlab/show/operad">operad</a>.</p>
+
+<h3 id="clubs">Clubs</h3>
+
+<p>For now, see <a class="existingWikiWord" href="/nlab/show/club">club</a>.</p>
+
+<h3 id="yoneda_embedding">Yoneda embedding</h3>
+
+<p>For now, see <a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+bicategories+with+finite+limits">coherence theorem for bicategories with finite limits</a>, which gives an example of this approach.</p>
+
+<h2 id="strictification_versus_coherence">Strictification versus coherence</h2>
+
+<p>See <a class="existingWikiWord" href="/nlab/show/strictification+versus+coherence">strictification versus coherence</a>.</p>
+
+<h2 id="list_of_strictification_theorems">List of strictification theorems</h2>
 
 <ul>
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+monoidal+categories">coherence theorem for monoidal categories</a></p>
-</li>
+<li><a class="existingWikiWord" href="/nlab/show/coherence+and+strictification+for+monoidal+categories">coherence and strictification for monoidal categories</a></li>
 
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+symmetric+monoidal+categories">coherence theorem for symmetric monoidal categories</a></p>
-</li>
+<li><a class="existingWikiWord" href="/nlab/show/coherence+and+strictification+for+symmetric+monoidal+categories">coherence and strictification for symmetric monoidal categories</a></li>
 
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+braided+monoidal+categories">coherence theorem for braided monoidal categories</a></p>
-</li>
-
-<li>
-<p><span class="newWikiWord">coherence theorem for tortile categories<a href="/nlab/new/coherence+theorem+for+tortile+categories">?</a></span></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+closed+symmetric+monoidal+categories">coherence theorem for closed symmetric monoidal categories</a></p>
-</li>
-
-<li>
-<p><a href="/nlab/show/bicategory#Coherence">coherence theorem for bicategories</a></p>
-</li>
-
-<li>
-<p><a href="/nlab/show/tricategory#Coherence">coherence theorem for tricategories</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+monoidal+bicategories">coherence theorem for monoidal bicategories</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+braided+monoidal+bicategories">coherence theorem for braided monoidal bicategories</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/coherence+theorem+for+symmetric+monoidal+bicategories">coherence theorem for symmetric monoidal bicategories</a></p>
-</li>
+<li><a class="existingWikiWord" href="/nlab/show/strictification+for+bicategories+with+finite+limits">strictification for bicategories with finite limits</a></li>
 </ul>
 
 <h2 id="related_pages">Related pages</h2>
 
 <ul>
-<li><a class="existingWikiWord" href="/nlab/show/strictification+theorem">strictification theorem</a></li>
+<li><a class="existingWikiWord" href="/nlab/show/coherence+theorem">coherence theorem</a></li>
 </ul>
 
 <h2 id="references">References</h2>
 
-<p><a class="existingWikiWord" href="/nlab/show/Saunders+Mac+Lane">Saunders Mac Lane</a> discusses some of the history of the coherence problem in section 5 of</p>
+<ul id="Shulman">
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Steve+Lack">Steve Lack</a>, Codescent objects and coherence, <a href="http://www.ams.org/mathscinet-getitem?mr=1935980">MR</a></p>
+</li>
 
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/Saunders+Mac+Lane">Saunders Mac Lane</a>, Topology and Logic as a Source of Algebra (Retiring Presidential Address), <em>Bulletin of the AMS</em> 82:1, January 1976. (<a href="https://projecteuclid.org/euclid.bams/1183537593">euclid</a>)</li>
-</ul>
-
-<p>An account of some of the history of (proofs of) coherence theorems is at</p>
-
-<ul>
-<li><a href="linear+type+theory#HistoryCategoricalSemantics">linear type theory – History of categorical semantics</a> .</li>
-</ul>
-
-<p>See also at <em><a class="existingWikiWord" href="/nlab/show/Kelly-Mac+Lane+graph">Kelly-Mac Lane graph</a></em>, at <em><a class="existingWikiWord" href="/nlab/show/proof+net">proof net</a></em> and at <em><a class="existingWikiWord" href="/nlab/show/Trimble+rewiring">Trimble rewiring</a></em> for more on the <a class="existingWikiWord" href="/nlab/show/syntax">syntactic</a> proofs of coherence.</p>
-
-<p>For specific references see at the above sub-entries in the <a href="#ListOfTheorems">List of coherence theorems</a>.</p>
-
-<p>For some general frameworks, see the following.</p>
-
-<ul>
-<li><a class="existingWikiWord" href="/nlab/show/Thomas+Fiore">Thomas Fiore</a>, Po Hu, and Igor Kriz. <em>Laplaza sets, or how to select coherence diagrams for pseudo algebras</em>, Advances in mathematics 218.6 (2008): 1705-1722.</li>
-
-<li>Miles Gould. <em>Coherence for categorified operadic theories</em>, PhD thesis, <a href="https://arxiv.org/abs/1002.0879">arXiv:1002.0879</a> (2010).</li>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Mike+Shulman">Mike Shulman</a>, “Not every pseudoalgebra is equivalent to a strict one”, <em>Adv. Math.</em> 229 no. 3 (2012), 2024–2041, <a href="http://arxiv.org/abs/1005.1520">arXiv</a></p>
+</li>
 </ul>
 </body></html>
 
@@ -667,17 +683,17 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on September 25, 2024 at 10:22:15.
-    See the <a href="/nlab/history/coherence+theorem" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    Last revised on September 25, 2024 at 10:22:00.
+    See the <a href="/nlab/history/strictification+theorem" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/coherence+theorem" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/18447/#Item_3">Discuss</a><span class="backintime"><a href="/nlab/revision/coherence+theorem/19" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/coherence+theorem" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/coherence+theorem" accesskey="S" class="navlink" id="history" rel="nofollow">History (19 revisions)</a>
-  <a href="/nlab/show/coherence+theorem/cite" style="color: black">Cite</a>
-  <a href="/nlab/print/coherence+theorem" accesskey="p" id="view_print" rel="nofollow">Print</a>
-    <a href="/nlab/source/coherence+theorem" id="view_source" rel="nofollow">Source</a>
+  <a href="/nlab/edit/strictification+theorem" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/18561/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/strictification+theorem/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/strictification+theorem" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/strictification+theorem" accesskey="S" class="navlink" id="history" rel="nofollow">History (1 revision)</a>
+  <a href="/nlab/show/strictification+theorem/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/strictification+theorem" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/strictification+theorem" id="view_source" rel="nofollow">Source</a>
 
   
 
