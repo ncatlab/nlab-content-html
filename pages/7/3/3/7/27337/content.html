@@ -1,0 +1,852 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>
+      dependent type theory with type variables in nLab
+  </title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
+
+  <style type="text/css">
+    h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
+      color: #226622;
+    }
+    a:visited.existingWikiWord {
+      color: #164416;
+    }
+    
+    
+  </style>
+  
+  <style type="text/css"><!--/*--><![CDATA[/*><!--*/
+    .toc ul {margin: 0; padding: 0;}
+.toc ul ul {margin: 0; padding: 0 0 0 10px;}
+.toc li > p {margin: 0}
+.toc ul li {list-style-type: none; position: relative;}
+.toc div {border-top:1px dotted #ccc;}
+.rightHandSide h2 {font-size: 1.5em;color:#008B26}
+table.plaintable {
+    border-collapse:collapse;
+    margin-left:30px;
+    border:0;
+}
+.plaintable td {border:1px solid #000; padding: 3px;}
+.plaintable th {padding: 3px;}
+.plaintable caption {
+    font-weight: bold;
+    font-size:1.1em;
+    text-align:center;
+    margin-left:30px;
+}
+    
+   
+/* Query boxes for questioning and answering mechanism */
+div.query{
+background: #f6fff3;
+border: solid #ce9;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+max-height: 20em;
+overflow: auto;
+}
+
+/* Standout boxes for putting important text */
+div.standout{
+background: #fff1f1;
+border: solid black;
+border-width: 2px 1px;
+padding: 0 1em;
+margin: 0 1em;
+overflow: auto;
+}
+
+/* Icon for links to n-category arXiv documents 
+ (commented out for now i.e. disabled)
+a[href*="http://arxiv.org/"] {
+  background-image: url(../files/arXiv_icon.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 22px;
+  } */
+    
+/* Icon for links to n-category cafe posts (disabled) 
+a[href*="http://golem.ph.utexas.edu/category"] {
+  background-image: url(../files/n-cafe_5.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pdf files (disabled)
+a[href$=".pdf"] {
+  background-image: url(../files/pdficon_small.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+/* Icon for links to pages, etc. -inside- pdf files (disabled)
+a[href*=".pdf#"] {
+  background-image: url(../files/pdf_entry.gif);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+     padding-right: 25px;
+  } */
+
+a.existingWikiWord {
+color: #226622;
+}
+
+a.existingWikiWord:visited {
+color: #226622;
+}
+
+
+a.existingWikiWord[title] {
+border: 0px;
+color: #aa0505;
+text-decoration: none;
+}
+    
+a.existingWikiWord[title]:visited {
+border: 0px;
+color: #551111;
+text-decoration: none;
+}
+
+a[href^="http://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="http://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+a[href^="https://"] {
+border: 0px;
+color: #003399;
+}
+
+a[href^="https://"]:visited {
+border: 0px;
+color: #330066;
+}
+
+div.dropDown .hide {
+display: none;
+}
+
+div.dropDown:hover .hide {
+display:block;
+}
+
+div.clickDown .hide {
+display: none;
+}
+
+div.clickDown:focus {
+outline:none;
+}
+
+div.clickDown:focus .hide, div.clickDown:hover .hide {
+display: block;
+}
+
+div.clickDown .clickToReveal, div.clickDown:focus .clickToHide {
+display:block;
+}
+
+div.clickDown:focus .clickToReveal, div.clickDown .clickToHide {
+display:none;
+}
+
+div.clickDown .clickToReveal:after {
+content: "A(Hover to reveal, click to "hold")";
+font-size: 60%;
+}
+
+div.clickDown .clickToHide:after {
+content: "A(Click to hide)";
+font-size: 60%;
+}
+div.clickDown .clickToHide, div.clickDown .clickToReveal {
+white-space: pre-wrap;
+}
+
+.un_theorem, .num_theorem, .un_lemma, .num_lemma, .un_prop, .num_prop, .un_cor, .num_cor, .un_defn, .num_defn, .un_example, .num_example, .un_note, .num_note, .un_remark, .num_remark {
+margin-left: 1em;
+}
+
+span.theorem_label {
+margin-left: -1em;
+}
+.proof span.theorem_label {
+margin-left: 0em;
+}
+:target {
+    background-color: #BBBBBB;
+    border-radius: 5pt;
+}
+
+  /*]]>*/--></style>
+  <script src="/javascripts/prototype.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1660229990" type="text/javascript"></script>
+<script src="/javascripts/application.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/page_helper.js?1660229990" type="text/javascript"></script>
+  <script src="/javascripts/thm_numbering.js?1660229990" type="text/javascript"></script>
+  
+  <script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Ajax.config.path["Contrib"] = "/MathJax";
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    extensions: ["handle-floats.js"]
+      }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+  </script>
+
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    window.addEventListener("DOMContentLoaded", function () {
+      var div = document.createElement('div');
+      var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+      document.body.appendChild(div);
+      div.appendChild(math);
+    // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+      div.setAttribute('style', 'font-style: italic');
+      var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+      div.parentNode.removeChild(div);
+      if (mathml_unsupported) {
+        // MathML does not seem to be supported...
+        var s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
+        document.querySelector('head').appendChild(s);
+      } else {
+        document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+      }
+    });
+    //--><!]]>
+  </script>
+
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  <script type="text/javascript">
+  document.observe("dom:loaded", function() {
+    generateThmNumbers();
+  });
+  </script>
+</head>
+
+<body>
+
+<div id="Container">
+<div id="Content">
+  <h1 id="pageName">
+    <span style="float: left; margin: 0.5em 0.25em -0.25em 0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.872em" height="1.8em" viewBox="0 0 190 181">
+        <path fill="#226622" d="M72.8 145c-1.6 17.3-15.7 10-23.6 20.2-5.6 7.3 4.8 15 11.4 15 11.5-.2 19-13.4 26.4-20.3 3.3-3 8.2-4 11.2-7.2a14 14 0 0 0 2.9-11.1c-1.4-9.6-12.4-18.6-16.9-27.2-5-9.6-10.7-27.4-24.1-27.7-17.4-.3-.4 26 4.7 30.7 2.4 2.3 5.4 4.1 7.3 6.9 1.6 2.3 2.1 5.8-1 7.2-5.9 2.6-12.4-6.3-15.5-10-8.8-10.6-15.5-23-26.2-31.8-5.2-4.3-11.8-8-18-3.7-7.3 4.9-4.2 12.9.2 18.5a81 81 0 0 0 30.7 23c3.3 1.5 12.8 5.6 10 10.7-2.5 5.2-11.7 3-15.6 1.1-8.4-3.8-24.3-21.3-34.4-13.7-3.5 2.6-2.3 7.6-1.2 11.1 2.8 9 12.2 17.2 20.9 20.5 17.3 6.7 34.3-8 50.8-12.1z"/>
+        <path fill="#a41e32" d="M145.9 121.3c-.2-7.5 0-19.6-4.5-26-5.4-7.5-12.9-1-14.1 5.8-1.4 7.8 2.7 14.1 4.8 21.3 3.4 12 5.8 29-.8 40.1-3.6-6.7-5.2-13-7-20.4-2.1-8.2-12.8-13.2-15.1-1.9-2 9.7 9 21.2 12 30.1 1.2 4 2 8.8 6.4 10.3 6.9 2.3 13.3-4.7 17.7-8.8 12.2-11.5 36.6-20.7 43.4-36.4 6.7-15.7-13.7-14-21.3-7.2-9.1 8-11.9 20.5-23.6 25.1 7.5-23.7 31.8-37.6 38.4-61.4 2-7.3-.8-29.6-13-19.8-14.5 11.6-6.6 37.6-23.3 49.2z"/>
+        <path fill="#193c78" d="M86.3 47.5c0-13-10.2-27.6-5.8-40.4 2.8-8.4 14.1-10.1 17-1 3.8 11.6-.3 26.3-1.8 38 11.7-.7 10.5-16 14.8-24.3 2.1-4.2 5.7-9.1 11-6.7 6 2.7 7.4 9.2 6.6 15.1-2.2 14-12.2 18.8-22.4 27-3.4 2.7-8 6.6-5.9 11.6 2 4.4 7 4.5 10.7 2.8 7.4-3.3 13.4-16.5 21.7-16 14.6.7 12 21.9.9 26.2-5 1.9-10.2 2.3-15.2 3.9-5.8 1.8-9.4 8.7-15.7 8.9-6.1.1-9-6.9-14.3-9-14.4-6-33.3-2-44.7-14.7-3.7-4.2-9.6-12-4.9-17.4 9.3-10.7 28 7.2 35.7 12 2 1.1 11 6.9 11.4 1.1.4-5.2-10-8.2-13.5-10-11.1-5.2-30-15.3-35-27.3-2.5-6 2.8-13.8 9.4-13.6 6.9.2 13.4 7 17.5 12C70.9 34 75 43.8 86.3 47.4z"/>
+      </svg>
+    </span>
+      <span class="webName">nLab</span>
+      dependent type theory with type variables
+  </h1>
+
+
+
+<div class="navigation">
+    <span class="skipNav"><a href='#navEnd'>Skip the Navigation Links</a> | </span>
+    <span style="display:inline-block; width: 0.3em;"></span>
+    <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
+    <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
+    <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
+    <a href="https://nforum.ncatlab.org/discussion/18729/#Item_1" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+<form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
+             style="display:inline-block; float: left;"
+             onfocus="this.value == 'Search' ? this.value = '' : true"
+             onblur="this.value == '' ? this.value = 'Search' : true" /></fieldset>
+</form>  <span id='navEnd'></span>
+</div>
+
+
+
+
+
+
+<div id="revision">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title></title></head>
+<body>
+<div class="rightHandSide">
+<div class="toc clickDown" tabindex="0">
+<h3 id="context">Context</h3>
+
+<h4 id="type_theory">Type theory</h4>
+
+<div class="hide"><div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/natural+deduction">natural deduction</a></strong> <a class="existingWikiWord" href="/nlab/show/metalanguage">metalanguage</a>, <a class="existingWikiWord" href="/nlab/show/practical+foundations">practical foundations</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/judgement">judgement</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/hypothetical+judgement">hypothetical judgement</a>, <a class="existingWikiWord" href="/nlab/show/sequent">sequent</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/antecedents">antecedents</a><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>⊢</mo></mrow><annotation encoding="application/x-tex">\vdash</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/consequent">consequent</a>, <a class="existingWikiWord" href="/nlab/show/succedents">succedents</a></li>
+</ul>
+</li>
+</ul>
+
+<ol>
+<li><a class="existingWikiWord" href="/nlab/show/type+formation+rule">type formation rule</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/term+introduction+rule">term introduction rule</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/term+elimination+rule">term elimination rule</a></li>
+
+<li><a class="existingWikiWord" href="/nlab/show/computation+rule">computation rule</a></li>
+</ol>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></strong> (<a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent</a>, <a class="existingWikiWord" href="/nlab/show/intensional+type+theory">intensional</a>, <a class="existingWikiWord" href="/nlab/show/observational+type+theory">observational type theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>)</p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/calculus+of+constructions">calculus of constructions</a></li>
+</ul>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/syntax">syntax</a></strong> <a class="existingWikiWord" href="/nlab/show/object+language">object language</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/theory">theory</a>, <a class="existingWikiWord" href="/nlab/show/axiom">axiom</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/proposition">proposition</a>/<a class="existingWikiWord" href="/nlab/show/type">type</a> (<a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/definition">definition</a>/<a class="existingWikiWord" href="/nlab/show/proof">proof</a>/<a class="existingWikiWord" href="/nlab/show/program">program</a> (<a class="existingWikiWord" href="/nlab/show/proofs+as+programs">proofs as programs</a>)</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/theorem">theorem</a></p>
+</li>
+</ul>
+<div>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/computational+trinitarianism">computational trinitarianism</a></strong> = <br /> <strong><a class="existingWikiWord" href="/nlab/show/propositions+as+types">propositions as types</a></strong> +<strong><a class="existingWikiWord" href="/nlab/show/programs+as+proofs">programs as proofs</a></strong> +<strong><a class="existingWikiWord" href="/nlab/show/relation+between+type+theory+and+category+theory">relation type theory/category theory</a></strong></p>
+
+<table><thead><tr><th><a class="existingWikiWord" href="/nlab/show/logic">logic</a></th><th><a class="existingWikiWord" href="/nlab/show/set+theory">set theory</a> (<a class="existingWikiWord" href="/nlab/show/internal+logic+of+set+theory">internal logic</a> of)</th><th><a class="existingWikiWord" href="/nlab/show/category+theory">category theory</a></th><th><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></th></tr></thead><tbody><tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/proposition">proposition</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/object">object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type">type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/predicate">predicate</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/family+of+sets">family of sets</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/display+morphism">display morphism</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+type">dependent type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/proof">proof</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/element">element</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/generalized+element">generalized element</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/term">term</a>/<a class="existingWikiWord" href="/nlab/show/program">program</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/cut+rule">cut rule</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/composition">composition</a> of <a class="existingWikiWord" href="/nlab/show/classifying+morphisms">classifying morphisms</a> / <a class="existingWikiWord" href="/nlab/show/pullback">pullback</a> of <a class="existingWikiWord" href="/nlab/show/display+maps">display maps</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/substitution">substitution</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/introduction+rule">introduction rule</a> for <a class="existingWikiWord" href="/nlab/show/implication">implication</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/counit">counit</a> for hom-tensor adjunction</td><td style="text-align: left;">lambda</td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/elimination+rule">elimination rule</a> for <a class="existingWikiWord" href="/nlab/show/implication">implication</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/unit">unit</a> for hom-tensor adjunction</td><td style="text-align: left;">application</td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/cut+elimination">cut elimination</a> for <a class="existingWikiWord" href="/nlab/show/implication">implication</a></td><td style="text-align: left;"></td><td style="text-align: left;">one of the <a class="existingWikiWord" href="/nlab/show/zigzag+identities">zigzag identities</a> for hom-tensor adjunction</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/beta+reduction">beta reduction</a></td></tr>
+<tr><td style="text-align: left;">identity elimination for <a class="existingWikiWord" href="/nlab/show/implication">implication</a></td><td style="text-align: left;"></td><td style="text-align: left;">the other <a class="existingWikiWord" href="/nlab/show/zigzag+identity">zigzag identity</a> for hom-tensor adjunction</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/eta+conversion">eta conversion</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/true">true</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/singleton">singleton</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a>/<a class="existingWikiWord" href="/nlab/show/%28-2%29-truncated+object">(-2)-truncated object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/h-level+0">h-level 0</a>-<a class="existingWikiWord" href="/nlab/show/type">type</a>/<a class="existingWikiWord" href="/nlab/show/unit+type">unit type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/false">false</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/empty+set">empty set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/proposition">proposition</a>, <a class="existingWikiWord" href="/nlab/show/truth+value">truth value</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/subsingleton">subsingleton</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/subterminal+object">subterminal object</a>/<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncated+object">(-1)-truncated object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/h-proposition">h-proposition</a>, <a class="existingWikiWord" href="/nlab/show/mere+proposition">mere proposition</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/logical+conjunction">logical conjunction</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/cartesian+product">cartesian product</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/product">product</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/product+type">product type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/disjunction">disjunction</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/disjoint+union">disjoint union</a> (<a class="existingWikiWord" href="/nlab/show/support">support</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/coproduct">coproduct</a> (<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncation">(-1)-truncation</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/sum+type">sum type</a> (<a class="existingWikiWord" href="/nlab/show/bracket+type">bracket type</a> of)</td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/implication">implication</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+set">function set</a> (into <a class="existingWikiWord" href="/nlab/show/subsingleton">subsingleton</a>)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a> (into <a class="existingWikiWord" href="/nlab/show/subterminal+object">subterminal object</a>)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+type">function type</a> (into <a class="existingWikiWord" href="/nlab/show/h-proposition">h-proposition</a>)</td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/negation">negation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+set">function set</a> into <a class="existingWikiWord" href="/nlab/show/empty+set">empty set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/internal+hom">internal hom</a> into <a class="existingWikiWord" href="/nlab/show/initial+object">initial object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/function+type">function type</a> into <a class="existingWikiWord" href="/nlab/show/empty+type">empty type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/universal+quantification">universal quantification</a></td><td style="text-align: left;">indexed <a class="existingWikiWord" href="/nlab/show/cartesian+product">cartesian product</a> (of family of <a class="existingWikiWord" href="/nlab/show/subsingletons">subsingletons</a>)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+product">dependent product</a> (of family of <a class="existingWikiWord" href="/nlab/show/subterminal+objects">subterminal objects</a>)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+product+type">dependent product type</a> (of family of <a class="existingWikiWord" href="/nlab/show/h-propositions">h-propositions</a>)</td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/existential+quantification">existential quantification</a></td><td style="text-align: left;">indexed <a class="existingWikiWord" href="/nlab/show/disjoint+union">disjoint union</a> (<a class="existingWikiWord" href="/nlab/show/support">support</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+sum">dependent sum</a> (<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncation">(-1)-truncation</a> of)</td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/dependent+sum+type">dependent sum type</a> (<a class="existingWikiWord" href="/nlab/show/bracket+type">bracket type</a> of)</td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/logical+equivalence">logical equivalence</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/bijection+set">bijection set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/object+of+isomorphisms">object of isomorphisms</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equivalence+type">equivalence type</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/support+set">support set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/support+object">support object</a>/<a class="existingWikiWord" href="/nlab/show/%28-1%29-truncation">(-1)-truncation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/propositional+truncation">propositional truncation</a>/<a class="existingWikiWord" href="/nlab/show/bracket+type">bracket type</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/n-image">n-image</a> of <a class="existingWikiWord" href="/nlab/show/morphism">morphism</a> into <a class="existingWikiWord" href="/nlab/show/terminal+object">terminal object</a>/<a class="existingWikiWord" href="/nlab/show/n-truncation">n-truncation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/n-truncation+modality">n-truncation modality</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equality">equality</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/diagonal+function">diagonal function</a>/<a class="existingWikiWord" href="/nlab/show/diagonal+subset">diagonal subset</a>/<a class="existingWikiWord" href="/nlab/show/diagonal+relation">diagonal relation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/path+space+object">path space object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/identity+type">identity type</a>/<a class="existingWikiWord" href="/nlab/show/path+type">path type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/completely+presented+set">completely presented set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/discrete+object">discrete object</a>/<a class="existingWikiWord" href="/nlab/show/0-truncated+object">0-truncated object</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/h-level+2">h-level 2</a>-<a class="existingWikiWord" href="/nlab/show/type">type</a>/<a class="existingWikiWord" href="/nlab/show/set">set</a>/<a class="existingWikiWord" href="/nlab/show/h-set">h-set</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a> with <a class="existingWikiWord" href="/nlab/show/equivalence+relation">equivalence relation</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/groupoid+object+in+an+%28infinity%2C1%29-category">internal 0-groupoid</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/Bishop+set">Bishop set</a>/<a class="existingWikiWord" href="/nlab/show/setoid">setoid</a> with its <a class="existingWikiWord" href="/nlab/show/pseudo-equivalence+relation">pseudo-equivalence relation</a> an actual <a class="existingWikiWord" href="/nlab/show/equivalence+relation">equivalence relation</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/equivalence+class">equivalence class</a>/<a class="existingWikiWord" href="/nlab/show/quotient+set">quotient set</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quotient">quotient</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quotient+type">quotient type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/induction">induction</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/colimit">colimit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/inductive+type">inductive type</a>, <a class="existingWikiWord" href="/nlab/show/W-type">W-type</a>, <a class="existingWikiWord" href="/nlab/show/M-type">M-type</a></td></tr>
+<tr><td style="text-align: left;">higher <a class="existingWikiWord" href="/nlab/show/induction">induction</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-colimit">higher colimit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/higher+inductive+type">higher inductive type</a></td></tr>
+<tr><td style="text-align: left;">-</td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/0-truncated">0-truncated</a> <a class="existingWikiWord" href="/nlab/show/%28infinity%2C1%29-colimit">higher colimit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quotient+inductive+type">quotient inductive type</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/coinduction">coinduction</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/limit">limit</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/coinductive+type">coinductive type</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/preset">preset</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type">type</a> without <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/set">set</a> of <a class="existingWikiWord" href="/nlab/show/truth+values">truth values</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/subobject+classifier">subobject classifier</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type+of+propositions">type of propositions</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/domain+of+discourse">domain of discourse</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/universe">universe</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/object+classifier">object classifier</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/type+universe">type universe</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/modality">modality</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/closure+operator">closure operator</a>, (<a class="existingWikiWord" href="/nlab/show/idempotent+monad">idempotent</a>) <a class="existingWikiWord" href="/nlab/show/monad">monad</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/modal+type+theory">modal type theory</a>, <a class="existingWikiWord" href="/nlab/show/monad+%28in+computer+science%29">monad (in computer science)</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a></td><td style="text-align: left;"></td><td style="text-align: left;">(<a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric</a>, <a class="existingWikiWord" href="/nlab/show/closed+monoidal+category">closed</a>) <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/linear+type+theory">linear type theory</a>/<a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a></td></tr>
+<tr><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/proof+net">proof net</a></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/string+diagram">string diagram</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a></td></tr>
+<tr><td style="text-align: left;">(absence of) <a class="existingWikiWord" href="/nlab/show/contraction+rule">contraction rule</a></td><td style="text-align: left;"></td><td style="text-align: left;">(absence of) <a class="existingWikiWord" href="/nlab/show/diagonal">diagonal</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/no-cloning+theorem">no-cloning theorem</a></td></tr>
+<tr><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/synthetic+mathematics">synthetic mathematics</a></td><td style="text-align: left;"><a class="existingWikiWord" href="/nlab/show/domain+specific+embedded+programming+language">domain specific embedded programming language</a></td></tr>
+</tbody></table>
+
+</div>
+<p><strong><a class="existingWikiWord" href="/nlab/show/homotopy+levels">homotopy levels</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/2-type+theory">2-type theory</a>, <a class="existingWikiWord" href="/michaelshulman/show/2-categorical+logic">2-categorical logic</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+type+theory">homotopy type theory</a>, <a class="existingWikiWord" href="/nlab/show/homotopy+type+theory+-+contents">homotopy type theory - contents</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/homotopy+type">homotopy type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/univalence">univalence</a>, <a class="existingWikiWord" href="/nlab/show/function+extensionality">function extensionality</a>, <a class="existingWikiWord" href="/nlab/show/internal+logic+of+an+%28%E2%88%9E%2C1%29-topos">internal logic of an (∞,1)-topos</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/cohesive+homotopy+type+theory">cohesive homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/directed+homotopy+type+theory">directed homotopy type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/HoTT+methods+for+homotopy+theorists">HoTT methods for homotopy theorists</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><strong><a class="existingWikiWord" href="/nlab/show/semantics">semantics</a></strong></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/internal+logic">internal logic</a>, <a class="existingWikiWord" href="/nlab/show/categorical+semantics">categorical semantics</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/display+map">display map</a></li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/internal+logic+of+a+topos">internal logic of a topos</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Mitchell-Benabou+language">Mitchell-Benabou language</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Kripke-Joyal+semantics">Kripke-Joyal semantics</a></p>
+</li>
+</ul>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/internal+logic+of+an+%28%E2%88%9E%2C1%29-topos">internal logic of an (∞,1)-topos</a></p>
+
+<ul>
+<li><a class="existingWikiWord" href="/nlab/show/type-theoretic+model+category">type-theoretic model category</a></li>
+</ul>
+</li>
+</ul>
+<div>
+<p>
+  <a href="/nlab/edit/type+theory+-+contents">Edit this sidebar</a>
+</p>
+</div></div></div>
+</div>
+</div>
+
+
+<h1 id='section_table_of_contents'>Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#idea'>Idea</a></li>
+<li><a href='#definition'>Definition</a></li>
+<ul>
+<li><a href='#judgmental_equality'>Judgmental equality</a></li>
+<li><a href='#impredicative_polymorphism'>Impredicative polymorphism</a></li>
+<li><a href='#identity_types_between_types'>Identity types between types</a></li>
+<ul>
+<li><a href='#univalence_axiom'> Univalence axiom</a></li>
+<li><a href='#large_recursion_principles'>Large recursion principles</a></li>
+<li><a href='#tarski_universes'>Tarski universes</a></li>
+</ul>
+<li><a href='#large_recursion_principles_2'>Large recursion principles</a></li>
+</ul>
+<li><a href='#related_concepts'> Related concepts</a></li>
+<li><a href='#references'>References</a></li>
+</ul>
+</div>
+
+
+<h2 id="idea">Idea</h2>
+
+<p>Traditionally, there are two different ways to present <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a>:</p>
+
+<ul>
+<li>
+<p>One can present dependent type theory with a <a class="existingWikiWord" href="/nlab/show/hierarchy+of+type+universes">hierarchy of type universes</a> such that every type is a term of a universe of the hierarchy. Examples of such dependent type theories include the one found in the <a class="existingWikiWord" href="/nlab/show/HoTT+book">HoTT book</a> and the proof assistants <a class="existingWikiWord" href="/nlab/show/Agda">Agda</a>, <a class="existingWikiWord" href="/nlab/show/Coq">Coq</a>, <a class="existingWikiWord" href="/nlab/show/Lean">Lean</a>, and its variants like <a class="existingWikiWord" href="/nlab/show/Cubical+Agda">Cubical Agda</a>.</p>
+</li>
+
+<li>
+<p>Alternatively, one can present dependent type theory with a separate type <a class="existingWikiWord" href="/nlab/show/judgment">judgment</a> and no <a class="existingWikiWord" href="/nlab/show/type+universes">type universes</a> at all. Examples of such dependent type theories include the one found in <a class="existingWikiWord" href="/nlab/show/Egbert+Rijke">Egbert Rijke</a>‘s <a class="existingWikiWord" href="/nlab/show/Introduction+to+Homotopy+Type+Theory">Introduction to Homotopy Type Theory</a>.</p>
+</li>
+</ul>
+
+<p>In the first presentation of dependent type theory, the concept of a “type variable” exists: since types are terms of universes, type variables are term variables where the <a class="existingWikiWord" href="/nlab/show/context">context</a> is extended by a free variable of a universe.</p>
+
+<p>In the second presentation of dependent type theory, the theory does not come with the concept of a type variable, since the context can only be extended by term judgments, and not type judgments. While this is sufficient to define <a class="existingWikiWord" href="/nlab/show/univalent+universes">univalent universes</a> and <a class="existingWikiWord" href="/nlab/show/higher+inductive+types">higher inductive types</a> in the type theory, there are a few reasons why one might want to extend dependent type theory with type variables:</p>
+
+<ul>
+<li>
+<p>One wants a <a class="existingWikiWord" href="/nlab/show/polymorphism">polymorphic</a> <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a>.</p>
+</li>
+
+<li>
+<p>Large recursion principles of inductive types and higher inductive types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> are principles where given some existing data one can construct a type family <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>x</mi><msub><mo stretchy="false">)</mo> <mrow><mi>x</mi><mo>:</mo><mi>T</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C(x)_{x:T}</annotation></semantics></math> indexed by the inductive type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>. (In the other formulation, large recursion principles are just the usual recursion principles for functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">T \to U</annotation></semantics></math> into a type universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math>.) While the large recursion principles of certain non-recursive inductive types and higher inductive types, such as the <a class="existingWikiWord" href="/nlab/show/boolean+domain">boolean domain</a>, the <a class="existingWikiWord" href="/nlab/show/circle+type">circle type</a>, and <a class="existingWikiWord" href="/nlab/show/graph+quotients">graph quotients</a>, can be defined without type variables, the large recursion principles of recursive inductive types and higher inductive types, such as the <a class="existingWikiWord" href="/nlab/show/natural+numbers+type">natural numbers type</a> and <a class="existingWikiWord" href="/nlab/show/W-types">W-types</a>, require type variables in the theory.</p>
+</li>
+
+<li>
+<p>With type variables, one can define <a class="existingWikiWord" href="/nlab/show/identity+types">identity types</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>=</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A = B</annotation></semantics></math> between types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>. This has a few benefits:</p>
+
+<ol>
+<li>
+<p>With identity types between types, it is possible to define the <a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a> and thus make the type theory a <a class="existingWikiWord" href="/nlab/show/univalent+type+theory">univalent type theory</a> without requiring universes in the type theory. This is important since the univalence axiom implies the large recursion principles discussed in the previous point.</p>
+</li>
+
+<li>
+<p>In a <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> without <a class="existingWikiWord" href="/nlab/show/judgmental+equality">judgmental equality</a>, such as <a class="existingWikiWord" href="/nlab/show/objective+type+theory">objective type theory</a>, it is cumbersome to define types in terms of other types, since one has to equip each definition with the structure of an <a class="existingWikiWord" href="/nlab/show/equivalence+of+types">equivalence of types</a>. With identity types between types, one can simply make use of an <a class="existingWikiWord" href="/nlab/show/identification">identification</a> between types.</p>
+</li>
+
+<li>
+<p>The same goes with the weak large recursion principles: in the absence of either judgmental equality or identity types between types, the <a class="existingWikiWord" href="/nlab/show/computation+rules">computation rules</a> associated with large recursion principles state that one can construct an equivalence of types between certain types given in the <a class="existingWikiWord" href="/nlab/show/elimination+rules">elimination rules</a> of the large recursion principles. With identity types between types, one can simply make use of an <a class="existingWikiWord" href="/nlab/show/identification">identification</a> between types.</p>
+</li>
+</ol>
+</li>
+
+<li>
+<p>The concept of <a class="existingWikiWord" href="/nlab/show/impredicative+polymorphism">impredicative polymorphism</a> can be implemented as applying to the entire type theory, rather than to a single universe.</p>
+</li>
+</ul>
+
+<p>Dependent type theory with type variables is thus similar to <a class="existingWikiWord" href="/nlab/show/System+F">System F</a>, which is a non-dependent <a class="existingWikiWord" href="/nlab/show/polymorphism">polymorphic</a> <a class="existingWikiWord" href="/nlab/show/lambda+calculus">lambda calculus</a> with type variables.</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>We assume <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> with context judgments <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><annotation encoding="application/x-tex">\Gamma \; \mathrm{ctx}</annotation></semantics></math>, type judgments <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">A \; \mathrm{type}</annotation></semantics></math>, and term judgments <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a:A</annotation></semantics></math> and the usual context-creating rules and <a class="existingWikiWord" href="/nlab/show/structural+rules">structural rules</a> for the dependent type theory.</p>
+
+<p>To extend the above theory with type variables, we add the following rule</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><mrow><mo stretchy="false">(</mo><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \; \mathrm{ctx}}{(\Gamma, A \; \mathrm{type}) \; \mathrm{ctx}}</annotation></semantics></math></div>
+<p>which states that it is possible to extend the <a class="existingWikiWord" href="/nlab/show/context">context</a> by a type judgment, and the following rule</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>Δ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>Δ</mi><mo>⊢</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, A \; \mathrm{type}, \Delta \; \mathrm{ctx}}{\Gamma, A \; \mathrm{type}, \Delta \vdash A \; \mathrm{type}}</annotation></semantics></math></div>
+<p>which states that we may derive a type judgment if the type judgment is already in the context.</p>
+
+<p>It is conjectured in the <a href="#CTZulip">Category Theory Zulip</a> that the substitution rules and weakening rules for type variables are <a class="existingWikiWord" href="/nlab/show/admissible+rules">admissible rules</a>.</p>
+
+<h3 id="judgmental_equality">Judgmental equality</h3>
+
+<p>If the type theory has additional judgments <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>≡</mo><mi>b</mi><mo>:</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a \equiv b:A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>≡</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">A \equiv B \; \mathrm{type}</annotation></semantics></math> for <a class="existingWikiWord" href="/nlab/show/judgmental+equality+of+terms">judgmental equality of terms</a> and <a class="existingWikiWord" href="/nlab/show/judgmental+equality+of+types">judgmental equality of types</a> respectively and the associated <a class="existingWikiWord" href="/nlab/show/structural+rules">structural rules</a> for judgmental equality, then the corresponding rules for judgmental equality involving type variables (i.e. substitution is a congruence, variable conversion, etc) should also be <a class="existingWikiWord" href="/nlab/show/admissible+rules">admissible rules</a>.</p>
+
+<h3 id="impredicative_polymorphism">Impredicative polymorphism</h3>
+
+<p>In the presentation of dependent type theory using a hierarchy of universes, <a class="existingWikiWord" href="/nlab/show/impredicative+polymorphism">impredicative polymorphism</a> is a resizing axiom which says that for all <a class="existingWikiWord" href="/nlab/show/endofunctions">endofunctions</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo>:</mo><msub><mi>U</mi> <mn>0</mn></msub><mo>→</mo><msub><mi>U</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">P:U_0 \to U_0</annotation></semantics></math> on the first <a class="existingWikiWord" href="/nlab/show/type+universe">type universe</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">U_0</annotation></semantics></math>, the <a class="existingWikiWord" href="/nlab/show/dependent+product+type">dependent product type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>X</mi><mo>:</mo><msub><mi>U</mi> <mn>0</mn></msub></mrow></msub><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\prod_{X:U_0} P(X)</annotation></semantics></math> is (<a class="existingWikiWord" href="/nlab/show/essentially+small+type">essentially</a>) <a class="existingWikiWord" href="/nlab/show/small+type"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <msub><mi>U</mi> <mn>0</mn></msub>
+    </mrow>
+    <annotation encoding="application/x-tex">U_0</annotation>
+  </semantics>
+</math>-small</a>.</p>
+
+<p>In the presentation of dependent type theory without universes but with a separate type judgment, while there is no universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mn>0</mn></msub></mrow><annotation encoding="application/x-tex">U_0</annotation></semantics></math> to quantify over for the dependent product type, using the type variable we can add an untyped version of the dependent product type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi X.P(X)</annotation></semantics></math> to the type theory. This type is similar to <a class="existingWikiWord" href="/nlab/show/universal+quantification">universal quantification</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∀</mo><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall X.P(X)</annotation></semantics></math> in untyped <a class="existingWikiWord" href="/nlab/show/first-order+logic">first-order logic</a>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi X.P(X)</annotation></semantics></math> plays the same role in this presentation of dependent type theory that the type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>X</mi><mo>:</mo><msub><mi>U</mi> <mn>0</mn></msub></mrow></msub><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\prod_{X:U_0} P(X)</annotation></semantics></math> does for the other presentation of dependnet type theory. The rules for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Pi X.P(X)</annotation></semantics></math> are as follows:</p>
+
+<p>Formation rule:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X \; \mathrm{type} \vdash P(X) \; \mathrm{type}}{\Gamma \vdash \Pi X.P(X) \; \mathrm{type}}</annotation></semantics></math></div>
+<p>Introduction rule:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>p</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>λ</mi><mi>X</mi><mo>.</mo><mi>p</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X \; \mathrm{type} \vdash P(X) \; \mathrm{type} \quad \Gamma, X \; \mathrm{type} \vdash p(X):P(x)}{\Gamma \vdash \lambda X.p(X):\Pi X.P(X)}</annotation></semantics></math></div>
+<p>Elimination rule:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>p</mi><mo>:</mo><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi mathvariant="normal">ev</mi><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X \; \mathrm{type} \vdash P(X) \; \mathrm{type} \quad \Gamma \vdash p:\Pi X.P(X)}{\Gamma, A \; \mathrm{type} \vdash \mathrm{ev}(p, X):P(X)}</annotation></semantics></math></div>
+<p>Computation rules:</p>
+
+<ul>
+<li>Judgmental computation rule:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>p</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi mathvariant="normal">ev</mi><mo stretchy="false">(</mo><mi>λ</mi><mi>X</mi><mo>.</mo><mi>p</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>≡</mo><mi>p</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X \; \mathrm{type} \vdash P(X) \; \mathrm{type} \quad \Gamma, X \; \mathrm{type} \vdash p(X):P(x)}{\Gamma, X \; \mathrm{type} \vdash \mathrm{ev}(\lambda X.p(X), X) \equiv p(X):P(X)}</annotation></semantics></math></div></li>
+
+<li>Typal computation rule:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>p</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><msubsup><mi>β</mi> <mi>Π</mi> <mrow><mi>P</mi><mo>,</mo><mi>p</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi mathvariant="normal">ev</mi><mo stretchy="false">(</mo><mi>λ</mi><mi>X</mi><mo>.</mo><mi>p</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><msub><mo>=</mo> <mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></msub><mi>p</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X \; \mathrm{type} \vdash P(X) \; \mathrm{type} \quad \Gamma, X \; \mathrm{type} \vdash p(X):P(x)}{\Gamma, X \; \mathrm{type} \vdash \beta_\Pi^{P, p}(X):\mathrm{ev}(\lambda X.p(X), X) =_{P(X)} p(X)}</annotation></semantics></math></div></li>
+</ul>
+
+<p>Uniqueness rules:</p>
+
+<ul>
+<li>Judgmental uniqueness rule:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>p</mi><mo>:</mo><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi>λ</mi><mi>X</mi><mo>.</mo><mi mathvariant="normal">ev</mi><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>≡</mo><mi>p</mi><mo>:</mo><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X \; \mathrm{type} \vdash P(X) \; \mathrm{type} \quad \Gamma \vdash p:\Pi X.P(X)}{\Gamma \vdash \lambda X.\mathrm{ev}(p, X) \equiv p:\Pi X.P(x)}</annotation></semantics></math></div></li>
+
+<li>Typal uniqueness rule:<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>p</mi><mo>:</mo><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><msubsup><mi>η</mi> <mi>Π</mi> <mi>P</mi></msubsup><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo><mo>:</mo><mi>λ</mi><mi>X</mi><mo>.</mo><mi mathvariant="normal">ev</mi><mo stretchy="false">(</mo><mi>p</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><msub><mo>=</mo> <mrow><mi>Π</mi><mi>X</mi><mo>.</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></msub><mi>p</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, X \; \mathrm{type} \vdash P(X) \; \mathrm{type} \quad \Gamma \vdash p:\Pi X.P(X)}{\Gamma \vdash \eta_\Pi^P(p):\lambda X.\mathrm{ev}(p, X) =_{\Pi X.P(x)} p}</annotation></semantics></math></div></li>
+</ul>
+
+<h3 id="identity_types_between_types">Identity types between types</h3>
+
+<p>Type variables allow for the formation of <a class="existingWikiWord" href="/nlab/show/identity+#IdentityTypesBetweenTypes">identity types between types</a>.</p>
+
+<ul>
+<li>Formation rule for identity types between types:</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi>A</mi><mo>=</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \; \mathrm{ctx}}{\Gamma, A \; \mathrm{type}, B \; \mathrm{type} \vdash A = B \; \mathrm{type}}</annotation></semantics></math></div>
+<ul>
+<li>Introduction rule for identity types between types:</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi><mo>=</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \; \mathrm{ctx}}{\Gamma, A \; \mathrm{type} \vdash \mathrm{refl}(A):A = A}</annotation></semantics></math></div>
+<ul>
+<li>Elimination rule for identity types between types:</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mo>⊢</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>⊢</mo><mi>t</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mo>⊢</mo><msubsup><mi mathvariant="normal">ind</mi> <mo>=</mo> <mrow><mi>C</mi><mo>,</mo><mi>t</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, A \; \mathrm{type}, B \; \mathrm{type}, p:A = B, \Delta(A, B, p) \vdash C(A, B, p) \; \mathrm{type} \quad \Gamma, A \; \mathrm{type}, \Delta(A, A, \mathrm{refl}(A)) \vdash t(A):C(A, A, \mathrm{refl}(A))}{\Gamma, A \; \mathrm{type}, B \; \mathrm{type}, p:A = B, \Delta(A, B, p) \vdash \mathrm{ind}_=^{C, t}(A, B, p):C(A, B, p)}</annotation></semantics></math></div>
+<ul>
+<li>Judgmental computation rule for identity types between types:</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mo>⊢</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>⊢</mo><mi>t</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mo>;</mo><mi mathvariant="normal">type</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>⊢</mo><msubsup><mi mathvariant="normal">ind</mi> <mo>=</mo> <mi>C</mi></msubsup><mo stretchy="false">(</mo><mi>t</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≡</mo><mi>t</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, A \; \mathrm{type}, B \; \mathrm{type}, p:A = B, \Delta(A, B, p) \vdash C(A, B, p) \; \mathrm{type} \quad \Gamma, A \; \mathrm{type}, \Delta(A, A, \mathrm{refl}(A)) \vdash t(A):C(A, A, \mathrm{refl}(A))}{\Gamma, A ; \mathrm{type}, \Delta(A, A, \mathrm{refl}(A)) \vdash \mathrm{ind}_=^{C}(t, A, A, \mathrm{refl}(A)) \equiv t(A):C(A, A, \mathrm{refl}(A))}</annotation></semantics></math></div>
+<ul>
+<li>Typal computation rule for identity types between types</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mo>⊢</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>⊢</mo><mi>t</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mo>;</mo><mi mathvariant="normal">type</mi><mo>,</mo><mi>Δ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>⊢</mo><msubsup><mi>β</mi> <mo>=</mo> <mrow><mi>C</mi><mo>,</mo><mi>t</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><msubsup><mi mathvariant="normal">ind</mi> <mo>=</mo> <mi>C</mi></msubsup><mo stretchy="false">(</mo><mi>t</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msub><mo>=</mo> <mrow><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></msub><mi>t</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, A \; \mathrm{type}, B \; \mathrm{type}, p:A = B, \Delta(A, B, p) \vdash C(A, B, p) \; \mathrm{type} \quad \Gamma, A \; \mathrm{type}, \Delta(A, A, \mathrm{refl}(A)) \vdash t(A):C(A, A, \mathrm{refl}(A))}{\Gamma, A ; \mathrm{type}, \Delta(A, A, \mathrm{refl}(A)) \vdash \beta_{=}^{C, t}(A):\mathrm{ind}_=^{C}(t, A, A, \mathrm{refl}(A)) =_{C(A, A, \mathrm{refl}(A))} t(A)}</annotation></semantics></math></div>
+<p>If the dependent type theory has <a class="existingWikiWord" href="/nlab/show/impredicative+polymorphism">impredicative polymorphism</a>, then the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Δ</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math> contexts can be removed from the elimination and computation rules of the identity types between types, simplifying the rules down to the following:</p>
+
+<ul>
+<li>Elimination rule for identity types between types:</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo>⊢</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>Π</mi><mi>A</mi><mo>.</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">ind</mi> <mo>=</mo> <mi>C</mi></msubsup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi>Π</mi><mi>A</mi><mo>.</mo><mi>Π</mi><mi>B</mi><mo>.</mo><mi>Π</mi><mo stretchy="false">(</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo stretchy="false">)</mo><mo>.</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, A \; \mathrm{type}, B \; \mathrm{type}, p:A = B \vdash C(A, B, p) \; \mathrm{type} \quad \Gamma \vdash t:\Pi A.C(A, A, \mathrm{refl}(A))}{\Gamma \vdash \mathrm{ind}_=^{C}(t):\Pi A.\Pi B.\Pi (p:A = B).C(A, B, p)}</annotation></semantics></math></div>
+<ul>
+<li>Judgmental computation rule for identity types between types:</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo>⊢</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>Π</mi><mi>A</mi><mo>.</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">ind</mi> <mo>=</mo> <mi>C</mi></msubsup><mo stretchy="false">(</mo><mi>t</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≡</mo><mi>t</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, A \; \mathrm{type}, B \; \mathrm{type}, p:A = B \vdash C(A, B, p) \; \mathrm{type} \quad \Gamma \vdash t:\Pi A.C(A, A, \mathrm{refl}(A))}{\Gamma, A \; \mathrm{type} \vdash \mathrm{ind}_=^{C}(t, A, A, \mathrm{refl}(A)) \equiv t(A):C(A, A, \mathrm{refl}(A))}</annotation></semantics></math></div>
+<ul>
+<li>Typal computation rule for identity types between types:</li>
+</ul>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>B</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>,</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo>⊢</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mi>Π</mi><mi>A</mi><mo>.</mo><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><mrow><mi>Γ</mi><mo>⊢</mo><msubsup><mi>β</mi> <mo>=</mo> <mi>C</mi></msubsup><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi>Π</mi><mi>A</mi><mo>.</mo><msubsup><mi mathvariant="normal">ind</mi> <mo>=</mo> <mi>C</mi></msubsup><mo stretchy="false">(</mo><mi>t</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msub><mo>=</mo> <mrow><mi>C</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></msub><mi>t</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma, A \; \mathrm{type}, B \; \mathrm{type}, p:A = B \vdash C(A, B, p) \; \mathrm{type} \quad \Gamma \vdash t:\Pi A.C(A, A, \mathrm{refl}(A))}{\Gamma \vdash \beta_{=}^{C}(t):\Pi A.\mathrm{ind}_=^{C}(t, A, A, \mathrm{refl}(A)) =_{C(A, A, \mathrm{refl}(A))} t(A)}</annotation></semantics></math></div>
+<p>There are many consequences of having identity types between types in the dependent type theory, such as the <span class="newWikiWord">univalence axioms<a href="/nlab/new/univalence+axioms">?</a></span>, a version of large recursion principles for inductive types and higher inductive types which uses identity types between types instead of equivalence types, and a new kind of <a class="existingWikiWord" href="/nlab/show/Tarski+universes">Tarski universes</a>.</p>
+
+<h4 id="univalence_axiom"> Univalence axiom</h4>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a> states that the function</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">idtoequiv</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mo stretchy="false">(</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo stretchy="false">)</mo><mo>→</mo><mo stretchy="false">(</mo><mi>A</mi><mo>≃</mo><mi>B</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{idtoequiv}(A, B):(A = B) \to (A \simeq B)</annotation></semantics></math></div>
+<p>inductively defined by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">idtoequiv</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>A</mi><mo>,</mo><mi mathvariant="normal">refl</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≔</mo><msub><mi mathvariant="normal">id</mi> <mi>A</mi></msub></mrow><annotation encoding="application/x-tex">\mathrm{idtoequiv}(A, A, \mathrm{refl}(A)) \coloneqq \mathrm{id}_A</annotation></semantics></math></div>
+<p>is an <a class="existingWikiWord" href="/nlab/show/equivalence+of+types">equivalence of types</a> for all types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">isEquiv</mi><mo stretchy="false">(</mo><mi mathvariant="normal">idtoequiv</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{isEquiv}(\mathrm{idtoequiv}(A, B))</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi mathvariant="normal">id</mi> <mi>A</mi></msub><mo>≔</mo><mi>λ</mi><mi>x</mi><mo>:</mo><mi>A</mi><mo>.</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\mathrm{id}_A \coloneqq \lambda x:A.x</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/identity+function">identity function</a> on the type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>. In <a class="existingWikiWord" href="/nlab/show/impredicative+polymorphism">impredicative polymorphism</a>, this is given by the following axiom:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">ctx</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mi mathvariant="normal">ua</mi><mo>:</mo><mi>Π</mi><mi>A</mi><mo>.</mo><mi>Π</mi><mi>B</mi><mo>.</mo><mi mathvariant="normal">isEquiv</mi><mo stretchy="false">(</mo><mi>λ</mi><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>B</mi><mo>.</mo><mi mathvariant="normal">idtoequiv</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>p</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\Gamma \; \mathrm{ctx}}{\Gamma \vdash \mathrm{ua}:\Pi A.\Pi B.\mathrm{isEquiv}(\lambda p:A = B.\mathrm{idtoequiv}(A, B, p))}</annotation></semantics></math></div>
+<p>Unlike the other presentation of dependent type theory in terms of universes, in this presentation of dependent type theory with a type judgment and type variables, it <em>is consistent</em> to assume both the <a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a> and an <a class="existingWikiWord" href="/nlab/show/axiom+of+set+truncation">axiom of set truncation</a> like <a class="existingWikiWord" href="/nlab/show/UIP">UIP</a> or <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a>, since here there is no universe.</p>
+
+<h4 id="large_recursion_principles">Large recursion principles</h4>
+
+<p>In the usual dependent type theory without type variables, large recursion of <a class="existingWikiWord" href="/nlab/show/inductive+types">inductive types</a> and <a class="existingWikiWord" href="/nlab/show/higher+inductive+types">higher inductive types</a> is usually expressed in terms of <a class="existingWikiWord" href="/nlab/show/equivalence+of+types">equivalences</a> and <a class="existingWikiWord" href="/nlab/show/transport">transport</a>. For example, the strict large recursion principle of the <a class="existingWikiWord" href="/nlab/show/circle+type">circle type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow><annotation encoding="application/x-tex">S^1</annotation></semantics></math> usually states that given a type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and an <a class="existingWikiWord" href="/nlab/show/autoequivalence">autoequivalence</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>e</mi><mo>:</mo><mi>A</mi><mo>≃</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">e:A \simeq A</annotation></semantics></math>, one can form the type family <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><msup><mi>S</mi> <mn>1</mn></msup><mo>⊢</mo><msubsup><mi mathvariant="normal">lrec</mi> <mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow> <mrow><mi>A</mi><mo>,</mo><mi>e</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x:S^1 \vdash \mathrm{lrec}_{S^1}^{A, e}(x)</annotation></semantics></math> such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi mathvariant="normal">lrec</mi> <mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow> <mrow><mi>A</mi><mo>,</mo><mi>e</mi></mrow></msubsup><mo stretchy="false">(</mo><mi mathvariant="normal">base</mi><mo stretchy="false">)</mo><mo>≡</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi mathvariant="normal">and</mi><mspace width="1em"></mspace><msubsup><mi mathvariant="normal">tr</mi> <mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow> <mrow><msubsup><mi mathvariant="normal">lrec</mi> <mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow> <mrow><mi>A</mi><mo>,</mo><mi>e</mi></mrow></msubsup></mrow></msubsup><mo stretchy="false">(</mo><mi mathvariant="normal">base</mi><mo>,</mo><mi mathvariant="normal">base</mi><mo>,</mo><mi mathvariant="normal">loop</mi><mo>≡</mo><mi>e</mi><mo>:</mo><mi>A</mi><mo>≃</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\mathrm{lrec}_{S^1}^{A, e}(\mathrm{base}) \equiv A \; \mathrm{type} \quad \mathrm{and} \quad \mathrm{tr}_{S^1}^{\mathrm{lrec}_{S^1}^{A, e}}(\mathrm{base}, \mathrm{base}, \mathrm{loop} \equiv e:A \simeq A</annotation></semantics></math></div>
+<p>However, with type variables, instead of using equivalences and transport, one can instead use <a class="existingWikiWord" href="/nlab/show/identity+type#IdentityTypesBetweenTypes">identity types between types</a> and the <a class="existingWikiWord" href="/nlab/show/action+on+identifications">action on identifications</a> for type families. For example, an alternative strict large recursion principle of the <a class="existingWikiWord" href="/nlab/show/circle+type">circle type</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow><annotation encoding="application/x-tex">S^1</annotation></semantics></math> states that given a type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and an <a class="existingWikiWord" href="/nlab/show/identification">identification</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">p:A = A</annotation></semantics></math>, one can form the type family <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><msup><mi>S</mi> <mn>1</mn></msup><mo>⊢</mo><msubsup><mi mathvariant="normal">lrec</mi> <mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow> <mrow><mi>A</mi><mo>,</mo><mi>p</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x:S^1 \vdash \mathrm{lrec}_{S^1}^{A, p}(x)</annotation></semantics></math> such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi mathvariant="normal">lrec</mi> <mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow> <mrow><mi>A</mi><mo>,</mo><mi>p</mi></mrow></msubsup><mo stretchy="false">(</mo><mi mathvariant="normal">base</mi><mo stretchy="false">)</mo><mo>≡</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mspace width="1em"></mspace><mi mathvariant="normal">and</mi><mspace width="1em"></mspace><msubsup><mi mathvariant="normal">ap</mi> <mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow> <mrow><msubsup><mi mathvariant="normal">lrec</mi> <mrow><msup><mi>S</mi> <mn>1</mn></msup></mrow> <mrow><mi>A</mi><mo>,</mo><mi>p</mi></mrow></msubsup></mrow></msubsup><mo stretchy="false">(</mo><mi mathvariant="normal">base</mi><mo>,</mo><mi mathvariant="normal">base</mi><mo>,</mo><mi mathvariant="normal">loop</mi><mo>≡</mo><mi>p</mi><mo>:</mo><mi>A</mi><mo>=</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\mathrm{lrec}_{S^1}^{A, p}(\mathrm{base}) \equiv A \; \mathrm{type} \quad \mathrm{and} \quad \mathrm{ap}_{S^1}^{\mathrm{lrec}_{S^1}^{A, p}}(\mathrm{base}, \mathrm{base}, \mathrm{loop} \equiv p:A = A</annotation></semantics></math></div>
+<p>In addition, traditionally without type variables, there are strict and weak versions of large recursion principles: the strict large recursion principles use <a class="existingWikiWord" href="/nlab/show/judgmental+equality">judgmental equality</a> between types for the computation and uniqueness rules, while the weak large recursion principles use <a class="existingWikiWord" href="/nlab/show/equivalences+of+types">equivalences of types</a> for the computation and uniqueness rules. For example, the strict large recursion principle for the <a class="existingWikiWord" href="/nlab/show/boolean+domain">boolean domain</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝟚</mi></mrow><annotation encoding="application/x-tex">\mathbb{2}</annotation></semantics></math> says that given types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math>, one can construct a type family <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>:</mo><mi>𝟚</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">lrec</mi> <mi>𝟚</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x:\mathbb{2} \vdash \mathrm{lrec}_\mathbb{2}^{A, B}(x)</annotation></semantics></math> such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi mathvariant="normal">lrec</mi> <mi>𝟚</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>≡</mo><mi>A</mi><mspace width="1em"></mspace><mi mathvariant="normal">and</mi><mspace width="1em"></mspace><msubsup><mi mathvariant="normal">lrec</mi> <mi>𝟚</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>≡</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\mathrm{lrec}_\mathbb{2}^{A, B}(0) \equiv A \quad \mathrm{and} \quad \mathrm{lrec}_\mathbb{2}^{A, B}(1) \equiv B</annotation></semantics></math></div>
+<p>and the weak large recursion principle for the boolean domain says that the type family above comes with <a class="existingWikiWord" href="/nlab/show/equivalences+of+types">equivalences of types</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">l</mi><msubsup><mi>β</mi> <mi>𝟚</mi> <mi>A</mi></msubsup><mo>:</mo><msubsup><mi mathvariant="normal">lrec</mi> <mi>𝟚</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>≃</mo><mi>A</mi><mspace width="1em"></mspace><mi mathvariant="normal">and</mi><mspace width="1em"></mspace><mi mathvariant="normal">l</mi><msubsup><mi>β</mi> <mi>𝟚</mi> <mi>B</mi></msubsup><mo>:</mo><msubsup><mi mathvariant="normal">lrec</mi> <mi>𝟚</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>≃</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\mathrm{l}\beta_\mathbb{2}^{A}:\mathrm{lrec}_\mathbb{2}^{A, B}(0) \simeq A \quad \mathrm{and} \quad \mathrm{l}\beta_\mathbb{2}^{B}:\mathrm{lrec}_\mathbb{2}^{A, B}(1) \simeq B</annotation></semantics></math></div>
+<p>However, with type variables and <a class="existingWikiWord" href="/nlab/show/identity+type#IdentityTypesBetweenTypes">identity types between types</a>, one can also use identifications of types instead of equivalences of types to express weak large recursion of the boolean domain:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">l</mi><msubsup><mi>β</mi> <mi>𝟚</mi> <mi>A</mi></msubsup><mo>:</mo><msubsup><mi mathvariant="normal">lrec</mi> <mi>𝟚</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mi>A</mi><mspace width="1em"></mspace><mi mathvariant="normal">and</mi><mspace width="1em"></mspace><mi mathvariant="normal">l</mi><msubsup><mi>β</mi> <mi>𝟚</mi> <mi>B</mi></msubsup><mo>:</mo><msubsup><mi mathvariant="normal">lrec</mi> <mi>𝟚</mi> <mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow></msubsup><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">\mathrm{l}\beta_\mathbb{2}^{A}:\mathrm{lrec}_\mathbb{2}^{A, B}(0) = A \quad \mathrm{and} \quad \mathrm{l}\beta_\mathbb{2}^{B}:\mathrm{lrec}_\mathbb{2}^{A, B}(1) = B</annotation></semantics></math></div>
+<p>This third notion of weak large recursion in dependent type theory with a single type judgment and type variables parallels the usual notion of weak large recursion in the other formulation of dependent type theory involving a hierarchy of universes, where large recursion simply means the usual recursion principle into one of the predefined universes in the hierarchy.</p>
+
+<h4 id="tarski_universes">Tarski universes</h4>
+
+<p>Similarly to the case for the large recursion principles, there are now three different notions of <a class="existingWikiWord" href="/nlab/show/Tarski+universes">Tarski universes</a> in dependent type theory with type variables and identity types between types.</p>
+
+<p>There is the usual notion of <a class="existingWikiWord" href="/nlab/show/strict+Tarski+universe">strict Tarski universe</a> which states that, for example,</p>
+
+<ul>
+<li>
+<p>the Tarski universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U, T)</annotation></semantics></math> is strictly closed under dependent sum types if for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">A:U</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">B:T(A) \to U</annotation></semantics></math> there is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">\Sigma(A, B):U</annotation></semantics></math> with a <a class="existingWikiWord" href="/nlab/show/judgmental+equality">judgmental equality</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>Σ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≡</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mi>T</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(\Sigma(A, B)) \equiv \sum_{x:T(A)} T(B(X))</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>the Tarski universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U, T)</annotation></semantics></math> is strictly closed under dependent product types if for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">A:U</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">B:T(A) \to U</annotation></semantics></math> there is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">\Pi(A, B):U</annotation></semantics></math> with a <a class="existingWikiWord" href="/nlab/show/judgmental+equality">judgmental equality</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mi>Π</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≡</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>x</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mi>T</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(\Pi(A, B)) \equiv \prod_{x:T(A)} T(B(X))</annotation></semantics></math></p>
+</li>
+</ul>
+
+<p>There is the usual notion of <a class="existingWikiWord" href="/nlab/show/weak+Tarski+universe">weak Tarski universe</a> which states that, for example,</p>
+
+<ul>
+<li>
+<p>the Tarski universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U, T)</annotation></semantics></math> is weakly closed under dependent sum types if for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">A:U</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">B:T(A) \to U</annotation></semantics></math> there is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">\Sigma(A, B):U</annotation></semantics></math> with an <a class="existingWikiWord" href="/nlab/show/equivalence+of+types">equivalence</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>e</mi> <mi>Σ</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>Σ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≃</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mi>T</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">e_\Sigma(A, B):T(\Sigma(A, B)) \simeq \sum_{x:T(A)} T(B(X))</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>the Tarski universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U, T)</annotation></semantics></math> is weakly closed under dependent product types if for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">A:U</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">B:T(A) \to U</annotation></semantics></math> there is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">\Pi(A, B):U</annotation></semantics></math> with an <a class="existingWikiWord" href="/nlab/show/equivalence+of+types">equivalence</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>e</mi> <mi>Π</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>Π</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≃</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>x</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mi>T</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">e_\Pi(A, B):T(\Pi(A, B)) \simeq \prod_{x:T(A)} T(B(X))</annotation></semantics></math></p>
+</li>
+</ul>
+
+<p>Then there is a stronger notion of weak Tarski universe which is only possible if there are identity types between types, which states that</p>
+
+<ul>
+<li>
+<p>the Tarski universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U, T)</annotation></semantics></math> is weakly closed under dependent sum types if for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">A:U</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">B:T(A) \to U</annotation></semantics></math> there is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Σ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">\Sigma(A, B):U</annotation></semantics></math> with an <a class="existingWikiWord" href="/nlab/show/identification">identification</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mi>Σ</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>Σ</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mrow><mi>x</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mi>T</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p_\Sigma(A, B):T(\Sigma(A, B)) = \sum_{x:T(A)} T(B(X))</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>the Tarski universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>U</mi><mo>,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(U, T)</annotation></semantics></math> is weakly closed under dependent product types if for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">A:U</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>B</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">B:T(A) \to U</annotation></semantics></math> there is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Π</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">\Pi(A, B):U</annotation></semantics></math> with an <a class="existingWikiWord" href="/nlab/show/identification">identification</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mi>Π</mi></msub><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>Π</mi><mo stretchy="false">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><msub><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>x</mi><mo>:</mo><mi>T</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></msub><mi>T</mi><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p_\Pi(A, B):T(\Pi(A, B)) = \prod_{x:T(A)} T(B(X))</annotation></semantics></math></p>
+</li>
+</ul>
+
+<p>This is similar to the case for Tarski universes in the presentation of dependent type theory with a hierarchy of universes, which also has three different kinds of Tarski universes involving judgmental equality, identity types between types, and equivalences of types respectively.</p>
+
+<h3 id="large_recursion_principles_2">Large recursion principles</h3>
+
+<p>Independently of the consequences of having <a class="existingWikiWord" href="/nlab/show/identity+type#IdentityTypesBetweenTypes">identity types between types</a>, having type variables allows for the formulation of certain large recursion principles which are not possible in the dependent type theory with a single type judgment but no type variables. These include large recursion for recursive inductive types and recursive higher inductive types such as the <a class="existingWikiWord" href="/nlab/show/natural+numbers+type">natural numbers type</a>, <a class="existingWikiWord" href="/nlab/show/W-types">W-types</a>, and <a class="existingWikiWord" href="/nlab/show/localizations+of+a+type">localizations of a type</a>.</p>
+
+<p>For example, the usual recursion principle for the <a class="existingWikiWord" href="/nlab/show/natural+numbers+type">natural numbers type</a> is given by the following: given</p>
+
+<ol>
+<li>
+<p>a type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>an element <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>c</mi> <mn>0</mn></msub><mo>:</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">c_0:C</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>a family of elements <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>,</mo><mi>x</mi><mo>:</mo><mi>C</mi><mo>⊢</mo><msub><mi>c</mi> <mi>s</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N}, x:C \vdash c_s(n, x):C</annotation></semantics></math></p>
+</li>
+</ol>
+
+<p>one can construct a family of elements</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><mi>C</mi><mo>,</mo><msub><mi>c</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>c</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N} \vdash \mathrm{rec}_\mathbb{N}^{C, c_0, c_s}(n):C</annotation></semantics></math></div>
+<p>such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><mi>C</mi><mo>,</mo><msub><mi>c</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>c</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>≡</mo><msub><mi>c</mi> <mn>0</mn></msub><mo>:</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">\mathrm{rec}_\mathbb{N}^{C, c_0, c_s}(0) \equiv c_0:C</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><mi>C</mi><mo>,</mo><msub><mi>c</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>c</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≡</mo><msub><mi>c</mi> <mi>s</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><mi>C</mi><mo>,</mo><msub><mi>c</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>c</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>:</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N} \vdash \mathrm{rec}_\mathbb{N}^{C, c_0, c_s}(s(n)) \equiv c_s(n, \mathrm{rec}_\mathbb{N}^{C, c_0, c_s}(n):C</annotation></semantics></math></div>
+<p>In the other formulation of dependent type theory in terms of a hierarchy of universes and no type judgment, large recursion of the natural numbers is simply the recursion principle for a universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>U</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">U_i</annotation></semantics></math> in the hierarchy: given</p>
+
+<ol>
+<li>
+<p>a universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>an type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>T</mi> <mn>0</mn></msub><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">T_0:U</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>a family of elements <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>,</mo><mi>X</mi><mo>:</mo><mi>U</mi><mo>⊢</mo><msub><mi>T</mi> <mi>s</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N}, X:U \vdash T_s(n, X):U</annotation></semantics></math></p>
+</li>
+</ol>
+
+<p>one can construct a family of elements</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><mi>U</mi><mo>,</mo><msub><mi>T</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>T</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N} \vdash \mathrm{rec}_\mathbb{N}^{U, T_0, T_s}(n):U</annotation></semantics></math></div>
+<p>such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><mi>U</mi><mo>,</mo><msub><mi>T</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>T</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>≡</mo><msub><mi>T</mi> <mn>0</mn></msub><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">\mathrm{rec}_\mathbb{N}^{U, T_0, T_s}(0) \equiv T_0:U</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><mi>U</mi><mo>,</mo><msub><mi>T</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>T</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≡</mo><msub><mi>T</mi> <mi>s</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><mi>U</mi><mo>,</mo><msub><mi>T</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>T</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>:</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N} \vdash \mathrm{rec}_\mathbb{N}^{U, T_0, T_s}(s(n)) \equiv T_s(n, \mathrm{rec}_\mathbb{N}^{U, T_0, T_s}(n):U</annotation></semantics></math></div>
+<p>However, in dependent type theory with a single type judgment, the universe <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math> is not needed and in fact non-existent. Translating the large recursion principle into type judgments, we get the following: given</p>
+
+<ol>
+<li>
+<p>a type <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>T</mi> <mn>0</mn></msub><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">T_0 \; \mathrm{type}</annotation></semantics></math></p>
+</li>
+
+<li>
+<p>a family of types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><msub><mi>T</mi> <mi>s</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N}, X \; \mathrm{type} \vdash T_s(n, X) \; \mathrm{type}</annotation></semantics></math></p>
+</li>
+</ol>
+
+<p>one can construct a family of types</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><msub><mi>T</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>T</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N} \vdash \mathrm{rec}_\mathbb{N}^{T_0, T_s}(n) \; \mathrm{type}</annotation></semantics></math></div>
+<p>such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><msub><mi>T</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>T</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>≡</mo><msub><mi>T</mi> <mn>0</mn></msub><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">\mathrm{rec}_\mathbb{N}^{T_0, T_s}(0) \equiv T_0 \; \mathrm{type}</annotation></semantics></math></div>
+<p>and</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>⊢</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><msub><mi>T</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>T</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>≡</mo><msub><mi>T</mi> <mi>s</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><msubsup><mi mathvariant="normal">rec</mi> <mi>ℕ</mi> <mrow><msub><mi>T</mi> <mn>0</mn></msub><mo>,</mo><msub><mi>T</mi> <mi>s</mi></msub></mrow></msubsup><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N} \vdash \mathrm{rec}_\mathbb{N}^{T_0, T_s}(s(n)) \equiv T_s(n, \mathrm{rec}_\mathbb{N}^{T_0, T_s}(n) \; \mathrm{type}</annotation></semantics></math></div>
+<p>It is clear that type variables are needed, since otherwise the second requirement in the large recursion principle that we have a family of types <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>ℕ</mi><mo>,</mo><mi>X</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><msub><mi>T</mi> <mi>s</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo>,</mo><mi>X</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow><annotation encoding="application/x-tex">n:\mathbb{N}, X \; \mathrm{type} \vdash T_s(n, X) \; \mathrm{type}</annotation></semantics></math> will not be possible.</p>
+
+<p>Similar requirements of type variables apply to the large recursion principles of more general recursive inductive types like <a class="existingWikiWord" href="/nlab/show/W-types">W-types</a>.</p>
+
+<h2 id="related_concepts"> Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/identity+type">identity type</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/univalence+axiom">univalence axiom</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/univalent+type+theory">univalent type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/polymorphism">polymorphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/impredicative+polymorphism">impredicative polymorphism</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/System+F">System F</a></p>
+</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<p>Some discussion about extending dependent type theory with type variables occurs in:</p>
+
+<ul>
+<li id="CTZulip"><em>Dependent Type Theory vs Polymorphic Type Theory</em>, Category Theory Zulip (<a href="https://categorytheory.zulipchat.com/#narrow/stream/229199-learning.3A-questions/topic/Dependent.20Type.20Theory.20vs.20Polymorphic.20Type.20Theory">web</a>)</li>
+</ul>
+</body></html>
+
+</div>
+
+<div class="revisedby">
+    <p>
+    Last revised on December 17, 2024 at 03:21:10.
+    See the <a href="/nlab/history/dependent+type+theory+with+type+variables" style="color: #005c19">history</a> of this page for a list of all contributions to it.
+    </p>
+</div>
+
+<div class="navigation navfoot">
+
+  <a href="/nlab/edit/dependent+type+theory+with+type+variables" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/18729/#Item_1">Discuss</a><span class="backintime"><a href="/nlab/revision/dependent+type+theory+with+type+variables/3" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/dependent+type+theory+with+type+variables" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/dependent+type+theory+with+type+variables" accesskey="S" class="navlink" id="history" rel="nofollow">History (3 revisions)</a>
+  <a href="/nlab/show/dependent+type+theory+with+type+variables/cite" style="color: black">Cite</a>
+  <a href="/nlab/print/dependent+type+theory+with+type+variables" accesskey="p" id="view_print" rel="nofollow">Print</a>
+    <a href="/nlab/source/dependent+type+theory+with+type+variables" id="view_source" rel="nofollow">Source</a>
+
+  
+
+
+</div>
+
+
+</div> <!-- Content -->
+
+</div> <!-- Container -->
+
+</body>
+</html>
