@@ -10,10 +10,10 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="/stylesheets/instiki.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
-  <link href="/stylesheets/nlab.css?1660229990" media="all" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
@@ -241,7 +241,7 @@ margin-left: 0em;
       if (mathml_unsupported) {
         // MathML does not seem to be supported...
         var s = document.createElement('script');
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=MML_HTMLorMML-full";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=MML_HTMLorMML-full";
         document.querySelector('head').appendChild(s);
       } else {
         document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/15368/#Item_2" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/15368/#Item_4" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -449,6 +449,31 @@ margin-left: 0em;
 <ul>
 <li><a href='#idea'>Idea</a></li>
 <li><a href='#related_entries'>Related entries</a></li>
+<li><a href='#some_notes'>Some notes</a></li>
+<ul>
+<li><a href='#space_constructors'>Space constructors</a></li>
+<li><a href='#predicates'>Predicates</a></li>
+<li><a href='#invariants'>Invariants</a></li>
+<li><a href='#computations'>Computations?</a></li>
+</ul>
+<li><a href='#chapter_by_chapter'>Chapter by chapter</a></li>
+<ul>
+<li><a href='#1_chain_complexes'>1. Chain complexes</a></li>
+<ul>
+<li><a href='#13_representation_of_a_chain_complex'>1.3. Representation of a chain complex</a></li>
+<li><a href='#14_morphisms'>1.4. Morphisms</a></li>
+</ul>
+<li><a href='#2_objects_with_effective_homology'>2. Objects with effective homology</a></li>
+<li><a href='#21_computing_homotopy_groups'>21. Computing homotopy groups</a></li>
+<ul>
+<li><a href='#212_the_functions_for_computing_homotopy_groups'>21.2 The functions for computing homotopy groups</a></li>
+</ul>
+</ul>
+<li><a href='#examples'>Examples</a></li>
+<ul>
+<li><a href='#'><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">S^{2}</annotation></semantics></math></a></li>
+<li><a href='#_2'><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi><msup><mi>P</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}P^{2}</annotation></semantics></math></a></li>
+</ul>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
@@ -462,6 +487,207 @@ margin-left: 0em;
 <ul>
 <li><a class="existingWikiWord" href="/nlab/show/list+of+mathematics+software">list of mathematics software</a></li>
 </ul>
+
+<h2 id="some_notes">Some notes</h2>
+
+<p>Some notes on coding in <a href="https://www-fourier.ujf-grenoble.fr/~sergerar/Kenzo/">Kenzo</a>.</p>
+
+<h3 id="space_constructors">Space constructors</h3>
+
+<pre><code>(setq m23 (moore 2 3)) ==&gt; "Moore space (Z/2Z,3)"
+
+(setq kz1 (k-z 1))     ==&gt; "Eilenberg-Maclane space K(Z,1)"
+
+(crts-prdc space1 space2): Cartesian product space
+
+(loop-space space1): Loop space </code></pre>
+
+<h3 id="predicates">Predicates</h3>
+
+<pre><code> (typep space1 'kan)
+
+ (typep space1 'simplicial-group)
+
+ (typep space1 'ab-simplicial-group)</code></pre>
+
+<h3 id="invariants">Invariants</h3>
+
+<pre><code> + (homology)
+ + (basis) eg. Basis for a simplicial set..</code></pre>
+
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>4</mn></msub></mrow><annotation encoding="application/x-tex">\pi_4</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>π</mi> <mn>5</mn></msub></mrow><annotation encoding="application/x-tex">\pi_5</annotation></semantics></math> for <code>Moore(Z/2,3)</code></p>
+
+<p>To compute the 4th <a class="existingWikiWord" href="/nlab/show/homotopy+group">homotopy group</a> of <code>Moore(Z/2,3)</code>, follow the overview of the DOC and do</p>
+
+<pre><code>  #+begin_src common-lisp
+  (require 'kenzo)
+  (setf m23 (moore 2 3))
+  (setf ch3 (chm1-class m23 3))
+  (setf f3 (z2-whitehead m23 ch3))
+  (setf x4 (fibration-total f3))
+  (homology x4 3 5) ;; this gives Z/2Z, which is the \pi_{4} for Moore(Z/2Z,3).
+  #+end_src</code></pre>
+
+<p>To compute its 5th homotopy group:</p>
+
+<pre><code> #+begin_src common-lisp
+ (setf ch4 (chml-class x4 4))
+ (setf f4 (z2-whitehead x4 ch4))
+ (setf x5 (fibration-total f4))
+ (homology x5 4 6) ;; this gives Z/4Z, which is the \pi_{5} for Moore(Z/2Z,3)
+ #+end_src</code></pre>
+
+<p></p>
+</div>
+</p>
+
+<h3 id="computations">Computations?</h3>
+
+<pre><code> (cprd) coproduct.. eg for a K(Z,1)
+
+ (aprd) product.. eg for a K(Z,1)</code></pre>
+
+<h2 id="chapter_by_chapter">Chapter by chapter</h2>
+
+<h3 id="1_chain_complexes">1. Chain complexes</h3>
+
+<h4 id="13_representation_of_a_chain_complex">1.3. Representation of a chain complex</h4>
+
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p><strong>morphism from a chain complex to another, of degree <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></strong></p>
+
+<p>A chain complex is implemented as an instance of a CLOS class.</p>
+
+<p>See page 8 for the definition of the class</p>
+
+<pre><code> =CHAIN-COMPLEX=: =(DEFCLASS CHAIN-COMPLEX () [..])= </code></pre>
+
+<p>This class has 8 slots</p>
+
+<p><code>=cmpr=</code>, <code>=basis=</code>, <code>=bsgn=</code>, <code>=dffr=</code>, <code>=idnm=</code>, <code>=orgn=</code>, <code>=grmd=</code>, <code>=efhm=</code>.</p>
+
+<p>the accessors of the slots are the functions speficied after <code>=:reader=</code> in the defclass code.</p>
+
+<p>To build a chain complex, use <code>=build-chcm=</code>. For example:</p>
+
+<pre><code>   #+begin_src common-lisp
+   ;; warning hasn't compiled
+   (setf diabolo-cmpr #'s-cmpr)
+   (setf diabolo-basis #'(lambda (dmn)
+                           (case dmn
+                             (0 '(s0 s1 s2 s3 s4 s5))
+                             (1 '(s01 s02 s12 s23 s34 s35 s45))
+                             (2 '(s345))
+                             (otherwise nil ))))
+   (setf diabolo-bspn 's0) ;; base point
+
+   (setf diabolo-pure-dffr
+         #'(lambda (dmn gnr)
+             (unless (&lt;= 0 dmn 2)
+               (error "Non-correct dimension for diabolo-dp."))
+             (case dmn
+                  (0 (cmbn -1)) ; Note the null combination of degree -1
+                  (1 (case gnr
+                       (s01 (cmbn 0 -1 's0 1 's1))
+                       (s02 (cmbn 0 -1 's0 1 's2))
+                       (s12 (cmbn 0 -1 's1 1 's2))
+                       (s23 (cmbn 0 -1 's2 1 's3))
+                       (s34 (cmbn 0 -1 's3 1 's4))
+                       (s35 (cmbn 0 -1 's3 1 's5))
+                       (s45 (cmbn 0 -1 's4 1 's5))))
+                  (2 (case gnr
+                       (s345 (cmbn 1 1 's34 -1 's35 1 's45))))
+                  (otherwise (error "Bad generator for complex diabolo")))
+             ))
+   (setf diabolo-strt :GNRT)
+   (setf diabolo-orgn '(diabolo-for-example))
+
+   ;; Then construct it!
+   (setf diabolo (build-chcm :cmpr diabolo-cmpr :basis diabolo-basis
+                             :bsgn diabolo-bspn :intr-dffr diabolo-pure-dffr
+                             :strt diabolo-strt :orgn diabolo-orgn))
+   #+end_src</code></pre>
+
+<p></p>
+</div>
+</p>
+
+<p>Simple functions handling chain complexes: <code>=cat-init=</code>, <code>=chcm=</code>, <code>=cmpr=</code>, <code>=basis=</code>, <code>=dffr=</code>, <code>=z-chcm=</code>.</p>
+
+<p>An important trivial case Z[0]. Do it as exercise! .. Answer on page 14. You can call it by <code>=(z-chcm)=</code> (predefined).</p>
+
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p><strong>The circle.</strong></p>
+
+<pre><code>   #+begin_src common-lisp
+   ;; warning hasn't compiled
+   (defun CIRCLE ()
+     (the chain-complex
+          (build-chcm
+           :cmpr #'(lambda (gnrt1 gnrt2) (the cmpr :equal))
+           :basis #'(lambda (dmns)
+                      (the list
+                           (case dmns (0 '(*)) (1 '(s1))
+                                      (otherwise +empty-list+))))
+           :bsgn '*
+           :intr-dffr #'zero-intr-dffr
+           :strt :cmbn
+           :orgn '(circle))))
+   #+end_src</code></pre>
+
+<p></p>
+</div>
+</p>
+
+<h4 id="14_morphisms">1.4. Morphisms</h4>
+
+<p>See the final example provided in the end of this section.</p>
+
+<h3 id="2_objects_with_effective_homology">2. Objects with effective homology</h3>
+
+<h3 id="21_computing_homotopy_groups">21. Computing homotopy groups</h3>
+
+<p>By constructing the <a class="existingWikiWord" href="/nlab/show/Whitehead+tower">Whitehead tower</a> of a space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, the computation of the <a class="existingWikiWord" href="/nlab/show/homotopy+groups">homotopy groups</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> is reduced to computing the <a class="existingWikiWord" href="/nlab/show/ordinary+homology">homology</a> groups of some pieces in the tower.</p>
+
+<h4 id="212_the_functions_for_computing_homotopy_groups">21.2 The functions for computing homotopy groups</h4>
+
+<pre><code> #+begin_quote
+ In this version of Kenzo, only the case where the first non-null
+ homology group is Z or Z/2Z can be processed; ..
+ #+end_quote</code></pre>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id=""><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">S^{2}</annotation></semantics></math></h3>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/2-sphere">2-sphere</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">S^2</annotation></semantics></math>:</p>
+
+<pre><code> #+begin_src common-lisp :eval never
+ ;; This looks like a 2-sphere to me
+ (setf short-s2?
+       (build-finite-ss
+        '(v0 v1 v2
+          1 e01 (v1 v0) e02 (v2 v0) e12 (v2 v1)
+          2 t (e12 e02 e01) t_ (e12 e02 e01))))
+ #+end_src</code></pre>
+
+<h3 id="_2"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi><msup><mi>P</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}P^{2}</annotation></semantics></math></h3>
+
+<p>The <a class="existingWikiWord" href="/nlab/show/real+projective+plane">real projective plane</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi><msup><mi>P</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}P^2</annotation></semantics></math>:</p>
+
+<pre><code> #+begin_src common-lisp :eval never
+ ;; This is a small construction of RP^2.. taken from lecture note.
+ ;; Constructive Homological Algebra and Applications-Julio Rubio and Francis Sergeraert-arXiv:1208.3816
+ (setf short-P2R
+       (build-finite-ss '(v 1 e (v v) 2 t ( e v e ))))
+ #+end_src</code></pre>
 
 <h2 id="references">References</h2>
 
@@ -500,14 +726,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on October 31, 2022 at 11:34:45.
+    Last revised on December 28, 2024 at 19:43:52.
     See the <a href="/nlab/history/Kenzo" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Kenzo" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15368/#Item_2">Discuss</a><span class="backintime"><a href="/nlab/revision/Kenzo/1" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Kenzo" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Kenzo" accesskey="S" class="navlink" id="history" rel="nofollow">History (1 revision)</a>
+  <a href="/nlab/edit/Kenzo" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/15368/#Item_4">Discuss</a><span class="backintime"><a href="/nlab/revision/Kenzo/3" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Kenzo" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Kenzo" accesskey="S" class="navlink" id="history" rel="nofollow">History (3 revisions)</a>
   <a href="/nlab/show/Kenzo/cite" style="color: black">Cite</a>
   <a href="/nlab/print/Kenzo" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/Kenzo" id="view_source" rel="nofollow">Source</a>
