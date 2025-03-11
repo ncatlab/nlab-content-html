@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/17538/#Item_10" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/17538/#Item_11" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -487,14 +487,15 @@ margin-left: 0em;
 <ul>
 <li><a href='#idea'>Idea</a></li>
 <li><a href='#syntax'>Syntax</a></li>
-<li><a href='#example'>Example</a></li>
-<li><a href='#reductionbased_operational_semantics'>Reduction-based operational semantics</a></li>
 <li><a href='#typed_calculus'>Typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus</a></li>
 <ul>
 <li><a href='#simple_types'>Simple types</a></li>
 <li><a href='#session_types'>Session types</a></li>
 </ul>
 <li><a href='#other_process_calculi'>Other process calculi</a></li>
+<ul>
+<li><a href='#the_applied_calculus'>The applied π-calculus</a></li>
+</ul>
 <li><a href='#references'>References</a></li>
 </ul>
 </div>
@@ -502,9 +503,9 @@ margin-left: 0em;
 
 <h2 id="idea">Idea</h2>
 
-<p>The <em><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus</em> is a <a class="existingWikiWord" href="/nlab/show/computational">computational</a> model for concurrent processes that communicate messages through named channels. It subsumes <a class="existingWikiWord" href="/nlab/show/%CE%BB-calculus">λ-calculus</a>.</p>
+<p>The <em><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus</em> is a <a class="existingWikiWord" href="/nlab/show/computational">computational</a> model for <a class="existingWikiWord" href="/nlab/show/concurrency">concurrent processes</a> that communicate messages through named channels. It subsumes <a class="existingWikiWord" href="/nlab/show/%CE%BB-calculus">λ-calculus</a>.</p>
 
-<p>In the monadic (here meaning: <em><a class="existingWikiWord" href="/nlab/show/unary">unary</a></em>) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus, outputs and inputs only send and receive single names, while the polyadic (here meaning: <em><a class="existingWikiWord" href="/nlab/show/n-ary"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+<p>In the <em>monadic</em> (here meaning: <em><a class="existingWikiWord" href="/nlab/show/unary">unary</a></em>) <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus, outputs and inputs only send and receive single names, while the <em>polyadic</em> (here meaning: <em><a class="existingWikiWord" href="/nlab/show/n-ary"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
   <semantics>
     <mrow>
       <mi>n</mi>
@@ -520,35 +521,64 @@ margin-left: 0em;
 <p>A process is either:</p>
 
 <ul>
-<li>an inactive process <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math>;</li>
+<li>
+<p>an inactive process <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math>;</p>
+</li>
 
-<li>the parallel composition of two processes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P\mid Q</annotation></semantics></math>;</li>
+<li>
+<p>the parallel composition of two processes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P\mid Q</annotation></semantics></math>;</p>
+</li>
 
-<li>the replication of a process <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">!P</annotation></semantics></math>;</li>
+<li>
+<p>the replication of a process <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>!</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">!P</annotation></semantics></math>;</p>
+</li>
 
-<li>a restriction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>ν</mi><mi>n</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>P</mi></mrow><annotation encoding="application/x-tex">(\nu n)\,P</annotation></semantics></math> (that is the generation of a fresh name only known to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>);</li>
+<li>
+<p>a restriction <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>ν</mi><mi>n</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi>P</mi></mrow><annotation encoding="application/x-tex">(\nu n)\,P</annotation></semantics></math> (that is the generation of a fresh name only known to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>);</p>
+</li>
 
-<li>prefixed by an input <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo><mo>.</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">n(m).P</annotation></semantics></math>;</li>
+<li>
+<p>prefixed by an input <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo><mo>.</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">n(m).P</annotation></semantics></math>;</p>
+</li>
 
-<li>prefixed by an output <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mi>n</mi><mo>¯</mo></mover><mo stretchy="false">⟨</mo><mi>m</mi><mo stretchy="false">⟩</mo><mo>.</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">\overline{n}\langle m\rangle.P</annotation></semantics></math>.</li>
+<li>
+<p>prefixed by an output <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mi>n</mi><mo>¯</mo></mover><mo stretchy="false">⟨</mo><mi>m</mi><mo stretchy="false">⟩</mo><mo>.</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">\overline{n}\langle m\rangle.P</annotation></semantics></math>.</p>
+</li>
 </ul>
 
 <p>Sometimes an <a class="existingWikiWord" href="/nlab/show/nondeterministic+computation">indeterministic</a> choice operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">+</mo></mrow><annotation encoding="application/x-tex">+</annotation></semantics></math> is added to the syntax.</p>
 
-<h2 id="example">Example</h2>
+<p>The central <a class="existingWikiWord" href="/nlab/show/inference+rule">reduction rule</a> of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus is the following:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mover><mi>n</mi><mo>¯</mo></mover><mo stretchy="false">⟨</mo><mi>a</mi><mo stretchy="false">⟩</mo><mo>.</mo><mi>P</mi><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>n</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>.</mo><mi>Q</mi><mspace width="thickmathspace"></mspace><mo>⟶</mo><mspace width="thickmathspace"></mspace><mi>P</mi><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><msub><mi>Q</mi> <mrow><mi>a</mi><mo>↦</mo><mi>b</mi></mrow></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \overline{n}\langle a\rangle.P\mid n(b).Q
+    \;\longrightarrow\; 
+  P\mid Q_{a\mapsto b}
+  \,.
+
+</annotation></semantics></math></div>
+<p>
+<div class='num_remark'>
+<h6>Example</h6>
+<p></p>
 
 <ul>
-<li>a server that increments the value it receives: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>=</mo><mo>!</mo><mi mathvariant="normal">incr</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>.</mo><mover><mi>a</mi><mo>¯</mo></mover><mo stretchy="false">⟨</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">S=!\mathrm{incr}(a,x).\overline{a}\langle x+1\rangle</annotation></semantics></math>;</li>
+<li>
+<p>a server that increments the value it receives: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>=</mo><mo>!</mo><mi mathvariant="normal">incr</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>.</mo><mover><mi>a</mi><mo>¯</mo></mover><mo stretchy="false">⟨</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">S=!\mathrm{incr}(a,x).\overline{a}\langle x+1\rangle</annotation></semantics></math>;</p>
+</li>
 
-<li>a client that calls to the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">incr</mi></mrow><annotation encoding="application/x-tex">\mathrm{incr}</annotation></semantics></math> server: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>=</mo><mo stretchy="false">(</mo><mi>ν</mi><mi>a</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mover><mi mathvariant="normal">incr</mi><mo>¯</mo></mover><mo stretchy="false">⟨</mo><mi>a</mi><mo>,</mo><mn>4</mn><mo stretchy="false">⟩</mo><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>a</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">C=(\nu a)\bigl(\overline{\mathrm{incr}}\langle a,4\rangle\mid a(y)\bigr)</annotation></semantics></math>;</li>
+<li>
+<p>a client that calls to the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">incr</mi></mrow><annotation encoding="application/x-tex">\mathrm{incr}</annotation></semantics></math> server: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>=</mo><mo stretchy="false">(</mo><mi>ν</mi><mi>a</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><mover><mi mathvariant="normal">incr</mi><mo>¯</mo></mover><mo stretchy="false">⟨</mo><mi>a</mi><mo>,</mo><mn>4</mn><mo stretchy="false">⟩</mo><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>a</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">C=(\nu a)\bigl(\overline{\mathrm{incr}}\langle a,4\rangle\mid a(y)\bigr)</annotation></semantics></math>;</p>
+</li>
 
-<li>the final process by composing the server and the client: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">S\mid C</annotation></semantics></math>.</li>
+<li>
+<p>the final process by composing the server and the client: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">S\mid C</annotation></semantics></math>.</p>
+</li>
 </ul>
 
-<h2 id="reductionbased_operational_semantics">Reduction-based operational semantics</h2>
+<p></p>
+</div>
+</p>
 
-<p>The central reduction rule of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus is the following:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mover><mi>n</mi><mo>¯</mo></mover><mo stretchy="false">⟨</mo><mi>a</mi><mo stretchy="false">⟩</mo><mo>.</mo><mi>P</mi><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><mi>n</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>.</mo><mi>Q</mi><mo>⟶</mo><mi>P</mi><mo lspace="mediummathspace" rspace="mediummathspace">∣</mo><msub><mi>Q</mi> <mrow><mi>a</mi><mo>↦</mo><mi>b</mi></mrow></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">\overline{n}\langle a\rangle.P\mid n(b).Q\longrightarrow P\mid Q_{a\mapsto b}\,.</annotation></semantics></math></div>
 <h2 id="typed_calculus">Typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus</h2>
 
 <p>Several attempts have been made to give the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus <a class="existingWikiWord" href="/nlab/show/typing+systems">typing systems</a>. It is crucial for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">HO</mi><mi>π</mi></mrow><annotation encoding="application/x-tex">\mathrm{HO}\pi</annotation></semantics></math>, a <a class="existingWikiWord" href="/nlab/show/higher-order+logic">higher-order</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus in which messages can be processes themselves.</p>
@@ -559,7 +589,7 @@ margin-left: 0em;
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>⟶</mo><mo>♯</mo><mover><mi>T</mi><mo>˜</mo></mover></mrow><annotation encoding="application/x-tex">T\longrightarrow\sharp\widetilde{T}</annotation></semantics></math></div>
 <p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mi>T</mi><mo>˜</mo></mover></mrow><annotation encoding="application/x-tex">\widetilde{T}</annotation></semantics></math> ranges over (possibly empty) tuples of simple types.</p>
 
-<p><span class="newWikiWord">Typing contexts<a href="/nlab/new/typing+context">?</a></span> are lists of hypotheses of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo>:</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">n:T</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> is a channel name and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> is a simple type.</p>
+<p><a class="existingWikiWord" href="/nlab/show/context">Typing contexts</a> are lists of hypotheses of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi><mo lspace="verythinmathspace">:</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">n \colon T</annotation></semantics></math> where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> is a channel name and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> is a simple type.</p>
 
 <p>Simply typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus corresponds to a <span class="newWikiWord">distributed logic<a href="/nlab/new/distributed+logic">?</a></span>: using a property proven at some place supposes therefore a call to that property under a name. Theorems can be used many times, but lemmas are limited to one use.</p>
 <table><thead><tr><th>Typing</th><th>Intuitive signification</th></tr></thead><tbody><tr><td style="text-align: left;"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>.</mo><mi>P</mi><mo>:</mo><mi>p</mi><mo>,</mo><mi>q</mi><mo>→</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">a(x,y).P:p,q\to r</annotation></semantics></math></td><td style="text-align: left;"><strong>Lemma 1.</strong> Under hypotheses <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math>.</td></tr>
@@ -567,7 +597,7 @@ margin-left: 0em;
 </tbody></table>
 <h3 id="session_types">Session types</h3>
 
-<p><span class="newWikiWord">Session types<a href="/nlab/new/session+type">?</a></span> were introduced by Kohei Honda. A session links exactly two subprocesses that interact with each other, and multiple sessions can run simultaneously.</p>
+<p><a class="existingWikiWord" href="/nlab/show/session+type">Session types</a> were introduced by Kohei Honda. A session links exactly two subprocesses that interact with each other, and multiple sessions can run simultaneously.</p>
 
 <p>
 <div class='num_remark'>
@@ -576,36 +606,62 @@ margin-left: 0em;
 </div>
 </p>
 
-<p><a href="#Caires2010">Caires and Pfenning 2010</a> established a correspondence between <span class="newWikiWord">dual intuitionistic linear logic<a href="/nlab/new/dual+intuitionistic+linear+logic">?</a></span> (DILL) and session typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus. Later on, <a href="#Walder2012">Wadler 2012</a> established a correspondence between <a class="existingWikiWord" href="/nlab/show/classical+linear+logic">classical linear logic</a> (CLL) and the same calculus.</p>
+<p><a href="#Caires2010">Caires and Pfenning 2010</a> established a correspondence between <span class="newWikiWord">dual intuitionistic<a href="/nlab/new/dual+intuitionistic+linear+logic">?</a></span> <a class="existingWikiWord" href="/nlab/show/linear+logic">linear logic</a> (DILL) and session typed <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus. Later on, <a href="#Walder2012">Wadler 2012</a> established a correspondence between <a class="existingWikiWord" href="/nlab/show/classical+linear+logic">classical linear logic</a> (CLL) and the same calculus.</p>
 
 <h2 id="other_process_calculi">Other process calculi</h2>
 
 <p>The Calculus of Communicating Systems (CCS) is an important predecessor of the π-calculus. It can be seen as a restriction of π in which only a dummy name <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math> is exchanged in communications, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math> cannot be used in subject position (<a href="#Hirschkoff03">Hirschkoff 2003</a>).</p>
 
+<h3 id="the_applied_calculus">The applied π-calculus</h3>
+
+<p>The <em>applied π-calculus</em> is an extension of the π-calculus with <a class="existingWikiWord" href="/nlab/show/terms">terms</a> (representing messages in security protocols) instead of names. In addition, function symbols represent cryptographic primitives and are related by an equational <a class="existingWikiWord" href="/nlab/show/theory">theory</a>.</p>
+
 <h2 id="references">References</h2>
 
 <ul>
-<li><a class="existingWikiWord" href="/nlab/show/Robin+Milner">Robin Milner</a>, Joachim Parrow and David Walker, <em>A Calculus of Mobile Processes</em>, Information and Computation, <strong>100</strong> (1992) 1-40.</li>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Robin+Milner">Robin Milner</a>, Joachim Parrow and David Walker, <em>A Calculus of Mobile Processes</em>, Information and Computation, <strong>100</strong> (1992) 1-40.</p>
+</li>
 
-<li>Peter Sewell, <em>Applied <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math> – A Brief Tutorial</em>, (2000) (<a href="https://www.cl.cam.ac.uk/~pes20/apppi.pdf">pdf</a>).</li>
+<li>
+<p>Peter Sewell, <em>Applied <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math> – A Brief Tutorial</em>, (2000) (<a href="https://www.cl.cam.ac.uk/~pes20/apppi.pdf">pdf</a>).</p>
+</li>
 
-<li>Jeannette M. Wing, <em>FAQ on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-Calculus</em>, (2002) (<a href="https://www.cs.cmu.edu/~wing/publications/Wing02a.pdf">pdf</a>).</li>
+<li>
+<p>Jeannette M. Wing, <em>FAQ on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-Calculus</em>, (2002) (<a href="https://www.cs.cmu.edu/~wing/publications/Wing02a.pdf">pdf</a>).</p>
+</li>
 
-<li id="Hirschkoff03">Daniel Hirschkoff, <em>A brief survey of the theory of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus</em>, (2003) (<a href="https://hal-lara.archives-ouvertes.fr/hal-02101985/file/RR2003-13.pdf">pdf</a>).</li>
+<li id="Hirschkoff03">
+<p>Daniel Hirschkoff, <em>A brief survey of the theory of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math>-calculus</em>, (2003) (<a href="https://hal-lara.archives-ouvertes.fr/hal-02101985/file/RR2003-13.pdf">pdf</a>).</p>
+</li>
 
-<li><a class="existingWikiWord" href="/nlab/show/Pierre-Louis+Curien">Pierre-Louis Curien</a>, <em>Introduction to CCS and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>pi</mi></mrow><annotation encoding="application/x-tex">pi</annotation></semantics></math>-calculus</em>, (2003) (<a href="https://www.irif.fr/~curien/CCS-DEA.ps.gz">ps</a>).</li>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Pierre-Louis+Curien">Pierre-Louis Curien</a>, <em>Introduction to CCS and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>pi</mi></mrow><annotation encoding="application/x-tex">pi</annotation></semantics></math>-calculus</em>, (2003) (<a href="https://www.irif.fr/~curien/CCS-DEA.ps.gz">ps</a>).</p>
+</li>
 </ul>
 
-<p>On types:</p>
+<p>With <a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a>:</p>
 
 <ul>
-<li>Kohei Honda, <em>Types for dyadic interaction</em>, 4th International Conference on Concurrency Theory (1993) 509–523.</li>
+<li>
+<p>Kohei Honda, <em>Types for dyadic interaction</em>, 4th International Conference on Concurrency Theory (1993) 509–523.</p>
+</li>
 
-<li>Noël Bernard, <em>Investigating the Logical Aspects of the Pi-calculus</em>, Schedae Informaticae, <strong>12</strong> (2003) 57-66 (<a href="https://hal.science/hal-00386109">hal-00386109</a>).</li>
+<li>
+<p>Noël Bernard, <em>Investigating the Logical Aspects of the Pi-calculus</em>, Schedae Informaticae, <strong>12</strong> (2003) 57-66 (<a href="https://hal.science/hal-00386109">hal-00386109</a>).</p>
+</li>
 
-<li id="Caires10">Luís Caires and <a class="existingWikiWord" href="/nlab/show/Frank+Pfenning">Frank Pfenning</a>, <em>Session Types as Intuitionistic Linear Propositions</em>, 21st International Conference on Concurrency Theory (2010) 222-236 (<a href="https://www.cs.cmu.edu/~fp/papers/concur10.pdf">pdf</a>).</li>
+<li id="Caires10">
+<p>Luís Caires and <a class="existingWikiWord" href="/nlab/show/Frank+Pfenning">Frank Pfenning</a>, <em>Session Types as Intuitionistic Linear Propositions</em>, 21st International Conference on Concurrency Theory (2010) 222-236 (<a href="https://www.cs.cmu.edu/~fp/papers/concur10.pdf">pdf</a>).</p>
+</li>
 
-<li id="Walder2012">Philip Wadler, <em>Propositions as Sessions</em> (<a href="https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-sessions/propositions-as-sessions.pdf">pdf</a>, <a href="https://dl.acm.org/doi/10.1145/2398856.2364568">doi:10.1145/2398856.2364568</a>).</li>
+<li id="Walder2012">
+<p><a class="existingWikiWord" href="/nlab/show/Philip+Wadler">Philip Wadler</a>: <em>Propositions as Sessions</em>,</p>
+
+<p>ACM SIGPLAN Notices <strong>47</strong> 9 (2012) 273 - 286 &lbrack;<a href="https://dl.acm.org/doi/10.1145/2398856.2364568">doi:10.1145/2398856.2364568</a>, <a href="https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-sessions/propositions-as-sessions.pdf">pdf</a>&rbrack;</p>
+
+<p>Journal of Functional Programming <strong>24</strong> 2-3 ICFP 2012 (2014) 384-418 &lbrack;<a href="https://doi.org/10.1017/S095679681400001X">doi:10.1017/S095679681400001X</a>&rbrack;</p>
+</li>
 </ul>
 
 <p>Other process calculi:</p>
@@ -619,14 +675,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on March  8, 2024 at 11:21:47.
+    Last revised on March 11, 2025 at 09:45:51.
     See the <a href="/nlab/history/pi-calculus" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/pi-calculus" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/17538/#Item_10">Discuss</a><span class="backintime"><a href="/nlab/revision/pi-calculus/10" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/pi-calculus" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/pi-calculus" accesskey="S" class="navlink" id="history" rel="nofollow">History (10 revisions)</a>
+  <a href="/nlab/edit/pi-calculus" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/17538/#Item_11">Discuss</a><span class="backintime"><a href="/nlab/revision/pi-calculus/12" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/pi-calculus" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/pi-calculus" accesskey="S" class="navlink" id="history" rel="nofollow">History (12 revisions)</a>
   <a href="/nlab/show/pi-calculus/cite" style="color: black">Cite</a>
   <a href="/nlab/print/pi-calculus" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/pi-calculus" id="view_source" rel="nofollow">Source</a>
