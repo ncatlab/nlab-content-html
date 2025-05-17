@@ -493,6 +493,7 @@ margin-left: 0em;
 <li><a href='#parametric_polymorphism'>Parametric polymorphism</a></li>
 <ul>
 <li><a href='#theorems_for_free'>Theorems for Free</a></li>
+<li><a href='#in_dependent_type_theory'>In dependent type theory</a></li>
 </ul>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
@@ -530,9 +531,7 @@ margin-left: 0em;
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>first</mi><mo>:</mo><mi>ℕ</mi><mo>×</mo><mi>ℕ</mi><mo>→</mo><mi>ℕ</mi></mrow><annotation encoding="application/x-tex"> first : \mathbb{N} \times \mathbb{N} \to \mathbb{N}</annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>first</mi><mo>:</mo><mi>ℝ</mi><mo>×</mo><mi>ℝ</mi><mo>→</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex"> first : \mathbb{R} \times \mathbb{R} \to \mathbb{R}</annotation></semantics></math></div>
 <p>and so on, for any types we wish. In contrast to <em>ad hoc</em> polymorphism, in this case we do have a guarantee that all these same-named functions are doing “the same thing”, because they are all instantiated by the same original polymorphic code.</p>
 
-<p>In a <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependently typed programming language</a> with a <a class="existingWikiWord" href="/nlab/show/type+of+types">type of types</a>, such as <a class="existingWikiWord" href="/nlab/show/Coq">Coq</a> or <a class="existingWikiWord" href="/nlab/show/Agda">Agda</a>, or with <a class="existingWikiWord" href="/nlab/show/dependent+type+theory+with+type+variables">type variables</a> and <a class="existingWikiWord" href="/nlab/show/impredicative+polymorphism">impredicative polymorphism</a>, a parametrically polymorphic family of functions can simply be considered to be a single dependently typed function whose first argument is a type. Thus our function above would be typed as</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>first</mi><mo>:</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>A</mi><mo>:</mo><mi>Type</mi></mrow></munder><mi>A</mi><mo>×</mo><mi>A</mi><mo>→</mo><mi>A</mi><mspace width="2em"></mspace><mi mathvariant="normal">or</mi><mspace width="2em"></mspace><mi>first</mi><mo>:</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow></munder><mi>A</mi><mo>×</mo><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex"> first : \prod_{A:Type} A\times A \to A \qquad \mathrm{or} \qquad first : \prod_{A \; \mathrm{type}} A\times A \to A</annotation></semantics></math></div>
-<p>However, parametric polymorphism makes sense and is very useful even in languages with less rich type systems, such as <a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a> and <span class="newWikiWord">Standard ML<a href="/nlab/new/Standard+ML">?</a></span>.</p>
+<p>Parametric polymorphism makes sense and is very useful in languages with non-dependent type systems, such as <a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a> and <span class="newWikiWord">Standard ML<a href="/nlab/new/Standard+ML">?</a></span>.</p>
 
 <h3 id="theorems_for_free">Theorems for Free</h3>
 
@@ -540,9 +539,41 @@ margin-left: 0em;
 <div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>∘</mo><mi>f</mi><mo>=</mo><mi>f</mi><mo>∘</mo><mo stretchy="false">(</mo><mi>α</mi><mo>×</mo><mi>β</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> \alpha \circ f = f \circ (\alpha \times \beta) </annotation></semantics></math></div>
 <p>for all functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> with that signature (<a href="#Wadler89">Wadler 89</a>, figure 1).</p>
 
+<h3 id="in_dependent_type_theory">In dependent type theory</h3>
+
+<p>In a <a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a> with a <a class="existingWikiWord" href="/nlab/show/type+universe">type universe</a> or <a class="existingWikiWord" href="/nlab/show/type+variables">type variables</a>, our family of functions above would be typed respectively as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Γ</mi><mo>,</mo><mi>A</mi><mo>:</mo><mi>Type</mi><mo>⊢</mo><mi mathvariant="normal">first</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi><mo>×</mo><mi>A</mi><mo>→</mo><mi>A</mi><mspace width="2em"></mspace><mi mathvariant="normal">or</mi><mspace width="2em"></mspace><mi>Γ</mi><mo>,</mo><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi><mo>⊢</mo><mi mathvariant="normal">first</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi><mo>×</mo><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\Gamma, A:Type \vdash \mathrm{first}(A):A\times A \to A \qquad \mathrm{or} \qquad \Gamma, A \; \mathrm{type} \vdash \mathrm{first}(A): A \times A \to A</annotation></semantics></math></div>
+<p>If the dependent type theory additionally has universe-indexed <a class="existingWikiWord" href="/nlab/show/dependent+product+types">dependent product types</a> or <a class="existingWikiWord" href="/nlab/show/impredicative+polymorphism">impredicative polymorphism</a> respectively, a parametrically polymorphic family of functions can simply be considered to be a single dependently typed function whose first argument is a type. Thus our function above would be typed as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi mathvariant="normal">first</mi><mo>:</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>A</mi><mo>:</mo><mi>Type</mi></mrow></munder><mi>A</mi><mo>×</mo><mi>A</mi><mo>→</mo><mi>A</mi><mspace width="2em"></mspace><mi mathvariant="normal">or</mi><mspace width="2em"></mspace><mi mathvariant="normal">first</mi><mo>:</mo><munder><mo lspace="thinmathspace" rspace="thinmathspace">∏</mo> <mrow><mi>A</mi><mspace width="thickmathspace"></mspace><mi mathvariant="normal">type</mi></mrow></munder><mi>A</mi><mo>×</mo><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex"> \mathrm{first} : \prod_{A:Type} A\times A \to A \qquad \mathrm{or} \qquad \mathrm{first} : \prod_{A \; \mathrm{type}} A\times A \to A</annotation></semantics></math></div>
+<p>Examples of parametric polymorphism in dependent type theory include <a class="existingWikiWord" href="/nlab/show/axioms">axioms</a> and <a class="existingWikiWord" href="/nlab/show/axiom+schemata">axiom schemata</a>, such as <a class="existingWikiWord" href="/nlab/show/UIP">UIP</a> and <a class="existingWikiWord" href="/nlab/show/axiom+K">axiom K</a>, <a class="existingWikiWord" href="/nlab/show/excluded+middle">excluded middle</a>, <a class="existingWikiWord" href="/nlab/show/axiom+of+choice">axiom of choice</a>, and the <a class="existingWikiWord" href="/nlab/show/type+theoretic+axiom+of+replacement">axiom of replacement</a> for a <a class="existingWikiWord" href="/nlab/show/Tarski+universe">Tarski universe</a>.</p>
+
+<p>For certain dependent type theories, one can prove that they have parametric polymorphism inside the type theory itself. These are the <a class="existingWikiWord" href="/nlab/show/parametric+dependent+type+theories">parametric dependent type theories</a>.</p>
+
 <h2 id="related_concepts">Related concepts</h2>
 
 <ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/type+theory">type theory</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/simple+type+theory">simple type theory</a></p>
+</li>
+
+<li>
+<p><strong>polymorphic type theory</strong></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/dependent+type+theory">dependent type theory</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/polymorphic+dependent+type+theory">polymorphic dependent type theory</a></p>
+</li>
+</ul>
+</li>
+
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/logical+relations">logical relations</a></p>
 </li>
@@ -553,10 +584,6 @@ margin-left: 0em;
 
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/parametric+dependent+type+theory">parametric dependent type theory</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/dependent+type+theory+with+type+variables">dependent type theory with type variables</a></p>
 </li>
 </ul>
 
@@ -597,14 +624,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on May 12, 2025 at 21:11:51.
+    Last revised on May 17, 2025 at 14:06:42.
     See the <a href="/nlab/history/polymorphism" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/polymorphism" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4187/#Item_15">Discuss</a><span class="backintime"><a href="/nlab/revision/polymorphism/20" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/polymorphism" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/polymorphism" accesskey="S" class="navlink" id="history" rel="nofollow">History (20 revisions)</a>
+  <a href="/nlab/edit/polymorphism" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/4187/#Item_15">Discuss</a><span class="backintime"><a href="/nlab/revision/polymorphism/22" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/polymorphism" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/polymorphism" accesskey="S" class="navlink" id="history" rel="nofollow">History (22 revisions)</a>
   <a href="/nlab/show/polymorphism/cite" style="color: black">Cite</a>
   <a href="/nlab/print/polymorphism" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/polymorphism" id="view_source" rel="nofollow">Source</a>
