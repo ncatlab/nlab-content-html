@@ -283,7 +283,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/13252/#Item_4" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/13252/#Item_5" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -315,6 +315,20 @@ margin-left: 0em;
 <ul>
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/monoid+object">monoid object</a></p>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/commutative+monoid+object">commutative monoid object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/idempotent+monoid+object">idempotent monoid object</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/semilattice+object">semilattice object</a></p>
+</li>
+</ul>
 </li>
 
 <li>
@@ -590,6 +604,7 @@ margin-left: 0em;
 <li><a href='#comonadic_homology_and_descent'>Comonadic homology and descent</a></li>
 <li><a href='#mixed_distributive_laws'>Mixed distributive laws</a></li>
 </ul>
+<li><a href='#typing_rules'>Typing rules</a></li>
 <li><a href='#examples'>Examples</a></li>
 <li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
@@ -623,6 +638,29 @@ margin-left: 0em;
 
 <p><a class="existingWikiWord" href="/nlab/show/distributive+law">Distributive laws</a> between a monad and a comonad are so-called <em>mixed</em> distributive laws; a special case has been rediscovered in physics under the name <em>entwining structures</em> (Brzeziński, Majid 1997). Their theory is often studied in the connection with the theory of comonads in the bicategory of rings, modules and morphisms of modules, that is <a class="existingWikiWord" href="/nlab/show/coring">coring</a>s. There is a homomorphism of bicategories from a bicategory of entwinings to a bicategory of corings (<a href="http://front.math.ucdavis.edu/0805.4611">Škoda 2008</a>), which is an analogue of the 2-functor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>comp</mi></mrow><annotation encoding="application/x-tex">comp</annotation></semantics></math> (R. Street, <em>Formal theory of monads</em>, JPAA 1972) of strict 2-categories in the case of distributive laws of monads (recall also that a distributive law among monads corresponds to a monad in the 2-category of monads).</p>
 
+<h2 id="typing_rules">Typing rules</h2>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mo>□</mo><mi>A</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mstyle mathvariant="sans-serif"><mi>extract</mi></mstyle><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>:</mo><mi>A</mi></mrow></mfrac><mspace width="2em"></mspace><mfrac><mrow><mi>Γ</mi><mo>⊢</mo><mi>t</mi><mo>:</mo><mo>□</mo><mi>A</mi><mspace width="2em"></mspace><mi>x</mi><mo>:</mo><mo>□</mo><mi>A</mi><mo>⊢</mo><mi>u</mi><mo>:</mo><mi>B</mi></mrow><mrow><mi>Γ</mi><mo>⊢</mo><mstyle mathvariant="sans-serif"><mi>extend</mi></mstyle><mspace width="thickmathspace"></mspace><mi>x</mi><mo>=</mo><mi>t</mi><mspace width="thickmathspace"></mspace><mstyle mathvariant="sans-serif"><mi>in</mi></mstyle><mspace width="thickmathspace"></mspace><mi>u</mi><mo>:</mo><mo>□</mo><mi>B</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+  \frac{\Gamma \vdash t:\Box A}{\Gamma \vdash \mathsf{extract}(t):A}
+  \qquad
+  \frac{\Gamma \vdash t:\Box A \qquad x:\Box A \vdash u:B}
+       {\Gamma \vdash \mathsf{extend}\ x = t\ \mathsf{in}\ u:\Box B}
+
+</annotation></semantics></math></div>
+<p>In <a class="existingWikiWord" href="/nlab/show/Haskell">Haskell</a>, comonads are defined by the following typeclass:</p>
+
+<pre class="haskell"><code class="haskell">class Functor w =&gt; Comonad w where
+  extract :: w a -&gt; a
+
+  duplicate :: w a -&gt; w (w a)
+  duplicate = extend id
+
+  extend :: (w a -&gt; b) -&gt; w a -&gt; w b
+  extend f = fmap f . duplicate
+
+  {-# MINIMAL extract, (duplicate | extend) #-}</code></pre>
+
+<p>See also the definition of a <span class="newWikiWord">monoidal comonad<a href="/nlab/new/monoidal+comonad">?</a></span>.</p>
+
 <h2 id="examples">Examples</h2>
 
 <ul>
@@ -631,11 +669,7 @@ margin-left: 0em;
 </li>
 
 <li>
-<p><a class="existingWikiWord" href="/nlab/show/writer+comonad">writer comonad</a></p>
-</li>
-
-<li>
-<p><a class="existingWikiWord" href="/nlab/show/store+comonad">store comonad</a></p>
+<p><a class="existingWikiWord" href="/nlab/show/writer+comonad">writer comonad</a>, <a class="existingWikiWord" href="/nlab/show/store+comonad">store comonad</a></p>
 </li>
 
 <li>
@@ -644,6 +678,10 @@ margin-left: 0em;
 
 <li>
 <p><a class="existingWikiWord" href="/nlab/show/jet+comonad">jet comonad</a></p>
+</li>
+
+<li>
+<p><span class="newWikiWord">monoidal comonad<a href="/nlab/new/monoidal+comonad">?</a></span></p>
 </li>
 </ul>
 
@@ -730,14 +768,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on June 21, 2024 at 08:25:52.
+    Last revised on May 23, 2026 at 21:38:27.
     See the <a href="/nlab/history/comonad" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/comonad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13252/#Item_4">Discuss</a><span class="backintime"><a href="/nlab/revision/comonad/28" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/comonad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/comonad" accesskey="S" class="navlink" id="history" rel="nofollow">History (28 revisions)</a>
+  <a href="/nlab/edit/comonad" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/13252/#Item_5">Discuss</a><span class="backintime"><a href="/nlab/revision/comonad/29" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/comonad" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/comonad" accesskey="S" class="navlink" id="history" rel="nofollow">History (29 revisions)</a>
   <a href="/nlab/show/comonad/cite" style="color: black">Cite</a>
   <a href="/nlab/print/comonad" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/comonad" id="view_source" rel="nofollow">Source</a>
