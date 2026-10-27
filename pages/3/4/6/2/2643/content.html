@@ -298,7 +298,7 @@ margin-left: 0em;
 
 <div id="revision">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
-<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>Contents</title></head>
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title></title></head>
 <body>
 <div class="rightHandSide">
 <div class="toc clickDown" tabindex="0">
@@ -445,84 +445,521 @@ margin-left: 0em;
 </div>
 </div>
 
-<h1 id="contents">Contents</h1>
+
+<h1 id='section_table_of_contents'>Contents</h1>
 <div class='maruku_toc'>
 <ul>
 <li><a href='#idea'>Idea</a></li>
-<li><a href='#example'>Example</a></li>
+<li><a href='#Examples'>Examples</a></li>
+<ul>
+<li><a href='#PositionAndMomentum'>Position and momentum on the line</a></li>
+<ul>
+<li><a href='#TheProblem'>The problem</a></li>
+<li><a href='#TheRigging'>The rigging</a></li>
+<li><a href='#GeneralizedEigenvectors'>Generalized eigenvectors</a></li>
+<li><a href='#CompletenessAndDiracNotation'>Completeness and Dirac’s notation</a></li>
+</ul>
+</ul>
+<li><a href='#related_concepts'>Related concepts</a></li>
 <li><a href='#references'>References</a></li>
-<li><a href='#see_also'>See also</a></li>
 </ul>
 </div>
 
+
 <h2 id="idea">Idea</h2>
 
-<p>The notion of <em>rigged Hilbert spaces</em> serves to treat <a class="existingWikiWord" href="/nlab/show/spectral+theory">spectral theory</a> of normal <a class="existingWikiWord" href="/nlab/show/unbounded+operators">unbounded operators</a> on a <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> much as if it were about actual <a class="existingWikiWord" href="/nlab/show/eigenvalues">eigenvalues</a> and <a class="existingWikiWord" href="/nlab/show/eigenvectors">eigenvectors</a>. It may be used to make rigorous the idea of <a class="existingWikiWord" href="/nlab/show/eigenstates">eigenstates</a> for <a class="existingWikiWord" href="/nlab/show/quantum+observables">quantum observables</a> as used in <a class="existingWikiWord" href="/nlab/show/quantum+mechanics">quantum mechanics</a>.</p>
+<p>In <a class="existingWikiWord" href="/nlab/show/quantum+mechanics">quantum mechanics</a> one routinely speaks of <a class="existingWikiWord" href="/nlab/show/eigenstates">eigenstates</a> of <a class="existingWikiWord" href="/nlab/show/quantum+observables">quantum observables</a> with continuous <a class="existingWikiWord" href="/nlab/show/spectrum">spectrum</a>, notably of eigenstates of position and of <a class="existingWikiWord" href="/nlab/show/momentum">momentum</a>, written in <a class="existingWikiWord" href="/nlab/show/bra-ket">bra-ket</a> notation as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert x \rangle</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>p</mi><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert p \rangle</annotation></semantics></math> and “normalized”, following <a class="existingWikiWord" href="/nlab/show/Paul+Dirac">Dirac</a>, in terms of the <a class="existingWikiWord" href="/nlab/show/Dirac+delta+distribution">Dirac delta distribution</a>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>x</mi><mo stretchy="false">|</mo><mi>x</mi><mo>′</mo><mo stretchy="false">⟩</mo><mo>=</mo><mi>δ</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>x</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\langle x \vert x' \rangle = \delta(x - x')</annotation></semantics></math>. But these <a class="existingWikiWord" href="/nlab/show/self-adjoint+operator">self-adjoint</a> <a class="existingWikiWord" href="/nlab/show/unbounded+operators">unbounded operators</a> have no actual <a class="existingWikiWord" href="/nlab/show/eigenvectors">eigenvectors</a> in the <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> of states (see <a href="#NoEigenvectorsInL2">below</a>). The <a class="existingWikiWord" href="/nlab/show/spectral+theorem">spectral theorem</a> in its Hilbert space form makes rigorous sense of such operators by trading their eigenvectors for <a class="existingWikiWord" href="/nlab/show/spectral+measures">spectral measures</a> (projection-valued measures), but in doing so it gives up the transparent picture of expanding any state in a “basis” of eigenstates, which is what makes Dirac’s formalism so effective in practice.</p>
 
-<h2 id="example">Example</h2>
-
-<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math> be the <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo>,</mo><mi>d</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^2(\mathbb{R}, d x)</annotation></semantics></math> consisting of square integrable functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> with respect to <a class="existingWikiWord" href="/nlab/show/Lebesgue+measure">Lebesgue measure</a>. There is an <a class="existingWikiWord" href="/nlab/show/unbounded+operator">unbounded</a> <a class="existingWikiWord" href="/nlab/show/self-adjoint+operator">self-adjoint operator</a></p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>m</mi> <mi>x</mi></msub><mspace width="thinmathspace"></mspace><mo lspace="verythinmathspace">:</mo><mspace width="thinmathspace"></mspace></mtd> <mtd><mi>H</mi></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mi>H</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mi>f</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><mi>x</mi><mo>⋅</mo><mi>f</mi><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
-  \array{
-    m_x \,\colon\, 
-    &amp; 
-    H &amp;\longrightarrow&amp; H
-    \\
-    &amp; f &amp;\mapsto&amp; x \cdot f  
-    \mathrlap{\,,}
-  }
+<p>The notion of <em>rigged Hilbert spaces</em> (also: <em>equipped Hilbert spaces</em>, closer to the Russian original, or <em><a class="existingWikiWord" href="/nlab/show/Gelfand+triples">Gelfand triples</a></em>) restores this picture rigorously, by enlarging the given Hilbert space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math> to a space of <em>generalized vectors</em> in which the missing eigenvectors do exist — much as <a class="existingWikiWord" href="/nlab/show/distributions">distributions</a>, such as the <a class="existingWikiWord" href="/nlab/show/Dirac+distribution">Dirac distribution</a>, enlarge the space of ordinary functions. To this end one chooses a <a class="existingWikiWord" href="/nlab/show/dense+subspace">dense subspace</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Φ</mi><mo>⊂</mo><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\Phi \subset \mathcal{H}</annotation></semantics></math> (notation following <a href="#GelfandVilenkin61">Gel’fand &amp; Vilenkin 1961 §4.2–3</a>) of particularly well-behaved vectors, equipped with its own <a class="existingWikiWord" href="/nlab/show/topological+vector+space">topology</a>, <a class="existingWikiWord" href="/nlab/show/fine+topology">finer</a> than the one induced from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math> (typically making <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math> a <a class="existingWikiWord" href="/nlab/show/nuclear+space">nuclear</a> <a class="existingWikiWord" href="/nlab/show/Fr%C3%A9chet+space">Fréchet space</a>, such as a <a class="existingWikiWord" href="/nlab/show/Schwartz+space">Schwartz space</a> of test functions). Since continuity with respect to this finer topology is a weaker condition, there are <em>more</em> <a class="existingWikiWord" href="/nlab/show/continuous+map">continuous</a> <a class="existingWikiWord" href="/nlab/show/antilinear+map">antilinear</a> <a class="existingWikiWord" href="/nlab/show/functionals">functionals</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math> than on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math> — the latter being, by the <a class="existingWikiWord" href="/nlab/show/Riesz+representation+theorem">Riesz representation theorem</a>, just the vectors of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math> themselves. This yields a triple of continuous inclusions</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Φ</mi><mspace width="thickmathspace"></mspace><mo>⊂</mo><mspace width="thickmathspace"></mspace><mi>ℋ</mi><mspace width="thickmathspace"></mspace><mo>⊂</mo><mspace width="thickmathspace"></mspace><msup><mi>Φ</mi> <mo>×</mo></msup><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow></mpadded></mrow><annotation encoding="application/x-tex">
+  \Phi
+  \;\subset\;
+  \mathcal{H}
+  \;\subset\;
+  \Phi^\times
+  \mathrlap{\,,}
 
 </annotation></semantics></math></div>
-<p>where</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>⋅</mo><mi>f</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mo>≔</mo><mi>y</mi><mi>f</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
-  (x \cdot f)(y) \coloneqq y f(y)
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Φ</mi> <mo>×</mo></msup></mrow><annotation encoding="application/x-tex">\Phi^\times</annotation></semantics></math> denotes the space of <a class="existingWikiWord" href="/nlab/show/continuous+map">continuous</a> <a class="existingWikiWord" href="/nlab/show/antilinear+map">antilinear</a> <a class="existingWikiWord" href="/nlab/show/functionals">functionals</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math>, into which <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi><mo>∈</mo><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\psi \in \mathcal{H}</annotation></semantics></math> embeds as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\langle - \vert \psi \rangle</annotation></semantics></math>.</p>
+
+<p>If now a <a class="existingWikiWord" href="/nlab/show/self-adjoint+operator">self-adjoint operator</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math> restricts to a continuous <a class="existingWikiWord" href="/nlab/show/linear+operator">linear operator</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo lspace="verythinmathspace">:</mo><mi>Φ</mi><mo>→</mo><mi>Φ</mi></mrow><annotation encoding="application/x-tex">A \colon \Phi \to \Phi</annotation></semantics></math>, then it extends by duality to an operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>A</mi> <mo>×</mo></msup><mo lspace="verythinmathspace">:</mo><msup><mi>Φ</mi> <mo>×</mo></msup><mo>→</mo><msup><mi>Φ</mi> <mo>×</mo></msup></mrow><annotation encoding="application/x-tex">A^\times \colon \Phi^\times \to \Phi^\times</annotation></semantics></math> on generalized vectors, given by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>A</mi> <mo>×</mo></msup><mi>F</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mo>≔</mo><mi>F</mi><mo stretchy="false">(</mo><mi>A</mi><mi>ϕ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(A^\times F)(\phi) \coloneqq F(A \phi)</annotation></semantics></math>, and a <em>generalized eigenvector</em> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> with <em>generalized eigenvalue</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> is an element <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>∈</mo><msup><mi>Φ</mi> <mo>×</mo></msup></mrow><annotation encoding="application/x-tex">F \in \Phi^\times</annotation></semantics></math> with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>A</mi> <mo>×</mo></msup><mi>F</mi><mo>=</mo><mi>λ</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">A^\times F = \lambda F</annotation></semantics></math>. The <em>nuclear spectral theorem</em> (due to Gel’fand &amp; Kostyuchenko and to Maurin, hence also called the <em>Gel’fand-Maurin theorem</em>, see <a href="#GelfandVilenkin61">Gel’fand &amp; Vilenkin 1961, Ch. I</a>, <a href="#BlanchardBruening15">Blanchard &amp; Brüning 2015, Ch. 29</a>) says that when <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math> is nuclear, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> has a <em>complete</em> system of generalized eigenvectors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>λ</mi><mo stretchy="false">⟩</mo><mo>∈</mo><msup><mi>Φ</mi> <mo>×</mo></msup></mrow><annotation encoding="application/x-tex">\vert \lambda \rangle \in \Phi^\times</annotation></semantics></math>, indexed by (almost all) points <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> of its spectrum (and in general also by a multiplicity label, here suppressed), in that there is a <a class="existingWikiWord" href="/nlab/show/measure">measure</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math> on the spectrum such that</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mo>∫</mo><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><mi>λ</mi><mo stretchy="false">⟩</mo></mrow><mspace width="thinmathspace"></mspace><mrow><mo stretchy="false">⟨</mo><mi>λ</mi><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow><mspace width="thickmathspace"></mspace><mi mathvariant="normal">d</mi><mi>μ</mi><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>for all</mtext><mspace width="thickmathspace"></mspace><mi>ϕ</mi><mo>,</mo><mi>ψ</mi><mo>∈</mo><mi>Φ</mi><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  {\langle \phi \vert \psi \rangle}
+  \;=\;
+  \int
+    {\langle \phi \vert \lambda \rangle}
+    \,
+    {\langle \lambda \vert \psi \rangle}
+  \;
+  \mathrm{d}\mu(\lambda)
+  \;\;\;\;\;\;
+  \text{for all}\; \phi, \psi \in \Phi
   \,.
 
 </annotation></semantics></math></div>
-<p>This operator is not defined on all of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>, but it is defined on a <a class="existingWikiWord" href="/nlab/show/dense+subspace">dense subspace</a> of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>. For example, if <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is the <a class="existingWikiWord" href="/nlab/show/Schwartz+space">Schwartz space</a> consisting of <a class="existingWikiWord" href="/nlab/show/smooth+functions">smooth functions</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math> all of whose <a class="existingWikiWord" href="/nlab/show/derivatives">derivatives</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>f</mi> <mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f^{(n)}(x)</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/rapidly+decreasing+function">decay rapidly</a> at infinity (more rapidly than any negative power of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo></mrow><annotation encoding="application/x-tex">|x|</annotation></semantics></math>), then there is a dense inclusion map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>:</mo><mi>S</mi><mo>→</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">i: S \to H</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>m</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">m_x</annotation></semantics></math> is defined globally on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>.</p>
+<p>This is the rigorous form of Dirac’s <em>completeness relation</em> “<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mrow><mo stretchy="false">|</mo><mi>λ</mi><mo stretchy="false">⟩</mo></mrow><mrow><mo stretchy="false">⟨</mo><mi>λ</mi><mo stretchy="false">|</mo></mrow><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>μ</mi><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">id</mi></mrow><annotation encoding="application/x-tex">\int {\vert \lambda \rangle} {\langle \lambda \vert} \, \mathrm{d}\mu(\lambda) = \mathrm{id}</annotation></semantics></math>”.</p>
 
-<p>Meanwhile the Schwartz space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> carries its own topology (as described in the article <em><a class="existingWikiWord" href="/nlab/show/distribution">distribution</a></em>), stronger than the topology it inherits from <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>, and the space of tempered distributions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">S^*</annotation></semantics></math> is defined to be the continuous dual of the <a class="existingWikiWord" href="/nlab/show/topological+vector+space">topological vector space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>. Since the continuous inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>:</mo><mi>S</mi><mo>→</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">i: S \to H</annotation></semantics></math> is dense, it follows that any continuous functional</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>:</mo><mi>S</mi><mo>→</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">f: S \to \mathbb{C}</annotation></semantics></math></div>
-<p>has at most one extension to a continuous functional <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi><mo>→</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">H \to \mathbb{C}</annotation></semantics></math>. In other words, the adjoint map</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>i</mi> <mo>*</mo></msup><mo>:</mo><msup><mi>H</mi> <mo>*</mo></msup><mo>→</mo><msup><mi>S</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">i^*: H^* \to S^*</annotation></semantics></math></div>
-<p>is injective. In addition, the topology on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math> is such that the operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>m</mi> <mi>x</mi></msub><mo>:</mo><mi>S</mi><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">m_x: S \to S</annotation></semantics></math> is continuous.</p>
+<p>In this way, rigged Hilbert spaces provide a rigorous home for Dirac’s <a class="existingWikiWord" href="/nlab/show/bra-ket">bra-ket</a> formalism: Kets <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>F</mi><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert F \rangle}</annotation></semantics></math> are elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>Φ</mi> <mo>×</mo></msup></mrow><annotation encoding="application/x-tex">\Phi^\times</annotation></semantics></math>, the corresponding bras <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>F</mi><mo stretchy="false">|</mo></mrow><annotation encoding="application/x-tex">\langle F \vert</annotation></semantics></math> are their complex conjugates, which are elements of the dual space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Φ</mi><mo>′</mo></mrow><annotation encoding="application/x-tex">\Phi'</annotation></semantics></math> of continuous <em>linear</em> functionals, and a bracket</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><mi>F</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>F</mi><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">⟨</mo><mi>F</mi><mo stretchy="false">|</mo><mi>ϕ</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mover><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover></mrow><annotation encoding="application/x-tex">
+  \langle \phi \vert F \rangle \;\coloneqq\; F(\phi)
+  \,,
+  \;\;\;\;\;\;
+  \langle F \vert \phi \rangle \;\coloneqq\; \overline{F(\phi)}
 
-<p>In this example, there is a dense inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>→</mo><msup><mi>S</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">S \to S^*</annotation></semantics></math> defined by the inner product pairing, and the operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>m</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">m_x</annotation></semantics></math> extends uniquely to an operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>S</mi> <mo>*</mo></msup><mo>→</mo><msup><mi>S</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">S^* \to S^*</annotation></semantics></math>, called <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>m</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">m_x</annotation></semantics></math> by abuse of notation. Again, in this example, the operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>m</mi> <mi>x</mi></msub><mo>:</mo><msup><mi>S</mi> <mo>*</mo></msup><mo>→</mo><msup><mi>S</mi> <mo>*</mo></msup></mrow><annotation encoding="application/x-tex">m_x: S^* \to S^*</annotation></semantics></math> has an eigenvector <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>s</mi> <mi>ξ</mi></msub></mrow><annotation encoding="application/x-tex">s_{\xi}</annotation></semantics></math> for each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ξ</mi><mo>∈</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\xi \in \mathbb{R}</annotation></semantics></math>:</p>
-<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>m</mi> <mi>x</mi></msub><mo stretchy="false">(</mo><msub><mi>s</mi> <mi>ξ</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>ξ</mi><msub><mi>s</mi> <mi>ξ</mi></msub></mrow><annotation encoding="application/x-tex">m_x(s_{\xi}) = \xi s_{\xi}</annotation></semantics></math></div>
-<p><em>Ugh. Lousy start on something that would be nice to understand properly. Maybe an expert can help out. John, you there?</em></p>
+</annotation></semantics></math></div>
+<p>is well-defined as long as at least one of its two entries is a test vector in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math>. (Brackets between two generalized vectors, such as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>x</mi><mo stretchy="false">|</mo><mi>x</mi><mo>′</mo><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\langle x \vert x' \rangle</annotation></semantics></math>, are not defined in general; see <a href="#BraKetDictionary">below</a> for what they stand for.)</p>
+
+<h2 id="Examples">Examples</h2>
+
+<h3 id="PositionAndMomentum">Position and momentum on the line</h3>
+
+<p>The archetypical example is the <a class="existingWikiWord" href="/nlab/show/quantum+mechanics">quantum mechanics</a> of a particle on the line, with the eigenstates of position and of momentum as generalized vectors. Throughout, let</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><msub><mo>∫</mo> <mi>ℝ</mi></msub><mover><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mspace width="thinmathspace"></mspace><mi>ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">
+  \mathcal{H}
+  \;\coloneqq\;
+  L^2(\mathbb{R})
+  \,,
+  \;\;\;\;\;\;
+  \langle \phi \vert \psi \rangle
+  \;\coloneqq\;
+  \int_{\mathbb{R}}
+    \overline{\phi(x)} \, \psi(x)
+  \, \mathrm{d}x
+
+</annotation></semantics></math></div>
+<p>be the <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> of square-integrable functions on the real line, with respect to <a class="existingWikiWord" href="/nlab/show/Lebesgue+measure">Lebesgue measure</a>, with inner product (as usual in physics) antilinear in its first argument.</p>
+
+<h4 id="TheProblem">The problem</h4>
+
+<p>The <em>position operator</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and the <em>momentum operator</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> (in units with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℏ</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\hbar = 1</annotation></semantics></math>)</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>X</mi><mi>ψ</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>x</mi><mo>⋅</mo><mi>ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">(</mo><mi>P</mi><mi>ψ</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo>−</mo><mi>i</mi><mfrac><mi mathvariant="normal">d</mi><mrow><mi mathvariant="normal">d</mi><mi>x</mi></mrow></mfrac><mi>ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  (X \psi)(x)
+  \;\coloneqq\;
+  x \cdot \psi(x)
+  \,,
+  \;\;\;\;\;\;\;\;
+  (P \psi)(x)
+  \;\coloneqq\;
+  - i \frac{\mathrm{d}}{\mathrm{d}x} \psi(x)
+
+</annotation></semantics></math></div>
+<p>are <a class="existingWikiWord" href="/nlab/show/unbounded+operator">unbounded</a> <a class="existingWikiWord" href="/nlab/show/self-adjoint+operators">self-adjoint operators</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math>, defined not on all of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math> but on <a class="existingWikiWord" href="/nlab/show/dense+subspace">dense</a> domains (for instance <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo><mo>=</mo><mo maxsize="1.2em" minsize="1.2em">{</mo><mi>ψ</mi><mo>∈</mo><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">|</mo><mspace width="thinmathspace"></mspace><mi>x</mi><mo>⋅</mo><mi>ψ</mi><mo>∈</mo><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">}</mo></mrow><annotation encoding="application/x-tex">D(X) = \big\{ \psi \in L^2(\mathbb{R}) \,\big\vert\, x \cdot \psi \in L^2(\mathbb{R}) \big\}</annotation></semantics></math>). Both have <a class="existingWikiWord" href="/nlab/show/spectrum">spectrum</a> all of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math>, but:</p>
+
+<div class="num_remark" id="NoEigenvectorsInL2">
+<h6 id="remark">Remark</h6>
+
+<p><strong>(no eigenvectors in the Hilbert space)</strong></p>
+
+<p>Neither <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> nor <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> has a single <a class="existingWikiWord" href="/nlab/show/eigenvector">eigenvector</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℋ</mi></mrow><annotation encoding="application/x-tex">\mathcal{H}</annotation></semantics></math>:</p>
+
+<ul>
+<li>
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mi>ψ</mi><mo>=</mo><mi>ξ</mi><mi>ψ</mi></mrow><annotation encoding="application/x-tex">X \psi = \xi \psi</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>ξ</mi><mo stretchy="false">)</mo><mi>ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">(x - \xi) \psi(x) = 0</annotation></semantics></math> for almost all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math>, whence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi><mo>=</mo><mn>0</mn><mo>∈</mo><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\psi = 0 \in L^2(\mathbb{R})</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>If <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi><mi>ψ</mi><mo>=</mo><mi>k</mi><mi>ψ</mi></mrow><annotation encoding="application/x-tex">P \psi = k \psi</annotation></semantics></math>, then <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi><mo>′</mo><mo>=</mo><mi>i</mi><mi>k</mi><mi>ψ</mi></mrow><annotation encoding="application/x-tex">\psi' = i k \psi</annotation></semantics></math> in the sense of <a class="existingWikiWord" href="/nlab/show/distributions">distributions</a>, whence <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>c</mi><mspace width="thinmathspace"></mspace><msup><mi>e</mi> <mrow><mi>i</mi><mi>k</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\psi(x) = c \, e^{i k x}</annotation></semantics></math>, which is square-integrable only for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>c</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c = 0</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<p>The would-be eigenfunctions, namely the <a class="existingWikiWord" href="/nlab/show/Dirac+distribution">Dirac distribution</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>δ</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>ξ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta(x - \xi)</annotation></semantics></math> and the plane wave <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>e</mi> <mrow><mi>i</mi><mi>k</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">e^{i k x}</annotation></semantics></math>, do make sense, but as <a class="existingWikiWord" href="/nlab/show/distributions">distributions</a> instead of as elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^2(\mathbb{R})</annotation></semantics></math>. The rigged Hilbert space makes this precise.</p>
+</div>
+
+<h4 id="TheRigging">The rigging</h4>
+
+<p>As the space of test vectors take the <a class="existingWikiWord" href="/nlab/show/Schwartz+space">Schwartz space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R})</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/smooth+functions">smooth functions</a> all of whose derivatives are <a class="existingWikiWord" href="/nlab/show/rapidly+decreasing+function">rapidly decreasing</a>, with its <a class="existingWikiWord" href="/nlab/show/Fr%C3%A9chet+space">Fréchet space</a>-topology given by the <a class="existingWikiWord" href="/nlab/show/seminorms">seminorms</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><munder><mi>sup</mi> <mrow><mi>x</mi><mo>∈</mo><mi>ℝ</mi></mrow></munder><mrow><mo>|</mo><msup><mi>x</mi> <mi>m</mi></msup><mspace width="thinmathspace"></mspace><msup><mi>ϕ</mi> <mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>|</mo></mrow><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mi>m</mi><mo>,</mo><mi>n</mi><mo>∈</mo><mi>ℕ</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  p_{m,n}(\phi)
+  \;\coloneqq\;
+  \sup_{x \in \mathbb{R}}
+  \left\vert
+    x^m \, \phi^{(n)}(x)
+  \right\vert
+  \,,
+  \;\;\;\;\;\;
+  m, n \in \mathbb{N}
+  \,,
+
+</annotation></semantics></math></div>
+<p>and write</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mover><mi>ϕ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mfrac><mn>1</mn><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt></mfrac><msub><mo>∫</mo> <mi>ℝ</mi></msub><msup><mi>e</mi> <mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mi>i</mi><mi>k</mi><mi>x</mi></mrow></msup><mspace width="thinmathspace"></mspace><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">
+  \widehat{\phi}(k)
+  \;\coloneqq\;
+  \frac{1}{\sqrt{2\pi}}
+  \int_{\mathbb{R}}
+    e^{- i k x} \, \phi(x)
+  \, \mathrm{d}x
+
+</annotation></semantics></math></div>
+<p>for the <a class="existingWikiWord" href="/nlab/show/Fourier+transform">Fourier transform</a>.</p>
+
+<div class="num_prop" id="PropertiesOfTheSchwartzRigging">
+<h6 id="proposition">Proposition</h6>
+
+<p><strong>(Schwartz space as test space for position and momentum)</strong></p>
+
+<ol>
+<li>
+<p>The inclusion <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo>↪</mo><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R}) \hookrightarrow L^2(\mathbb{R})</annotation></semantics></math> is continuous with dense image.</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> restrict to continuous linear operators <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo>→</mo><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R}) \to \mathcal{S}(\mathbb{R})</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p>The Fourier transform restricts to a linear automorphism of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R})</annotation></semantics></math> which preserves the inner product (by the Plancherel theorem) and turns <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> into multiplication by the momentum variable, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mrow><mi>P</mi><mi>ϕ</mi></mrow><mo>^</mo></mover><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mo>=</mo><mi>k</mi><mspace width="thinmathspace"></mspace><mover><mi>ϕ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\widehat{P\phi}(k) = k \, \widehat{\phi}(k)</annotation></semantics></math> (and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> into <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mfrac><mi mathvariant="normal">d</mi><mrow><mi mathvariant="normal">d</mi><mi>k</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">i \frac{\mathrm{d}}{\mathrm{d}k}</annotation></semantics></math>).</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R})</annotation></semantics></math> is a <a class="existingWikiWord" href="/nlab/show/nuclear+space">nuclear space</a>.</p>
+</li>
+</ol>
+</div>
+
+<div class="proof">
+<h6 id="proof">Proof</h6>
+
+<p>Using <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo>+</mo><msup><mi>x</mi> <mn>2</mn></msup><mo>≤</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">|</mo><msup><mo stretchy="false">)</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">1 + x^2 \leq (1 + \vert x \vert)^2</annotation></semantics></math> we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">‖</mo><mi>ϕ</mi><msubsup><mo stretchy="false">‖</mo> <mrow><msup><mi>L</mi> <mn>2</mn></msup></mrow> <mn>2</mn></msubsup><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mo>∫</mo> <mi>ℝ</mi></msub><mfrac><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><msup><mi>x</mi> <mn>2</mn></msup><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">|</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msup><mo stretchy="false">|</mo> <mn>2</mn></msup></mrow><mrow><mn>1</mn><mo>+</mo><msup><mi>x</mi> <mn>2</mn></msup></mrow></mfrac><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>x</mi><mspace width="thickmathspace"></mspace><mo>≤</mo><mspace width="thickmathspace"></mspace><mi>π</mi><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>p</mi> <mrow><mn>0</mn><mo>,</mo><mn>0</mn></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>p</mi> <mrow><mn>1</mn><mo>,</mo><mn>0</mn></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mn>2</mn></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \Vert \phi \Vert^2_{L^2}
+  \;=\;
+  \int_{\mathbb{R}}
+    \frac{
+      (1 + x^2) \, \vert \phi(x) \vert^2
+    }{
+      1 + x^2
+    }
+  \, \mathrm{d}x
+  \;\leq\;
+  \pi
+  \,
+  \big(
+    p_{0,0}(\phi) + p_{1,0}(\phi)
+  \big)^2
+  \,,
+
+</annotation></semantics></math></div>
+<p>which gives the continuity in the first item, while density holds since already the compactly supported smooth functions are dense in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^2(\mathbb{R})</annotation></semantics></math>. For the second item, the Leibniz rule gives</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">(</mo><mi>X</mi><mi>ϕ</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≤</mo><mspace width="thickmathspace"></mspace><msub><mi>p</mi> <mrow><mi>m</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mo>+</mo><mi>n</mi><mspace width="thinmathspace"></mspace><msub><mi>p</mi> <mrow><mi>m</mi><mo>,</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>p</mi> <mrow><mi>m</mi><mo>,</mo><mi>n</mi></mrow></msub><mo stretchy="false">(</mo><mi>P</mi><mi>ϕ</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mi>p</mi> <mrow><mi>m</mi><mo>,</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+  p_{m,n}(X \phi)
+  \;\leq\;
+  p_{m+1,n}(\phi) + n \, p_{m,n-1}(\phi)
+  \,,
+  \;\;\;\;\;\;
+  p_{m,n}(P \phi)
+  \;=\;
+  p_{m,n+1}(\phi)
+
+</annotation></semantics></math></div>
+<p>(with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>p</mi> <mrow><mi>m</mi><mo>,</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mrow></msub><mo>≔</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">p_{m,-1} \coloneqq 0</annotation></semantics></math>). The last two items are standard, see at <em><a class="existingWikiWord" href="/nlab/show/Schwartz+space">Schwartz space</a></em> and at <em><a class="existingWikiWord" href="/nlab/show/nuclear+space">nuclear space</a></em>.</p>
+</div>
+
+<p>Now let <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> be the space of continuous antilinear functionals <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo lspace="verythinmathspace">:</mo><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo>→</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">F \colon \mathcal{S}(\mathbb{R}) \to \mathbb{C}</annotation></semantics></math>. Since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R})</annotation></semantics></math> is closed under complex conjugation, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>↦</mo><mi>F</mi><mo maxsize="1.2em" minsize="1.2em">(</mo><mover><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">F \mapsto F\big(\overline{(-)}\big)</annotation></semantics></math> is a linear isomorphism onto the usual space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo>′</mo><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}'(\mathbb{R})</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/tempered+distributions">tempered distributions</a>, so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> is just the space of tempered distributions in a guise adapted to the inner product. Concretely, every locally integrable function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math> of at most polynomial growth defines an element of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><mi>f</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><msub><mo>∫</mo> <mi>ℝ</mi></msub><mover><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mspace width="thinmathspace"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>x</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \langle \phi \vert f \rangle
+  \;\coloneqq\;
+  \int_{\mathbb{R}}
+    \overline{\phi(x)}
+    \,
+    f(x)
+  \,\mathrm{d}x
+  \,,
+
+</annotation></semantics></math></div>
+<p>and so does every <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>f</mi><mo>∈</mo><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f \in L^2(\mathbb{R})</annotation></semantics></math>, continuously so by the Cauchy-Schwarz inequality and the first item of Prop. <a class="maruku-ref" href="#PropertiesOfTheSchwartzRigging"></a>. The resulting map <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo>→</mo><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^2(\mathbb{R}) \to \mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> is injective, since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R})</annotation></semantics></math> is dense in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^2(\mathbb{R})</annotation></semantics></math>, and so we have the rigged Hilbert space</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>⊂</mo><mspace width="thickmathspace"></mspace><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>⊂</mo><mspace width="thickmathspace"></mspace><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≃</mo><mspace width="thickmathspace"></mspace><mi>𝒮</mi><mo>′</mo><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \mathcal{S}(\mathbb{R})
+  \;\subset\;
+  L^2(\mathbb{R})
+  \;\subset\;
+  \mathcal{S}^\times(\mathbb{R})
+  \;\simeq\;
+  \mathcal{S}'(\mathbb{R})
+  \,.
+
+</annotation></semantics></math></div>
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>∈</mo><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F \in \mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo>∈</mo><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi \in \mathcal{S}(\mathbb{R})</annotation></semantics></math> we write, as in the Idea section, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><mi>F</mi><mo stretchy="false">⟩</mo><mo>≔</mo><mi>F</mi><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\langle \phi \vert F \rangle \coloneqq F(\phi)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>F</mi><mo stretchy="false">|</mo><mi>ϕ</mi><mo stretchy="false">⟩</mo><mo>≔</mo><mover><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover></mrow><annotation encoding="application/x-tex">\langle F \vert \phi \rangle \coloneqq \overline{F(\phi)}</annotation></semantics></math>, which for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>F</mi><mo>∈</mo><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F \in L^2(\mathbb{R})</annotation></semantics></math> reproduces the inner product.</p>
+
+<p>Finally, for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi><mo>∈</mo><mo stretchy="false">{</mo><mi>X</mi><mo>,</mo><mi>P</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">A \in \{X, P\}</annotation></semantics></math> define <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>A</mi> <mo>×</mo></msup><mo lspace="verythinmathspace">:</mo><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo>→</mo><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">A^\times \colon \mathcal{S}^\times(\mathbb{R}) \to \mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msup><mi>A</mi> <mo>×</mo></msup><mi>F</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">⟨</mo><mi>A</mi><mi>ϕ</mi><mo stretchy="false">|</mo><mi>F</mi><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \langle \phi \vert A^\times F \rangle
+  \;\coloneqq\;
+  \langle A \phi \vert F \rangle
+  \,.
+
+</annotation></semantics></math></div>
+<p>By self-adjointness of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, this restricts on the domain <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>⊂</mo><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo>⊂</mo><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(A) \subset L^2(\mathbb{R}) \subset \mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> to the original operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>, while under the identification <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo>≃</mo><mi>𝒮</mi><mo>′</mo><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}^\times(\mathbb{R}) \simeq \mathcal{S}'(\mathbb{R})</annotation></semantics></math> it is the usual action of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi><mo>⋅</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x \cdot (-)</annotation></semantics></math> and of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo lspace="verythinmathspace" rspace="0em">−</mo><mi>i</mi><mfrac><mi mathvariant="normal">d</mi><mrow><mi mathvariant="normal">d</mi><mi>x</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">-i \frac{\mathrm{d}}{\mathrm{d}x}</annotation></semantics></math> on tempered distributions.</p>
+
+<h4 id="GeneralizedEigenvectors">Generalized eigenvectors</h4>
+
+<p>For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ξ</mi><mo>,</mo><mi>k</mi><mo>∈</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\xi, k \in \mathbb{R}</annotation></semantics></math> consider the generalized vectors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mi>ξ</mi></msub><mo>,</mo><msub><mi>e</mi> <mi>k</mi></msub><mo>∈</mo><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta_\xi, e_k \in \mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> given by</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>δ</mi> <mi>ξ</mi></msub><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mover><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mfrac><mn>1</mn><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt></mfrac><msup><mi>e</mi> <mrow><mi>i</mi><mi>k</mi><mi>x</mi></mrow></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \langle \phi \vert \delta_\xi \rangle
+  \;\coloneqq\;
+  \overline{\phi(\xi)}
+  \,,
+  \;\;\;\;\;\;\;\;
+  e_k(x)
+  \;\coloneqq\;
+  \frac{1}{\sqrt{2\pi}} e^{i k x}
+  \,,
+
+</annotation></semantics></math></div>
+<p>hence with</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><msub><mi>δ</mi> <mi>ξ</mi></msub><mo stretchy="false">|</mo><mi>ϕ</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>ϕ</mi><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo stretchy="false">⟨</mo><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">|</mo><mi>ϕ</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mover><mi>ϕ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \langle \delta_\xi \vert \phi \rangle
+  \;=\;
+  \phi(\xi)
+  \,,
+  \;\;\;\;\;\;\;\;
+  \langle e_k \vert \phi \rangle
+  \;=\;
+  \widehat{\phi}(k)
+  \,.
+
+</annotation></semantics></math></div>
+<p>(These are continuous on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R})</annotation></semantics></math>, since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>δ</mi> <mi>ξ</mi></msub><mo stretchy="false">⟩</mo><mo stretchy="false">|</mo><mo>≤</mo><msub><mi>p</mi> <mrow><mn>0</mn><mo>,</mo><mn>0</mn></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\vert \langle \phi \vert \delta_\xi \rangle \vert \leq p_{0,0}(\phi)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">⟩</mo><mo stretchy="false">|</mo><mo>≤</mo><msqrt><mrow><mi>π</mi><mo stretchy="false">/</mo><mn>2</mn></mrow></msqrt><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">(</mo><msub><mi>p</mi> <mrow><mn>0</mn><mo>,</mo><mn>0</mn></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>p</mi> <mrow><mn>2</mn><mo>,</mo><mn>0</mn></mrow></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mo maxsize="1.2em" minsize="1.2em">)</mo></mrow><annotation encoding="application/x-tex">\vert \langle \phi \vert e_k \rangle \vert \leq \sqrt{\pi/2} \, \big( p_{0,0}(\phi) + p_{2,0}(\phi) \big)</annotation></semantics></math>.)</p>
+
+<div class="num_prop" id="PositionAndMomentumEigenvectors">
+<h6 id="proposition_2">Proposition</h6>
+
+<p><strong>(generalized position and momentum eigenvectors)</strong></p>
+
+<p>For all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ξ</mi><mo>,</mo><mi>k</mi><mo>∈</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\xi, k \in \mathbb{R}</annotation></semantics></math> we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msup><mi>X</mi> <mo>×</mo></msup><msub><mi>δ</mi> <mi>ξ</mi></msub><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>ξ</mi><mspace width="thinmathspace"></mspace><msub><mi>δ</mi> <mi>ξ</mi></msub><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><msup><mi>P</mi> <mo>×</mo></msup><msub><mi>e</mi> <mi>k</mi></msub><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>k</mi><mspace width="thinmathspace"></mspace><msub><mi>e</mi> <mi>k</mi></msub><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  X^\times \delta_\xi \;=\; \xi \, \delta_\xi
+  \,,
+  \;\;\;\;\;\;\;\;
+  P^\times e_k \;=\; k \, e_k
+  \,.
+
+</annotation></semantics></math></div></div>
+
+<div class="proof">
+<h6 id="proof_2">Proof</h6>
+
+<p>For all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo>∈</mo><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi \in \mathcal{S}(\mathbb{R})</annotation></semantics></math> we have, using that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ξ</mi></mrow><annotation encoding="application/x-tex">\xi</annotation></semantics></math> is real,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msup><mi>X</mi> <mo>×</mo></msup><msub><mi>δ</mi> <mi>ξ</mi></msub><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">⟨</mo><mi>X</mi><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>δ</mi> <mi>ξ</mi></msub><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mover><mrow><mi>ξ</mi><mspace width="thinmathspace"></mspace><mi>ϕ</mi><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>ξ</mi><mspace width="thinmathspace"></mspace><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>δ</mi> <mi>ξ</mi></msub><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \langle \phi \vert X^\times \delta_\xi \rangle
+  \;=\;
+  \langle X\phi \vert \delta_\xi \rangle
+  \;=\;
+  \overline{\xi \, \phi(\xi)}
+  \;=\;
+  \xi \, \langle \phi \vert \delta_\xi \rangle
+  \,,
+
+</annotation></semantics></math></div>
+<p>and, by integration by parts (the boundary terms vanishing since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math> is rapidly decreasing while <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>e</mi> <mi>k</mi></msub></mrow><annotation encoding="application/x-tex">e_k</annotation></semantics></math> is bounded),</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msup><mi>P</mi> <mo>×</mo></msup><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">⟩</mo></mtd> <mtd><mo>=</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">⟨</mo><mi>P</mi><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mo>∫</mo> <mi>ℝ</mi></msub><mi>i</mi><mspace width="thinmathspace"></mspace><mover><mrow><mi>ϕ</mi><mo>′</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mspace width="thinmathspace"></mspace><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>x</mi></mtd></mtr> <mtr><mtd></mtd> <mtd><mo>=</mo><mspace width="thickmathspace"></mspace><mo>−</mo><mi>i</mi><msub><mo>∫</mo> <mi>ℝ</mi></msub><mover><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mspace width="thinmathspace"></mspace><msub><mi>e</mi> <mi>k</mi></msub><mo>′</mo><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>x</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>k</mi><mspace width="thinmathspace"></mspace><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+    \langle \phi \vert P^\times e_k \rangle
+    &amp; =\;
+    \langle P \phi \vert e_k \rangle
+    \;=\;
+    \int_{\mathbb{R}}
+      i \, \overline{\phi'(x)}
+      \, e_k(x)
+    \,\mathrm{d}x
+    \\
+    &amp; =\;
+    - i
+    \int_{\mathbb{R}}
+      \overline{\phi(x)}
+      \, e_k'(x)
+    \,\mathrm{d}x
+    \;=\;
+    k \, \langle \phi \vert e_k \rangle
+    \,.
+  \end{aligned}
+
+</annotation></semantics></math></div></div>
+
+<h4 id="CompletenessAndDiracNotation">Completeness and Dirac’s notation</h4>
+
+<div class="num_prop" id="CompletenessRelations">
+<h6 id="proposition_3">Proposition</h6>
+
+<p><strong>(completeness relations)</strong></p>
+
+<p>For all <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo>,</mo><mi>ψ</mi><mo>∈</mo><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi, \psi \in \mathcal{S}(\mathbb{R})</annotation></semantics></math> we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mo>∫</mo> <mi>ℝ</mi></msub><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>δ</mi> <mi>ξ</mi></msub><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">⟨</mo><msub><mi>δ</mi> <mi>ξ</mi></msub><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>ξ</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mo>∫</mo> <mi>ℝ</mi></msub><mo stretchy="false">⟨</mo><mi>ϕ</mi><mo stretchy="false">|</mo><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">⟨</mo><msub><mi>e</mi> <mi>k</mi></msub><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>k</mi><mspace width="thinmathspace"></mspace><mo>;</mo></mrow><annotation encoding="application/x-tex">
+  \langle \phi \vert \psi \rangle
+  \;=\;
+  \int_{\mathbb{R}}
+    \langle \phi \vert \delta_\xi \rangle
+    \,
+    \langle \delta_\xi \vert \psi \rangle
+  \,\mathrm{d}\xi
+  \;=\;
+  \int_{\mathbb{R}}
+    \langle \phi \vert e_k \rangle
+    \,
+    \langle e_k \vert \psi \rangle
+  \,\mathrm{d}k
+  \,;
+
+</annotation></semantics></math></div>
+<p>equivalently, every test vector <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi></mrow><annotation encoding="application/x-tex">\psi</annotation></semantics></math> has the generalized eigenvector expansions</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>ψ</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mo>∫</mo> <mi>ℝ</mi></msub><mi>ψ</mi><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><msub><mi>δ</mi> <mi>ξ</mi></msub><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>ξ</mi><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mo>∫</mo> <mi>ℝ</mi></msub><mover><mi>ψ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo><mspace width="thinmathspace"></mspace><msub><mi>e</mi> <mi>k</mi></msub><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>k</mi><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \psi
+  \;=\;
+  \int_{\mathbb{R}}
+    \psi(\xi)
+    \,
+    \delta_\xi
+  \,\mathrm{d}\xi
+  \;=\;
+  \int_{\mathbb{R}}
+    \widehat{\psi}(k)
+    \,
+    e_k
+  \,\mathrm{d}k
+  \,,
+
+</annotation></semantics></math></div>
+<p>where the integrals converge weakly in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}^\times(\mathbb{R})</annotation></semantics></math>, i.e. after pairing with any <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo>∈</mo><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi \in \mathcal{S}(\mathbb{R})</annotation></semantics></math>.</p>
+</div>
+
+<div class="proof">
+<h6 id="proof_3">Proof</h6>
+
+<p>The integrands are <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mspace width="thinmathspace"></mspace><mi>ψ</mi><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\overline{\phi(\xi)} \, \psi(\xi)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mrow><mover><mi>ϕ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><mo>¯</mo></mover><mspace width="thinmathspace"></mspace><mover><mi>ψ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\overline{\widehat{\phi}(k)} \, \widehat{\psi}(k)</annotation></semantics></math>, respectively. Hence the first equality is the definition of the inner product on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^2(\mathbb{R})</annotation></semantics></math>, and the second is the Plancherel theorem. In the weak form, the second expansion of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi></mrow><annotation encoding="application/x-tex">\psi</annotation></semantics></math> is thereby <a class="existingWikiWord" href="/nlab/show/Fourier+transform">Fourier inversion</a>.</p>
+</div>
+
+<div class="num_remark" id="BraKetDictionary">
+<h6 id="remark_2">Remark</h6>
+
+<p><strong>(Dirac’s notation)</strong></p>
+
+<p>In Dirac’s <a class="existingWikiWord" href="/nlab/show/bra-ket">bra-ket</a> notation, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mi>x</mi></msub></mrow><annotation encoding="application/x-tex">\delta_x</annotation></semantics></math> is the position eigenket <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert x \rangle</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>e</mi> <mi>p</mi></msub></mrow><annotation encoding="application/x-tex">e_p</annotation></semantics></math> is the momentum eigenket <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>p</mi><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert p \rangle</annotation></semantics></math>, and the above says precisely that:</p>
+
+<ul>
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>x</mi><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mo>=</mo><mi>ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\langle x \vert \psi \rangle = \psi(x)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>p</mi><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mo>=</mo><mover><mi>ψ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\langle p \vert \psi \rangle = \widehat{\psi}(p)</annotation></semantics></math> are the wavefunctions of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi></mrow><annotation encoding="application/x-tex">\psi</annotation></semantics></math> in the position and in the momentum representation, respectively;</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∫</mo><mo stretchy="false">|</mo><mi>x</mi><mo stretchy="false">⟩</mo><mo stretchy="false">⟨</mo><mi>x</mi><mo stretchy="false">|</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>x</mi><mo>=</mo><mi mathvariant="normal">id</mi><mo>=</mo><mo>∫</mo><mo stretchy="false">|</mo><mi>p</mi><mo stretchy="false">⟩</mo><mo stretchy="false">⟨</mo><mi>p</mi><mo stretchy="false">|</mo><mspace width="thinmathspace"></mspace><mi mathvariant="normal">d</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">\int \vert x \rangle \langle x \vert \, \mathrm{d}x = \mathrm{id} = \int \vert p \rangle \langle p \vert \, \mathrm{d}p</annotation></semantics></math> are the completeness relations of Prop. <a class="maruku-ref" href="#CompletenessRelations"></a>;</p>
+</li>
+
+<li>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>x</mi><mo stretchy="false">|</mo><mi>p</mi><mo stretchy="false">⟩</mo><mo>=</mo><mfrac><mn>1</mn><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt></mfrac><msup><mi>e</mi> <mrow><mi>i</mi><mi>p</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\langle x \vert p \rangle = \frac{1}{\sqrt{2\pi}} e^{i p x}</annotation></semantics></math> — here, exceptionally, a bracket between two generalized vectors makes sense, because <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>e</mi> <mi>p</mi></msub></mrow><annotation encoding="application/x-tex">e_p</annotation></semantics></math> is a smooth function, whose value at <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math> is defined.</p>
+</li>
+</ul>
+
+<p>On the other hand, formulas such as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>x</mi><mo stretchy="false">|</mo><mi>x</mi><mo>′</mo><mo stretchy="false">⟩</mo><mo>=</mo><mi>δ</mi><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>x</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\langle x \vert x' \rangle = \delta(x - x')</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">⟨</mo><mi>p</mi><mo stretchy="false">|</mo><mi>p</mi><mo>′</mo><mo stretchy="false">⟩</mo><mo>=</mo><mi>δ</mi><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mi>p</mi><mo>′</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\langle p \vert p' \rangle = \delta(p - p')</annotation></semantics></math> pair two generalized vectors and have no literal meaning in the rigged Hilbert space; they are mnemonics for the completeness relations, obtained by formally inserting <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi><mo>=</mo><mo stretchy="false">|</mo><mi>x</mi><mo>′</mo><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\psi = \vert x' \rangle</annotation></semantics></math> (resp. <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ψ</mi><mo>=</mo><mo stretchy="false">|</mo><mi>p</mi><mo>′</mo><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\psi = \vert p' \rangle</annotation></semantics></math>) into the expansions of Prop. <a class="maruku-ref" href="#CompletenessRelations"></a>.</p>
+</div>
+
+<div class="num_remark" id="DependenceOnTestSpace">
+<h6 id="remark_3">Remark</h6>
+
+<p><strong>(dependence on the choice of test space)</strong></p>
+
+<p>In this example, the generalized eigenvalues of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> are exactly the points of their spectrum <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math>: For <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>λ</mi><mo>∈</mo><mi>ℂ</mi><mo>∖</mo><mi>ℝ</mi></mrow><annotation encoding="application/x-tex">\lambda \in \mathbb{C} \setminus \mathbb{R}</annotation></semantics></math>, multiplication by the function <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn><mo stretchy="false">/</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mover><mi>λ</mi><mo>¯</mo></mover><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">1/(x - \overline{\lambda})</annotation></semantics></math> (all of whose derivatives are bounded) is a continuous inverse to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mo>−</mo><mover><mi>λ</mi><mo>¯</mo></mover></mrow><annotation encoding="application/x-tex">X - \overline{\lambda}</annotation></semantics></math> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R})</annotation></semantics></math>, so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>X</mi> <mo>×</mo></msup><mo lspace="verythinmathspace" rspace="0em">−</mo><mi>λ</mi><mo>=</mo><mo stretchy="false">(</mo><mi>X</mi><mo>−</mo><mover><mi>λ</mi><mo>¯</mo></mover><msup><mo stretchy="false">)</mo> <mo>×</mo></msup></mrow><annotation encoding="application/x-tex">X^\times - \lambda = (X - \overline{\lambda})^\times</annotation></semantics></math> is invertible on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>𝒮</mi> <mo>×</mo></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}^\times(\mathbb{R})</annotation></semantics></math> and hence has trivial kernel; similarly for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>, via Fourier transform.</p>
+
+<p>But the generalized eigenvalues do depend on the choice of test space:</p>
+
+<ul>
+<li>
+<p>A smaller test space has a larger antidual, which may contain spurious generalized eigenvectors. For instance, with the space <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>C</mi> <mi>c</mi> <mn>∞</mn></msubsup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C^\infty_c(\mathbb{R})</annotation></semantics></math> of compactly supported smooth functions (also nuclear and also preserved by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>) as test space, the antidual (equivalently: all <a class="existingWikiWord" href="/nlab/show/distributions">distributions</a>) contains <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>e</mi> <mrow><mi>i</mi><mi>k</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">e^{i k x}</annotation></semantics></math> for every complex number <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>, and these are generalized eigenvectors of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math> with non-real eigenvalue <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>, which do not contribute to the completeness relation.</p>
+</li>
+
+<li>
+<p>A larger test space with coarser topology may lose the generalized eigenvectors. For instance, on the domain <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(X)</annotation></semantics></math> with its graph norm, point evaluations <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ϕ</mi><mo>↦</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi \mapsto \phi(\xi)</annotation></semantics></math> are not even defined (elements of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(X)</annotation></semantics></math> being only <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">L^2</annotation></semantics></math>-classes), and so its antidual contains no <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>δ</mi> <mi>ξ</mi></msub></mrow><annotation encoding="application/x-tex">\delta_\xi</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<p>The Schwartz space sits well between these extremes, simultaneously for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>, which is no accident:</p>
+</div>
+
+<div class="num_remark" id="HermiteRealization">
+<h6 id="remark_4">Remark</h6>
+
+<p><strong>(intrinsic characterization via the harmonic oscillator)</strong></p>
+
+<p>The Schwartz space is intrinsically determined by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math>: It is the space of smooth vectors of the Schrödinger representation of the <a class="existingWikiWord" href="/nlab/show/Heisenberg+group">Heisenberg group</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>L</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L^2(\mathbb{R})</annotation></semantics></math>, and coincides with the intersection <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo lspace="thinmathspace" rspace="thinmathspace">⋂</mo> <mi>n</mi></msub><mi>D</mi><mo stretchy="false">(</mo><msup><mi>N</mi> <mi>n</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\bigcap_{n} D(N^n)</annotation></semantics></math> of the domains of all powers of the <a class="existingWikiWord" href="/nlab/show/harmonic+oscillator">harmonic oscillator</a> Hamiltonian <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><mo>≔</mo><mstyle displaystyle="false"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo stretchy="false">(</mo><msup><mi>X</mi> <mn>2</mn></msup><mo>+</mo><msup><mi>P</mi> <mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N \coloneqq \tfrac{1}{2}(X^2 + P^2)</annotation></semantics></math>. Expanding in the orthonormal basis of Hermite functions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>h</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">h_n</annotation></semantics></math>, which are honest eigenvectors <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>N</mi><msub><mi>h</mi> <mi>n</mi></msub><mo>=</mo><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mstyle displaystyle="false"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo stretchy="false">)</mo><msub><mi>h</mi> <mi>n</mi></msub></mrow><annotation encoding="application/x-tex">N h_n = (n + \tfrac{1}{2}) h_n</annotation></semantics></math>, identifies the above rigged Hilbert space with</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>s</mi><mspace width="thickmathspace"></mspace><mo>⊂</mo><mspace width="thickmathspace"></mspace><msup><mi>ℓ</mi> <mn>2</mn></msup><mspace width="thickmathspace"></mspace><mo>⊂</mo><mspace width="thickmathspace"></mspace><msup><mi>s</mi> <mo>×</mo></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  s
+  \;\subset\;
+  \ell^2
+  \;\subset\;
+  s^\times
+  \,,
+
+</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math> is the space of rapidly decreasing sequences and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>s</mi> <mo>×</mo></msup></mrow><annotation encoding="application/x-tex">s^\times</annotation></semantics></math> that of sequences of at most polynomial growth. In this form the nuclearity of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>𝒮</mi><mo stretchy="false">(</mo><mi>ℝ</mi><mo stretchy="false">)</mo><mo>≃</mo><mi>s</mi></mrow><annotation encoding="application/x-tex">\mathcal{S}(\mathbb{R}) \simeq s</annotation></semantics></math> is manifest: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math> is the intersection of the weighted Hilbert spaces <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>ℓ</mi> <mi>m</mi> <mn>2</mn></msubsup><mo>≔</mo><mo maxsize="1.2em" minsize="1.2em">{</mo><mo stretchy="false">(</mo><msub><mi>c</mi> <mi>n</mi></msub><msub><mo stretchy="false">)</mo> <mrow><mi>n</mi><mo>∈</mo><mi>ℕ</mi></mrow></msub><mspace width="thinmathspace"></mspace><mo maxsize="1.2em" minsize="1.2em">|</mo><mspace width="thinmathspace"></mspace><msub><mo lspace="thinmathspace" rspace="thinmathspace">∑</mo> <mi>n</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mrow><mn>2</mn><mi>m</mi></mrow></msup><mo stretchy="false">|</mo><msub><mi>c</mi> <mi>n</mi></msub><msup><mo stretchy="false">|</mo> <mn>2</mn></msup><mo>&lt;</mo><mn>∞</mn><mo maxsize="1.2em" minsize="1.2em">}</mo></mrow><annotation encoding="application/x-tex">\ell^2_m \coloneqq \big\{ (c_n)_{n \in \mathbb{N}} \,\big\vert\, \sum_n (n+1)^{2m} \vert c_n \vert^2 \lt \infty \big\}</annotation></semantics></math>, and the inclusions <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msubsup><mi>ℓ</mi> <mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow> <mn>2</mn></msubsup><mo>↪</mo><msubsup><mi>ℓ</mi> <mi>m</mi> <mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">\ell^2_{m+1} \hookrightarrow \ell^2_m</annotation></semantics></math> are <a class="existingWikiWord" href="/nlab/show/Hilbert-Schmidt+operator">Hilbert-Schmidt</a>.</p>
+</div>
+
+<h2 id="related_concepts">Related concepts</h2>
+
+<ul>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/Gelfand+triple">Gelfand triple</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/spectral+theorem">spectral theorem</a>, <a class="existingWikiWord" href="/nlab/show/spectral+measure">spectral measure</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/distribution">distribution</a>, <a class="existingWikiWord" href="/nlab/show/tempered+distribution">tempered distribution</a></p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/bra-ket">bra-ket</a></p>
+</li>
+</ul>
 
 <h2 id="references">References</h2>
 
-<p>Among the original treatises on the theory of rigged Hilbert spaces is</p>
+<p>The notion of rigged Hilbert spaces, together with the nuclear spectral theorem for them, is due to:</p>
 
 <ul>
-<li><a class="existingWikiWord" href="/nlab/show/John+Roberts">John Roberts</a>, <em>Rigged Hilbert spaces in quantum mechanics</em>, Communications in Mathematical Physics, <em>3</em> (1966) 98–119. doi:<a href="https://doi.org/10.1007/BF01645448">10.1007/BF01645448</a></li>
+<li id="GelfandVilenkin61"><a class="existingWikiWord" href="/nlab/show/I.+M.+Gel%27fand">I. M. Gel'fand</a>, N. Ya. Vilenkin, §I.4 of: <em>Generalized Functions, Vol. 4: Applications of Harmonic Analysis</em>, Fizmatgiz, Moscow (1961); English translation: Academic Press (1964); reprint: AMS Chelsea (2016) &lbrack;<a href="https://doi.org/10.1090/chel/380">doi:10.1090/chel/380</a>&rbrack;</li>
 </ul>
 
-<p>A unification of various inequivalent approaches is claimed to be achieved in</p>
+<p>Early treatments in the context of Dirac’s <a class="existingWikiWord" href="/nlab/show/bra-ket">bra-ket</a> formalism:</p>
 
 <ul>
-<li>M. Gadella, F. Gómez, <em>A Unified Mathematical Formalism for the Dirac Formulation of Quantum Mechanics</em>, Foundations of Physics <em>32</em> (2002) 815–869, doi:<a href="https://doi.org/10.1023/A:1016069311589">10.1023/A:1016069311589</a></li>
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+E.+Roberts">John E. Roberts</a>: <em>The Dirac Bra and Ket Formalism</em>, J. Math. Phys. <strong>7</strong> (1966) 1097–1104 &lbrack;<a href="https://doi.org/10.1063/1.1705001">doi:10.1063/1.1705001</a>&rbrack;</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/John+E.+Roberts">John E. Roberts</a>: <em>Rigged Hilbert spaces in quantum mechanics</em>, Communications in Mathematical Physics <strong>3</strong> (1966) 98–119 &lbrack;<a href="https://doi.org/10.1007/BF01645448">doi:10.1007/BF01645448</a>&rbrack;</p>
+</li>
 </ul>
 
-<p>See also</p>
+<p>Textbook account, including the nuclear spectral theorem:</p>
 
 <ul>
-<li>S. Wickramasekara, A. Bohm, <em>Symmetry Representations in the Rigged Hilbert Space Formulation of Quantum Mechanics</em> (<a href="http://arxiv.org/abs/math-ph/0302018">arXiv</a>)</li>
+<li id="BlanchardBruening15">Philippe Blanchard, Erwin Brüning, Ch. 29 of: <em>Mathematical Methods in Physics – Distributions, Hilbert Space Operators, Variational Methods, and Applications in Quantum Physics</em>, Progress in Mathematical Physics <strong>69</strong>, Birkhäuser (2015) &lbrack;<a href="https://doi.org/10.1007/978-3-319-14045-2">doi:10.1007/978-3-319-14045-2</a>&rbrack;</li>
 </ul>
 
-<p>Rigged Hilbert spaces are also known as <a class="existingWikiWord" href="/nlab/show/Gelfand+triple">Gelfand triple</a>s, written about in his series on generalized functions</p>
+<p>Pedagogical introduction aimed at physicists, via an exactly solvable example:</p>
 
 <ul>
-<li>Gel’fand, I. M., and Shilov, Georgiĭ Evgenʹevich. Generalized Functions. United States, American Mathematical Society, (2016)</li>
+<li>Rafael de la Madrid: <em>The role of the rigged Hilbert space in Quantum Mechanics</em>, Eur. J. Phys. <strong>26</strong> (2005) 287–312 &lbrack;<a href="https://doi.org/10.1088/0143-0807/26/2/008">doi:10.1088/0143-0807/26/2/008</a>, <a href="https://arxiv.org/abs/quant-ph/0502053">arXiv:quant-ph/0502053</a>&rbrack;</li>
 </ul>
 
-<h2 id="see_also">See also</h2>
-
-<p>Discussion on MathOverflow</p>
+<p>Claim of a unification of various inequivalent approaches:</p>
 
 <ul>
-<li><a href="https://mathoverflow.net/questions/43313/good-references-for-rigged-hilbert-spaces"><em>Good references for Rigged Hilbert spaces?</em></a></li>
+<li>M. Gadella, F. Gómez, <em>A Unified Mathematical Formalism for the Dirac Formulation of Quantum Mechanics</em>, Foundations of Physics <strong>32</strong> (2002) 815–869 &lbrack;<a href="https://doi.org/10.1023/A:1016069311589">doi:10.1023/A:1016069311589</a>&rbrack;</li>
+</ul>
+
+<p>See also:</p>
+
+<ul>
+<li>
+<p>S. Wickramasekara, A. Bohm, <em>Symmetry Representations in the Rigged Hilbert Space Formulation of Quantum Mechanics</em> &lbrack;<a href="http://arxiv.org/abs/math-ph/0302018">arXiv:math-ph/0302018</a>&rbrack;</p>
+</li>
+
+<li>
+<p>MathOverflow: <em><a href="https://mathoverflow.net/questions/43313/good-references-for-rigged-hilbert-spaces">Good references for Rigged Hilbert spaces?</a></em></p>
+</li>
 </ul>
 </body></html>
 
@@ -530,14 +967,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on May 16, 2023 at 05:12:16.
+    Last revised on October 26, 2026 at 20:11:40.
     See the <a href="/nlab/history/rigged+Hilbert+space" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/rigged+Hilbert+space" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/16505/#Item_6">Discuss</a><span class="backintime"><a href="/nlab/revision/rigged+Hilbert+space/7" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/rigged+Hilbert+space" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/rigged+Hilbert+space" accesskey="S" class="navlink" id="history" rel="nofollow">History (7 revisions)</a>
+  <a href="/nlab/edit/rigged+Hilbert+space" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/16505/#Item_6">Discuss</a><span class="backintime"><a href="/nlab/revision/rigged+Hilbert+space/9" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/rigged+Hilbert+space" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/rigged+Hilbert+space" accesskey="S" class="navlink" id="history" rel="nofollow">History (9 revisions)</a>
   <a href="/nlab/show/rigged+Hilbert+space/cite" style="color: black">Cite</a>
   <a href="/nlab/print/rigged+Hilbert+space" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/rigged+Hilbert+space" id="view_source" rel="nofollow">Source</a>
