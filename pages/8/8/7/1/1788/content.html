@@ -308,7 +308,7 @@ margin-left: 0em;
 
 <div id="revision">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xml:lang="en" lang="en">
-<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title></title></head>
+<head><meta http-equiv="Content-type" content="application/xhtml+xml;charset=utf-8" /><title>The 3Qbit code</title></head>
 <body>
 <blockquote>
 <p>This <a class="existingWikiWord" href="/nlab/show/HomePage">nLab</a> page is for developing preliminary notes or making typographical experiments, etc. It may be edited by anybody, anytime. But you don’t necessarily need to delete other people’s ongoing notes here in order to add your own. In any case, overwritten edits may always be recovered from the <a href="/nlab/history/Sandbox">page history</a>.</p>
@@ -316,6 +316,437 @@ margin-left: 0em;
 <p>If this edit page here is seemingly locked by “Anonymous”, there is no harm in breaking the lock, as it is just caused by bot traffic. When the page is locked by an actual user, there is also the alternative <em><a class="existingWikiWord" href="/nlab/show/Sandbox2">Sandbox2</a></em>.</p>
 </blockquote>
 <hr />
+
+<h1 id='section_table_of_contents'>Contents</h1>
+<div class='maruku_toc'>
+<ul>
+<li><a href='#the_3qbit_code'>The 3Qbit code</a></li>
+<ul>
+<li><a href='#TheClassicalCase'>The classical case</a></li>
+<li><a href='#TheIssueWithTheQuantumCase'>The issue with the quantum case</a></li>
+<li><a href='#TheProperQuantumCase'>The proper quantum case</a></li>
+</ul>
+</ul>
+</div>
+
+
+<h2 id="the_3qbit_code">The 3Qbit code</h2>
+
+<h3 id="TheClassicalCase">The classical case</h3>
+
+<p>A <a class="existingWikiWord" href="/nlab/show/bit">bit</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">b \in \{0,1\}</annotation></semantics></math> stored or transmitted in a noisy medium may get flipped, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>↦</mo><mi>b</mi><mo>⊕</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">b \mapsto b \oplus 1</annotation></semantics></math>, with some small probability <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>. The simplest remedy is redundancy: encode each <em>logical bit</em> by a triple of equal <em>physical bits</em>,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mn>0</mn><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><mn>000</mn><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="2em"></mspace><mn>1</mn><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><mn>111</mn><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  0 \;\mapsto\; 000
+  \,,
+  \qquad
+  1 \;\mapsto\; 111
+  \,.
+
+</annotation></semantics></math></div>
+<p>If at most one of the bits <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">b_1 b_2 b_3</annotation></semantics></math> gets flipped, its position is determined by the two parities</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>s</mi> <mn>1</mn></msub><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><msub><mi>b</mi> <mn>1</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>2</mn></msub><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="2em"></mspace><msub><mi>s</mi> <mn>2</mn></msub><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><msub><mi>b</mi> <mn>2</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>3</mn></msub><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  s_1 \;\coloneqq\; b_1 \oplus b_2
+  \,,
+  \qquad
+  s_2 \;\coloneqq\; b_2 \oplus b_3
+  \,,
+
+</annotation></semantics></math></div>
+<p>which vanish on the codewords. This pair is the <em>error syndrome</em>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⇒</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>no error</mtext></mtd></mtr> <mtr><mtd><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⇒</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>bit 1 flipped</mtext></mtd></mtr> <mtr><mtd><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⇒</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>bit 2 flipped</mtext></mtd></mtr> <mtr><mtd><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⇒</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>bit 3 flipped</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+    (s_1, s_2) = (0,0) &amp; \;\;\Rightarrow\;\; \text{no error}
+    \\
+    (s_1, s_2) = (1,0) &amp; \;\;\Rightarrow\;\; \text{bit 1 flipped}
+    \\
+    (s_1, s_2) = (1,1) &amp; \;\;\Rightarrow\;\; \text{bit 2 flipped}
+    \\
+    (s_1, s_2) = (0,1) &amp; \;\;\Rightarrow\;\; \text{bit 3 flipped}
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>Flipping the indicated bit back (equivalently: taking the majority vote) recovers the logical bit. This fails only if two or more bits were flipped, which happens with probability <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>3</mn><msup><mi>p</mi> <mn>2</mn></msup><mo>−</mo><mn>2</mn><msup><mi>p</mi> <mn>3</mn></msup><mo>&lt;</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">3p^2 - 2p^3 \lt p</annotation></semantics></math> (for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">/</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">p \lt 1/2</annotation></semantics></math>).</p>
+
+<p>Here the syndrome is obtained in the most direct way: by reading out, hence by <em>measuring</em>, the three physical bits. Classically, this does no harm.</p>
+
+<h3 id="TheIssueWithTheQuantumCase">The issue with the quantum case</h3>
+
+<p>Now the information to be protected is the state <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mo>=</mo><mi>α</mi><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">⟩</mo><mo>+</mo><mi>β</mi><mo stretchy="false">|</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert \psi \rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle</annotation></semantics></math> of a <a class="existingWikiWord" href="/nlab/show/qbit">qbit</a>, hence the amplitudes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>,</mo><mi>β</mi><mo>∈</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\alpha, \beta \in \mathbb{C}</annotation></semantics></math>. Copying <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mo>↦</mo><mo stretchy="false">|</mo><mi>ψ</mi><msup><mo stretchy="false">⟩</mo> <mrow><mo>⊗</mo><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\vert\psi\rangle \mapsto \vert\psi\rangle^{\otimes 3}</annotation></semantics></math> is ruled out by the <a class="existingWikiWord" href="/nlab/show/no-cloning+theorem">no-cloning theorem</a>, but the <em>linear</em> extension of the classical encoding,</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>↦</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mi>α</mi><mo stretchy="false">|</mo><mn>000</mn><mo stretchy="false">⟩</mo><mo>+</mo><mi>β</mi><mo stretchy="false">|</mo><mn>111</mn><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \vert \psi \rangle
+  \;\mapsto\;
+  \vert \psi_L \rangle
+  \;\coloneqq\;
+  \alpha \vert 000 \rangle + \beta \vert 111 \rangle
+  \,,
+
+</annotation></semantics></math></div>
+<p>is fine: two <a class="existingWikiWord" href="/nlab/show/CNOT+gate">CNOT gates</a> implement it on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo><mo>⊗</mo><mo stretchy="false">|</mo><mn>00</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert\psi\rangle \otimes \vert 00 \rangle</annotation></semantics></math> (see <a href="#TheProperQuantumCase">below</a>). A flip of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math>th qbit now acts by the Pauli operator <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">X_i</annotation></semantics></math> (with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>≔</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">X_0 \coloneqq 1</annotation></semantics></math> for the error-free case), e.g.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>2</mn></msub><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>α</mi><mo stretchy="false">|</mo><mn>010</mn><mo stretchy="false">⟩</mo><mo>+</mo><mi>β</mi><mo stretchy="false">|</mo><mn>101</mn><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  X_2 \vert \psi_L \rangle
+  \;=\;
+  \alpha \vert 010 \rangle + \beta \vert 101 \rangle
+  \,.
+
+</annotation></semantics></math></div>
+<p>Applying the classical strategy verbatim means measuring the three qbits in the computational basis. This does reveal the syndrome, but already the first measurement collapses the state onto one of its two branches (here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mn>010</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert 010\rangle</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mn>101</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert 101 \rangle</annotation></semantics></math>, with probability <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>α</mi><msup><mo stretchy="false">|</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\vert\alpha\vert^2</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>β</mi><msup><mo stretchy="false">|</mo> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\vert\beta\vert^2</annotation></semantics></math>, respectively). The error is diagnosed, but the amplitudes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>,</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">\alpha, \beta</annotation></semantics></math> (the very data to be protected) are lost.</p>
+
+<p>Notice, however, that the syndrome takes the same value on both branches (here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(s_1, s_2) = (1,1)</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mn>010</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert 010\rangle</annotation></semantics></math> as well as for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mn>101</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert 101\rangle</annotation></semantics></math>). So each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">X_i \vert \psi_L\rangle</annotation></semantics></math> is a joint eigenstate of the parity observables <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mn>1</mn></msub><msub><mi>Z</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">Z_1 Z_2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mn>2</mn></msub><msub><mi>Z</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">Z_2 Z_3</annotation></semantics></math>, with eigenvalues <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mrow><msub><mi>s</mi> <mn>1</mn></msub></mrow></msup></mrow><annotation encoding="application/x-tex">(-1)^{s_1}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mrow><msub><mi>s</mi> <mn>2</mn></msub></mrow></msup></mrow><annotation encoding="application/x-tex">(-1)^{s_2}</annotation></semantics></math>. The individual bits must not be measured, but their parities may.</p>
+
+<p>This motivates adjoining auxiliary <em>ancilla</em> qbits onto which the parities are imprinted by unitary gates. A <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> of just the ancillas is then a measurement on the total system which reveals the syndrome without collapsing the encoded state.</p>
+
+<h3 id="TheProperQuantumCase">The proper quantum case</h3>
+
+<p>Concretely, adjoin two ancilla qbits in state <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mn>00</mn><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert 00 \rangle</annotation></semantics></math> and imprint on them the parities by four CNOT gates:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo><mo>⊗</mo><mo stretchy="false">|</mo><mn>00</mn><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo lspace="0em" rspace="thinmathspace">longmapsto</mo><mspace width="thickmathspace"></mspace><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo><mo>⊗</mo><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>2</mn></msub><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>b</mi> <mn>2</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  \vert b_1 b_2 b_3 \rangle \otimes \vert 00 \rangle
+  \;\longmapsto\;
+  \vert b_1 b_2 b_3 \rangle \otimes \vert b_1 \oplus b_2 ,\, b_2 \oplus b_3 \rangle
+  \,.
+
+</annotation></semantics></math></div>
+<p>Since the parities agree on both branches of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">X_i \vert \psi_L \rangle</annotation></semantics></math>, this unitary maps</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo><mo>⊗</mo><mo stretchy="false">|</mo><mn>00</mn><mo stretchy="false">⟩</mo><mspace width="thickmathspace"></mspace><mo lspace="0em" rspace="thinmathspace">longmapsto</mo><mspace width="thickmathspace"></mspace><msub><mi>X</mi> <mi>i</mi></msub><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo><mo>⊗</mo><mo stretchy="false">|</mo><msub><mi>s</mi> <mn>1</mn></msub><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">⟩</mo><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  X_i \vert \psi_L \rangle \otimes \vert 00 \rangle
+  \;\longmapsto\;
+  X_i \vert \psi_L \rangle \otimes \vert s_1 s_2 \rangle
+  \,.
+
+</annotation></semantics></math></div>
+<p>This being a product state, measuring the ancillas yields the syndrome <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(s_1, s_2)</annotation></semantics></math> with certainty and leaves the code qbits in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">X_i \vert\psi_L\rangle</annotation></semantics></math>, uncollapsed. Applying <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">X_i</annotation></semantics></math> once more, with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math> read off from the syndrome table <a href="#TheClassicalCase">above</a>, restores <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert \psi_L \rangle</annotation></semantics></math>.</p>
+
+<p>This is the <em>3-qbit bit flip code</em>. Its full circuit reads as follows: encoding, error (here on the second qbit), syndrome extraction, measurement, correction:</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="409.208pt" height="158.309pt" viewBox="0 0 409.208 158.309" version="1.2">
+<defs>
+<g>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-1">
+<path style="stroke:none;" d="M 1.890625 -8.5 C 1.890625 -8.71875 1.890625 -8.921875 1.65625 -8.921875 C 1.421875 -8.921875 1.421875 -8.71875 1.421875 -8.5 L 1.421875 2.546875 C 1.421875 2.765625 1.421875 2.96875 1.65625 2.96875 C 1.890625 2.96875 1.890625 2.765625 1.890625 2.546875 Z M 1.890625 -8.5 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-2">
+<path style="stroke:none;" d="M 3.25 -2.78125 C 3.3125 -2.921875 3.3125 -2.9375 3.3125 -2.96875 C 3.3125 -3.015625 3.3125 -3.03125 3.25 -3.171875 L 1.171875 -8.65625 C 1.09375 -8.859375 1.03125 -8.921875 0.890625 -8.921875 C 0.765625 -8.921875 0.65625 -8.828125 0.65625 -8.6875 C 0.65625 -8.65625 0.65625 -8.625 0.71875 -8.5 L 2.828125 -2.96875 L 0.71875 2.53125 C 0.65625 2.65625 0.65625 2.671875 0.65625 2.734375 C 0.65625 2.875 0.765625 2.96875 0.890625 2.96875 C 1.046875 2.96875 1.09375 2.859375 1.140625 2.734375 Z M 3.25 -2.78125 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-3">
+<path style="stroke:none;" d="M 5.28125 -2.96875 C 5.28125 -4.25 4.234375 -5.28125 2.96875 -5.28125 C 1.6875 -5.28125 0.65625 -4.234375 0.65625 -2.96875 C 0.65625 -1.71875 1.6875 -0.671875 2.96875 -0.671875 C 4.234375 -0.671875 5.28125 -1.703125 5.28125 -2.96875 Z M 5.28125 -2.96875 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-4">
+<path style="stroke:none;" d="M 8.59375 -2.96875 C 8.59375 -5.171875 6.8125 -6.9375 4.625 -6.9375 C 2.421875 -6.9375 0.65625 -5.140625 0.65625 -2.96875 C 0.65625 -0.78125 2.4375 0.984375 4.625 0.984375 C 6.828125 0.984375 8.59375 -0.8125 8.59375 -2.96875 Z M 0.953125 -3.125 C 1.078125 -5.125 2.625 -6.546875 4.484375 -6.640625 L 4.484375 -3.125 Z M 4.78125 -6.640625 C 6.640625 -6.546875 8.171875 -5.125 8.296875 -3.125 L 4.78125 -3.125 Z M 4.484375 0.6875 C 2.625 0.59375 1.078125 -0.796875 0.953125 -2.828125 L 4.484375 -2.828125 Z M 8.296875 -2.828125 C 8.171875 -0.796875 6.609375 0.59375 4.78125 0.6875 L 4.78125 -2.828125 Z M 8.296875 -2.828125 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-1">
+<path style="stroke:none;" d="M 5.59375 -7.984375 C 5.59375 -7.984375 5.640625 -8.140625 5.640625 -8.15625 C 5.640625 -8.265625 5.546875 -8.265625 5.515625 -8.265625 C 5.40625 -8.265625 5.390625 -8.203125 5.34375 -8.03125 L 3.375 -0.140625 C 2.390625 -0.265625 2.03125 -0.765625 2.03125 -1.46875 C 2.03125 -1.734375 2.03125 -2.015625 2.578125 -3.484375 C 2.734375 -3.921875 2.796875 -4.078125 2.796875 -4.28125 C 2.796875 -4.828125 2.421875 -5.25 1.859375 -5.25 C 0.765625 -5.25 0.328125 -3.53125 0.328125 -3.421875 C 0.328125 -3.375 0.375 -3.328125 0.453125 -3.328125 C 0.5625 -3.328125 0.578125 -3.375 0.625 -3.53125 C 0.90625 -4.578125 1.375 -5.015625 1.828125 -5.015625 C 1.921875 -5.015625 2.125 -5 2.125 -4.625 C 2.125 -4.578125 2.125 -4.3125 1.921875 -3.78125 C 1.28125 -2.09375 1.28125 -1.828125 1.28125 -1.5625 C 1.28125 -0.421875 2.234375 0.03125 3.3125 0.109375 C 3.21875 0.46875 3.125 0.859375 3.03125 1.21875 C 2.84375 1.9375 2.765625 2.28125 2.765625 2.328125 C 2.765625 2.421875 2.859375 2.421875 2.890625 2.421875 C 2.921875 2.421875 2.96875 2.421875 2.984375 2.375 C 3.03125 2.328125 3.53125 0.328125 3.578125 0.125 C 4.015625 0.125 4.953125 0.125 6.03125 -0.984375 C 6.421875 -1.421875 6.78125 -1.96875 6.984375 -2.46875 C 7.09375 -2.78125 7.375 -3.84375 7.375 -4.453125 C 7.375 -5.171875 7.03125 -5.25 6.90625 -5.25 C 6.625 -5.25 6.359375 -4.96875 6.359375 -4.734375 C 6.359375 -4.578125 6.4375 -4.5 6.484375 -4.453125 C 6.59375 -4.34375 6.921875 -4.03125 6.921875 -3.40625 C 6.921875 -2.96875 6.671875 -2.09375 5.921875 -1.234375 C 4.921875 -0.125 4 -0.125 3.640625 -0.125 Z M 5.59375 -7.984375 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-2">
+<path style="stroke:none;" d="M 5.65625 -4.828125 L 4.53125 -7.4375 C 4.6875 -7.734375 5.046875 -7.78125 5.1875 -7.78125 C 5.265625 -7.78125 5.390625 -7.796875 5.390625 -8 C 5.390625 -8.125 5.28125 -8.125 5.21875 -8.125 C 5.015625 -8.125 4.78125 -8.109375 4.578125 -8.109375 L 3.875 -8.109375 C 3.15625 -8.109375 2.625 -8.125 2.625 -8.125 C 2.53125 -8.125 2.40625 -8.125 2.40625 -7.90625 C 2.40625 -7.78125 2.515625 -7.78125 2.671875 -7.78125 C 3.359375 -7.78125 3.40625 -7.671875 3.53125 -7.375 L 4.9375 -4.078125 L 2.359375 -1.3125 C 1.921875 -0.84375 1.421875 -0.390625 0.53125 -0.34375 C 0.390625 -0.328125 0.296875 -0.328125 0.296875 -0.125 C 0.296875 -0.078125 0.3125 0 0.4375 0 C 0.609375 0 0.78125 -0.03125 0.953125 -0.03125 L 1.515625 -0.03125 C 1.890625 -0.03125 2.3125 0 2.671875 0 C 2.765625 0 2.90625 0 2.90625 -0.21875 C 2.90625 -0.328125 2.828125 -0.34375 2.75 -0.34375 C 2.515625 -0.375 2.359375 -0.5 2.359375 -0.6875 C 2.359375 -0.890625 2.5 -1.03125 2.84375 -1.390625 L 3.90625 -2.546875 C 4.171875 -2.828125 4.796875 -3.515625 5.0625 -3.78125 L 6.3125 -0.84375 C 6.328125 -0.828125 6.375 -0.703125 6.375 -0.6875 C 6.375 -0.578125 6.109375 -0.375 5.734375 -0.34375 C 5.65625 -0.34375 5.53125 -0.328125 5.53125 -0.125 C 5.53125 0 5.640625 0 5.703125 0 C 5.90625 0 6.140625 -0.03125 6.34375 -0.03125 L 7.65625 -0.03125 C 7.875 -0.03125 8.09375 0 8.296875 0 C 8.375 0 8.515625 0 8.515625 -0.21875 C 8.515625 -0.34375 8.390625 -0.34375 8.28125 -0.34375 C 7.578125 -0.359375 7.546875 -0.421875 7.34375 -0.859375 L 5.78125 -4.546875 L 7.28125 -6.171875 C 7.40625 -6.28125 7.671875 -6.578125 7.78125 -6.703125 C 8.296875 -7.234375 8.78125 -7.734375 9.734375 -7.78125 C 9.859375 -7.796875 9.984375 -7.796875 9.984375 -8 C 9.984375 -8.125 9.875 -8.125 9.828125 -8.125 C 9.65625 -8.125 9.484375 -8.109375 9.3125 -8.109375 L 8.765625 -8.109375 C 8.375 -8.109375 7.96875 -8.125 7.59375 -8.125 C 7.515625 -8.125 7.375 -8.125 7.375 -7.921875 C 7.375 -7.796875 7.453125 -7.78125 7.53125 -7.78125 C 7.71875 -7.765625 7.921875 -7.671875 7.921875 -7.4375 L 7.90625 -7.421875 C 7.890625 -7.328125 7.875 -7.21875 7.734375 -7.078125 Z M 5.65625 -4.828125 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-3">
+<path style="stroke:none;" d="M 2.71875 -2.375 C 2.921875 -2.34375 3.234375 -2.28125 3.3125 -2.265625 C 3.46875 -2.21875 4 -2.03125 4 -1.453125 C 4 -1.078125 3.671875 -0.125 2.28125 -0.125 C 2.03125 -0.125 1.140625 -0.15625 0.90625 -0.8125 C 1.375 -0.75 1.625 -1.125 1.625 -1.375 C 1.625 -1.625 1.453125 -1.765625 1.21875 -1.765625 C 0.953125 -1.765625 0.609375 -1.5625 0.609375 -1.03125 C 0.609375 -0.328125 1.328125 0.125 2.28125 0.125 C 4.078125 0.125 4.625 -1.21875 4.625 -1.828125 C 4.625 -2.015625 4.625 -2.34375 4.234375 -2.71875 C 3.9375 -3.015625 3.65625 -3.078125 3.015625 -3.203125 C 2.6875 -3.28125 2.171875 -3.375 2.171875 -3.921875 C 2.171875 -4.15625 2.390625 -5.015625 3.53125 -5.015625 C 4.03125 -5.015625 4.515625 -4.828125 4.625 -4.390625 C 4.109375 -4.390625 4.078125 -3.9375 4.078125 -3.921875 C 4.078125 -3.671875 4.3125 -3.609375 4.421875 -3.609375 C 4.578125 -3.609375 4.921875 -3.734375 4.921875 -4.234375 C 4.921875 -4.734375 4.46875 -5.25 3.53125 -5.25 C 1.96875 -5.25 1.5625 -4.03125 1.5625 -3.53125 C 1.5625 -2.625 2.4375 -2.4375 2.71875 -2.375 Z M 2.71875 -2.375 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph2-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph2-1">
+<path style="stroke:none;" d="M 3.203125 -2.984375 C 3.015625 -2.953125 2.84375 -2.8125 2.84375 -2.609375 C 2.84375 -2.46875 2.9375 -2.359375 3.125 -2.359375 C 3.234375 -2.359375 3.484375 -2.453125 3.484375 -2.8125 C 3.484375 -3.296875 2.96875 -3.5 2.46875 -3.5 C 1.40625 -3.5 1.078125 -2.75 1.078125 -2.34375 C 1.078125 -2.265625 1.078125 -1.96875 1.375 -1.75 C 1.5625 -1.609375 1.6875 -1.59375 2.109375 -1.515625 C 2.375 -1.453125 2.828125 -1.375 2.828125 -0.953125 C 2.828125 -0.75 2.6875 -0.484375 2.453125 -0.34375 C 2.171875 -0.15625 1.78125 -0.140625 1.65625 -0.140625 C 1.453125 -0.140625 0.921875 -0.171875 0.71875 -0.484375 C 1.125 -0.515625 1.1875 -0.828125 1.1875 -0.921875 C 1.1875 -1.171875 0.96875 -1.21875 0.875 -1.21875 C 0.75 -1.21875 0.421875 -1.125 0.421875 -0.6875 C 0.421875 -0.21875 0.90625 0.078125 1.65625 0.078125 C 3.03125 0.078125 3.328125 -0.890625 3.328125 -1.234375 C 3.328125 -1.9375 2.546875 -2.09375 2.25 -2.15625 C 1.875 -2.21875 1.5625 -2.28125 1.5625 -2.609375 C 1.5625 -2.75 1.703125 -3.28125 2.46875 -3.28125 C 2.765625 -3.28125 3.078125 -3.1875 3.203125 -2.984375 Z M 3.203125 -2.984375 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-1">
+<path style="stroke:none;" d="M 2.140625 -3.78125 C 2.140625 -3.953125 2.109375 -3.953125 1.9375 -3.953125 C 1.546875 -3.578125 0.9375 -3.578125 0.71875 -3.578125 L 0.71875 -3.34375 C 0.875 -3.34375 1.265625 -3.34375 1.625 -3.515625 L 1.625 -0.5 C 1.625 -0.3125 1.625 -0.234375 1.015625 -0.234375 L 0.75 -0.234375 L 0.75 0 C 1.078125 -0.03125 1.546875 -0.03125 1.875 -0.03125 C 2.21875 -0.03125 2.671875 -0.03125 3 0 L 3 -0.234375 L 2.75 -0.234375 C 2.140625 -0.234375 2.140625 -0.3125 2.140625 -0.5 Z M 2.140625 -3.78125 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-2">
+<path style="stroke:none;" d="M 3.203125 -1.109375 L 2.984375 -1.109375 C 2.96875 -1.03125 2.90625 -0.640625 2.828125 -0.578125 C 2.78125 -0.53125 2.296875 -0.53125 2.21875 -0.53125 L 1.09375 -0.53125 L 1.859375 -1.15625 C 2.0625 -1.3125 2.59375 -1.703125 2.78125 -1.875 C 2.953125 -2.046875 3.203125 -2.359375 3.203125 -2.78125 C 3.203125 -3.53125 2.53125 -3.953125 1.734375 -3.953125 C 0.96875 -3.953125 0.421875 -3.453125 0.421875 -2.890625 C 0.421875 -2.59375 0.6875 -2.546875 0.75 -2.546875 C 0.90625 -2.546875 1.078125 -2.65625 1.078125 -2.875 C 1.078125 -3 1 -3.203125 0.734375 -3.203125 C 0.875 -3.5 1.234375 -3.734375 1.640625 -3.734375 C 2.265625 -3.734375 2.59375 -3.265625 2.59375 -2.78125 C 2.59375 -2.359375 2.328125 -1.921875 1.90625 -1.546875 L 0.5 -0.25 C 0.4375 -0.1875 0.421875 -0.1875 0.421875 0 L 3.015625 0 Z M 3.203125 -1.109375 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph4-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph4-1">
+<path style="stroke:none;" d="M 3.625 -4.421875 L 3.625 -4.71875 L 0.59375 -4.71875 L 0.59375 -4.421875 Z M 3.625 -4.421875 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph4-2">
+<path style="stroke:none;" d="M 2.5 -5.0625 C 2.5 -5.265625 2.46875 -5.28125 2.265625 -5.28125 C 1.9375 -4.953125 1.515625 -4.765625 0.765625 -4.765625 L 0.765625 -4.515625 C 0.96875 -4.515625 1.40625 -4.515625 1.859375 -4.71875 L 1.859375 -0.65625 C 1.859375 -0.359375 1.84375 -0.265625 1.09375 -0.265625 L 0.8125 -0.265625 L 0.8125 0 C 1.140625 -0.03125 1.8125 -0.03125 2.171875 -0.03125 C 2.53125 -0.03125 3.21875 -0.03125 3.546875 0 L 3.546875 -0.265625 L 3.265625 -0.265625 C 2.515625 -0.265625 2.5 -0.359375 2.5 -0.65625 Z M 2.5 -5.0625 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph4-3">
+<path style="stroke:none;" d="M 2.234375 -1.625 C 2.359375 -1.734375 2.703125 -2 2.828125 -2.109375 C 3.3125 -2.5625 3.78125 -3 3.78125 -3.71875 C 3.78125 -4.671875 3 -5.28125 2 -5.28125 C 1.046875 -5.28125 0.421875 -4.5625 0.421875 -3.84375 C 0.421875 -3.453125 0.734375 -3.40625 0.84375 -3.40625 C 1.015625 -3.40625 1.25 -3.53125 1.25 -3.828125 C 1.25 -4.234375 0.859375 -4.234375 0.765625 -4.234375 C 0.984375 -4.8125 1.53125 -5.015625 1.90625 -5.015625 C 2.65625 -5.015625 3.03125 -4.390625 3.03125 -3.71875 C 3.03125 -2.890625 2.453125 -2.296875 1.515625 -1.328125 L 0.515625 -0.296875 C 0.421875 -0.21875 0.421875 -0.203125 0.421875 0 L 3.5625 0 L 3.78125 -1.421875 L 3.546875 -1.421875 C 3.515625 -1.265625 3.453125 -0.859375 3.359375 -0.71875 C 3.3125 -0.65625 2.703125 -0.65625 2.578125 -0.65625 L 1.171875 -0.65625 Z M 2.234375 -1.625 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-0">
+<path style="stroke:none;" d=""></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-1">
+<path style="stroke:none;" d="M 5.328125 -3.8125 C 5.328125 -4.796875 5.28125 -5.765625 4.84375 -6.671875 C 4.359375 -7.65625 3.5 -7.921875 2.921875 -7.921875 C 2.21875 -7.921875 1.375 -7.578125 0.9375 -6.578125 C 0.609375 -5.828125 0.484375 -5.09375 0.484375 -3.8125 C 0.484375 -2.65625 0.578125 -1.78125 1 -0.9375 C 1.46875 -0.03125 2.28125 0.25 2.90625 0.25 C 3.9375 0.25 4.53125 -0.375 4.875 -1.0625 C 5.3125 -1.953125 5.328125 -3.125 5.328125 -3.8125 Z M 2.90625 0.015625 C 2.53125 0.015625 1.75 -0.203125 1.53125 -1.5 C 1.390625 -2.21875 1.390625 -3.125 1.390625 -3.953125 C 1.390625 -4.921875 1.390625 -5.8125 1.578125 -6.515625 C 1.78125 -7.3125 2.390625 -7.671875 2.90625 -7.671875 C 3.359375 -7.671875 4.046875 -7.40625 4.28125 -6.375 C 4.421875 -5.703125 4.421875 -4.765625 4.421875 -3.953125 C 4.421875 -3.15625 4.421875 -2.25 4.296875 -1.53125 C 4.078125 -0.21875 3.328125 0.015625 2.90625 0.015625 Z M 2.90625 0.015625 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-2">
+<path style="stroke:none;" d="M 8.53125 -2.890625 C 8.53125 -4 8.53125 -4.328125 8.265625 -4.71875 C 7.921875 -5.171875 7.359375 -5.25 6.953125 -5.25 C 5.96875 -5.25 5.46875 -4.53125 5.28125 -4.078125 C 5.109375 -4.984375 4.46875 -5.25 3.71875 -5.25 C 2.5625 -5.25 2.109375 -4.265625 2.015625 -4.03125 L 2 -4.03125 L 2 -5.25 L 0.375 -5.125 L 0.375 -4.78125 C 1.1875 -4.78125 1.28125 -4.6875 1.28125 -4.109375 L 1.28125 -0.875 C 1.28125 -0.34375 1.15625 -0.34375 0.375 -0.34375 L 0.375 0 C 0.6875 -0.03125 1.328125 -0.03125 1.671875 -0.03125 C 2.015625 -0.03125 2.65625 -0.03125 2.96875 0 L 2.96875 -0.34375 C 2.203125 -0.34375 2.0625 -0.34375 2.0625 -0.875 L 2.0625 -3.09375 C 2.0625 -4.34375 2.875 -5.015625 3.625 -5.015625 C 4.359375 -5.015625 4.53125 -4.40625 4.53125 -3.671875 L 4.53125 -0.875 C 4.53125 -0.34375 4.390625 -0.34375 3.625 -0.34375 L 3.625 0 C 3.921875 -0.03125 4.578125 -0.03125 4.90625 -0.03125 C 5.25 -0.03125 5.890625 -0.03125 6.203125 0 L 6.203125 -0.34375 C 5.4375 -0.34375 5.296875 -0.34375 5.296875 -0.875 L 5.296875 -3.09375 C 5.296875 -4.34375 6.125 -5.015625 6.859375 -5.015625 C 7.59375 -5.015625 7.765625 -4.40625 7.765625 -3.671875 L 7.765625 -0.875 C 7.765625 -0.34375 7.625 -0.34375 6.859375 -0.34375 L 6.859375 0 C 7.171875 -0.03125 7.8125 -0.03125 8.140625 -0.03125 C 8.484375 -0.03125 9.125 -0.03125 9.4375 0 L 9.4375 -0.34375 C 8.84375 -0.34375 8.546875 -0.34375 8.53125 -0.703125 Z M 8.53125 -2.890625 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-3">
+<path style="stroke:none;" d="M 4.5625 -2.765625 C 4.828125 -2.765625 4.84375 -2.765625 4.84375 -2.984375 C 4.84375 -4.1875 4.203125 -5.3125 2.765625 -5.3125 C 1.40625 -5.3125 0.359375 -4.078125 0.359375 -2.609375 C 0.359375 -1.03125 1.578125 0.125 2.890625 0.125 C 4.3125 0.125 4.84375 -1.171875 4.84375 -1.421875 C 4.84375 -1.484375 4.78125 -1.53125 4.71875 -1.53125 C 4.625 -1.53125 4.59375 -1.46875 4.578125 -1.421875 C 4.265625 -0.421875 3.46875 -0.140625 2.96875 -0.140625 C 2.46875 -0.140625 1.265625 -0.46875 1.265625 -2.53125 L 1.265625 -2.765625 Z M 1.28125 -2.984375 C 1.375 -4.859375 2.421875 -5.078125 2.75 -5.078125 C 4.03125 -5.078125 4.09375 -3.390625 4.109375 -2.984375 Z M 1.28125 -2.984375 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-4">
+<path style="stroke:none;" d="M 4.59375 -3.171875 C 4.59375 -3.828125 4.59375 -4.296875 4.078125 -4.765625 C 3.65625 -5.140625 3.125 -5.3125 2.59375 -5.3125 C 1.625 -5.3125 0.875 -4.671875 0.875 -3.890625 C 0.875 -3.546875 1.09375 -3.375 1.375 -3.375 C 1.65625 -3.375 1.859375 -3.578125 1.859375 -3.875 C 1.859375 -4.359375 1.421875 -4.359375 1.25 -4.359375 C 1.53125 -4.859375 2.09375 -5.078125 2.578125 -5.078125 C 3.125 -5.078125 3.828125 -4.625 3.828125 -3.546875 L 3.828125 -3.078125 C 1.421875 -3.03125 0.53125 -2.03125 0.53125 -1.125 C 0.53125 -0.171875 1.625 0.125 2.34375 0.125 C 3.125 0.125 3.671875 -0.359375 3.890625 -0.921875 C 3.9375 -0.375 4.3125 0.0625 4.828125 0.0625 C 5.078125 0.0625 5.765625 -0.109375 5.765625 -1.0625 L 5.765625 -1.71875 L 5.5 -1.71875 L 5.5 -1.0625 C 5.5 -0.375 5.21875 -0.28125 5.046875 -0.28125 C 4.59375 -0.28125 4.59375 -0.921875 4.59375 -1.09375 Z M 3.828125 -1.671875 C 3.828125 -0.515625 2.953125 -0.125 2.4375 -0.125 C 1.859375 -0.125 1.375 -0.546875 1.375 -1.125 C 1.375 -2.6875 3.390625 -2.828125 3.828125 -2.859375 Z M 3.828125 -1.671875 "></path>
+</symbol>
+<symbol overflow="visible" id="YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-5">
+<path style="stroke:none;" d="M 3.90625 -5.03125 C 3.90625 -5.25 3.90625 -5.3125 3.78125 -5.3125 C 3.6875 -5.3125 3.46875 -5.046875 3.375 -4.9375 C 3.015625 -5.234375 2.640625 -5.3125 2.265625 -5.3125 C 0.828125 -5.3125 0.390625 -4.53125 0.390625 -3.875 C 0.390625 -3.734375 0.390625 -3.328125 0.84375 -2.90625 C 1.21875 -2.578125 1.625 -2.484375 2.171875 -2.375 C 2.828125 -2.25 2.984375 -2.21875 3.28125 -1.96875 C 3.5 -1.796875 3.65625 -1.53125 3.65625 -1.203125 C 3.65625 -0.6875 3.359375 -0.125 2.3125 -0.125 C 1.53125 -0.125 0.953125 -0.578125 0.6875 -1.765625 C 0.640625 -1.96875 0.640625 -1.984375 0.625 -2 C 0.609375 -2.046875 0.5625 -2.046875 0.53125 -2.046875 C 0.390625 -2.046875 0.390625 -1.984375 0.390625 -1.78125 L 0.390625 -0.15625 C 0.390625 0.0625 0.390625 0.125 0.515625 0.125 C 0.578125 0.125 0.578125 0.109375 0.78125 -0.140625 C 0.84375 -0.21875 0.84375 -0.25 1.03125 -0.4375 C 1.46875 0.125 2.125 0.125 2.328125 0.125 C 3.578125 0.125 4.1875 -0.578125 4.1875 -1.515625 C 4.1875 -2.15625 3.796875 -2.53125 3.6875 -2.640625 C 3.265625 -3.015625 2.9375 -3.078125 2.15625 -3.234375 C 1.796875 -3.296875 0.921875 -3.46875 0.921875 -4.171875 C 0.921875 -4.546875 1.171875 -5.09375 2.25 -5.09375 C 3.546875 -5.09375 3.625 -3.984375 3.640625 -3.625 C 3.65625 -3.53125 3.734375 -3.53125 3.78125 -3.53125 C 3.90625 -3.53125 3.90625 -3.578125 3.90625 -3.796875 Z M 3.90625 -5.03125 "></path>
+</symbol>
+</g>
+</defs>
+<g id="YNOKU74J22k-8j99gEcTNkxG8sQ=-surface1">
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-1" x="5.619544" y="17.195942"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-1" x="8.926111" y="17.195942"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-2" x="16.930174" y="17.195942"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-3" x="47.448963" y="17.195942"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-3" x="80.942767" y="17.195942"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-3" x="156.027033" y="17.195942"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-2" x="348.021997" y="17.195942"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph2-1" x="358.630692" y="12.281393"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-1" x="362.529673" y="13.382587"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph4-1" x="366.972282" y="12.281393"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph2-1" x="366.662633" y="12.281393"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-2" x="370.561615" y="13.382587"></use>
+</g>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128515 0.00043183 L 34.060808 0.00043183 " transform="matrix(0.995654,0,0,-0.995654,344.649717,4.555117)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.000196832 -0.00101116 L -0.000196832 15.884432 " transform="matrix(0.995654,0,0,-0.995654,344.847852,20.370087)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128011 -0.00101116 L -0.00128011 15.884432 " transform="matrix(0.995654,0,0,-0.995654,378.364556,20.370087)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128515 -0.00101116 L 34.060808 -0.00101116 " transform="matrix(0.995654,0,0,-0.995654,344.649717,20.370087)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-1" x="6.707793" y="51.474321"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-1" x="10.014361" y="51.474321"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-2" x="15.841924" y="51.474321"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-4" x="45.796177" y="51.474321"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-2" x="116.15706" y="51.474321"></use>
+</g>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.00137789 -0.00129717 L 17.428678 -0.00129717 " transform="matrix(0.995654,0,0,-0.995654,112.783784,40.166677)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00145709 0.0000285549 L -0.00145709 14.543703 " transform="matrix(0.995654,0,0,-0.995654,112.98192,54.648466)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.00151289 0.0000285549 L 0.00151289 14.543703 " transform="matrix(0.995654,0,0,-0.995654,129.9399,54.648466)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.00137789 0.0000285549 L 17.428678 0.0000285549 " transform="matrix(0.995654,0,0,-0.995654,112.783784,54.648466)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-3" x="189.521832" y="51.474321"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-3" x="223.015635" y="51.474321"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-2" x="348.021997" y="51.474321"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph2-1" x="358.630692" y="46.559772"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-1" x="362.529673" y="47.661961"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph2-1" x="366.662633" y="46.559772"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-2" x="370.561615" y="47.661961"></use>
+</g>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128515 -0.000208851 L 34.060808 -0.000208851 " transform="matrix(0.995654,0,0,-0.995654,344.649717,39.968542)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.000196832 0.0000285549 L -0.000196832 14.743791 " transform="matrix(0.995654,0,0,-0.995654,344.847852,54.648466)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128011 0.0000285549 L -0.00128011 14.743791 " transform="matrix(0.995654,0,0,-0.995654,378.364556,54.648466)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128515 0.0000285549 L 34.060808 0.0000285549 " transform="matrix(0.995654,0,0,-0.995654,344.649717,54.648466)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-1" x="6.707793" y="86.887745"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-1" x="10.014361" y="86.887745"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-2" x="15.841924" y="86.887745"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-4" x="79.289981" y="86.887745"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-3" x="256.509439" y="86.887745"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-2" x="348.021997" y="86.887745"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph4-1" x="358.94034" y="81.973197"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph2-1" x="358.630692" y="81.973197"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-1" x="362.529673" y="83.075386"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph2-1" x="366.662633" y="81.973197"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph3-2" x="370.561615" y="83.075386"></use>
+</g>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128515 0.000830861 L 34.060808 0.000830861 " transform="matrix(0.995654,0,0,-0.995654,344.649717,74.246921)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.000196832 -0.000612126 L -0.000196832 15.884831 " transform="matrix(0.995654,0,0,-0.995654,344.847852,90.061891)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128011 -0.000612126 L -0.00128011 15.884831 " transform="matrix(0.995654,0,0,-0.995654,378.364556,90.061891)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00128515 -0.000612126 L 34.060808 -0.000612126 " transform="matrix(0.995654,0,0,-0.995654,344.649717,90.061891)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-1" x="6.707793" y="118.390241"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-1" x="10.014361" y="118.390241"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-2" x="15.841924" y="118.390241"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-4" x="154.374247" y="118.390241"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-4" x="187.86805" y="118.390241"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-2" x="291.722737" y="118.390241"></use>
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-3" x="301.435784" y="118.390241"></use>
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-4" x="306.616076" y="118.390241"></use>
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-5" x="312.443904" y="118.390241"></use>
+</g>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.00111067 0.000627145 L 32.20356 0.000627145 " transform="matrix(0.995654,0,0,-0.995654,288.350457,110.090468)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00172431 0.00189411 L -0.00172431 11.524627 " transform="matrix(0.995654,0,0,-0.995654,288.548592,121.564386)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.000471365 0.00189411 L 0.000471365 11.524627 " transform="matrix(0.995654,0,0,-0.995654,320.214374,121.564386)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.00111067 0.00189411 L 32.20356 0.00189411 " transform="matrix(0.995654,0,0,-0.995654,288.350457,121.564386)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-3" x="356.50497" y="118.390241"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph4-2" x="361.995007" y="120.175448"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-1" x="6.707793" y="149.89174"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-1" x="10.014361" y="149.89174"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-2" x="15.841924" y="149.89174"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-4" x="221.361854" y="149.89174"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph0-4" x="254.856653" y="149.89174"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-2" x="291.722737" y="149.89174"></use>
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-3" x="301.435784" y="149.89174"></use>
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-4" x="306.616076" y="149.89174"></use>
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph5-5" x="312.443904" y="149.89174"></use>
+</g>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.00111067 -0.000789917 L 32.20356 -0.000789917 " transform="matrix(0.995654,0,0,-0.995654,288.350457,141.592964)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -0.00172431 -0.00052295 L -0.00172431 11.52221 " transform="matrix(0.995654,0,0,-0.995654,288.548592,153.065886)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.000471365 -0.00052295 L 0.000471365 11.52221 " transform="matrix(0.995654,0,0,-0.995654,320.214374,153.065886)"></path>
+<path style="fill:none;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 0.00111067 -0.00052295 L 32.20356 -0.00052295 " transform="matrix(0.995654,0,0,-0.995654,288.350457,153.065886)"></path>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph1-3" x="356.50497" y="149.89174"></use>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#YNOKU74J22k-8j99gEcTNkxG8sQ=-glyph4-3" x="361.995007" y="151.677944"></use>
+</g>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -178.100919 64.874187 L -162.792202 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -146.122099 64.874187 L -129.153825 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -154.459112 57.310064 L -154.459112 39.003945 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -112.479798 64.874187 L -88.45743 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -120.816811 57.310064 L -120.816811 3.435304 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -77.762514 64.874187 L -53.740146 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -37.070043 64.874187 L -17.108291 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -45.403133 57.310064 L -45.403133 -28.206113 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -6.417297 64.874187 L 16.530086 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 27.225003 64.874187 L 50.172386 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 60.86338 64.874187 L 95.262877 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 105.957794 64.874187 L 135.70818 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 180.46519 64.874187 L 194.110428 64.874187 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -179.19552 30.443303 L -164.455681 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -144.462542 30.443303 L -126.16427 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -115.469353 30.443303 L -97.17108 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -69.048864 30.443303 L -50.750591 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -40.059598 30.443303 L -20.097846 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -3.427743 30.443303 L 13.540531 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -11.764756 22.883104 L -11.764756 -28.206113 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 30.214558 30.443303 L 50.172386 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 21.877544 22.883104 L 21.877544 -59.843607 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 60.86338 30.443303 L 95.262877 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 105.957794 30.443303 L 135.70818 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 180.46519 30.443303 L 194.110428 30.443303 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:2.79451;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 158.086685 43.786448 L 158.086685 53.924256 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:1.83812;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:10;" d="M 158.086685 43.786448 L 158.086685 53.924256 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -179.19552 -5.125337 L -159.80657 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -149.111653 -5.125337 L -130.813381 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -110.820242 -5.125337 L -88.45743 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -77.762514 -5.125337 L -50.750591 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -40.059598 -5.125337 L -17.108291 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -6.417297 -5.125337 L 16.530086 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 27.225003 -5.125337 L 47.182831 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 63.852934 -5.125337 L 95.262877 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 55.519845 -12.685537 L 55.519845 -59.843607 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 105.957794 -5.125337 L 135.70818 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 180.46519 -5.125337 L 194.110428 -5.125337 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:2.79451;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 158.086685 9.355564 L 158.086685 19.493372 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:1.83812;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:10;" d="M 158.086685 9.355564 L 158.086685 19.493372 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -179.19552 -36.762831 L -159.80657 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -149.111653 -36.762831 L -126.16427 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -115.469353 -36.762831 L -88.45743 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -77.762514 -36.762831 L -55.399702 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -35.406564 -36.762831 L -21.761325 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -1.768187 -36.762831 L 16.530086 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 27.225003 -36.762831 L 50.172386 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 60.86338 -36.762831 L 79.161652 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:2.79451;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 122.059018 -36.762831 L 147.615396 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:1.83812;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:10;" d="M 122.059018 -36.762831 L 147.615396 -36.762831 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:2.79451;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 158.086685 -30.030448 L 158.086685 -16.075269 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:1.83812;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:10;" d="M 158.086685 -30.030448 L 158.086685 -16.075269 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -179.19552 -68.404248 L -159.80657 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -149.111653 -68.404248 L -126.16427 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -115.469353 -68.404248 L -88.45743 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -77.762514 -68.404248 L -50.750591 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -40.059598 -68.404248 L -17.108291 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -6.417297 -68.404248 L 11.880975 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 31.874114 -68.404248 L 45.523275 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:0.47818;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 65.512491 -68.404248 L 79.161652 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:2.79451;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 122.059018 -68.404248 L 147.615396 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:1.83812;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:10;" d="M 122.059018 -68.404248 L 147.615396 -68.404248 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:2.79451;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 158.086685 -61.671865 L 158.086685 -46.119902 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+<path style="fill:none;stroke-width:1.83812;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(100%,100%,100%);stroke-opacity:1;stroke-miterlimit:10;" d="M 158.086685 -61.671865 L 158.086685 -46.119902 " transform="matrix(0.995654,0,0,-0.995654,204.209721,78.810999)"></path>
+</g>
+</svg>
+<p>Here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mover><mi>s</mi><mo stretchy="false">¯</mo></mover><mo>≔</mo><mn>1</mn><mo>⊕</mo><mi>s</mi></mrow><annotation encoding="application/x-tex">\bar s \coloneqq 1 \oplus s</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>X</mi> <mn>0</mn></msup><mo>≔</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">X^0 \coloneqq 1</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mi>X</mi> <mn>1</mn></msup><mo>≔</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">X^1 \coloneqq X</annotation></semantics></math>. The final gates are classically controlled (double lines) by the measurement outcomes, so they flip exactly the qbit indicated by the syndrome.</p>
+
+<p>The code protects only against single bit flips. Conjugating with Hadamard gates turns it into the analogous <em>phase flip code</em> (protecting against single <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">Z_i</annotation></semantics></math>-errors), and nesting the two yields Shor’s 9-qbit code.</p>
+
 <p><br /></p>
 
 <p><a href="adjoint+functor#InTermsOfHomIsomorphism">hom-isomorphisms</a></p>
@@ -337,14 +768,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on November  3, 2026 at 11:44:14.
+    Last revised on November  3, 2026 at 16:36:22.
     See the <a href="/nlab/history/Sandbox" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/Sandbox" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/Sandbox/4090" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Sandbox" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Sandbox" accesskey="S" class="navlink" id="history" rel="nofollow">History (4090 revisions)</a>
+  <a href="/nlab/edit/Sandbox" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussions/?CategoryID=0">Discuss</a><span class="backintime"><a href="/nlab/revision/Sandbox/4091" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/Sandbox" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/Sandbox" accesskey="S" class="navlink" id="history" rel="nofollow">History (4091 revisions)</a>
   <a href="/nlab/show/Sandbox/cite" style="color: black">Cite</a>
   <a href="/nlab/print/Sandbox" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/Sandbox" id="view_source" rel="nofollow">Source</a>
