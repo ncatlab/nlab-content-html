@@ -261,8 +261,8 @@ margin-left: 0em;
     //--><!]]>
   </script>
 
-  	<link href="https://ncatlab.org/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
-  	<link href="https://ncatlab.org/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_headlines" rel="alternate" title="Atom with headlines" type="application/atom+xml" />
+  	<link href="http://localhost/nlab/atom_with_content" rel="alternate" title="Atom with full content" type="application/atom+xml" />
   <script type="text/javascript">
   document.observe("dom:loaded", function() {
     generateThmNumbers();
@@ -294,7 +294,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/10901/#Item_44" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/10901/#Item_45" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -940,12 +940,25 @@ margin-left: 0em;
 <ul>
 <li><a href='#idea'>Idea</a></li>
 <ul>
-<li><a href='#in_theory'>In theory</a></li>
+<li><a href='#InTheory'>In principle</a></li>
 <ul>
-<li><a href='#quantum_error_correcting_codes'>Quantum error correcting codes</a></li>
-<li><a href='#tgates_and_magic_states'>T-Gates and magic states</a></li>
+<li><a href='#BasicIdeaOfQECVia3QBitCode'>Basic idea of QEC via the 3-qbit code</a></li>
+<ul>
+<li><a href='#TheClassicalCase'>The classical case</a></li>
+<li><a href='#TheIssueWithTheQuantumCase'>The issue with the quantum case</a></li>
+<li><a href='#TheProperQuantumCase'>The proper quantum case</a></li>
+<li><a href='#Refinements'>Refinements</a></li>
 </ul>
-<li><a href='#IdeaOfQECInPractice'>In practice — The Decoding Bottleneck</a></li>
+<li><a href='#general_qec_codes'>General QEC codes</a></li>
+</ul>
+<li><a href='#InPractice'>In practice</a></li>
+<ul>
+<li><a href='#IdeaOfQECInPractice'>The decoding bottleneck</a></li>
+<li><a href='#aside_hardwarelevel_protection'>Aside: Hardware-level protection</a></li>
+<li><a href='#NestedCodesAndSurfaceCodes'>Nested codes and Surface codes</a></li>
+<li><a href='#TGatesAndMagicStates'>Magic state factories</a></li>
+<li><a href='#references_challenges_of_practical_qec'>References: Challenges of practical QEC</a></li>
+</ul>
 </ul>
 <li><a href='#examples'>Examples</a></li>
 <ul>
@@ -971,9 +984,45 @@ margin-left: 0em;
 
 <h2 id="idea">Idea</h2>
 
-<p><em>Quantum error correction</em> is concerned with ensuring the robustness of <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a> against <a class="existingWikiWord" href="/nlab/show/noise">noise</a> (as in classical <a class="existingWikiWord" href="/nlab/show/error+correction">error correction</a>) and particularly against <a class="existingWikiWord" href="/nlab/show/quantum+noise">quantum noise</a> and <a class="existingWikiWord" href="/nlab/show/quantum+decoherence">quantum decoherence</a> (e.g. against <a class="existingWikiWord" href="/nlab/show/bit+flip+channel">bit flip errors</a>), by “correcting errors as they occur” at runtime.</p>
+<p><em>Quantum error correction</em> (QEC) is concerned with ensuring the robustness of <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a> against <a class="existingWikiWord" href="/nlab/show/noise">noise</a> (as in classical <a class="existingWikiWord" href="/nlab/show/error+correction">error correction</a>) and particularly against <a class="existingWikiWord" href="/nlab/show/quantum+noise">quantum noise</a> and <a class="existingWikiWord" href="/nlab/show/quantum+decoherence">quantum decoherence</a>, by <em>correcting computational errors as they occur</em> at runtime.</p>
 
-<h3 id="in_theory">In theory</h3>
+<p>The need for quantum error correction is particularly urgent for the currently existing <em>noisy</em> quantum memories (cf. <a href="#quantum+computation#ReferencesNISQ">NISQ</a>), which, despite their inherent instability, are widely envisioned to scale up to useful <a class="existingWikiWord" href="/nlab/show/quantum+computers">quantum computers</a> by having them vigorously corrected by massive classical computing power; cf. discussion of the <em>decoding bottleneck</em> <a href="#IdeaOfQECInPractice">below</a>.</p>
+
+<p>What is being corrected with QEC are <a class="existingWikiWord" href="/nlab/show/quantum+computing">quantum computations</a> on a <a class="existingWikiWord" href="/nlab/show/quantum+computer">quantum computer</a>, while the correction mechanisms are classical <a class="existingWikiWord" href="/nlab/show/computations">computations</a>: During and in parallel to the execution of the <a class="existingWikiWord" href="/nlab/show/quantum+computer">quantum computer</a>, a classical computer executes an indefinite loop which in each step:</p>
+
+<ol>
+<li>
+<p>reads out <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> results on parts of the <a class="existingWikiWord" href="/nlab/show/quantum+memory">quantum memory</a> (on the “syndromes”),</p>
+</li>
+
+<li>
+<p>infers from these (via a <em>decoding</em> algorithm) potential errors that may have occured in the quantum machine,</p>
+</li>
+
+<li>
+<p><a class="existingWikiWord" href="/nlab/show/controlled+quantum+gate">controls</a> the quantum computer to execute <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> designed to counteract these errors.</p>
+</li>
+</ol>
+
+<p>Hence QEC is about a <a href="quantum+computation#ClassicalControlQuantumData">quantum/classical interaction loop</a>:</p>
+<center>
+<div style="margin:-40px 0px 00px 0px;">
+<img src="/nlab/files/QEC-interaction-loop_26-11-04.png" width="700" />
+</div>
+</center>
+<p>It is a nontrivial and remarkable theoretical insight (involving results such as <em><a class="existingWikiWord" href="/nlab/show/quantum+error+threshold+theorems">quantum error threshold theorems</a></em>) that such a scheme can work</p>
+
+<ul>
+<li><a href="#InTheory">in principle</a>,</li>
+</ul>
+
+<p>but it remains a substantial engineering challenge to also make it work</p>
+
+<ul>
+<li><a href="#InPractice">in practice</a>.</li>
+</ul>
+
+<h3 id="InTheory">In principle</h3>
 
 <p>From <a href="#FerrisPoulin13">Ferris &amp; Poulin 2013</a>:</p>
 
@@ -1027,7 +1076,361 @@ margin-left: 0em;
 <p>Holographic codes can admit erasure thresholds comparable to that of the widely-studied surface code, and likewise for their threshold against Pauli errors. Their holographic structure also naturally leads to an organization of encoded qubits into a hierarchy of levels of protection from errors, which could be useful for applications which call for many qubits withvarying levels of protection. In particular, this is reminiscent of many schemes for magic state distillation – and indeed, the concatenated codes utilized for magic state distillation share a similar hierarchical structure to holographic codes. The layered structure of holographic codes is also reminiscent of memory architectures in classical computers, where it is useful to have different levels of short- and long-term memory. Although these codes have some notable drawbacks, in particular holographic stabilizer codes require nonlocal stabilizer generators, other codes such as concatenated codes suffer similar drawbacks and have still proven to be useful. Conversely, the stringent requirement of non-local stabilizer generators allows holographic codes to protect many more qubits than a topological code and in fact attain a finite nonzero encoding rate, which is typically not possible for topological codes. Nonetheless, many open questions remain about the usefulness of holographic codes for fault-tolerant quantum computing.</p>
 </blockquote>
 
-<h4 id="quantum_error_correcting_codes">Quantum error correcting codes</h4>
+<h4 id="BasicIdeaOfQECVia3QBitCode">Basic idea of QEC via the 3-qbit code</h4>
+
+<p>It is useful and common to illustrate the basic idea of QEC with the <a href="bit+flip+code#3QbitFlipCode">3-qbit code</a>, since it already showcases the key stages of (1.) <em>encoding</em>, (2) <em>syndrome</em> and (3.) <em>correction</em>. But beware that practically relevant code these days are <em><a class="existingWikiWord" href="/nlab/show/surface+codes">surface codes</a></em> which are quite different in nature, see also <a href="#NestedCodesAndSurfaceCodes">below</a>.</p>
+
+<h5 id="TheClassicalCase">The classical case</h5>
+
+<p>Before considering quantum error correction it is useful to step back and briefly reconsider the analogous case of classical error correction.</p>
+
+<p>To set the stage: We regard <a class="existingWikiWord" href="/nlab/show/bit">bit</a> values as elements of the <a class="existingWikiWord" href="/nlab/show/cyclic+group">cyclic group</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>ℤ</mi> <mrow><mo stretchy="false">/</mo><mn>2</mn></mrow></msub><mo>=</mo><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\mathbb{Z}_{/2} = \{0,1\}</annotation></semantics></math> of <a class="existingWikiWord" href="/nlab/show/integers">integers</a> <a class="existingWikiWord" href="/nlab/show/modulo">modulo</a> 2.</p>
+
+<ol>
+<li>
+<p>Their <a class="existingWikiWord" href="/nlab/show/addition">addition</a> mod 2 is the <em><a class="existingWikiWord" href="/nlab/show/exclusive+disjunction">exclusive or</a></em> (<a class="existingWikiWord" href="/nlab/show/xor">xor</a>) of <a class="existingWikiWord" href="/nlab/show/bits">bits</a>, denoted</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mn>0</mn><mo>⊕</mo><mn>0</mn></mtd> <mtd><mo>=</mo><mn>1</mn><mo>⊕</mo><mn>1</mn><mspace width="thinmathspace"></mspace><mo>=</mo><mspace width="thinmathspace"></mspace><mn>0</mn></mtd></mtr> <mtr><mtd><mn>0</mn><mo>⊕</mo><mn>1</mn></mtd> <mtd><mo>=</mo><mn>1</mn><mo>⊕</mo><mn>0</mn><mspace width="thinmathspace"></mspace><mo>=</mo><mspace width="thinmathspace"></mspace><mn>1</mn><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+    0 \oplus 0 &amp; = 1 \oplus 1 \,=\, 0
+    \\
+    0 \oplus 1 &amp; = 1 \oplus 0 \,=\, 1
+  \mathrlap{\,,}
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>so that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi><mo>↦</mo><mi>b</mi><mo>⊕</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">b \mapsto b \oplus 1</annotation></semantics></math> is the flip of a bit <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math>,</p>
+</li>
+
+<li>
+<p>Their <a class="existingWikiWord" href="/nlab/show/multiplication">multiplication</a> mod 2 is the logical <em><a class="existingWikiWord" href="/nlab/show/conjunction">and</a></em>.</p>
+</li>
+</ol>
+
+<p>Now, a bit stored or transmitted in a noisy medium may get flipped with some small probability <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>∈</mo><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">p \in [0,1]</annotation></semantics></math>, and error correction is about fixing such flips.</p>
+
+<p>The simplest remedy is redundancy: encode each <em>logical bit</em> by a <a class="existingWikiWord" href="/nlab/show/triple">triple</a> of equal <em>physical bits</em>,</p>
+<div class="maruku-equation" id="eq:ClassicalTripledEncoding"><span class="maruku-eq-number">(1)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable><mtr><mtd><msub><mi>ℤ</mi> <mrow><mo stretchy="false">/</mo><mn>2</mn></mrow></msub></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mo stretchy="false">(</mo><msub><mi>ℤ</mi> <mrow><mo stretchy="false">/</mo><mn>2</mn></mrow></msub><msup><mo stretchy="false">)</mo> <mn>3</mn></msup></mtd></mtr> <mtr><mtd><mi>b</mi></mtd> <mtd><mo>↦</mo></mtd> <mtd><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>b</mi><mo stretchy="false">)</mo><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \array{
+    \mathbb{Z}_{/2} &amp;\longrightarrow&amp; (\mathbb{Z}_{/2})^3
+    \\
+    b &amp;\mapsto&amp; (b,b,b) 
+    \mathrlap{\,.}
+  }
+
+</annotation></semantics></math></div>
+<p>If at most one of the bits in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>b</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>b</mi> <mn>2</mn></msub><mo>,</mo><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(b_1, b_2, b_3)</annotation></semantics></math> gets flipped, its position in the triple is exactly determined by the following <a class="existingWikiWord" href="/nlab/show/pair">pair</a> of <em>parities</em>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><msub><mi>s</mi> <mn>1</mn></msub></mtd> <mtd><mo>≔</mo><msub><mi>b</mi> <mn>1</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>2</mn></msub></mtd></mtr> <mtr><mtd><msub><mi>s</mi> <mn>2</mn></msub></mtd> <mtd><mo>≔</mo><msub><mi>b</mi> <mn>2</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>3</mn></msub><mspace width="thinmathspace"></mspace><mo>,</mo></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+    s_1 &amp; \coloneqq  b_1 \oplus b_2
+    \\
+    s_2 &amp; \coloneqq  b_2 \oplus b_3
+  \,,
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>which vanish exactly on the codewords <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(0,0,0)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(1,1,1)</annotation></semantics></math>. This pair <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(s_1,s_2)</annotation></semantics></math> is hence called the <em>error syndrome</em>:</p>
+<div class="maruku-equation" id="eq:SyndromeToError"><span class="maruku-eq-number">(2)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⇔</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>no error</mtext></mtd></mtr> <mtr><mtd><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⇔</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>1st bit flipped</mtext></mtd></mtr> <mtr><mtd><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⇔</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>2nd bit flipped</mtext></mtd></mtr> <mtr><mtd><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mtd> <mtd><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mo>⇔</mo><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mspace width="thickmathspace"></mspace><mtext>3rd bit flipped</mtext><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  
+  \begin{aligned}
+    (s_1, s_2) = (0,0) 
+      &amp; \;\;\;\;\Leftrightarrow\;\;\;\; 
+    \text{no error}
+    \\
+    (s_1, s_2) = (1,0) 
+      &amp; \;\;\;\;\Leftrightarrow\;\;\;\; 
+    \text{1st bit flipped}
+    \\
+    (s_1, s_2) = (1,1) 
+      &amp; \;\;\;\;\Leftrightarrow\;\;\;\; 
+    \text{2nd bit flipped}
+    \\
+    (s_1, s_2) = (0,1) 
+      &amp; \;\;\;\;\Leftrightarrow\;\;\;\; 
+    \text{3rd bit flipped}
+    \mathrlap{\,.}
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>Hence <em>classical error correction</em> in this case proceeds by:</p>
+
+<ol>
+<li>
+<p><strong>Syndrome:</strong> Measuring the triple state and computing the error syndrome from it.</p>
+</li>
+
+<li>
+<p><strong>Decoding:</strong> Computing from the syndrome the apparent position of the flipped bit according to <a class="maruku-eqref" href="#eq:SyndromeToError">(2)</a>.</p>
+</li>
+
+<li>
+<p><strong>Correction:</strong> Flipping that identified bit back.</p>
+</li>
+</ol>
+
+<p>This prodedure:</p>
+
+<ul>
+<li>
+<p>succeeds if none or one bit flipped,</p>
+</li>
+
+<li>
+<p>fails if two or three bits flipped.</p>
+
+<p>Assuming that the bits flip independently of each other, this failure happens with probability</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><munder><munder><mrow><mn>3</mn><msup><mi>p</mi> <mn>2</mn></msup><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><mo>⏟</mo></munder><mtext>two flips</mtext></munder><mspace width="thickmathspace"></mspace><mo>+</mo><mspace width="thickmathspace"></mspace><munder><munder><mrow><msup><mi>p</mi> <mn>3</mn></msup></mrow><mo>⏟</mo></munder><mtext>three flips</mtext></munder><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mn>3</mn><msup><mi>p</mi> <mn>2</mn></msup><mo>−</mo><mn>2</mn><msup><mi>p</mi> <mn>3</mn></msup><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  \underset{
+    \text{two flips}
+  }{
+  \underbrace{
+    3 p^2 (1-p)
+  }}
+  \;+\;
+  \underset{
+    \text{three flips}
+  }{
+  \underbrace{
+    p^3
+  }}
+  \;=\;
+  3 p^2 - 2 p^3
+  \,,
+
+</annotation></semantics></math></div>
+<p>where the factor of 3 counts the choices of the pair of flipped bits. Since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>−</mo><mo stretchy="false">(</mo><mn>3</mn><msup><mi>p</mi> <mn>2</mn></msup><mo>−</mo><mn>2</mn><msup><mi>p</mi> <mn>3</mn></msup><mo stretchy="false">)</mo><mo>=</mo><mi>p</mi><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mn>2</mn><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p - (3p^2 - 2p^3) = p(1-p)(1-2p)</annotation></semantics></math>, this is smaller than the error probability <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> of an unprotected bit as long as <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">/</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">p \lt 1/2</annotation></semantics></math>.</p>
+</li>
+</ul>
+
+<p><br /></p>
+
+<p>The key point of this classical error correction is that the error syndrome is obtained in the most direct way: by reading out, hence by <em>measuring</em>, the state of the tuple of physical bits. Classically, this does no harm, but for <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> this does not work so directly.</p>
+
+<h5 id="TheIssueWithTheQuantumCase">The issue with the quantum case</h5>
+
+<p>As we pass from classical <a class="existingWikiWord" href="/nlab/show/bits">bits</a> to <a class="existingWikiWord" href="/nlab/show/quantum+information+theory">quantum</a> bits, <em><a class="existingWikiWord" href="/nlab/show/qbits">qbits</a></em>, the information to be protected is that of a <a class="existingWikiWord" href="/nlab/show/quantum+state">quantum state</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow><mo>=</mo><mi>α</mi><mrow><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">⟩</mo></mrow><mo>+</mo><mi>β</mi><mrow><mo stretchy="false">|</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert \psi \rangle} = \alpha {\vert 0 \rangle} + \beta {\vert 1 \rangle}</annotation></semantics></math> of a <a class="existingWikiWord" href="/nlab/show/qbit">qbit</a>, encoded by the amplitudes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>,</mo><mi>β</mi><mo>∈</mo><mi>ℂ</mi></mrow><annotation encoding="application/x-tex">\alpha, \beta \in \mathbb{C}</annotation></semantics></math>.</p>
+
+<p>The classical triple encoding <a class="maruku-eqref" href="#eq:ClassicalTripledEncoding">(1)</a> <a class="existingWikiWord" href="/nlab/show/linear+span">extends linearly</a> from the canonical <a class="existingWikiWord" href="/nlab/show/linear+basis">linear basis</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo maxsize="1.2em" minsize="1.2em">{</mo><mrow><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">⟩</mo></mrow><mo>,</mo><mrow><mo stretchy="false">|</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\big\{ {\vert 0\rangle}, {\vert 1 \rangle} \}</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>QBit</mi><mo>≡</mo><msup><mi>ℂ</mi> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">QBit \equiv \mathbb{C}^2</annotation></semantics></math>:</p>
+<div class="maruku-equation" id="eq:QuantumTripledEncoding"><span class="maruku-eq-number">(3)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="center center center"><mtr><mtd><msup><mi>ℂ</mi> <mn>2</mn></msup></mtd> <mtd><mo>⟶</mo></mtd> <mtd><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>ℂ</mi> <mn>2</mn></msup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mn>3</mn></msup></mtd></mtr> <mtr><mtd><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow></mtd></mtr> <mtr><mtd><mi>α</mi><mrow><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">⟩</mo></mrow><mo>+</mo><mi>β</mi><mrow><mo stretchy="false">|</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mi>α</mi><mrow><mo stretchy="false">|</mo><mn>000</mn><mo stretchy="false">⟩</mo></mrow><mo>+</mo><mi>β</mi><mrow><mo stretchy="false">|</mo><mn>111</mn><mo stretchy="false">⟩</mo></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">
+  
+  \begin{array}{ccc}
+    \mathbb{C}^2 &amp;\longrightarrow&amp; 
+    \big(\mathbb{C}^2\big)^3
+    \\
+    {\vert \psi \rangle}
+    &amp;\mapsto&amp;
+    {\vert \psi_L \rangle}
+    \\
+    \alpha {\vert 0\rangle} + \beta {\vert 1 \rangle}
+    &amp;\mapsto&amp;
+    \alpha {\vert 000 \rangle} + \beta {\vert 111 \rangle}
+    \,.
+  \end{array}
+
+</annotation></semantics></math></div>
+<p>In terms of <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> this operation <a class="maruku-eqref" href="#eq:QuantumTripledEncoding">(3)</a> may be implemented by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow><mo>↦</mo><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow><mo>⊗</mo><mrow><mo stretchy="false">|</mo><mn>00</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert \psi\rangle} \mapsto {\vert \psi \rangle} \otimes {\vert 00 \rangle}</annotation></semantics></math> followed by two <a class="existingWikiWord" href="/nlab/show/CNOT+gates">CNOT gates</a> (see <a href="#TheProperQuantumCase">below</a>).</p>
+
+<blockquote>
+<p>This <a class="maruku-eqref" href="#eq:QuantumTripledEncoding">(3)</a> is a copying operation, namely of the computational <a class="existingWikiWord" href="/nlab/show/linear+basis">basis</a> states. The <a class="existingWikiWord" href="/nlab/show/no-cloning+theorem">no-cloning theorem</a> only rules out that copying be <a class="existingWikiWord" href="/nlab/show/natural+transformation">natural</a> (in particular: independent of the choice of basis), which would instead send <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert \psi \rangle}</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mrow><mo stretchy="false">|</mo><mi>ψ</mi><mo stretchy="false">⟩</mo></mrow> <mrow><mo>⊗</mo><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">{\vert \psi \rangle}^{\otimes 3}</annotation></semantics></math>.</p>
+</blockquote>
+
+<p>A flip of the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math>th qbit now acts as the <a class="existingWikiWord" href="/nlab/show/Pauli+operator">Pauli operator</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">X_i</annotation></semantics></math>, hence as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>X</mi><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mrow><mo>(</mo><mrow><mtable><mtr><mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd></mtr> <mtr><mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="2em"></mspace><mi>X</mi><mrow><mo stretchy="false">|</mo><mi>b</mi><mo stretchy="false">⟩</mo></mrow><mspace width="thinmathspace"></mspace><mo>=</mo><mspace width="thinmathspace"></mspace><mrow><mo stretchy="false">|</mo><mi>b</mi><mo>⊕</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">
+  X
+  \;\coloneqq\;
+  \left(
+    \array{
+      0 &amp; 1
+      \\
+      1 &amp; 0
+    }
+  \right)
+  \,,
+  \qquad
+  X {\vert b \rangle} \,=\, {\vert b \oplus 1 \rangle}
+
+</annotation></semantics></math></div>
+<p>on the <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math>th tensor factor and as the identity on the others (with <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>0</mn></msub><mo>≔</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">X_0 \coloneqq 1</annotation></semantics></math> for the error-free case). For example:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>2</mn></msub><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><mi>α</mi><mrow><mo stretchy="false">|</mo><mn>010</mn><mo stretchy="false">⟩</mo></mrow><mo>+</mo><mi>β</mi><mrow><mo stretchy="false">|</mo><mn>101</mn><mo stretchy="false">⟩</mo></mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow><annotation encoding="application/x-tex">
+  X_2 {\vert \psi_L \rangle}
+  \;=\;
+  \alpha {\vert 010 \rangle} + \beta {\vert 101 \rangle}
+  \,.
+
+</annotation></semantics></math></div>
+<p>Now, applying the classical strategy <a href="#TheClassicalCase">above</a> verbatim would mean <a class="existingWikiWord" href="/nlab/show/quantum+measurement">measuring</a> the three qbits in the computational basis. While this would reveal the syndrome, already the first measurement would <a class="existingWikiWord" href="/nlab/show/collapse+of+the+wavefunction">collapses</a> the <a class="existingWikiWord" href="/nlab/show/quantum+state">quantum state</a> onto one of its two branches (here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mn>010</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert 010 \rangle}</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mn>101</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert 101 \rangle}</annotation></semantics></math>, with <a class="existingWikiWord" href="/nlab/show/Born+rule">Born rule</a> <a class="existingWikiWord" href="/nlab/show/probability">probability</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mrow><mo stretchy="false">|</mo><mi>α</mi><mo stretchy="false">|</mo></mrow> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">{\vert \alpha \vert}^2</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msup><mrow><mo stretchy="false">|</mo><mi>β</mi><mo stretchy="false">|</mo></mrow> <mn>2</mn></msup></mrow><annotation encoding="application/x-tex">{\vert \beta \vert}^2</annotation></semantics></math>, respectively). This would serve to diagnose the error, but would destroy the quantum state completely: the amplitudes <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mo>,</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">\alpha, \beta</annotation></semantics></math> (the very data to be protected) would be lost.</p>
+
+<p>Notice, however, that the syndrome takes the same value on both branches (here <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(s_1, s_2) = (1,1)</annotation></semantics></math> for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mn>010</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert 010 \rangle}</annotation></semantics></math> as well as for <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mn>101</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert 101 \rangle}</annotation></semantics></math>).</p>
+
+<p>To turn this into a <a class="existingWikiWord" href="/nlab/show/quantum+observable">quantum observable</a>, consider the <a class="existingWikiWord" href="/nlab/show/Pauli+operator">Pauli operator</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>Z</mi><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mrow><mo>(</mo><mrow><mtable><mtr><mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow><mspace width="thinmathspace"></mspace><mo>,</mo><mspace width="2em"></mspace><mi>Z</mi><mrow><mo stretchy="false">|</mo><mi>b</mi><mo stretchy="false">⟩</mo></mrow><mspace width="thinmathspace"></mspace><mo>=</mo><mspace width="thinmathspace"></mspace><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mi>b</mi></msup><mrow><mo stretchy="false">|</mo><mi>b</mi><mo stretchy="false">⟩</mo></mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  Z
+  \;\coloneqq\;
+  \left(
+    \array{
+      1 &amp; 0
+      \\
+      0 &amp; -1
+    }
+  \right)
+  \,,
+  \qquad
+  Z {\vert b \rangle} \,=\, (-1)^b {\vert b \rangle}
+  \,,
+
+</annotation></semantics></math></div>
+<p>with which the syndrome appears as</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><msub><mi>Z</mi> <mn>1</mn></msub><msub><mi>Z</mi> <mn>2</mn></msub><mrow><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>=</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mrow><msub><mi>b</mi> <mn>1</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>2</mn></msub></mrow></msup><mrow><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo></mrow></mtd></mtr> <mtr><mtd><msub><mi>Z</mi> <mn>2</mn></msub><msub><mi>Z</mi> <mn>2</mn></msub><mrow><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>=</mo><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mrow><msub><mi>b</mi> <mn>2</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>3</mn></msub></mrow></msup><mrow><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo></mrow><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+    Z_1 Z_2 {\vert b_1 b_2 b_3 \rangle} 
+      &amp; = 
+    (-1)^{b_1 \oplus b_2} {\vert b_1 b_2 b_3 \rangle}
+   \\
+    Z_2 Z_2 {\vert b_1 b_2 b_3 \rangle} 
+      &amp; = 
+    (-1)^{b_2 \oplus b_3} {\vert b_1 b_2 b_3 \rangle}
+    \mathrlap{\,.}
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>This means that each <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">X_i {\vert \psi_L \rangle}</annotation></semantics></math> is a joint <a class="existingWikiWord" href="/nlab/show/eigenstate">eigenstate</a> of the syndrome <em>parity observables</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mn>1</mn></msub><msub><mi>Z</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">Z_1 Z_2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mn>2</mn></msub><msub><mi>Z</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">Z_2 Z_3</annotation></semantics></math>, with <a class="existingWikiWord" href="/nlab/show/eigenvalues">eigenvalues</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mrow><msub><mi>s</mi> <mn>1</mn></msub></mrow></msup></mrow><annotation encoding="application/x-tex">(-1)^{s_1}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn><msup><mo stretchy="false">)</mo> <mrow><msub><mi>s</mi> <mn>2</mn></msub></mrow></msup></mrow><annotation encoding="application/x-tex">(-1)^{s_2}</annotation></semantics></math>, respectively.</p>
+
+<p>Hence while the individual physical bits must not be measured, their parities may.</p>
+
+<p>This motivates adjoining auxiliary <em>ancilla</em> <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> onto which the parities are imprinted by unitary gates. A <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a> of just the ancillas is then a measurement on the total system which reveals the syndrome without collapsing the encoded state.</p>
+
+<h5 id="TheProperQuantumCase">The proper quantum case</h5>
+
+<p>Concretely, consider adjoining to the logical <a class="existingWikiWord" href="/nlab/show/Hilbert+space">Hilbert space</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>ℂ</mi> <mn>2</mn></msup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mn>3</mn></msup></mrow><annotation encoding="application/x-tex">\big(\mathbb{C}^2\big)^3</annotation></semantics></math> two ancilla qbits, hence pass to</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi class="mathscript">ℋ</mi><mo>≔</mo><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>ℂ</mi> <mn>2</mn></msup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mn>3</mn></msup><mo>⊗</mo><msub><munder><mrow><mo maxsize="1.2em" minsize="1.2em">(</mo><msup><mi>ℂ</mi> <mn>2</mn></msup><msup><mo maxsize="1.2em" minsize="1.2em">)</mo> <mn>2</mn></msup></mrow><mo>⏟</mo></munder> <mtext>ancillary</mtext></msub></mrow><annotation encoding="application/x-tex">
+  \mathscr{H}
+  \coloneqq
+  \big(\mathbb{C}^2\big)^3 
+    \otimes 
+  \underbrace{ 
+    \big(\mathbb{C}^2\big)^2
+  }_{\text{ancillary}}
+
+</annotation></semantics></math></div>
+<p>and consider on this the <em>imprint</em> <a class="existingWikiWord" href="/nlab/show/unitary+operator">unitary operator</a></p>
+<div class="maruku-equation" id="eq:TheImprintingOperator"><span class="maruku-eq-number">(4)</span><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mtable displaystyle="false" rowspacing="0.5ex" columnalign="center center center"><mtr><mtd><mi class="mathscript">ℋ</mi></mtd> <mtd><mover><mo>⟶</mo><mi>I</mi></mover></mtd> <mtd><mi class="mathscript">ℋ</mi></mtd></mtr> <mtr><mtd><mrow><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo></mrow><mo>⊗</mo><mrow><mo stretchy="false">|</mo><msub><mi>a</mi> <mn>1</mn></msub><msub><mi>a</mi> <mn>2</mn></msub><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>↦</mo></mtd> <mtd><mrow><mo stretchy="false">|</mo><msub><mi>b</mi> <mn>1</mn></msub><msub><mi>b</mi> <mn>2</mn></msub><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo></mrow><mo>⊗</mo><mrow><mo stretchy="false">|</mo><msub><mi>a</mi> <mn>1</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>1</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>2</mn></msub><mo>,</mo><mspace width="thinmathspace"></mspace><msub><mi>a</mi> <mn>2</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>2</mn></msub><mo>⊕</mo><msub><mi>b</mi> <mn>3</mn></msub><mo stretchy="false">⟩</mo></mrow></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">
+  
+  \begin{array}{ccc}
+  \mathscr{H} &amp;\overset{I}{\longrightarrow}&amp; \mathscr{H}
+  \\
+  {\vert b_1 b_2 b_3 \rangle} 
+    \otimes 
+  {\vert a_1 a_2 \rangle}
+    &amp;\mapsto&amp;
+  {\vert b_1 b_2 b_3 \rangle} 
+    \otimes 
+  {\vert a_1 \oplus b_1 \oplus b_2 ,\, a_2 \oplus b_2 \oplus b_3 \rangle}
+  \end{array}
+
+</annotation></semantics></math></div>
+<p>(a <a class="existingWikiWord" href="/nlab/show/permutation">permutation</a> of the computational <a class="existingWikiWord" href="/nlab/show/linear+basis">basis</a>, implementable by four <a class="existingWikiWord" href="/nlab/show/CNOT+gates">CNOT gates</a>), which imprints the parities of the code qbits onto ancillas initialized in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mn>00</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert 00 \rangle}</annotation></semantics></math>.</p>
+
+<p>Suppose that the code state has suffered at most one bit flip, so that it is <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">X_i {\vert \psi_L \rangle}</annotation></semantics></math> for some <em>unknown</em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">i \in \{0,1,2,3\}</annotation></semantics></math>. Since the parities agree on both branches of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">X_i {\vert \psi_L \rangle}</annotation></semantics></math>, we have</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>I</mi><mrow><mo>(</mo><msub><mi>X</mi> <mi>i</mi></msub><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow><mo>⊗</mo><mrow><mo stretchy="false">|</mo><mn>00</mn><mo stretchy="false">⟩</mo></mrow><mo>)</mo></mrow><mspace width="thickmathspace"></mspace><mo>=</mo><mspace width="thickmathspace"></mspace><msub><mi>X</mi> <mi>i</mi></msub><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow><mo>⊗</mo><mrow><mo stretchy="false">|</mo><msub><mi>s</mi> <mn>1</mn></msub><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">⟩</mo></mrow><mspace width="thinmathspace"></mspace><mo>,</mo></mrow><annotation encoding="application/x-tex">
+  I\left( X_i {\vert \psi_L \rangle} \otimes {\vert 00 \rangle} \right)
+  \;=\;
+  X_i {\vert \psi_L \rangle} \otimes {\vert s_1 s_2 \rangle}
+  \,,
+
+</annotation></semantics></math></div>
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(s_1, s_2)</annotation></semantics></math> is the syndrome of the error <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">X_i</annotation></semantics></math> in that <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math> may be computed from it <a class="maruku-eqref" href="#eq:SyndromeToError">(2)</a>.</p>
+
+<p>Error correction now proceeds in three steps analogous to the classical case <a href="#TheClassicalCase">above</a>, but replacing code bit measurement by ancilla qbit <a class="existingWikiWord" href="/nlab/show/quantum+measurement">quantum measurement</a>:</p>
+
+<ol>
+<li>
+<p><strong>Syndrome:</strong> Since on the right of <a class="maruku-eqref" href="#eq:TheImprintingOperator">(4)</a> we have a product state, measuring only the ancillas yields the syndrome <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>s</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>s</mi> <mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(s_1, s_2)</annotation></semantics></math> with certainty, while leaving the code qbits in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">X_i {\vert \psi_L \rangle}</annotation></semantics></math>, <a class="existingWikiWord" href="/nlab/show/collapse+of+the+wavefunction">uncollapsed</a>.</p>
+</li>
+
+<li>
+<p><strong>Decoding:</strong> From the syndrome, a classical algorithm, the <em>decoder</em>, determines <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math>, here via the <a href="#TheClassicalCase">above</a>) syndrome table <a class="maruku-eqref" href="#eq:SyndromeToError">(2)</a>, and thereby <em>chooses</em> the correcting <a class="existingWikiWord" href="/nlab/show/quantum+gate">quantum gate</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">X_i</annotation></semantics></math>.</p>
+</li>
+
+<li>
+<p><em>Correction:</em> Applying the chosen correction <a class="existingWikiWord" href="/nlab/show/quantum+gate">quantum gate</a>, which restores the code state in case of at most one bit flip error: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><msub><mi>X</mi> <mi>i</mi></msub><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">X_i X_i {\vert \psi_L \rangle} = {\vert \psi_L \rangle}</annotation></semantics></math>, since <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mi>X</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">X X = 1</annotation></semantics></math>.</p>
+</li>
+</ol>
+
+<p>This is the <em>3-qbit bit flip code</em>. Its full <a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a> reads as follows: encoding, error, syndrome extraction by <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math>, measurement, decoding and correction:</p>
+
+<p><br /></p>
+
+<p><br /></p>
+<div class="maruku-equation" id="eq:3QBItQECcircuit"><span class="maruku-eq-number">(5)</span><code class="maruku-mathml">
+   
+
+</code></div><center>
+<div style="margin:-100px 0px 00px 0px;">
+<img src="/nlab/files/3QBit-QEC-circuit_26-11-04.png" width="700" />
+</div>
+</center>
+<p>(The final <a class="existingWikiWord" href="/nlab/show/quantum+gates">gates</a> are <a class="existingWikiWord" href="/nlab/show/classically+controlled+quantum+gate">classically controlled</a> (double lines) by the <a class="existingWikiWord" href="/nlab/show/quantum+measurement">measurement</a> outcomes.)</p>
+
+<p>It should be noted here that the quantum correction mechanism <a class="maruku-eqref" href="#eq:3QBItQECcircuit">(5)</a> is itself nothing but a <a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a>, hence, when physically executed, is <em>itself subject to quantum errors</em>. This is a problem that is solved <em>in principle</em> by the <a class="existingWikiWord" href="/nlab/show/quantum+error+threshold+theorems">quantum error threshold theorems</a>, but <em>in practice</em> it makes this and similar codes actually unusable, see the discussion of <em>Nested codes and Surface codes</em> <a href="#NestedCodesAndSurfaceCodes">below</a>.</p>
+
+<h5 id="Refinements">Refinements</h5>
+
+<p>The <a href="#TheProperQuantumCase">above</a> <a class="existingWikiWord" href="/nlab/show/bit+flip+code">bit flip code</a> does not protect against <em>phase flips</em> as reflected by the <a class="existingWikiWord" href="/nlab/show/Pauli+operator">Pauli operator</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">Z_i</annotation></semantics></math>. These send <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><msub><mi>ψ</mi> <mi>L</mi></msub><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert \psi_L \rangle}</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>α</mi><mrow><mo stretchy="false">|</mo><mn>000</mn><mo stretchy="false">⟩</mo></mrow><mo>−</mo><mi>β</mi><mrow><mo stretchy="false">|</mo><mn>111</mn><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">\alpha {\vert 000 \rangle} - \beta {\vert 111 \rangle}</annotation></semantics></math>, which is again a code state and hence has trivial syndrome under the <a href="#TheProperQuantumCase">above</a> code: the error goes undetected and corrupts the logical state.</p>
+
+<p>But since the <a class="existingWikiWord" href="/nlab/show/Hadamard+gate">Hadamard gate</a></p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>H</mi><mspace width="thickmathspace"></mspace><mo>≔</mo><mspace width="thickmathspace"></mspace><mfrac><mn>1</mn><msqrt><mn>2</mn></msqrt></mfrac><mrow><mo>(</mo><mrow><mtable><mtr><mtd><mn>1</mn></mtd> <mtd><mn>1</mn></mtd></mtr> <mtr><mtd><mn>1</mn></mtd> <mtd><mo lspace="verythinmathspace" rspace="0em">−</mo><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">
+  H
+  \;\coloneqq\;
+  \frac{1}{\sqrt{2}}
+  \left(
+    \array{
+      1 &amp; 1
+      \\
+      1 &amp; -1
+    }
+  \right)
+
+</annotation></semantics></math></div>
+<p>exchanges bit and phase flips, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi><mi>X</mi><mi>H</mi><mo>=</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">H X H = Z</annotation></semantics></math>, the same scheme may be run in the Hadamard-transformed basis <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mo>±</mo><mo stretchy="false">⟩</mo></mrow><mo>≔</mo><mi>H</mi><mrow><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">/</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msqrt><mn>2</mn></msqrt></mfrac><mrow><mo>(</mo><mrow><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">⟩</mo></mrow><mo>±</mo><mrow><mo stretchy="false">|</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert {\pm} \rangle} \coloneqq H {\vert 0/1 \rangle} = \frac{1}{\sqrt{2}} \left( {\vert 0 \rangle} \pm {\vert 1 \rangle} \right)</annotation></semantics></math>. Hence the encoding</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mrow><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>↦</mo><mrow><mo stretchy="false">|</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mo stretchy="false">⟩</mo></mrow></mtd></mtr> <mtr><mtd><mrow><mo stretchy="false">|</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>↦</mo><mrow><mo stretchy="false">|</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo lspace="verythinmathspace" rspace="0em">−</mo><mo stretchy="false">⟩</mo></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+    {\vert 0 \rangle} 
+      &amp; \mapsto
+    {\vert {+}{+}{+} \rangle}
+    \\
+    {\vert 1 \rangle} 
+      &amp; \mapsto 
+   {\vert {-}{-}{-} \rangle}
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>gives the “3-qbit <em>phase flip</em> code”, with syndrome given by the parity observables <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>1</mn></msub><msub><mi>X</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">X_1 X_2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mn>2</mn></msub><msub><mi>X</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">X_2 X_3</annotation></semantics></math>. It corrects any single phase flip, but now not bit flips.</p>
+
+<p>Nesting the two codes, by encoding each of the three qbits of the phase flip code via the bit flip code, yields <em>Shor’s 9-qbit code</em>:</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mrow><mtable displaystyle="true" columnalign="right left right left right left right left right left" columnspacing="0em"><mtr><mtd><mrow><mo stretchy="false">|</mo><mn>0</mn><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>↦</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msqrt><mn>2</mn></msqrt></mrow></mfrac><msup><mrow><mo>(</mo><mrow><mo stretchy="false">|</mo><mn>000</mn><mo stretchy="false">⟩</mo></mrow><mo>+</mo><mrow><mo stretchy="false">|</mo><mn>111</mn><mo stretchy="false">⟩</mo></mrow><mo>)</mo></mrow> <mrow><mo>⊗</mo><mn>3</mn></mrow></msup></mtd></mtr> <mtr><mtd><mrow><mo stretchy="false">|</mo><mn>1</mn><mo stretchy="false">⟩</mo></mrow></mtd> <mtd><mo>↦</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msqrt><mn>2</mn></msqrt></mrow></mfrac><msup><mrow><mo>(</mo><mrow><mo stretchy="false">|</mo><mn>000</mn><mo stretchy="false">⟩</mo></mrow><mo>−</mo><mrow><mo stretchy="false">|</mo><mn>111</mn><mo stretchy="false">⟩</mo></mrow><mo>)</mo></mrow> <mrow><mo>⊗</mo><mn>3</mn></mrow></msup><mpadded width="0"><mrow><mspace width="thinmathspace"></mspace><mo>.</mo></mrow></mpadded></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+  \begin{aligned}
+  {\vert 0 \rangle}
+    &amp; \mapsto
+  \frac{1}{2\sqrt{2}}
+  \left( 
+    {\vert 000 \rangle} + {\vert 111 \rangle}
+  \right)^{\otimes 3}
+  \\
+  {\vert 1 \rangle}
+    &amp; \mapsto
+  \frac{1}{2\sqrt{2}}
+  \left( 
+    {\vert 000 \rangle} - {\vert 111 \rangle} 
+  \right)^{\otimes 3}
+  \mathrlap{\,.}
+  \end{aligned}
+
+</annotation></semantics></math></div>
+<p>This corrects bit flips, phase flips and their composites <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>X</mi> <mi>i</mi></msub><msub><mi>Z</mi> <mi>i</mi></msub></mrow><annotation encoding="application/x-tex">X_i Z_i</annotation></semantics></math> on any single qbit. In fact this suffices to correct <em>arbitrary</em> errors on a single qbit. Every operator on a qbit is a linear combination of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>X</mi><mi>Z</mi></mrow><annotation encoding="application/x-tex">X Z</annotation></semantics></math>, and the syndrome measurement collapses such a superposition of errors onto one of its components, which is then corrected as before.</p>
+
+<p>All of these are examples of <em><a class="existingWikiWord" href="/nlab/show/stabilizer+codes">stabilizer codes</a></em>: the code space is the joint <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">(</mo><mo lspace="verythinmathspace" rspace="0em">+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(+1)</annotation></semantics></math>-eigenspace of a commuting set of products of Pauli operators (for the bit flip code: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mn>1</mn></msub><msub><mi>Z</mi> <mn>2</mn></msub></mrow><annotation encoding="application/x-tex">Z_1 Z_2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mi>Z</mi> <mn>2</mn></msub><msub><mi>Z</mi> <mn>3</mn></msub></mrow><annotation encoding="application/x-tex">Z_2 Z_3</annotation></semantics></math>), whose measurement via ancillas yields the error syndrome.</p>
+
+<h4 id="general_qec_codes">General QEC codes</h4>
 
 <p>The simple but important special case of passive correction of erasures may be handled by <em><a class="existingWikiWord" href="/nlab/show/quantum+error+correcting+codes">quantum error correcting codes</a></em>:</p>
 
@@ -1082,48 +1485,13 @@ margin-left: 0em;
 
 <p>While this is superficially analogous to a classical <a class="existingWikiWord" href="/nlab/show/error+correcting+code">error correcting code</a>, the crucial and subtle difference is that quantum error correction codes thus take place in a non-<a class="existingWikiWord" href="/nlab/show/cartesian+monoidal+category">Cartesian</a> <a class="existingWikiWord" href="/nlab/show/symmetric+monoidal+category">symmetric</a> <a class="existingWikiWord" href="/nlab/show/monoidal+category">monoidal category</a>. For this reason, effects of <a class="existingWikiWord" href="/nlab/show/quantum+entanglement">quantum entanglement</a> play a paramount role in quantum error correction codes.</p>
 
-<h4 id="tgates_and_magic_states">T-Gates and magic states</h4>
+<h3 id="InPractice">In practice</h3>
 
-<p>The <em><a class="existingWikiWord" href="/nlab/show/Clifford+group">Clifford group</a></em> of <a class="existingWikiWord" href="/nlab/show/quantum+gates">quantum gates</a> on <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> <a class="existingWikiWord" href="/nlab/show/qbits">qbits</a> (the <a class="existingWikiWord" href="/nlab/show/normalizer+subgroup">normalizer</a> of the <a class="existingWikiWord" href="/nlab/show/Pauli+group">Pauli group</a> in <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>U</mi><mo stretchy="false">(</mo><msup><mn>2</mn> <mi>n</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">U(2^n)</annotation></semantics></math>, generated by the <a class="existingWikiWord" href="/nlab/show/Hadamard+gate">Hadamard gate</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math>, the phase gate <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi><mo>=</mo><mi>diag</mi><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">S = diag(1,\mathrm{i})</annotation></semantics></math> and the <a class="existingWikiWord" href="/nlab/show/CNOT+gate">CNOT gate</a>) is computationally weak: By the <em><a href="#GottesmanKnillTheorem">Gottesman-Knill theorem</a>, Clifford <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> acting on stabilizer states and followed by Pauli <a class="existingWikiWord" href="/nlab/show/quantum+measurements">quantum measurements</a> are efficiently simulable on a classical computer. But adjoining any one non-Clifford gate yields a <a href="quantum+logic+gate#UniversalGateSets">universal gate set</a>.</em></p>
+<p>While the <a class="existingWikiWord" href="/nlab/show/quantum+error+threshold+theorem">quantum error threshold theorem</a> shows that quantum error correction of noisy <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> is possible <em>in principle</em>, the practice of QEC <em>at scale</em> remains a major engineering challenge.</p>
 
-<p>The prominent choice of that extra non-Clifford gate is the <em><a class="existingWikiWord" href="/nlab/show/T-gate">T-gate</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi><mo>=</mo><mi mathvariant="normal">diag</mi><mo stretchy="false">(</mo><mn>1</mn><mo>,</mo><msup><mi>e</mi> <mrow><mi>π</mi><mi mathvariant="normal">i</mi><mo stretchy="false">/</mo><mn>4</mn></mrow></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T = \mathrm{diag}(1, e^{\pi \mathrm{i}/4})</annotation></semantics></math>: The set Clifford+<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> generates, up to global phase, a <a class="existingWikiWord" href="/nlab/show/dense+subset">dense</a> <a class="existingWikiWord" href="/nlab/show/subgroup">subgroup</a> of <a class="existingWikiWord" href="/nlab/show/special+unitary+group"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
-  <semantics>
-    <mrow>
-      <mi>SU</mi>
-      <mo stretchy="false">(</mo>
-      <msup><mn>2</mn> <mi>n</mi></msup>
-      <mo stretchy="false">)</mo>
-    </mrow>
-    <annotation encoding="application/x-tex">SU(2^n)</annotation>
-  </semantics>
-</math></a>, so that every <a class="existingWikiWord" href="/nlab/show/quantum+circuit">quantum circuit</a> is efficiently approximated by Clifford+<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math> circuits (by the <a class="existingWikiWord" href="/nlab/show/Solovay-Kitaev+theorem">Solovay-Kitaev theorem</a>).</p>
+<h4 id="IdeaOfQECInPractice">The decoding bottleneck</h4>
 
-<p>The catch is that:</p>
-
-<ul>
-<li>
-<p><em>The prominent topological <a class="existingWikiWord" href="/nlab/show/quantum+error+correction">quantum error-correcting codes</a> like the <a class="existingWikiWord" href="/nlab/show/surface+code">surface code</a> (lattice <a class="existingWikiWord" href="/nlab/show/quantum+simulations">quantum simulations</a> of <a class="existingWikiWord" href="/nlab/show/topological+order">topological order</a>) protect only <a class="existingWikiWord" href="/nlab/show/Clifford+gates">Clifford gates</a>.</em> And this is a problem of principle (<a href="magic+state##EastinKnill09">Eastin &amp; Knill 2009</a>, <a href="magic+state##BravyiKoenig13">Bravyi &amp; König 2013</a>).</p>
-</li>
-
-<li>
-<p>Also actual <a class="existingWikiWord" href="/nlab/show/topological+quantum+computation">topological quantum computation</a> as long as its <a class="existingWikiWord" href="/nlab/show/anyons">anyons</a> are only of <a class="existingWikiWord" href="/nlab/show/Ising+anyons">Ising type</a> (such as expected, but not established, for the <a href="quantum+Hall+effect#ReferencesOnNuFiveHalves"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>ν</mi><mo>=</mo><mn>5</mn><mo stretchy="false">/</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\nu = 5/2</annotation></semantics></math></a> <a class="existingWikiWord" href="/nlab/show/FQH">FQH</a> states) yields exactly only the Clifford gates.</p>
-</li>
-</ul>
-
-<p>The now standard strategy to work around this problem, trades the missing gate for a resource state: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math>-gates are enacted by <em>gate teleportation</em>, consuming <em><a class="existingWikiWord" href="/nlab/show/magic+states">magic states</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">⟩</mo><mo>=</mo><mi>T</mi><mo stretchy="false">|</mo><mo>+</mo><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\vert A \rangle = T \vert + \rangle</annotation></semantics></math> via a <a class="existingWikiWord" href="/nlab/show/CNOT+gate">CNOT</a>, a <a class="existingWikiWord" href="/nlab/show/Pauli+gate"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
-  <semantics>
-    <mrow>
-      <mi>Z</mi>
-    </mrow>
-    <annotation encoding="application/x-tex">Z</annotation>
-  </semantics>
-</math>-</a><a class="existingWikiWord" href="/nlab/show/quantum+measurement">measurement</a> and a <a class="existingWikiWord" href="/nlab/show/controlled+quantum+gate">classically controlled</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-correction (which are all Clifford operations).</p>
-
-<p>For more see at <em><a class="existingWikiWord" href="/nlab/show/magic+state">magic state</a></em>.</p>
-
-<h3 id="IdeaOfQECInPractice">In practice — The Decoding Bottleneck</h3>
-
-<p>As of the 2020s, <a class="existingWikiWord" href="/nlab/show/quantum+error+correction">quantum error correction</a> (QEC) applied to noisy intermediate-scale quantum (<a href="quantum+computation#ReferencesNISQ">NISQ</a>) machines is the dominant strategy paradigm, in both academia and industry, for potentially achieving meaningful commercial value <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a> in the future. Specifically, the prevailing strategy utilizes <a class="existingWikiWord" href="/nlab/show/surface+code">surface codes</a> for the encoding of logical qubits (typically considered on top of physical <a href="superconductivity#SuperconductingQBitsReferences">superconducting qubits</a>) — upon which <a class="existingWikiWord" href="/nlab/show/Clifford+gates">Clifford gates</a> are implemented natively — supplemented by “magic state” resource distillation to implement the remaining universal <a class="existingWikiWord" href="/nlab/show/T-gates">T-gates</a>.</p>
+<p>As of the 2020s, <a class="existingWikiWord" href="/nlab/show/quantum+error+correction">quantum error correction</a> (QEC) applied to noisy intermediate-scale quantum (<a href="quantum+computation#ReferencesNISQ">NISQ</a>) machines is the dominant strategy paradigm, in both academia and industry, for potentially achieving <a class="existingWikiWord" href="/nlab/show/quantum+advantage">meaningful</a> <a class="existingWikiWord" href="/nlab/show/quantum+computation">quantum computation</a> in the future.</p>
 
 <p>But in technical discussions, the physical reality of the “endgame” of this approach may be easily missed by outsiders: Even in optimistic scenarios where theoretical error thresholds are achieved, the NISQ+QEC roadmap requires envisioning a staggering future feat of quantum and classical hardware engineering, haunted by intrinsic design tensions.</p>
 
@@ -1134,14 +1502,61 @@ margin-left: 0em;
 <p>This problem is also known as the <em>decoding bottleneck</em> or <em>decoder bottleneck</em> (cf. <a href="#Mishan2025">Mishan 2025</a>, <a href="#CrootEtAl2025">Croot et al. 2025</a>, <a href="#Ivezic2026">Ivezic 2026</a>, <a href="#MahmudEtAl2026">Mahmud at al. 2026</a>, <a href="#Canton2026">Canton 2026</a>).</p>
 
 <p>To overcome this formidable scenario, the NISQ+QEC field has now turned to speculating on future classical hardware technology where <em>Application Specific Integrated Circuit</em> (<a href="https://technav.ieee.org/topic/application-specific-integrated-circuits/">ASICs</a>) hardware is integrated directly into the ultra-cooled quantum refrigerator (e.g., via specialized “Cryo-CMOS” logic; cf. <a href="#Erol2026">Erol 2026</a>). However, this poses severe thermodynamic contradictions: Standard silicon transistors suffer from carrier freeze-out below <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mo>∼</mo><mn>40</mn><mi>K</mi></mrow><annotation encoding="application/x-tex">\sim 40K</annotation></semantics></math>, whence one needs to envision an entire <em>new kind of classical computing hardware</em>. More generally, the cooling power at the base of a dilution refrigerator is strictly limited to a few micro-Watts. Therefore, placing a petaflop ASIC chip in near proximity to the quantum device would produce excess heat that under currently understood conditions would destroy the cryogenic environment that the quantum computer relies on.</p>
-
+<center>
+<div style="margin:-40px 0px 00px 0px;">
+<img src="/nlab/files/QDecodingBottleneck-Cartoon_26-11-04.jpg" width="700" />
+</div>
+<small>
+  Error correcting a reasonably powerful but noisy quantum computer will require novel classical supercomputers operating, partially, in currently unachieved cryogenic temperature regimes. [graphics from <a href="https://ncatlab.org/schreiber/show/WIKO+2026">Schreiber 2026</a>]
+</small>
+</center>
 <p>In conclusion, the NISQ+QEC roadmap for achieving meaningful commercial value quantum computers is now tacitly banking on unheard of and intrinsically dubious future progress in <em>classical supercomputing</em> technology — which, assuming it can be brought into existence, would then not be used for contentful computation itself, but would solely serve the task of preventing the memory of a quantum computer from decaying.</p>
+<center>
+<div style="margin:-0px 0px 00px 0px;">
+<img src="/nlab/files/QEC-Buckets_26-11-04b.png" width="700" />
+</div>
+<small>
+Noisy qbits are like water in a leaky bucket. In this analogy, (1.) <i>quantum error correction</i> is like continuously catching the leaking water and rapidly filling it back into the bucket, (2.) the <i>decoding bottleneck</i> is the intense amount of auxiliary  machinery and effort of pumping this requires, (3.) hardware-level <i>topological quantum</i> protection is the patching of the buckets. [graphics from <a href="https://ncatlab.org/schreiber/show/WIKO+2026">Schreiber 2026</a>]
+</small>
+</center>
+<h4 id="aside_hardwarelevel_protection">Aside: Hardware-level protection</h4>
 
-<p>Of course, the initial problem at the base of this story is the instability of current qubit technology. The problem is akin to that of a bucket brigade which operates with extremely leaky buckets. In this picture, the QEC-style solution is like using ever more buckets together with sophisticated machinery that cleverly catches the leaked water only to fill it back into the buckets. This analogy makes clear that an alternative strategy may be to actually fix the buckets. On the quantum technology side this corresponds to the approach of <a class="existingWikiWord" href="/nlab/show/topological+quantum+computing">topological quantum computing</a> (cf. <a href="#DasSarma22">Das Sarma 2022</a>), where it is not runtime software redundancy that stabilizes shaky qubits, but intrinsic physical effects in topological quantum hardware. However, while such topological stabilization of quantum states and topological protection of quantum gates exists in theory (and even that theory is not well developed at this point) essentially no experience with practical engineering implementation exists to date.</p>
+<p>The initial problem at the base of the decoding bottlenck problem <a href="#IdeaOfQECInPractice">above</a> is the instability of current qubit technology (<em>NISQ</em>, see <a href="quantum+computation#ReferencesNISQ">there</a>).</p>
 
-<p><br /></p>
+<p>The problem is akin to that of a bucket brigade which operates with extremely leaky buckets. In this picture, the QEC-style solution is like using ever more buckets together with sophisticated machinery that cleverly catches the leaked water only to fill it back into the buckets.</p>
 
-<p><strong>References on the decoding bottleneck:</strong></p>
+<p>This analogy makes clear that an alternative strategy may be to actually fix the buckets. On the quantum technology side this corresponds to the approach of <a class="existingWikiWord" href="/nlab/show/topological+quantum+computing">topological quantum computing</a> (cf. <a href="#DasSarma22">Das Sarma 2022</a>), where it is not runtime software redundancy that stabilizes shaky qubits, but intrinsic physical effects in <a class="existingWikiWord" href="/nlab/show/topological+order">topological</a> <a class="existingWikiWord" href="/nlab/show/quantum+materials">quantum hardware</a>.</p>
+
+<p>However, while such topological stabilization of quantum states and topological protection of quantum gates exists in theory (and even that theory is not well developed at this point) essentially no experience with practical engineering implementation exists to date.</p>
+
+<h4 id="NestedCodesAndSurfaceCodes">Nested codes and Surface codes</h4>
+
+<p>An intrinsic practical problem with QEC implemented via <a class="existingWikiWord" href="/nlab/show/quantum+circuits">quantum circuits</a> as in the simple 3-qbit code example <a class="maruku-eqref" href="#eq:3QBItQECcircuit">(5)</a> <a href="#BasicIdeaOfQECVia3QBitCode">above</a> is that these quantum circuits are <em>themselves</em> subject to errors, needing <em>themselves</em> another layer of QEC, and so on. This may appear to already lead to an infinite regression problem. Remarkably, the <em><a class="existingWikiWord" href="/nlab/show/quantum+error+threshold+theorem">quantum error threshold theorem</a></em> says that, in principle, a <em>finite</em> depth of nested codes is sufficient for breaking even if the baseline physical error rate <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> is below some threshold (whence the name).</p>
+
+<p>However, nested codes require non-local <a class="existingWikiWord" href="/nlab/show/qbit">qbit</a> connectivity on the quantum hardware, which becomes quickly technologically unachievable. For this reason, the nested codes that the theory of the threshold theorem considers are actually useless in practice.</p>
+
+<p>For this reason the community has turned instead to <em><a class="existingWikiWord" href="/nlab/show/surface+codes">surface codes</a></em>. These mimic (“<a class="existingWikiWord" href="/nlab/show/quantum+simulation">simulate</a>”) <a class="existingWikiWord" href="/nlab/show/topological+quantum+computing">topological</a> mechanisms of error protection by a lattice of qbits using only local connectivity.</p>
+
+<p>While surface codes solve the non-locality of nested codes, this comes at the cost that they correct errors only in <a class="existingWikiWord" href="/nlab/show/Clifford+gates">Clifford gates</a>, which are not sufficient for universal quantum computation, leaving non-Clifford gates like <a class="existingWikiWord" href="/nlab/show/T-gates">T-gates</a> unprotected (see <a href="#TGatesAndMagicStates">below</a>).</p>
+
+<h4 id="TGatesAndMagicStates">Magic state factories</h4>
+
+<p>The decoding bottleneck (<a href="#IdeaOfQECInPractice">above</a>) is only part of the problem of practically implementing QEC at scale.</p>
+
+<p>Namely, with the currently most popular error correcting codes, which are <em><a class="existingWikiWord" href="/nlab/show/surface+codes">surface codes</a></em> (<a href="#NestedCodesAndSurfaceCodes">above</a>), it is only <em><a class="existingWikiWord" href="/nlab/show/Clifford+gates">Clifford gates</a></em> that are error protected (after solving the decoding bottleneck), while <a href="quantum+logic+gate#UniversalGateSets">universal quantum computing</a> requires further gate type (such as the <a class="existingWikiWord" href="/nlab/show/T-gate">T-gate</a>) that remain uncorrected by <a class="existingWikiWord" href="/nlab/show/surface+codes">surface codes</a>.</p>
+
+<p>The now standard strategy to work around this problem, trades the missing gate for a resource <a class="existingWikiWord" href="/nlab/show/quantum+state">quantum state</a>: <a class="existingWikiWord" href="/nlab/show/T-gates">T-gates</a> are enacted by <em>gate teleportation</em>, consuming <em><a class="existingWikiWord" href="/nlab/show/magic+states">magic states</a></em> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">⟩</mo></mrow><mo>=</mo><mi>T</mi><mrow><mo stretchy="false">|</mo><mo>+</mo><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">{\vert A \rangle} = T {\vert + \rangle}</annotation></semantics></math> via a <a class="existingWikiWord" href="/nlab/show/CNOT+gate">CNOT</a>, a <a class="existingWikiWord" href="/nlab/show/Pauli+gate"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml">
+  <semantics>
+    <mrow>
+      <mi>Z</mi>
+    </mrow>
+    <annotation encoding="application/x-tex">Z</annotation>
+  </semantics>
+</math>-</a><a class="existingWikiWord" href="/nlab/show/quantum+measurement">measurement</a> and a <a class="existingWikiWord" href="/nlab/show/controlled+quantum+gate">classically controlled</a> <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math>-correction (which are all Clifford operations).</p>
+
+<p>This leads to the further practical problem of equipping the quantum computer with a good supply of <a class="existingWikiWord" href="/nlab/show/magic+states">magic states</a>, which has become a research field all in itself: “<em>magic state factories</em>”. Current estimates are that “magic state distillation” alone will occupy about 90% of the quantum chip, leaving 10% for actual computation, and that this creates a bottleneck on top of and dwarfing the error correction bottlenect (cf. <a href="#NKM2026">NKM 2026</a>).</p>
+
+<h4 id="references_challenges_of_practical_qec">References: Challenges of practical QEC</h4>
 
 <ul>
 <li id="DasSarma22">
@@ -1202,6 +1617,10 @@ margin-left: 0em;
 </blockquote>
 </li>
 
+<li id="NKM2026">
+<p>Kris Naudts, Zeynep Koruturk, Donald Harmitt: <em><a href="https://firgun.vc/insights/quantum-bottleneck-magic-state-factory">The Quantum Bottleneck Isn’t Error Correction, It’s the Magic State Factory</a></em>, Firgun Ventures Insight (July 2026)</p>
+</li>
+
 <li id="MahmudEtAl2026">
 <p>Mahmud et al.: <em>Decoder Architectures and Computational Bottlenecks in QEC</em>: section IV of: <em>Quantum Error Correction Survey</em>, IEEE Access <strong>14</strong> (Sep 2026) 154233–154277 &lbrack;<a href="https://doi.org/10.1109/ACCESS.2026.3737721">doi:10.1109/ACCESS.2026.3737721</a>&rbrack;</p>
 </li>
@@ -1233,7 +1652,7 @@ margin-left: 0em;
 
 <h4 id="bit_flip_codes">Bit flip codes</h4>
 
-<p>See at <em><a class="existingWikiWord" href="/nlab/show/bit+flip+code">bit flip code</a></em>.</p>
+<p>See at <em><a class="existingWikiWord" href="/nlab/show/bit+flip+code">bit flip code</a></em>, and the exposition of the 3-qbit code <a href="#BasicIdeaOfQECVia3QBitCode">above</a>.</p>
 
 <h4 id="A3FoldqtritCode">A 3-qutrit code</h4>
 
@@ -2126,14 +2545,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on November  3, 2026 at 10:37:08.
+    Last revised on November  4, 2026 at 16:28:29.
     See the <a href="/nlab/history/quantum+error+correction" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/quantum+error+correction" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10901/#Item_44">Discuss</a><span class="backintime"><a href="/nlab/revision/quantum+error+correction/102" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quantum+error+correction" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quantum+error+correction" accesskey="S" class="navlink" id="history" rel="nofollow">History (102 revisions)</a>
+  <a href="/nlab/edit/quantum+error+correction" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/10901/#Item_45">Discuss</a><span class="backintime"><a href="/nlab/revision/quantum+error+correction/104" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/quantum+error+correction" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/quantum+error+correction" accesskey="S" class="navlink" id="history" rel="nofollow">History (104 revisions)</a>
   <a href="/nlab/show/quantum+error+correction/cite" style="color: black">Cite</a>
   <a href="/nlab/print/quantum+error+correction" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/quantum+error+correction" id="view_source" rel="nofollow">Source</a>
