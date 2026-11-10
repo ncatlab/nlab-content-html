@@ -10,11 +10,22 @@
   <meta name="robots" content="index,follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <link rel="preload" as="style" href="/stylesheets/instiki.css?1676280126" />
+  <link rel="preload" as="style" href="/stylesheets/mathematics.css?1660229990" />
+  <link rel="preload" as="style" href="/stylesheets/syntax.css?1660229990" />
+  <link rel="preload" as="style" href="/stylesheets/nlab.css?1676280126" />
+  <link rel="preload" as="script" href="/javascripts/prototype.js?1660229990" />
+  <link rel="preload" as="script" href="/javascripts/effects.js?1660229990" />
+  <link rel="preload" as="script" href="/javascripts/dragdrop.js?1660229990" />
+  <link rel="preload" as="script" href="/javascripts/controls.js?1660229990" />
+  <link rel="preload" as="script" href="/javascripts/application.js?1660229990" />
+  <link rel="preload" as="script" href="/javascripts/page_helper.js?1660229990" />
+  <link rel="preload" as="script" href="/javascripts/thm_numbering.js?1660229990" />
+
   <link href="/stylesheets/instiki.css?1676280126" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/mathematics.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/syntax.css?1660229990" media="all" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/nlab.css?1676280126" media="all" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"/>
 
   <style type="text/css">
     h1#pageName, div.info, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, [actiontype="toggle"]:hover, #TextileHelp h3 {
@@ -283,7 +294,7 @@ margin-left: 0em;
     <a href="/nlab/show/HomePage" accesskey="H" title="Home page">Home Page</a> |
     <a href="/nlab/all_pages" accesskey="A" title="List of all pages">All Pages</a> |
     <a href="/nlab/latest_revisions" accesskey="U" title="Latest edits and page creations">Latest Revisions</a> |
-    <a href="https://nforum.ncatlab.org/discussion/8582/#Item_10" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
+    <a href="https://nforum.ncatlab.org/discussion/8582/#Item_21" title="Discuss this page in its dedicated thread on the nForum" style="color: black">Discuss this page</a> |
 <form accept-charset="utf-8" action="/nlab/search" id="navigationSearchForm" method="get">      <fieldset class="search"><input type="text" id="searchField" name="query" value="Search"
              style="display:inline-block; float: left;"
              onfocus="this.value == 'Search' ? this.value = '' : true"
@@ -969,6 +980,20 @@ margin-left: 0em;
 <ul>
 <li><a href='#idea'>Idea</a></li>
 <li><a href='#definition'>Definition</a></li>
+<li><a href='#as_first_order_logic'>As First Order Logic</a></li>
+<ul>
+<li><a href='#identity_morphism'>Identity morphism</a></li>
+<li><a href='#composition'>Composition</a></li>
+<li><a href='#terminal'>Terminal</a></li>
+<li><a href='#products'>Products</a></li>
+<li><a href='#equalizers'>Equalizers</a></li>
+<li><a href='#exponentials'>Exponentials</a></li>
+<li><a href='#classifier'>Classifier</a></li>
+<li><a href='#natural_numbers'>Natural numbers</a></li>
+<li><a href='#well_pointed'>Well pointed</a></li>
+<li><a href='#nontriviality'>Nontriviality</a></li>
+<li><a href='#axiom_of_choice'>Axiom of choice</a></li>
+</ul>
 <li><a href='#a_constructive_view'>A constructive view</a></li>
 <li><a href='#a_contemporary_perspective'>A contemporary perspective</a></li>
 <li><a href='#ExpositionByTrimble'>Todd Trimble’s exposition of ETCS</a></li>
@@ -1018,6 +1043,72 @@ margin-left: 0em;
 <ul>
 <li><a class="existingWikiWord" href="/nlab/show/fully+formal+ETCS">fully formal ETCS</a>.</li>
 </ul>
+
+<h2 id="as_first_order_logic">As First Order Logic</h2>
+
+<p>(Citations needed for this whole section).</p>
+
+<p>Here we present ETCS as a finite-arity first logic with equality. We use a two sorted version, with sorts <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ar</mi></mrow><annotation encoding="application/x-tex">Ar</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>Ob</mi></mrow><annotation encoding="application/x-tex">Ob</annotation></semantics></math> representing arrows and objects. A one sorted version is possible by using the identity morphisms to represent objects. We will use <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>Ar</mi></msub><mo>,</mo><msub><mo>∃</mo> <mi>Ar</mi></msub></mrow><annotation encoding="application/x-tex">\forall_{Ar}, \exists_{Ar}</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>Ob</mi></msub><mo>,</mo><msub><mo>∃</mo> <mi>Ob</mi></msub></mrow><annotation encoding="application/x-tex">\forall_{Ob}, \exists_{Ob}</annotation></semantics></math> to quantify over the sorts respectively.</p>
+
+<p>The signature has three function symbols representing the domain, codomain, and identity morphism.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>dom</mi><mo>,</mo><mi>cod</mi><mo>:</mo><mi>Ar</mi><mo>→</mo><mi>Ob</mi></mrow><annotation encoding="application/x-tex"> dom, cod : Ar \to Ob </annotation></semantics></math></div><div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>id</mi><mo>:</mo><mi>Ob</mi><mo>→</mo><mi>Ar</mi></mrow><annotation encoding="application/x-tex"> id : Ob \to Ar </annotation></semantics></math></div>
+<p>and one relation symbol representing function composition.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo>:</mo><mi>Ar</mi><mo>×</mo><mi>Ar</mi><mo>×</mo><mi>Ar</mi></mrow><annotation encoding="application/x-tex"> C : Ar \times Ar \times Ar </annotation></semantics></math></div>
+<p>Intuitively <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>C</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">C(a, b, c)</annotation></semantics></math> means <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>a</mi><mo>∘</mo><mi>b</mi><mo>=</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a \circ b = c</annotation></semantics></math>.</p>
+
+<p>We abbreviate the proposition <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>dom</mi><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo><mo>=</mo><mi>A</mi><mo>∧</mo><mi>cod</mi><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo><mo>=</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">dom(m) = A \wedge cod(m) = B</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>m</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">m : A \to B</annotation></semantics></math>.</p>
+
+<h6 id="identity_morphism">Identity morphism</h6>
+
+<p>The identity morphism on object <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math> has domain and codomain of <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="maruku-mathml"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math>.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>Ob</mi></msub><mi>A</mi><mspace width="1em"></mspace><mo stretchy="false">(</mo><mi>dom</mi><mo stretchy="false">(</mo><mi>id</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>A</mi><mo stretchy="false">)</mo><mo>∧</mo><mo stretchy="false">(</mo><mi>cod</mi><mo stretchy="false">(</mo><mi>id</mi><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall_{Ob} A \quad (dom(id(A)) = A) \wedge (cod(id(A)) = A)</annotation></semantics></math></div>
+<h6 id="composition">Composition</h6>
+
+<p>Composition of functions keeps the domain of first and the codomain of the second.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>a</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>b</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>c</mi><mspace width="1em"></mspace><mi>C</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>⇒</mo><mo maxsize="1.8em" minsize="1.8em">(</mo><mi>dom</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>dom</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo>∧</mo><mi>cod</mi><mo stretchy="false">(</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>cod</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo></mrow><annotation encoding="application/x-tex">\forall_{Ar} a \forall_{Ar} b \forall_{Ar} c \quad C(a, b, c) \implies \Big( dom(c) = dom(b) \wedge cod(c) = cod(a) \Big)</annotation></semantics></math></div>
+<p>If one function has a domain of another’s codomain they can be composed.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>a</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>b</mi><mspace width="2em"></mspace><mo maxsize="1.8em" minsize="1.8em">(</mo><mi>dom</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>cod</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo><mo>⇔</mo><mo maxsize="1.8em" minsize="1.8em">(</mo><msub><mo>∃</mo> <mi>Ar</mi></msub><mi>c</mi><mspace width="1em"></mspace><mi>C</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo></mrow><annotation encoding="application/x-tex">\forall_{Ar} a \forall_{Ar} b \qquad \Big(dom(a) = cod(b)\Big) \iff \Big( \exists_{Ar} c \quad C(a, b, c)\Big)</annotation></semantics></math></div>
+<p>Composition is injective.</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>a</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>b</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>c</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>d</mi><mspace width="1em"></mspace><mo maxsize="1.8em" minsize="1.8em">(</mo><mi>C</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>∧</mo><mi>C</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>d</mi><mo stretchy="false">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo><mo>⇒</mo><mi>c</mi><mo>=</mo><mi>d</mi></mrow><annotation encoding="application/x-tex">\forall_{Ar} a \forall_{Ar} b \forall_{Ar} c \forall_{Ar} d \quad \Big(C(a, b, c) \wedge C(a, b, d)\Big) \implies c = d</annotation></semantics></math></div>
+<p>Composition is assosiative</p>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>a</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>b</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>c</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>f</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>g</mi><msub><mo>∀</mo> <mi>Ar</mi></msub><mi>k</mi><mspace width="1em"></mspace><mo maxsize="1.8em" minsize="1.8em">(</mo><mi>C</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>f</mi><mo stretchy="false">)</mo><mo>∧</mo><mi>C</mi><mo stretchy="false">(</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>g</mi><mo stretchy="false">)</mo><mo>∧</mo><mi>C</mi><mo stretchy="false">(</mo><mi>a</mi><mo>,</mo><mi>g</mi><mo>,</mo><mi>k</mi><mo stretchy="false">)</mo><mo maxsize="1.8em" minsize="1.8em">)</mo><mo>⇒</mo><mi>C</mi><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\forall_{Ar} a \forall_{Ar} b \forall_{Ar} c \forall_{Ar} f \forall_{Ar} g \forall_{Ar} k \quad \Big(C(a, b, f) \wedge C(b, c, g) \wedge C(a, g, k) \Big) \implies C(f, c, k)</annotation></semantics></math></div>
+<p>Composition with identity doesn’t do anything.</p>
+
+<p>todo</p>
+
+<h6 id="terminal">Terminal</h6>
+<div class="maruku-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="maruku-mathml"><semantics><mrow><msub><mo>∃</mo> <mi>Ob</mi></msub><mi>T</mi><msub><mo>∀</mo> <mi>Ob</mi></msub><mi>X</mi><mo>∃</mo><msub><mo>!</mo> <mi>Ar</mi></msub><mi>t</mi><mspace width="1em"></mspace><mo stretchy="false">(</mo><mi>t</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exists_{Ob} T \forall_{Ob} X \exists!_{Ar} t \quad (t : X \to T) </annotation></semantics></math></div>
+<h6 id="products">Products</h6>
+
+<p>todo</p>
+
+<h6 id="equalizers">Equalizers</h6>
+
+<p>todo</p>
+
+<h6 id="exponentials">Exponentials</h6>
+
+<p>todo</p>
+
+<h6 id="classifier">Classifier</h6>
+
+<p>todo</p>
+
+<h6 id="natural_numbers">Natural numbers</h6>
+
+<p>todo</p>
+
+<h6 id="well_pointed">Well pointed</h6>
+
+<p>todo</p>
+
+<h6 id="nontriviality">Nontriviality</h6>
+
+<p>todo</p>
+
+<h6 id="axiom_of_choice">Axiom of choice</h6>
+
+<p>todo</p>
 
 <h2 id="a_constructive_view">A constructive view</h2>
 
@@ -1192,14 +1283,14 @@ margin-left: 0em;
 
 <div class="revisedby">
     <p>
-    Last revised on October 27, 2025 at 20:11:23.
+    Last revised on November  9, 2026 at 22:07:53.
     See the <a href="/nlab/history/ETCS" style="color: #005c19">history</a> of this page for a list of all contributions to it.
     </p>
 </div>
 
 <div class="navigation navfoot">
 
-  <a href="/nlab/edit/ETCS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/8582/#Item_10">Discuss</a><span class="backintime"><a href="/nlab/revision/ETCS/62" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/ETCS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/ETCS" accesskey="S" class="navlink" id="history" rel="nofollow">History (62 revisions)</a>
+  <a href="/nlab/edit/ETCS" accesskey="E" class="navlink" id="edit" rel="nofollow">Edit</a><a href="https://nforum.ncatlab.org/discussion/8582/#Item_21">Discuss</a><span class="backintime"><a href="/nlab/revision/ETCS/63" accesskey="B" class="navlinkbackintime" id="to_previous_revision" rel="nofollow">Previous revision</a></span><a href="/nlab/show/diff/ETCS" accesskey="C" class="navlink" id="see_changes" rel="nofollow">Changes from previous revision</a><a href="/nlab/history/ETCS" accesskey="S" class="navlink" id="history" rel="nofollow">History (63 revisions)</a>
   <a href="/nlab/show/ETCS/cite" style="color: black">Cite</a>
   <a href="/nlab/print/ETCS" accesskey="p" id="view_print" rel="nofollow">Print</a>
     <a href="/nlab/source/ETCS" id="view_source" rel="nofollow">Source</a>
